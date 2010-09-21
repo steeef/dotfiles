@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 
 export PS1="\w$ "
+=======
+export PS1="[\u:\w] "
+>>>>>>> ea0c29ac76d17a959783b9a2dae3777b7700b673
 export EDITOR="vim"
