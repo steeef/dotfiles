@@ -1,13 +1,11 @@
-set t_Co=256
-colorscheme mustang
-
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
   set lines=100 columns=150
-  set guifont=Consolas:h9:cANSI
+  set guifont=Consolas:h9
 else
   " This is console Vim.
+  set t_Co=256
   if exists("+lines")
     set lines=60
   endif
@@ -15,6 +13,8 @@ else
     set columns=150
   endif
 endif
+
+colorscheme mustang
 
 
 filetype off

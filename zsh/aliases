@@ -32,3 +32,4 @@ alias rst='touch tmp/restart.txt'
 alias %=' '
 
 alias duh='du -h --max=1'
+alias vi='vim'
