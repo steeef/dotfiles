@@ -15,6 +15,7 @@ else
 endif
 
 colorscheme mustang
+syntax enable
 
 
 filetype off
