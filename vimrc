@@ -1,8 +1,8 @@
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=100 columns=150
-  set guifont=Consolas:h9:cANSI
+  "set lines=100 columns=150
+  "set guifont=Consolas:h9:cANSI
 else
   " This is console Vim.
   set t_Co=256
