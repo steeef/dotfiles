@@ -1,7 +1,7 @@
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=100 columns=150
+  set lines=100 columns=200
   set guifont=Consolas:h9
 else
   " This is console Vim.
@@ -10,7 +10,7 @@ else
     set lines=60
   endif
   if exists("+columns")
-    set columns=150
+    set columns=200
   endif
 endif
 
@@ -45,5 +45,36 @@ set ruler
 set backspace=indent,eol,start
 set laststatus=2
 
+set incsearch
+set hlsearch
+set showmatch
+
+set ignorecase
+set smartcase
+
 set relativenumber
 set undofile
+
+set wrap
+"set textwidth=189
+set formatoptions=qrn1
+"set colorcolumn=195
+
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+nnoremap ; :
+
+au FocusLost * :wa
