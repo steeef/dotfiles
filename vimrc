@@ -19,6 +19,7 @@ syntax enable
 
 
 filetype off
+call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
@@ -53,7 +54,8 @@ set ignorecase
 set smartcase
 
 set relativenumber
-set undofile
+"create separate undo file when opening in VIM
+"set undofile
 
 set wrap
 "see :help for-table
