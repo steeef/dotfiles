@@ -30,6 +30,4 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-if version > 720
-    set relativenumber
-endif
+set relativenumber
