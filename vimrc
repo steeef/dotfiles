@@ -56,8 +56,9 @@ set relativenumber
 set undofile
 
 set wrap
-"set textwidth=189
+"see :help for-table
 set formatoptions=qrn1
+"set textwidth=189
 "set colorcolumn=195
 
 nnoremap <up> <nop>
@@ -77,4 +78,5 @@ vnoremap <F1> <ESC>
 
 nnoremap ; :
 
-au FocusLost * :wa
+"save on lost focus
+"au FocusLost * :wa
