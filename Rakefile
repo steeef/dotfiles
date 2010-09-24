@@ -44,7 +44,13 @@ def link_file(file)
       new_file.write ERB.new(File.read(file)).result(binding)
     end
   else
-    puts "linking ~/.#{file}"
-    system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
+    # move gitconfig to ~/.gitconfig instead of linking, to prevent uploading to github
+    if file =~ /gitconfig$/
+        puts "moving #{file} to ~/.#{file}"
+        system %Q{mv "$PWD/#{file}" "$HOME/.#{file}"}
+    else
+        puts "linking ~/.#{file}"
+        system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
+    end
   end
 end
