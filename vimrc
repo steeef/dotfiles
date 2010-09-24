@@ -45,6 +45,12 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
+set title
+
+set nobackup
+set noswapfile
+set history=1000
+set undolevels=1000
 
 set incsearch
 set hlsearch
@@ -54,8 +60,6 @@ set ignorecase
 set smartcase
 
 set relativenumber
-"create separate undo file when opening in VIM
-"set undofile
 
 set wrap
 "see :help for-table
@@ -74,11 +78,23 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 nnoremap ; :
 
-"save on lost focus
-"au FocusLost * :wa
+"sudo save if not root
+cmap w!! w !sudo tee % >/dev/null
+
+let mapleader=","
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <slient> <leader>/ :nohlsearch<CR>
