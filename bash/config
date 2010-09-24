@@ -1,2 +1,2 @@
-export PS1="\e[32;1m\][\e[0m\]\u@\h:\w\e[32;1m\]]\e[0m\] "
+export PS1="\[\e[32;1m\][\e[0m\]\u@\h:\w\e[32;1m\]]\e[0m\] "
 export EDITOR="vim"
