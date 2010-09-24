@@ -33,17 +33,22 @@ require 'open-uri'
 
 bundles_dir = File.join(File.dirname(__FILE__), "bundle")
 
-FileUtils.cd(bundles_dir)
-
 #puts "Trashing everything (lookout!)"
 #Dir["*"].each {|d| FileUtils.rm_rf d }
 
-git_bundles.each do |url|
-  dir = url.split('/').last.sub(/\.git$/, '')
-  puts "  Unpacking #{url} into #{dir}"
-  `git clone #{url} #{dir}`
-  FileUtils.rm_rf(File.join(dir, ".git"))
-end
+#git_bundles.each do |url|
+  #dir = url.split('/').last.sub(/\.git$/, '')
+  #puts "  Unpacking #{url} into #{dir}"
+  #`git clone #{url} #{dir}`
+  #FileUtils.rm_rf(File.join(dir, ".git"))
+#end
+
+puts " Updating submodule bundles via git..."
+dotfiles_dir = File.join(Dir.getwd())
+FileUtils.cd(dotfiles_dir)
+`git submodule update`
+
+FileUtils.cd(bundles_dir)
 
 vim_org_scripts.each do |name, script_id, script_type|
   puts "  Downloading #{name}"
@@ -55,4 +60,5 @@ vim_org_scripts.each do |name, script_id, script_type|
 end
 
 #Update help
-`vim -e -c "call pathogen#helptags()-c q`
+puts " Updating bundle help tags..."
+`vim -e -c "call pathogen#helptags()" -c q`
