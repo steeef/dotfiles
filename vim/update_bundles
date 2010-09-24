@@ -40,7 +40,7 @@ bundles_dir = File.join(File.dirname(__FILE__), "bundle")
 git_bundles.each do |url|
     dir = url.split('/').last.sub(/\.git$/, '')
     is_submodule = `grep -c "#{url}" "#{cur_dir}/.gitmodules"`
-    if is_submodule == 0
+    if Integer(is_submodule) == 0
         puts "  adding #{url} as submodule..."
         `git submodule add #{url} vim/bundle/#{dir}`
         `git submodule init`
