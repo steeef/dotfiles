@@ -43,6 +43,9 @@ git_bundles.each do |url|
     if Integer(is_submodule) == 0
         puts "  adding #{url} as submodule..."
         `git submodule add #{url} vim/bundle/#{dir}`
+    end
+    is_initted = `grep -c "#{url}" "#{cur_dir}/.git/config"`
+    if Integer(is_initted) == 0
         `git submodule init`
     end
 end
