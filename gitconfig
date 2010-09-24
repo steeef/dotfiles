@@ -1,3 +1,20 @@
 [user]
 	name = steeef
 	email = steeef@gmail.com
+[alias]
+	co = checkout
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	excludesfile = /home/sprice/.gitignore
+	editor = vim
+	autocrlf = input
+[apply]
+	whitespace = nowarn
+[format]
+	pretty = %C(yellow)%h%Creset %s %C(red)(%cr)%Creset
+[github]
+	user = steeef
+    token = cc676d9c8a9d5cf5fa91c37946b1e66e
