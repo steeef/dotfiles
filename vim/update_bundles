@@ -1,41 +1,25 @@
 #!/usr/bin/env ruby
 
+vim_dir = "vim"
+
 git_bundles = [ 
-#    "git://github.com/mrtazz/simplenote.vim.git",
-#  "git://github.com/astashov/vim-ruby-debugger.git",
-#  "git://github.com/msanders/snipmate.vim.git",
     "git://github.com/scrooloose/nerdtree.git",
     "git://github.com/scrooloose/nerdcommenter.git",
-#  "git://github.com/timcharper/textile.vim.git",
-#  "git://github.com/tpope/vim-cucumber.git",
-#  "git://github.com/tpope/vim-fugitive.git",
-#  "git://github.com/tpope/vim-git.git",
-#  "git://github.com/tpope/vim-haml.git",
-#  "git://github.com/tpope/vim-markdown.git",
-#  "git://github.com/tpope/vim-rails.git",
-#  "git://github.com/tpope/vim-repeat.git",
-#  "git://github.com/tpope/vim-surround.git",
-#  "git://github.com/tpope/vim-vividchalk.git",
-#  "git://github.com/tsaleh/vim-align.git",
-#  "git://github.com/tsaleh/vim-shoulda.git",
-#  "git://github.com/tsaleh/vim-supertab.git",
-#  "git://github.com/tsaleh/vim-tcomment.git",
     "git://github.com/vim-ruby/vim-ruby.git",
     "git://github.com/mileszs/ack.vim.git",
     "git://git.wincent.com/command-t.git",
+    "git://github.com/msanders/snipmate.vim.git",
 ]
 
 vim_org_scripts = [
     ["IndexedSearch", "7062",  "plugin"],
-#  ["gist",          "12732", "plugin"],
-#  ["jquery",        "12107", "syntax"],
 ]
 
 require 'fileutils'
 require 'open-uri'
 
-cur_dir = File.join(Dir.getwd())
-bundles_dir = File.join(File.dirname(__FILE__), "bundle")
+cur_dir = FileUtils.pwd
+bundles_dir = File.join(cur_dir, vim_dir, "bundle")
 
 
 git_bundles.each do |url|
@@ -43,7 +27,7 @@ git_bundles.each do |url|
     is_submodule = `grep -c "#{url}" "#{cur_dir}/.gitmodules"`
     if Integer(is_submodule) == 0
         puts "  adding #{url} as submodule..."
-        `git submodule add #{url} vim/bundle/#{dir}`
+        `git submodule add #{url} #{bundles_dir}/#{dir}`
     end
     is_initialized = `grep -c "#{url}" "#{cur_dir}/.git/config"`
     if Integer(is_initialized) == 0
