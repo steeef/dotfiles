@@ -85,9 +85,15 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
+" F1 = remove search highlighting
+inoremap <F1> :nohlsearch<Enter>
+nnoremap <F1> :nohlsearch<Enter>
+vnoremap <F1> :nohlsearch<Enter>
+
+" F5 = toggle paste mode
+nnoremap <F5> :set invpaste paste?<Enter>
+imap <F5> <C-O><F5>
+set pastetoggle=<F5>
 
 nnoremap ; :
 
@@ -95,6 +101,7 @@ nnoremap ; :
 cmap w!! w !sudo tee % >/dev/null
 
 let mapleader=","
+" ev = edit vimrc
+" sv = reload vimrc
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-nmap <slient> <leader>/ :nohlsearch<CR>
