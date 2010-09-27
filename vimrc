@@ -67,6 +67,7 @@ set formatoptions=qrn1
 "set textwidth=189
 "set colorcolumn=195
 
+"disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -75,8 +76,13 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+"up and down work with wrapped lines
 nnoremap j gj
 nnoremap k gk
+
+" match bracket pairs
+nnoremap <tab> %
+vnoremap <tab> %
 
 " Easy window navigation
 map <C-h> <C-w>h
@@ -105,3 +111,5 @@ let mapleader=","
 " sv = reload vimrc
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+nmap <leader>a :Ack
