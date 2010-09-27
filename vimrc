@@ -14,7 +14,7 @@ else
   endif
 endif
 
-colorscheme mustang
+colorscheme molokai
 syntax enable
 
 
