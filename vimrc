@@ -122,3 +122,7 @@ nmap <leader>a :Ack
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
+
+"YankRing: Show yanked test
+nmap <silent> <F3> :YRShow<CR>
+imap <silent> <F3> <ESC>:YRShow<CR>
