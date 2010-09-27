@@ -111,11 +111,14 @@ let mapleader=","
 " sv = reload vimrc
 " if winvimrc is set, use that instead of $MYVIMRC
 if exists("winvimrc")
-    exec "nmap <silent> <leader>ev :e ".winvimrc."<CR>"
+    exec "nmap <silent> <leader>ev <C-w><C-v><C-l>:e ".winvimrc."<CR>"
     exec "nmap <silent> <leader>sv :so ".winvimrc."<CR>"
 else
-    nmap <silent> <leader>ev :e $MYVIMRC<CR>
+    nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
     nmap <silent> <leader>sv :so $MYVIMRC<CR>
 endif
 
 nmap <leader>a :Ack
+
+"open new vertical window and switch to it
+nmap <leader>w <C-w>v<C-w>l
