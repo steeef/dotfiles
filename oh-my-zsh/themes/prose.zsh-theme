@@ -15,7 +15,7 @@ function box_name {
 }
 
 function user_name {
-    [ $USERNAME ] && echo '$USERNAME'
+    [ $USERNAME ] && echo $USERNAME
 }
 
 PROMPT='
