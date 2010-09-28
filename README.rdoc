@@ -24,3 +24,5 @@ and update all of them:
 Run this script from the directory you cloned to. If you followed the above
 instructions, this should be ~/.dotfiles. Edit this script to change the bundles
 you'd like to use.
+
+Also using oh-my-zsh instead of Ryan's zsh config (http://github.com/robbyrussell/oh-my-zsh).
