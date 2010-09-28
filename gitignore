@@ -1,9 +1,11 @@
 .DS_Store
 .svn
 *~
+*.un~
 .*.swp
 locals.zsh
 log/.zsh_history
 projects.zsh
+custom
 custom/*.zsh
 !custom/example.zsh

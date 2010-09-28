@@ -1,6 +1,6 @@
 #compdef brew
 
-# imported from the latest homebrew contributions
+# copied from _fink
 
 _brew_all_formulae() {
   formulae=(`brew search`)
@@ -12,25 +12,19 @@ _brew_installed_formulae() {
 
 local -a _1st_arguments
 _1st_arguments=(
-  'cat:display formula file for a formula'
-  'cleanup:uninstall unused and old versions of packages'
-  'create:create a new formula'
-  'deps:list dependencies and dependants of a formula'
-  'doctor:audits your installation for common issues'
-  'edit:edit a formula'
-  'home:visit the homepage of a formula or the brew project'
-  'info:information about a formula'
   'install:install a formula'
-  'link:link a formula'
-  'list:list files in a formula or not-installed formulae'
-  'log:git commit log for a formula'
-  'outdated:list formulas for which a newer version is available'
-  'prune:remove dead links'
   'remove:remove a formula'
   'search:search for a formula (/regex/ or string)'
+  'list:list files in a formula or not-installed formulae'
+  'link:link a formula'
   'unlink:unlink a formula'
+  'home:visit the homepage of a formula or the brew project'
+  'info:information about a formula'
+  'prune:remove dead links'
   'update:freshen up links'
-  'uses:show formulas which depend on a formula'
+  'log:git commit log for a formula'
+  'create:create a new formula'
+  'edit:edit a formula'
 )
 
 local expl
@@ -53,12 +47,12 @@ case "$words[1]" in
     _arguments \
       '(--unbrewed)--unbrewed[files in brew --prefix not controlled by brew]' \
       '1: :->forms' &&  return 0
-
+      
       if [[ "$state" == forms ]]; then
         _brew_installed_formulae
         _requested installed_formulae expl 'installed formulae' compadd -a installed_formulae
       fi ;;
-  install|home|log|info|uses|cat|deps)
+  install|home|log|info)
     _brew_all_formulae
     _wanted formulae expl 'all formulae' compadd -a formulae ;;
   remove|edit|xo)

@@ -32,9 +32,3 @@ function uninstall_oh_my_zsh() {
 function upgrade_oh_my_zsh() {
   /bin/sh $ZSH/tools/upgrade.sh
 }
-
-function take() {
-  mkdir -p $1
-  cd $1
-}
-
