@@ -1,7 +1,7 @@
 # get the revision we're currently at
 function svn_prompt_info() {
   ref=$(svn info 2> /dev/null | grep Revision) || return
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#Revision: }$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#Revision: }$(parse_svn_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
 parse_svn_dirty () {
