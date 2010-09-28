@@ -1,6 +1,6 @@
 # Aliases
 alias g='git'
-alias gs='git status'
+alias gs='git status --ignore-submodules'
 alias gl='git pull'
 alias gup='git fetch && git rebase'
 alias gp='git push'
