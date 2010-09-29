@@ -54,7 +54,3 @@ export GREP_COLOR='1;32'
 #custom aliases
 alias duh='du -h --max=1'
 alias vi='vim'
-<<<<<<< HEAD
-
-=======
->>>>>>> 4a3ab4024d5642f6328598d648dd4953946652c4
