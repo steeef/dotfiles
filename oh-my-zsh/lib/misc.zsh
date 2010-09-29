@@ -50,3 +50,7 @@ alias history='fc -l 1'
 ## Examples: http://rubyurl.com/ZXv
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
+
+#custom aliases
+alias duh='du -h --max=1'
+alias vi='vim'
