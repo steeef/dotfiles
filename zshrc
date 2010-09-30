@@ -22,4 +22,4 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/.bin
