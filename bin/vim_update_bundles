@@ -3,7 +3,7 @@
 # bundles added as submodules in <vim_dir>/bundle
 
 # set repo_dir to your super-repository
-repo_dir = "~/.dotfiles"
+repo_dir = File.expand_path("~/.dotfiles")
 # set vim_dir to Vim's runtimepath variable
 # (usually .vim in your home directory)
 vim_dir = "vim"
