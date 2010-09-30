@@ -34,15 +34,13 @@ git_bundles.each do |url|
     dir = url.split('/').last.sub(/\.git$/, '')
     
     # if plugin hasn't been added as a submodule
-    if !system("grep -q \"#{url}\" \"#{repo_dir}/.gitmodules\"")
+    unless system("grep -q \"#{url}\" \"#{repo_dir}/.gitmodules\"")
         puts "  adding #{url} as submodule..."
         `git submodule add #{url} "#{bundles_dir}/#{dir}"`
     end
 
     # if submodule hasn't been initialized
-    if !system("grep -q \"#{url}\" \"#{repo_dir}/.git/config\"")
-        need_init = true
-    end
+    need_init = true unless system("grep -q \"#{url}\" \"#{repo_dir}/.git/config\"")
 end
 if need_init
     puts " initializing new submodules"
