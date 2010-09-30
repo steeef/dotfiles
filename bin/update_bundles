@@ -2,6 +2,8 @@
 # assume running from a git repository
 # bundles added as submodules in <vim_dir>/bundle
 
+# set repo_dir to your super-repository
+repo_dir = "~/.dotfiles"
 # set vim_dir to Vim's runtimepath variable
 # (usually .vim in your home directory)
 vim_dir = "vim"
@@ -23,7 +25,7 @@ vim_org_scripts = [
 require 'fileutils'
 require 'open-uri'
 
-cur_dir = FileUtils.pwd
+FileUtils.cd(repo_dir)
 bundles_dir = File.join(vim_dir, "bundle")
 
 need_init = false
@@ -32,13 +34,13 @@ git_bundles.each do |url|
     dir = url.split('/').last.sub(/\.git$/, '')
     
     # if plugin hasn't been added as a submodule
-    if !system("grep -q \"#{url}\" \"#{cur_dir}/.gitmodules\"")
+    if !system("grep -q \"#{url}\" \"#{repo_dir}/.gitmodules\"")
         puts "  adding #{url} as submodule..."
         `git submodule add #{url} "#{bundles_dir}/#{dir}"`
     end
 
     # if submodule hasn't been initialized
-    if !system("grep -q \"#{url}\" \"#{cur_dir}/.git/config\"")
+    if !system("grep -q \"#{url}\" \"#{repo_dir}/.git/config\"")
         need_init = true
     end
 end
