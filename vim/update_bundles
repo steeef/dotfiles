@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
+# assume running from a git repository
+# bundles added as submodules in <vim_dir>/bundle
 
+# set vim_dir to Vim's runtimepath variable
+# (usually .vim in your home directory)
 vim_dir = "vim"
 
 git_bundles = [ 
@@ -25,17 +29,21 @@ bundles_dir = File.join(vim_dir, "bundle")
 
 git_bundles.each do |url|
     dir = url.split('/').last.sub(/\.git$/, '')
+    
+    # if plugin hasn't been added as a submodule
     if !system("grep -q \"#{url}\" \"#{cur_dir}/.gitmodules\"")
         puts "  adding #{url} as submodule..."
         `git submodule add #{url} "#{bundles_dir}/#{dir}"`
     end
+
+    # if submodule hasn't been initialized
     if !system("grep -q \"#{url}\" \"#{cur_dir}/.git/config\"")
         puts "  initializing #{dir}"
         `git submodule init`
     end
 end
 
-puts " Updating submodule bundles via git..."
+puts " Updating submodule bundles..."
 `git submodule update`
 
 FileUtils.cd(bundles_dir)
@@ -49,6 +57,5 @@ vim_org_scripts.each do |name, script_id, script_type|
     end
 end
 
-#Update help
 puts " Updating bundle help tags..."
 `vim -e -c "call pathogen#helptags()" -c q`
