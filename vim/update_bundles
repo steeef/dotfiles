@@ -26,6 +26,7 @@ require 'open-uri'
 cur_dir = FileUtils.pwd
 bundles_dir = File.join(vim_dir, "bundle")
 
+need_init = false
 
 git_bundles.each do |url|
     dir = url.split('/').last.sub(/\.git$/, '')
@@ -38,9 +39,12 @@ git_bundles.each do |url|
 
     # if submodule hasn't been initialized
     if !system("grep -q \"#{url}\" \"#{cur_dir}/.git/config\"")
-        puts "  initializing #{dir}"
-        `git submodule init`
+        need_init = true
     end
+end
+if need_init
+    puts " initializing new submodules"
+    `git submodule init`
 end
 
 puts " Updating submodule bundles..."
