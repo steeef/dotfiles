@@ -9,3 +9,4 @@ projects.zsh
 custom
 custom/*.zsh
 !custom/example.zsh
+doc/tags
