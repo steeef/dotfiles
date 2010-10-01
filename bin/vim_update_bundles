@@ -50,6 +50,13 @@ end
 puts " Updating submodule bundles..."
 `git submodule update`
 
+git_bundles.each do |url|
+    dir = url.split('/').last.sub(/\.git$/, '')
+
+    `git add #{bundles_dir}/#{dir}`
+    `git commit -m "adding #{dir} bundle"`
+end
+
 FileUtils.cd(bundles_dir)
 
 vim_org_scripts.each do |name, script_id, script_type|
