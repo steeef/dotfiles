@@ -10,14 +10,29 @@ colors
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
 
+
 # check-for-changes can be really slow.
 # you should disable it, if you work with large repositories
 zstyle ':vcs_info:*:prompt:*' check-for-changes true
-zstyle ':vcs_info:*:prompt:*' unstagedstr   'Â¹'  # display Â¹ if there are unstaged changes
-zstyle ':vcs_info:*:prompt:*' stagedstr     'Â²'  # display Â² if there are staged changes
-zstyle ':vcs_info:*:prompt:*' actionformats "(%{$fg[magenta]%}%b%u%c%{$reset_color%})(%{$fg[green]%}%a%{$reset_color%})"
-zstyle ':vcs_info:*:prompt:*' formats       "(%{$fg[magenta]%}%b%u%c%{$reset_color%})"
-zstyle ':vcs_info:*:prompt:*' nvcsformats   ""                             "%~"
+
+# set formats
+# %b - branchname
+# %u - unstagedstr (see below)
+# %c - stagedstr (see below)
+# %a - action (e.g. rebase-i)
+# %R - repository path
+# %S - path in the repository
+PR_RST="%{${reset_color}%}"
+FMT_BRANCH="(%{$fg[magenta]%}%b%u%c${PR_RST})"
+FMT_ACTION="(%{$fg[green]%}%a${PR_RST})"
+FMT_UNSTAGED="%{$fg[yellow]%}!"
+FMT_STAGED="%{$fg[yellow]%}?"
+
+zstyle ':vcs_info:*:prompt:*' unstagedstr   "${FMT_UNSTAGED}"
+zstyle ':vcs_info:*:prompt:*' stagedstr     "${FMT_STAGED}"
+zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
+zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
+zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
 
 function steeef_preexec {
