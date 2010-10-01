@@ -25,5 +25,4 @@ Run this script from the directory you cloned to. If you followed the above
 instructions, this should be ~/.dotfiles. Edit this script to change the bundles
 you'd like to use.
 
-Also using sjl's fork of oh-my-zsh instead of Ryan's zsh config (http://github.com/sjl/oh-my-zsh).
-I've removed the Mercurial prompt stuff, since I only use Git.
+Also using my own fork of oh-my-zsh instead of Ryan's zsh config (http://github.com/steeef/oh-my-zsh).

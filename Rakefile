@@ -3,6 +3,10 @@ require 'erb'
 
 desc "install the dot files into user's home directory"
 task :install do
+    # update and initialize submodules first
+    `git submodule init`
+    `git submodule update`
+
   replace_all = false
   Dir['*'].each do |file|
     next if %w[Rakefile README.rdoc LICENSE].include? file
