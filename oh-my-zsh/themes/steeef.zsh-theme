@@ -1,3 +1,9 @@
+# prompt style and colors based on Steve Losh's Prose theme:
+# http://github.com/sjl/oh-my-zsh/blob/master/themes/prose.zsh-theme
+#
+# vcs_info modifications from Bart Trojanowski's zsh prompt:
+# http://www.jukie.net/bart/blog/pimping-out-zsh-prompt
+
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
