@@ -22,3 +22,6 @@
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
+[submodule "vim/bundle/vim-guicolorscheme"]
+	path = vim/bundle/vim-guicolorscheme
+	url = git://github.com/thinca/vim-guicolorscheme.git
