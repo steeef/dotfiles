@@ -16,6 +16,7 @@ git_bundles = [
     "git://git.wincent.com/command-t.git",
     "git://github.com/msanders/snipmate.vim.git",
     "git://github.com/chrismetcalf/vim-yankring.git",
+    "git://github.com/thinca/vim-guicolorscheme.git",
 ]
 
 vim_org_scripts = [
