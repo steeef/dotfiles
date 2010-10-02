@@ -7,7 +7,7 @@ else
   " This is console Vim.
   set t_Co=256
   if exists("+lines")
-    set lines=60
+    set lines=55
   endif
   if exists("+columns")
     set columns=200
