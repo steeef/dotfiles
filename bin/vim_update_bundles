@@ -18,6 +18,7 @@ git_bundles = [
     "git://github.com/chrismetcalf/vim-yankring.git",
     "git://github.com/thinca/vim-guicolorscheme.git",
     "git://github.com/vim-scripts/TVO--The-Vim-Outliner.git",
+    "git://github.com/tomtom/viki_vim.git",
 ]
 
 vim_org_scripts = [
