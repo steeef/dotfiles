@@ -135,16 +135,3 @@ nmap <leader>w <C-w>v<C-w>l
 "YankRing: Show yanked test
 nmap <silent> <F3> :YRShow<CR>
 imap <silent> <F3> <ESC>:YRShow<CR>
-
-" Open URL
-command -bar -nargs=1 OpenURL :!open <args>
-function! OpenURL()
-  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
-  echo s:uri
-  if s:uri != ""
-exec "!open \"" . s:uri . "\""
-  else
-echo "No URI found in line."
-  endif
-endfunction
-map <Leader>w :call OpenURL()<CR>
