@@ -9,6 +9,7 @@ repo_dir = File.expand_path("~/.dotfiles")
 vim_dir = "vim"
 
 git_bundles = [ 
+    "git://github.com/tomtom/tlib_vim.git",
     "git://github.com/scrooloose/nerdtree.git",
     "git://github.com/scrooloose/nerdcommenter.git",
     "git://github.com/vim-ruby/vim-ruby.git",
