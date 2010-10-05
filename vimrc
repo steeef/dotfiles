@@ -135,3 +135,8 @@ nmap <leader>w <C-w>v<C-w>l
 "YankRing: Show yanked test
 nmap <silent> <F3> :YRShow<CR>
 imap <silent> <F3> <ESC>:YRShow<CR>
+
+"Viki: toggle VikiMinorMode
+nmap <silent> <F4> :VikiMinorMode<CR>
+imap <silent> <F4> <ESC>:VikiMinorMode<CR>
+vmap <silent> <F4> <ESC>:VikiMinorMode<CR>
