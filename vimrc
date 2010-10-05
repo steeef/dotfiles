@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
@@ -64,8 +66,12 @@ set relativenumber
 set wrap
 "see :help for-table
 set formatoptions=qrn1
-"set textwidth=189
-"set colorcolumn=195
+set textwidth=79
+set colorcolumn=85
+
+"show formatting characters
+set list
+set listchars=tab:»\ ,eol:¬
 
 "disable arrow keys
 nnoremap <up> <nop>
