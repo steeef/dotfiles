@@ -26,6 +26,7 @@ filetype plugin indent on
 set nocompatible
 set modelines=0
 
+set autoindent
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -33,7 +34,6 @@ set expandtab
 
 set encoding=utf-8
 set scrolloff=3
-set autoindent
 set showmode
 set showcmd
 set hidden
