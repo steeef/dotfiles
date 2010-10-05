@@ -28,3 +28,6 @@
 [submodule "vim/bundle/TVO--The-Vim-Outliner"]
 	path = vim/bundle/TVO--The-Vim-Outliner
 	url = git://github.com/vim-scripts/TVO--The-Vim-Outliner.git
+[submodule "vim/bundle/viki_vim"]
+	path = vim/bundle/viki_vim
+	url = git://github.com/tomtom/viki_vim.git
