@@ -31,3 +31,6 @@
 [submodule "vim/bundle/viki_vim"]
 	path = vim/bundle/viki_vim
 	url = git://github.com/tomtom/viki_vim.git
+[submodule "vim/bundle/tlib_vim"]
+	path = vim/bundle/tlib_vim
+	url = git://github.com/tomtom/tlib_vim.git
