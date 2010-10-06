@@ -8,6 +8,12 @@ if has("gui_running")
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
+
+    " Set Putty options
+    let g:netrw_cygwin = 0
+    let g:netrw_ssh_cmd  = '"C:\Progra~1\PuTTY\plink.exe" -batch -T -ssh'
+    let g:netrw_scp_cmd  = '"C:\Progra~1\PuTTY\pscp.exe"  -batch -q -scp'
+    let g:netrw_sftp_cmd = '"C:\Progra~1\PuTTY\pscp.exe"  -batch -q -sftp'
 else
   " This is console Vim.
   set t_Co=256
