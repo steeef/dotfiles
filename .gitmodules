@@ -31,3 +31,6 @@
 [submodule "vim/bundle/tlib_vim"]
 	path = vim/bundle/tlib_vim
 	url = git://github.com/tomtom/tlib_vim.git
+[submodule "vim/bundle/TVO--The-Vim-Outliner"]
+	path = vim/bundle/TVO--The-Vim-Outliner
+	url = git://github.com/steeef/TVO--The-Vim-Outliner.git
