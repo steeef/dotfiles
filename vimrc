@@ -135,6 +135,9 @@ endif
 
 nmap <leader>a :Ack
 
+"omnicompletion
+imap <leader><TAB> <C-x><C-o>
+
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
 
@@ -146,3 +149,6 @@ imap <silent> <F3> <ESC>:YRShow<CR>
 nmap <silent> <F4> :VikiMinorMode<CR>
 imap <silent> <F4> <ESC>:VikiMinorMode<CR>
 vmap <silent> <F4> <ESC>:VikiMinorMode<CR>
+
+"Ruby: Run script
+nmap <F10> :!ruby %<CR>
