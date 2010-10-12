@@ -44,7 +44,7 @@ git_bundles.each do |url|
     end
 
     unless system("grep -q \"doc/tags\" \"#{bundles_dir}/#{dir}/.git/info/exclude\"")
-        #exclude helptags from git
+        puts"  exclude #{dir}'s helptags from git..."
         open("#{bundles_dir}/#{dir}/.git/info/exclude", "a") do |f|
             f << "\ndoc/tags\n"
         end
