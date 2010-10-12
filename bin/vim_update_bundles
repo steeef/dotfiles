@@ -41,6 +41,9 @@ git_bundles.each do |url|
     unless system("grep -q \"#{url}\" \"#{repo_dir}/.gitmodules\"")
         puts "  adding #{url} as submodule..."
         `git submodule add #{url} "#{bundles_dir}/#{dir}"`
+    end
+
+    unless system("grep -q \"doc/tags\" \"#{bundles_dir}/#{dir}/.git/info/exclude\"")
         #exclude helptags from git
         open("#{bundles_dir}/#{dir}/.git/info/exclude", "a") do |f|
             f << "\ndoc/tags\n"
