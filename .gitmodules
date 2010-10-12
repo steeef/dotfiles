@@ -25,3 +25,12 @@
 [submodule "vim/bundle/TVO--The-Vim-Outliner"]
 	path = vim/bundle/TVO--The-Vim-Outliner
 	url = git://github.com/steeef/TVO--The-Vim-Outliner.git
+[submodule "vim/bundle/vim-ruby"]
+	path = vim/bundle/vim-ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
+[submodule "vim/bundle/snipmate.vim"]
+	path = vim/bundle/snipmate.vim
+	url = git://github.com/msanders/snipmate.vim.git
+[submodule "vim/bundle/vim-yankring"]
+	path = vim/bundle/vim-yankring
+	url = git://github.com/chrismetcalf/vim-yankring.git
