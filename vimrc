@@ -95,9 +95,6 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
-"use jj in insert mode for ESC
-imap jj <ESC>
-
 " match bracket pairs
 nnoremap <tab> %
 vnoremap <tab> %
