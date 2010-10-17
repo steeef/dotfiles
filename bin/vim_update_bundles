@@ -17,13 +17,10 @@ git_bundles = [
     "git://git.wincent.com/command-t.git",
     "git://github.com/msanders/snipmate.vim.git",
     "git://github.com/chrismetcalf/vim-yankring.git",
+    "git://github.com/vim-scripts/IndexedSearch.git",
 #    "git://github.com/thinca/vim-guicolorscheme.git",
 #    "git://github.com/steeef/TVO--The-Vim-Outliner.git",
 #    "git://github.com/tomtom/viki_vim.git",
-]
-
-vim_org_scripts = [
-    ["IndexedSearch", "7062",  "plugin"],
 ]
 
 require 'fileutils'
@@ -60,17 +57,6 @@ end
 
 puts " Updating submodule bundles..."
 `git submodule update`
-
-FileUtils.cd(bundles_dir)
-
-vim_org_scripts.each do |name, script_id, script_type|
-    puts "  Downloading #{name}"
-    local_file = File.join(name, script_type, "#{name}.vim")
-    FileUtils.mkdir_p(File.dirname(local_file))
-    File.open(local_file, "w") do |file|
-        file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
-    end
-end
 
 puts " Updating bundle help tags..."
 `vim -e -c "call pathogen#helptags()" -c q`
