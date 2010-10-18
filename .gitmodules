@@ -7,12 +7,6 @@
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
-[submodule "vim/bundle/IndexedSearch"]
-	path = vim/bundle/IndexedSearch
-	url = git://github.com/vim-scripts/IndexedSearch.git
 [submodule "vim/bundle/ruby"]
 	path = vim/bundle/ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
@@ -25,3 +19,6 @@
 [submodule "vim/bundle/yankring"]
 	path = vim/bundle/yankring
 	url = git://github.com/chrismetcalf/vim-yankring.git
+[submodule "vim/bundle/indexedsearch"]
+	path = vim/bundle/indexedsearch
+	url = git://github.com/bronson/vim-indexedsearch.git

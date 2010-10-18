@@ -8,7 +8,7 @@ scriptencoding utf-8
 " BUNDLE: git://git.wincent.com/command-t.git
 " BUNDLE: git://github.com/msanders/snipmate.vim.git
 " BUNDLE: git://github.com/chrismetcalf/vim-yankring.git
-" BUNDLE: git://github.com/vim-scripts/IndexedSearch.git
+" BUNDLE: git://github.com/bronson/vim-indexedsearch.git
 
 if has("gui_running")
     " GUI is running or is about to start.
