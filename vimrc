@@ -80,7 +80,10 @@ set showmatch
 set ignorecase
 set smartcase
 
-set relativenumber
+" 7.3-specific setting
+if has('relativenumber')
+    set relativenumber
+end
 
 set wrap
 "see :help for-table
