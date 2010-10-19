@@ -131,6 +131,10 @@ nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 set pastetoggle=<F5>
 
+" Use Enter to exit insert mode
+" Can still use Shift+Enter for a new line
+inoremap <CR> <Esc>
+
 nnoremap ; :
 
 "sudo save if not root
@@ -159,11 +163,6 @@ nmap <leader>w <C-w>v<C-w>l
 "YankRing: Show yanked test
 nmap <silent> <F3> :YRShow<CR>
 imap <silent> <F3> <ESC>:YRShow<CR>
-
-"Viki: toggle VikiMinorMode
-nmap <silent> <F4> :VikiMinorMode<CR>
-imap <silent> <F4> <ESC>:VikiMinorMode<CR>
-vmap <silent> <F4> <ESC>:VikiMinorMode<CR>
 
 "Ruby: Run script
 nmap <F10> :!ruby %<CR>
