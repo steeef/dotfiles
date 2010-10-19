@@ -19,9 +19,6 @@
 [submodule "vim/bundle/yankring"]
 	path = vim/bundle/yankring
 	url = git://github.com/chrismetcalf/vim-yankring.git
-[submodule "vim/bundle/indexedsearch"]
-	path = vim/bundle/indexedsearch
-	url = git://github.com/bronson/vim-indexedsearch.git
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
