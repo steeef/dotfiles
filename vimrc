@@ -83,6 +83,8 @@ set smartcase
 " 7.3-specific setting
 if has('relativenumber')
     set relativenumber
+else
+    set number
 end
 
 set wrap
