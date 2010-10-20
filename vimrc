@@ -81,8 +81,9 @@ set ignorecase
 set smartcase
 
 " 7.3-specific setting
-if has('relativenumber')
+if v:version >= 703
     set relativenumber
+    set colorcolumn=85
 else
     set number
 end
@@ -91,9 +92,6 @@ set wrap
 "see :help for-table
 set formatoptions=qrn1
 set textwidth=79
-if has('colorcolumn')
-    set colorcolumn=85
-end
 
 "show formatting characters
 set list
