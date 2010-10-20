@@ -91,7 +91,9 @@ set wrap
 "see :help for-table
 set formatoptions=qrn1
 set textwidth=79
-set colorcolumn=85
+if has('colorcolumn')
+    set colorcolumn=85
+end
 
 "show formatting characters
 set list
