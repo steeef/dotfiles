@@ -1,15 +1,5 @@
 scriptencoding utf-8
 
-"git urls for pathogen bundles
-" BUNDLE: git://github.com/scrooloose/nerdtree.git
-" BUNDLE: git://github.com/scrooloose/nerdcommenter.git
-" BUNDLE: git://github.com/vim-ruby/vim-ruby.git
-" BUNDLE: git://github.com/mileszs/ack.vim.git
-" BUNDLE: git://git.wincent.com/command-t.git
-" BUNDLE: git://github.com/msanders/snipmate.vim.git
-" BUNDLE: git://github.com/chrismetcalf/vim-yankring.git
-" BUNDLE: git://github.com/bronson/vim-indexedsearch.git
-
 if has("gui_running")
     " GUI is running or is about to start.
     " Maximize gvim window.
@@ -152,17 +142,8 @@ else
     nmap <silent> <leader>sv :so $MYVIMRC<CR>
 endif
 
-nmap <leader>a :Ack
-
 "omnicompletion
 imap <leader><TAB> <C-x><C-o>
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
-
-"YankRing: Show yanked test
-nmap <silent> <F3> :YRShow<CR>
-imap <silent> <F3> <ESC>:YRShow<CR>
-
-"Ruby: Run script
-nmap <F10> :!ruby %<CR>
