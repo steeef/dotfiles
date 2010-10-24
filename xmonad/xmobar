@@ -6,9 +6,9 @@
 Config { font = "xft:Fixed-8"
       , bgColor = "#000000"
       , fgColor = "#ffffff"
-      , position = Static { xpos = 1680, ypos = 0, width = 1560, height = 16 }
+      , position = Static { xpos = 1920, ypos = 0, width = 540, height = 16 }
       , lowerOnStart = True
-      , commands = [ Run Weather "KNYC" ["-t","<tempF>F <skyCondition>","-L","64","-H","77","--normal","#CEFFAC","--high","#FFB6B0","--low","#96CBFE"] 36000
+      , commands = [ Run Weather "97210" ["-t","<tempF>F <skyCondition>","-L","64","-H","77","--normal","#CEFFAC","--high","#FFB6B0","--low","#96CBFE"] 36000
                    , Run Cpu ["-L","3","-H","50","--normal","#CEFFAC","--high","#FFB6B0"] 10
                    , Run MultiCpu ["-t","Cpu: <total0><total1><total2><total3>","-L","3","-H","50","--normal","#CEFFAC","--high","#FFB6B0","-w","5"] 10
                    , Run Memory ["-t","Mem: <usedratio>%"] 10
