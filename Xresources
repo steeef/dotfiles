@@ -1,4 +1,4 @@
-URxvt*font: xft:Droid Sans Mono:pixelsize=13
+URxvt*font: xft:Inconsolata:pixelsize=11
 URxvt*foreground: lightgrey
 URxvt*background: #121212
 URxvt*internalBorder: 0
