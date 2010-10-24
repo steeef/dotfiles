@@ -1,4 +1,4 @@
-URxvt*font: xft:Inconsolata:pixelsize=11
+URxvt*font: xft:Inconsolata:pixelsize=12
 URxvt*foreground: lightgrey
 URxvt*background: #121212
 URxvt*internalBorder: 0
