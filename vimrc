@@ -14,16 +14,17 @@ if has("gui_running")
     " GUI is running or is about to start.
     " Maximize gvim window.
     set lines=100 columns=200
-    set guifont=Liberation\ Mono\ 10
+
+    " Set font based on operating system
+    if has("unix")
+        set guifont=Liberation\ Mono\ 10
+    else
+        set guifont=Liberation\ Mono:h10
+    endif
+
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
-
-    " Set Putty options
-    let g:netrw_cygwin = 0
-    let g:netrw_ssh_cmd  = '"C:\Progra~1\PuTTY\plink.exe" -batch -T -ssh'
-    let g:netrw_scp_cmd  = '"C:\Progra~1\PuTTY\pscp.exe"  -batch -q -scp'
-    let g:netrw_sftp_cmd = '"C:\Progra~1\PuTTY\pscp.exe"  -batch -q -sftp'
 else
   " This is console Vim.
   set t_Co=256
