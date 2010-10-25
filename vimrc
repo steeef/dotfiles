@@ -14,7 +14,7 @@ if has("gui_running")
     " GUI is running or is about to start.
     " Maximize gvim window.
     set lines=100 columns=200
-    set guifont=Liberation\ Mono:h10
+    set guifont=Liberation\ Mono\ 10
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
