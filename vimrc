@@ -12,14 +12,13 @@ scriptencoding utf-8
 
 if has("gui_running")
     " GUI is running or is about to start.
-    " Maximize gvim window.
-    set lines=100 columns=200
 
-    " Set font based on operating system
+    " Set font and window size based on operating system
     if has("unix")
         set guifont=Liberation\ Mono\ 10
     else
         set guifont=Liberation\ Mono:h10
+        set lines=100 columns=200
     endif
 
     set guioptions-=m  "remove menu bar
