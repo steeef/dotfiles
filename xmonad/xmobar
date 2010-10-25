@@ -6,7 +6,7 @@
 Config { font = "xft:Liberation Mono-8"
       , bgColor = "#000000"
       , fgColor = "#ffffff"
-      , position = TopW L 90
+      , position = TopW L 95
       , lowerOnStart = True
       , commands = [ Run Weather "97210" ["-t","<tempF>F <skyCondition>","-L","64","-H","77","--normal","#CEFFAC","--high","#FFB6B0","--low","#96CBFE"] 36000
                    , Run Cpu ["-L","3","-H","50","--normal","#CEFFAC","--high","#FFB6B0"] 10
@@ -19,6 +19,6 @@ Config { font = "xft:Liberation Mono-8"
                    ]
       , sepChar = "%"
       , alignSep = "}{"
-      , template = "%StdinReader% }{ %multicpu%   %memory%   %swap%   %eth0%   <fc=#FFFFCC>%date%</fc>   %KNYC%"
+      , template = "%StdinReader% }{ %cpu%   %memory%   %swap%   %eth0%   <fc=#FFFFCC>%date%</fc>   %97210%"
       }
 
