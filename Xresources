@@ -1,9 +1,0 @@
-URxvt*font: xft:Liberation Mono:pixelsize=13
-URxvt*foreground: lightgrey
-URxvt*background: #121212
-URxvt*internalBorder: 0
-URxvt*jumpScroll: true
-URxvt*saveLines: 5000
-URxvt*secondaryScroll: true
-URxvt*scrollBar: false
-URxvt*loginShell: true
