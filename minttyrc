@@ -1,6 +1,6 @@
 BackgroundColour=18,18,18
-Font=Inconsolata
-FontHeight=11
+Font=Liberation Mono
+FontHeight=10
 Locale=en_US
 Charset=UTF-8
 Columns=150
