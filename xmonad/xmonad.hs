@@ -280,7 +280,7 @@ main = do
 	xmonad $ defaults {
 		logHook            = dynamicLogWithPP $ xmobarPP {
                                 ppOutput = hPutStrLn xmproc
-                                , ppTitle = xmobarColor "#CD5907" "" . shorten 100
+                                , ppTitle = xmobarColor "#A6E22E" "" . shorten 100
                                 , ppCurrent = xmobarColor "#A6E22E" ""
                                 , ppSep = "   "
                                 }
