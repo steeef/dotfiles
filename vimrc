@@ -136,6 +136,7 @@ inoremap <CR> <Esc>
 nnoremap <CR> <Esc>
 vnoremap <CR> <Esc>gV
 onoremap <CR> <Esc>
+inoremap <C-o> <CR>
 
 nnoremap ; :
 
