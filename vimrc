@@ -28,10 +28,10 @@ else
   " This is console Vim.
   set t_Co=256
   if exists("+lines")
-    set lines=55
+    set lines=65
   endif
   if exists("+columns")
-    set columns=200
+    set columns=190
   endif
 endif
 
@@ -132,8 +132,10 @@ imap <F5> <C-O><F5>
 set pastetoggle=<F5>
 
 " Use Enter to exit insert mode
-" Can still use Shift+Enter for a new line
 inoremap <CR> <Esc>
+nnoremap <CR> <Esc>
+vnoremap <CR> <Esc>gV
+onoremap <CR> <Esc>
 
 nnoremap ; :
 
