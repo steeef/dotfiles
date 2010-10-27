@@ -121,17 +121,13 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 
-" F1 = remove search highlighting
-inoremap <F1> :nohlsearch<Enter>
-nnoremap <F1> :nohlsearch<Enter>
-vnoremap <F1> :nohlsearch<Enter>
-
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 set pastetoggle=<F5>
 
-" Use Enter to exit insert mode
+" Use Enter to exit insert,normal,visual,command mode
+" Use CTRL-O to create new line in insert mode
 inoremap <CR> <Esc>
 nnoremap <CR> <Esc>
 vnoremap <CR> <Esc>gV
@@ -155,6 +151,9 @@ else
     nmap <silent> <leader>sv :so $MYVIMRC<CR>
 endif
 
+" remove search highlighting
+nnoremap <leader><space> :nohlsearch<Enter>
+
 nmap <leader>a :Ack
 
 "omnicompletion
@@ -167,5 +166,5 @@ nmap <leader>w <C-w>v<C-w>l
 nmap <silent> <F3> :YRShow<CR>
 imap <silent> <F3> <ESC>:YRShow<CR>
 
-"Ruby: Run script
-nmap <F10> :!ruby %<CR>
+" Re-select pasted text
+nnoremap <leader>v V`]
