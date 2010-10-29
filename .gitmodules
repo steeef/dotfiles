@@ -31,3 +31,6 @@
 [submodule "vim/bundle/snipmate.vim"]
 	path = vim/bundle/snipmate.vim
 	url = git://github.com/msanders/snipmate.vim.git
+[submodule "vim/bundle/IndexedSearch"]
+	path = vim/bundle/IndexedSearch
+	url = git://github.com/vim-scripts/IndexedSearch.git
