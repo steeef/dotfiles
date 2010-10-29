@@ -1,7 +1,7 @@
 *bundles.txt*                    Bundles                      Version 0.1
 
 These are the bundles installed on your system, along with their
-versions and release dates.  Downloaded on 2010-10-28 16:56:04 -0700.
+versions and release dates.  Downloaded on 2010-10-28 17:04:46 -0700.
 
 A version number of 'n/a' means upstream hasn't tagged any releases.
   - |nerdtree|                     4.1.0-4-ge1abd4d       2010-09-18
@@ -11,5 +11,5 @@ A version number of 'n/a' means upstream hasn't tagged any releases.
   - |command-t|                    0.9                    2010-10-08
   - |snipmate.vim|                 n/a                    2010-04-08
   - |yankring|                     n/a                    2010-08-08
-  - |indexedsearch|                070503                 2007-05-03
+  - |IndexedSearch|                070503                 2007-05-03
 
