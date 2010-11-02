@@ -34,3 +34,6 @@
 [submodule "vim/bundle/IndexedSearch"]
 	path = vim/bundle/IndexedSearch
 	url = git://github.com/vim-scripts/IndexedSearch.git
+[submodule "vim/bundle/Puppet-Syntax-Highlighting"]
+	path = vim/bundle/Puppet-Syntax-Highlighting
+	url = git://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
