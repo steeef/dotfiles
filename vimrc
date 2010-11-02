@@ -172,3 +172,4 @@ nnoremap <leader>v V`]
 
 " reload Command-T
 noremap <leader>y :CommandTFlush<CR>
+noremap <leader>t :CommandT<CR>
