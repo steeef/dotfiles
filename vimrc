@@ -45,6 +45,23 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
+set laststatus=2
+" full path
+set statusline=[%F]
+
+" format (e.g, unix, dos)
+set statusline+=[%{&ff}]
+
+" file type
+set statusline+=[%Y]
+
+" pos (line and col)
+set statusline+=[%04l,%04v]
+
+" percent of entire file
+set statusline+=[%p%%]
+set statusline+=%*
+
 set nocompatible
 set modelines=0
 
@@ -66,7 +83,6 @@ set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
-set laststatus=2
 set title
 
 set nobackup
