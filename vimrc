@@ -10,6 +10,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/chrismetcalf/vim-yankring.git
 " BUNDLE: git://github.com/vim-scripts/IndexedSearch.git
 " BUNDLE: git://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
+" BUNDLE: git://github.com/tpope/vim-fugitive.git
 
 if has("gui_running")
     " GUI is running or is about to start.
