@@ -1,16 +1,17 @@
 *bundles.txt*                    Bundles                      Version 0.1
 
 These are the bundles installed on your system, along with their
-versions and release dates.  Downloaded on Wed Nov 03 17:09:51 -0700 2010.
+versions and release dates.  Downloaded on Thu Nov 04 18:32:10 -0700 2010.
 
 A version number of 'n/a' means upstream hasn't tagged any releases.
   - |nerdtree|                     4.1.0-4-ge1abd4d       2010-09-18
   - |nerdcommenter|                2.2.2-15-g930be32      2010-09-03
   - |ruby|                         vim7.3-21-g5560a2f     2010-09-12
   - |ack.vim|                      n/a                    2010-07-29
-  - |command-t|                    0.9                    2010-10-08
+  - |command-t|                    0.9-7-g8f38e57         2010-11-04
   - |snipmate.vim|                 n/a                    2010-04-08
   - |yankring|                     n/a                    2010-08-08
   - |IndexedSearch|                070503                 2007-05-03
   - |Puppet-Syntax-Highlighting|   0.1                    2007-12-14
+  - |fugitive|                     v1.1-30-gb3f38c4       2010-10-24
 
