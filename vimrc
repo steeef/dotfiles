@@ -26,6 +26,8 @@ if has("gui_running")
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
+
+    colorscheme molokai
 else
   " This is console Vim.
   set t_Co=256
@@ -35,9 +37,14 @@ else
   if exists("+columns")
     set columns=190
   endif
+
+    if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
+        colorscheme molokai
+    else
+        colorscheme slate
+    endif
 endif
 
-colorscheme molokai
 syntax enable
 
 
