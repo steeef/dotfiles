@@ -66,6 +66,11 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+"Set ruby-specific formatting
+if has("autocmd")
+    autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+endif
+
 set encoding=utf-8
 set scrolloff=3
 set showmode
