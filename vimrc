@@ -1,7 +1,6 @@
 scriptencoding utf-8
 
 "git urls for pathogen bundles
-" BUNDLE: git://github.com/scrooloose/nerdtree.git
 " BUNDLE: git://github.com/scrooloose/nerdcommenter.git
 " BUNDLE: git://github.com/vim-ruby/vim-ruby.git
 " BUNDLE: git://github.com/mileszs/ack.vim.git
