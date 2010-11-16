@@ -56,7 +56,7 @@ endif
 filetype plugin indent on
 
 set laststatus=2
-set statusline=%M%R%l/%L\,%c:\%F
+set statusline=%M%R%l/%L\,%c:%Y:\%F
 
 set nocompatible
 set modelines=0
