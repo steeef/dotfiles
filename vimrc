@@ -193,3 +193,8 @@ vmap <C-[> <gv
 
 " open current file's directory
 map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Commenting
+"requires NERDCommenter plugin
+vmap <C-m> ,c<space>gv
+map <C-m> ,c<space>
