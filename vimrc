@@ -199,3 +199,9 @@ nnoremap <leader>v V`]
 " reload Command-T
 noremap <leader>y :CommandTFlush<CR>
 noremap <leader>t :CommandT<CR>
+
+" make indentation easier
+nmap <C-]> >>
+nmap <C-[> <<
+vmap <C-]> >gv
+vmap <C-[> <gv
