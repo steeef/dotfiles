@@ -203,3 +203,7 @@ map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 "requires NERDCommenter plugin
 vmap <C-m> ,c<space>gv
 map <C-m> ,c<space>
+
+" insert blank line below or above current line
+nnoremap <silent><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
