@@ -57,6 +57,10 @@ filetype plugin indent on
 
 set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
+" syntastic addition
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 set nocompatible
 set modelines=0
@@ -202,8 +206,8 @@ map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Commenting
 "requires NERDCommenter plugin
-vmap <C-m> ,c<space>gv
-map <C-m> ,c<space>
+vmap <leader>m ,c<space>gv
+map <leader>m ,c<space>
 
 " insert blank line below or above current line
 nnoremap <silent><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
