@@ -11,6 +11,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
 " BUNDLE: git://github.com/tpope/vim-fugitive.git
 " BUNDLE: git://github.com/tpope/vim-unimpaired.git
+" BUNDLE: git://github.com/scrooloose/syntastic.git
 
 if has("gui_running")
     " GUI is running or is about to start.
@@ -55,7 +56,7 @@ endif
 filetype plugin indent on
 
 set laststatus=2
-set statusline=%M%R%l/%L\,%c:%Y:\%F
+set statusline=%M%R%l/%L\,%c:%Y:\%f
 
 set nocompatible
 set modelines=0
