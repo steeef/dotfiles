@@ -10,6 +10,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/vim-scripts/IndexedSearch.git
 " BUNDLE: git://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
 " BUNDLE: git://github.com/tpope/vim-fugitive.git
+" BUNDLE: git://github.com/tpope/vim-unimpaired.git
 
 if has("gui_running")
 " GUI is running or is about to start.
@@ -207,3 +208,11 @@ map <C-m> ,c<space>
 " insert blank line below or above current line
 nnoremap <silent><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+"Movement commands (requires unimpoired plugin)
+"Move current line down/up
+map <C-Down> ]e
+map <C-Up> [e
+"Move visually selected lines down/up
+vmap <C-Down> ]egv
+vmap <C-Up> [egv
