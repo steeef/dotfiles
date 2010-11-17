@@ -1,9 +1,9 @@
 scriptencoding utf-8
 
 "git urls for pathogen bundles
+" BUNDLE: git://github.com/mileszs/ack.vim.git
 " BUNDLE: git://github.com/scrooloose/nerdcommenter.git
 " BUNDLE: git://github.com/vim-ruby/vim-ruby.git
-" BUNDLE: git://github.com/mileszs/ack.vim.git
 " BUNDLE: git://git.wincent.com/command-t.git
 " BUNDLE: git://github.com/msanders/snipmate.vim.git
 " BUNDLE: git://github.com/chrismetcalf/vim-yankring.git
@@ -13,40 +13,39 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/tpope/vim-unimpaired.git
 
 if has("gui_running")
-" GUI is running or is about to start.
+    " GUI is running or is about to start.
 
-" Set font and window size based on operating system
-if has("unix")
-    set guifont=Liberation\ Mono\ 10
-else
-    set guifont=Liberation\ Mono:h10
-    set lines=100 columns=200
-endif
+    " Set font and window size based on operating system
+    if has("unix")
+        set guifont=Liberation\ Mono\ 10
+    else
+        set guifont=Liberation\ Mono:h10
+        set lines=100 columns=200
+    endif
 
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
 
-colorscheme molokai
-else
-" This is console Vim.
-set t_Co=256
-if exists("+lines")
-set lines=65
-endif
-if exists("+columns")
-set columns=190
-endif
-
-if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
     colorscheme molokai
-else
-    colorscheme slate
-endif
+    else
+    " This is console Vim.
+    set t_Co=256
+    if exists("+lines")
+        set lines=65
+    endif
+    if exists("+columns")
+        set columns=190
+    endif
+
+    if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
+        colorscheme molokai
+    else
+        colorscheme slate
+    endif
 endif
 
 syntax enable
-
 
 filetype off
 runtime! autoload/pathogen.vim
@@ -100,10 +99,10 @@ set smartcase
 
 " 7.3-specific setting
 if v:version >= 703
-set relativenumber
-set colorcolumn=85
+    set relativenumber
+    set colorcolumn=85
 else
-set number
+    set number
 end
 
 set wrap
@@ -162,11 +161,11 @@ let mapleader=","
 " sv = reload vimrc
 " if winvimrc is set, use that instead of $MYVIMRC
 if exists("winvimrc")
-exec "nmap <silent> <leader>ev <C-w><C-v><C-l>:e ".winvimrc."<CR>"
-exec "nmap <silent> <leader>sv :so ".winvimrc."<CR>"
+    exec "nmap <silent> <leader>ev <C-w><C-v><C-l>:e ".winvimrc."<CR>"
+    exec "nmap <silent> <leader>sv :so ".winvimrc."<CR>"
 else
-nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+    nmap <silent> <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<CR>
+    nmap <silent> <leader>sv :so $MYVIMRC<CR>
 endif
 
 " remove search highlighting
