@@ -14,16 +14,16 @@ Based on Ryan Bates' dotfiles (http://github.com/ryanb/dotfiles)
 I've modified vimrc heavily to my liking (options, keybindings, colors).
 I attempted to document what directives do.
 
-I switched to using Pathogen to manage bundles instead of having plugins
-spread across folders under the vim folder. You should be able to run the
-following script to add bundles as submodules, init them if necessary,
-and update all of them:
+I switched to using Pathogen to manage bundles instead of having
+plugins spread across folders under the vim folder. You should be able
+to run the following script to add bundles as submodules, init them if
+necessary, and update all of them:
 
     bin/vim_update_bundles
 
-Run this script from the directory you cloned to. If you followed the above
-instructions, this should be ~/.dotfiles. Edit this script to change the bundles
-you'd like to use.
+Run this script from the directory you cloned to. If you followed the
+above instructions, this should be ~/.dotfiles. Edit this script to
+change the bundles you'd like to use.
 
 == Command-T Bundle
 The Command-T Bundle requires you to run "rake make" in its directory
