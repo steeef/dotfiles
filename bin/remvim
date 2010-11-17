@@ -5,13 +5,14 @@
 #Run GVIM from that folder
 #Configure GVIM to unmount folder on exit
 
+. $HOME/.remvimrc
+
 SSHFS=/usr/bin/sshfs
 GVIM="/usr/bin/gvim"
 SSH_ADD="/usr/bin/ssh-add"
 REMOTE_SFTP=/usr/libexec/openssh/sftp-server
 
 SSH_KEY="$HOME/.ssh/id_rsa"
-USER="MON+sprice"
 HOST=
 FOLDER=/
 MOUNT_FOLDER=
