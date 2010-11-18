@@ -25,6 +25,7 @@ export PATH=$PATH:~/.bin
 alias vi='vim'
 alias duh='du -h --max=1'
 alias d='cd ~/.dotfiles'
+alias remvim='~/.bin/remvim'
 
 # add custom functions
 fpath=(~/.zsh/functions $fpath)
