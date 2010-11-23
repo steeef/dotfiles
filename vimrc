@@ -73,7 +73,7 @@ set expandtab
 
 "Set ruby-specific formatting
 if has("autocmd")
-    autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
 endif
 
 set encoding=utf-8
