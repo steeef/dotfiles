@@ -62,7 +62,7 @@ fi
 /bin/rm -rf $HOME/mnt/*
 /bin/mkdir -p $HOME/mnt/$MOUNT_FOLDER
 if [ `$SSH_ADD -l | grep -c "$SSH_KEY"` = "0" ]; then
-    $SSH_ADD -t 3600 "$SSH_KEY"
+    $SSH_ADD "$SSH_KEY"
 fi
 $SSHFS -o sftp_server="/usr/bin/sudo $REMOTE_SFTP" $USER@$HOST:$FOLDER $HOME/mnt/$MOUNT_FOLDER \
     && $GVIM -c ":cd $HOME/mnt/$MOUNT_FOLDER" -c ":au VimLeave * :cd $HOME | :!fusermount -u $HOME/mnt/$MOUNT_FOLDER"
