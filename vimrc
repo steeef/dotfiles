@@ -210,8 +210,8 @@ vmap <leader>m ,c<space>gv
 map <leader>m ,c<space>
 
 " insert blank line below or above current line
-nnoremap <silent><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <silent><C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+nnoremap <leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 "Movement commands (requires unimpoired plugin)
 "Move current line down/up
