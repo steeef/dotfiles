@@ -51,7 +51,7 @@ syntax enable
 filetype off
 runtime! autoload/pathogen.vim
 if exists('g:loaded_pathogen')
-call pathogen#runtime_append_all_bundles()
+    call pathogen#runtime_append_all_bundles()
 endif
 filetype plugin indent on
 
@@ -59,7 +59,9 @@ set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
 " syntastic addition
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+if exists("g:loaded_syntastic_plugin")
+    set statusline+=%{SyntasticStatuslineFlag()}
+endif
 set statusline+=%*
 
 set nocompatible
