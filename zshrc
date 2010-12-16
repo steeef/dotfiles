@@ -26,6 +26,8 @@ alias vi='vim'
 alias duh='du -h --max=1'
 alias d='cd ~/.dotfiles'
 alias remvim='~/.bin/remvim'
+alias on='sudo reboot'
+alias off='sudo shutdown -h now'
 
 # add custom functions
 fpath=(~/.zsh/functions $fpath)
