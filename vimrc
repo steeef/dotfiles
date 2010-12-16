@@ -12,6 +12,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/tpope/vim-fugitive.git
 " BUNDLE: git://github.com/tpope/vim-unimpaired.git
 " BUNDLE: git://github.com/scrooloose/syntastic.git
+" BUNDLE: git://github.com/tpope/vim-surround.git
 
 if has("gui_running")
     " GUI is running or is about to start.
