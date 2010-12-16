@@ -9,7 +9,7 @@ Config { font = "xft:Liberation Mono-9"
       , lowerOnStart = True
       , commands = [ Run Weather "KPDX" ["-t","<tempF>F <skyCondition>","-L","60","-H","75","--normal","#A6E22E","--high","#F92672","--low","#66D9EF"] 36000
                    , Run Cpu ["-L","3","-H","50","--normal","#A6E22E","--high","#F92672"] 10
-                   , Run MultiCpu ["-t","Cpu: <total0><total1><total2><total3>","-L","3","-H","50","--normal","#A6E22E","--high","#F92672","-w","5"] 10
+                   , Run MultiCpu ["-t","Cpu: <total0><total1>","-L","3","-H","50","--normal","#A6E22E","--high","#F92672","-w","5"] 10
                    , Run Memory ["-t","Mem: <usedratio>%"] 10
                    , Run Swap [] 10
             		   , Run Network "eth0" ["-t","Net: <rx>, <tx>","-H","200","-L","10","-h","#F92672","-l","#A6E22E","-n","#FFFFCC"] 5
@@ -18,6 +18,6 @@ Config { font = "xft:Liberation Mono-9"
                    ]
       , sepChar = "%"
       , alignSep = "}{"
-      , template = "%StdinReader% }{ %cpu%   %memory%   %swap%   %eth0%   <fc=#E6DB74>%date%</fc>   %KPDX%"
+      , template = "%StdinReader% }{ %multicpu%   %memory%   %swap%   %eth0%   <fc=#E6DB74>%date%</fc>   %KPDX%"
       }
 
