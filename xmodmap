@@ -1,0 +1,33 @@
+! map Mac numpad equals to mode switch
+keycode 125 = Mode_switch
+
+! top row
+keycode 49 = grave asciitilde Escape
+keycode 10 = 1 exclam F1
+keycode 11 = 2 at F2
+keycode 12 = 3 numbersign F3
+keycode 13 = 4 dollar F4
+keycode 14 = 5 percent F5
+keycode 15 = 6 asciicircum F6
+keycode 16 = 7 ampersand F7
+keycode 17 = 8 asterisk F8
+keycode 18 = 9 parenleft F9
+keycode 19 = 0 parenright F10
+keycode 20 = minus underscore F11
+keycode 21 = equal plus F12
+keycode 22 = BackSpace NoSymbol Delete NoSymbol
+
+! second row
+keycode 30 = u U 7
+keycode 31 = i I 8
+keycode 32 = o O 9
+
+! home row
+keycode 44 = j J 4
+keycode 45 = k K 5
+keycode 46 = l L 6
+
+! bottom row
+keycode 58 = m M 1
+keycode 59 = comma less 2
+keycode 60 = period greater 3
