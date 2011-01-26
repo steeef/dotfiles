@@ -1,3 +1,6 @@
+! Squeezeboard xmodmap config
+! http://geekhack.org/showwiki.php?title=Island:6491 
+!
 ! map Mac numpad equals to mode switch
 keycode 125 = Mode_switch
 
