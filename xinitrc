@@ -4,5 +4,4 @@ xrdb -merge $HOME/.Xdefaults &
 $HOME/.bin/tray &
 /usr/bin/VBoxClient-all &
 eval `ssh-agent`
-(sleep 10 && xmodmap $HOME/.xmodmap) &
 xmonad

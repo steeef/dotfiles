@@ -2,6 +2,7 @@
 ! http://geekhack.org/showwiki.php?title=Island:6491 
 !
 ! map Mac numpad equals to mode switch
+clear Lock
 keycode 125 = Mode_switch
 
 ! top row
