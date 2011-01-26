@@ -18,16 +18,38 @@ keycode 21 = equal plus F12
 keycode 22 = BackSpace NoSymbol Delete NoSymbol
 
 ! second row
-keycode 30 = u U 7
-keycode 31 = i I 8
-keycode 32 = o O 9
+keycode 23 = Tab ISO_Left_Tab Caps_Lock
+keycode 24 = q Q KP_Home
+keycode 25 = w W KP_Up
+keycode 26 = e E KP_End
+keycode 27 = r R KP_Prior
+keycode 30 = u U KP_7
+keycode 31 = i I KP_8
+keycode 32 = o O KP_9
+keycode 33 = p P KP_Subtract
 
 ! home row
-keycode 44 = j J 4
-keycode 45 = k K 5
-keycode 46 = l L 6
+keycode 38 = a A KP_Left
+keycode 39 = s S KP_Down
+keycode 40 = d D KP_Right
+keycode 41 = f F KP_Next
+keycode 44 = j J KP_4
+keycode 45 = k K KP_5
+keycode 46 = l L KP_6
+keycode 47 = semicolon colon KP_Add
+keycode 48 = apostrophe quotedbl KP_Multiply
+keycode 36 = Return NoSymbol KP_Enter NoSymbol
 
 ! bottom row
-keycode 58 = m M 1
-keycode 59 = comma less 2
-keycode 60 = period greater 3
+keycode 52 = z Z Print
+keycode 53 = x X Pause
+keycode 54 = c C KP_Delete
+keycode 55 = v V KP_Insert
+keycode 57 = n N period
+keycode 58 = m M KP_1
+keycode 59 = comma less KP_2
+keycode 60 = period greater KP_3
+keycode 61 = slash question KP_Divide
+
+! space bar
+keycode 65 = space NoSymbol KP_0 NoSymbol
