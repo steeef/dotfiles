@@ -151,6 +151,10 @@ nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 set pastetoggle=<F5>
 
+" try jj as escape in interactive mode
+" remove enter later?
+inoremap jj <Esc>
+
 " Use Enter to exit insert,normal,visual,command mode
 " Use CTRL-O to create new line in insert mode
 inoremap <CR> <Esc>
