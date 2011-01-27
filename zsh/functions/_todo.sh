@@ -55,7 +55,7 @@ case $state in
     "move:move item between files"
     "prepend:adds to the beginning of the item on line NUMBER text TEXT."
     "pri:adds or replace in NUMBER the priority PRIORITY (upper case letter)."
-    "replace:replace in NUMBER the TEXT."
+"replace:replace in NUMBER the TEXT."
     "remdup:remove exact duplicates from todo.txt."
     "report:adds the number of open and done items to report.txt."
   )
