@@ -28,6 +28,7 @@ alias d='cd ~/.dotfiles'
 alias remvim='~/.bin/remvim'
 alias on='sudo reboot'
 alias off='sudo shutdown -h now'
+alias t='$HOME/.bin/todo.sh'
 
 # add custom functions
 fpath=(~/.zsh/functions $fpath)
