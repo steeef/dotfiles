@@ -33,4 +33,3 @@ alias t='$HOME/.bin/todo.sh'
 # add custom functions
 fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
-source ~/.zsh/functions/zkbd
