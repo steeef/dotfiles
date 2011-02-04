@@ -203,7 +203,11 @@ noremap <leader>t :CommandT<CR>
 
 " make indentation easier
 nmap <C-]> >>
-nmap <C-[> <<
+" if running vim in a terminal, <C-[> is the escape character
+" Mapping it will insert extra characters
+if has("gui_running")
+    nmap <C-[> <<
+endif
 vmap <C-]> >gv
 vmap <C-[> <gv
 
