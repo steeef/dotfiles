@@ -43,7 +43,7 @@ else
     if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
         colorscheme molokai
     else
-        colorscheme slate
+        colorscheme elflord
     endif
 endif
 
