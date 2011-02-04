@@ -67,7 +67,6 @@ set statusline+=%*
 
 set nocompatible
 set modelines=0
-
 set autoindent
 set tabstop=4
 set shiftwidth=4
@@ -93,7 +92,16 @@ set ruler
 set backspace=indent,eol,start
 set title
 
-set nobackup
+" create backup directory and set backupdir
+let vimbackupdir = $HOME . '/.vimbackup'
+if exists("*mkdir")
+    if !isdirectory(vimbackupdir)
+        call mkdir(vimbackupdir)
+    endif
+endif
+set backup
+let &backupdir=vimbackupdir
+
 set noswapfile
 set history=1000
 set undolevels=1000
