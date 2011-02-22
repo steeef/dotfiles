@@ -170,7 +170,9 @@ vnoremap <CR> <Esc>gV
 onoremap <CR> <Esc>
 inoremap <C-o> <CR>
 
+" Swap colon, semicolon
 nnoremap ; :
+nnoremap : ;
 
 "sudo save if not root
 cmap w!! w !sudo tee % >/dev/null
