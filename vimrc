@@ -190,7 +190,7 @@ else
 endif
 
 " remove search highlighting
-nnoremap <leader><space> :nohlsearch<Enter>
+nnoremap <Esc> :nohlsearch<return><esc>
 
 nmap <leader>a :Ack
 
