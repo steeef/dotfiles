@@ -30,6 +30,9 @@ alias on='sudo reboot'
 alias off='sudo shutdown -h now'
 alias t='$HOME/.bin/todo.sh'
 
+# set vi mode
+bindkey -v
+
 # add custom functions
 fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
