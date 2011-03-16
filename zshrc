@@ -29,6 +29,8 @@ alias remvim='~/.bin/remvim'
 alias on='sudo reboot'
 alias off='sudo shutdown -h now'
 alias t='$HOME/.bin/todo.sh'
+alias rvme='rvm 1.8.7-head,1.9.2-head,ree exec'
+alias gsv='git svn dcommit'
 
 # set vi mode
 bindkey -v
