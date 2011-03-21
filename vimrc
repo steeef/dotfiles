@@ -4,7 +4,6 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/mileszs/ack.vim.git
 " BUNDLE: git://github.com/scrooloose/nerdcommenter.git
 " BUNDLE: git://github.com/vim-ruby/vim-ruby.git
-" BUNDLE: git://git.wincent.com/command-t.git
 " BUNDLE: git://github.com/msanders/snipmate.vim.git
 " BUNDLE: git://github.com/chrismetcalf/vim-yankring.git
 " BUNDLE: git://github.com/vim-scripts/IndexedSearch.git
