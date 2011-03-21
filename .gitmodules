@@ -49,9 +49,3 @@
 [submodule "vim/bundle/L9"]
 	path = vim/bundle/L9
 	url = git://github.com/vim-scripts/L9.git
-[submodule "vim/bundle/fuzzyfinder"]
-	path = vim/bundle/fuzzyfinder
-	url = git://github.com/marcelinollano/vim-fuzzyfinder.git
-[submodule "vim/bundle/fuzzyfinder_textmate"]
-	path = vim/bundle/fuzzyfinder_textmate
-	url = git://github.com/jamis/fuzzyfinder_textmate.git
