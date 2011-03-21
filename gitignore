@@ -6,6 +6,6 @@
 locals.zsh
 log/.zsh_history
 projects.zsh
-doc/tags
+doc/tags*
 vim/doc/bundles.txt
 vim/.netrwhist
