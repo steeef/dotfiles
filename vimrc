@@ -45,7 +45,7 @@ else
 if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
         colorscheme molokai
     else
-        colorscheme elflord
+        colorscheme desert
     endif
 endif
 
@@ -196,7 +196,8 @@ nnoremap <leader><space> :nohlsearch<Enter>
 nmap <leader>a :Ack
 
 "omnicompletion
-imap <leader><TAB> <C-x><C-o>
+inoremap <leader>, <C-x><C-o>
+
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
