@@ -14,6 +14,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/tpope/vim-surround.git
 " BUNDLE: git://github.com/vim-scripts/L9.git
 " BUNDLE: git://github.com/vim-scripts/FuzzyFinder.git c68420b
+" BUNDLE: git://github.com/jamis/fuzzyfinder_textmate.git
 
 if has("gui_running")
     " GUI is running or is about to start.
