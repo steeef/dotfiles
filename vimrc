@@ -42,7 +42,7 @@ else
         "set columns=190
     "endif
 
-    if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
+if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
         colorscheme molokai
     else
         colorscheme elflord
@@ -215,7 +215,7 @@ nnoremap <leader>v V`]
 "
 " FuzzyFinder
 noremap <leader>y :FufRenewCache<CR>
-noremap <leader>t :FufFile<CR>
+noremap <leader>t :FuzzyFinderTextMate<CR>
 
 " make indentation easier
 nmap <C-]> >>
