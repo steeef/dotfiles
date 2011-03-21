@@ -4,7 +4,6 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/mileszs/ack.vim.git
 " BUNDLE: git://github.com/scrooloose/nerdcommenter.git
 " BUNDLE: git://github.com/vim-ruby/vim-ruby.git
-" BUNDLE: git://github.com/msanders/snipmate.vim.git
 " BUNDLE: git://github.com/chrismetcalf/vim-yankring.git
 " BUNDLE: git://github.com/vim-scripts/IndexedSearch.git
 " BUNDLE: git://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
@@ -15,6 +14,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/vim-scripts/L9.git
 " BUNDLE: git://github.com/marcelinollano/vim-fuzzyfinder.git
 " BUNDLE: git://github.com/ervandew/supertab.git
+" BUNDLE: git://github.com/msanders/snipmate.vim.git
 
 if has("gui_running")
     " GUI is running or is about to start.
@@ -49,14 +49,13 @@ if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
     endif
 endif
 
-syntax enable
-
 filetype off
 runtime! autoload/pathogen.vim
 if exists('g:loaded_pathogen')
     call pathogen#runtime_append_all_bundles()
 endif
 filetype plugin indent on
+syntax on
 
 set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
