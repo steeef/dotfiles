@@ -52,3 +52,6 @@
 [submodule "vim/bundle/fuzzyfinder"]
 	path = vim/bundle/fuzzyfinder
 	url = git://github.com/marcelinollano/vim-fuzzyfinder.git
+[submodule "vim/bundle/fuzzyfinder_textmate"]
+	path = vim/bundle/fuzzyfinder_textmate
+	url = git://github.com/jamis/fuzzyfinder_textmate.git
