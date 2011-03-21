@@ -13,7 +13,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/scrooloose/syntastic.git
 " BUNDLE: git://github.com/tpope/vim-surround.git
 " BUNDLE: git://github.com/vim-scripts/L9.git
-" BUNDLE: git://github.com/vim-scripts/FuzzyFinder.git
+" BUNDLE: git://github.com/marcelinollano/vim-fuzzyfinder.git
 
 if has("gui_running")
     " GUI is running or is about to start.
@@ -213,7 +213,7 @@ nnoremap <leader>v V`]
 " noremap <leader>t :CommandT<CR>
 "
 " FuzzyFinder
-noremap <leader>y :FufRenewCache<CR>
+noremap <leader>y :FuzzyFinderTextmate<CR>
 noremap <leader>t :FufFile<CR>
 
 " make indentation easier
