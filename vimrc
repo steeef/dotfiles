@@ -13,6 +13,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/scrooloose/syntastic.git
 " BUNDLE: git://github.com/tpope/vim-surround.git
 " BUNDLE: git://github.com/astashov/vim-ruby-debugger.git
+" BUNDLE: git://github.com/vim-scripts/FuzzyFinder.git
 
 if has("gui_running")
     " GUI is running or is about to start.
@@ -208,8 +209,8 @@ imap <silent> <F3> <ESC>:YRShow<CR>
 nnoremap <leader>v V`]
 
 " reload Command-T
-noremap <leader>y :CommandTFlush<CR>
-noremap <leader>t :CommandT<CR>
+" noremap <leader>y :CommandTFlush<CR>
+" noremap <leader>t :CommandT<CR>
 
 " make indentation easier
 nmap <C-]> >>
