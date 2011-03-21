@@ -43,9 +43,6 @@
 [submodule "vim/bundle/surround"]
 	path = vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/ruby-debugger"]
-	path = vim/bundle/ruby-debugger
-	url = git://github.com/astashov/vim-ruby-debugger.git
 [submodule "vim/bundle/FuzzyFinder"]
 	path = vim/bundle/FuzzyFinder
 	url = git://github.com/vim-scripts/FuzzyFinder.git
