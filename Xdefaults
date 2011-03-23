@@ -11,3 +11,5 @@ URxvt*saveLines: 5000
 URxvt*secondaryScroll: true
 URxvt*scrollBar: false
 URxvt*loginShell: true
+URxvt*depth:    32
+URxvt*letterSpace: -1
