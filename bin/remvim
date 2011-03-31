@@ -59,7 +59,6 @@ if [[ -z "$MOUNT_FOLDER" ]]; then
     MOUNT_FOLDER=$HOST
 fi
 
-/bin/rm -rf $HOME/mnt/*
 /bin/mkdir -p $HOME/mnt/$MOUNT_FOLDER
 if [ `$SSH_ADD -l | grep -c "$SSH_KEY"` = "0" ]; then
     $SSH_ADD "$SSH_KEY"
