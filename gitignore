@@ -1,6 +1,6 @@
 .DS_Store
 .svn
-.pyc
+bin/*.pyc
 *~
 *.un~
 .*.swp
