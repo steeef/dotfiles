@@ -18,6 +18,7 @@ Config { font = "xft:Liberation Mono-9"
                    ]
       , sepChar = "%"
       , alignSep = "}{"
-      , template = "%StdinReader% }{ %multicpu%   %memory%   %swap%   %eth0%   <fc=#E6DB74>%date%</fc>   %KPDX%"
+--       , template = "%StdinReader% }{ %multicpu%   %memory%   %swap%   %eth0%   <fc=#E6DB74>%date%</fc>   %KPDX%"
+      , template = "%StdinReader% }{ <fc=#E6DB74>%date%</fc>   %KPDX%"
       }
 
