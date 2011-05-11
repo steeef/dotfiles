@@ -9,7 +9,7 @@ export ZSH_THEME="steeef"
 # export CASE_SENSITIVE="true"
 
 # Comment this out to disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
+export DISABLE_AUTO_UPDATE="true"
 
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
@@ -33,7 +33,7 @@ alias rvme='rvm 1.8.7-head,1.9.2-head,ree exec'
 alias gsv='git svn dcommit'
 
 # set vi mode
-bindkey -v
+#bindkey -v
 
 # add custom functions
 fpath=(~/.zsh/functions $fpath)
