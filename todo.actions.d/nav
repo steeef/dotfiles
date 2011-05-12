@@ -34,6 +34,9 @@ fi
 # on Debian alike:
 if $(which x-www-browser >/dev/null 2>&1); then
     exec x-www-browser "$URL"
+# chrome
+elif [ -x /usr/bin/google-chrome ]; then
+    exec /usr/bin/google-chrome "$URL"
 # with freedesktop.org utils:
 elif $(which xdg-open >/dev/null 2>&1); then
     exec xdg-open "$URL"
