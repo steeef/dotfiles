@@ -12,7 +12,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/scrooloose/syntastic.git
 " BUNDLE: git://github.com/tpope/vim-surround.git
 " BUNDLE: git://github.com/vim-scripts/L9.git
-" BUNDLE: git://github.com/marcelinollano/vim-fuzzyfinder.git
+" BUNDLE: git://github.com/sethbc/fuzzyfinder_textmate.git
 " BUNDLE: git://github.com/ervandew/supertab.git
 " BUNDLE: git://github.com/Shougo/neocomplcache.git
 

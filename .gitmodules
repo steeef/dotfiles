@@ -22,9 +22,6 @@
 [submodule "vim/bundle/ack.vim"]
 	path = vim/bundle/ack.vim
 	url = git://github.com/mileszs/ack.vim.git
-[submodule "vim/bundle/snipmate.vim"]
-	path = vim/bundle/snipmate.vim
-	url = git://github.com/msanders/snipmate.vim.git
 [submodule "vim/bundle/IndexedSearch"]
 	path = vim/bundle/IndexedSearch
 	url = git://github.com/vim-scripts/IndexedSearch.git
@@ -49,12 +46,12 @@
 [submodule "vim/bundle/L9"]
 	path = vim/bundle/L9
 	url = git://github.com/vim-scripts/L9.git
-[submodule "vim/bundle/fuzzyfinder"]
-	path = vim/bundle/fuzzyfinder
-	url = git://github.com/marcelinollano/vim-fuzzyfinder.git
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = git://github.com/ervandew/supertab.git
-[submodule "vim/bundle/AutoComplPop"]
-	path = vim/bundle/AutoComplPop
-	url = git://github.com/vim-scripts/AutoComplPop.git
+[submodule "vim/bundle/fuzzyfinder_textmate"]
+	path = vim/bundle/fuzzyfinder_textmate
+	url = git://github.com/sethbc/fuzzyfinder_textmate.git
+[submodule "vim/bundle/neocomplcache"]
+	path = vim/bundle/neocomplcache
+	url = git://github.com/Shougo/neocomplcache.git
