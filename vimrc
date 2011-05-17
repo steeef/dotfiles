@@ -12,9 +12,9 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/scrooloose/syntastic.git
 " BUNDLE: git://github.com/tpope/vim-surround.git
 " BUNDLE: git://github.com/vim-scripts/L9.git
-" BUNDLE: git://github.com/sethbc/fuzzyfinder_textmate.git
 " BUNDLE: git://github.com/ervandew/supertab.git
 " BUNDLE: git://github.com/Shougo/neocomplcache.git
+" BUNDLE: git://git.wincent.com/command-t.git
 
 if has("gui_running")
     " GUI is running or is about to start.
@@ -195,9 +195,10 @@ nnoremap <leader><space> :nohlsearch<Enter>
 
 nmap <leader>a :Ack
 
-"omnicompletion
-inoremap <leader>, <C-x><C-o>
-
+" SuperTab and neocomplcache support
+imap  <silent><expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-e>" : "\<tab>")
+smap <tab> <right><plug>(neocomplcache_snippets_jump)
+inoremap <expr><c-e> neocomplcache#complete_common_string()
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
@@ -209,10 +210,6 @@ imap <silent> <F3> <ESC>:YRShow<CR>
 " Re-select pasted text
 nnoremap <leader>v V`]
 
-" Command-T
-" noremap <leader>y :CommandTFlush<CR>
-" noremap <leader>t :CommandT<CR>
-"
 " FuzzyFinder
 noremap <leader>y :FuzzyFinderTextMateRefreshFiles<CR>
 noremap <leader>t :FuzzyFinderTextMate<CR>
