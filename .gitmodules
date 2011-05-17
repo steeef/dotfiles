@@ -49,9 +49,9 @@
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = git://github.com/ervandew/supertab.git
-[submodule "vim/bundle/fuzzyfinder_textmate"]
-	path = vim/bundle/fuzzyfinder_textmate
-	url = git://github.com/sethbc/fuzzyfinder_textmate.git
 [submodule "vim/bundle/neocomplcache"]
 	path = vim/bundle/neocomplcache
 	url = git://github.com/Shougo/neocomplcache.git
+[submodule "vim/bundle/command-t"]
+	path = vim/bundle/command-t
+	url = git://git.wincent.com/command-t.git

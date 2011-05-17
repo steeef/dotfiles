@@ -15,6 +15,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/ervandew/supertab.git
 " BUNDLE: git://github.com/Shougo/neocomplcache.git
 " BUNDLE: git://git.wincent.com/command-t.git
+" Bundle-Command: rake make
 
 if has("gui_running")
     " GUI is running or is about to start.
