@@ -214,7 +214,7 @@ nnoremap <leader>v V`]
 " noremap <leader>t :CommandT<CR>
 "
 " FuzzyFinder
-noremap <leader>y :FufRenewCache<CR>
+noremap <leader>y :FuzzyFinderTextMateRefreshFiles<CR>
 noremap <leader>t :FuzzyFinderTextMate<CR>
 
 " make indentation easier
