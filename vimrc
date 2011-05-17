@@ -211,9 +211,9 @@ imap <silent> <F3> <ESC>:YRShow<CR>
 " Re-select pasted text
 nnoremap <leader>v V`]
 
-" FuzzyFinder
-noremap <leader>y :FuzzyFinderTextMateRefreshFiles<CR>
-noremap <leader>t :FuzzyFinderTextMate<CR>
+" Command-T
+noremap <leader>y :CommandTFlush<CR>
+noremap <leader>t :CommandT<CR>
 
 " make indentation easier
 nmap <C-]> >>
