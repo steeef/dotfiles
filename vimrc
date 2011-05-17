@@ -14,8 +14,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/vim-scripts/L9.git
 " BUNDLE: git://github.com/marcelinollano/vim-fuzzyfinder.git
 " BUNDLE: git://github.com/ervandew/supertab.git
-" BUNDLE: git://github.com/msanders/snipmate.vim.git
-" BUNDLE: git://github.com/vim-scripts/AutoComplPop.git
+" BUNDLE: git://github.com/Shougo/neocomplcache.git
 
 if has("gui_running")
     " GUI is running or is about to start.
