@@ -220,9 +220,11 @@ imap <C-e> <plug>(neocomplcache_snippets_expand)
 smap <C-e> <plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-r> neocomplcache#complete_common_string()
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<BS>"
+inoremap <expr><C-y> neocomplcache#cancel_popup()
 
 " SuperTab and neocomplcache support
-imap  <silent><expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-r>" : "\<tab>")
+imap  <expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<tab>"
 smap <tab> <right><plug>(neocomplcache_snippets_jump)
 
 "open new vertical window and switch to it
