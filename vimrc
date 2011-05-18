@@ -196,36 +196,34 @@ nnoremap <leader><space> :nohlsearch<Enter>
 
 nmap <leader>a :Ack
 
-if exists(':NeoComplCacheEnable')
-    " neocomplcache setup
-    let g:neocomplcache_enable_at_startup = 1
-    let g:neocomplcache_enable_smart_case = 1
-    let g:neocomplcache_enable_camel_case_completion = 1
-    let g:neocomplcache_enable_enable_underbar_completion = 1
-    let g:neocomplcache_min_syntax_length = 1
-    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" neocomplcache setup
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 1
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 
-    " Define dictionary.
-    let g:neocomplcache_dictionary_filetype_lists = {
-                \ 'default' : ''
-                \ }
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+            \ 'default' : ''
+            \ }
 
-    " Define keyword.
-    if !exists('g:neocomplcache_keyword_patterns')
-        let g:neocomplcache_keyword_patterns = {}
-    endif 
-    let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif 
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-    imap <C-e> <plug>(neocomplcache_snippets_expand)
-    smap <C-e> <plug>(neocomplcache_snippets_expand)
-    inoremap <expr><C-g> neocomplcache#undo_completion()
-    inoremap <expr><C-r> neocomplcache#complete_common_string()
+imap <C-e> <plug>(neocomplcache_snippets_expand)
+smap <C-e> <plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g> neocomplcache#undo_completion()
+inoremap <expr><C-r> neocomplcache#complete_common_string()
 
-    " SuperTab and neocomplcache support
-    imap  <silent><expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-r>" : "\<tab>")
-    smap <tab> <right><plug>(neocomplcache_snippets_jump)
-endif
+" SuperTab and neocomplcache support
+imap  <silent><expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-r>" : "\<tab>")
+smap <tab> <right><plug>(neocomplcache_snippets_jump)
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
