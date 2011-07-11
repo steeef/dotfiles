@@ -30,6 +30,7 @@ alias on='sudo reboot'
 alias off='sudo shutdown -h now'
 alias e0='sudo ifconfig eth0 down && sudo ifconfig eth0 up'
 alias t='$HOME/.bin/todo.sh'
+alias ts='$HOME/.bin/todo.sh addto someday.txt'
 alias rvme='rvm 1.8.7-head,1.9.2-head,ree exec'
 alias gsv='git svn dcommit'
 
