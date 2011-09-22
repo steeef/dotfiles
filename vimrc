@@ -216,8 +216,8 @@ if !exists('g:neocomplcache_keyword_patterns')
 endif 
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-imap <C-e> <plug>(neocomplcache_snippets_expand)
-smap <C-e> <plug>(neocomplcache_snippets_expand)
+imap <C-e> <Plug>(neocomplcache_snippets_expand)
+smap <C-e> <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-r> neocomplcache#complete_common_string()
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<BS>"
