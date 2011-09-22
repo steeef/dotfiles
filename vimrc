@@ -216,16 +216,18 @@ if !exists('g:neocomplcache_keyword_patterns')
 endif 
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-imap <C-e> <plug>(neocomplcache_snippets_expand)
-smap <C-e> <plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g> neocomplcache#undo_completion()
-inoremap <expr><C-r> neocomplcache#complete_common_string()
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<BS>"
-inoremap <expr><C-y> neocomplcache#cancel_popup()
+if exists('neocomplcache#enable()')
+    imap <C-e> <plug>(neocomplcache_snippets_expand)
+    smap <C-e> <plug>(neocomplcache_snippets_expand)
+    inoremap <expr><C-g> neocomplcache#undo_completion()
+    inoremap <expr><C-r> neocomplcache#complete_common_string()
+    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<BS>"
+    inoremap <expr><C-y> neocomplcache#cancel_popup()
 
-" SuperTab and neocomplcache support
-imap  <expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<tab>"
-smap <tab> <right><plug>(neocomplcache_snippets_jump)
+    " SuperTab and neocomplcache support
+    imap  <expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<tab>"
+    smap <tab> <right><plug>(neocomplcache_snippets_jump)
+endif
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
