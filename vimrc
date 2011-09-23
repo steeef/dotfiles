@@ -36,18 +36,13 @@ if has("gui_running")
 else
     " This is console Vim.
     set t_Co=256
-    "if exists("+lines")
-    "set lines=65
-    "endif
-    "if exists("+columns")
-    "set columns=190
-    "endif
 
-    if filereadable(expand("$HOME/.vim/colors/molokai.vim"))
+    try
         colorscheme molokai
-    else
+    catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme desert
-    endif
+    endtry
+
 endif
 
 filetype off
