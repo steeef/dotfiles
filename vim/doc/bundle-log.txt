@@ -88,3 +88,10 @@ Wed Sep 28 09:31:16 PDT 2011 by vim-update-bundles 0.8
  up  |command-t|                1.2.1-10-g65b2679  <- 1.2.1-7-ga353ea1
    1 bundle added, 1 bundle updated
 
+Wed Sep 28 09:32:03 PDT 2011 by vim-update-bundles 0.8
+ bundle for vim-nagios changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/kogent/vim-nagios.git
+
+ Del |vim-nagios|               c53846f6a86da
+ Add |vim-nagios|               7c244306d85a4      git://github.com/kogent/vim-nagios.git
+   1 bundle added, 1 bundle removed
+
