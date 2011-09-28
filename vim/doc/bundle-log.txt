@@ -1,0 +1,35 @@
+*bundle-log.txt*                   Bundle Install Log
+
+
+Logs bundle install activity. Also see the list of installed |bundles|.
+
+Tue Sep 27 22:17:01 PDT 2011 by vim-update-bundles 0.8
+ Add |vim-ruby|                 vim7.3-82-gabfe860 git://github.com/vim-ruby/vim-ruby.git
+ Add |vim-yankring|             37f57f839fc5f      git://github.com/chrismetcalf/vim-yankring.git
+ Add |vim-fugitive|             v1.2-60-g1eeeb41   git://github.com/tpope/vim-fugitive.git
+ Add |vim-unimpaired|           v1.1-20-gb528bef   git://github.com/tpope/vim-unimpaired.git
+ Add |vim-surround|             v1.90-14-gf6c9d3b  git://github.com/tpope/vim-surround.git
+ up  |supertab|                 1.5-9-ge228cff     <- 1.5-8-g80ec653
+ up  |neocomplcache|            ver.6.1-68-g4f97ab6 <- ver.6.1-49-gb726395
+ Del |ruby|                     vim7.3-77-ge85a87e
+ Del |surround|                 v1.90-14-gf6c9d3b
+ Del |yankring|                 37f57f839fc5f
+ Del |fugitive|                 v1.2-59-g201bdd0
+ Del |unimpaired|               v1.1-19-g1c9dcee
+   5 bundles added, 5 bundles removed, and 2 bundles updated
+
+Tue Sep 27 22:26:22 PDT 2011 by vim-update-bundles 0.8
+ Aborted: 'git submodule add git://github.com/scrooloose/nerdcommenter.git vim/bundle/nerdcommenter' in /home/sprice/Dropbox/dotfiles exited with code 1
+
+Tue Sep 27 22:28:07 PDT 2011 by vim-update-bundles 0.8
+ Add |nerdcommenter|            2.2.2-55-gb28e7be  git://github.com/scrooloose/nerdcommenter.git
+ Add |vim-ruby|                 vim7.3-82-gabfe860 git://github.com/vim-ruby/vim-ruby.git
+ Add |IndexedSearch|            070503             git://github.com/vim-scripts/IndexedSearch.git
+ Add |vim-fugitive|             v1.2-60-g1eeeb41   git://github.com/tpope/vim-fugitive.git
+ Add |vim-unimpaired|           v1.1-20-gb528bef   git://github.com/tpope/vim-unimpaired.git
+ Add |syntastic|                1.2.0-110-gcf6aa9a git://github.com/scrooloose/syntastic.git
+ Add |vim-surround|             v1.90-14-gf6c9d3b  git://github.com/tpope/vim-surround.git
+ Add |L9|                       1.1                git://github.com/vim-scripts/L9.git
+ Add |command-t|                1.2.1-7-ga353ea1   git://git.wincent.com/command-t.git
+   9 bundles added
+
