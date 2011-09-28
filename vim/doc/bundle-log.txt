@@ -39,3 +39,36 @@ Tue Sep 27 22:31:25 PDT 2011 by vim-update-bundles 0.8
  Add |snipmate.vim|             f5a75d075d3c0      git://github.com/msanders/snipmate.vim.git
    3 bundles added
 
+Wed Sep 28 08:28:44 PDT 2011 by vim-update-bundles 0.8
+ bundle for vim-ruby changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/vim-ruby/vim-ruby.git
+
+ Del |vim-ruby|                 5e2fbd415424b
+ Add |vim-ruby|                 vim7.3-82-gabfe860 git://github.com/vim-ruby/vim-ruby.git
+ bundle for vim-fugitive changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/tpope/vim-fugitive.git
+
+ Del |vim-fugitive|             5e2fbd415424b
+ Add |vim-fugitive|             v1.2-60-g1eeeb41   git://github.com/tpope/vim-fugitive.git
+ bundle for vim-unimpaired changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/tpope/vim-unimpaired.git
+
+ Del |vim-unimpaired|           5e2fbd415424b
+ Add |vim-unimpaired|           v1.1-20-gb528bef   git://github.com/tpope/vim-unimpaired.git
+ bundle for vim-surround changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/tpope/vim-surround.git
+
+ Del |vim-surround|             5e2fbd415424b
+ Add |vim-surround|             v1.90-14-gf6c9d3b  git://github.com/tpope/vim-surround.git
+ bundle for YankRing.vim changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/vim-scripts/YankRing.vim.git
+
+ Del |YankRing.vim|             5e2fbd415424b
+ Add |YankRing.vim|             12.0               git://github.com/vim-scripts/YankRing.vim.git
+ bundle for vim-puppet changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/rodjek/vim-puppet.git
+
+ Del |vim-puppet|               5e2fbd415424b
+ Add |vim-puppet|               b0dbf8e43a12e      git://github.com/rodjek/vim-puppet.git
+ bundle for snipmate.vim changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/msanders/snipmate.vim.git
+
+ Del |snipmate.vim|             5e2fbd415424b
+ Add |snipmate.vim|             f5a75d075d3c0      git://github.com/msanders/snipmate.vim.git
+ up  |command-t|                1.2.1-10-g65b2679  <- 1.2.1-7-ga353ea1
+ Del |Puppet-Syntax-Highlighting| 0.1
+ Aborted: 'git rm vim/bundle/Puppet-Syntax-Highlighting' in /home/sprice/.dotfiles exited with code 128
+
