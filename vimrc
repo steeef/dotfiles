@@ -9,6 +9,9 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/scrooloose/syntastic.git
 " BUNDLE: git://github.com/tpope/vim-surround.git
 " BUNDLE: git://github.com/vim-scripts/L9.git
+" BUNDLE: git://github.com/vim-scripts/YankRing.vim.git
+" BUNDLE: git://github.com/rodjek/vim-puppet.git
+" BUNDLE: git://github.com/msanders/snipmate.vim.git
 " BUNDLE: git://git.wincent.com/command-t.git
 " Bundle-Command: rake make
 
