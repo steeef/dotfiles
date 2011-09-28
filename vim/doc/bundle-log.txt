@@ -33,3 +33,9 @@ Tue Sep 27 22:28:07 PDT 2011 by vim-update-bundles 0.8
  Add |command-t|                1.2.1-7-ga353ea1   git://git.wincent.com/command-t.git
    9 bundles added
 
+Tue Sep 27 22:31:25 PDT 2011 by vim-update-bundles 0.8
+ Add |YankRing.vim|             12.0               git://github.com/vim-scripts/YankRing.vim.git
+ Add |vim-puppet|               b0dbf8e43a12e      git://github.com/rodjek/vim-puppet.git
+ Add |snipmate.vim|             f5a75d075d3c0      git://github.com/msanders/snipmate.vim.git
+   3 bundles added
+
