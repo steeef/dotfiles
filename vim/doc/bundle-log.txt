@@ -72,3 +72,14 @@ Wed Sep 28 08:28:44 PDT 2011 by vim-update-bundles 0.8
  Del |Puppet-Syntax-Highlighting| 0.1
  Aborted: 'git rm vim/bundle/Puppet-Syntax-Highlighting' in /home/sprice/.dotfiles exited with code 128
 
+Wed Sep 28 08:30:00 PDT 2011 by vim-update-bundles 0.8
+ Del |supertab|                 1.5-8-g80ec653
+ Del |unimpaired|               v1.1-19-g1c9dcee
+ Del |fugitive|                 v1.2-59-g201bdd0
+ Del |ruby|                     vim7.3-77-ge85a87e
+ Del |surround|                 v1.90-14-gf6c9d3b
+ Del |ack.vim|                  a41d5d52c39a3
+ Del |neocomplcache|            ver.6.1-49-gb726395
+ Del |yankring|                 37f57f839fc5f
+   8 bundles removed
+
