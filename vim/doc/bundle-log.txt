@@ -83,3 +83,8 @@ Wed Sep 28 08:30:00 PDT 2011 by vim-update-bundles 0.8
  Del |yankring|                 37f57f839fc5f
    8 bundles removed
 
+Wed Sep 28 09:31:16 PDT 2011 by vim-update-bundles 0.8
+ Add |vim-nagios|               7c244306d85a4      git://github.com/kogent/vim-nagios.git
+ up  |command-t|                1.2.1-10-g65b2679  <- 1.2.1-7-ga353ea1
+   1 bundle added, 1 bundle updated
+
