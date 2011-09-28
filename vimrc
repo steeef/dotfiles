@@ -55,6 +55,8 @@ syntax on
 set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
 " syntastic addition
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
 set statusline+=%#warningmsg#
 if exists("g:loaded_syntastic_plugin")
     set statusline+=%{SyntasticStatuslineFlag()}
