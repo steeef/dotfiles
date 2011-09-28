@@ -187,41 +187,6 @@ endif
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
 
-nmap <leader>a :Ack
-
-" neocomplcache setup
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 1
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-            \ 'default' : ''
-            \ }
-
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif 
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-if exists('neocomplcache#enable()')
-    imap <C-e> <plug>(neocomplcache_snippets_expand)
-    smap <C-e> <plug>(neocomplcache_snippets_expand)
-    inoremap <expr><C-g> neocomplcache#undo_completion()
-    inoremap <expr><C-r> neocomplcache#complete_common_string()
-    inoremap <expr><BS> neocomplcache#smart_close_popup()."\<BS>"
-    inoremap <expr><C-y> neocomplcache#cancel_popup()
-
-    " SuperTab and neocomplcache support
-    imap  <expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<tab>"
-    smap <tab> <right><plug>(neocomplcache_snippets_jump)
-endif
-
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
 
