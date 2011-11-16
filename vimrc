@@ -13,6 +13,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/rodjek/vim-puppet.git
 " BUNDLE: git://github.com/msanders/snipmate.vim.git
 " BUNDLE: git://github.com/kogent/vim-nagios.git
+" BUNDLE: git://github.com/gabemc/powershell-vim.git
 " BUNDLE: git://git.wincent.com/command-t.git
 " Bundle-Command: rake make
 

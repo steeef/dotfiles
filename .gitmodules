@@ -10,9 +10,6 @@
 [submodule "vim/bundle/L9"]
 	path = vim/bundle/L9
 	url = git://github.com/vim-scripts/L9.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
 [submodule "vim/bundle/YankRing.vim"]
 	path = vim/bundle/YankRing.vim
 	url = git://github.com/vim-scripts/YankRing.vim.git
@@ -43,3 +40,6 @@
 [submodule "vim/bundle/powershell-vim"]
 	path = vim/bundle/powershell-vim
 	url = git://github.com/gabemc/powershell-vim.git
+[submodule "vim/bundle/command-t"]
+	path = vim/bundle/command-t
+	url = git://git.wincent.com/command-t.git

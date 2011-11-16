@@ -95,3 +95,52 @@ Wed Sep 28 09:32:03 PDT 2011 by vim-update-bundles 0.8
  Add |vim-nagios|               7c244306d85a4      git://github.com/kogent/vim-nagios.git
    1 bundle added, 1 bundle removed
 
+Wed, Nov 16, 2011 08:37:55 by vim-update-bundles 0.8
+ error: Your local changes to the following files would be overwritten by merge: indent/ruby.vim Please, commit your changes or stash them before you can merge. Updating abfe860..852596f Aborting 
+
+ Del |vim-ruby|                 vim7.3-82-gabfe860
+ Add |vim-ruby|                 vim7.3-83-g852596f git://github.com/vim-ruby/vim-ruby.git
+ up  |vim-ruby|                 vim7.3-83-g852596f <- vim7.3-82-gabfe860
+ error: Your local changes to the following files would be overwritten by merge: doc/fugitive.txt plugin/fugitive.vim Please, commit your changes or stash them before you can merge. Updating 1eeeb41..1b7e407 Aborting 
+
+ Del |vim-fugitive|             v1.2-60-g1eeeb41
+ Add |vim-fugitive|             v1.2-75-g1b7e407   git://github.com/tpope/vim-fugitive.git
+ up  |vim-fugitive|             v1.2-75-g1b7e407   <- v1.2-60-g1eeeb41
+ error: Your local changes to the following files would be overwritten by merge: plugin/unimpaired.vim Please, commit your changes or stash them before you can merge. Updating b528bef..440629a Aborting 
+
+ Del |vim-unimpaired|           v1.1-20-gb528bef
+ Add |vim-unimpaired|           v1.1-21-g440629a   git://github.com/tpope/vim-unimpaired.git
+ up  |vim-unimpaired|           v1.1-21-g440629a   <- v1.1-20-gb528bef
+ error: Your local changes to the following files would be overwritten by merge: autoload/syntastic.vim syntax_checkers/c.vim syntax_checkers/cpp.vim syntax_checkers/css.vim Please, commit your changes or stash them before you can merge. Updating cf6aa9a..d2f51c7 Aborting 
+
+ Del |syntastic|                1.2.0-110-gcf6aa9a
+ Aborted: Permission denied - syntastic or /home/sprice/.dotfiles/vim/Trashed-Bundles/syntastic
+
+Wed, Nov 16, 2011 08:39:26 by vim-update-bundles 0.8
+ Aborted: 'git submodule add git://github.com/scrooloose/syntastic.git vim/bundle/syntastic' in /cygdrive/c/Users/sprice/Documents/My Dropbox/dotfiles exited with code 1
+
+Wed, Nov 16, 2011 08:41:58 by vim-update-bundles 0.8
+ Aborted: 'git submodule add git://github.com/scrooloose/syntastic.git vim/bundle/syntastic' in /cygdrive/c/Users/sprice/Documents/My Dropbox/dotfiles exited with code 1
+
+Wed, Nov 16, 2011 08:45:01 by vim-update-bundles 0.8
+ Aborted: 'git submodule add git://github.com/scrooloose/syntastic.git vim/bundle/syntastic' in /cygdrive/c/Users/sprice/Documents/My Dropbox/dotfiles exited with code 1
+
+Wed, Nov 16, 2011 08:45:57 by vim-update-bundles 0.8
+ Add |syntastic|                1.2.0-130-gd2f51c7 git://github.com/scrooloose/syntastic.git
+ error: Your local changes to the following files would be overwritten by merge: doc/surround.txt plugin/surround.vim Please, commit your changes or stash them before you can merge. Updating f6c9d3b..4eb2cdf Aborting 
+
+ Del |vim-surround|             v1.90-14-gf6c9d3b
+ Aborted: Permission denied - vim-surround or /home/sprice/.dotfiles/vim/Trashed-Bundles/vim-surround
+
+Wed, Nov 16, 2011 08:48:29 by vim-update-bundles 0.8
+ Add |vim-surround|             v1.90-18-g4eb2cdf  git://github.com/tpope/vim-surround.git
+ Add |powershell-vim|           935142afc3d4e      git://github.com/gabemc/powershell-vim.git
+ error: Your local changes to the following files would be overwritten by merge: Rakefile doc/command-t.txt plugin/command-t.vim ruby/command-t/match_window.rb Please, commit your changes or stash them before you can merge. Updating 65b2679..d563170 Aborting 
+
+ Del |command-t|                1.2.1-10-g65b2679
+ Aborted: Permission denied - command-t or /home/sprice/.dotfiles/vim/Trashed-Bundles/command-t
+
+Wed, Nov 16, 2011 08:50:26 by vim-update-bundles 0.8
+ Add |command-t|                1.2.1-15-gd563170  git://git.wincent.com/command-t.git
+   1 bundle added
+
