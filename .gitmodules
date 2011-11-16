@@ -13,9 +13,6 @@
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
-[submodule "vim/bundle/vim-surround"]
-	path = vim/bundle/vim-surround
-	url = git://github.com/tpope/vim-surround.git
 [submodule "vim/bundle/YankRing.vim"]
 	path = vim/bundle/YankRing.vim
 	url = git://github.com/vim-scripts/YankRing.vim.git
@@ -40,3 +37,9 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git
+[submodule "vim/bundle/powershell-vim"]
+	path = vim/bundle/powershell-vim
+	url = git://github.com/gabemc/powershell-vim.git
