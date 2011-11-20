@@ -160,3 +160,6 @@ Wed Nov 16 08:59:46 PST 2011 by vim-update-bundles 0.8
 Sat Nov 19 22:55:04 PST 2011 by vim-update-bundles 0.8
    no updates
 
+Sat Nov 19 23:34:29 PST 2011 by vim-update-bundles 0.8
+   no updates
+
