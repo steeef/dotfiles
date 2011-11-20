@@ -37,6 +37,7 @@ else
     " This is console Vim.
     set t_Co=256
 
+    " set molokai, or desert if it doesn't exist
     try
         colorscheme molokai
     catch /^Vim\%((\a\+)\)\=:E185/
@@ -188,8 +189,21 @@ else
     nmap <silent> <leader>sv :so $MYVIMRC<CR>
 endif
 
+" Remove whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
+
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
+
+" Change case
+nnoremap <C-u> gUiw
+inoremap <C-u> <esc>gUiwea
+
+" Substitute
+nnoremap <leader>s :%s//<left>
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
@@ -228,6 +242,8 @@ map <leader>m ,c<space>
 " insert blank line below or above current line
 nnoremap <leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+nnoremap <CR> o<ESC>
 
 "Movement commands (requires unimpoired plugin)
 "Move current line down/up
