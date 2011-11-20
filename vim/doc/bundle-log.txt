@@ -163,3 +163,8 @@ Sat Nov 19 22:55:04 PST 2011 by vim-update-bundles 0.8
 Sat Nov 19 23:34:29 PST 2011 by vim-update-bundles 0.8
    no updates
 
+Sun Nov 20 09:51:25 PST 2011 by vim-update-bundles 0.8
+ Del |vim-fugitive|             v1.2-75-g1b7e407
+ Del |syntastic|                1.2.0-130-gd2f51c7
+   2 bundles removed
+
