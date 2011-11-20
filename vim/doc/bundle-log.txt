@@ -157,3 +157,6 @@ Wed Nov 16 08:59:46 PST 2011 by vim-update-bundles 0.8
  up  |command-t|                1.2.1-15-gd563170  <- 1.2.1-10-g65b2679
    1 bundle added, 1 bundle removed, and 6 bundles updated
 
+Sat Nov 19 22:55:04 PST 2011 by vim-update-bundles 0.8
+   no updates
+
