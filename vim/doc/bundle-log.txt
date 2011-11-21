@@ -168,3 +168,12 @@ Sun Nov 20 09:51:25 PST 2011 by vim-update-bundles 0.8
  Del |syntastic|                1.2.0-130-gd2f51c7
    2 bundles removed
 
+Mon Nov 21 08:30:26 PST 2011 by vim-update-bundles 0.8
+ Add |supertab|                 1.5-12-g688b5d7    git://github.com/ervandew/supertab.git
+ Del |syntastic|                1.2.0-130-gd2f51c7
+ Aborted: 'git rm vim/bundle/syntastic' in /home/sprice/.dotfiles exited with code 128
+
+Mon Nov 21 08:31:05 PST 2011 by vim-update-bundles 0.8
+ Del |vim-fugitive|             v1.2-75-g1b7e407
+ Aborted: 'git rm vim/bundle/vim-fugitive' in /home/sprice/.dotfiles exited with code 128
+

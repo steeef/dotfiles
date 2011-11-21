@@ -37,3 +37,6 @@
 [submodule "vim/bundle/powershell-vim"]
 	path = vim/bundle/powershell-vim
 	url = git://github.com/gabemc/powershell-vim.git
+[submodule "vim/bundle/supertab"]
+	path = vim/bundle/supertab
+	url = git://github.com/ervandew/supertab.git
