@@ -4,9 +4,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/scrooloose/nerdcommenter.git
 " BUNDLE: git://github.com/vim-ruby/vim-ruby.git
 " BUNDLE: git://github.com/vim-scripts/IndexedSearch.git
-" BUNDLE: git://github.com/tpope/vim-fugitive.git
 " BUNDLE: git://github.com/tpope/vim-unimpaired.git
-" BUNDLE: git://github.com/scrooloose/syntastic.git
 " BUNDLE: git://github.com/tpope/vim-surround.git
 " BUNDLE: git://github.com/vim-scripts/L9.git
 " BUNDLE: git://github.com/vim-scripts/YankRing.vim.git
@@ -14,6 +12,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/msanders/snipmate.vim.git
 " BUNDLE: git://github.com/kogent/vim-nagios.git
 " BUNDLE: git://github.com/gabemc/powershell-vim.git
+" BUNDLE: git://github.com/ervandew/supertab.git
 " BUNDLE: git://git.wincent.com/command-t.git
 " Bundle-Command: rake make
 
@@ -37,6 +36,7 @@ else
     " This is console Vim.
     set t_Co=256
 
+    " set molokai, or desert if it doesn't exist
     try
         colorscheme molokai
     catch /^Vim\%((\a\+)\)\=:E185/
@@ -71,6 +71,8 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+set completeopt=longest,menuone,preview
 
 "Set ruby-specific formatting
 if has("autocmd")
@@ -188,8 +190,21 @@ else
     nmap <silent> <leader>sv :so $MYVIMRC<CR>
 endif
 
+" Remove whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
+
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
+
+" Change case
+nnoremap <C-u> gUiw
+inoremap <C-u> <esc>gUiwea
+
+" Substitute
+nnoremap <leader>s :%s//<left>
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
@@ -229,6 +244,8 @@ map <leader>m ,c<space>
 nnoremap <leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
+nnoremap <CR> o<ESC>
+
 "Movement commands (requires unimpoired plugin)
 "Move current line down/up
 map <C-Down> ]e
@@ -236,3 +253,7 @@ map <C-Up> [e
 "Move visually selected lines down/up
 vmap <C-Down> ]egv
 vmap <C-Up> [egv
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabLongestHighlight = 1
