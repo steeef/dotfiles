@@ -11,4 +11,3 @@ doc/tags*
 vim/doc/bundles.txt
 vim/.netrwhist
 vim/Trashed-Bundles
-oh-my-zsh/cache

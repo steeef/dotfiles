@@ -144,36 +144,3 @@ Wed, Nov 16, 2011 08:50:26 by vim-update-bundles 0.8
  Add |command-t|                1.2.1-15-gd563170  git://git.wincent.com/command-t.git
    1 bundle added
 
-Wed Nov 16 08:59:46 PST 2011 by vim-update-bundles 0.8
- up  |vim-ruby|                 vim7.3-83-g852596f <- vim7.3-82-gabfe860
- up  |vim-fugitive|             v1.2-75-g1b7e407   <- v1.2-60-g1eeeb41
- up  |vim-unimpaired|           v1.1-21-g440629a   <- v1.1-20-gb528bef
- up  |syntastic|                1.2.0-130-gd2f51c7 <- 1.2.0-110-gcf6aa9a
- up  |vim-surround|             v1.90-18-g4eb2cdf  <- v1.90-14-gf6c9d3b
- bundle for powershell-vim changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/gabemc/powershell-vim.git
-
- Del |powershell-vim|           f17df11451a60
- Add |powershell-vim|           935142afc3d4e      git://github.com/gabemc/powershell-vim.git
- up  |command-t|                1.2.1-15-gd563170  <- 1.2.1-10-g65b2679
-   1 bundle added, 1 bundle removed, and 6 bundles updated
-
-Sat Nov 19 22:55:04 PST 2011 by vim-update-bundles 0.8
-   no updates
-
-Sat Nov 19 23:34:29 PST 2011 by vim-update-bundles 0.8
-   no updates
-
-Sun Nov 20 09:51:25 PST 2011 by vim-update-bundles 0.8
- Del |vim-fugitive|             v1.2-75-g1b7e407
- Del |syntastic|                1.2.0-130-gd2f51c7
-   2 bundles removed
-
-Mon Nov 21 08:30:26 PST 2011 by vim-update-bundles 0.8
- Add |supertab|                 1.5-12-g688b5d7    git://github.com/ervandew/supertab.git
- Del |syntastic|                1.2.0-130-gd2f51c7
- Aborted: 'git rm vim/bundle/syntastic' in /home/sprice/.dotfiles exited with code 128
-
-Mon Nov 21 08:31:05 PST 2011 by vim-update-bundles 0.8
- Del |vim-fugitive|             v1.2-75-g1b7e407
- Aborted: 'git rm vim/bundle/vim-fugitive' in /home/sprice/.dotfiles exited with code 128
-
