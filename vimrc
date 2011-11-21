@@ -12,6 +12,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/msanders/snipmate.vim.git
 " BUNDLE: git://github.com/kogent/vim-nagios.git
 " BUNDLE: git://github.com/gabemc/powershell-vim.git
+" BUNDLE: git://github.com/ervandew/supertab.git
 " BUNDLE: git://git.wincent.com/command-t.git
 " Bundle-Command: rake make
 
@@ -70,6 +71,8 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+set completeopt=longest,menuone,preview
 
 "Set ruby-specific formatting
 if has("autocmd")
@@ -250,3 +253,7 @@ map <C-Up> [e
 "Move visually selected lines down/up
 vmap <C-Down> ]egv
 vmap <C-Up> [egv
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabLongestHighlight = 1
