@@ -41,10 +41,9 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 
-filetype off
 runtime! autoload/pathogen.vim
 if exists('g:loaded_pathogen')
-    call pathogen#runtime_append_all_bundles()
+    call pathogen#infect()
 endif
 filetype plugin indent on
 syntax on
