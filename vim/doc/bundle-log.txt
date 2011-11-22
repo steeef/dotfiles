@@ -150,3 +150,16 @@ Tue Nov 22 09:34:02 PST 2011 by vim-update-bundles 0.8
  Del |command-t|                1.2.1-15-gd563170
    1 bundle added, 1 bundle removed, and 1 bundle updated
 
+Tue, Nov 22, 2011 09:38:18 by vim-update-bundles 0.8
+ error: Your local changes to the following files would be overwritten by merge: etc/examples/indent/nested_hashes.rb indent/ruby.vim Please, commit your changes or stash them before you can merge. Updating 852596f..f265e6b Aborting 
+
+ Del |vim-ruby|                 vim7.3-83-g852596f
+ Add |vim-ruby|                 vim7.3-84-gf265e6b git://github.com/vim-ruby/vim-ruby.git
+ up  |vim-ruby|                 vim7.3-84-gf265e6b <- vim7.3-83-g852596f
+ bundle for ctrlp.vim changed from ssh://github-steeef/steeef/dotfiles.git to git://github.com/kien/ctrlp.vim.git
+
+ Del |ctrlp.vim|                4abcd4e3981aa
+ Add |ctrlp.vim|                1.6.1              git://github.com/kien/ctrlp.vim.git
+ Del |command-t|                1.2.1-15-gd563170
+ Aborted: 'git rm vim/bundle/command-t' in /cygdrive/c/Users/sprice/Documents/My Dropbox/dotfiles exited with code 128
+
