@@ -49,16 +49,9 @@ endif
 filetype plugin indent on
 syntax on
 
+" statusline settings
 set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
-" syntastic addition
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
-set statusline+=%#warningmsg#
-if exists("g:loaded_syntastic_plugin")
-    set statusline+=%{SyntasticStatuslineFlag()}
-endif
-set statusline+=%*
 
 set nocompatible
 set modelines=0
@@ -80,14 +73,32 @@ set scrolloff=3
 set showmode
 set showcmd
 set hidden
-set wildmenu
-set wildmode=list:longest
 set visualbell
 set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
 set title
+
+" Wildmenu settings
+set wildmenu
+set wildmode=list:longest
+
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+
+set wildignore+=*.luac                           " Lua byte code
+
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
+
+" Make Vim able to edit crontab files again.
+set backupskip=/tmp/*,/private/tmp/*"
 
 " create backup directory and set backupdir
 let vimbackupdir = $HOME . '/.vimbackup'
@@ -254,3 +265,11 @@ let g:ctrlp_map = '<leader>t'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_split_window = 0
+let g:ctrlp_prompt_mappings = {
+\ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+\ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+\ 'PrtHistory(-1)':       ['<c-n>'],
+\ 'PrtHistory(1)':        ['<c-p>'],
+\ 'ToggleFocus()':        ['<c-tab>'],
+\ 'PrtClearCache()':      ['<leader>y'],
+\ }
