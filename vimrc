@@ -14,6 +14,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/gabemc/powershell-vim.git
 " BUNDLE: git://github.com/ervandew/supertab.git
 " BUNDLE: git://github.com/kien/ctrlp.vim.git
+" BUNDLE: git://github.com/kien/rainbow_parentheses.vim.git
 
 if has("gui_running")
     " GUI is running or is about to start.
@@ -272,3 +273,25 @@ let g:ctrlp_prompt_mappings = {
 \ 'ToggleFocus()':        ['<c-tab>'],
 \ 'PrtClearCache()':      ['<leader>y'],
 \ }
+
+" Rainbow Parentheses
+nnoremap <leader>r :RainbowParenthesesToggle<cr>
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
