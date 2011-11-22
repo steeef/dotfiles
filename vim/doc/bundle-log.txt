@@ -144,3 +144,9 @@ Wed, Nov 16, 2011 08:50:26 by vim-update-bundles 0.8
  Add |command-t|                1.2.1-15-gd563170  git://git.wincent.com/command-t.git
    1 bundle added
 
+Tue Nov 22 09:34:02 PST 2011 by vim-update-bundles 0.8
+ up  |vim-ruby|                 vim7.3-84-gf265e6b <- vim7.3-83-g852596f
+ Add |ctrlp.vim|                1.6.1              git://github.com/kien/ctrlp.vim.git
+ Del |command-t|                1.2.1-15-gd563170
+   1 bundle added, 1 bundle removed, and 1 bundle updated
+
