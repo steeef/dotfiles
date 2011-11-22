@@ -13,8 +13,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/kogent/vim-nagios.git
 " BUNDLE: git://github.com/gabemc/powershell-vim.git
 " BUNDLE: git://github.com/ervandew/supertab.git
-" BUNDLE: git://git.wincent.com/command-t.git
-" Bundle-Command: rake make
+" BUNDLE: git://github.com/kien/ctrlp.vim.git
 
 if has("gui_running")
     " GUI is running or is about to start.
@@ -30,20 +29,17 @@ if has("gui_running")
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
-
-    colorscheme molokai
 else
     " This is console Vim.
     set t_Co=256
-
-    " set molokai, or desert if it doesn't exist
-    try
-        colorscheme molokai
-    catch /^Vim\%((\a\+)\)\=:E185/
-        colorscheme desert
-    endtry
-
 endif
+" set molokai, or desert if it doesn't exist
+try
+    colorscheme molokai
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme desert
+endtry
+
 
 filetype off
 runtime! autoload/pathogen.vim
@@ -215,13 +211,6 @@ nnoremap <silent> <F3> :YRShow<CR>
 inoremap <silent> <F3> <ESC>:YRShow<CR>
 nnoremap <leader>p "*p
 
-" Re-select pasted text
-nnoremap <leader>v V`]
-
-" Command-T
-noremap <leader>y :CommandTFlush<CR>
-noremap <leader>t :CommandT<CR>
-
 " make indentation easier
 nmap <C-]> >>
 " if running vim in a terminal, <C-[> is the escape character
@@ -229,6 +218,7 @@ nmap <C-]> >>
 if has("gui_running")
     nmap <C-[> <<
 endif
+" indentation in vmode
 vmap <C-]> >gv
 vmap <C-[> <gv
 
@@ -244,9 +234,10 @@ map <leader>m ,c<space>
 nnoremap <leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
+" insert blank line below
 nnoremap <CR> o<ESC>
 
-"Movement commands (requires unimpoired plugin)
+"Movement commands (requires unimpaired plugin)
 "Move current line down/up
 map <C-Down> ]e
 map <C-Up> [e
@@ -257,3 +248,9 @@ vmap <C-Up> [egv
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabLongestHighlight = 1
+
+" CTRL-P
+let g:ctrlp_map = '<leader>t'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 1
+let g:ctrlp_split_window = 0
