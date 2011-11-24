@@ -9,6 +9,7 @@ log/.zsh_history
 projects.zsh
 doc/tags*
 vim/doc/bundles.txt
+vim/doc/bundle-log.txt
 vim/.netrwhist
 vim/Trashed-Bundles
 oh-my-zsh/cache
