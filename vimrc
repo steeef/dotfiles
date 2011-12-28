@@ -42,10 +42,10 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 
-runtime! autoload/pathogen.vim
-if exists('g:loaded_pathogen')
+"runtime! autoload/pathogen.vim
+"if exists('g:loaded_pathogen')
     call pathogen#infect()
-endif
+"endif
 filetype plugin indent on
 syntax on
 
