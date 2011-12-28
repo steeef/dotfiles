@@ -43,9 +43,9 @@ endtry
 
 
 runtime! autoload/pathogen.vim
-"if exists('g:loaded_pathogen')
+if exists('g:loaded_pathogen')
     call pathogen#infect()
-"endif
+endif
 filetype plugin indent on
 syntax on
 
