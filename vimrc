@@ -42,7 +42,7 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 
-"runtime! autoload/pathogen.vim
+runtime! autoload/pathogen.vim
 "if exists('g:loaded_pathogen')
     call pathogen#infect()
 "endif
