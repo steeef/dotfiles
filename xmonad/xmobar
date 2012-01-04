@@ -2,7 +2,7 @@
 -- Author: Vic Fryzel
 -- http://github.com/vicfryzel/xmonad-config
 
-Config { font = "xft:Liberation Mono-9"
+Config { font = "xft:DejaVu Sans Mono-9"
       , bgColor = "#000000"
       , fgColor = "#ffffff"
       , position = TopW L 90
