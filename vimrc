@@ -42,13 +42,6 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 
-runtime! autoload/pathogen.vim
-if exists('g:loaded_pathogen')
-    call pathogen#infect()
-endif
-filetype plugin indent on
-syntax on
-
 " statusline settings
 set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
@@ -79,6 +72,13 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set title
+
+runtime! autoload/pathogen.vim
+if exists('g:loaded_pathogen')
+    call pathogen#infect()
+endif
+filetype plugin indent on
+syntax on
 
 " Wildmenu settings
 set wildmenu
