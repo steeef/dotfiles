@@ -15,6 +15,7 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/ervandew/supertab.git
 " BUNDLE: git://github.com/kien/ctrlp.vim.git
 " BUNDLE: git://github.com/kien/rainbow_parentheses.vim.git
+" BUNDLE: git://github.com/Raimondi/YAIFA.git
 
 if has("gui_running")
     " GUI is running or is about to start.
