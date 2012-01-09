@@ -258,7 +258,7 @@ vmap <C-Down> ]egv
 vmap <C-Up> [egv
 
 " Supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestHighlight = 1
 
 " CTRL-P
