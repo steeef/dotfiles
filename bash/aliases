@@ -6,6 +6,7 @@ alias h='cd $HOME'
 alias ls="ls -F"
 alias l="ls -lAh"
 alias ll="ls -l"
+alias lsl="ls -l"
 alias la='ls -A'
 
 # prompt
@@ -26,5 +27,16 @@ alias gb='git branch'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 
+# hg
+alias h='hg'
+alias ha='hg add'
+alias hl='hg pull -u'
+alias hp='hg push'
+alias hd='hg diff'
+alias hc='hg commit'
+alias hcm='hg commit -m'
+alias hs='hg status'
+
+# common
 alias duh='du -h --max=1'
 alias vi='vim'
