@@ -14,9 +14,10 @@ scriptencoding utf-8
 " BUNDLE: git://github.com/gabemc/powershell-vim.git
 " BUNDLE: git://github.com/ervandew/supertab.git
 " BUNDLE: git://github.com/kien/ctrlp.vim.git
-" BUNDLE: git://github.com/kien/rainbow_parentheses.vim.git
 " BUNDLE: git://github.com/Raimondi/YAIFA.git
 
+" appearance/font config
+" ---------------------------------------------------------
 if has("gui_running")
     " GUI is running or is about to start.
 
@@ -41,12 +42,15 @@ try
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme desert
 endtry
-
-
 " statusline settings
 set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
+" ---------------------------------------------------------
 
+
+
+" standard vim options
+" ---------------------------------------------------------
 set nocompatible
 set modelines=0
 set autoindent
@@ -54,14 +58,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-
 set completeopt=longest,menuone,preview
-
-"Set ruby-specific formatting
-if has("autocmd")
-    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
-endif
-
 set encoding=utf-8
 set scrolloff=3
 set showmode
@@ -73,47 +70,6 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set title
-
-runtime! autoload/pathogen.vim
-if exists('g:loaded_pathogen')
-    call pathogen#infect()
-endif
-filetype plugin indent on
-syntax on
-
-" Wildmenu settings
-set wildmenu
-set wildmode=list:longest
-
-set wildignore+=.hg,.git,.svn,CVS                " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
-
-set wildignore+=*.luac                           " Lua byte code
-
-set wildignore+=migrations                       " Django migrations
-set wildignore+=*.pyc                            " Python byte code
-
-" Make Vim able to edit crontab files again.
-set backupskip=/tmp/*,/private/tmp/*"
-
-" create backup directory and set backupdir
-let vimbackupdir = $HOME . '/.vimbackup'
-if exists("*mkdir")
-    if !isdirectory(vimbackupdir)
-        call mkdir(vimbackupdir)
-    endif
-endif
-set backup
-let &backupdir=vimbackupdir
-
-set noswapfile
-set history=1000
-set undolevels=1000
 
 set incsearch
 set hlsearch
@@ -138,8 +94,64 @@ set textwidth=79
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
+" ---------------------------------------------------------
 
-"disable arrow keys
+" create backup directory and set backupdir
+" ---------------------------------------------------------
+let vimbackupdir = $HOME . '/.vimbackup'
+if exists("*mkdir")
+    if !isdirectory(vimbackupdir)
+        call mkdir(vimbackupdir)
+    endif
+endif
+set backup
+let &backupdir=vimbackupdir
+" set history options
+set noswapfile
+set history=1000
+set undolevels=1000
+" Make Vim able to edit crontab files again.
+set backupskip=/tmp/*,/private/tmp/*"
+" ---------------------------------------------------------
+
+"Set ruby-specific formatting
+if has("autocmd")
+    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
+endif
+
+
+" Pathogen start
+" ---------------------------------------------------------
+runtime! autoload/pathogen.vim
+if exists('g:loaded_pathogen')
+    call pathogen#infect()
+endif
+filetype plugin indent on
+syntax on
+" ---------------------------------------------------------
+
+" Wildmenu settings
+" ---------------------------------------------------------
+set wildmenu
+set wildmode=list:longest
+
+set wildignore+=.hg,.git,.svn,CVS                " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+
+set wildignore+=*.luac                           " Lua byte code
+
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
+" ---------------------------------------------------------
+
+" key mapping
+" ---------------------------------------------------------
+" disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -201,8 +213,21 @@ endif
 " Remove whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
-" Resize splits when the window is resized
-au VimResized * exe "normal! \<c-w>="
+" insert blank line below or above current line
+nnoremap <leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+" insert blank line below
+nnoremap <CR> o<ESC>
+
+"Movement commands (requires unimpaired plugin)
+"Move current line down/up
+map <C-Down> ]e
+map <C-Up> [e
+
+"Move visually selected lines down/up
+vmap <C-Down> ]egv
+vmap <C-Up> [egv
 
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
@@ -216,12 +241,8 @@ nnoremap <leader>s :%s//<left>
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
-
-"YankRing: Show yanked text
-let g:yankring_clipboard_monitor = 1
-nnoremap <silent> <F3> :YRShow<CR>
-inoremap <silent> <F3> <ESC>:YRShow<CR>
-nnoremap <leader>p "*p
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
 
 " make indentation easier
 nmap <C-]> >>
@@ -236,32 +257,31 @@ vmap <C-[> <gv
 
 " open current file's directory
 map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+" ---------------------------------------------------------
+
+" YankRing: Show yanked text
+" ---------------------------------------------------------
+let g:yankring_clipboard_monitor = 1
+nnoremap <silent> <F3> :YRShow<CR>
+inoremap <silent> <F3> <ESC>:YRShow<CR>
+nnoremap <leader>p "*p
+" ---------------------------------------------------------
 
 " Commenting
 "requires NERDCommenter plugin
+" ---------------------------------------------------------
 vmap <leader>m ,c<space>gv
 map <leader>m ,c<space>
-
-" insert blank line below or above current line
-nnoremap <leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
-" insert blank line below
-nnoremap <CR> o<ESC>
-
-"Movement commands (requires unimpaired plugin)
-"Move current line down/up
-map <C-Down> ]e
-map <C-Up> [e
-"Move visually selected lines down/up
-vmap <C-Down> ]egv
-vmap <C-Up> [egv
+" ---------------------------------------------------------
 
 " Supertab
+" ---------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestHighlight = 1
+" ---------------------------------------------------------
 
 " CTRL-P
+" ---------------------------------------------------------
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 1
@@ -274,25 +294,4 @@ let g:ctrlp_prompt_mappings = {
 \ 'ToggleFocus()':        ['<c-tab>'],
 \ 'PrtClearCache()':      ['<leader>y'],
 \ }
-
-" Rainbow Parentheses
-nnoremap <leader>r :RainbowParenthesesToggle<cr>
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
+" ---------------------------------------------------------
