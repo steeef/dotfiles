@@ -1,20 +1,6 @@
+" initial settings
 scriptencoding utf-8
-
-"git urls for pathogen bundles
-" BUNDLE: git://github.com/scrooloose/nerdcommenter.git
-" BUNDLE: git://github.com/vim-ruby/vim-ruby.git
-" BUNDLE: git://github.com/vim-scripts/IndexedSearch.git
-" BUNDLE: git://github.com/tpope/vim-unimpaired.git
-" BUNDLE: git://github.com/tpope/vim-surround.git
-" BUNDLE: git://github.com/vim-scripts/L9.git
-" BUNDLE: git://github.com/vim-scripts/YankRing.vim.git
-" BUNDLE: git://github.com/rodjek/vim-puppet.git
-" BUNDLE: git://github.com/msanders/snipmate.vim.git
-" BUNDLE: git://github.com/kogent/vim-nagios.git
-" BUNDLE: git://github.com/gabemc/powershell-vim.git
-" BUNDLE: git://github.com/ervandew/supertab.git
-" BUNDLE: git://github.com/kien/ctrlp.vim.git
-" BUNDLE: git://github.com/Raimondi/YAIFA.git
+set nocompatible
 
 " appearance/font config
 " ---------------------------------------------------------
@@ -47,11 +33,44 @@ set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
 " ---------------------------------------------------------
 
+" vundle setup
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" ---------------------------------------------------------
+set rtp+=~/.vim/bundle/vundle/
+runtime autoload/vundle.vim " apparently without this the exists() check fails
+if exists("*vundle#rc")
+    filetype off
+    call vundle#rc()
 
+    " let Vundle manage Vundle
+    " required!
+    Bundle 'gmarik/vundle'
+    " Bundles to manage with vundle
+    " ---------------------------------------------------------
+    Bundle 'git://github.com/scrooloose/nerdcommenter.git'
+    Bundle 'git://github.com/vim-scripts/IndexedSearch.git'
+    Bundle 'git://github.com/tpope/vim-unimpaired.git'
+    Bundle 'git://github.com/tpope/vim-surround.git'
+    Bundle 'git://github.com/tpope/vim-repeat.git'
+    Bundle 'git://github.com/vim-scripts/L9.git'
+    Bundle 'git://github.com/vim-scripts/YankRing.vim.git'
+    Bundle 'git://github.com/ervandew/supertab.git'
+    Bundle 'git://github.com/kien/ctrlp.vim.git'
+    Bundle 'git://github.com/Raimondi/YAIFA.git'
+    " language-specific bundles
+    Bundle 'git://github.com/vim-ruby/vim-ruby.git'
+    Bundle 'git://github.com/rodjek/vim-puppet.git'
+    Bundle 'git://github.com/msanders/snipmate.vim.git'
+    Bundle 'git://github.com/kogent/vim-nagios.git'
+    Bundle 'git://github.com/gabemc/powershell-vim.git'
+    " ---------------------------------------------------------
+    " post-vundle settings
+    filetype plugin indent on
+endif
 
 " standard vim options
 " ---------------------------------------------------------
-set nocompatible
+syntax on
 set modelines=0
 set autoindent
 set tabstop=4
@@ -119,16 +138,6 @@ if has("autocmd")
     autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
 endif
 
-
-" Pathogen start
-" ---------------------------------------------------------
-runtime! autoload/pathogen.vim
-if exists('g:loaded_pathogen')
-    call pathogen#infect()
-endif
-filetype plugin indent on
-syntax on
-" ---------------------------------------------------------
 
 " Wildmenu settings
 " ---------------------------------------------------------
