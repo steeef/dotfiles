@@ -37,6 +37,14 @@ alias hc='hg commit'
 alias hcm='hg commit -m'
 alias hs='hg status'
 
+# cvs
+alias c='cvs'
+alias ca='cvs add'
+alias cu='cvs update'
+alias ccm='cvs commit -m'
+alias cs='cvs status'
+alias cvd='cvs diff'
+
 # common
 alias duh='du -h --max=1'
 alias vi='vim'
