@@ -64,7 +64,7 @@ if exists("*vundle#rc")
     Bundle 'git://github.com/vim-scripts/IndentConsistencyCop.git'
     Bundle 'git://github.com/ciaranm/detectindent.git'
     Bundle 'git://github.com/msanders/snipmate.vim.git'
-    Bundle 'git://github.com/Lokaltog/vim-powerline.git'
+    "Bundle 'Lokaltog/vim-powerline', {'v': 'a9e7b79'}
     " language-specific bundles
     Bundle 'git://github.com/vim-ruby/vim-ruby.git'
     Bundle 'git://github.com/rodjek/vim-puppet.git'
