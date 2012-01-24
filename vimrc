@@ -64,7 +64,7 @@ if exists("*vundle#rc")
     Bundle 'git://github.com/vim-scripts/IndentConsistencyCop.git'
     Bundle 'git://github.com/ciaranm/detectindent.git'
     Bundle 'git://github.com/msanders/snipmate.vim.git'
-    Bundle 'Lokaltog/vim-powerline', {'v': 'a9e7b79'}
+    Bundle 'Lokaltog/vim-powerline'
     " language-specific bundles
     Bundle 'git://github.com/vim-ruby/vim-ruby.git'
     Bundle 'git://github.com/rodjek/vim-puppet.git'
@@ -308,4 +308,4 @@ let g:ctrlp_prompt_mappings = {
 " Powerline
 " ---------------------------------------------------------
 "let g:Powerline_symbols = 'fancy'
-let g:Powerline_theme = 'sjl'
+"let g:Powerline_theme = 'sjl'
