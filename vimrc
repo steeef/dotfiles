@@ -114,6 +114,10 @@ set textwidth=79
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
+
+"per-project vimrc files
+set exrc    " enable per-directory .vimrc files
+set secure  " disable unsafe commands in local .vimrc files
 " ---------------------------------------------------------
 
 " create backup directory and set backupdir
