@@ -57,10 +57,10 @@ if exists("*vundle#rc")
     Bundle 'git://github.com/ervandew/supertab.git'
     Bundle 'git://github.com/kien/ctrlp.vim.git'
     Bundle 'git://github.com/vim-scripts/IndentConsistencyCop.git'
+    Bundle 'git://github.com/msanders/snipmate.vim.git'
     " language-specific bundles
     Bundle 'git://github.com/vim-ruby/vim-ruby.git'
     Bundle 'git://github.com/rodjek/vim-puppet.git'
-    Bundle 'git://github.com/msanders/snipmate.vim.git'
     Bundle 'git://github.com/kogent/vim-nagios.git'
     Bundle 'git://github.com/gabemc/powershell-vim.git'
     " ---------------------------------------------------------
