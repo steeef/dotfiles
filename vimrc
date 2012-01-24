@@ -62,7 +62,6 @@ if exists("*vundle#rc")
     " language-specific bundles
     Bundle 'git://github.com/vim-ruby/vim-ruby.git'
     Bundle 'git://github.com/rodjek/vim-puppet.git'
-    Bundle 'git://github.com/kogent/vim-nagios.git'
     Bundle 'git://github.com/gabemc/powershell-vim.git'
     " ---------------------------------------------------------
     " post-vundle settings
