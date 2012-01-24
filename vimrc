@@ -36,7 +36,12 @@ set statusline=%M%R%l/%L\,%c:%Y:\%f
 " vundle setup
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " ---------------------------------------------------------
-set rtp+=~/.vim/bundle/vundle/
+" Use custom path in Windows
+if has("win32")
+    set rtp+=~/My\ Documents/My\ Dropbox/dotfiles/vim/bundle/vundle/
+else
+    set rtp+=~/.vim/bundle/vundle/
+endif
 runtime autoload/vundle.vim " apparently without this the exists() check fails
 if exists("*vundle#rc")
     filetype off
