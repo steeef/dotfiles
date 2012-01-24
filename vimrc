@@ -308,4 +308,4 @@ let g:ctrlp_prompt_mappings = {
 " Powerline
 " ---------------------------------------------------------
 "let g:Powerline_symbols = 'fancy'
-let g:Powerline_theme = 'sjl'
+"let g:Powerline_theme = 'sjl'
