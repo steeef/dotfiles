@@ -56,7 +56,7 @@ if exists("*vundle#rc")
     Bundle 'git://github.com/vim-scripts/YankRing.vim.git'
     Bundle 'git://github.com/ervandew/supertab.git'
     Bundle 'git://github.com/kien/ctrlp.vim.git'
-    Bundle 'git://github.com/Raimondi/YAIFA.git'
+    Bundle 'git://github.com/vim-scripts/IndentConsistencyCop.git'
     " language-specific bundles
     Bundle 'git://github.com/vim-ruby/vim-ruby.git'
     Bundle 'git://github.com/rodjek/vim-puppet.git'
