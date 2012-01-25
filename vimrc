@@ -52,24 +52,23 @@ if exists("*vundle#rc")
     Bundle 'gmarik/vundle'
     " Bundles to manage with vundle
     " ---------------------------------------------------------
-    Bundle 'git://github.com/scrooloose/nerdcommenter.git'
-    Bundle 'git://github.com/vim-scripts/IndexedSearch.git'
-    Bundle 'git://github.com/tpope/vim-unimpaired.git'
-    Bundle 'git://github.com/tpope/vim-surround.git'
-    Bundle 'git://github.com/tpope/vim-repeat.git'
-    Bundle 'git://github.com/vim-scripts/L9.git'
-    Bundle 'git://github.com/vim-scripts/YankRing.vim.git'
-    Bundle 'git://github.com/ervandew/supertab.git'
-    Bundle 'git://github.com/kien/ctrlp.vim.git'
-    Bundle 'git://github.com/vim-scripts/IndentConsistencyCop.git'
-    Bundle 'git://github.com/ciaranm/detectindent.git'
-    Bundle 'git://github.com/msanders/snipmate.vim.git'
+    Bundle 'scrooloose/nerdcommenter'
+    Bundle 'vim-scripts/IndexedSearch'
+    Bundle 'tpope/vim-surround'
+    Bundle 'tpope/vim-repeat'
+    Bundle 'vim-scripts/L9'
+    Bundle 'vim-scripts/YankRing.vim'
+    Bundle 'ervandew/supertab'
+    Bundle 'kien/ctrlp.vim'
+    Bundle 'vim-scripts/IndentConsistencyCop'
+    Bundle 'ciaranm/detectindent'
+    Bundle 'msanders/snipmate.vim'
     Bundle 'Lokaltog/vim-powerline'
-    Bundle 'git://repo.or.cz/vcscommand'
+    Bundle 'vcscommand.vim'
     " language-specific bundles
-    Bundle 'git://github.com/vim-ruby/vim-ruby.git'
-    Bundle 'git://github.com/rodjek/vim-puppet.git'
-    Bundle 'git://github.com/gabemc/powershell-vim.git'
+    Bundle 'vim-ruby/vim-ruby'
+    Bundle 'rodjek/vim-puppet'
+    Bundle 'gabemc/powershell-vim'
     " ---------------------------------------------------------
     " post-vundle settings
     filetype plugin indent on
@@ -79,11 +78,6 @@ endif
 " ---------------------------------------------------------
 syntax on
 set modelines=0
-set autoindent
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
 set completeopt=longest,menuone,preview
 set encoding=utf-8
 set scrolloff=3
@@ -96,13 +90,26 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set title
+set ignorecase
+set smartcase
+set wrap
+"see :help for-table
+set formatoptions=qrn1
+set textwidth=79
+set lazyredraw
 
+"indent options
+set autoindent
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set shiftround
+
+"search options
 set incsearch
 set hlsearch
 set showmatch
-
-set ignorecase
-set smartcase
 
 " 7.3-specific setting
 if v:version >= 703
@@ -112,18 +119,20 @@ else
     set number
 end
 
-set wrap
-"see :help for-table
-set formatoptions=qrn1
-set textwidth=79
-
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
 
+"window options
+set splitbelow
+set splitright
+
 "per-project vimrc files
-set exrc    " enable per-directory .vimrc files
-set secure  " disable unsafe commands in local .vimrc files
+"don't use in Windows
+if has("unix")
+    set exrc    " enable per-directory .vimrc files
+    set secure  " disable unsafe commands in local .vimrc files
+endif
 " ---------------------------------------------------------
 
 " create backup directory and set backupdir
@@ -171,6 +180,8 @@ set wildignore+=*.pyc                            " Python byte code
 
 " key mapping
 " ---------------------------------------------------------
+let mapleader=","
+
 " disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -183,17 +194,6 @@ inoremap <right> <nop>
 "up and down work with wrapped lines
 nnoremap j gj
 nnoremap k gk
-
-" match bracket pairs
-nnoremap <tab> %
-vnoremap <tab> %
-
-" Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
 
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
@@ -218,25 +218,15 @@ nnoremap : ;
 "sudo save if not root
 cmap w!! w !sudo tee % >/dev/null
 
-let mapleader=","
-
 " Remove whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " insert blank line below
 nnoremap <CR> o<ESC>
 
-"Movement commands (requires unimpaired plugin)
-"Move current line down/up
-map <C-Down> ]e
-map <C-Up> [e
-
-"Move visually selected lines down/up
-vmap <C-Down> ]egv
-vmap <C-Up> [egv
-
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
+
 " Split line (sister to [J]oin lines)
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc><right>
@@ -249,6 +239,14 @@ inoremap <C-u> <esc>gUiwea
 nmap <leader>w <C-w>v<C-w>l
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
+" Easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+" Window resizing
+nnoremap <c-left> 5<c-w>>
+nnoremap <c-right> 5<c-w><
 
 " make indentation easier
 nmap <C-]> >>
@@ -260,7 +258,7 @@ endif
 " indentation in vmode
 vmap <C-]> >gv
 vmap <C-[> <gv
-"
+
 " Quick editing
 " ---------------------------------------------------------
 " vimrc
@@ -272,15 +270,38 @@ nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>s :%s//<left>
 " ---------------------------------------------------------
 
+" ExecuteInShell
+" Create :Shell command to execute in shell and display
+" results in a split window
+" ---------------------------------------------------------
+function! s:ExecuteInShell(command)
+    let command = join(map(split(a:command), 'expand(v:val)'))
+    let winnr = bufwinnr('^' . command . '$')
+    silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
+    setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap nonumber
+    echo 'Execute ' . command . '...'
+    silent! execute 'silent %!'. command
+    silent! redraw
+    silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
+    silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>:AnsiEsc<CR>'
+    silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
+    silent! execute 'AnsiEsc'
+    echo 'Shell command ' . command . ' executed.'
+endfunction " }}}
+command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
+nnoremap <leader>! :Shell 
+" ---------------------------------------------------------
+
 " YankRing: Show yanked text
 " ---------------------------------------------------------
 let g:yankring_clipboard_monitor = 1
 nnoremap <silent> <F3> :YRShow<CR>
 inoremap <silent> <F3> <ESC>:YRShow<CR>
+" paste from clipboard
 nnoremap <leader>p "*p
 " ---------------------------------------------------------
 
-" Commenting
+"Commenting
 "requires NERDCommenter plugin
 " ---------------------------------------------------------
 vmap <leader>m ,c<space>gv
