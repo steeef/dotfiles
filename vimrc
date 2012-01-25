@@ -65,6 +65,7 @@ if exists("*vundle#rc")
     Bundle 'git://github.com/ciaranm/detectindent.git'
     Bundle 'git://github.com/msanders/snipmate.vim.git'
     Bundle 'Lokaltog/vim-powerline'
+    Bundle 'git://repo.or.cz/vcscommand'
     " language-specific bundles
     Bundle 'git://github.com/vim-ruby/vim-ruby.git'
     Bundle 'git://github.com/rodjek/vim-puppet.git'
@@ -222,10 +223,6 @@ let mapleader=","
 " Remove whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
-" insert blank line below or above current line
-nnoremap <leader>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <leader>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
 " insert blank line below
 nnoremap <CR> o<ESC>
 
@@ -240,13 +237,13 @@ vmap <C-Up> [egv
 
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc><right>
 
 " Change case
 nnoremap <C-u> gUiw
 inoremap <C-u> <esc>gUiwea
-
-" Substitute
-nnoremap <leader>s :%s//<left>
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
@@ -271,6 +268,8 @@ nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>
 " open current file's directory
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+" Substitute
+nnoremap <leader>s :%s//<left>
 " ---------------------------------------------------------
 
 " YankRing: Show yanked text
@@ -292,6 +291,12 @@ map <leader>m ,c<space>
 " ---------------------------------------------------------
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestHighlight = 1
+" ---------------------------------------------------------
+
+" vcscommand
+" ---------------------------------------------------------
+nnoremap <leader>d :VCSVimDiff<cr>
+nnoremap <leader>D :diffoff<cr>
 " ---------------------------------------------------------
 
 " CTRL-P
