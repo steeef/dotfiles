@@ -65,6 +65,7 @@ if exists("*vundle#rc")
     Bundle 'msanders/snipmate.vim'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'vcscommand.vim'
+    Bundle 'mileszs/ack.vim'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
@@ -268,6 +269,8 @@ nnoremap <leader>sv :so $MYVIMRC<cr>
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 " Substitute
 nnoremap <leader>s :%s//<left>
+" paste from clipboard
+nnoremap <leader>p "*p
 " ---------------------------------------------------------
 
 " ExecuteInShell
@@ -297,8 +300,6 @@ nnoremap <leader>! :Shell
 let g:yankring_clipboard_monitor = 1
 nnoremap <silent> <F3> :YRShow<CR>
 inoremap <silent> <F3> <ESC>:YRShow<CR>
-" paste from clipboard
-nnoremap <leader>p "*p
 " ---------------------------------------------------------
 
 "Commenting
@@ -340,3 +341,9 @@ let g:ctrlp_prompt_mappings = {
 " ---------------------------------------------------------
 "let g:Powerline_symbols = 'fancy'
 "let g:Powerline_theme = 'sjl'
+" ---------------------------------------------------------
+
+" Ack
+" ---------------------------------------------------------
+noremap <leader>a :Ack! 
+" ---------------------------------------------------------
