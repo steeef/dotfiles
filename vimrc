@@ -263,9 +263,14 @@ endif
 " indentation in vmode
 vmap <C-]> >gv
 vmap <C-[> <gv
-
+"
+" Quick editing
+" ---------------------------------------------------------
+" vimrc
+nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<cr>
+nnoremap <leader>sv :so $MYVIMRC<cr>
 " open current file's directory
-map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 " ---------------------------------------------------------
 
 " YankRing: Show yanked text
