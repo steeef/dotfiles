@@ -53,6 +53,7 @@ if exists("*vundle#rc")
     " Bundles to manage with vundle
     " ---------------------------------------------------------
     Bundle 'scrooloose/nerdcommenter'
+    Bundle 'scrooloose/nerdtree'
     Bundle 'vim-scripts/IndexedSearch'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
@@ -326,15 +327,9 @@ nnoremap <leader>D :diffoff<cr>
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 1
+let g:ctrlp_jump_to_buffer = 2
+let g:ctrlp_max_height = 15
 let g:ctrlp_split_window = 0
-let g:ctrlp_prompt_mappings = {
-\ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
-\ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
-\ 'PrtHistory(-1)':       ['<c-n>'],
-\ 'PrtHistory(1)':        ['<c-p>'],
-\ 'ToggleFocus()':        ['<c-tab>'],
-\ 'PrtClearCache()':      ['<leader>y'],
-\ }
 " ---------------------------------------------------------
 
 " Powerline
@@ -346,4 +341,18 @@ let g:ctrlp_prompt_mappings = {
 " Ack
 " ---------------------------------------------------------
 noremap <leader>a :Ack! 
+" ---------------------------------------------------------
+
+" NERDTree
+" ---------------------------------------------------------
+noremap  <F2> :NERDTreeToggle<cr>
+inoremap <F2> <esc>:NERDTreeToggle<cr>
+
+au Filetype nerdtree setlocal nolist
+
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index', 'xapian_index', '.*.pid', 'monitor.py', '.*-fixtures-.*.json', '.*\.o$', 'db.db', 'tags.bak']
+
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 0
 " ---------------------------------------------------------
