@@ -3,6 +3,9 @@ alias ..='cd ..'
 alias h='cd $HOME'
 alias d='cd $HOME/.dotfiles'
 
+# sudo
+alias si='sudo -i'
+
 # ls
 alias ls="ls -F"
 alias l="ls -lAh"
