@@ -50,5 +50,5 @@ alias cs='cvs status'
 alias cvd='cvs diff'
 
 # common
-alias duh='du -hs * | sort -hr'
+alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias vi='vim'

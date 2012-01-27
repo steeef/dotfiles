@@ -65,6 +65,7 @@ if exists("*vundle#rc")
     Bundle 'ciaranm/detectindent'
     Bundle 'msanders/snipmate.vim'
     Bundle 'Lokaltog/vim-powerline'
+    Bundle 'Lokaltog/vim-easymotion'
     Bundle 'vcscommand.vim'
     Bundle 'mileszs/ack.vim'
     " language-specific bundles
