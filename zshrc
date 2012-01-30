@@ -23,7 +23,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=$PATH:~/.bin
 alias vi='vim'
-alias duh='du -h --max=1'
+alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias d='cd ~/.dotfiles'
 alias remvim='~/.bin/remvim'
 alias on='sudo reboot'
