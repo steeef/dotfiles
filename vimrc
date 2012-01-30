@@ -325,7 +325,7 @@ nnoremap <leader>D :diffoff<cr>
 
 " CTRL-P
 " ---------------------------------------------------------
-let g:ctrlp_map = '<leader>t'
+let g:ctrlp_map = '<leader>,'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_jump_to_buffer = 2
@@ -356,4 +356,20 @@ let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 0
+" ---------------------------------------------------------
+
+" EasyMition
+" ---------------------------------------------------------
+let g:EasyMotion_do_mapping = 0
+
+nnoremap <silent> <Leader>f      :call EasyMotion#F(0, 0)<CR>
+onoremap <silent> <Leader>f      :call EasyMotion#F(0, 0)<CR>
+vnoremap <silent> <Leader>f :<C-U>call EasyMotion#F(1, 0)<CR>
+
+nnoremap <silent> <Leader>F      :call EasyMotion#F(0, 1)<CR>
+onoremap <silent> <Leader>F      :call EasyMotion#F(0, 1)<CR>
+vnoremap <silent> <Leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
+
+onoremap <silent> <Leader>t      :call EasyMotion#T(0, 0)<CR>
+onoremap <silent> <Leader>T      :call EasyMotion#T(0, 1)<CR>
 " ---------------------------------------------------------
