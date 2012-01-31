@@ -38,6 +38,9 @@ alias ts='$HOME/.bin/todo.sh addto someday.txt'
 # git
 alias gsv='git svn dcommit'
 
+# hg
+alias hgcm='hg commit -m'
+
 # set vi mode
 #bindkey -v
 
