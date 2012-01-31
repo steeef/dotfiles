@@ -22,16 +22,20 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=$PATH:~/.bin
+
 alias vi='vim'
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias d='cd ~/.dotfiles'
-alias remvim='~/.bin/remvim'
+
+# reboot/shutdown
 alias on='sudo reboot'
 alias off='sudo shutdown -h now'
-alias e0='sudo ifconfig eth0 down && sudo ifconfig eth0 up'
+
+# todo.txt
 alias t='$HOME/.bin/todo.sh'
 alias ts='$HOME/.bin/todo.sh addto someday.txt'
-alias rvme='rvm 1.8.7-head,1.9.2-head,ree exec'
+
+# git
 alias gsv='git svn dcommit'
 
 # set vi mode
@@ -42,4 +46,6 @@ fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
 
 # add local
-source $HOME/.zshrc-local
+if [ -f $HOME/.zshrc-local ]; then
+    source $HOME/.zshrc-local
+fi
