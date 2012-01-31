@@ -2,39 +2,7 @@
 scriptencoding utf-8
 set nocompatible
 
-" appearance/font config
-" ---------------------------------------------------------
-if has("gui_running")
-    " GUI is running or is about to start.
-
-    " Set font and window size based on operating system
-    if has("unix")
-        set guifont=DejaVu\ Sans\ Mono\ 10
-    else
-        set guifont=DejaVu\ Sans\ Mono:h10
-        set lines=100 columns=200
-    endif
-
-    set guioptions-=m  "remove menu bar
-    set guioptions-=T  "remove toolbar
-    set guioptions-=r  "remove right-hand scroll bar
-else
-    " This is console Vim.
-    set t_Co=256
-endif
-" set molokai, or desert if it doesn't exist
-try
-    colorscheme molokai
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme desert
-endtry
-" statusline settings
-set laststatus=2
-set statusline=%M%R%l/%L\,%c:%Y:\%f
-" ---------------------------------------------------------
-
 " vundle setup
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " ---------------------------------------------------------
 " Use custom path in Windows
 if has("win32")
@@ -77,9 +45,42 @@ if exists("*vundle#rc")
     filetype plugin indent on
 endif
 
+syntax on
+
+" appearance/font config
+" ---------------------------------------------------------
+if has("gui_running")
+    " GUI is running or is about to start.
+
+    " Set font and window size based on operating system
+    if has("unix")
+        set guifont=DejaVu\ Sans\ Mono\ 10
+    else
+        set guifont=DejaVu\ Sans\ Mono:h10
+        set lines=100 columns=200
+    endif
+
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
+else
+    " This is console Vim.
+    set t_Co=256
+endif
+" set molokai, or desert if it doesn't exist
+try
+    colorscheme molokai
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme desert
+endtry
+" ---------------------------------------------------------
+
 " standard vim options
 " ---------------------------------------------------------
-syntax on
+" statusline settings
+set laststatus=2
+set statusline=%M%R%l/%L\,%c:%Y:\%f
+
 set modelines=0
 set completeopt=longest,menuone,preview
 set encoding=utf-8
