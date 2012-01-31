@@ -67,12 +67,13 @@ else
     " This is console Vim.
     set t_Co=256
 endif
-" set molokai, or desert if it doesn't exist
-try
-    colorscheme molokai
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme desert
-endtry
+" set colorscheme in increasing order of desire
+" using 'silent!' prevents error messages if colorscheme is not found
+silent! colorscheme desert
+silent! colorscheme jellybeans
+silent! colorscheme xoria256
+silent! colorscheme solarized
+silent! colorscheme molokai
 " ---------------------------------------------------------
 
 " standard vim options
