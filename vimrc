@@ -96,6 +96,7 @@ set title
 set ignorecase
 set smartcase
 set wrap
+set number
 "see :help for-table
 set formatoptions=qrn1
 set textwidth=79
@@ -116,10 +117,7 @@ set showmatch
 
 " 7.3-specific setting
 if v:version >= 703
-    set relativenumber
     set colorcolumn=85
-else
-    set number
 end
 
 "show formatting characters
@@ -264,13 +262,16 @@ vmap <C-[> <gv
 
 " Quick editing
 " ---------------------------------------------------------
-" vimrc
+" vimrc: open in new window, reload
 nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<cr>
 nnoremap <leader>sv :so $MYVIMRC<cr>
+
 " open current file's directory
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+
 " Substitute
 nnoremap <leader>s :%s//<left>
+
 " paste from clipboard
 nnoremap <leader>p "*p
 " ---------------------------------------------------------
@@ -297,15 +298,14 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 nnoremap <leader>! :Shell 
 " ---------------------------------------------------------
 
-" YankRing: Show yanked text
+" YankRing
 " ---------------------------------------------------------
 let g:yankring_clipboard_monitor = 1
 nnoremap <silent> <F3> :YRShow<CR>
 inoremap <silent> <F3> <ESC>:YRShow<CR>
 " ---------------------------------------------------------
 
-"Commenting
-"requires NERDCommenter plugin
+" NERDCommenter
 " ---------------------------------------------------------
 vmap <leader>m ,c<space>gv
 map <leader>m ,c<space>
@@ -333,12 +333,6 @@ let g:ctrlp_max_height = 15
 let g:ctrlp_split_window = 0
 " ---------------------------------------------------------
 
-" Powerline
-" ---------------------------------------------------------
-"let g:Powerline_symbols = 'fancy'
-"let g:Powerline_theme = 'sjl'
-" ---------------------------------------------------------
-
 " Ack
 " ---------------------------------------------------------
 noremap <leader>a :Ack! 
@@ -358,7 +352,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 0
 " ---------------------------------------------------------
 
-" EasyMition
+" EasyMotion
 " ---------------------------------------------------------
 let g:EasyMotion_do_mapping = 0
 
