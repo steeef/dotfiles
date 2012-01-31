@@ -33,13 +33,16 @@ alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 
 # hg
-alias ha='hg add'
-alias hl='hg pull -u'
-alias hp='hg push'
-alias hd='hg diff'
-alias hc='hg commit'
-alias hcm='hg commit -m'
-alias hs='hg status'
+alias hga='hg add'
+alias hgl='hg pull -u'
+alias hgp='hg push'
+alias hgd='hg diff'
+alias hgc='hg commit'
+alias hgcm='hg commit -m'
+alias hgs='hg status'
+alias hgu='hg update'
+alias hgm='hg merge'
+alias hgb='hg branch'
 
 # cvs
 alias c='cvs'
