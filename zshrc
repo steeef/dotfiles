@@ -40,6 +40,8 @@ alias gsv='git svn dcommit'
 
 # hg
 alias hgcm='hg commit -m'
+alias hgu='hg update'
+alias hgm='hg merge'
 
 # set vi mode
 #bindkey -v
