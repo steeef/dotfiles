@@ -27,7 +27,7 @@ if exists("*vundle#rc")
     Bundle 'tpope/vim-repeat'
     Bundle 'vim-scripts/L9'
     Bundle 'vim-scripts/YankRing.vim'
-    Bundle 'ervandew/supertab'
+    "Bundle 'ervandew/supertab'
     Bundle 'kien/ctrlp.vim'
     Bundle 'vim-scripts/IndentConsistencyCop'
     Bundle 'ciaranm/detectindent'
@@ -66,17 +66,25 @@ if has("gui_running")
     set guioptions-=r  "remove right-hand scroll bar
 else
     " This is console Vim.
-    "set t_Co=256
 endif
+" ---------------------------------------------------------
+
 " colorscheme settings
+" ---------------------------------------------------------
 set background=dark
-"let g:solarized_termcolors=256
 
 " try/catch to set colorscheme
+" little tricky to follow here:
+" If solarized exists, don't force terminal to 256 colors.
+" Otherwise, set to 256 if in console (not gui) and try the
+" next two colorschemes.
 try
     colorscheme solarized
 catch /^Vim\%((\a\+)\)\=:E185/
     try
+        if !has("gui_running")
+            set t_Co=256
+        endif
         colorscheme molokai
     catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme desert
@@ -91,7 +99,6 @@ set laststatus=2
 set statusline=%M%R%l/%L\,%c:%Y:\%f
 
 set modelines=0
-set completeopt=longest,menuone,preview
 set encoding=utf-8
 set scrolloff=3
 set showmode
@@ -107,10 +114,10 @@ set ignorecase
 set smartcase
 set wrap
 set number
-"see :help for-table
 set formatoptions=qrn1
 set textwidth=79
 set lazyredraw
+set confirm
 
 "indent options
 set autoindent
@@ -138,12 +145,14 @@ set listchars=tab:»\ ,trail:·
 set splitbelow
 set splitright
 
-"per-project vimrc files
-"don't use in Windows
-if has("unix")
-    set exrc    " enable per-directory .vimrc files
-    set secure  " disable unsafe commands in local .vimrc files
-endif
+"completion
+set completeopt=longest,menuone,preview
+set omnifunc=syntaxcomplete#Complete
+
+" per-project vimrc files
+" useful for specifying things like tabstops
+silent! set exrc    " enable per-directory .vimrc files
+silent! set secure  " disable unsafe commands in local .vimrc files
 " ---------------------------------------------------------
 
 " create backup directory and set backupdir
@@ -216,7 +225,6 @@ inoremap jj <Esc>
 
 " Use Enter to exit normal,visual,command mode
 " Use CTRL-O to create new line in insert mode
-"inoremap <CR> <Esc>
 nnoremap <CR> <Esc>
 vnoremap <CR> <Esc>gV
 onoremap <CR> <Esc>
@@ -229,7 +237,7 @@ nnoremap : ;
 "sudo save if not root
 cmap w!! w !sudo tee % >/dev/null
 
-" Remove whitespace
+" Remove trailing whitespace from buffer
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " insert blank line below
@@ -255,9 +263,6 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-" Window resizing
-nnoremap <c-left> 5<c-w>>
-nnoremap <c-right> 5<c-w><
 
 " make indentation easier
 nmap <C-]> >>
@@ -270,10 +275,14 @@ endif
 vmap <C-]> >gv
 vmap <C-[> <gv
 
+" completion
+inoremap <leader>q <C-x><C-o>
+
 " Quick editing
 " ---------------------------------------------------------
-" vimrc: open in new window, reload
+" vimrc: open in new window
 nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<cr>
+" vimrc: reload
 nnoremap <leader>sv :so $MYVIMRC<cr>
 
 " open current file's directory
@@ -284,6 +293,7 @@ nnoremap <leader>s :%s//<left>
 
 " paste from clipboard
 nnoremap <leader>p "*p
+
 " ---------------------------------------------------------
 
 " ExecuteInShell
@@ -319,12 +329,6 @@ inoremap <silent> <F3> <ESC>:YRShow<CR>
 " ---------------------------------------------------------
 vmap <leader>m ,c<space>gv
 map <leader>m ,c<space>
-" ---------------------------------------------------------
-
-" Supertab
-" ---------------------------------------------------------
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabLongestHighlight = 1
 " ---------------------------------------------------------
 
 " vcscommand
@@ -364,6 +368,8 @@ let NERDTreeDirArrows = 0
 
 " EasyMotion
 " ---------------------------------------------------------
+" map specific functions to specific keys rather than let
+" EasyMotion do the mapping
 let g:EasyMotion_do_mapping = 0
 
 nnoremap <silent> <Leader>f      :call EasyMotion#F(0, 0)<CR>
@@ -376,4 +382,7 @@ vnoremap <silent> <Leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
 
 onoremap <silent> <Leader>t      :call EasyMotion#T(0, 0)<CR>
 onoremap <silent> <Leader>T      :call EasyMotion#T(0, 1)<CR>
+
+onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
+onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 " ---------------------------------------------------------
