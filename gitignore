@@ -5,6 +5,7 @@ bin/*.pyc
 *.un~
 .*.swp
 locals.zsh
+.netrwhist
 log/.zsh_history
 projects.zsh
 doc/tags*

@@ -46,7 +46,7 @@ if exists("*vundle#rc")
     filetype plugin indent on
 endif
 
-syntax on
+syntax enable
 
 " appearance/font config
 " ---------------------------------------------------------
@@ -70,7 +70,7 @@ else
 endif
 " colorscheme settings
 set background=dark
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 
 " try/catch to set colorscheme
 try
