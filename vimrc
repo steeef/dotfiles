@@ -36,6 +36,7 @@ if exists("*vundle#rc")
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'vcscommand.vim'
     Bundle 'mileszs/ack.vim'
+    Bundle 'altercation/vim-colors-solarized'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
@@ -67,13 +68,15 @@ else
     " This is console Vim.
     set t_Co=256
 endif
+set background=dark
+let g:solarized_termcolors=256
 " set colorscheme in increasing order of desire
 " using 'silent!' prevents error messages if colorscheme is not found
-silent! colorscheme desert
-silent! colorscheme jellybeans
-silent! colorscheme xoria256
+"silent! colorscheme desert
+"silent! colorscheme jellybeans
+"silent! colorscheme xoria256
+"silent! colorscheme molokai
 silent! colorscheme solarized
-silent! colorscheme molokai
 " ---------------------------------------------------------
 
 " standard vim options
