@@ -66,17 +66,21 @@ if has("gui_running")
     set guioptions-=r  "remove right-hand scroll bar
 else
     " This is console Vim.
-    set t_Co=256
+    "set t_Co=256
 endif
+" colorscheme settings
 set background=dark
 let g:solarized_termcolors=256
-" set colorscheme in increasing order of desire
-" using 'silent!' prevents error messages if colorscheme is not found
-"silent! colorscheme desert
-"silent! colorscheme jellybeans
-"silent! colorscheme xoria256
-"silent! colorscheme molokai
-silent! colorscheme solarized
+" try/catch to set colorscheme
+try
+    colorscheme solarized
+catch /^Vim\%((\a\+)\)\=:E185/
+    try
+        colorscheme molokai
+    catch /^Vim\%((\a\+)\)\=:E185/
+        colorscheme desert
+    endtry
+endtry
 " ---------------------------------------------------------
 
 " standard vim options
