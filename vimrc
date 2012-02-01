@@ -71,6 +71,7 @@ endif
 " colorscheme settings
 set background=dark
 let g:solarized_termcolors=256
+
 " try/catch to set colorscheme
 try
     colorscheme solarized
