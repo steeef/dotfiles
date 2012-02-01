@@ -2,6 +2,7 @@
 alias ..='cd ..'
 alias h='cd $HOME'
 alias d='cd $HOME/.dotfiles'
+alias c='cd $HOME/code'
 
 # sudo
 alias si='sudo -i'
@@ -44,14 +45,6 @@ alias hgu='hg update'
 alias hgm='hg merge'
 alias hgb='hg branch'
 alias hgf='hg fetch'
-
-# cvs
-alias c='cvs'
-alias ca='cvs add'
-alias cu='cvs update'
-alias ccm='cvs commit -m'
-alias cs='cvs status'
-alias cvd='cvs diff'
 
 # common
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
