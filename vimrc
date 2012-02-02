@@ -111,7 +111,6 @@ set title
 set ignorecase
 set smartcase
 set wrap
-set number
 set formatoptions=qrn1
 set textwidth=79
 set lazyredraw
@@ -149,7 +148,7 @@ set splitright
 if !has("win32")
     set exrc    " enable per-directory .vimrc files
     set secure  " disable unsafe commands in local .vimrc files
-fi
+endif
 " ---------------------------------------------------------
 
 " create backup directory and set backupdir
@@ -310,9 +309,34 @@ function! s:ExecuteInShell(command)
     silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
     silent! execute 'AnsiEsc'
     echo 'Shell command ' . command . ' executed.'
-endfunction " }}}
+endfunction
+
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 nnoremap <leader>! :Shell 
+" ---------------------------------------------------------
+
+" NumberToggle
+" Switch between relative and absolute line numbers
+" Only works in Vim >= 7.3
+" ---------------------------------------------------------
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunction
+
+if v:version >= 703
+    set relativenumber
+    nnoremap <leader>n :call NumberToggle()<CR>
+else
+    set number
+endif
+" ---------------------------------------------------------
+
+" ---------------------------------------------------------
+" Plugin settings
 " ---------------------------------------------------------
 
 " YankRing
