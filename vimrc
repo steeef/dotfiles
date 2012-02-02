@@ -27,12 +27,10 @@ if exists("*vundle#rc")
     Bundle 'tpope/vim-repeat'
     Bundle 'vim-scripts/L9'
     Bundle 'vim-scripts/YankRing.vim'
-    "Bundle 'ervandew/supertab'
     Bundle 'kien/ctrlp.vim'
     Bundle 'vim-scripts/IndentConsistencyCop'
     Bundle 'ciaranm/detectindent'
     Bundle 'msanders/snipmate.vim'
-    "Bundle 'Lokaltog/vim-powerline'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'vcscommand.vim'
     Bundle 'mileszs/ack.vim'
@@ -145,14 +143,13 @@ set listchars=tab:»\ ,trail:·
 set splitbelow
 set splitright
 
-"completion
-set completeopt=longest,menuone,preview
-set omnifunc=syntaxcomplete#Complete
-
 " per-project vimrc files
 " useful for specifying things like tabstops
-silent! set exrc    " enable per-directory .vimrc files
-silent! set secure  " disable unsafe commands in local .vimrc files
+" Disable on Windows
+if !has("win32")
+    set exrc    " enable per-directory .vimrc files
+    set secure  " disable unsafe commands in local .vimrc files
+fi
 " ---------------------------------------------------------
 
 " create backup directory and set backupdir
