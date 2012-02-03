@@ -151,6 +151,15 @@ if !has("win32")
     set exrc    " enable per-directory .vimrc files
     set secure  " disable unsafe commands in local .vimrc files
 endif
+
+
+" filetypes
+" ---------------------------------------------------------
+augroup ft_todotxt
+    au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
+augroup END
+" ---------------------------------------------------------
+
 " ---------------------------------------------------------
 
 " create backup directory and set backupdir
