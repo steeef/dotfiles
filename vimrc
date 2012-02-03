@@ -35,10 +35,12 @@ if exists("*vundle#rc")
     Bundle 'vcscommand.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'altercation/vim-colors-solarized'
+    Bundle 'sjl/gundo.vim'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
     Bundle 'gabemc/powershell-vim'
+    Bundle 'davidoc/todo.txt-vim'
     " ---------------------------------------------------------
     " post-vundle settings
     filetype plugin indent on
@@ -407,3 +409,7 @@ onoremap <silent> <Leader>T      :call EasyMotion#T(0, 1)<CR>
 onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
 onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 " ---------------------------------------------------------
+
+" Gundo
+" ---------------------------------------------------------
+nnoremap <F4> :GundoToggle<CR>
