@@ -1,6 +1,7 @@
 " initial settings
 scriptencoding utf-8
 set nocompatible
+filetype plugin indent on
 
 " vundle setup
 " ---------------------------------------------------------
@@ -54,8 +55,6 @@ syntax enable
 " appearance/font config
 " ---------------------------------------------------------
 if has("gui_running")
-    " GUI is running or is about to start.
-
     " Set font and window size based on operating system
     if has("unix")
         set guifont=DejaVu\ Sans\ Mono\ 10
@@ -149,7 +148,8 @@ set splitright
 
 " per-project vimrc files
 " useful for specifying things like tabstops
-" Disable on Windows
+" Disable on Windows since it will complain if you're
+" running in a path where it's not allowed.
 if !has("win32")
     set exrc    " enable per-directory .vimrc files
     set secure  " disable unsafe commands in local .vimrc files
@@ -158,9 +158,15 @@ endif
 
 " filetypes
 " ---------------------------------------------------------
-augroup ft_todotxt
-    au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
-augroup END
+" todo.txt
+if has("autocmd")
+    augroup ft_todotxt
+        au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
+    augroup END
+
+    "Set ruby-specific formatting
+    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
+endif
 " ---------------------------------------------------------
 
 " ---------------------------------------------------------
@@ -182,12 +188,6 @@ set undolevels=1000
 " Make Vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
 " ---------------------------------------------------------
-
-"Set ruby-specific formatting
-if has("autocmd")
-    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
-endif
-
 
 " Wildmenu settings
 " ---------------------------------------------------------
@@ -230,7 +230,7 @@ nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 set pastetoggle=<F5>
 
-" try jj as escape in interactive mode
+" use jj as escape in interactive mode
 inoremap jj <Esc>
 
 " Use Enter to exit normal,visual,command mode
@@ -247,22 +247,8 @@ nnoremap : ;
 "sudo save if not root
 cmap w!! w !sudo tee % >/dev/null
 
-" Remove trailing whitespace from buffer
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
-" insert blank line below
-nnoremap <CR> o<ESC>
-
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
-
-" Split line (sister to [J]oin lines)
-" The normal use of S is covered by cc, so don't worry about shadowing it.
-nnoremap S i<cr><esc><right>
-
-" Change case
-nnoremap <C-u> gUiw
-inoremap <C-u> <esc>gUiwea
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
@@ -285,11 +271,22 @@ endif
 vmap <C-]> >gv
 vmap <C-[> <gv
 
-" completion
-inoremap <leader>q <C-x><C-o>
-
 " Quick editing
 " ---------------------------------------------------------
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc><right>
+
+" Change case
+nnoremap <C-u> gUiw
+inoremap <C-u> <esc>gUiwea
+"
+" Remove trailing whitespace from entire buffer
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" insert blank line below
+nnoremap <CR> o<ESC>
+
 " vimrc: open in new window
 nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<cr>
 " vimrc: reload
@@ -425,3 +422,4 @@ onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 " Gundo
 " ---------------------------------------------------------
 nnoremap <F4> :GundoToggle<CR>
+" ---------------------------------------------------------
