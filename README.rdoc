@@ -2,6 +2,8 @@
 
 == Acknowledgement
 Based on Ryan Bates' dotfiles (http://github.com/ryanb/dotfiles)
+Using a lot of Vim config ideas from Steve Losh (http://github.com/sjl/dotfiles),
+plus his hgprompt script for a bash prompt (http://github.com/sjl/hgprompt).
 
 == Installation
 
@@ -9,27 +11,24 @@ Based on Ryan Bates' dotfiles (http://github.com/ryanb/dotfiles)
   cd ~/.dotfiles
   rake install
 
+== Shells
+I have configs and aliases for both bash and zsh. Since I'm a Linux sysadmin,
+it was easier to stick with bash as my primary shell due to its ubiquity.
 
-== Changes
+== Vim and Vundle
 I've modified vimrc heavily to my liking (options, keybindings, colors).
 I attempted to document what directives do.
 
-I switched to using Pathogen to manage bundles instead of having
-plugins spread across folders under the vim folder. You should be able
-to run the following script to add bundles as submodules, init them if
-necessary, and update all of them:
+I've moved away from Pathogen to Vundle (https://github.com/gmarik/vundle),
+since it incorporates all of Pathogen's neat features with
+downloading/updating bundles from Github and vim.org.
 
-    bin/vim_update_bundles
+It's a submodule of this repository, so run the usual commands to download
+and update:
+  git submodule init
+  git submodule update
 
-Run this script from the directory you cloned to. If you followed the
-above instructions, this should be ~/.dotfiles. Edit this script to
-change the bundles you'd like to use.
-
-== Command-T Bundle
-The Command-T Bundle requires you to run "rake make" in its directory
-(vim/bundle/command-t) before you can use it. All other bundles should
-be useable after runnning the vim_update_bundles script.
-
-== Oh-My-Zsh
-Also using my own fork of oh-my-zsh instead of Ryan's zsh config
-(http://github.com/steeef/oh-my-zsh).
+== Zsh and Oh-My-Zsh
+I'm also using my own fork of oh-my-zsh instead of Ryan's zsh config
+(http://github.com/steeef/oh-my-zsh). Initiaizing/Updating submodules as
+above will install it.
