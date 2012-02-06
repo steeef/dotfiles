@@ -30,9 +30,13 @@ if exists("*vundle#rc")
     " ---------------------------------------------------------
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/nerdtree'
+    Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
+    Bundle 'vim-scripts/taglist.vim'
+    Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
+    Bundle 'tpope/vim-fugitive'
     if v:version >= 702
         " L9 Requires at least version 7.2
         Bundle 'vim-scripts/L9'
@@ -105,8 +109,9 @@ endtry
 " standard vim options
 " ---------------------------------------------------------
 " statusline settings
+" everything else defined in plugin/statusline.vim
 set laststatus=2
-set statusline=%M%R%l/%L\,%c:%Y:\%f
+"set statusline=%M%R%l/%L\,%c:%Y:\%f
 
 set modelines=0
 set encoding=utf-8
@@ -315,6 +320,11 @@ nnoremap <leader>s :%s//<left>
 nnoremap <leader>p "*p
 
 
+" ctags
+" ---------------------------------------------------------
+set tags=./tags;   " allows recursing upwards to project roots
+" ---------------------------------------------------------
+
 " ---------------------------------------------------------
 
 " ExecuteInShell
@@ -442,3 +452,34 @@ nnoremap <F4> :GundoToggle<CR>
 " ---------------------------------------------------------
 " Puppet: align resource parameters
 vnoremap <leader>= :Align =><CR>
+" ---------------------------------------------------------
+
+" syntastic
+" ---------------------------------------------------------
+" autoclose window if no errors
+let g:syntastic_auto_loc_list=2
+let g:puppet_module_detect=1
+nnoremap <leader>E :Errors<CR>
+" ---------------------------------------------------------
+
+" taglist
+" ---------------------------------------------------------
+let tlist_puppet_settings='puppet;c:class;d:define;s:site;n:node'
+nnoremap <silent><leader>l :TlistToggle<CR>
+" ---------------------------------------------------------
+
+" supertab
+" ---------------------------------------------------------
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabLogestHighlight = 1
+" ---------------------------------------------------------
+"
+" fugitive
+" ---------------------------------------------------------
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ga :Gadd<CR>
+nnoremap <leader>gm :Gmove<CR>
+nnoremap <leader>gr :Gremove<CR>
+" ---------------------------------------------------------
