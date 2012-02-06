@@ -25,7 +25,10 @@ if exists("*vundle#rc")
     Bundle 'vim-scripts/IndexedSearch'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
-    Bundle 'vim-scripts/L9'
+    if v:version >= 702
+        " L9 Requires at least version 7.2
+        Bundle 'vim-scripts/L9'
+    endif
     Bundle 'vim-scripts/YankRing.vim'
     Bundle 'kien/ctrlp.vim'
     Bundle 'vim-scripts/IndentConsistencyCop'
