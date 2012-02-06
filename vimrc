@@ -3,6 +3,13 @@ scriptencoding utf-8
 set nocompatible
 filetype plugin indent on
 
+" Variables
+let fullname = "Stephen Price"
+let email_address = "sprice@monsooncommerce.com"
+let company_name = "Monsoon Commerce"
+let template_date_format_string = "%Y%m%d"
+
+
 " vundle setup
 " ---------------------------------------------------------
 " Use custom path in Windows
@@ -226,6 +233,11 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+"Unmap help in favor of Escape
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
@@ -301,6 +313,7 @@ nnoremap <leader>s :%s//<left>
 
 " paste from clipboard
 nnoremap <leader>p "*p
+
 
 " ---------------------------------------------------------
 
