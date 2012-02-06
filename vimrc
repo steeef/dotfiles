@@ -40,6 +40,7 @@ if exists("*vundle#rc")
     Bundle 'mileszs/ack.vim'
     Bundle 'altercation/vim-colors-solarized'
     Bundle 'sjl/gundo.vim'
+    Bundle 'Align'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
@@ -423,3 +424,8 @@ onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 " ---------------------------------------------------------
 nnoremap <F4> :GundoToggle<CR>
 " ---------------------------------------------------------
+"
+" Align
+" ---------------------------------------------------------
+" Puppet: align resource parameters
+vnoremap <leader>= :Align =><CR>
