@@ -1,9 +1,14 @@
 = steeef's Dot Files
 
 == Acknowledgement
-Based on Ryan Bates' dotfiles (http://github.com/ryanb/dotfiles)
-Using a lot of Vim config ideas from Steve Losh (http://github.com/sjl/dotfiles),
-plus his hgprompt script for a bash prompt (http://github.com/sjl/hgprompt).
+* Ryan Bates' dotfiles (http://github.com/ryanb/dotfiles): I forked his repo
+* Steve Losh's dotfiles (http://github.com/sjl/dotfiles): Got a lot of great
+ideas from his vimrc and plugins
+* Steve Losh's hgprompt (http://github.com/sjl/hgprompt): great utility for
+creating a bash prompt with hg repository info on it.
+* Gina Trapani's todo.txt-cli (http://github.com/ginatrapani/todo.txt-cli): I
+use this tool to manage my own todo list in a text file. Very easy to use and
+powerful script.
 
 == Installation
 
