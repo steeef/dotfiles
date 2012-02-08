@@ -84,17 +84,17 @@ set background=dark
 " little tricky to follow here:
 " If solarized exists, don't force terminal to 256 colors.
 " Otherwise, set to 256 if in console (not gui) and try the
-" next two colorschemes.
+" next few colorschemes.
 try
-    colorscheme wombat256
+    colorscheme solarized
 catch /^Vim\%((\a\+)\)\=:E185/
     try
-        colorscheme solarized
+        if !has("gui_running")
+            set t_Co=256
+        endif
+        colorscheme wombat256
     catch /^Vim\%((\a\+)\)\=:E185/
         try
-            if !has("gui_running")
-                set t_Co=256
-            endif
             colorscheme molokai
         catch /^Vim\%((\a\+)\)\=:E185/
             colorscheme desert
