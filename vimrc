@@ -1,9 +1,9 @@
 " initial settings
 scriptencoding utf-8
 set nocompatible
+filetype plugin indent on
 
-" vundle setup
-" ---------------------------------------------------------
+" vundle ----------------------------------------------------------------- "{{{
 " Use custom path in Windows
 if has("win32")
     set rtp+=~/My\ Documents/My\ Dropbox/dotfiles/vim/bundle/vundle/
@@ -19,13 +19,20 @@ if exists("*vundle#rc")
     " required!
     Bundle 'gmarik/vundle'
     " Bundles to manage with vundle
-    " ---------------------------------------------------------
+    " ---------------------------------------------------------"{{{
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/nerdtree'
+    Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
+    Bundle 'vim-scripts/taglist.vim'
+    Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
-    Bundle 'vim-scripts/L9'
+    Bundle 'tpope/vim-fugitive'
+    if v:version >= 702
+        " L9 Requires at least version 7.2
+        Bundle 'vim-scripts/L9'
+    endif
     Bundle 'vim-scripts/YankRing.vim'
     Bundle 'kien/ctrlp.vim'
     Bundle 'vim-scripts/IndentConsistencyCop'
@@ -36,23 +43,23 @@ if exists("*vundle#rc")
     Bundle 'mileszs/ack.vim'
     Bundle 'altercation/vim-colors-solarized'
     Bundle 'sjl/gundo.vim'
+    Bundle 'Align'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
     Bundle 'gabemc/powershell-vim'
     Bundle 'davidoc/todo.txt-vim'
-    " ---------------------------------------------------------
+    "}}}
+
     " post-vundle settings
     filetype plugin indent on
 endif
 
 syntax enable
+"}}}
 
-" appearance/font config
-" ---------------------------------------------------------
+" appearance/font -------------------------------------------------------- "{{{
 if has("gui_running")
-    " GUI is running or is about to start.
-
     " Set font and window size based on operating system
     if has("unix")
         set guifont=DejaVu\ Sans\ Mono\ 10
@@ -67,10 +74,9 @@ if has("gui_running")
 else
     " This is console Vim.
 endif
-" ---------------------------------------------------------
+"}}}
 
-" colorscheme settings
-" ---------------------------------------------------------
+" colorscheme ------------------------------------------------------------ "{{{
 set background=dark
 
 " try/catch to set colorscheme
@@ -90,13 +96,12 @@ catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme desert
     endtry
 endtry
-" ---------------------------------------------------------
+"}}}
 
-" standard vim options
-" ---------------------------------------------------------
+" standard options ------------------------------------------------------- "{{{
 " statusline settings
+" everything else defined in plugin/statusline.vim
 set laststatus=2
-set statusline=%M%R%l/%L\,%c:%Y:\%f
 
 set modelines=0
 set encoding=utf-8
@@ -130,6 +135,8 @@ set shiftround
 set incsearch
 set hlsearch
 set showmatch
+runtime macros/matchit.vim
+map <tab> %
 
 " 7.3-specific setting
 if v:version >= 703
@@ -139,6 +146,14 @@ end
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
+" show when not in insert mode
+if has("autocmd")
+    augroup au_listchars
+        au!
+        au InsertEnter * :set listchars-=tab:»\ ,trail:·
+        au InsertLeave * :set listchars+=tab:»\ ,trail:·
+    augroup END
+endif
 
 "window options
 set splitbelow
@@ -146,24 +161,26 @@ set splitright
 
 " per-project vimrc files
 " useful for specifying things like tabstops
-" Disable on Windows
+" Disable on Windows since it will complain if you're
+" running in a path where it's not allowed.
 if !has("win32")
     set exrc    " enable per-directory .vimrc files
     set secure  " disable unsafe commands in local .vimrc files
 endif
 
+" Abbreviations
+iabbrev myName Stephen Price <sprice@monsooncommerce.com>
 
-" filetypes
-" ---------------------------------------------------------
-augroup ft_todotxt
-    au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
-augroup END
-" ---------------------------------------------------------
+" jump to last known position upon opening
+if has ("autocmd")
+    autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+endif
+"}}}
 
-" ---------------------------------------------------------
-
-" create backup directory and set backupdir
-" ---------------------------------------------------------
+" backup ----------------------------------------------------------------- "{{{
 let vimbackupdir = $HOME . '/.vimbackup'
 if exists("*mkdir")
     if !isdirectory(vimbackupdir)
@@ -178,16 +195,9 @@ set history=1000
 set undolevels=1000
 " Make Vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
-" ---------------------------------------------------------
+"}}}
 
-"Set ruby-specific formatting
-if has("autocmd")
-    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
-endif
-
-
-" Wildmenu settings
-" ---------------------------------------------------------
+" wildmenu --------------------------------------------------------------- "{{{
 set wildmenu
 set wildmode=list:longest
 
@@ -203,10 +213,9 @@ set wildignore+=*.luac                           " Lua byte code
 
 set wildignore+=migrations                       " Django migrations
 set wildignore+=*.pyc                            " Python byte code
-" ---------------------------------------------------------
+"}}}
 
-" key mapping
-" ---------------------------------------------------------
+" mapping ---------------------------------------------------------------- "{{{
 let mapleader=","
 
 " disable arrow keys
@@ -222,12 +231,17 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+"Unmap help in favor of Escape
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 set pastetoggle=<F5>
 
-" try jj as escape in interactive mode
+" use jj as escape in interactive mode
 inoremap jj <Esc>
 
 " Use Enter to exit normal,visual,command mode
@@ -244,22 +258,8 @@ nnoremap : ;
 "sudo save if not root
 cmap w!! w !sudo tee % >/dev/null
 
-" Remove trailing whitespace from buffer
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
-" insert blank line below
-nnoremap <CR> o<ESC>
-
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
-
-" Split line (sister to [J]oin lines)
-" The normal use of S is covered by cc, so don't worry about shadowing it.
-nnoremap S i<cr><esc><right>
-
-" Change case
-nnoremap <C-u> gUiw
-inoremap <C-u> <esc>gUiwea
 
 "open new vertical window and switch to it
 nmap <leader>w <C-w>v<C-w>l
@@ -281,12 +281,23 @@ endif
 " indentation in vmode
 vmap <C-]> >gv
 vmap <C-[> <gv
+"}}}
 
-" completion
-inoremap <leader>q <C-x><C-o>
+" quick edit --------------------------------------------------------------- "{{{
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc><right>
 
-" Quick editing
-" ---------------------------------------------------------
+" Change case
+nnoremap <C-u> gUiw
+inoremap <C-u> <esc>gUiwea
+"
+" Remove trailing whitespace from entire buffer
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" insert blank line below
+nnoremap <CR> o<ESC>
+
 " vimrc: open in new window
 nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<cr>
 " vimrc: reload
@@ -301,13 +312,75 @@ nnoremap <leader>s :%s//<left>
 " paste from clipboard
 nnoremap <leader>p "*p
 
-" ---------------------------------------------------------
+" insert date
+:nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
+:inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
+"}}}
 
-" ExecuteInShell
+" Folding ----------------------------------------------------------------- {{{
+set foldlevelstart=0
+
+" Make the current location sane.
+nnoremap <c-cr> zvzt
+
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+
+" Make zO recursively open whatever top level fold we're in, no matter where the
+" cursor happens to be.
+nnoremap zO zCzO
+
+" Use ,z to "focus" the current fold.
+nnoremap <leader>z zMzvzz
+
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
+
+" }}}
+
+" Filetypes ----------------------------------------------------------------- {{{
+if has("autocmd")
+    augroup ft_todotxt
+        au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
+    augroup END
+
+    "Set ruby-specific formatting
+    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
+
+    augroup ft_vim
+        au!
+
+        au FileType vim setlocal foldmethod=marker
+        au FileType help setlocal textwidth=78
+        au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+    augroup END
+endif
+" }}}
+
+" ctags --------------------------------------------------------------------- {{{
+set tags=./tags;   " allows recursing upwards to project roots
+" }}}
+
+" ExecuteInShell() ----------------------------------------------------------"{{{
 " Create :Shell command to execute in shell and display
 " results in a split window
-" ---------------------------------------------------------
-function! s:ExecuteInShell(command)
+
+function! s:ExecuteInShell(command)"{{{
     let command = join(map(split(a:command), 'expand(v:val)'))
     let winnr = bufwinnr('^' . command . '$')
     silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
@@ -320,13 +393,13 @@ function! s:ExecuteInShell(command)
     silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
     silent! execute 'AnsiEsc'
     echo 'Shell command ' . command . ' executed.'
-endfunction
+endfunction"}}}
 
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-nnoremap <leader>! :Shell 
-" ---------------------------------------------------------
+nnoremap <leader>! :Shell
+"}}}
 
-" NumberToggle
+" NumberToggle() ----------------------------------------------------------- "{{{
 " Switch between relative and absolute line numbers
 " Only works in Vim >= 7.3
 " ---------------------------------------------------------
@@ -344,48 +417,40 @@ if v:version >= 703
 else
     set number
 endif
-" ---------------------------------------------------------
+"}}}
 
-" ---------------------------------------------------------
-" Plugin settings
-" ---------------------------------------------------------
+" Plugins ------------------------------------------------------------------"{{{
 
-" YankRing
-" ---------------------------------------------------------
+" YankRing -----------------------------------------------------------------"{{{
 let g:yankring_clipboard_monitor = 1
 nnoremap <silent> <F3> :YRShow<CR>
 inoremap <silent> <F3> <ESC>:YRShow<CR>
-" ---------------------------------------------------------
+"}}}
 
-" NERDCommenter
-" ---------------------------------------------------------
+" NERDCommenter ------------------------------------------------------------"{{{
 vmap <leader>m ,c<space>gv
 map <leader>m ,c<space>
-" ---------------------------------------------------------
+"}}}
 
-" vcscommand
-" ---------------------------------------------------------
+" vcscommand ---------------------------------------------------------------"{{{
 nnoremap <leader>d :VCSVimDiff<cr>
 nnoremap <leader>D :diffoff<cr>
-" ---------------------------------------------------------
+"}}}
 
-" CTRL-P
-" ---------------------------------------------------------
+" CTRL-P -------------------------------------------------------------------"{{{
 let g:ctrlp_map = '<leader>,'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_jump_to_buffer = 2
 let g:ctrlp_max_height = 15
 let g:ctrlp_split_window = 0
-" ---------------------------------------------------------
+"}}}
 
-" Ack
-" ---------------------------------------------------------
-noremap <leader>a :Ack! 
-" ---------------------------------------------------------
+" Ack ----------------------------------------------------------------------"{{{
+noremap <leader>a :Ack!
+"}}}
 
-" NERDTree
-" ---------------------------------------------------------
+" NERDTree -----------------------------------------------------------------"{{{
 noremap  <F2> :NERDTreeToggle<cr>
 inoremap <F2> <esc>:NERDTreeToggle<cr>
 
@@ -396,10 +461,9 @@ let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 0
-" ---------------------------------------------------------
+"}}}
 
-" EasyMotion
-" ---------------------------------------------------------
+" EasyMotion ---------------------------------------------------------------"{{{
 " map specific functions to specific keys rather than let
 " EasyMotion do the mapping
 let g:EasyMotion_do_mapping = 0
@@ -417,8 +481,47 @@ onoremap <silent> <Leader>T      :call EasyMotion#T(0, 1)<CR>
 
 onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
 onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
-" ---------------------------------------------------------
+"}}}
 
-" Gundo
-" ---------------------------------------------------------
+" Gundo -------------------------------------------------------------------"{{{
 nnoremap <F4> :GundoToggle<CR>
+"}}}
+
+" Align -------------------------------------------------------------------"{{{
+" Puppet: align resource parameters
+vnoremap <leader>= :Align =><CR>
+"}}}
+
+" syntastic ---------------------------------------------------------------"{{{
+" autoclose window if no errors
+let g:syntastic_auto_loc_list=2
+let g:puppet_module_detect=1
+" maintain list of active (check on save) and passive (check on command) filetypes
+" avoids annoying delay when saving files
+let g:syntastic_mode_map = { 'mode': 'active',
+                            \ 'active_filetypes': ['ruby', 'perl', 'php', 'bash',
+                            \                      'vim'],
+                            \ 'passive_filetypes': ['puppet'] }
+
+nnoremap <leader>E :Errors<CR>
+nnoremap <leader>S :SyntasticCheck<CR>
+"}}}
+
+" taglist -----------------------------------------------------------------"{{{
+let tlist_puppet_settings='puppet;c:class;d:define;s:site;n:node'
+nnoremap <silent><leader>l :TlistToggle<CR>
+"}}}
+
+" supertab ----------------------------------------------------------------"{{{
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabLogestHighlight = 1
+"}}}
+
+" fugitive ----------------------------------------------------------------"{{{
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>ga :Gadd<CR>
+nnoremap <leader>gm :Gmove<CR>
+nnoremap <leader>gr :Gremove<CR>
+"}}}"}}}
