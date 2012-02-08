@@ -24,7 +24,10 @@ if exists("*vundle#rc")
     Bundle 'scrooloose/nerdtree'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'vim-scripts/taglist.vim'
+    if filereadable('/usr/bin/ctags')
+        " taglist requires ctags
+        Bundle 'vim-scripts/taglist.vim'
+    endif
     Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
