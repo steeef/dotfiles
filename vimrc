@@ -154,14 +154,6 @@ end
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
-" show when not in insert mode
-if has("autocmd")
-    augroup au_listchars
-        au!
-        au InsertEnter * :set listchars-=tab:»\ ,trail:·
-        au InsertLeave * :set listchars+=tab:»\ ,trail:·
-    augroup END
-endif
 
 "window options
 set splitbelow
@@ -375,7 +367,7 @@ if has("autocmd")
 
         au FileType vim setlocal foldmethod=marker
         au FileType help setlocal textwidth=78
-        au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+        au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
     augroup END
 endif
 " }}}
