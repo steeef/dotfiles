@@ -44,9 +44,10 @@ if exists("*vundle#rc")
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'vcscommand.vim'
     Bundle 'mileszs/ack.vim'
-    Bundle 'altercation/vim-colors-solarized'
     Bundle 'sjl/gundo.vim'
     Bundle 'Align'
+    " colorschemes
+    Bundle 'altercation/vim-colors-solarized'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
@@ -86,7 +87,7 @@ set background=dark
 " little tricky to follow here:
 " If solarized exists, don't force terminal to 256 colors.
 " Otherwise, set to 256 if in console (not gui) and try the
-" next two colorschemes.
+" next few colorschemes.
 try
     colorscheme solarized
 catch /^Vim\%((\a\+)\)\=:E185/
@@ -94,9 +95,13 @@ catch /^Vim\%((\a\+)\)\=:E185/
         if !has("gui_running")
             set t_Co=256
         endif
-        colorscheme molokai
+        colorscheme wombat256
     catch /^Vim\%((\a\+)\)\=:E185/
-        colorscheme desert
+        try
+            colorscheme molokai
+        catch /^Vim\%((\a\+)\)\=:E185/
+            colorscheme desert
+        endtry
     endtry
 endtry
 "}}}
