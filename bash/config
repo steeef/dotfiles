@@ -2,10 +2,14 @@
 PYVER=`/usr/bin/env python -c 'import platform; print platform.python_version()'`
 REQPYVER=2.6.0
 HGPROMPT=false
-if [[ $PYVER > $REQPYVER ]]; then
-    HGPROMPT=true
-elif [[ $PYVER == $REQPYVER ]]; then
-    HGPROMPT=true
+
+hg prompt >/dev/null 2>&1; PROMPTERR=$?
+if [ $PROMPTERR != 0 ]; then
+    if [[ $PYVER > $REQPYVER ]]; then
+        HGPROMPT=true
+    elif [[ $PYVER == $REQPYVER ]]; then
+        HGPROMPT=true
+    fi
 fi
 
 #use extended color pallete if available
