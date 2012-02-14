@@ -83,19 +83,15 @@ endif
 " colorscheme ------------------------------------------------------------ "{{{
 set background=dark
 
+if !has("gui_running")
+    set t_Co=256
+endif
 " try/catch to set colorscheme
-" little tricky to follow here:
-" If solarized exists, don't force terminal to 256 colors.
-" Otherwise, set to 256 if in console (not gui) and try the
-" next few colorschemes.
 try
-    colorscheme solarized
+    colorscheme wombat256
 catch /^Vim\%((\a\+)\)\=:E185/
     try
-        if !has("gui_running")
-            set t_Co=256
-        endif
-        colorscheme wombat256
+        colorscheme solarized
     catch /^Vim\%((\a\+)\)\=:E185/
         try
             colorscheme molokai
