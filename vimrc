@@ -6,7 +6,7 @@ filetype plugin indent on
 " helpful variables ------------------------------------------------------"{{{
 " set path to .vimrc
 if has("win32")
-    let g:vimrc = "~/My\ Documents/My\ Dropbox/dotfiles/vim/vimrc"
+    let g:vimrc = "~/Documents/My\ Dropbox/dotfiles/vim/vimrc"
 else
     let g:vimrc = $MYVIMRC
 endif
