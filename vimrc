@@ -3,6 +3,16 @@ scriptencoding utf-8
 set nocompatible
 filetype plugin indent on
 
+" helpful variables ------------------------------------------------------"{{{
+" set path to .vimrc
+if has("win32")
+    let g:vimrc = ~/My\ Documents/My\ Dropbox/dotfiles/vim/vimrc
+else
+    let g:vimrc = $MYVIMRC
+endif
+
+"}}}
+
 " vundle ----------------------------------------------------------------- "{{{
 " Use custom path in Windows
 if has("win32")
@@ -88,13 +98,13 @@ if !has("gui_running")
 endif
 " try/catch to set colorscheme
 try
-    colorscheme wombat256
+    colorscheme molokai
 catch /^Vim\%((\a\+)\)\=:E185/
     try
         colorscheme solarized
     catch /^Vim\%((\a\+)\)\=:E185/
         try
-            colorscheme molokai
+            colorscheme wombat256
         catch /^Vim\%((\a\+)\)\=:E185/
             colorscheme desert
         endtry
@@ -279,7 +289,7 @@ vmap <C-]> >gv
 vmap <C-[> <gv
 "}}}
 
-" quick edit --------------------------------------------------------------- "{{{
+" quick edit ------------------------------------------------------------- "{{{
 " Split line (sister to [J]oin lines)
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc><right>
@@ -295,9 +305,9 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <CR> o<ESC>
 
 " vimrc: open in new window
-nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<cr>
+nnorema <leader>ev <C-w>v<C-w>j execute "e " . fnameescape(g:vimrc)
 " vimrc: reload
-nnoremap <leader>sv :so $MYVIMRC<cr>
+nnoremap <leader>sv execute "source " . fnameescape(g:vimrc)
 
 " open current file's directory
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -313,7 +323,7 @@ nnoremap <leader>p "*p
 :inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
 "}}}
 
-" Folding ----------------------------------------------------------------- {{{
+" Folding ---------------------------------------------------------------- {{{
 set foldlevelstart=0
 
 " Make the current location sane.
@@ -349,7 +359,7 @@ set foldtext=MyFoldText()
 
 " }}}
 
-" Filetypes ----------------------------------------------------------------- {{{
+" Filetypes -------------------------------------------------------------- {{{
 if has("autocmd")
     augroup ft_todotxt
         au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
@@ -368,11 +378,11 @@ if has("autocmd")
 endif
 " }}}
 
-" ctags --------------------------------------------------------------------- {{{
+" ctags ------------------------------------------------------------------ {{{
 set tags=./tags;   " allows recursing upwards to project roots
 " }}}
 
-" ExecuteInShell() ----------------------------------------------------------"{{{
+" ExecuteInShell() -------------------------------------------------------"{{{
 " Create :Shell command to execute in shell and display
 " results in a split window
 
@@ -395,7 +405,7 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 nnoremap <leader>! :Shell
 "}}}
 
-" NumberToggle() ----------------------------------------------------------- "{{{
+" NumberToggle() --------------------------------------------------------- "{{{
 " Switch between relative and absolute line numbers
 " Only works in Vim >= 7.3
 " ---------------------------------------------------------
@@ -415,7 +425,7 @@ else
 endif
 "}}}
 
-" Plugins ------------------------------------------------------------------"{{{
+" Plugins ----------------------------------------------------------------"{{{
 
 " YankRing -----------------------------------------------------------------"{{{
 let g:yankring_clipboard_monitor = 1
