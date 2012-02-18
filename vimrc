@@ -304,8 +304,8 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " insert blank line below
 nnoremap <CR> o<ESC>
 
-" vimrc: open in ne window
-nnoremap leader>ev <C-w>v<C-w>j execute "e " . fnameescape(g:vimrc)
+" vimrc: open in new window
+nnoremap <leader>ev <C-w>v<C-w>j execute "e " . fnameescape(g:vimrc)
 " vimrc: reload
 nnoremap <leader>sv execute "source " . fnameescape(g:vimrc)
 
