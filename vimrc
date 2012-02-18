@@ -3,16 +3,6 @@ scriptencoding utf-8
 set nocompatible
 filetype plugin indent on
 
-" helpful variables ------------------------------------------------------ "{{{
-" set path to .vimrc
-if has("win32")
-    let g:vimrc = "~\\Documents\\My\ Dropbox\\dotfiles\\vimrc"
-else
-    let g:vimrc = $MYVIMRC
-endif
-
-"}}}
-
 " vundle ----------------------------------------------------------------- "{{{
 " Use custom path in Windows
 if has("win32")
@@ -304,10 +294,14 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " insert blank line below
 nnoremap <CR> o<ESC>
 
-" vimrc: open in new window
-nnoremap <leader>ev <C-w>v<C-w>j execute "e " . fnameescape(g:vimrc)
-" vimrc: reload
-nnoremap <leader>sv execute "source " . fnameescape(g:vimrc)
+" vimrc
+if has("win32")
+    nnoremap <leader>ev <C-w>v<C-w>j:e "~\\Documents\\My\ Dropbox\\dotfiles\\vimrc"<CR>
+    nnoremap <leader>sv :so "~\\Documents\\My\ Dropbox\\dotfiles\\vimrc"<CR>
+else
+    nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
+    nnoremap <leader>sv :so $MYVIMRC<CR>
+endif
 
 " open current file's directory
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
