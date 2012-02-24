@@ -45,6 +45,7 @@ if exists("*vundle#rc")
     Bundle 'vcscommand.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'sjl/gundo.vim'
+    Bundle 'AndrewRadev/linediff.vim'
     Bundle 'Align'
     " colorschemes
     Bundle 'altercation/vim-colors-solarized'
@@ -515,6 +516,11 @@ nnoremap <silent><leader>l :TlistToggle<CR>
 " supertab ----------------------------------------------------------------"{{{
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLogestHighlight = 1
+"}}}
+
+" linediff ----------------------------------------------------------------"{{{
+vnoremap <leader>l :Linediff<cr>
+nnoremap <leader>L :LinediffReset<cr>
 "}}}
 
 " fugitive ----------------------------------------------------------------"{{{
