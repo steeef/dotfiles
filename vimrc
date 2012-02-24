@@ -42,6 +42,7 @@ if exists("*vundle#rc")
     Bundle 'ciaranm/detectindent'
     Bundle 'msanders/snipmate.vim'
     Bundle 'Lokaltog/vim-easymotion'
+    Bundle 'Lokaltog/vim-powerline'
     Bundle 'vcscommand.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'sjl/gundo.vim'
@@ -176,6 +177,25 @@ if has ("autocmd")
     \ endif
 endif
 "}}}
+
+" Toggle whitespace in diffs {{{
+
+set diffopt-=iwhite
+let g:diffwhitespaceon = 1
+function! ToggleDiffWhitespace() "{{{
+    if g:diffwhitespaceon
+        set diffopt-=iwhite
+        let g:diffwhitespaceon = 0
+    else
+        set diffopt+=iwhite
+        let g:diffwhitespaceon = 1
+    endif
+    diffupdate
+endfunc "}}}
+
+nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
+
+" }}}
 
 " backup ----------------------------------------------------------------- "{{{
 let vimbackupdir = $HOME . '/.vimbackup'
