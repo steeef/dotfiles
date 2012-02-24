@@ -176,11 +176,10 @@ if has ("autocmd")
     \   exe "normal! g`\"" |
     \ endif
 endif
-"}}}
 
 " Toggle whitespace in diffs {{{
 
-set diffopt-=iwhite
+set diffopt+=iwhite
 let g:diffwhitespaceon = 1
 function! ToggleDiffWhitespace() "{{{
     if g:diffwhitespaceon
@@ -196,6 +195,7 @@ endfunc "}}}
 nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
 
 " }}}
+"}}}
 
 " backup ----------------------------------------------------------------- "{{{
 let vimbackupdir = $HOME . '/.vimbackup'
