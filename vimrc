@@ -316,8 +316,8 @@ nnoremap <CR> o<ESC>
 
 " vimrc
 if has("win32")
-    nnoremap <leader>ev <C-w>v<C-w>j:e "~\\Documents\\My\ Dropbox\\dotfiles\\vimrc"<CR>
-    nnoremap <leader>sv :so "~\\Documents\\My\ Dropbox\\dotfiles\\vimrc"<CR>
+    nnoremap <leader>ev <C-w>v<C-w>j:e ~/Documents/My\ Dropbox/dotfiles/vimrc<CR>
+    nnoremap <leader>sv :so ~/Documents/My\ Dropbox/dotfiles/vimrc<CR>
 else
     nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
     nnoremap <leader>sv :so $MYVIMRC<CR>
