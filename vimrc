@@ -431,7 +431,7 @@ function! NumberToggle()
     endif
 endfunction
 
-if v:version >= 703
+if exists("&relativenumber")
     set relativenumber
     nnoremap <leader>n :call NumberToggle()<CR>
 else
