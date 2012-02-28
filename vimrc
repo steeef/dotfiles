@@ -144,10 +144,9 @@ set showmatch
 runtime macros/matchit.vim
 map <tab> %
 
-" 7.3-specific setting
-if v:version >= 703
+if exists("+colorcolumn")
     set colorcolumn=85
-end
+endif
 
 "show formatting characters
 set list
