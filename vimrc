@@ -58,6 +58,7 @@ if exists("*vundle#rc")
     Bundle 'Align'
     " colorschemes
     Bundle 'altercation/vim-colors-solarized'
+    Bundle 'sickill/vim-monokai'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
