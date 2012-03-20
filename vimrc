@@ -3,16 +3,6 @@ scriptencoding utf-8
 set nocompatible
 filetype plugin indent on
 
-" helpful variables ------------------------------------------------------"{{{
-" set path to .vimrc
-if has("win32")
-    let g:vimrc = ~/My\ Documents/My\ Dropbox/dotfiles/vim/vimrc
-else
-    let g:vimrc = $MYVIMRC
-endif
-
-"}}}
-
 " vundle ----------------------------------------------------------------- "{{{
 " Use custom path in Windows
 if has("win32")
@@ -52,9 +42,11 @@ if exists("*vundle#rc")
     Bundle 'ciaranm/detectindent'
     Bundle 'msanders/snipmate.vim'
     Bundle 'Lokaltog/vim-easymotion'
+    Bundle 'Lokaltog/vim-powerline'
     Bundle 'vcscommand.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'sjl/gundo.vim'
+    Bundle 'AndrewRadev/linediff.vim'
     Bundle 'Align'
     " colorschemes
     Bundle 'altercation/vim-colors-solarized'
@@ -153,10 +145,9 @@ set showmatch
 runtime macros/matchit.vim
 map <tab> %
 
-" 7.3-specific setting
-if v:version >= 703
+if exists("+colorcolumn")
     set colorcolumn=85
-end
+endif
 
 "show formatting characters
 set list
@@ -185,6 +176,25 @@ if has ("autocmd")
     \   exe "normal! g`\"" |
     \ endif
 endif
+
+" Toggle whitespace in diffs {{{
+
+set diffopt+=iwhite
+let g:diffwhitespaceon = 1
+function! ToggleDiffWhitespace() "{{{
+    if g:diffwhitespaceon
+        set diffopt-=iwhite
+        let g:diffwhitespaceon = 0
+    else
+        set diffopt+=iwhite
+        let g:diffwhitespaceon = 1
+    endif
+    diffupdate
+endfunc "}}}
+
+nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
+
+" }}}
 "}}}
 
 " backup ----------------------------------------------------------------- "{{{
@@ -305,10 +315,14 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " insert blank line below
 nnoremap <CR> o<ESC>
 
-" vimrc: open in new window
-nnorema <leader>ev <C-w>v<C-w>j execute "e " . fnameescape(g:vimrc)
-" vimrc: reload
-nnoremap <leader>sv execute "source " . fnameescape(g:vimrc)
+" vimrc
+if has("win32")
+    nnoremap <leader>ev <C-w>v<C-w>j:e ~/Documents/My\ Dropbox/dotfiles/vimrc<CR>
+    nnoremap <leader>sv :so ~/Documents/My\ Dropbox/dotfiles/vimrc<CR>
+else
+    nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
+    nnoremap <leader>sv :so $MYVIMRC<CR>
+endif
 
 " open current file's directory
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -418,7 +432,7 @@ function! NumberToggle()
     endif
 endfunction
 
-if v:version >= 703
+if exists("&relativenumber")
     set relativenumber
     nnoremap <leader>n :call NumberToggle()<CR>
 else
@@ -522,6 +536,11 @@ nnoremap <silent><leader>l :TlistToggle<CR>
 " supertab ----------------------------------------------------------------"{{{
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLogestHighlight = 1
+"}}}
+
+" linediff ----------------------------------------------------------------"{{{
+vnoremap <leader>l :Linediff<cr>
+nnoremap <leader>L :LinediffReset<cr>
 "}}}
 
 " fugitive ----------------------------------------------------------------"{{{
