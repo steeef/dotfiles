@@ -4,6 +4,12 @@ DOWNLOADDIR=$HOME/code/vim
 HG=/usr/bin/hg
 
 /bin/mkdir -p $DOWNLOADDIR
-$HG clone $VIMREPO $DOWNLOADDIR || cd $DOWNLOADDIR && $HG pull -u
-cd $DOWNLOADDIR && ./configure --with-features=huge --prefix=$HOME && /usr/bin/make clean && /usr/bin/make && /usr/bin/make install
+HGCLONED=$($HG -R $DOWNLOADDIR root);$HGCLONEDERR=$?
+if [ $HGCLONEDERR == 0 ]; then
+    cd $DOWNLOADDIR && $HG pull -u
+else
+    $HG clone $VIMREPO $DOWNLOADDIR
+    cd $DOWNLOADDIR
+fi
+./configure --with-features=huge --prefix=$HOME && /usr/bin/make clean && /usr/bin/make && /usr/bin/make install
 
