@@ -51,6 +51,10 @@ if exists("*vundle#rc")
     " colorschemes
     Bundle 'altercation/vim-colors-solarized'
     Bundle 'sickill/vim-monokai'
+    Bundle 'jnurmine/Zenburn'
+    Bundle 'nanotech/jellybeans.vim'
+    Bundle 'sjl/badwolf'
+    Bundle 'xoria256.vim'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
@@ -91,10 +95,10 @@ if !has("gui_running")
 endif
 " try/catch to set colorscheme
 try
-    colorscheme molokai
+    colorscheme badwolf
 catch /^Vim\%((\a\+)\)\=:E185/
     try
-        colorscheme solarized
+        colorscheme molokai
     catch /^Vim\%((\a\+)\)\=:E185/
         try
             colorscheme wombat256
