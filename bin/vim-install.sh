@@ -4,7 +4,7 @@ DOWNLOADDIR=$HOME/code/vim
 HG=/usr/bin/hg
 
 /bin/mkdir -p $DOWNLOADDIR
-HGCLONED=$($HG -R $DOWNLOADDIR root);$HGCLONEDERR=$?
+HGCLONED=$($HG -R $DOWNLOADDIR root);HGCLONEDERR=$?
 if [ $HGCLONEDERR == 0 ]; then
     cd $DOWNLOADDIR && $HG pull -u
 else
