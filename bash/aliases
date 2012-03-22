@@ -1,18 +1,19 @@
 # cd
 alias ..='cd ..'
-alias h='cd $HOME'
 alias d='cd $HOME/.dotfiles'
-alias c='cd $HOME/code'
 
 # sudo
 alias si='sudo -i'
 
 # ls
-alias ls="ls -F"
+alias ls="ls -F --color"
 alias l="ls -lAh"
 alias ll="ls -l"
 alias lsl="ls -l"
 alias la='ls -A'
+alias lla='ls -lA'
+
+alias mkdir='mkdir -p'
 
 # prompt
 alias rm='rm -i'
@@ -45,6 +46,11 @@ alias hgu='hg update -C'
 alias hgm='hg merge'
 alias hgb='hg branch'
 alias hgf='hg fetch'
+
+# directories
+# uses directory_completion
+make_dir_complete c ~/code
+make_dir_complete h ~
 
 # common
 alias space='du -ms * .[^\.]* | sort -nr | less -i'

@@ -1,5 +1,5 @@
-source ~/.bash/aliases
 source ~/.bash/completions
+source ~/.bash/aliases
 source ~/.bash/paths
 source ~/.bash/config
 if [ -f ~/.bashrc_local ]; then
