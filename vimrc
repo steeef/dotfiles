@@ -55,6 +55,7 @@ if exists("*vundle#rc")
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'sjl/badwolf'
     Bundle 'xoria256.vim'
+    Bundle 'Lucius'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
