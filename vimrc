@@ -24,10 +24,10 @@ if exists("*vundle#rc")
     Bundle 'scrooloose/nerdtree'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
-    if filereadable('/usr/bin/ctags')
-        " taglist requires ctags
-        Bundle 'vim-scripts/taglist.vim'
-    endif
+    "if filereadable('/usr/bin/ctags')
+        "" taglist requires ctags
+        "Bundle 'vim-scripts/taglist.vim'
+    "endif
     Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
@@ -40,22 +40,20 @@ if exists("*vundle#rc")
     Bundle 'kien/ctrlp.vim'
     Bundle 'vim-scripts/IndentConsistencyCop'
     Bundle 'ciaranm/detectindent'
-    Bundle 'msanders/snipmate.vim'
+    "Bundle 'msanders/snipmate.vim'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
-    Bundle 'vcscommand.vim'
-    Bundle 'mileszs/ack.vim'
+    "Bundle 'vcscommand.vim'
+    "Bundle 'mileszs/ack.vim'
     Bundle 'sjl/gundo.vim'
     Bundle 'AndrewRadev/linediff.vim'
     Bundle 'Align'
     " colorschemes
-    Bundle 'altercation/vim-colors-solarized'
+    "Bundle 'altercation/vim-colors-solarized'
     Bundle 'sickill/vim-monokai'
-    Bundle 'jnurmine/Zenburn'
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'sjl/badwolf'
     Bundle 'xoria256.vim'
-    Bundle 'Lucius'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
