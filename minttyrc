@@ -1,9 +1,10 @@
 BackgroundColour=18,18,18
-Font=DejaVu Sans Mono
+Font=DejaVu Sans Mono for Powerline
 FontHeight=10
 Locale=en_US
 Charset=UTF-8
 Columns=150
 Rows=50
 Term=xterm-256color
-RightClickAction=1
+RightClickAction=paste
+BoldAsFont=no
