@@ -543,7 +543,7 @@ nnoremap <leader>L :LinediffReset<cr>
 "}}}
 
 " Powerline ---------------------------------------------------------------"{{{
-let Powerline_symbols = 'compatible'
+let Powerline_symbols = 'fancy'
 "}}}
 
 " fugitive ----------------------------------------------------------------"{{{
