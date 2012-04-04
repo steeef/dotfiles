@@ -72,9 +72,9 @@ syntax enable
 if has("gui_running")
     " Set font and window size based on operating system
     if has("unix")
-        set guifont=DejaVu\ Sans\ Mono\ 10
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
     else
-        set guifont=DejaVu\ Sans\ Mono:h10
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
         set lines=100 columns=200
     endif
 
@@ -540,6 +540,10 @@ let g:SuperTabLogestHighlight = 1
 " linediff ----------------------------------------------------------------"{{{
 vnoremap <leader>l :Linediff<cr>
 nnoremap <leader>L :LinediffReset<cr>
+"}}}
+
+" Powerline ---------------------------------------------------------------"{{{
+let Powerline_symbols = 'compatible'
 "}}}
 
 " fugitive ----------------------------------------------------------------"{{{
