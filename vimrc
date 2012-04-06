@@ -24,14 +24,9 @@ if exists("*vundle#rc")
     Bundle 'scrooloose/nerdtree'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
-    "if filereadable('/usr/bin/ctags')
-        "" taglist requires ctags
-        "Bundle 'vim-scripts/taglist.vim'
-    "endif
     Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
-    Bundle 'tpope/vim-fugitive'
     if v:version >= 702
         " L9 Requires at least version 7.2
         Bundle 'vim-scripts/L9'
@@ -40,16 +35,12 @@ if exists("*vundle#rc")
     Bundle 'kien/ctrlp.vim'
     Bundle 'vim-scripts/IndentConsistencyCop'
     Bundle 'ciaranm/detectindent'
-    "Bundle 'msanders/snipmate.vim'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
-    "Bundle 'vcscommand.vim'
-    "Bundle 'mileszs/ack.vim'
     Bundle 'sjl/gundo.vim'
     Bundle 'AndrewRadev/linediff.vim'
     Bundle 'Align'
     " colorschemes
-    "Bundle 'altercation/vim-colors-solarized'
     Bundle 'sickill/vim-monokai'
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'sjl/badwolf'
@@ -392,10 +383,6 @@ if has("autocmd")
 endif
 " }}}
 
-" ctags ------------------------------------------------------------------ {{{
-set tags=./tags;   " allows recursing upwards to project roots
-" }}}
-
 " ExecuteInShell() -------------------------------------------------------"{{{
 " Create :Shell command to execute in shell and display
 " results in a split window
@@ -452,11 +439,6 @@ vmap <leader>m ,c<space>gv
 map <leader>m ,c<space>
 "}}}
 
-" vcscommand ---------------------------------------------------------------"{{{
-nnoremap <leader>d :VCSVimDiff<cr>
-nnoremap <leader>D :diffoff<cr>
-"}}}
-
 " CTRL-P -------------------------------------------------------------------"{{{
 let g:ctrlp_map = '<leader>,'
 let g:ctrlp_working_path_mode = 0
@@ -464,10 +446,6 @@ let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_jump_to_buffer = 2
 let g:ctrlp_max_height = 15
 let g:ctrlp_split_window = 0
-"}}}
-
-" Ack ----------------------------------------------------------------------"{{{
-noremap <leader>a :Ack!
 "}}}
 
 " NERDTree -----------------------------------------------------------------"{{{
@@ -545,12 +523,3 @@ nnoremap <leader>L :LinediffReset<cr>
 " Powerline ---------------------------------------------------------------"{{{
 let Powerline_symbols = 'fancy'
 "}}}
-
-" fugitive ----------------------------------------------------------------"{{{
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>ga :Gadd<CR>
-nnoremap <leader>gm :Gmove<CR>
-nnoremap <leader>gr :Gremove<CR>
-"}}}"}}}
