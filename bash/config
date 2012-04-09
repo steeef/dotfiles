@@ -1,5 +1,5 @@
 # grab python version as prompt.py won't work on < 2.6
-PYVER=`/usr/bin/env python -c 'import platform; print platform.python_version()'`
+PYVER=`/usr/bin/env python -c 'import platform; print(platform.python_version())'`
 REQPYVER=2.6.0
 HGPROMPT=false
 

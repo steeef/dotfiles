@@ -27,6 +27,7 @@ if exists("*vundle#rc")
     Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
+    Bundle 'tpope/vim-fugitive'
     if v:version >= 702
         " L9 Requires at least version 7.2
         Bundle 'vim-scripts/L9'
