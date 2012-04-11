@@ -34,6 +34,7 @@ alias off='sudo shutdown -h now'
 # todo.txt
 alias t='$HOME/.bin/todo.sh'
 alias ts='$HOME/.bin/todo.sh addto someday.txt'
+alias tv='$HOME/.bin/todo.sh view context'
 
 # git
 alias gsv='git svn dcommit'
