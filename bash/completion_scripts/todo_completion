@@ -84,7 +84,7 @@ complete -F _todo todo.sh
 
 # If you define an alias (e.g. "t") to todo.sh, you need to explicitly enable
 # completion for it, too:
-#complete -F _todo t
+complete -F _todo t
 
 # If you have renamed the todo.sh executable, or if it is not accessible through
 # PATH, you need to add and use a wrapper completion function, like this:
