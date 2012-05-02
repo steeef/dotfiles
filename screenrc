@@ -1,0 +1,8 @@
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
+autodetach on
+startup_message off
+defscrollback 100000
+vbell off
+term xterm-256color
