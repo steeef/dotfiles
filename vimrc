@@ -86,10 +86,10 @@ if !has("gui_running")
 endif
 " try/catch to set colorscheme
 try
-    colorscheme wombat256mod
+    colorscheme molokai
 catch /^Vim\%((\a\+)\)\=:E185/
     try
-        colorscheme molokai
+        colorscheme wombat256mod
     catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme desert
     endtry
