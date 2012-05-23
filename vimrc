@@ -6,7 +6,7 @@ filetype plugin indent on
 " vundle ----------------------------------------------------------------- "{{{
 " Use custom path in Windows
 if has("win32")
-    set rtp+=~/My\ Documents/My\ Dropbox/dotfiles/vim/bundle/vundle/
+    set rtp+=~/Dropbox/dotfiles/vim/bundle/vundle/
 else
     set rtp+=~/.vim/bundle/vundle/
 endif
@@ -308,8 +308,8 @@ nnoremap <CR> o<ESC>
 
 " vimrc
 if has("win32")
-    nnoremap <leader>ev <C-w>v<C-w>j:e ~/Documents/My\ Dropbox/dotfiles/vimrc<CR>
-    nnoremap <leader>sv :so ~/Documents/My\ Dropbox/dotfiles/vimrc<CR>
+    nnoremap <leader>ev <C-w>v<C-w>j:e ~/Dropbox/dotfiles/vimrc<CR>
+    nnoremap <leader>sv :so ~/Dropbox/dotfiles/vimrc<CR>
 else
     nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
     nnoremap <leader>sv :so $MYVIMRC<CR>
