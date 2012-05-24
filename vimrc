@@ -8,7 +8,11 @@ filetype plugin indent on
 if has("win32")
     set rtp+=~/Dropbox/dotfiles/vim/bundle/vundle/
 else
-    set rtp+=~/.vim/bundle/vundle/
+    if !empty($SUDO_USER)
+        set rtp+=/home/${SUDO_USER}/.vim/bundle/vundle/
+    else
+        set rtp+=~/.vim/bundle/vundle/
+    endif
 endif
 runtime autoload/vundle.vim " apparently without this the exists() check fails
 if exists("*vundle#rc")
