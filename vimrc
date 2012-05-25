@@ -6,18 +6,20 @@ filetype plugin indent on
 " vundle ----------------------------------------------------------------- "{{{
 " Use custom path in Windows
 if has("win32")
-    set rtp+=~/Dropbox/dotfiles/vim/bundle/vundle/
+    let vundlepath = "~/Dropbox/dotfiles/vim/bundle"
 else
+    " Use sudo user's vundle path
     if !empty($SUDO_USER)
-        set rtp+=/home/${SUDO_USER}/.vim/bundle/vundle/
+        let vundlepath = "/home/$SUDO_USER/.vim/bundle"
     else
-        set rtp+=~/.vim/bundle/vundle/
+        let vundlepath = "~/.vim/bundle"
     endif
 endif
+execute "set rtp+=".vundlepath."/vundle/"
 runtime autoload/vundle.vim " apparently without this the exists() check fails
 if exists("*vundle#rc")
     filetype off
-    call vundle#rc()
+    call vundle#rc(vundlepath)
 
     " let Vundle manage Vundle
     " required!
