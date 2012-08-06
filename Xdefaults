@@ -2,7 +2,7 @@ Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=13
+URxvt*font: xft:DejaVu Sans Mono for Powerline:pixelsize=13
 URxvt*foreground: lightgrey
 URxvt*background: #121212
 URxvt*internalBorder: 0
@@ -17,7 +17,7 @@ XTerm*termName: xterm-256color
 XTerm*background: #121212
 XTerm*foreground: lightgrey
 XTerm*geometry: 150x60
-XTerm*faceName: xft:DejaVu Sans Mono:pixelsize=13
+XTerm*faceName: xft:DejaVu Sans Mono for Powerline:pixelsize=13
 XTerm*utf8: 2
 XTerm*saveLines: 5000
 XTerm*toolBar: false
