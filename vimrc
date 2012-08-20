@@ -323,6 +323,9 @@ endif
 " indentation in vmode
 vmap <C-]> >gv
 vmap <C-[> <gv
+
+" Open a Quickfix window for the last search.
+nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 "}}}
 
 " quick edit ------------------------------------------------------------- "{{{
