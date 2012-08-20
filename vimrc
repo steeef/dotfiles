@@ -152,7 +152,9 @@ set list
 set listchars=tab:»\ ,trail:·
 " use vertical line (CTRL-K+VV) for verticle splits
 " see :help digraphs
-set fillchars=vert:┃
+if !has("gui_running")
+    set fillchars=vert:┃
+endif
 
 "window options
 set splitbelow
