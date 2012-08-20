@@ -79,6 +79,7 @@ if has("gui_running")
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
+    set guioptions+=c  "use text-based dialogs instead of popups
 else
     " This is console Vim.
 endif
@@ -149,6 +150,9 @@ endif
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
+" use vertical line (CTRL-K+VV) for verticle splits
+" see :help digraphs
+set fillchars=vert:┃
 
 "window options
 set splitbelow
@@ -193,6 +197,30 @@ nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
 
 " }}}
 "}}}
+
+" autocommands ----------------------------------------------------------- "{{{
+if has("autocmd")
+    " turn off PASTE mode when leaving insert mode
+    au InsertLeave * set nopaste
+
+    " todo.txt filetype
+    augroup ft_todotxt
+        au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
+    augroup END
+
+    " Set ruby-specific formatting
+    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
+
+    " vim helpiles
+    augroup ft_vim
+        au!
+
+        au FileType vim setlocal foldmethod=marker
+        au FileType help setlocal textwidth=78
+        au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
+    augroup END
+endif
+" }}}
 
 " backup ----------------------------------------------------------------- "{{{
 let vimbackupdir = $HOME . '/.vimbackup'
@@ -371,25 +399,6 @@ set foldtext=MyFoldText()
 
 " }}}
 
-" Filetypes -------------------------------------------------------------- {{{
-if has("autocmd")
-    augroup ft_todotxt
-        au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
-    augroup END
-
-    "Set ruby-specific formatting
-    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
-
-    augroup ft_vim
-        au!
-
-        au FileType vim setlocal foldmethod=marker
-        au FileType help setlocal textwidth=78
-        au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
-    augroup END
-endif
-" }}}
-
 " ExecuteInShell() -------------------------------------------------------"{{{
 " Create :Shell command to execute in shell and display
 " results in a split window
@@ -530,3 +539,4 @@ nnoremap <leader>L :LinediffReset<cr>
 " Powerline ---------------------------------------------------------------"{{{
 let Powerline_symbols = 'fancy'
 "}}}
+
