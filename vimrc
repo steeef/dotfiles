@@ -150,7 +150,9 @@ endif
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
-" use vertical line (CTRL-K+VV) for verticle splits
+"set underscore as a word boundary
+set iskeyword-=_
+" use vertical line (CTRL-K+VV) for vertical splits
 " see :help digraphs
 if !has("gui_running")
     set fillchars=vert:┃
