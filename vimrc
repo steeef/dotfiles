@@ -47,6 +47,7 @@ if exists("*vundle#rc")
     Bundle 'sjl/gundo.vim'
     Bundle 'AndrewRadev/linediff.vim'
     Bundle 'Align'
+    Bundle 'mileszs/ack.vim'
     " colorschemes
     Bundle 'sickill/vim-monokai'
     Bundle 'nanotech/jellybeans.vim'
