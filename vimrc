@@ -547,3 +547,7 @@ nnoremap <leader>L :LinediffReset<cr>
 let Powerline_symbols = 'fancy'
 "}}}
 
+" Ack ---------------------------------------------------------------------"{{{
+nnoremap <leader>a :Ack!<space>
+"}}}
+
