@@ -11,3 +11,4 @@
 
 # Puppet
 --type-set=puppet=.pp
+--type-set=nagios=.cfg

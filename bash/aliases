@@ -52,6 +52,9 @@ alias hgf='hg fetch'
 make_dir_complete c ~/code
 make_dir_complete h ~
 
+# network
+alias external_ip="curl -s http://www.monip.org/ | grep 'IP : ' | sed -e 's/^.*IP : //' | cut -d '<' -f 1"
+
 # common
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias vi='vim'
