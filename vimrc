@@ -73,7 +73,7 @@ if has("gui_running")
     if has("unix")
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
     else
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h8
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h9
         set lines=100 columns=200
     endif
 
