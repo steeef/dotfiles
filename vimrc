@@ -71,9 +71,9 @@ syntax enable
 if has("gui_running")
     " Set font and window size based on operating system
     if has("unix")
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
     else
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h8
         set lines=100 columns=200
     endif
 
