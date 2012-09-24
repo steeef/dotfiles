@@ -71,9 +71,9 @@ syntax enable
 if has("gui_running")
     " Set font and window size based on operating system
     if has("unix")
-        set guifont=ProggyCleanTT\ for\ Powerline\ 12
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
     else
-        set guifont=ProggyCleanTT\ for\ Powerline:h12
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
         set lines=100 columns=200
     endif
 
@@ -155,9 +155,9 @@ set listchars=tab:»\ ,trail:·
 set iskeyword-=_
 " use vertical line (CTRL-K+VV) for vertical splits
 " see :help digraphs
-"if !has("gui_running")
-    "set fillchars=vert:┃
-"endif
+if !has("gui_running")
+    set fillchars=vert:┃
+endif
 
 "window options
 set splitbelow
