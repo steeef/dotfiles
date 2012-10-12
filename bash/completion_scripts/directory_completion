@@ -1,7 +1,7 @@
 # source: http://blog.caioromao.com/2010/10/10/Custom-directory-completion
 make_dir_complete() {
     local aliasname=$1
-    local dirname=$(readlink -f $2)
+    local dirname=$(~/.bash/readlink $2)
     local prgname="__s_${aliasname}__"
     FUNC="function $prgname() {
         local cur len wrkdir;

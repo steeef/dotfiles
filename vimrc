@@ -70,9 +70,17 @@ syntax enable
 " appearance/font -------------------------------------------------------- "{{{
 if has("gui_running")
     " Set font and window size based on operating system
-    if has("unix")
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
+    if has ("unix")
+        if has ("gui_macvim")
+            set guifont=Monaco:h10
+            set noantialias
+            set lines=100 columns=200
+        else
+            " Must be Linux
+            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
+        endif
     else
+        " Must be Windows
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h9
         set lines=100 columns=200
     endif
