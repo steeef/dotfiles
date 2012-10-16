@@ -1,0 +1,16 @@
+#!/bin/sh
+
+TODOBIN=~/.bin/todo.sh
+
+#stty erase ^H
+clear
+while true; do
+    read -p 'todo: '
+    clear
+    $TODOBIN $REPLY
+
+    if [ $? == 0 ]; then
+        clear
+        $TODOBIN view context
+    fi
+done
