@@ -4,6 +4,7 @@ TODOBIN=~/.bin/todo.sh
 
 #stty erase ^H
 clear
+$TODOBIN view context
 while true; do
     read -p 'todo: '
     clear
