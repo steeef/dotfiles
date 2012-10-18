@@ -74,7 +74,6 @@ if has("gui_running")
         if has ("gui_macvim")
             set guifont=Monaco:h10
             set noantialias
-            set lines=100 columns=200
         else
             " Must be Linux
             set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
@@ -82,7 +81,6 @@ if has("gui_running")
     else
         " Must be Windows
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h9
-        set lines=100 columns=200
     endif
 
     set guioptions-=m  "remove menu bar
