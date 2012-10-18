@@ -284,6 +284,9 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" Make Y behave like other capitals (e.g., D)
+nmap Y y$
+
 "Unmap help in favor of Escape
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
