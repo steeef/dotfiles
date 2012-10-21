@@ -27,13 +27,11 @@ if exists("*vundle#rc")
     " Bundles to manage with vundle
     " ---------------------------------------------------------"{{{
     Bundle 'scrooloose/nerdcommenter'
-    Bundle 'scrooloose/nerdtree'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
     Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
-    Bundle 'tpope/vim-fugitive'
     if v:version >= 702
         " L9 Requires at least version 7.2
         Bundle 'vim-scripts/L9'
@@ -45,18 +43,14 @@ if exists("*vundle#rc")
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'sjl/gundo.vim'
-    Bundle 'AndrewRadev/linediff.vim'
     Bundle 'Align'
     Bundle 'mileszs/ack.vim'
     " colorschemes
-    Bundle 'sickill/vim-monokai'
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'sjl/badwolf'
-    Bundle 'xoria256.vim'
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
-    Bundle 'gabemc/powershell-vim'
     Bundle 'davidoc/todo.txt-vim'
     "}}}
 
@@ -538,19 +532,9 @@ nnoremap <leader>E :Errors<CR>
 nnoremap <leader>S :SyntasticCheck<CR>
 "}}}
 
-" taglist -----------------------------------------------------------------"{{{
-let tlist_puppet_settings='puppet;c:class;d:define;s:site;n:node'
-nnoremap <silent><leader>l :TlistToggle<CR>
-"}}}
-
 " supertab ----------------------------------------------------------------"{{{
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLogestHighlight = 1
-"}}}
-
-" linediff ----------------------------------------------------------------"{{{
-vnoremap <leader>l :Linediff<cr>
-nnoremap <leader>L :LinediffReset<cr>
 "}}}
 
 " Powerline ---------------------------------------------------------------"{{{
