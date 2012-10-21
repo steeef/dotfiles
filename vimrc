@@ -43,8 +43,8 @@ if exists("*vundle#rc")
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'sjl/gundo.vim'
-    Bundle 'Align'
     Bundle 'mileszs/ack.vim'
+    Bundle 'godlygeek/tabular'
     " colorschemes
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'sjl/badwolf'
@@ -453,6 +453,56 @@ else
 endif
 "}}}
 
+" Stab() ---------------------------------------------------------------- "{{{
+" Switch between tabs and spaces
+" Prompts for values or shows current values
+" ---------------------------------------------------------
+
+command! -nargs=* Stab call Stab()
+function! Stab()
+  let l:tabstop = 1 * input('set shiftwidth=')
+
+  if l:tabstop > 0
+    " do we want expandtab as well?
+    let l:expandtab = confirm('set expandtab?', "&Yes\n&No\n&Cancel")
+    if l:expandtab == 3
+      " abort?
+      return
+    endif
+
+    let &l:sts = l:tabstop
+    let &l:ts = l:tabstop
+    let &l:sw = l:tabstop
+
+    if l:expandtab == 1
+      setlocal expandtab
+    else
+      setlocal noexpandtab
+    endif
+  endif
+
+  " show the selected options
+  try
+    echohl ModeMsg
+    echon 'set tabstop='
+    echohl Question
+    echon &l:ts
+    echohl ModeMsg
+    echon ' shiftwidth='
+    echohl Question
+    echon &l:sw
+    echohl ModeMsg
+    echon ' sts='
+    echohl Question
+    echon &l:sts . ' ' . (&l:et ? '  ' : 'no')
+    echohl ModeMsg
+    echon 'expandtab'
+  finally
+    echohl None
+  endtry
+endfunction
+"}}}
+
 " Plugins ----------------------------------------------------------------"{{{
 
 " YankRing -----------------------------------------------------------------"{{{
@@ -512,9 +562,9 @@ onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 nnoremap <F4> :GundoToggle<CR>
 "}}}
 
-" Align -------------------------------------------------------------------"{{{
+" Tabular -----------------------------------------------------------------"{{{
 " Puppet: align resource parameters
-vnoremap <leader>= :Align =><CR>
+vnoremap <leader>ap :Tabularize /=><CR>
 "}}}
 
 " syntastic ---------------------------------------------------------------"{{{
@@ -542,6 +592,6 @@ let Powerline_symbols = 'fancy'
 "}}}
 
 " Ack ---------------------------------------------------------------------"{{{
-nnoremap <leader>a :Ack!<space>
+nnoremap <leader>A :Ack!<space>
 "}}}
 
