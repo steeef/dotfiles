@@ -9,6 +9,7 @@ source $ZSH/oh-my-zsh.sh
 alias j='z'
 alias d='cd $HOME/.dotfiles'
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
+alias lr='ls -ltr'
 
 # todo.txt
 alias t='~/.bin/todo.sh'
