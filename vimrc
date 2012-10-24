@@ -32,6 +32,7 @@ if exists("*vundle#rc")
     Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
+    Bundle 'tpope/vim-endwise'
     if v:version >= 702
         " L9 Requires at least version 7.2
         Bundle 'vim-scripts/L9'
@@ -141,6 +142,7 @@ set shiftround
 set incsearch
 set hlsearch
 set showmatch
+" matching
 runtime macros/matchit.vim
 map <tab> %
 
@@ -171,9 +173,6 @@ if !has("win32")
     set exrc    " enable per-directory .vimrc files
     set secure  " disable unsafe commands in local .vimrc files
 endif
-
-" Abbreviations
-iabbrev myName Stephen Price <sprice@monsooncommerce.com>
 
 " jump to last known position upon opening
 if has ("autocmd")
@@ -229,17 +228,23 @@ endif
 
 " backup ----------------------------------------------------------------- "{{{
 let vimbackupdir = $HOME . '/.vimbackup'
+let vimundodir = $HOME . '/.vimundo'
 if exists("*mkdir")
     if !isdirectory(vimbackupdir)
         call mkdir(vimbackupdir)
     endif
+    if !isdirectory(vimundodir)
+        call mkdir(vimundodir)
+    endif
 endif
 set backup
-let &backupdir=vimbackupdir
-" set history options
 set noswapfile
+set undofile
+let &backupdir=vimbackupdir
+let &undodir=vimundodir
 set history=1000
 set undolevels=1000
+set undoreload=10000
 " Make Vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
 "}}}
@@ -274,9 +279,13 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+
 "up and down work with wrapped lines
 nnoremap j gj
 nnoremap k gk
+
+" toggle number
+nnoremap <leader>N :setlocal number!<cr>
 
 " Make Y behave like other capitals (e.g., D)
 nmap Y y$
@@ -293,6 +302,15 @@ set pastetoggle=<F5>
 
 " use jj as escape in interactive mode
 inoremap jj <Esc>
+
+" map easier-to-use keys
+noremap H ^
+noremap L $
+vnoremap L g_
+
+" gi already moves to "last place you exited insert mode", so we'll map gI to
+" something similar: move to last change
+nnoremap gI `.
 
 " Use Enter to exit normal,visual,command mode
 " Use CTRL-O to create new line in insert mode
@@ -321,19 +339,18 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" make indentation easier
-nmap <C-]> >>
-" if running vim in a terminal, <C-[> is the escape character
-" Mapping it will insert extra characters
-if has("gui_running")
-    nmap <C-[> <<
-endif
 " indentation in vmode
-vmap <C-]> >gv
-vmap <C-[> <gv
+vmap > >gv
+vmap < <gv
 
 " Open a Quickfix window for the last search.
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+"}}}
+
+" Abbreviations ---------------------------------------------------------- "{{{
+
+iabbrev myName Stephen Price <sprice@monsooncommerce.com>
+
 "}}}
 
 " quick edit ------------------------------------------------------------- "{{{
