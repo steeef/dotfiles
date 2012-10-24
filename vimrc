@@ -46,6 +46,11 @@ if exists("*vundle#rc")
     Bundle 'sjl/gundo.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
+    " snipmate fork and dependencies
+    Bundle "MarcWeber/vim-addon-mw-utils"
+    Bundle "tomtom/tlib_vim"
+    Bundle "honza/snipmate-snippets"
+    Bundle "garbas/vim-snipmate"
     " colorschemes
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'sjl/badwolf'
@@ -69,6 +74,9 @@ if has("gui_running")
         if has ("gui_macvim")
             set guifont=Monaco:h10
             set noantialias
+
+            " Full screen means FULL screen
+            set fuoptions=maxvert,maxhorz
         else
             " Must be Linux
             set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
@@ -81,9 +89,20 @@ if has("gui_running")
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=R  "remove right-hand scroll bar for vert split
+    set guioptions-=l  "remove left-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar for vert split
     set guioptions+=c  "use text-based dialogs instead of popups
+
+    " Different cursors for different modes.
+    set guicursor=n-c:block-Cursor-blinkon0
+    set guicursor+=v:block-vCursor-blinkon0
+    set guicursor+=i-ci:ver20-iCursor
 else
     " This is console Vim.
+
+    " mouse support
+    set mouse=a
 endif
 "}}}
 
