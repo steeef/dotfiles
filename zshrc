@@ -46,7 +46,7 @@ alias hgf='hg fetch'
 
 # environment variables ------------------------------------
 export EDITOR='vim'
-export PATH="${HOME}/bin:${HOME}/.bin:${PATH}"
+export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export GREP_OPTIONS='--color=auto'
 export HISTSIZE=1000
 export HISTFILESIZE=1000
