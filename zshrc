@@ -59,5 +59,9 @@ function precmd () {
     _z --add "$(pwd -P)"
 }
 
+# VI Mode -------------------------------------------------------------
+bindkey -v
+bindkey "^R" history-incremental-search-backward
+
 # Local Settings -------------------------------------------------------------
 if [[ -s $HOME/.zshrc_local ]] ; then source $HOME/.zshrc_local ; fi
