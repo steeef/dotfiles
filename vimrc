@@ -256,7 +256,6 @@ set backup
 set noswapfile
 let &backupdir=vimbackupdir
 set history=1000
-set undoreload=10000
 " Make Vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
 
@@ -271,6 +270,7 @@ if has("undofile")
     set undofile
     let &undodir=vimundodir
     set undolevels=1000
+    set undoreload=10000
 endif
 "}}}
 
