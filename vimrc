@@ -247,25 +247,31 @@ endif
 
 " backup ----------------------------------------------------------------- "{{{
 let vimbackupdir = $HOME . '/.vimbackup'
-let vimundodir = $HOME . '/.vimundo'
 if exists("*mkdir")
     if !isdirectory(vimbackupdir)
         call mkdir(vimbackupdir)
     endif
-    if !isdirectory(vimundodir)
-        call mkdir(vimundodir)
-    endif
 endif
 set backup
 set noswapfile
-set undofile
 let &backupdir=vimbackupdir
-let &undodir=vimundodir
 set history=1000
-set undolevels=1000
 set undoreload=10000
 " Make Vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
+
+" undo feature requires > 7.3
+if has("undofile")
+    let vimundodir = $HOME . '/.vimundo'
+    if exists("*mkdir")
+        if !isdirectory(vimundodir)
+            call mkdir(vimundodir)
+        endif
+    endif
+    set undofile
+    let &undodir=vimundodir
+    set undolevels=1000
+endif
 "}}}
 
 " wildmenu --------------------------------------------------------------- "{{{
