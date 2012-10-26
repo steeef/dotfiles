@@ -37,7 +37,6 @@ if exists("*vundle#rc")
         " L9 Requires at least version 7.2
         Bundle 'vim-scripts/L9'
     endif
-    Bundle 'vim-scripts/YankRing.vim'
     Bundle 'kien/ctrlp.vim'
     Bundle 'vim-scripts/IndentConsistencyCop'
     Bundle 'ciaranm/detectindent'
@@ -46,6 +45,7 @@ if exists("*vundle#rc")
     Bundle 'sjl/gundo.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
+    Bundle 'maxbrunsfeld/vim-yankstack'
     " snipmate fork and dependencies
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
@@ -193,13 +193,6 @@ if !has("win32")
     set secure  " disable unsafe commands in local .vimrc files
 endif
 
-" jump to last known position upon opening
-if has ("autocmd")
-    autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-endif
 
 " Toggle whitespace in diffs {{{
 
@@ -234,14 +227,21 @@ if has("autocmd")
     " Set ruby-specific formatting
     autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
 
-    " vim helpiles
+    " vim, vim helpfiles
     augroup ft_vim
         au!
 
         au FileType vim setlocal foldmethod=marker
         au FileType help setlocal textwidth=78
+        " use Enter to follow links
+        au FileType help nmap <buffer> <CR> <C-]>
         au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
     augroup END
+
+    autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 endif
 " }}}
 
@@ -293,6 +293,11 @@ set wildignore+=*.pyc                            " Python byte code
 "}}}
 
 " mapping ---------------------------------------------------------------- "{{{
+" Call YankStack's setup before mapping yank/paste keys
+if exists("yankstack#setup")
+    call yankstack#setup()
+endif
+
 let mapleader=","
 
 " disable arrow keys
@@ -407,9 +412,6 @@ nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Substitute
 nnoremap <leader>s :%s//<left>
-
-" paste from clipboard
-nnoremap <leader>p "*p
 
 " insert date
 :nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
@@ -547,10 +549,9 @@ endfunction
 
 " Plugins ----------------------------------------------------------------"{{{
 
-" YankRing -----------------------------------------------------------------"{{{
-let g:yankring_clipboard_monitor = 1
-nnoremap <silent> <F3> :YRShow<CR>
-inoremap <silent> <F3> <ESC>:YRShow<CR>
+" YankStack --------------------------------------------------------------"{{{
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_older_paste
 "}}}
 
 " NERDCommenter ------------------------------------------------------------"{{{
