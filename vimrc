@@ -17,6 +17,7 @@ else
 endif
 execute "set rtp+=".vundlepath."/vundle/"
 runtime autoload/vundle.vim " apparently without this the exists() check fails
+" if vundle is loaded
 if exists("*vundle#rc")
     filetype off
     call vundle#rc(vundlepath)
@@ -70,6 +71,7 @@ if has("gui_running")
     " Set font and window size based on operating system
     if has ("unix")
         if has ("gui_macvim")
+            " Must be MacVim
             set guifont=Monaco:h10
             set noantialias
 
@@ -110,7 +112,10 @@ set background=dark
 if !has("gui_running")
     set t_Co=256
 endif
+
 " try/catch to set colorscheme
+" Vim will throw an error if the colorscheme doesn't exist, so we try another
+" in the catch block
 try
     colorscheme molokai
 catch /^Vim\%((\a\+)\)\=:E185/
@@ -125,6 +130,7 @@ endtry
 " standard options ------------------------------------------------------- "{{{
 " statusline settings
 " everything else defined in plugin/statusline.vim
+" Not used if powerline is loaded
 set laststatus=2
 
 set modelines=0
@@ -133,19 +139,27 @@ set scrolloff=3
 set showmode
 set showcmd
 set hidden
+set title
 set visualbell
 set cursorline
 set ttyfast
+set lazyredraw
 set ruler
-set backspace=indent,eol,start
-set title
-set ignorecase
-set smartcase
+set confirm
 set wrap
+if exists("+colorcolumn")
+    set colorcolumn=85
+endif
+
+"set underscore as a word boundary
+set iskeyword-=_
+
+"allow backspace to work for indents, between lines, and the start of insert mode
+set backspace=indent,eol,start
+
+"see :help fo-table
 set formatoptions=qrn1
 set textwidth=79
-set lazyredraw
-set confirm
 
 "indent options
 set autoindent
@@ -156,24 +170,21 @@ set expandtab
 set shiftround
 
 "search options
+set ignorecase
+set smartcase
 set incsearch
 set hlsearch
 set showmatch
-" matching
+
+"matching
 runtime macros/matchit.vim
 map <tab> %
-
-if exists("+colorcolumn")
-    set colorcolumn=85
-endif
 
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
-"set underscore as a word boundary
-set iskeyword-=_
-" use vertical line (CTRL-K+VV) for vertical splits
-" see :help digraphs
+"use vertical line (CTRL-K+VV) for vertical splits
+"see :help digraphs
 if !has("gui_running")
     set fillchars=vert:┃
 endif
@@ -238,6 +249,7 @@ if has("autocmd")
         au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
     augroup END
 
+    " Return to last position when file is reopened
     autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
@@ -256,6 +268,7 @@ set backup
 set noswapfile
 let &backupdir=vimbackupdir
 set history=1000
+
 " Make Vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
 
@@ -301,7 +314,7 @@ endif
 
 let mapleader=","
 
-" disable arrow keys
+"disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -387,7 +400,7 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " insert blank line below
 nnoremap <CR> o<ESC>
 
-" vimrc
+" edit vimrc in new window, reload vimrc
 if has("win32")
     nnoremap <leader>ev <C-w>v<C-w>j:e ~/Dropbox/dotfiles/vimrc<CR>
     nnoremap <leader>sv :so ~/Dropbox/dotfiles/vimrc<CR>
