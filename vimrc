@@ -33,12 +33,7 @@ if exists("*vundle#rc")
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-endwise'
-    if v:version >= 702
-        " L9 Requires at least version 7.2
-        Bundle 'vim-scripts/L9'
-    endif
     Bundle 'kien/ctrlp.vim'
-    Bundle 'vim-scripts/IndentConsistencyCop'
     Bundle 'ciaranm/detectindent'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
@@ -46,14 +41,17 @@ if exists("*vundle#rc")
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
     Bundle 'maxbrunsfeld/vim-yankstack'
+
     " snipmate fork and dependencies
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
     Bundle "honza/snipmate-snippets"
     Bundle "garbas/vim-snipmate"
+
     " colorschemes
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'sjl/badwolf'
+
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
@@ -379,16 +377,6 @@ nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc><right>
 
-"}}}
-
-" Abbreviations ---------------------------------------------------------- "{{{
-
-iabbrev myName Stephen Price <sprice@monsooncommerce.com>
-
-"}}}
-
-" quick edit ------------------------------------------------------------- "{{{
-
 " Change case
 nnoremap <C-u> gUiw
 inoremap <C-u> <esc>gUiwea
@@ -417,6 +405,13 @@ nnoremap <leader>s :%s//<left>
 " insert date
 :nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
 :inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
+
+"}}}
+
+" Abbreviations ---------------------------------------------------------- "{{{
+
+iabbrev myName Stephen Price <sprice@monsooncommerce.com>
+
 "}}}
 
 " Folding ---------------------------------------------------------------- {{{
