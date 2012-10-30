@@ -216,6 +216,8 @@ nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
 
 " autocommands ----------------------------------------------------------- "{{{
 if has("autocmd")
+    " Resize splits when the window is resized
+    au VimResized * exe "normal! \<c-w>="
     " turn off PASTE mode when leaving insert mode
     au InsertLeave * set nopaste
 
@@ -293,6 +295,11 @@ set wildignore+=*.pyc                            " Python byte code
 "}}}
 
 " mapping ---------------------------------------------------------------- "{{{
+
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc><right>
+
 " Call YankStack's setup before mapping yank/paste keys
 if exists("yankstack#setup")
     call yankstack#setup()
@@ -318,7 +325,7 @@ nnoremap k gk
 nnoremap <leader>N :setlocal number!<cr>
 
 " Make Y behave like other capitals (e.g., D)
-nmap Y y$
+nnoremap Y y$
 
 "Unmap help in favor of Escape
 inoremap <F1> <ESC>
@@ -327,7 +334,7 @@ vnoremap <F1> <ESC>
 
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
-imap <F5> <C-O><F5>
+inoremap <F5> <C-O><F5>
 set pastetoggle=<F5>
 
 " use jj as escape in interactive mode
@@ -354,27 +361,26 @@ nnoremap ; :
 nnoremap : ;
 
 "sudo save if not root
-cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
 
 "open new vertical window and switch to it
-nmap <leader>w <C-w>v<C-w>l
-" Resize splits when the window is resized
-au VimResized * exe "normal! \<c-w>="
+nnoremap <leader>w <C-w>v<C-w>l
 " Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " indentation in vmode
-vmap > >gv
-vmap < <gv
+" re-select visual selection after indent/outdent
+vnoremap > >gv
+vnoremap < <gv
 
 " Open a Quickfix window for the last search.
-nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 "}}}
 
 " Abbreviations ---------------------------------------------------------- "{{{
@@ -384,9 +390,6 @@ iabbrev myName Stephen Price <sprice@monsooncommerce.com>
 "}}}
 
 " quick edit ------------------------------------------------------------- "{{{
-" Split line (sister to [J]oin lines)
-" The normal use of S is covered by cc, so don't worry about shadowing it.
-nnoremap S i<cr><esc><right>
 
 " Change case
 nnoremap <C-u> gUiw
@@ -550,13 +553,13 @@ endfunction
 " Plugins ----------------------------------------------------------------"{{{
 
 " YankStack --------------------------------------------------------------"{{{
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_older_paste
+nnoremap <leader>p <Plug>yankstack_substitute_older_paste
+nnoremap <leader>P <Plug>yankstack_substitute_older_paste
 "}}}
 
 " NERDCommenter ------------------------------------------------------------"{{{
-vmap <leader>m ,c<space>gv
-map <leader>m ,c<space>
+vnoremap <leader>m ,c<space>gv
+noremap <leader>m ,c<space>
 "}}}
 
 " CTRL-P -------------------------------------------------------------------"{{{
@@ -566,19 +569,6 @@ let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_jump_to_buffer = 2
 let g:ctrlp_max_height = 15
 let g:ctrlp_split_window = 0
-"}}}
-
-" NERDTree -----------------------------------------------------------------"{{{
-noremap  <F2> :NERDTreeToggle<cr>
-inoremap <F2> <esc>:NERDTreeToggle<cr>
-
-au Filetype nerdtree setlocal nolist
-
-let NERDTreeHighlightCursorline=1
-let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$', 'pip-log\.txt$', 'whoosh_index', 'xapian_index', '.*.pid', 'monitor.py', '.*-fixtures-.*.json', '.*\.o$', 'db.db', 'tags.bak']
-
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 0
 "}}}
 
 " EasyMotion ---------------------------------------------------------------"{{{
