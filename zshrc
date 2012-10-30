@@ -4,6 +4,8 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(git command-coloring)
 
 source $ZSH/oh-my-zsh.sh
+# disable auto-correct
+unsetopt correct_all
 
 # aliases --------------------------------------------------
 alias j='z'
