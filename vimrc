@@ -296,12 +296,8 @@ set wildignore+=*.pyc                            " Python byte code
 
 " mapping ---------------------------------------------------------------- "{{{
 
-" Split line (sister to [J]oin lines)
-" The normal use of S is covered by cc, so don't worry about shadowing it.
-nnoremap S i<cr><esc><right>
-
 " Call YankStack's setup before mapping yank/paste keys
-if exists("yankstack#setup")
+if exists("*yankstack#setup")
     call yankstack#setup()
 endif
 
@@ -378,6 +374,11 @@ vnoremap < <gv
 
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc><right>
+
 "}}}
 
 " Abbreviations ---------------------------------------------------------- "{{{
