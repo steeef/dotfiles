@@ -316,6 +316,10 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+"Unmap help
+inoremap <F1> <nop>
+nnoremap <F1> <nop>
+vnoremap <F1> <nop>
 
 "up and down work with wrapped lines
 nnoremap j gj
@@ -327,18 +331,11 @@ nnoremap <leader>N :setlocal number!<cr>
 " Make Y behave like other capitals (e.g., D)
 nnoremap Y y$
 
-"Unmap help in favor of Escape
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
 
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
 inoremap <F5> <C-O><F5>
 set pastetoggle=<F5>
-
-" use jj as escape in interactive mode
-inoremap jj <Esc>
 
 " map easier-to-use keys
 noremap H ^
