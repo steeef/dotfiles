@@ -30,7 +30,6 @@ if exists("*vundle#rc")
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'ervandew/supertab'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-endwise'
@@ -308,9 +307,8 @@ set wildignore+=*.pyc                            " Python byte code
 " mapping ---------------------------------------------------------------- "{{{
 
 " Call YankStack's setup before mapping yank/paste keys
-if exists("*yankstack#setup")
-    call yankstack#setup()
-endif
+" Use silent! to suppress error messages
+silent! call yankstack#setup()
 
 let mapleader=","
 
@@ -388,7 +386,7 @@ nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " Split line (sister to [J]oin lines)
 " The normal use of S is covered by cc, so don't worry about shadowing it.
-nnoremap S i<cr><esc><right>
+nmap S i<cr><esc><right>
 
 " Change case
 nnoremap <C-u> gUiw
@@ -619,11 +617,6 @@ let g:syntastic_mode_map = { 'mode': 'active',
 
 nnoremap <leader>E :Errors<CR>
 nnoremap <leader>S :SyntasticCheck<CR>
-"}}}
-
-" supertab ----------------------------------------------------------------"{{{
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabLogestHighlight = 1
 "}}}
 
 " Powerline ---------------------------------------------------------------"{{{
