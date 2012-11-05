@@ -40,7 +40,6 @@ if exists("*vundle#rc")
     Bundle 'sjl/gundo.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
-    Bundle 'maxbrunsfeld/vim-yankstack'
 
     " snipmate fork and dependencies
     Bundle "MarcWeber/vim-addon-mw-utils"
@@ -305,11 +304,6 @@ set wildignore+=*.pyc                            " Python byte code
 "}}}
 
 " mapping ---------------------------------------------------------------- "{{{
-
-" Call YankStack's setup before mapping yank/paste keys
-" Use silent! to suppress error messages
-silent! call yankstack#setup()
-
 let mapleader=","
 
 "disable arrow keys
@@ -555,11 +549,6 @@ endfunction
 "}}}
 
 " Plugins ----------------------------------------------------------------"{{{
-
-" YankStack --------------------------------------------------------------"{{{
-nnoremap <leader>p <Plug>yankstack_substitute_older_paste
-nnoremap <leader>P <Plug>yankstack_substitute_older_paste
-"}}}
 
 " NERDCommenter ------------------------------------------------------------"{{{
 vnoremap <leader>m ,c<space>gv
