@@ -63,7 +63,12 @@ function precmd () {
 
 # VI Mode -------------------------------------------------------------
 bindkey -v
+
+# Bindkeys ------------------------------------------------------------
 bindkey "^R" history-incremental-search-backward
+# PageUp/Down search history to complete command
+bindkey "^[[I" history-beginning-search-backward
+bindkey "^[[G" history-beginning-search-forward
 
 # Local Settings -------------------------------------------------------------
 if [[ -s $HOME/.zshrc_local ]] ; then source $HOME/.zshrc_local ; fi
