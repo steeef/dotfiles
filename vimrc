@@ -30,6 +30,7 @@ if exists("*vundle#rc")
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
+    Bundle 'vim-scripts/YankRing.vim'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-endwise'
@@ -327,9 +328,15 @@ nnoremap k gk
 " toggle number
 nnoremap <leader>N :setlocal number!<cr>
 
-" Make Y behave like other capitals (e.g., D)
-nnoremap Y y$
+" :help yankring-custom-maps
+function! YRRunAfterMaps()
+    " Make Y behave like other capitals (e.g., D)
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 
+    " Split line (sister to [J]oin lines)
+    " The normal use of S is covered by cc, so don't worry about shadowing it.
+    nnoremap S i<cr><esc><right>
+endfunction
 
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
@@ -378,9 +385,6 @@ vnoremap < <gv
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
-" Split line (sister to [J]oin lines)
-" The normal use of S is covered by cc, so don't worry about shadowing it.
-nmap S i<cr><esc><right>
 
 " Change case
 nnoremap <C-u> gUiw
@@ -616,3 +620,28 @@ let Powerline_symbols = 'fancy'
 nnoremap <leader>A :Ack!<space>
 "}}}
 
+" Yankring ----------------------------------------------------------------"{{{
+" cycle through yankring
+let g:yankring_replace_n_pkey = '<leader>p'
+let g:yankring_replace_n_nkey = '<leader>P'
+
+" Some settings to try to get yank ring to not mess with default vim
+" functionality so much.
+let g:yankring_manage_numbered_reg = 0
+let g:yankring_clipboard_monitor = 0
+let g:yankring_paste_check_default_buffer = 0
+let g:yankring_map_dot = 0
+
+" Don't let yankring use f, t, /. It doesn't record them properly in macros
+" and that's my most common use. Yankring also blocks macros of macros (it
+" prompts for the macro register), but removing @ doesn't fix that :(
+let g:yankring_zap_keys = ''
+
+" Disable yankring for regular p/P. This preserves vim's normal behavior, but
+" I can still use C-p/C-n to cycle through yankring.
+let g:yankring_paste_n_bkey = ''
+let g:yankring_paste_n_akey = ''
+let g:yankring_paste_v_key = ''
+let g:yankring_paste_v_bkey = ''
+let g:yankring_paste_v_akey = ''
+"}}}
