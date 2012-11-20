@@ -330,9 +330,6 @@ nnoremap <leader>N :setlocal number!<cr>
 
 " :help yankring-custom-maps
 function! YRRunAfterMaps()
-    " Make Y behave like other capitals (e.g., D)
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-
     " Split line (sister to [J]oin lines)
     " The normal use of S is covered by cc, so don't worry about shadowing it.
     nnoremap S i<cr><esc><right>
@@ -594,7 +591,7 @@ nnoremap <F4> :GundoToggle<CR>
 
 " Tabular -----------------------------------------------------------------"{{{
 " Puppet: align resource parameters
-vnoremap <leader>ap :Tabularize /=><CR>
+vnoremap <leader>Ap :Tabularize /=><CR>
 "}}}
 
 " syntastic ---------------------------------------------------------------"{{{
@@ -617,7 +614,48 @@ let Powerline_symbols = 'fancy'
 "}}}
 
 " Ack ---------------------------------------------------------------------"{{{
-nnoremap <leader>A :Ack!<space>
+" Use ag if it's in PATH
+" https://github.com/ggreer/the_silver_searcher
+if executable("ag")
+    let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
+
+nnoremap <leader>a :Ack!<space>
+
+" Ack motions {{{
+" Steve Losh https://github.com/sjl/dotfiles
+
+" Motions to Ack for things.  Works with pretty much everything, including:
+"
+"   w, W, e, E, b, B, t*, f*, i*, a*, and custom text objects
+"
+" Awesome.
+"
+" Note: If the text covered by a motion contains a newline it won't work.  Ack
+" searches line-by-line.
+
+nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
+xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
+
+function! s:CopyMotionForType(type)
+    if a:type ==# 'v'
+        silent execute "normal! `<" . a:type . "`>y"
+    elseif a:type ==# 'char'
+        silent execute "normal! `[v`]y"
+    endif
+endfunction
+
+function! s:AckMotion(type) abort
+    let reg_save = @@
+
+    call s:CopyMotionForType(a:type)
+
+    execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
+
+    let @@ = reg_save
+endfunction
+
+" }}}
 "}}}
 
 " Yankring ----------------------------------------------------------------"{{{
