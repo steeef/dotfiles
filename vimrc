@@ -374,6 +374,9 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
+" simplify indentation
+nnoremap > >>
+nnoremap < <<
 " indentation in vmode
 " re-select visual selection after indent/outdent
 vnoremap > >gv
@@ -634,6 +637,8 @@ nnoremap <leader>a :Ack!<space>
 " Note: If the text covered by a motion contains a newline it won't work.  Ack
 " searches line-by-line.
 
+" \aiw will search for the word under the cursor
+" \aib will search inside braces
 nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
 xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
 
