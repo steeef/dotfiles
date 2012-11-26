@@ -108,6 +108,7 @@ endif
 " colorscheme ------------------------------------------------------------ "{{{
 set background=dark
 
+" force terminal Vim to use 256 colors
 if !has("gui_running")
     set t_Co=256
 endif
@@ -554,9 +555,9 @@ endfunction
 
 " Plugins ----------------------------------------------------------------"{{{
 
-" NERDCommenter ------------------------------------------------------------"{{{
+" nerdcommenter ------------------------------------------------------------"{{{
 vnoremap <leader>m ,c<space>gv
-noremap <leader>m ,c<space>
+nnoremap <leader>m ,c<space>
 "}}}
 
 " CTRL-P -------------------------------------------------------------------"{{{
