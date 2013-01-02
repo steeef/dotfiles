@@ -39,6 +39,7 @@ if exists("*vundle#rc")
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'sjl/gundo.vim'
+    Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
 
@@ -460,29 +461,6 @@ set foldtext=MyFoldText()
 
 " }}}
 
-" ExecuteInShell() -------------------------------------------------------"{{{
-" Create :Shell command to execute in shell and display
-" results in a split window
-
-function! s:ExecuteInShell(command)"{{{
-    let command = join(map(split(a:command), 'expand(v:val)'))
-    let winnr = bufwinnr('^' . command . '$')
-    silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
-    setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap nonumber
-    echo 'Execute ' . command . '...'
-    silent! execute 'silent %!'. command
-    silent! redraw
-    silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
-    silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>:AnsiEsc<CR>'
-    silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
-    silent! execute 'AnsiEsc'
-    echo 'Shell command ' . command . ' executed.'
-endfunction"}}}
-
-command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-nnoremap <leader>! :Shell
-"}}}
-
 " NumberToggle() --------------------------------------------------------- "{{{
 " Switch between relative and absolute line numbers
 " Only works in Vim >= 7.3
@@ -591,6 +569,10 @@ onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 
 " Gundo -------------------------------------------------------------------"{{{
 nnoremap <F4> :GundoToggle<CR>
+"}}}
+"
+" Clam --------------------------------------------------------------------"{{{
+nnoremap <leader>l :Clam<space>
 "}}}
 
 " Tabular -----------------------------------------------------------------"{{{
