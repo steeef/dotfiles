@@ -1,0 +1,4 @@
+# Create new session, open vim with Clam plugin, view by context
+new -s todotxt -n view vim -c 'Clam todo.sh view context' -c 'set filetype=todotxt' -c 'only'
+# Split smaller window with shell
+splitw -v 15 -t 0 zsh
