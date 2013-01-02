@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Create new session, open vim with Clam plugin, view by context
-tmux new -s todotxt -n view vim -c 'Clam todo.sh view context' -c 'set filetype=todotxt' -c 'only'
+tmux new-session -s todotxt -n view -d "vim -c 'Clam todo.sh view context' -c 'set filetype=todotxt' -c 'only'"
 # Split smaller window with shell
-tmux splitw -v 15 -t 0 zsh
+tmux split-window -v -p 15 -t todotxt
+tmux attach-session -d -t todotxt
