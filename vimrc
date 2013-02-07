@@ -570,7 +570,7 @@ onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 " Gundo -------------------------------------------------------------------"{{{
 nnoremap <F4> :GundoToggle<CR>
 "}}}
-"
+
 " Clam --------------------------------------------------------------------"{{{
 nnoremap <leader>l :Clam<space>
 "}}}
