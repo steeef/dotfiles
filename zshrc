@@ -13,6 +13,9 @@ alias d='cd $HOME/.dotfiles'
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias lr='ls -ltr'
 
+# huffshell suggestions
+alias s='ssh'
+
 # todo.txt with tmux
 alias t='~/.bin/todo_tmux.sh'
 alias tv='clear; t view context'

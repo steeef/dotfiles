@@ -12,6 +12,7 @@ alias ll="ls -l"
 alias lsl="ls -l"
 alias la='ls -A'
 alias lla='ls -lA'
+alias lr='ls -ltr'
 
 alias mkdir='mkdir -p'
 
