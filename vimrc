@@ -545,6 +545,8 @@ let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_jump_to_buffer = 2
 let g:ctrlp_max_height = 15
 let g:ctrlp_split_window = 0
+
+nnoremap <leader>b :CtrlPBuffer<CR>
 "}}}
 
 " EasyMotion ---------------------------------------------------------------"{{{

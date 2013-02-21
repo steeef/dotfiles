@@ -4,7 +4,7 @@
 " mappings can't go in vimrc.
 "
 " Use EasyMotion for regular f/t mappings.
-if exists(':EasyMotion')
+if exists('EasyMotion_loaded')
     nnoremap <silent> f      :call EasyMotion#F(0, 0)<CR>
     onoremap <silent> f      :call EasyMotion#F(0, 0)<CR>
     vnoremap <silent> f :<C-U>call EasyMotion#F(1, 0)<CR>
