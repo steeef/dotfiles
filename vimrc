@@ -359,8 +359,8 @@ onoremap <CR> <Esc>
 inoremap <C-o> <CR>
 
 " Swap colon, semicolon
-"nnoremap ; :
-"nnoremap : ;
+nnoremap ; :
+nnoremap : ;
 
 "sudo save if not root
 cnoremap w!! w !sudo tee % >/dev/null
@@ -552,19 +552,8 @@ let g:ctrlp_split_window = 0
 " EasyMotion do the mapping
 let g:EasyMotion_do_mapping = 0
 
-nnoremap <silent> <Leader>f      :call EasyMotion#F(0, 0)<CR>
-onoremap <silent> <Leader>f      :call EasyMotion#F(0, 0)<CR>
-vnoremap <silent> <Leader>f :<C-U>call EasyMotion#F(1, 0)<CR>
+" See .vim/after/plugin/EasyMotion.vim for mappings
 
-nnoremap <silent> <Leader>F      :call EasyMotion#F(0, 1)<CR>
-onoremap <silent> <Leader>F      :call EasyMotion#F(0, 1)<CR>
-vnoremap <silent> <Leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
-
-onoremap <silent> <Leader>t      :call EasyMotion#T(0, 0)<CR>
-onoremap <silent> <Leader>T      :call EasyMotion#T(0, 1)<CR>
-
-onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
-onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 "}}}
 
 " Gundo -------------------------------------------------------------------"{{{
