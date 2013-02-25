@@ -1,7 +1,10 @@
-" initial settings
+" initial settings  ------------------------------------------------------ "{{{
+"
 scriptencoding utf-8
 set nocompatible
 filetype plugin indent on
+
+"}}}
 
 " vundle ----------------------------------------------------------------- "{{{
 " Use custom path in Windows
@@ -27,13 +30,13 @@ if exists("*vundle#rc")
     Bundle 'gmarik/vundle'
     " Bundles to manage with vundle
     " ---------------------------------------------------------"{{{
-    Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
     Bundle 'maxbrunsfeld/vim-yankstack'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-endwise'
+    Bundle 'tpope/vim-commentary'
     Bundle 'kien/ctrlp.vim'
     Bundle 'ciaranm/detectindent'
     Bundle 'Lokaltog/vim-easymotion'
@@ -523,11 +526,6 @@ endfunction
 "}}}
 
 " Plugins ----------------------------------------------------------------"{{{
-
-" nerdcommenter ------------------------------------------------------------"{{{
-vnoremap <leader>m ,c<space>gv
-nnoremap <leader>m ,c<space>
-"}}}
 
 " CTRL-P -------------------------------------------------------------------"{{{
 let g:ctrlp_map = '<leader>,'
