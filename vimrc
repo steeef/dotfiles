@@ -528,6 +528,7 @@ endfunction
 " Plugins ----------------------------------------------------------------"{{{
 
 " CTRL-P -------------------------------------------------------------------"{{{
+
 let g:ctrlp_map = '<leader>,'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 1
@@ -536,6 +537,7 @@ let g:ctrlp_max_height = 15
 let g:ctrlp_split_window = 0
 
 nnoremap <leader>b :CtrlPBuffer<CR>
+
 "}}}
 
 " EasyMotion ---------------------------------------------------------------"{{{
@@ -548,19 +550,26 @@ let g:EasyMotion_do_mapping = 0
 "}}}
 
 " Gundo -------------------------------------------------------------------"{{{
+
 nnoremap <F4> :GundoToggle<CR>
+
 "}}}
 
 " Clam --------------------------------------------------------------------"{{{
+
 nnoremap <leader>l :Clam<space>
+
 "}}}
 
 " Tabular -----------------------------------------------------------------"{{{
+
 " Puppet: align resource parameters
 vnoremap <leader>Ap :Tabularize /=><CR>
+
 "}}}
 
 " syntastic ---------------------------------------------------------------"{{{
+
 " autoclose window if no errors
 let g:syntastic_auto_loc_list=2
 let g:puppet_module_detect=1
@@ -573,9 +582,11 @@ let g:syntastic_mode_map = { 'mode': 'active',
 
 nnoremap <leader>E :Errors<CR>
 nnoremap <leader>S :SyntasticCheck<CR>
+
 "}}}
 
 " Powerline ---------------------------------------------------------------"{{{
+
 let Powerline_symbols = 'fancy'
 "}}}
 
