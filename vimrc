@@ -30,7 +30,7 @@ if exists("*vundle#rc")
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'scrooloose/syntastic'
     Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'vim-scripts/YankRing.vim'
+    Bundle 'maxbrunsfeld/vim-yankstack'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-endwise'
@@ -42,12 +42,6 @@ if exists("*vundle#rc")
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
-
-    " snipmate fork and dependencies
-    Bundle "MarcWeber/vim-addon-mw-utils"
-    Bundle "tomtom/tlib_vim"
-    Bundle "honza/snipmate-snippets"
-    Bundle "garbas/vim-snipmate"
 
     " colorschemes
     Bundle 'nanotech/jellybeans.vim'
@@ -330,12 +324,9 @@ nnoremap k gk
 " toggle number
 nnoremap <leader>N :setlocal number!<cr>
 
-" :help yankring-custom-maps
-function! YRRunAfterMaps()
-    " Split line (sister to [J]oin lines)
-    " The normal use of S is covered by cc, so don't worry about shadowing it.
-    nnoremap S i<cr><esc><right>
-endfunction
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc><right>
 
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
@@ -635,30 +626,4 @@ function! s:AckMotion(type) abort
 endfunction
 
 " }}}
-"}}}
-
-" Yankring ----------------------------------------------------------------"{{{
-" cycle through yankring
-let g:yankring_replace_n_pkey = '<leader>p'
-let g:yankring_replace_n_nkey = '<leader>P'
-
-" Some settings to try to get yank ring to not mess with default vim
-" functionality so much.
-let g:yankring_manage_numbered_reg = 0
-let g:yankring_clipboard_monitor = 0
-let g:yankring_paste_check_default_buffer = 0
-let g:yankring_map_dot = 0
-
-" Don't let yankring use f, t, /. It doesn't record them properly in macros
-" and that's my most common use. Yankring also blocks macros of macros (it
-" prompts for the macro register), but removing @ doesn't fix that :(
-let g:yankring_zap_keys = ''
-
-" Disable yankring for regular p/P. This preserves vim's normal behavior, but
-" I can still use C-p/C-n to cycle through yankring.
-let g:yankring_paste_n_bkey = ''
-let g:yankring_paste_n_akey = ''
-let g:yankring_paste_v_key = ''
-let g:yankring_paste_v_bkey = ''
-let g:yankring_paste_v_akey = ''
 "}}}
