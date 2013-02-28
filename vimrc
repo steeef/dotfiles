@@ -304,7 +304,11 @@ set wildignore+=*.pyc                            " Python byte code
 "}}}
 
 " mapping ---------------------------------------------------------------- "{{{
+
 let mapleader=","
+
+" setup yankstack before mappings
+silent! call yankstack#setup()
 
 "disable arrow keys
 nnoremap <up> <nop>
