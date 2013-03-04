@@ -12,4 +12,4 @@ term xterm-256color
 termcapinfo xterm* 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
 
 logfile $HOME/lib/screen-logs/session.log
-deflog on
+deflog off
