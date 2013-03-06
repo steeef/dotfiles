@@ -549,6 +549,18 @@ nnoremap <leader>b :ctrlpbuffer<cr>
 " easymotion do the mapping
 let g:easymotion_do_mapping = 0
 
+<<<<<<< HEAD
+nnoremap <silent> <Leader>f      :call EasyMotion#F(0, 0)<CR>
+onoremap <silent> <Leader>f      :call EasyMotion#F(0, 0)<CR>
+vnoremap <silent> <Leader>f :<C-U>call EasyMotion#F(1, 0)<CR>
+
+nnoremap <silent> <Leader>F      :call EasyMotion#F(0, 1)<CR>
+onoremap <silent> <Leader>F      :call EasyMotion#F(0, 1)<CR>
+vnoremap <silent> <Leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
+
+onoremap <silent> <Leader>t      :call EasyMotion#T(0, 0)<CR>
+onoremap <silent> <Leader>T      :call EasyMotion#T(0, 1)<CR>
+=======
 nnoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
 onoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
 vnoremap <silent> <leader>f :<C-U>call EasyMotion#F(1, 0)<CR>
@@ -559,6 +571,7 @@ vnoremap <silent> <leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
 
 onoremap <silent> <leader>t      :call EasyMotion#T(0, 0)<CR>
 onoremap <silent> <leader>T      :call EasyMotion#T(0, 1)<CR>
+>>>>>>> da02a8380a9ffdabaf2d2c5de14ae7c90d837286
 
 onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
 onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
