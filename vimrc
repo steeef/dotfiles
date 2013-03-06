@@ -7,13 +7,13 @@ filetype plugin indent on
 "}}}
 
 " vundle ----------------------------------------------------------------- "{{{
-" Use custom path in Windows
+" use custom path in windows
 if has("win32")
-    let vundlepath = "~/Dropbox/dotfiles/vim/bundle"
+    let vundlepath = "~/dropbox/dotfiles/vim/bundle"
 else
-    " Use sudo user's vundle path
-    if !empty($SUDO_USER)
-        let vundlepath = "/home/$SUDO_USER/.vim/bundle"
+    " use sudo user's vundle path
+    if !empty($sudo_user)
+        let vundlepath = "/home/$sudo_user/.vim/bundle"
     else
         let vundlepath = "~/.vim/bundle"
     endif
@@ -25,35 +25,35 @@ if exists("*vundle#rc")
     filetype off
     call vundle#rc(vundlepath)
 
-    " let Vundle manage Vundle
+    " let vundle manage vundle
     " required!
-    Bundle 'gmarik/vundle'
-    " Bundles to manage with vundle
+    bundle 'gmarik/vundle'
+    " bundles to manage with vundle
     " ---------------------------------------------------------"{{{
-    Bundle 'scrooloose/syntastic'
-    Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'maxbrunsfeld/vim-yankstack'
-    Bundle 'tpope/vim-surround'
-    Bundle 'tpope/vim-repeat'
-    Bundle 'tpope/vim-endwise'
-    Bundle 'tpope/vim-commentary'
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'ciaranm/detectindent'
-    Bundle 'Lokaltog/vim-easymotion'
-    Bundle 'Lokaltog/vim-powerline'
-    Bundle 'sjl/gundo.vim'
-    Bundle 'sjl/clam.vim'
-    Bundle 'mileszs/ack.vim'
-    Bundle 'godlygeek/tabular'
+    bundle 'scrooloose/syntastic'
+    bundle 'vim-scripts/indexedsearch'
+    bundle 'maxbrunsfeld/vim-yankstack'
+    bundle 'tpope/vim-surround'
+    bundle 'tpope/vim-repeat'
+    bundle 'tpope/vim-endwise'
+    bundle 'tpope/vim-commentary'
+    bundle 'kien/ctrlp.vim'
+    bundle 'ciaranm/detectindent'
+    bundle 'lokaltog/vim-easymotion'
+    bundle 'lokaltog/vim-powerline'
+    bundle 'sjl/gundo.vim'
+    bundle 'sjl/clam.vim'
+    bundle 'mileszs/ack.vim'
+    bundle 'godlygeek/tabular'
 
     " colorschemes
-    Bundle 'nanotech/jellybeans.vim'
-    Bundle 'sjl/badwolf'
+    bundle 'nanotech/jellybeans.vim'
+    bundle 'sjl/badwolf'
 
     " language-specific bundles
-    Bundle 'vim-ruby/vim-ruby'
-    Bundle 'rodjek/vim-puppet'
-    Bundle 'davidoc/todo.txt-vim'
+    bundle 'vim-ruby/vim-ruby'
+    bundle 'rodjek/vim-puppet'
+    bundle 'davidoc/todo.txt-vim'
     "}}}
 
     " post-vundle settings
@@ -65,38 +65,38 @@ syntax enable
 
 " appearance/font -------------------------------------------------------- "{{{
 if has("gui_running")
-    " Set font and window size based on operating system
+    " set font and window size based on operating system
     if has ("unix")
         if has ("gui_macvim")
-            " Must be MacVim
-            set guifont=Monaco:h10
+            " must be macvim
+            set guifont=monaco:h10
             set noantialias
 
-            " Full screen means FULL screen
+            " full screen means full screen
             set fuoptions=maxvert,maxhorz
         else
-            " Must be Linux
-            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
+            " must be linux
+            set guifont=dejavu\ sans\ mono\ for\ powerline\ 8
         endif
     else
-        " Must be Windows
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h9
+        " must be windows
+        set guifont=dejavu\ sans\ mono\ for\ powerline:h9
     endif
 
     set guioptions-=m  "remove menu bar
-    set guioptions-=T  "remove toolbar
+    set guioptions-=t  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
-    set guioptions-=R  "remove right-hand scroll bar for vert split
+    set guioptions-=r  "remove right-hand scroll bar for vert split
     set guioptions-=l  "remove left-hand scroll bar
-    set guioptions-=L  "remove left-hand scroll bar for vert split
+    set guioptions-=l  "remove left-hand scroll bar for vert split
     set guioptions+=c  "use text-based dialogs instead of popups
 
-    " Different cursors for different modes.
-    set guicursor=n-c:block-Cursor-blinkon0
-    set guicursor+=v:block-vCursor-blinkon0
-    set guicursor+=i-ci:ver20-iCursor
+    " different cursors for different modes.
+    set guicursor=n-c:block-cursor-blinkon0
+    set guicursor+=v:block-vcursor-blinkon0
+    set guicursor+=i-ci:ver20-icursor
 else
-    " This is console Vim.
+    " this is console vim.
 
     " mouse support
     set mouse=a
@@ -106,20 +106,20 @@ endif
 " colorscheme ------------------------------------------------------------ "{{{
 set background=dark
 
-" force terminal Vim to use 256 colors
+" force terminal vim to use 256 colors
 if !has("gui_running")
-    set t_Co=256
+    set t_co=256
 endif
 
 " try/catch to set colorscheme
-" Vim will throw an error if the colorscheme doesn't exist, so we try another
+" vim will throw an error if the colorscheme doesn't exist, so we try another
 " in the catch block
 try
     colorscheme molokai
-catch /^Vim\%((\a\+)\)\=:E185/
+catch /^vim\%((\a\+)\)\=:e185/
     try
         colorscheme wombat256mod
-    catch /^Vim\%((\a\+)\)\=:E185/
+    catch /^vim\%((\a\+)\)\=:e185/
         colorscheme desert
     endtry
 endtry
@@ -128,7 +128,7 @@ endtry
 " standard options ------------------------------------------------------- "{{{
 " statusline settings
 " everything else defined in plugin/statusline.vim
-" Not used if powerline is loaded
+" not used if powerline is loaded
 set laststatus=2
 
 set modelines=0
@@ -181,7 +181,7 @@ map <tab> %
 "show formatting characters
 set list
 set listchars=tab:»\ ,trail:·
-"use vertical line (CTRL-K+VV) for vertical splits
+"use vertical line (ctrl-k+vv) for vertical splits
 "see :help digraphs
 if !has("gui_running")
     set fillchars=vert:┃
@@ -193,7 +193,7 @@ set splitright
 
 " per-project vimrc files
 " useful for specifying things like tabstops
-" Disable on Windows since it will complain if you're
+" disable on windows since it will complain if you're
 " running in a path where it's not allowed.
 if !has("win32")
     set exrc    " enable per-directory .vimrc files
@@ -201,11 +201,11 @@ if !has("win32")
 endif
 
 
-" Toggle whitespace in diffs {{{
+" toggle whitespace in diffs {{{
 
 set diffopt+=iwhite
 let g:diffwhitespaceon = 1
-function! ToggleDiffWhitespace() "{{{
+function! togglediffwhitespace() "{{{
     if g:diffwhitespaceon
         set diffopt-=iwhite
         let g:diffwhitespaceon = 0
@@ -216,39 +216,39 @@ function! ToggleDiffWhitespace() "{{{
     diffupdate
 endfunc "}}}
 
-nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
+nnoremap <leader>dw :call togglediffwhitespace()<cr>
 
 " }}}
 "}}}
 
 " autocommands ----------------------------------------------------------- "{{{
 if has("autocmd")
-    " Resize splits when the window is resized
-    au VimResized * exe "normal! \<c-w>="
-    " turn off PASTE mode when leaving insert mode
-    au InsertLeave * set nopaste
+    " resize splits when the window is resized
+    au vimresized * exe "normal! \<c-w>="
+    " turn off paste mode when leaving insert mode
+    au insertleave * set nopaste
 
     " todo.txt filetype
     augroup ft_todotxt
-        au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
-    augroup END
+        au bufnewfile,bufread */todo/*.txt set filetype=todotxt
+    augroup end
 
-    " Set ruby-specific formatting
-    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
+    " set ruby-specific formatting
+    autocmd filetype ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
 
     " vim, vim helpfiles
     augroup ft_vim
         au!
 
-        au FileType vim setlocal foldmethod=marker
-        au FileType help setlocal textwidth=78
-        " use Enter to follow links
-        au FileType help nmap <buffer> <CR> <C-]>
-        au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
-    augroup END
+        au filetype vim setlocal foldmethod=marker
+        au filetype help setlocal textwidth=78
+        " use enter to follow links
+        au filetype help nmap <buffer> <cr> <c-]>
+        au bufwinenter *.txt if &ft == 'help' | wincmd j | endif
+    augroup end
 
-    " Return to last position when file is reopened
-    autocmd BufReadPost *
+    " return to last position when file is reopened
+    autocmd bufreadpost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
@@ -256,7 +256,7 @@ endif
 " }}}
 
 " backup ----------------------------------------------------------------- "{{{
-let vimbackupdir = $HOME . '/.vimbackup'
+let vimbackupdir = $home . '/.vimbackup'
 if exists("*mkdir")
     if !isdirectory(vimbackupdir)
         call mkdir(vimbackupdir)
@@ -267,12 +267,12 @@ set noswapfile
 let &backupdir=vimbackupdir
 set history=1000
 
-" Make Vim able to edit crontab files again.
+" make vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
 
 " undo feature requires > 7.3
 if has("undofile")
-    let vimundodir = $HOME . '/.vimundo'
+    let vimundodir = $home . '/.vimundo'
     if exists("*mkdir")
         if !isdirectory(vimundodir)
             call mkdir(vimundodir)
@@ -289,18 +289,18 @@ endif
 set wildmenu
 set wildmode=list:longest
 
-set wildignore+=.hg,.git,.svn,CVS                " Version control
-set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=.hg,.git,.svn,cvs                " version control
+set wildignore+=*.aux,*.out,*.toc                " latex intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 set wildignore+=*.spl                            " compiled spelling word lists
-set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=*.sw?                            " vim swap files
+set wildignore+=*.ds_store                       " osx bullshit
 
-set wildignore+=*.luac                           " Lua byte code
+set wildignore+=*.luac                           " lua byte code
 
-set wildignore+=migrations                       " Django migrations
-set wildignore+=*.pyc                            " Python byte code
+set wildignore+=migrations                       " django migrations
+set wildignore+=*.pyc                            " python byte code
 "}}}
 
 " mapping ---------------------------------------------------------------- "{{{
@@ -319,44 +319,44 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-"Unmap help
-inoremap <F1> <nop>
-nnoremap <F1> <nop>
-vnoremap <F1> <nop>
+"unmap help
+inoremap <f1> <nop>
+nnoremap <f1> <nop>
+vnoremap <f1> <nop>
 
 "up and down work with wrapped lines
 nnoremap j gj
 nnoremap k gk
 
 " toggle number
-nnoremap <leader>N :setlocal number!<cr>
+nnoremap <leader>n :setlocal number!<cr>
 
-" Split line (sister to [J]oin lines)
-" The normal use of S is covered by cc, so don't worry about shadowing it.
-nnoremap S i<cr><esc><right>
+" split line (sister to [j]oin lines)
+" the normal use of s is covered by cc, so don't worry about shadowing it.
+nnoremap s i<cr><esc><right>
 
-" F5 = toggle paste mode
-nnoremap <F5> :set invpaste paste?<Enter>
-inoremap <F5> <C-O><F5>
-set pastetoggle=<F5>
+" f5 = toggle paste mode
+nnoremap <f5> :set invpaste paste?<enter>
+inoremap <f5> <c-o><f5>
+set pastetoggle=<f5>
 
 " map easier-to-use keys
-noremap H ^
-noremap L $
-vnoremap L g_
+noremap h ^
+noremap l $
+vnoremap l g_
 
-" gi already moves to "last place you exited insert mode", so we'll map gI to
+" gi already moves to "last place you exited insert mode", so we'll map gi to
 " something similar: move to last change
-nnoremap gI `.
+nnoremap gi `.
 
-" Use Enter to exit normal,visual,command mode
-" Use CTRL-O to create new line in insert mode
-nnoremap <CR> <Esc>
-vnoremap <CR> <Esc>gV
-onoremap <CR> <Esc>
-inoremap <C-o> <CR>
+" use enter to exit normal,visual,command mode
+" use ctrl-o to create new line in insert mode
+nnoremap <cr> <esc>
+vnoremap <cr> <esc>gv
+onoremap <cr> <esc>
+inoremap <c-o> <cr>
 
-" Swap colon, semicolon
+" swap colon, semicolon
 nnoremap ; :
 nnoremap : ;
 
@@ -364,15 +364,15 @@ nnoremap : ;
 cnoremap w!! w !sudo tee % >/dev/null
 
 " remove search highlighting
-nnoremap <leader><space> :nohlsearch<Enter>
+nnoremap <leader><space> :nohlsearch<enter>
 
 "open new vertical window and switch to it
-nnoremap <leader>w <C-w>v<C-w>l
-" Easy window navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+nnoremap <leader>w <c-w>v<c-w>l
+" easy window navigation
+noremap <c-h> <c-w>h
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
 
 " simplify indentation
 nnoremap > >>
@@ -382,65 +382,65 @@ nnoremap < <<
 vnoremap > >gv
 vnoremap < <gv
 
-" Open a Quickfix window for the last search.
-nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+" open a quickfix window for the last search.
+nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
 
 
-" Change case
-nnoremap <C-u> gUiw
-inoremap <C-u> <esc>gUiwea
+" change case
+nnoremap <c-u> guiw
+inoremap <c-u> <esc>guiwea
 "
-" Remove trailing whitespace from entire buffer
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" remove trailing whitespace from entire buffer
+nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<cr>
 
 " insert blank line below
-nnoremap <CR> o<ESC>
+nnoremap <cr> o<esc>
 
 " edit vimrc in new window, reload vimrc
 if has("win32")
-    nnoremap <leader>ev <C-w>v<C-w>j:e ~/Dropbox/dotfiles/vimrc<CR>
-    nnoremap <leader>sv :so ~/Dropbox/dotfiles/vimrc<CR>
+    nnoremap <leader>ev <c-w>v<c-w>j:e ~/dropbox/dotfiles/vimrc<cr>
+    nnoremap <leader>sv :so ~/dropbox/dotfiles/vimrc<cr>
 else
-    nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
-    nnoremap <leader>sv :so $MYVIMRC<CR>
+    nnoremap <leader>ev <c-w>v<c-w>j:e $myvimrc<cr>
+    nnoremap <leader>sv :so $myvimrc<cr>
 endif
 
 " open current file's directory
-nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <leader>ew :e <c-r>=expand("%:p:h") . "/" <cr>
 
-" Substitute
+" substitute
 nnoremap <leader>s :%s//<left>
 
 " insert date
-:nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
-:inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
+:nnoremap <f6> "=strftime("%y-%m-%d")<cr>p
+:inoremap <f6> <c-r>=strftime("%y-%m-%d")<cr>
 
 "}}}
 
-" Abbreviations ---------------------------------------------------------- "{{{
+" abbreviations ---------------------------------------------------------- "{{{
 
-iabbrev myName Stephen Price <sprice@monsooncommerce.com>
+iabbrev myname stephen price <sprice@monsooncommerce.com>
 
 "}}}
 
-" Folding ---------------------------------------------------------------- {{{
+" folding ---------------------------------------------------------------- {{{
 set foldlevelstart=0
 
-" Make the current location sane.
+" make the current location sane.
 nnoremap <c-cr> zvzt
 
-" Space to toggle folds.
-nnoremap <Space> za
-vnoremap <Space> za
+" space to toggle folds.
+nnoremap <space> za
+vnoremap <space> za
 
-" Make zO recursively open whatever top level fold we're in, no matter where the
+" make zo recursively open whatever top level fold we're in, no matter where the
 " cursor happens to be.
-nnoremap zO zCzO
+nnoremap zo zczo
 
-" Use ,z to "focus" the current fold.
-nnoremap <leader>z zMzvzz
+" use ,z to "focus" the current fold.
+nnoremap <leader>z zmzvzz
 
-function! MyFoldText() " {{{
+function! myfoldtext() " {{{
     let line = getline(v:foldstart)
 
     let nucolwidth = &fdc + &number * &numberwidth
@@ -455,15 +455,15 @@ function! MyFoldText() " {{{
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
-set foldtext=MyFoldText()
+set foldtext=myfoldtext()
 
 " }}}
 
-" NumberToggle() --------------------------------------------------------- "{{{
-" Switch between relative and absolute line numbers
-" Only works in Vim >= 7.3
+" numbertoggle() --------------------------------------------------------- "{{{
+" switch between relative and absolute line numbers
+" only works in vim >= 7.3
 " ---------------------------------------------------------
-function! NumberToggle()
+function! numbertoggle()
     if(&relativenumber == 1)
         set number
     else
@@ -473,24 +473,24 @@ endfunction
 
 if exists("&relativenumber")
     set relativenumber
-    nnoremap <leader>n :call NumberToggle()<CR>
+    nnoremap <leader>n :call numbertoggle()<cr>
 else
     set number
 endif
 "}}}
 
-" Stab() ---------------------------------------------------------------- "{{{
-" Switch between tabs and spaces
-" Prompts for values or shows current values
+" stab() ---------------------------------------------------------------- "{{{
+" switch between tabs and spaces
+" prompts for values or shows current values
 " ---------------------------------------------------------
 
-command! -nargs=* Stab call Stab()
-function! Stab()
+command! -nargs=* stab call stab()
+function! stab()
   let l:tabstop = 1 * input('set shiftwidth=')
 
   if l:tabstop > 0
     " do we want expandtab as well?
-    let l:expandtab = confirm('set expandtab?', "&Yes\n&No\n&Cancel")
+    let l:expandtab = confirm('set expandtab?', "&yes\n&no\n&cancel")
     if l:expandtab == 3
       " abort?
       return
@@ -509,29 +509,29 @@ function! Stab()
 
   " show the selected options
   try
-    echohl ModeMsg
+    echohl modemsg
     echon 'set tabstop='
-    echohl Question
+    echohl question
     echon &l:ts
-    echohl ModeMsg
+    echohl modemsg
     echon ' shiftwidth='
-    echohl Question
+    echohl question
     echon &l:sw
-    echohl ModeMsg
+    echohl modemsg
     echon ' sts='
-    echohl Question
+    echohl question
     echon &l:sts . ' ' . (&l:et ? '  ' : 'no')
-    echohl ModeMsg
+    echohl modemsg
     echon 'expandtab'
   finally
-    echohl None
+    echohl none
   endtry
 endfunction
 "}}}
 
-" Plugins ----------------------------------------------------------------"{{{
+" plugins ----------------------------------------------------------------"{{{
 
-" CTRL-P -------------------------------------------------------------------"{{{
+" ctrl-p -------------------------------------------------------------------"{{{
 
 let g:ctrlp_map = '<leader>,'
 let g:ctrlp_working_path_mode = 0
@@ -540,35 +540,47 @@ let g:ctrlp_jump_to_buffer = 2
 let g:ctrlp_max_height = 15
 let g:ctrlp_split_window = 0
 
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>b :ctrlpbuffer<cr>
 
 "}}}
 
-" EasyMotion ---------------------------------------------------------------"{{{
+" easymotion ---------------------------------------------------------------"{{{
 " map specific functions to specific keys rather than let
-" EasyMotion do the mapping
-let g:EasyMotion_do_mapping = 0
+" easymotion do the mapping
+let g:easymotion_do_mapping = 0
 
-" See .vim/after/plugin/EasyMotion.vim for mappings
+nnoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
+onoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
+vnoremap <silent> <leader>f :<C-U>call EasyMotion#F(1, 0)<CR>
+
+nnoremap <silent> <leader>F      :call EasyMotion#F(0, 1)<CR>
+onoremap <silent> <leader>F      :call EasyMotion#F(0, 1)<CR>
+vnoremap <silent> <leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
+
+onoremap <silent> <leader>t      :call EasyMotion#T(0, 0)<CR>
+onoremap <silent> <leader>T      :call EasyMotion#T(0, 1)<CR>
+
+onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
+onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 
 "}}}
 
-" Gundo -------------------------------------------------------------------"{{{
+" gundo -------------------------------------------------------------------"{{{
 
-nnoremap <F4> :GundoToggle<CR>
-
-"}}}
-
-" Clam --------------------------------------------------------------------"{{{
-
-nnoremap <leader>l :Clam<space>
+nnoremap <f4> :gundotoggle<cr>
 
 "}}}
 
-" Tabular -----------------------------------------------------------------"{{{
+" clam --------------------------------------------------------------------"{{{
 
-" Puppet: align resource parameters
-vnoremap <leader>Ap :Tabularize /=><CR>
+nnoremap <leader>l :clam<space>
+
+"}}}
+
+" tabular -----------------------------------------------------------------"{{{
+
+" puppet: align resource parameters
+vnoremap <leader>ap :tabularize /=><cr>
 
 "}}}
 
@@ -584,43 +596,43 @@ let g:syntastic_mode_map = { 'mode': 'active',
                             \                      'vim'],
                             \ 'passive_filetypes': ['puppet'] }
 
-nnoremap <leader>E :Errors<CR>
-nnoremap <leader>S :SyntasticCheck<CR>
+nnoremap <leader>e :errors<cr>
+nnoremap <leader>s :syntasticcheck<cr>
 
 "}}}
 
-" Powerline ---------------------------------------------------------------"{{{
+" powerline ---------------------------------------------------------------"{{{
 
-let Powerline_symbols = 'fancy'
+let powerline_symbols = 'fancy'
 "}}}
 
-" Ack ---------------------------------------------------------------------"{{{
-" Use ag if it's in PATH
+" ack ---------------------------------------------------------------------"{{{
+" use ag if it's in path
 " https://github.com/ggreer/the_silver_searcher
 if executable("ag")
     let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 
-nnoremap <leader>a :Ack!<space>
+nnoremap <leader>a :ack!<space>
 
-" Ack motions {{{
-" Steve Losh https://github.com/sjl/dotfiles
+" ack motions {{{
+" steve losh https://github.com/sjl/dotfiles
 
-" Motions to Ack for things.  Works with pretty much everything, including:
+" motions to ack for things.  works with pretty much everything, including:
 "
-"   w, W, e, E, b, B, t*, f*, i*, a*, and custom text objects
+"   w, w, e, e, b, b, t*, f*, i*, a*, and custom text objects
 "
-" Awesome.
+" awesome.
 "
-" Note: If the text covered by a motion contains a newline it won't work.  Ack
+" note: if the text covered by a motion contains a newline it won't work.  ack
 " searches line-by-line.
 
 " \aiw will search for the word under the cursor
 " \aib will search inside braces
-nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
-xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
+nnoremap <silent> \a :set opfunc=<sid>ackmotion<cr>g@
+xnoremap <silent> \a :<c-u>call <sid>ackmotion(visualmode())<cr>
 
-function! s:CopyMotionForType(type)
+function! s:copymotionfortype(type)
     if a:type ==# 'v'
         silent execute "normal! `<" . a:type . "`>y"
     elseif a:type ==# 'char'
@@ -628,12 +640,12 @@ function! s:CopyMotionForType(type)
     endif
 endfunction
 
-function! s:AckMotion(type) abort
+function! s:ackmotion(type) abort
     let reg_save = @@
 
-    call s:CopyMotionForType(a:type)
+    call s:copymotionfortype(a:type)
 
-    execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
+    execute "normal! :ack! --literal " . shellescape(@@) . "\<cr>"
 
     let @@ = reg_save
 endfunction
