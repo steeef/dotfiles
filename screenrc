@@ -2,8 +2,8 @@ hardstatus on
 hardstatus alwayslastline
 logfile $HOME/
 backtick 1 0 0 date +%Y%m%d-%H%M
-logfile '~/log/%1`.%n'
-hardstatus string "%{+b wk} %-w%{+b wk} %n %t %{-}%+w %41=%H @ %l ~/%H_%1`.%n %-= %= %D,%c:%s "
+logfile '~/screen-%1`.%n'
+hardstatus string "%{+b wk} %-w%{+b wk} %n %t %{-}%+w %41=%H @ %l %-= %= %D,%c:%s "
 
 altscreen on
 autodetach on
