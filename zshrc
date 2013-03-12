@@ -1,7 +1,7 @@
 ZSH=$HOME/.oh-my-zsh
 export ZSH_THEME="prose"
 DISABLE_AUTO_UPDATE="true"
-plugins=(git command-coloring vi-mode)
+plugins=(git command-coloring)
 
 source $ZSH/oh-my-zsh.sh
 # disable auto-correct
