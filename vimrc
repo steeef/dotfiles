@@ -581,7 +581,9 @@ nnoremap <leader>l :Clam<space>
 
 " Puppet: align resource parameters
 vnoremap <leader>Ap :Tabularize /=><CR>
-vnoremap <leader>Ay :Tabularize /:<CR>
+
+" YAML: align by first colon
+vnoremap <leader>Ay :Tabularize /^[^:]*\zs:<CR>
 
 "}}}
 
