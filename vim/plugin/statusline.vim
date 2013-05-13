@@ -1,6 +1,7 @@
 " statusline.vim
 "
 " Settings for statusline without Powerline
+" https://gist.github.com/dhruvasagar/5553071
 
 let g:last_mode = ''
 
