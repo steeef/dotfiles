@@ -57,7 +57,9 @@ set statusline+=%#StatusLine#
 set statusline+=%f\ %{&ro?'⭤':''}%{&mod?'+':''}%<
 set statusline+=%4*⮀
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+if exists("*SyntasticStatuslineFlag")
+    set statusline+=%{SyntasticStatuslineFlag()}
+endif
 set statusline+=%=
 set statusline+=%4*⮂
 set statusline+=%#StatusLine#
