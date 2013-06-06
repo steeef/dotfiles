@@ -531,127 +531,133 @@ endfunction
 
 " Plugins ----------------------------------------------------------------"{{{
 
-" CTRL-P -------------------------------------------------------------------"{{{
+    " CTRL-P -------------------------------------------------------------------"{{{
 
-let g:ctrlp_map = '<leader>,'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window_reversed = 1
-let g:ctrlp_jump_to_buffer = 2
-let g:ctrlp_max_height = 15
-let g:ctrlp_split_window = 0
+    let g:ctrlp_map = '<leader>,'
+    let g:ctrlp_working_path_mode = 0
+    let g:ctrlp_match_window_reversed = 1
+    let g:ctrlp_jump_to_buffer = 2
+    let g:ctrlp_max_height = 15
+    let g:ctrlp_split_window = 0
 
-nnoremap <leader>b :CtrlPBuffer<CR>
+    nnoremap <leader>b :CtrlPBuffer<CR>
 
-"}}}
+    "}}}
 
-" EasyMotion ---------------------------------------------------------------"{{{
-" map specific functions to specific keys rather than let
-" EasyMotion do the mapping
-let g:EasyMotion_do_mapping = 0
+    " EasyMotion ---------------------------------------------------------------"{{{
+    " map specific functions to specific keys rather than let
+    " EasyMotion do the mapping
+    let g:EasyMotion_do_mapping = 0
 
-nnoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
-onoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
-vnoremap <silent> <leader>f :<C-U>call EasyMotion#F(1, 0)<CR>
+    nnoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
+    onoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
+    vnoremap <silent> <leader>f :<C-U>call EasyMotion#F(1, 0)<CR>
 
-nnoremap <silent> <leader>F      :call EasyMotion#F(0, 1)<CR>
-onoremap <silent> <leader>F      :call EasyMotion#F(0, 1)<CR>
-vnoremap <silent> <leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
+    nnoremap <silent> <leader>F      :call EasyMotion#F(0, 1)<CR>
+    onoremap <silent> <leader>F      :call EasyMotion#F(0, 1)<CR>
+    vnoremap <silent> <leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
 
-onoremap <silent> <leader>t      :call EasyMotion#T(0, 0)<CR>
-onoremap <silent> <leader>T      :call EasyMotion#T(0, 1)<CR>
+    onoremap <silent> <leader>t      :call EasyMotion#T(0, 0)<CR>
+    onoremap <silent> <leader>T      :call EasyMotion#T(0, 1)<CR>
 
-onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
-onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
+    onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
+    onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 
-"}}}
+    "}}}
 
-" Gundo -------------------------------------------------------------------"{{{
+    " Gundo -------------------------------------------------------------------"{{{
 
-nnoremap <F4> :GundoToggle<CR>
+    nnoremap <F4> :GundoToggle<CR>
 
-"}}}
+    "}}}
 
-" Clam --------------------------------------------------------------------"{{{
+    " Clam --------------------------------------------------------------------"{{{
 
-nnoremap <leader>l :Clam<space>
+    nnoremap <leader>l :Clam<space>
 
-"}}}
+    "}}}
 
-" Tabular -----------------------------------------------------------------"{{{
+    " Tabular -----------------------------------------------------------------"{{{
 
-" Puppet: align resource parameters
-vnoremap <leader>Ap :Tabularize /=><CR>
+    " Puppet: align resource parameters
+    vnoremap <leader>Ap :Tabularize /=><CR>
 
-" YAML: align by first colon
-vnoremap <leader>Ay :Tabularize /^[^:]*\zs:<CR>
+    " YAML: align by first colon
+    vnoremap <leader>Ay :Tabularize /^[^:]*\zs:<CR>
 
-"}}}
+    "}}}
 
-" syntastic ---------------------------------------------------------------"{{{
+    " syntastic ---------------------------------------------------------------"{{{
 
-" autoclose window if no errors
-let g:syntastic_auto_loc_list=2
-let g:puppet_module_detect=1
-" maintain list of active (check on save) and passive (check on command) filetypes
-" avoids annoying delay when saving files
-let g:syntastic_mode_map = { 'mode': 'active',
-                            \ 'active_filetypes': ['ruby', 'perl', 'php', 'bash',
-                            \                      'vim'],
-                            \ 'passive_filetypes': ['puppet'] }
+    " autoclose window if no errors
+    let g:syntastic_auto_loc_list=2
+    let g:puppet_module_detect=1
+    " maintain list of active (check on save) and passive (check on command) filetypes
+    " avoids annoying delay when saving files
+    let g:syntastic_mode_map = { 'mode': 'active',
+                                \ 'active_filetypes': ['ruby', 'perl', 'php', 'bash',
+                                \                      'vim'],
+                                \ 'passive_filetypes': ['puppet'] }
 
-nnoremap <leader>E :Errors<CR>
-nnoremap <leader>S :SyntasticCheck<CR>
+    nnoremap <leader>E :Errors<CR>
+    nnoremap <leader>S :SyntasticCheck<CR>
 
-"}}}
+    "}}}
 
-" Powerline ---------------------------------------------------------------"{{{
+    " Powerline ---------------------------------------------------------------"{{{
 
-let Powerline_symbols = 'fancy'
-"}}}
+    let Powerline_symbols = 'fancy'
+    "}}}
 
-" Ack ---------------------------------------------------------------------"{{{
-" Use ag if it's in PATH
-" https://github.com/ggreer/the_silver_searcher
-if executable("ag")
-    let g:ackprg = 'ag --nogroup --nocolor --column'
-endif
-
-nnoremap <leader>a :Ack!<space>
-
-" Ack motions {{{
-" Steve Losh https://github.com/sjl/dotfiles
-
-" Motions to Ack for things.  Works with pretty much everything, including:
-"
-"   w, W, e, E, b, B, t*, f*, i*, a*, and custom text objects
-"
-" Awesome.
-"
-" Note: If the text covered by a motion contains a newline it won't work.  Ack
-" searches line-by-line.
-
-" \aiw will search for the word under the cursor
-" \aib will search inside braces
-nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
-xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
-
-function! s:CopyMotionForType(type)
-    if a:type ==# 'v'
-        silent execute "normal! `<" . a:type . "`>y"
-    elseif a:type ==# 'char'
-        silent execute "normal! `[v`]y"
+    " Ack ---------------------------------------------------------------------"{{{
+    " Use ag if it's in PATH
+    " https://github.com/ggreer/the_silver_searcher
+    if executable("ag")
+        let g:ackprg = 'ag --nogroup --nocolor --column'
     endif
-endfunction
 
-function! s:AckMotion(type) abort
-    let reg_save = @@
+    nnoremap <leader>a :Ack!<space>
 
-    call s:CopyMotionForType(a:type)
+    " Ack motions {{{
+    " Steve Losh https://github.com/sjl/dotfiles
 
-    execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
+    " Motions to Ack for things.  Works with pretty much everything, including:
+    "
+    "   w, W, e, E, b, B, t*, f*, i*, a*, and custom text objects
+    "
+    " Awesome.
+    "
+    " Note: If the text covered by a motion contains a newline it won't work.  Ack
+    " searches line-by-line.
 
-    let @@ = reg_save
-endfunction
+    " \aiw will search for the word under the cursor
+    " \aib will search inside braces
+    nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
+    xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
 
-" }}}
+    function! s:CopyMotionForType(type)
+        if a:type ==# 'v'
+            silent execute "normal! `<" . a:type . "`>y"
+        elseif a:type ==# 'char'
+            silent execute "normal! `[v`]y"
+        endif
+    endfunction
+
+    function! s:AckMotion(type) abort
+        let reg_save = @@
+
+        call s:CopyMotionForType(a:type)
+
+        execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
+
+        let @@ = reg_save
+    endfunction
+
+    " }}}
+
+    " Yankstack ---------------------------------------------------------------"{{{
+let g:yankstack_map_keys = 0
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+    "}}}
 "}}}
