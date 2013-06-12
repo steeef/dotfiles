@@ -654,6 +654,7 @@ endfunction
     endfunction
 
     " }}}
+    " }}}
 
     " Yankstack ---------------------------------------------------------------"{{{
 let g:yankstack_map_keys = 0
