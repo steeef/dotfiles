@@ -1,7 +1,11 @@
 #!/bin/bash
+SESSION=todotxt
 
 # Create new session, open vim with Clam plugin, view by context
-tmux new-session -s todotxt -n view -d "vim -c 'Clam todo.sh view context' -c 'set filetype=todotxt' -c 'only' -c 'set norelativenumber'"
+tmux new-session -s $SESSION -n view -d "vim -c 'Clam todo.sh view context' \
+    -c 'set filetype=todotxt' \
+    -c 'only' \
+    -c 'set norelativenumber'"
 # Split smaller window with shell
-tmux split-window -v -p 15 -t todotxt
-tmux attach-session -d -t todotxt
+tmux split-window -v -p 15 -t $SESSION
+tmux attach-session -d -t $SESSION

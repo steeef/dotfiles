@@ -18,11 +18,12 @@ alias s='ssh'
 compdef s=ssh
 
 # todo.txt with tmux
-alias t='~/.bin/todo_tmux.sh'
+#alias t=todo_tmux.sh
+alias t=todo.sh
+compdef t=todo.sh
 alias tv='clear; t view context'
 alias ts='t addto someday.txt'
 alias te='t edit someday'
-compdef t=todo.sh
 
 # git
 alias g='git'
