@@ -22,6 +22,7 @@ alias t='~/.bin/todo_tmux.sh'
 alias tv='clear; t view context'
 alias ts='t addto someday.txt'
 alias te='t edit someday'
+compdef t=todo.sh
 
 # git
 alias g='git'

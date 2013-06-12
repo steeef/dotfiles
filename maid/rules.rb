@@ -52,7 +52,7 @@ Maid.rules do
   end
 
   rule 'Remove expendable files' do
-    dir('~/Downloads/*.{csv,doc,docx,gem,vcs,ics,ppt,js,rb,xml,xlsx}').each do |p|
+    dir('~/Downloads/*.{csv,pdf,doc,docx,gem,vcs,ics,ppt,js,rb,xml,xlsx}').each do |p|
       trash(p) if 3.days.since?(accessed_at(p))
     end
   end
