@@ -48,7 +48,7 @@ Maid.rules do
   end
 
   rule 'added Torrent files (Transmission)' do
-    trash(dir('~/Dropbox/torrents/*.added'))
+    remove(dir('~/Dropbox/torrents/*.added'))
   end
 
   rule 'Remove expendable files' do
