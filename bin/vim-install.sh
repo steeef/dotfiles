@@ -11,5 +11,5 @@ else
     $HG clone $VIMREPO $DOWNLOADDIR
     cd $DOWNLOADDIR
 fi
-./configure --with-features=huge --prefix=$HOME && /usr/bin/make clean && /usr/bin/make && /usr/bin/make install
+./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp --enable-cscope --prefix=$HOME && /usr/bin/make clean && /usr/bin/make && /usr/bin/make install
 
