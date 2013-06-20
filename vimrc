@@ -40,7 +40,7 @@ if exists("*vundle#rc")
     Bundle 'kien/ctrlp.vim'
     Bundle 'ciaranm/detectindent'
     Bundle 'Lokaltog/vim-easymotion'
-    "Bundle 'Lokaltog/vim-powerline'
+    Bundle 'Valloric/YouCompleteMe'
     Bundle 'sjl/gundo.vim'
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
