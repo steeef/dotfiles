@@ -1,5 +1,5 @@
 #!/bin/bash
-MVIMREPO=git://github.com/b4winckler/macvim.git
+MVIMREPO=git://github.com/zhaocai/macvim.git
 DOWNLOADDIR=$HOME/code/mvim
 
 /bin/mkdir -p $DOWNLOADDIR
