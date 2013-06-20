@@ -10,5 +10,5 @@ else
     git clone $MVIMREPO $DOWNLOADDIR
     cd $DOWNLOADDIR
 fi
-./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp --enable-cscope && make && open src/MacVim/build/Release
+./configure --with-features=huge --with-lua --enable-rubyinterp --enable-pythoninterp --enable-cscope && make && open src/MacVim/build/Release
 
