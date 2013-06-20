@@ -10,5 +10,5 @@ else
     git clone $MVIMREPO $DOWNLOADDIR
     cd $DOWNLOADDIR
 fi
-./configure --with-features=huge --enable-luainterp --enable-rubyinterp --enable-pythoninterp --enable-cscope && make && open src/MacVim/build/Release
+LDFLAGS=-L/usr/lib ./configure --with-features=huge --enable-luainterp --with-lua-prefix=/opt/local --enable-rubyinterp --enable-pythoninterp --enable-cscope && make && open src/MacVim/build/Release
 
