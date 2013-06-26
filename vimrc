@@ -45,6 +45,7 @@ if exists("*vundle#rc")
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
+    Bundle 'LaTeX-Box-Team/LaTeX-Box'
 
     " colorschemes
     Bundle 'nanotech/jellybeans.vim'
@@ -657,8 +658,8 @@ endfunction
     " }}}
 
     " Yankstack ---------------------------------------------------------------"{{{
-let g:yankstack_map_keys = 0
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
+    let g:yankstack_map_keys = 0
+    nmap <leader>p <Plug>yankstack_substitute_older_paste
+    nmap <leader>P <Plug>yankstack_substitute_newer_paste
     "}}}
 "}}}
