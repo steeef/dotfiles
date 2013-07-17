@@ -49,7 +49,7 @@ Maid.rules do
 
   rule 'Screenshots' do
     dir('~/Desktop/Screen Shot *').each do |path|
-      if 1.week.since?(accessed_at(path))
+      if 2.day.since?(accessed_at(path))
         move(path, '~/Documents/Screenshots/')
       end
     end
