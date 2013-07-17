@@ -39,6 +39,22 @@ Maid.rules do
     end
   end
 
+  rule 'Old Screenshots' do
+    dir('~/Documents/Screenshots/*').each do |path|
+      if 30.day.since?(accessed_at(path))
+        trash(path)
+      end
+    end
+  end
+
+  rule 'Screenshots' do
+    dir('~/Desktop/Screen Shot *').each do |path|
+      if 1.week.since?(accessed_at(path))
+        move(path, '~/Documents/Screenshots/')
+      end
+    end
+  end
+
   rule 'Mac OS X applications in zip files' do
     found = dir('~/Downloads/*.zip').select { |path|
       zipfile_contents(path).any? { |c| c.match(/\.app$/) }
