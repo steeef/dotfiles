@@ -82,7 +82,7 @@ Maid.rules do
 
   rule 'Take out the Trash' do
     dir('~/.Trash/*').each do |p|
-      remove(p) if accessed_at(p) > 30.days.ago
+      remove(p) if modified_at(p) > 30.days.ago
     end
   end
 
