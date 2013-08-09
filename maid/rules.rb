@@ -25,25 +25,19 @@ Maid.rules do
 
   rule 'Old downloads' do
     dir('~/Downloads/*').each do |path|
-      if 180.day.since?(accessed_at(path))
-        trash(path)
-      end
+      trash(path) if 180.day.since?(accessed_at(path))
     end
   end
 
   rule 'Old ISOs' do
     dir('~/Downloads/*.iso').each do |path|
-      if 90.day.since?(accessed_at(path))
-        trash(path)
-      end
+      trash(path) if 90.day.since?(accessed_at(path))
     end
   end
 
   rule 'Old Screenshots' do
     dir('~/Documents/Screenshots/*').each do |path|
-      if 30.day.since?(accessed_at(path))
-        trash(path)
-      end
+      trash(path) if 30.day.since?(accessed_at(path))
     end
   end
 
@@ -82,7 +76,7 @@ Maid.rules do
 
   rule 'Take out the Trash' do
     dir('~/.Trash/*').each do |p|
-      remove(p) if modified_at(p) > 30.days.ago
+      remove(p) if 30.days.since?(accessed_at(p))
     end
   end
 
