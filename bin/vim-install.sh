@@ -1,7 +1,7 @@
 #!/bin/bash
 VIMREPO=https://vim.googlecode.com/hg/
 DOWNLOADDIR=$HOME/code/vim
-HG=/usr/bin/hg
+HG=`which hg`
 
 /bin/mkdir -p $DOWNLOADDIR
 HGCLONED=$($HG -R $DOWNLOADDIR root);HGCLONEDERR=$?
