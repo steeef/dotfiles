@@ -31,6 +31,7 @@ if exists("*vundle#rc")
     " Bundles to manage with vundle
     " ---------------------------------------------------------"{{{
     Bundle 'scrooloose/syntastic'
+    Bundle 'bling/vim-airline'
     Bundle 'vim-scripts/IndexedSearch'
     Bundle 'maxbrunsfeld/vim-yankstack'
     Bundle 'tpope/vim-surround'
@@ -129,7 +130,6 @@ endtry
 " standard options ------------------------------------------------------- "{{{
 " statusline settings
 " everything else defined in plugin/statusline.vim
-" Not used if powerline is loaded
 set laststatus=2
 
 set modelines=0
@@ -661,5 +661,11 @@ endfunction
     let g:yankstack_map_keys = 0
     nmap <leader>p <Plug>yankstack_substitute_older_paste
     nmap <leader>P <Plug>yankstack_substitute_newer_paste
+    "}}}
+
+    " airline -----------------------------------------------------------------"{{{
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline_theme = 'jellybeans'
     "}}}
 "}}}
