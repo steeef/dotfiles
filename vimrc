@@ -51,6 +51,8 @@ if exists("*vundle#rc")
     " colorschemes
     Bundle 'nanotech/jellybeans.vim'
     Bundle 'sjl/badwolf'
+    Bundle 'w0ng/vim-hybrid'
+    Bundle 'altercation/vim-colors-solarized'
 
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
@@ -117,7 +119,7 @@ endif
 " Vim will throw an error if the colorscheme doesn't exist, so we try another
 " in the catch block
 try
-    colorscheme molokai
+    colorscheme hybrid
 catch /^Vim\%((\a\+)\)\=:E185/
     try
         colorscheme wombat256mod
@@ -667,7 +669,7 @@ endfunction
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#fnamemod = ':t'
     let g:airline_theme = 'jellybeans'
-    let g:airline_left_sep=' '
-    let g:airline_right_sep=' '
+    let g:airline_left_sep=''
+    let g:airline_right_sep=''
     "}}}
 "}}}
