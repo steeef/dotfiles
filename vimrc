@@ -98,7 +98,8 @@ if has("gui_running")
     " Different cursors for different modes.
     set guicursor=n-c:block-Cursor-blinkon0
     set guicursor+=v:block-vCursor-blinkon0
-    set guicursor+=i-ci:ver20-iCursor
+    " commented out INSERT mode cursor for compatibilty with other colorschemes
+    "set guicursor+=i-ci:ver20-iCursor
 else
     " This is console Vim.
 
@@ -122,9 +123,13 @@ try
     colorscheme hybrid
 catch /^Vim\%((\a\+)\)\=:E185/
     try
-        colorscheme wombat256mod
+        colorscheme molokai
     catch /^Vim\%((\a\+)\)\=:E185/
-        colorscheme desert
+        try
+            colorscheme wombat256mod
+        catch /^Vim\%((\a\+)\)\=:E185/
+            colorscheme desert
+        endtry
     endtry
 endtry
 "}}}
