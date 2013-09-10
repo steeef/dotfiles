@@ -356,6 +356,9 @@ noremap H ^
 noremap L $
 vnoremap L g_
 
+" Make Y behave like D, C
+nmap Y y$
+
 " gi already moves to "last place you exited insert mode", so we'll map gI to
 " something similar: move to last change
 nnoremap gI `.
