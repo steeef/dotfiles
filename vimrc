@@ -361,23 +361,23 @@ vnoremap L g_
 nnoremap gI `.
 
 " Use Enter to exit normal,visual,command mode
-" Use CTRL-O to create new line in insert mode
 nnoremap <CR> <Esc>
 vnoremap <CR> <Esc>gV
 onoremap <CR> <Esc>
+" Use CTRL-O to create new line in insert mode
 inoremap <C-o> <CR>
 
 " Swap colon, semicolon
 nnoremap ; :
 nnoremap : ;
 
-"sudo save if not root
+" sudo save if not root
 cnoremap w!! w !sudo tee % >/dev/null
 
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
 
-"open new vertical window and switch to it
+" open new vertical window and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
 " Easy window navigation
 noremap <C-h> <C-w>h
@@ -395,7 +395,6 @@ vnoremap < <gv
 
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-
 
 " Change case
 nnoremap <C-u> gUiw
@@ -542,7 +541,7 @@ endfunction
 
 " Plugins ----------------------------------------------------------------"{{{
 
-    " CTRL-P -------------------------------------------------------------------"{{{
+    " CTRL-P ------------------------------------------------------------------"{{{
 
     let g:ctrlp_map = '<leader>,'
     let g:ctrlp_working_path_mode = 0
@@ -555,7 +554,7 @@ endfunction
 
     "}}}
 
-    " EasyMotion ---------------------------------------------------------------"{{{
+    " EasyMotion --------------------------------------------------------------"{{{
     " map specific functions to specific keys rather than let
     " EasyMotion do the mapping
     let g:EasyMotion_do_mapping = 0
@@ -615,11 +614,6 @@ endfunction
 
     "}}}
 
-    " Powerline ---------------------------------------------------------------"{{{
-
-    let Powerline_symbols = 'fancy'
-    "}}}
-
     " Ack ---------------------------------------------------------------------"{{{
     " Use ag if it's in PATH
     " https://github.com/ggreer/the_silver_searcher
@@ -674,9 +668,9 @@ endfunction
     "}}}
 
     " airline -----------------------------------------------------------------"{{{
-    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#enabled = 0
     let g:airline#extensions#tabline#fnamemod = ':t'
-    let g:airline_theme = 'jellybeans'
+    let g:airline_theme = 'zenburn'
     let g:airline_left_sep=''
     let g:airline_right_sep=''
     "}}}
