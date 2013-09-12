@@ -595,8 +595,11 @@ endfunction
     " Puppet: align resource parameters
     vnoremap <leader>Ap :Tabularize /=><CR>
 
+    " YAML: align by last colon
+    vnoremap <leader>Ay :Tabularize /.*\zs:<CR>
     " YAML: align by first colon
-    vnoremap <leader>Ay :Tabularize /^[^:]*\zs:<CR>
+    vnoremap <leader>AY :Tabularize /^[^:]*\zs:<CR>
+
 
     "}}}
 
