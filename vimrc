@@ -60,7 +60,7 @@ if exists("*vundle#rc")
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
-    Bundle 'davidoc/todo.txt-vim'
+    Bundle 'steeef/todo.txt-vim'
     "}}}
 
     " post-vundle settings
@@ -83,11 +83,11 @@ if has("gui_running")
             set fuoptions=maxvert,maxhorz
         else
             " Must be Linux
-            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 8
+            set guifont=DejaVu\ Sans\ Mono\ 8
         endif
     else
         " Must be Windows
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h9
+        set guifont=DejaVu\ Sans\ Mono:h9
     endif
 
     set guioptions-=m  "remove menu bar
