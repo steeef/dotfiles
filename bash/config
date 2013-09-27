@@ -37,4 +37,4 @@ export PS1='\n${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w$(hg_ps1)${D}\n$ '
 export EDITOR="vim"
 
 # vi mode
-#set -o vi
+set -o vi
