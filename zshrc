@@ -79,7 +79,7 @@ function precmd () {
 }
 
 # VI Mode -------------------------------------------------------------
-#bindkey -v
+bindkey -v
 
 # Bindkeys ------------------------------------------------------------
 bindkey "^R" history-incremental-search-backward
