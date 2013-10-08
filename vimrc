@@ -45,7 +45,7 @@ if exists("*vundle#rc")
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
-    Bundle 'LaTeX-Box-Team/LaTeX-Box'
+    Bundle 'jeffkreeftmeijer/vim-numbertoggle'
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
         Bundle 'Valloric/YouCompleteMe'
@@ -61,6 +61,8 @@ if exists("*vundle#rc")
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'rodjek/vim-puppet'
     Bundle 'steeef/todo.txt-vim'
+    Bundle 'avakhov/vim-yaml'
+    Bundle 'LaTeX-Box-Team/LaTeX-Box'
     "}}}
 
     " post-vundle settings
@@ -105,7 +107,6 @@ if has("gui_running")
     "set guicursor+=i-ci:ver20-iCursor
 else
     " This is console Vim.
-
     " mouse support
     set mouse=a
 endif
@@ -158,6 +159,23 @@ set confirm
 set wrap
 if exists("+colorcolumn")
     set colorcolumn=85
+endif
+
+"set line number settings based on features. Relative number is preferred.
+"Vim >= 7.4 has a hybrid mode that will display the current line number as
+"well as relative line numbers. You set it by setting both relativenumber
+"and number.
+if v:version > 703
+    echo "setting hybridnum"
+    set relativenumber
+    set number
+else
+    if exists("+relativenumber")
+        echo "setting relnum"
+        set relativenumber
+    else
+        set number
+    endif
 endif
 
 "set underscore as a word boundary
@@ -472,26 +490,6 @@ set foldtext=MyFoldText()
 
 " }}}
 
-" NumberToggle() --------------------------------------------------------- "{{{
-" Switch between relative and absolute line numbers
-" Only works in Vim >= 7.3
-" ---------------------------------------------------------
-function! NumberToggle()
-    if(&relativenumber == 1)
-        set number
-    else
-        set relativenumber
-    endif
-endfunction
-
-if exists("&relativenumber")
-    set relativenumber
-    nnoremap <leader>n :call NumberToggle()<CR>
-else
-    set number
-endif
-"}}}
-
 " Stab() ---------------------------------------------------------------- "{{{
 " Switch between tabs and spaces
 " Prompts for values or shows current values
@@ -679,5 +677,9 @@ endfunction
     let g:airline_theme = 'zenburn'
     let g:airline_left_sep=''
     let g:airline_right_sep=''
+    "}}}
+
+    " numbertoggle ------------------------------------------------------------"{{{
+    let g:NumberToggleTrigger="<leader>n"
     "}}}
 "}}}
