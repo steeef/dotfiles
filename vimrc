@@ -166,12 +166,10 @@ endif
 "well as relative line numbers. You set it by setting both relativenumber
 "and number.
 if v:version > 703
-    echo "setting hybridnum"
     set relativenumber
     set number
 else
     if exists("+relativenumber")
-        echo "setting relnum"
         set relativenumber
     else
         set number
