@@ -45,7 +45,7 @@ if exists("*vundle#rc")
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'godlygeek/tabular'
-    Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+    Bundle 'myusuf3/numbers.vim'
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
         Bundle 'Valloric/YouCompleteMe'
@@ -111,6 +111,9 @@ else
     " mouse support
     set mouse=a
 endif
+
+set shortmess=atI " Don't show the Vim intro message
+
 "}}}
 
 " colorscheme ------------------------------------------------------------ "{{{
@@ -146,10 +149,9 @@ set laststatus=2
 
 set modelines=0
 set encoding=utf-8
-set scrolloff=3
+set scrolloff=5
 set showmode
 set showcmd
-set hidden
 set title
 set visualbell
 set cursorline
@@ -157,25 +159,51 @@ set ttyfast
 set lazyredraw
 set ruler
 set confirm
-set wrap
 if exists("+colorcolumn")
     set colorcolumn=85
 endif
 
+" Buffers ---------------------------------------------------------------- "{{{
+
+" Allow unsaved background buffers and remember marks/undo for them
+set hidden
+
+" Jump to the first open window that contains the specified buffer
+set switchbuf=useopen
+
+" Auto-reload buffers when files are changed on disk
+set autoread
+
+" }}}
+
+" Wrapping --------------------------------------------------------------- "{{{
+
+set wrap
+set showbreak=↪\  " Character to precede line wraps
+set textwidth=79
+
+" }}}
+
+" Numbers now handled by numbers.vim plugin
 "set line number settings based on features. Relative number is preferred.
 "Vim >= 7.4 has a hybrid mode that will display the current line number as
 "well as relative line numbers. You set it by setting both relativenumber
 "and number.
-if v:version > 703
-    set relativenumber
-    set number
-else
-    if exists("+relativenumber")
-        set relativenumber
-    else
-        set number
-    endif
-endif
+" if v:version > 703
+"     set relativenumber
+"     set number
+" else
+"     if exists("+relativenumber")
+"         set relativenumber
+"     else
+"         set number
+"     endif
+" endif
+set number
+
+" Prevent Vim from clearing the scrollback buffer
+" http://www.shallowsky.com/linux/noaltscreen.html
+set t_ti= t_te=
 
 "set underscore as a word boundary
 set iskeyword-=_
@@ -185,7 +213,10 @@ set backspace=indent,eol,start
 
 "see :help fo-table
 set formatoptions=qrn1
-set textwidth=79
+" Delete comment character when joining commented lines
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
 
 "indent options
 set autoindent
@@ -208,7 +239,7 @@ map <tab> %
 
 "show formatting characters
 set list
-set listchars=tab:»\ ,trail:·
+set listchars=tab:»\ ,trail:·,extends:❯,precedes:❮
 "use vertical line (CTRL-K+VV) for vertical splits
 "see :help digraphs
 if !has("gui_running")
@@ -356,9 +387,6 @@ vnoremap <F1> <nop>
 nnoremap j gj
 nnoremap k gk
 
-" toggle number
-nnoremap <leader>N :setlocal number!<cr>
-
 " Split line (sister to [J]oin lines)
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc><right>
@@ -374,7 +402,7 @@ noremap L $
 vnoremap L g_
 
 " Make Y behave like D, C
-nmap Y y$
+" nmap Y y$
 
 " gi already moves to "last place you exited insert mode", so we'll map gI to
 " something similar: move to last change
@@ -427,13 +455,8 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <CR> o<ESC>
 
 " edit vimrc in new window, reload vimrc
-if has("win32")
-    nnoremap <leader>ev <C-w>v<C-w>j:e ~/Dropbox/dotfiles/vimrc<CR>
-    nnoremap <leader>sv :so ~/Dropbox/dotfiles/vimrc<CR>
-else
-    nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
-    nnoremap <leader>sv :so $MYVIMRC<CR>
-endif
+nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
+nnoremap <leader>sv :so $MYVIMRC<CR>
 
 " open current file's directory
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -445,11 +468,26 @@ nnoremap <leader>s :%s//<left>
 :nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
 :inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
 
+" Registers -------------------------------------------------------------- "{{{
+
+" Use the OS clipboard by default
+set clipboard=unnamed
+
+" Copy to X11 primary clipboard
+map <leader>y "*y
+
+" Paste from unnamed register and fix indentation
+nmap <leader>p pV`]=
+
+"}}}
+
 "}}}
 
 " Abbreviations ---------------------------------------------------------- "{{{
 
 iabbrev myName Stephen Price <sprice@monsooncommerce.com>
+" Insert a hash rocket with <c-l>
+imap <c-l> <space>=><space>
 
 "}}}
 
@@ -591,7 +629,8 @@ endfunction
 
     " Puppet: align resource parameters
     vnoremap <leader>Ap :Tabularize /=><CR>
-
+    "align by equals
+    vnoremap <leader>A= :Tabularize /=<CR>
     " YAML: align by last colon
     vnoremap <leader>Ay :Tabularize /.*\zs:<CR>
     " YAML: align by first colon
@@ -678,7 +717,8 @@ endfunction
     let g:airline_right_sep=''
     "}}}
 
-    " numbertoggle ------------------------------------------------------------"{{{
-    let g:NumberToggleTrigger="<leader>n"
+    " numbers -----------------------------------------------------------------"{{{
+        nnoremap <leader>n :NumbersToggle<CR>
+        nnoremap <leader>N :NumbersOnOff<CR>
     "}}}
 "}}}
