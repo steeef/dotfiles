@@ -1,5 +1,5 @@
 " initial settings  ------------------------------------------------------ "{{{
-"
+
 scriptencoding utf-8
 set nocompatible
 filetype plugin indent on
@@ -7,17 +7,13 @@ filetype plugin indent on
 "}}}
 
 " vundle ----------------------------------------------------------------- "{{{
-" Use custom path in Windows
-if has("win32")
-    let vundlepath = "~/Dropbox/dotfiles/vim/bundle"
-else
+if !empty($SUDO_USER)
     " Use sudo user's vundle path
-    if !empty($SUDO_USER)
-        let vundlepath = "/home/$SUDO_USER/.vim/bundle"
-    else
-        let vundlepath = "~/.vim/bundle"
-    endif
+    let vundlepath = "/home/$SUDO_USER/.vim/bundle"
+else
+    let vundlepath = "~/.vim/bundle"
 endif
+
 execute "set rtp+=".vundlepath."/vundle/"
 runtime autoload/vundle.vim " apparently without this the exists() check fails
 " if vundle is loaded
@@ -471,7 +467,7 @@ nnoremap <leader>s :%s//<left>
 " Registers -------------------------------------------------------------- "{{{
 
 " Use the OS clipboard by default
-set clipboard=unnamed
+set clipboard^=unnamed
 
 " Copy to X11 primary clipboard
 map <leader>y "*y
