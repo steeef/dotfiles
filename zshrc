@@ -1,9 +1,8 @@
-ZSH=$HOME/.oh-my-zsh
-export ZSH_THEME="prose"
-DISABLE_AUTO_UPDATE="true"
-plugins=(git command-coloring vi-mode)
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
-source $ZSH/oh-my-zsh.sh
 # disable auto-correct
 unsetopt correct_all
 
@@ -89,6 +88,3 @@ bindkey "^[[G" history-beginning-search-forward
 
 # Local Settings -------------------------------------------------------------
 if [[ -s $HOME/.zshrc_local ]] ; then source $HOME/.zshrc_local ; fi
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
