@@ -124,11 +124,11 @@ endif
 " Vim will throw an error if the colorscheme doesn't exist, so we try another
 " in the catch block
 try
-    let g:seoul256_background = 234
-    colorscheme seoul256
+    colorscheme hybrid
 catch /^Vim\%((\a\+)\)\=:E185/
     try
-        colorscheme hybrid
+        let g:seoul256_background = 234
+        colorscheme seoul256
     catch /^Vim\%((\a\+)\)\=:E185/
         try
             colorscheme molokai
