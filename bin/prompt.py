@@ -18,6 +18,13 @@ from os import path
 from mercurial import extensions, commands, cmdutil, help
 from mercurial.node import hex, short
 
+# `revrange' has been moved into module `scmutil' since v1.9.
+try :
+    from mercurial import scmutil
+    revrange = scmutil.revrange
+except :
+    revrange = cmdutil.revrange
+
 CACHE_PATH = ".hg/prompt/cache"
 CACHE_TIMEOUT = timedelta(minutes=15)
 
@@ -103,7 +110,12 @@ def prompt(ui, repo, fs='', **opts):
             book = getattr(repo, '_bookmarkcurrent', None)
         except KeyError:
             book = getattr(repo, '_bookmarkcurrent', None)
-        return _with_groups(m.groups(), book) if book else ''
+        if book:
+            cur = repo['.'].node()
+            if repo._bookmarks[book] == cur:
+                return _with_groups(m.groups(), book)
+        else:
+            return ''
 
     def _branch(m):
         g = m.groups()
@@ -132,7 +144,7 @@ def prompt(ui, repo, fs='', **opts):
     def _count(m):
         g = m.groups()
         query = [g[1][1:]] if g[1] else ['all()']
-        return _with_groups(g, str(len(cmdutil.revrange(repo, query))))
+        return _with_groups(g, str(len(revrange(repo, query))))
 
     def _node(m):
         g = m.groups()

@@ -5,6 +5,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# options --------------------------------------------------
 # disable auto-correct
 unsetopt correct_all
 
@@ -60,18 +61,6 @@ export EDITOR='vim'
 export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}"
 export GREP_OPTIONS='--color=auto'
 export COMMAND_MODE=unix2003
-# history --------------------------------------------------
-export HISTSIZE=20000
-export SAVEHIST=20000
-#export HISTCONTROL=erasedups
-setopt append_history
-setopt extended_history
-#  setopt hist_expire_dups_first
-# setopt hist_ignore_dups # ignore duplication command history list
-setopt hist_ignore_space
-setopt hist_verify
-setopt inc_append_history
-# setopt share_history # share command history data
 
 # z --------------------------------------------------------
 source ~/.bin/z.sh
