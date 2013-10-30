@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 '''get repository information for use in a shell prompt
 
@@ -304,10 +305,10 @@ def prompt(ui, repo, fs='', **opts):
 
         flag = ''
         if '|modified' not in g and '|unknown' not in g:
-            flag = '!' if modified else '?' if unknown else ''
+            flag = '✱' if modified else '?' if unknown else ''
         else:
             if '|modified' in g:
-                flag += '!' if modified else ''
+                flag += '✱' if modified else ''
             if '|unknown' in g:
                 flag += '?' if unknown else ''
 
@@ -350,7 +351,7 @@ def prompt(ui, repo, fs='', **opts):
 
         current_rev = repo[None].parents()[0]
         to = repo[repo.branchtags()[current_rev.branch()]]
-        return _with_groups(m.groups(), '^') if current_rev != to else ''
+        return _with_groups(m.groups(), '═') if current_rev != to else ''
 
 
     if opts.get("angle_brackets"):
