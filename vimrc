@@ -462,8 +462,8 @@ nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>s :%s//<left>
 
 " insert date
-:nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
-:inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
+nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
+inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
 
 " Registers -------------------------------------------------------------- "{{{
 
