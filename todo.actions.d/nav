@@ -39,7 +39,6 @@ elif $(command -v xdg-open >/dev/null 2>&1); then
     xdg-open "$URL"
 # OS X?
 elif $(command -v open >/dev/null 2>&1); then
-    echo "Mac OS X: Using 'open'"
     open "$URL"
 # last resort, a la mano...
 # chrome
