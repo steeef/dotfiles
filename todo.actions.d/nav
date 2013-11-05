@@ -32,30 +32,28 @@ fi
 
 # Trying to be smart...
 # on Debian alike:
-if $(which x-www-browser >/dev/null 2>&1); then
-    exec x-www-browser "$URL"
-# chrome
-elif [ -x /usr/bin/google-chrome ]; then
-    exec /usr/bin/google-chrome "$URL" &
+if $(command -v x-www-browser >/dev/null 2>&1); then
+    x-www-browser "$URL"
 # with freedesktop.org utils:
-elif $(which xdg-open >/dev/null 2>&1); then
-    exec xdg-open "$URL"
-# if you have git:
-elif [ -x /usr/lib/git-core/git-web--browse ]; then
-    cd /usr/lib/git-core && ./git-web--browse "$URL"
+elif $(command -v xdg-open >/dev/null 2>&1); then
+    xdg-open "$URL"
+# OS X?
+elif $(command -v open >/dev/null 2>&1); then
+    echo "Mac OS X: Using 'open'"
+    open "$URL"
 # last resort, a la mano...
-elif $(which firefox >/dev/null 2>&1); then
+# chrome
+elif $(command -v google-chrome >/dev/null 2>&1); then
+    google-chrome "$URL" &
+elif $(command -v firefox >/dev/null 2>&1); then
     exec firefox "$URL"
-elif $(which konqueror >/dev/null 2>&1); then
+elif $(command -v konqueror >/dev/null 2>&1); then
     exec konqueror "$URL"
-elif $(which nautilus >/dev/null 2>&1); then
+elif $(command -v nautilus >/dev/null 2>&1); then
     exec nautilus "$URL"
 # Windowsien?
 elif [ -x "/cygdrive/c/Program Files/Mozilla Firefox/firefox.exe" ]; then
     exec "/cygdrive/c/Program Files/Mozilla Firefox/firefox.exe" "$URL"
-# OS X?
-elif [ -x "/usr/bin/open" ]; then
-    exec "/usr/bin/open" "$URL"
 else
     echo "Sorry I'm giving up, cannot find your browser :-("
     echo "Under cygwin, consider creating a shortcut in the path, like"
