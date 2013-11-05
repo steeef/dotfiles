@@ -40,7 +40,8 @@ if exists("*vundle#rc")
     Bundle 'sjl/gundo.vim'
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
-    Bundle 'godlygeek/tabular'
+    "Bundle 'godlygeek/tabular'
+    Bundle 'junegunn/vim-easy-align'
     Bundle 'myusuf3/numbers.vim'
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
@@ -622,19 +623,11 @@ endfunction
 
     "}}}
 
-    " Tabular -----------------------------------------------------------------"{{{
-
-    " Puppet: align resource parameters
-    vnoremap <leader>Ap :Tabularize /=><CR>
-    "align by equals
-    vnoremap <leader>A= :Tabularize /=<CR>
-    " YAML: align by last colon
-    vnoremap <leader>Ay :Tabularize /.*\zs:<CR>
-    " YAML: align by first colon
-    vnoremap <leader>AY :Tabularize /^[^:]*\zs:<CR>
-
-
-    "}}}
+    " easy-align --------------------------------------------------------------"{{{
+    vnoremap <silent> <Enter> :EasyAlign<Enter>
+    " hash rocket auto-aign (for Puppet)
+    inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/<CR>`z$a<Space>
+    " }}}
 
     " syntastic ---------------------------------------------------------------"{{{
 

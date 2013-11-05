@@ -6,11 +6,11 @@ Maid.rules do
   def files(paths)
     dir(paths).select { |f| File.file?(f) }
   end
- 
+
   def size_of(path)
     File.size(path)
   end
- 
+
   def checksum_for(path)
     Digest::MD5.hexdigest(File.read(path))
   end
@@ -71,6 +71,16 @@ Maid.rules do
     dupes_in('~/Downloads/*').each do |dupes|
       # Keep the dupe with the shortest filename
       trash dupes.sort_by { |p| File.basename(p).length }[1..-1]
+    end
+  end
+
+  # Often archives are unpacked to the Downloads directory. We still have the
+  # archive, so get rid of the folder.
+  rule 'Remove directories in Downloads' do
+    dir(['~/Downloads/*']).each do |p|
+      if File.directory?(p) && 2.days.since?(accessed_at(p))
+        trash(p)
+      end
     end
   end
 
