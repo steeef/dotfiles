@@ -4,6 +4,8 @@
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
     source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+# for some reason tmux module doesn't get loaded even when in the list of
+# modules. Load it manually here based on .zprezto/init.zsh
 if zstyle -t ":prezto:module:tmux" loaded 'no'; then
     if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/modules/tmux/init.zsh" ]]; then
         source "${ZDOTDIR:-$HOME}/.zprezto/modules/tmux/init.zsh"
