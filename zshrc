@@ -2,7 +2,15 @@
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+if zstyle -t ":prezto:module:tmux" loaded 'no'; then
+    if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/modules/tmux/init.zsh" ]]; then
+        source "${ZDOTDIR:-$HOME}/.zprezto/modules/tmux/init.zsh"
+    fi
+    if (( $? == 0 )); then
+        zstyle ":prezto:module:tmux" loaded 'yes'
+    fi
 fi
 
 # options --------------------------------------------------
@@ -73,7 +81,7 @@ BASE16_SHELL="$HOME/code/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 # z --------------------------------------------------------
 source ~/.bin/z.sh
 function precmd () {
-    _z --add "$(pwd -P)"
+_z --add "$(pwd -P)"
 }
 
 # VI Mode -------------------------------------------------------------
