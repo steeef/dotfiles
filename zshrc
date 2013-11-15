@@ -14,13 +14,15 @@ alias j='z'
 alias d='cd $HOME/.dotfiles'
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias lr='ls -ltr'
+alias h='cd ~'
 
 # huffshell suggestions
 alias s='ssh'
 compdef s=ssh
+alias v='vim'
+compdef v=vim
 
-# todo.txt with tmux
-#alias t=todo_tmux.sh
+# todo.txt
 alias t=todo.sh
 compdef t=todo.sh
 alias tv='clear; t view context'
@@ -61,6 +63,12 @@ export EDITOR='vim'
 export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}"
 export GREP_OPTIONS='--color=auto'
 export COMMAND_MODE=unix2003
+
+# colorscheme
+# https://github.com/chriskempson/base16-shell
+BASE16_SCHEME="tomorrow"
+BASE16_SHELL="$HOME/code/base16-shell/base16-$BASE16_SCHEME.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # z --------------------------------------------------------
 source ~/.bin/z.sh

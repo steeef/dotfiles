@@ -54,6 +54,7 @@ if exists("*vundle#rc")
     Bundle 'w0ng/vim-hybrid'
     Bundle 'junegunn/seoul256.vim'
     Bundle 'altercation/vim-colors-solarized'
+    Bundle 'chriskempson/base16-vim'
 
     " language-specific bundles
     Bundle 'vim-ruby/vim-ruby'
@@ -119,17 +120,17 @@ set background=dark
 " force terminal Vim to use 256 colors
 if !has("gui_running")
     set t_Co=256
+    let base16colorspace=256
 endif
 
 " try/catch to set colorscheme
 " Vim will throw an error if the colorscheme doesn't exist, so we try another
 " in the catch block
 try
-    colorscheme hybrid
+    colorscheme base16-tomorrow
 catch /^Vim\%((\a\+)\)\=:E185/
     try
-        let g:seoul256_background = 234
-        colorscheme seoul256
+        colorscheme hybrid
     catch /^Vim\%((\a\+)\)\=:E185/
         try
             colorscheme molokai
@@ -706,7 +707,7 @@ endfunction
     " airline -----------------------------------------------------------------"{{{
     let g:airline#extensions#tabline#enabled = 0
     let g:airline#extensions#tabline#fnamemod = ':t'
-    let g:airline_theme = 'zenburn'
+    let g:airline_theme = 'jellybeans'
     let g:airline_left_sep=''
     let g:airline_right_sep=''
     "}}}
