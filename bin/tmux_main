@@ -1,0 +1,9 @@
+#!/bin/bash
+SESSION=main
+
+if ! tmux has-session -t $SESSION; then
+    tmux new-session -s $SESSION -n main -d
+    # modify panels
+    tmux split-window -h -t $SESSION
+fi
+tmux attach -d -t $SESSION
