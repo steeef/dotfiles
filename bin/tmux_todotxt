@@ -2,11 +2,13 @@
 SESSION=todotxt
 VIM=/Users/sprice/bin/vim
 
-# Create new session, open vim with Clam plugin, view by context
-tmux new-session -s $SESSION -n view -d "${VIM} -c 'Clam todo.sh view context' \
-    -c 'set filetype=todotxt' \
-    -c 'only' \
-    -c 'set norelativenumber'"
-# Split smaller window with shell
-tmux split-window -v -p 15 -t $SESSION
+if ! tmux has-session -t $SESSION; then
+    # Create new session, open vim with Clam plugin, view by context
+    tmux new-session -s $SESSION -n view -d "${VIM} -c 'Clam todo.sh view context' \
+        -c 'set filetype=todotxt' \
+        -c 'only' \
+        -c 'set norelativenumber'"
+    # Split smaller window with shell
+    tmux split-window -v -p 15 -t $SESSION
+fi
 tmux attach-session -d -t $SESSION
