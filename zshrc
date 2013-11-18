@@ -31,6 +31,8 @@ alias s='ssh'
 compdef s=ssh
 alias v='vim'
 compdef v=vim
+alias tm='tmux'
+compdef tm=tmux
 
 # todo.txt
 alias t=todo.sh
