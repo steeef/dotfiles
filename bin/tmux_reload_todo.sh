@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-TMUX=/opt/local/bin/tmux
+TMUX=/opt/homebrew/bin/tmux
 TMUX_SESSION_NAME=todotxt
 # Check that tmux is installed and there is a session with the expected name
 /usr/bin/logger "todo.txt changed"
