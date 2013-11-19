@@ -41,7 +41,9 @@ if exists("*vundle#rc")
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'junegunn/vim-easy-align'
-    Bundle 'myusuf3/numbers.vim'
+    if v:version >= 703
+        Bundle 'myusuf3/numbers.vim'
+    endif
     Bundle 'christoomey/vim-tmux-navigator'
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
