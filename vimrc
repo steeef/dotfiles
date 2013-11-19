@@ -106,8 +106,6 @@ if has("gui_running")
     "set guicursor+=i-ci:ver20-iCursor
 else
     " This is console Vim.
-    " mouse support
-    set mouse=a
 endif
 
 set shortmess=atI " Don't show the Vim intro message
