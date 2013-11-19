@@ -7,7 +7,8 @@ if ! tmux has-session -t $SESSION; then
     tmux new-session -s $SESSION -n view -d "${VIM} -c 'Clam todo.sh view context' \
         -c 'set filetype=todotxt' \
         -c 'only' \
-        -c 'set norelativenumber'"
+        -c 'set norelativenumber'
+        -c 'set laststatus=0'"
     # Split smaller window with shell
     tmux split-window -v -p 15 -t $SESSION
 fi
