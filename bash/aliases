@@ -59,3 +59,4 @@ alias external_ip="curl -s http://www.monip.org/ | grep 'IP : ' | sed -e 's/^.*I
 # common
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias vi='vim'
+alias v='vim'
