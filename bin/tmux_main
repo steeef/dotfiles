@@ -6,7 +6,5 @@ if ! tmux has-session -t $SESSION; then
     # modify panels
     tmux split-window -h -t $SESSION
     tmux last-pane -t $SESSION
-    tmux split-window -v -p 20 -t $SESSION
-    tmux last-pane -t $SESSION
 fi
 tmux attach -d -t $SESSION
