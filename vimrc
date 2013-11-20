@@ -41,6 +41,7 @@ if exists("*vundle#rc")
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
     Bundle 'junegunn/vim-easy-align'
+    Bundle 'mhinz/vim-tmuxify'
     if v:version >= 703
         Bundle 'myusuf3/numbers.vim'
     endif
@@ -427,10 +428,7 @@ nnoremap <leader><space> :nohlsearch<Enter>
 " open new vertical window and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
 " Easy window navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+" see plugin settings for tmux-navigator below
 
 " simplify indentation
 nnoremap > >>
@@ -715,5 +713,27 @@ endfunction
     " numbers -----------------------------------------------------------------"{{{
         nnoremap <leader>n :NumbersToggle<CR>
         nnoremap <leader>N :NumbersOnOff<CR>
+    "}}}
+
+    " tmuxify -----------------------------------------------------------------"{{{
+        let g:tmuxify_pane_split = '-v'
+        let g:tmuxify_pane_size  = '15'
+    "}}}
+
+    " tmux-navigator ----------------------------------------------------------"{{{
+        " If tmux-navigator is loaded
+        if exists(":TmuxNavigateLeft")
+            noremap <silent> <C-h> :TmuxNavigateLeft<cr>
+            noremap <silent> <C-j> :TmuxNavigateDown<cr>
+            noremap <silent> <C-k> :TmuxNavigateUp<cr>
+            noremap <silent> <C-l> :TmuxNavigateRight<cr>
+            noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+        else
+            noremap <C-h> <C-w>h
+            noremap <C-j> <C-w>j
+            noremap <C-k> <C-w>k
+            noremap <C-l> <C-w>l
+            noremap <C-\> <C-w><C-p>
+        endif
     "}}}
 "}}}
