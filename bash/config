@@ -14,7 +14,8 @@ fi
 
 #use extended color pallete if available
 if [[ $TERM =~ .*256color.* ]]; then
-    D=$'\e[48;5;233m\e[38;5;250m'
+    #D=$'\e[48;5;233m\e[38;5;250m'
+    D=$'\e[1;30m'
     PINK=$'\e[38;5;199m'
     GREEN=$'\e[38;5;47m'
     ORANGE=$'\e[38;5;208m'
