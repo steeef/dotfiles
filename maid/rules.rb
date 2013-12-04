@@ -37,13 +37,13 @@ Maid.rules do
 
   rule 'Old Screenshots' do
     dir('~/Documents/Screenshots/*').each do |path|
-      trash(path) if 30.day.since?(accessed_at(path))
+      trash(path) if 30.day.since?(created_at(path))
     end
   end
 
   rule 'Screenshots' do
     dir('~/Desktop/Screen Shot *').each do |path|
-      if 2.day.since?(accessed_at(path))
+      if 2.day.since?(created_at(path))
         move(path, '~/Documents/Screenshots/')
       end
     end

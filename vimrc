@@ -29,14 +29,15 @@ if exists("*vundle#rc")
     Bundle 'scrooloose/syntastic'
     Bundle 'bling/vim-airline'
     Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'maxbrunsfeld/vim-yankstack'
+    " Bundle 'maxbrunsfeld/vim-yankstack'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-endwise'
     Bundle 'tpope/vim-commentary'
     Bundle 'kien/ctrlp.vim'
     Bundle 'ciaranm/detectindent'
-    Bundle 'Lokaltog/vim-easymotion'
+    " Bundle 'Lokaltog/vim-easymotion'
+    Bundle 'justinmk/vim-sneak'
     Bundle 'sjl/gundo.vim'
     Bundle 'sjl/clam.vim'
     Bundle 'mileszs/ack.vim'
@@ -608,6 +609,11 @@ endfunction
     onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
     onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 
+    "}}}
+
+    " sneak -----------------------------------------------------------------"{{{
+    " enable streak mode
+    let g:sneak#streak = 1
     "}}}
 
     " Gundo -------------------------------------------------------------------"{{{
