@@ -58,7 +58,8 @@ alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 
 # hg
 alias hga='hg add'
-alias hgl='hg pull -u'
+alias hgl='hg pull --rebase'
+alias hgr='hg rebase'
 alias hgp='hg push'
 alias hgd='hg diff'
 alias hgc='hg commit'
