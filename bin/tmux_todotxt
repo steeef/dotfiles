@@ -4,7 +4,7 @@ VIM=/Users/sprice/bin/vim
 
 if ! tmux has-session -t $SESSION; then
     # Create new session, open vim with Clam plugin, view by context
-    tmux new-session -s $SESSION -n view -d "${VIM} -c 'Clam todo.sh view context' \
+    tmux new-session -s $SESSION -n view -d "TODOTXT=1 ${VIM} -c 'Clam todo.sh view context' \
         -c 'set filetype=todotxt' \
         -c 'only' \
         -c 'set norelativenumber'

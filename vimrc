@@ -48,7 +48,8 @@ if exists("*vundle#rc")
     endif
     Bundle 'christoomey/vim-tmux-navigator'
     " YCM requires 7.3.584
-    if v:version > 703 || (v:version == 703 && has('patch584'))
+    " Only load if not using Vim as a todo.txt display
+    if (v:version > 703 || (v:version == 703 && has('patch584'))) && !exists("$TODOTXT")
         Bundle 'Valloric/YouCompleteMe'
     endif
 
