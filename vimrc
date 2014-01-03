@@ -26,29 +26,32 @@ if exists("*vundle#rc")
     Bundle 'gmarik/vundle'
     " Bundles to manage with vundle
     " ---------------------------------------------------------"{{{
-    Bundle 'scrooloose/syntastic'
     Bundle 'bling/vim-airline'
     Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'tpope/vim-surround'
-    Bundle 'tpope/vim-repeat'
-    Bundle 'tpope/vim-endwise'
-    Bundle 'tpope/vim-commentary'
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'ciaranm/detectindent'
-    Bundle 'justinmk/vim-sneak'
-    Bundle 'sjl/gundo.vim'
     Bundle 'sjl/clam.vim'
-    Bundle 'mileszs/ack.vim'
-    Bundle 'junegunn/vim-easy-align'
-    Bundle 'mhinz/vim-tmuxify'
-    if v:version >= 703
-        Bundle 'myusuf3/numbers.vim'
-    endif
-    Bundle 'christoomey/vim-tmux-navigator'
-    " YCM requires 7.3.584
-    " Only load if not using Vim as a todo.txt display
-    if (v:version > 703 || (v:version == 703 && has('patch584'))) && !exists("$TODOTXT")
-        Bundle 'Valloric/YouCompleteMe'
+
+    " Only load following if not using Vim as a todo.txt display
+    if !exists("$TODOTXT")
+        Bundle 'mhinz/vim-tmuxify'
+        Bundle 'christoomey/vim-tmux-navigator'
+        Bundle 'tpope/vim-surround'
+        Bundle 'tpope/vim-repeat'
+        Bundle 'tpope/vim-endwise'
+        Bundle 'kien/ctrlp.vim'
+        Bundle 'ciaranm/detectindent'
+        Bundle 'scrooloose/syntastic'
+        Bundle 'tpope/vim-commentary'
+        Bundle 'justinmk/vim-sneak'
+        Bundle 'mileszs/ack.vim'
+        Bundle 'sjl/gundo.vim'
+        Bundle 'junegunn/vim-easy-align'
+        if v:version >= 703
+            Bundle 'myusuf3/numbers.vim'
+        endif
+        " YCM requires 7.3.584
+        if v:version > 703 || (v:version == 703 && has('patch584'))
+            Bundle 'Valloric/YouCompleteMe'
+        endif
     endif
 
     " colorschemes
