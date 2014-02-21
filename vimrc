@@ -45,6 +45,7 @@ if exists("*vundle#rc")
         Bundle 'mileszs/ack.vim'
         Bundle 'sjl/gundo.vim'
         Bundle 'junegunn/vim-easy-align'
+        Bundle 'takac/vim-hardtime'
         if v:version >= 703
             Bundle 'myusuf3/numbers.vim'
         endif
@@ -700,6 +701,10 @@ endfunction
     " numbers -----------------------------------------------------------------"{{{
         nnoremap <leader>n :NumbersToggle<CR>
         nnoremap <leader>N :NumbersOnOff<CR>
+    "}}}
+    "
+    " hardtime ----------------------------------------------------------------"{{{
+        let g:hardtime_default_on = 1
     "}}}
 
     " tmuxify -----------------------------------------------------------------"{{{
