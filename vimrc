@@ -233,7 +233,7 @@ set shiftround
 set ignorecase
 set smartcase
 set incsearch
-set hlsearch
+set nohlsearch
 set showmatch
 
 "matching
@@ -589,27 +589,6 @@ endfunction
     let g:ctrlp_split_window = 0
 
     nnoremap <leader>b :CtrlPBuffer<CR>
-
-    "}}}
-
-    " EasyMotion --------------------------------------------------------------"{{{
-    " map specific functions to specific keys rather than let
-    " EasyMotion do the mapping
-    let g:EasyMotion_do_mapping = 0
-
-    nnoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
-    onoremap <silent> <leader>f      :call EasyMotion#F(0, 0)<CR>
-    vnoremap <silent> <leader>f :<C-U>call EasyMotion#F(1, 0)<CR>
-
-    nnoremap <silent> <leader>F      :call EasyMotion#F(0, 1)<CR>
-    onoremap <silent> <leader>F      :call EasyMotion#F(0, 1)<CR>
-    vnoremap <silent> <leader>F :<C-U>call EasyMotion#F(1, 1)<CR>
-
-    onoremap <silent> <leader>t      :call EasyMotion#T(0, 0)<CR>
-    onoremap <silent> <leader>T      :call EasyMotion#T(0, 1)<CR>
-
-    onoremap <silent> <Leader>j      :call EasyMotion#JK(0, 0)<CR>
-    onoremap <silent> <Leader>k      :call EasyMotion#JK(0, 1)<CR>
 
     "}}}
 
