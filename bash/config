@@ -1,17 +1,3 @@
-# grab python version as prompt.py won't work on < 2.6
-PYVER=`/usr/bin/env python -c 'import platform; print(platform.python_version())'`
-REQPYVER=2.6.0
-HGPROMPT=false
-
-#hg prompt >/dev/null 2>&1; PROMPTERR=$?
-#if [ $PROMPTERR != 0 ]; then
-#    if [[ $PYVER > $REQPYVER ]]; then
-#        HGPROMPT=true
-#    elif [[ $PYVER == $REQPYVER ]]; then
-#        HGPROMPT=true
-#    fi
-#fi
-
 #use extended color pallete if available
 if [[ $TERM =~ .*256color.* ]]; then
     #D=$'\e[48;5;233m\e[38;5;250m'
@@ -28,13 +14,7 @@ else
     RED=$'\e[31;40m'
 fi
 
-hg_ps1() {
-    if $HGPROMPT ; then
-        hg prompt "{${D} (${PINK}{branch}}${D}){at ${ORANGE}{bookmark}}{${RED}{status}}" 2>/dev/null
-    fi
-}
-
-export PS1='\n${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w$(hg_ps1)${D}\n$ '
+export PS1='\n${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w${D}\n$ '
 export EDITOR="vim"
 
 # vi mode
