@@ -46,6 +46,7 @@ if exists("*vundle#rc")
         Bundle 'sjl/gundo.vim'
         Bundle 'junegunn/vim-easy-align'
         Bundle 'takac/vim-hardtime'
+        Bundle 'tpope/vim-fugitive'
         if v:version >= 703
             Bundle 'myusuf3/numbers.vim'
         endif
