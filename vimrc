@@ -45,8 +45,9 @@ if exists("*vundle#rc")
         Bundle 'mileszs/ack.vim'
         Bundle 'sjl/gundo.vim'
         Bundle 'junegunn/vim-easy-align'
-        Bundle 'takac/vim-hardtime'
+        "Bundle 'takac/vim-hardtime'
         Bundle 'tpope/vim-fugitive'
+        Bundle 'tpope/vim-dispatch'
         if v:version >= 703
             Bundle 'myusuf3/numbers.vim'
         endif
@@ -70,6 +71,8 @@ if exists("*vundle#rc")
     Bundle 'steeef/todo.txt-vim'
     Bundle 'avakhov/vim-yaml'
     Bundle 'LaTeX-Box-Team/LaTeX-Box'
+    Bundle 'kchmck/vim-coffee-script'
+    Bundle 'jnwhiteh/vim-golang'
     "}}}
 
     " post-vundle settings
@@ -298,7 +301,7 @@ if has("autocmd")
     augroup END
 
     " Set ruby-specific formatting
-    autocmd FileType ruby,puppet setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType ruby,puppet,coffee setlocal ts=2 sts=2 sw=2 expandtab
 
     " vim, vim helpfiles
     augroup ft_vim
@@ -590,6 +593,10 @@ endfunction
     let g:ctrlp_max_height = 15
     let g:ctrlp_split_window = 0
 
+    " .git folders
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+    let g:ctrlp_use_caching = 0
+
     nnoremap <leader>b :CtrlPBuffer<CR>
 
     "}}}
@@ -697,6 +704,7 @@ endfunction
     let g:airline_theme = 'jellybeans'
     let g:airline_left_sep=''
     let g:airline_right_sep=''
+    let g:airline_section_z=''
     "}}}
 
     " numbers -----------------------------------------------------------------"{{{
