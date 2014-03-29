@@ -47,6 +47,7 @@ if exists("*vundle#rc")
         Bundle 'junegunn/vim-easy-align'
         "Bundle 'takac/vim-hardtime'
         Bundle 'tpope/vim-fugitive'
+        Bundle 'airblade/vim-gitgutter'
         Bundle 'tpope/vim-dispatch'
         if v:version >= 703
             Bundle 'myusuf3/numbers.vim'
@@ -719,6 +720,15 @@ endfunction
     " tmuxify -----------------------------------------------------------------"{{{
         let g:tmuxify_pane_split = '-v'
         let g:tmuxify_pane_size  = '15'
+    "}}}
+
+    " fugitive ----------------------------------------------------------------"{{{
+        nnoremap <Leader>gs :Gstatus<CR>
+        nnoremap <Leader>gd :Gdiff<CR>
+        nnoremap <Leader>gb :Gblame<CR>
+        nnoremap <Leader>gr :Gread<CR>
+        nnoremap <Leader>gw :Gwrite<CR>
+        nnoremap <Leader>gp :Git push<CR>
     "}}}
 
     " tmux-navigator ----------------------------------------------------------"{{{
