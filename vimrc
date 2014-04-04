@@ -728,6 +728,7 @@ endfunction
         nnoremap <Leader>gb :Gblame<CR>
         nnoremap <Leader>gr :Gread<CR>
         nnoremap <Leader>gw :Gwrite<CR>
+        nnoremap <Leader>gc :Gcommit --all<CR>
         nnoremap <Leader>gp :Git push<CR>
     "}}}
 

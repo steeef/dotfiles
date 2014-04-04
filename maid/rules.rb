@@ -49,13 +49,13 @@ Maid.rules do
     end
   end
 
-  rule 'Mac OS X applications in zip files' do
-    found = dir('~/Downloads/*.zip').select { |path|
-      zipfile_contents(path).any? { |c| c.match(/\.app$/) }
-    }
+  # rule 'Mac OS X applications in zip files' do
+  #   found = dir('~/Downloads/*.zip').select { |path|
+  #     zipfile_contents(path).any? { |c| c.match(/\.app$/) }
+  #   }
 
-    trash(found)
-  end
+  #   trash(found)
+  # end
 
   rule 'added Torrent files (Transmission)' do
     remove(dir('~/Dropbox/torrents/*.added'))
