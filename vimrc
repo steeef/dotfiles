@@ -48,6 +48,7 @@ if exists("*vundle#rc")
         "Bundle 'takac/vim-hardtime'
         Bundle 'tpope/vim-fugitive'
         Bundle 'airblade/vim-gitgutter'
+        Bundle 'rson/vim-conque'
         Bundle 'tpope/vim-dispatch'
         if v:version >= 703
             Bundle 'myusuf3/numbers.vim'
@@ -193,21 +194,6 @@ set textwidth=79
 
 " }}}
 
-" Numbers now handled by numbers.vim plugin
-"set line number settings based on features. Relative number is preferred.
-"Vim >= 7.4 has a hybrid mode that will display the current line number as
-"well as relative line numbers. You set it by setting both relativenumber
-"and number.
-" if v:version > 703
-"     set relativenumber
-"     set number
-" else
-"     if exists("+relativenumber")
-"         set relativenumber
-"     else
-"         set number
-"     endif
-" endif
 set number
 
 " Prevent Vim from clearing the scrollback buffer
@@ -616,6 +602,16 @@ endfunction
     " Clam --------------------------------------------------------------------"{{{
 
     nnoremap <leader>l :Clam<space>
+    " puppet git commands
+    cnoremap hgdp Clam git checkout master && git pull && git checkout development
+                \ && git merge master -m "merge staging into dev" && git push;
+                \ git checkout development<CR>
+    cnoremap hgsp Clam git checkout master && git pull &&
+                \ git merge development -m "merge dev into staging" && git push;
+                \ git checkout development<CR>
+    cnoremap hgpp Clam git checkout production && git pull &&
+                \ git merge master -m "merge staging into production" && git push;
+                \ git checkout development<CR>
 
     "}}}
 
