@@ -48,7 +48,6 @@ if exists("*vundle#rc")
         "Bundle 'takac/vim-hardtime'
         Bundle 'tpope/vim-fugitive'
         Bundle 'airblade/vim-gitgutter'
-        Bundle 'rosenfeld/conque-term'
         Bundle 'tpope/vim-dispatch'
         if v:version >= 703
             Bundle 'myusuf3/numbers.vim'
