@@ -741,14 +741,13 @@ command! -complete=shellcmd -nargs=* -bang Shell call s:ExecuteInShell(<q-args>,
         nnoremap <leader>n :NumbersToggle<CR>
         nnoremap <leader>N :NumbersOnOff<CR>
     "}}}
-    "
+
     " hardtime ----------------------------------------------------------------"{{{
         let g:hardtime_default_on = 1
     "}}}
 
     " tmuxify -----------------------------------------------------------------"{{{
-        let g:tmuxify_pane_split = '-v'
-        let g:tmuxify_pane_size  = '15'
+        let g:tmuxify_custom_command  = 'tmux split-window -v -l 15'
     "}}}
 
     " fugitive ----------------------------------------------------------------"{{{
