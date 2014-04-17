@@ -459,6 +459,9 @@ nnoremap <leader>s :%s//<left>
 nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
 inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
 
+" Insert a hash rocket with <c-l>
+imap <c-l> <space>=>
+
 " Registers -------------------------------------------------------------- "{{{
 
 " Use the OS clipboard by default
@@ -477,8 +480,6 @@ nmap <leader>p pV`]=
 " Abbreviations ---------------------------------------------------------- "{{{
 
 iabbrev myName Stephen Price <sprice@monsooncommerce.com>
-" Insert a hash rocket with <c-l>
-imap <c-l> <space>=><space>
 
 "}}}
 
