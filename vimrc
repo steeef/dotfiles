@@ -414,7 +414,7 @@ nnoremap ; :
 nnoremap : ;
 
 " sudo save if not root
-cnoremap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null <CR> :e! <CR><CR>
 
 " remove search highlighting
 nnoremap <leader><space> :nohlsearch<Enter>
