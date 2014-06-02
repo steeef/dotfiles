@@ -73,7 +73,7 @@ if exists("*vundle#rc")
     Bundle 'avakhov/vim-yaml'
     Bundle 'LaTeX-Box-Team/LaTeX-Box'
     Bundle 'kchmck/vim-coffee-script'
-    Bundle 'jnwhiteh/vim-golang'
+    Bundle 'fatih/vim-go'
     "}}}
 
     " post-vundle settings
