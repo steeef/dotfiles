@@ -285,6 +285,10 @@ if has("autocmd")
     augroup ft_todotxt
         au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
     augroup END
+    " eyaml: encrypted yaml for Puppet and Hiera
+    augroup ft_eyaml
+        au BufNewFile,BufRead *.eyaml set filetype=yaml
+    augroup END
 
     " Set ruby-specific formatting
     autocmd FileType ruby,puppet,coffee setlocal ts=2 sts=2 sw=2 expandtab
