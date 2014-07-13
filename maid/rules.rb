@@ -26,6 +26,7 @@ Maid.rules do
   rule 'Old downloads' do
     dir('~/Downloads/*').each do |path|
       trash(path) if 180.day.since?(accessed_at(path))
+      trash(path) if 365.day.since?(created_at(path))
     end
   end
 
@@ -87,6 +88,8 @@ Maid.rules do
   rule 'Take out the Trash' do
     dir('~/.Trash/*').each do |p|
       remove(p) if 30.days.since?(accessed_at(p))
+      remove(p) if 180.days.since?(created_at(p))
+      remove(p) if 180.days.since?(modified_at(p))
     end
   end
 
