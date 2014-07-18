@@ -25,13 +25,13 @@ Maid.rules do
 
   rule 'Oldest downloads' do
     dir('~/Downloads/*').each do |path|
-      trash(path) if 365.day.since?(created_at(path))
+      trash(path) if 180.day.since?(created_at(path))
     end
   end
 
   rule 'Old downloads' do
     dir('~/Downloads/*').each do |path|
-      trash(path) if 180.day.since?(accessed_at(path))
+      trash(path) if 30.day.since?(accessed_at(path))
     end
   end
 
@@ -55,18 +55,6 @@ Maid.rules do
     end
   end
 
-  # rule 'Mac OS X applications in zip files' do
-  #   found = dir('~/Downloads/*.zip').select { |path|
-  #     zipfile_contents(path).any? { |c| c.match(/\.app$/) }
-  #   }
-
-  #   trash(found)
-  # end
-
-  rule 'added Torrent files (Transmission)' do
-    remove(dir('~/Dropbox/torrents/*.added'))
-  end
-
   rule 'Remove expendable files' do
     dir('~/Downloads/*.{csv,pdf,doc,docx,gem,vcs,ics,ppt,js,rb,xml,xlsx}').each do |p|
       trash(p) if 3.days.since?(accessed_at(p))
@@ -84,21 +72,30 @@ Maid.rules do
   # archive, so get rid of the folder.
   rule 'Remove directories in Downloads' do
     dir(['~/Downloads/*']).each do |p|
-      if File.directory?(p) && 2.days.since?(accessed_at(p))
+      if File.directory?(p) && 7.days.since?(created_at(p))
         trash(p)
       end
     end
   end
 
-  rule 'Take out the Trash' do
+  rule 'Take out the Trash (accessed)' do
     dir('~/.Trash/*').each do |p|
       remove(p) if 30.days.since?(accessed_at(p))
     end
   end
 
-  rule 'Take out the Trash' do
+  rule 'Take out the Trash (created)' do
     dir('~/.Trash/*').each do |p|
       remove(p) if 180.days.since?(created_at(p))
+    end
+  end
+
+  # This one should be after all the other 'Downloads' and 'Outbox' rules
+  rule 'Remove empty directories' do
+    dir(['~/Downloads/*']).each do |path|
+      if File.directory?(path) && dir("#{ path }/*").empty?
+        trash(path)
+      end
     end
   end
 
