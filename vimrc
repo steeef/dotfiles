@@ -18,54 +18,56 @@ call plug#begin(bundlepath)
 
 " plugins ---------------------------------------------------------"{{{
 
-Plug 'bling/vim-airline'
-Plug 'vim-scripts/IndexedSearch'
-"Plug 'sjl/clam.vim'
-Plug 'mhinz/vim-tmuxify'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-endwise'
-" Prefer fzf to ctrlp
-if !executable("fzf")
-    Plug 'kien/ctrlp.vim'
-endif
-Plug 'ciaranm/detectindent'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-commentary'
-Plug 'justinmk/vim-sneak'
-Plug 'mileszs/ack.vim'
-Plug 'sjl/gundo.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
-"Plug 'takac/vim-hardtime'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-"Plug 'tpope/vim-dispatch'
-if v:version >= 703
-    Plug 'myusuf3/numbers.vim'
-endif
-" YCM requires 7.3.584
-if v:version > 703 || (v:version == 703 && has('patch584'))
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-endif
+if exists(":PlugInstall")
+    Plug 'bling/vim-airline'
+    Plug 'vim-scripts/IndexedSearch'
+    "Plug 'sjl/clam.vim'
+    Plug 'mhinz/vim-tmuxify'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-endwise'
+    " Prefer fzf to ctrlp
+    if !executable("fzf")
+        Plug 'kien/ctrlp.vim'
+    endif
+    Plug 'ciaranm/detectindent'
+    Plug 'scrooloose/syntastic'
+    Plug 'tpope/vim-commentary'
+    Plug 'justinmk/vim-sneak'
+    Plug 'mileszs/ack.vim'
+    Plug 'sjl/gundo.vim'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+    "Plug 'takac/vim-hardtime'
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+    "Plug 'tpope/vim-dispatch'
+    if v:version >= 703
+        Plug 'myusuf3/numbers.vim'
+    endif
+    " YCM requires 7.3.584
+    if v:version > 703 || (v:version == 703 && has('patch584'))
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+    endif
 
-" colorschemes
-Plug 'nanotech/jellybeans.vim'
-Plug 'sjl/badwolf'
-Plug 'w0ng/vim-hybrid'
-Plug 'junegunn/seoul256.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
+    " colorschemes
+    Plug 'nanotech/jellybeans.vim'
+    Plug 'sjl/badwolf'
+    Plug 'w0ng/vim-hybrid'
+    Plug 'junegunn/seoul256.vim'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'chriskempson/base16-vim'
 
-" language-specific bundles
-Plug 'vim-ruby/vim-ruby'
-Plug 'rodjek/vim-puppet'
-"Plug 'steeef/todo.txt-vim'
-Plug 'avakhov/vim-yaml'
-Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'fatih/vim-go', { 'for': 'go' }
+    " language-specific bundles
+    Plug 'vim-ruby/vim-ruby'
+    Plug 'rodjek/vim-puppet'
+    "Plug 'steeef/todo.txt-vim'
+    Plug 'avakhov/vim-yaml'
+    Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
+    Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+    Plug 'fatih/vim-go', { 'for': 'go' }
+endif
 
 "}}}
 
