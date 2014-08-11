@@ -100,3 +100,4 @@ bindkey "^[[G" history-beginning-search-forward
 
 # Local Settings -------------------------------------------------------------
 if [[ -s $HOME/.zshrc_local ]] ; then source $HOME/.zshrc_local ; fi
+source ~/.fzf.zsh
