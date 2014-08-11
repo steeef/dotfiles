@@ -199,9 +199,6 @@ set number
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
 
-"set underscore as a word boundary
-set iskeyword-=_
-
 "allow backspace to work for indents, between lines, and the start of insert mode
 set backspace=indent,eol,start
 
@@ -291,7 +288,13 @@ if has("autocmd")
     augroup END
 
     " Set ruby-specific formatting
-    autocmd FileType ruby,puppet,coffee setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType ruby,coffee setlocal ts=2 sts=2 sw=2 expandtab
+    " Set puppet stuff
+    augroup ft_puppet
+        autocmd FileType puppet setlocal ts=2 sts=2 sw=2 expandtab
+        autocmd FileType puppet setlocal iskeyword-=:
+        autocmd FileType puppet setlocal iskeyword-=_
+    augroup END
 
     " vim, vim helpfiles
     augroup ft_vim
