@@ -37,7 +37,10 @@ if exists("*vundle#rc")
         Bundle 'tpope/vim-surround'
         Bundle 'tpope/vim-repeat'
         Bundle 'tpope/vim-endwise'
-        "Bundle 'kien/ctrlp.vim'
+        " Prefer fzf to ctrlp
+        if !executable("fzf")
+            Bundle 'kien/ctrlp.vim'
+        endif
         Bundle 'ciaranm/detectindent'
         Bundle 'scrooloose/syntastic'
         Bundle 'tpope/vim-commentary'
@@ -372,7 +375,9 @@ let mapleader=","
 silent! call yankstack#setup()
 
 " F2F
-nnoremap <leader>, :FZF<enter>
+if executable("fzf")
+    nnoremap <leader>, :FZF<enter>
+endif
 "disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
