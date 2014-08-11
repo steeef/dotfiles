@@ -26,58 +26,54 @@ if exists("*vundle#rc")
     Bundle 'gmarik/vundle'
     " Bundles to manage with vundle
     " ---------------------------------------------------------"{{{
-    Bundle 'bling/vim-airline'
-    Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'sjl/clam.vim'
-
-    " Only load following if not using Vim as a todo.txt display
-    if !exists("$TODOTXT")
-        Bundle 'mhinz/vim-tmuxify'
-        Bundle 'christoomey/vim-tmux-navigator'
-        Bundle 'tpope/vim-surround'
-        Bundle 'tpope/vim-repeat'
-        Bundle 'tpope/vim-endwise'
-        " Prefer fzf to ctrlp
-        if !executable("fzf")
-            Bundle 'kien/ctrlp.vim'
-        endif
-        Bundle 'ciaranm/detectindent'
-        Bundle 'scrooloose/syntastic'
-        Bundle 'tpope/vim-commentary'
-        Bundle 'justinmk/vim-sneak'
-        Bundle 'mileszs/ack.vim'
-        Bundle 'sjl/gundo.vim'
-        Bundle 'junegunn/vim-easy-align'
-        Bundle 'junegunn/fzf'
-        "Bundle 'takac/vim-hardtime'
-        Bundle 'tpope/vim-fugitive'
-        Bundle 'airblade/vim-gitgutter'
-        "Bundle 'tpope/vim-dispatch'
-        if v:version >= 703
-            Bundle 'myusuf3/numbers.vim'
-        endif
-        " YCM requires 7.3.584
-        if v:version > 703 || (v:version == 703 && has('patch584'))
-            Bundle 'Valloric/YouCompleteMe'
-        endif
+    "Bundle 'bling/vim-airline'
+    "Bundle 'vim-scripts/IndexedSearch'
+    "Bundle 'sjl/clam.vim'
+    "Bundle 'mhinz/vim-tmuxify'
+    "Bundle 'christoomey/vim-tmux-navigator'
+    "Bundle 'tpope/vim-surround'
+    "Bundle 'tpope/vim-repeat'
+    "Bundle 'tpope/vim-endwise'
+    " Prefer fzf to ctrlp
+    if !executable("fzf")
+        "Bundle 'kien/ctrlp.vim'
+    endif
+    "Bundle 'ciaranm/detectindent'
+    "Bundle 'scrooloose/syntastic'
+    "Bundle 'tpope/vim-commentary'
+    "Bundle 'justinmk/vim-sneak'
+    "Bundle 'mileszs/ack.vim'
+    "Bundle 'sjl/gundo.vim'
+    "Bundle 'junegunn/vim-easy-align'
+    "Bundle 'junegunn/fzf'
+    "Bundle 'takac/vim-hardtime'
+    "Bundle 'tpope/vim-fugitive'
+    "Bundle 'airblade/vim-gitgutter'
+    "Bundle 'tpope/vim-dispatch'
+    if v:version >= 703
+        "Bundle 'myusuf3/numbers.vim'
+    endif
+    " YCM requires 7.3.584
+    if v:version > 703 || (v:version == 703 && has('patch584'))
+        "Bundle 'Valloric/YouCompleteMe'
     endif
 
     " colorschemes
-    Bundle 'nanotech/jellybeans.vim'
-    Bundle 'sjl/badwolf'
-    Bundle 'w0ng/vim-hybrid'
-    Bundle 'junegunn/seoul256.vim'
-    Bundle 'altercation/vim-colors-solarized'
-    Bundle 'chriskempson/base16-vim'
+    "Bundle 'nanotech/jellybeans.vim'
+    "Bundle 'sjl/badwolf'
+    "Bundle 'w0ng/vim-hybrid'
+    "Bundle 'junegunn/seoul256.vim'
+    "Bundle 'altercation/vim-colors-solarized'
+    "Bundle 'chriskempson/base16-vim'
 
     " language-specific bundles
-    Bundle 'vim-ruby/vim-ruby'
-    Bundle 'rodjek/vim-puppet'
-    Bundle 'steeef/todo.txt-vim'
-    Bundle 'avakhov/vim-yaml'
-    Bundle 'LaTeX-Box-Team/LaTeX-Box'
-    Bundle 'kchmck/vim-coffee-script'
-    Bundle 'fatih/vim-go'
+    "Bundle 'vim-ruby/vim-ruby'
+    "Bundle 'rodjek/vim-puppet'
+    "Bundle 'steeef/todo.txt-vim'
+    "Bundle 'avakhov/vim-yaml'
+    "Bundle 'LaTeX-Box-Team/LaTeX-Box'
+    "Bundle 'kchmck/vim-coffee-script'
+    "Bundle 'fatih/vim-go'
     "}}}
 
     " post-vundle settings
