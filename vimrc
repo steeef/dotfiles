@@ -45,6 +45,7 @@ if exists("*vundle#rc")
         Bundle 'mileszs/ack.vim'
         Bundle 'sjl/gundo.vim'
         Bundle 'junegunn/vim-easy-align'
+        Bundle 'junegunn/fzf'
         "Bundle 'takac/vim-hardtime'
         Bundle 'tpope/vim-fugitive'
         Bundle 'airblade/vim-gitgutter'
@@ -370,6 +371,8 @@ let mapleader=","
 " setup yankstack before mappings
 silent! call yankstack#setup()
 
+" F2F
+nnoremap <leader>, :FZF<enter>
 "disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
