@@ -37,7 +37,7 @@ if exists("*vundle#rc")
         Bundle 'tpope/vim-surround'
         Bundle 'tpope/vim-repeat'
         Bundle 'tpope/vim-endwise'
-        Bundle 'kien/ctrlp.vim'
+        "Bundle 'kien/ctrlp.vim'
         Bundle 'ciaranm/detectindent'
         Bundle 'scrooloose/syntastic'
         Bundle 'tpope/vim-commentary'
