@@ -2,85 +2,75 @@
 
 scriptencoding utf-8
 set nocompatible
-filetype plugin indent on
 
 "}}}
 
-" vundle ----------------------------------------------------------------- "{{{
+" vim-plug --------------------------------------------------------------- "{{{
+
 if !empty($SUDO_USER)
-    " Use sudo user's vundle path
-    let vundlepath = "/home/$SUDO_USER/.vim/bundle"
+    " Use sudo user's bundle path
+    let bundlepath = "/home/$SUDO_USER/.vim/bundle"
 else
-    let vundlepath = "~/.vim/bundle"
+    let bundlepath = "~/.vim/bundle"
 endif
 
-execute "set rtp+=".vundlepath."/vundle/"
-runtime autoload/vundle.vim " apparently without this the exists() check fails
-" if vundle is loaded
-if exists("*vundle#rc")
-    filetype off
-    call vundle#rc(vundlepath)
+call plug#begin(bundlepath)
 
-    " let Vundle manage Vundle
-    " required!
-    Bundle 'gmarik/vundle'
-    " Bundles to manage with vundle
-    " ---------------------------------------------------------"{{{
-    "Bundle 'bling/vim-airline'
-    "Bundle 'vim-scripts/IndexedSearch'
-    "Bundle 'sjl/clam.vim'
-    "Bundle 'mhinz/vim-tmuxify'
-    "Bundle 'christoomey/vim-tmux-navigator'
-    "Bundle 'tpope/vim-surround'
-    "Bundle 'tpope/vim-repeat'
-    "Bundle 'tpope/vim-endwise'
-    " Prefer fzf to ctrlp
-    if !executable("fzf")
-        "Bundle 'kien/ctrlp.vim'
-    endif
-    "Bundle 'ciaranm/detectindent'
-    "Bundle 'scrooloose/syntastic'
-    "Bundle 'tpope/vim-commentary'
-    "Bundle 'justinmk/vim-sneak'
-    "Bundle 'mileszs/ack.vim'
-    "Bundle 'sjl/gundo.vim'
-    "Bundle 'junegunn/vim-easy-align'
-    "Bundle 'junegunn/fzf'
-    "Bundle 'takac/vim-hardtime'
-    "Bundle 'tpope/vim-fugitive'
-    "Bundle 'airblade/vim-gitgutter'
-    "Bundle 'tpope/vim-dispatch'
-    if v:version >= 703
-        "Bundle 'myusuf3/numbers.vim'
-    endif
-    " YCM requires 7.3.584
-    if v:version > 703 || (v:version == 703 && has('patch584'))
-        "Bundle 'Valloric/YouCompleteMe'
-    endif
+" plugins ---------------------------------------------------------"{{{
 
-    " colorschemes
-    "Bundle 'nanotech/jellybeans.vim'
-    "Bundle 'sjl/badwolf'
-    "Bundle 'w0ng/vim-hybrid'
-    "Bundle 'junegunn/seoul256.vim'
-    "Bundle 'altercation/vim-colors-solarized'
-    "Bundle 'chriskempson/base16-vim'
-
-    " language-specific bundles
-    "Bundle 'vim-ruby/vim-ruby'
-    "Bundle 'rodjek/vim-puppet'
-    "Bundle 'steeef/todo.txt-vim'
-    "Bundle 'avakhov/vim-yaml'
-    "Bundle 'LaTeX-Box-Team/LaTeX-Box'
-    "Bundle 'kchmck/vim-coffee-script'
-    "Bundle 'fatih/vim-go'
-    "}}}
-
-    " post-vundle settings
-    filetype plugin indent on
+Plug 'bling/vim-airline'
+Plug 'vim-scripts/IndexedSearch'
+"Plug 'sjl/clam.vim'
+Plug 'mhinz/vim-tmuxify'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-endwise'
+" Prefer fzf to ctrlp
+if !executable("fzf")
+    Plug 'kien/ctrlp.vim'
+endif
+Plug 'ciaranm/detectindent'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-commentary'
+Plug 'justinmk/vim-sneak'
+Plug 'mileszs/ack.vim'
+Plug 'sjl/gundo.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+"Plug 'takac/vim-hardtime'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-dispatch'
+if v:version >= 703
+    Plug 'myusuf3/numbers.vim'
+endif
+" YCM requires 7.3.584
+if v:version > 703 || (v:version == 703 && has('patch584'))
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 endif
 
-syntax enable
+" colorschemes
+Plug 'nanotech/jellybeans.vim'
+Plug 'sjl/badwolf'
+Plug 'w0ng/vim-hybrid'
+Plug 'junegunn/seoul256.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
+
+" language-specific bundles
+Plug 'vim-ruby/vim-ruby'
+Plug 'rodjek/vim-puppet'
+"Plug 'steeef/todo.txt-vim'
+Plug 'avakhov/vim-yaml'
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'fatih/vim-go', { 'for': 'go' }
+
+"}}}
+
+call plug#end()
+
 "}}}
 
 " appearance/font -------------------------------------------------------- "{{{
