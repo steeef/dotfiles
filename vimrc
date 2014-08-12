@@ -27,18 +27,13 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-endwise'
-    " Prefer fzf to ctrlp
-    if !executable("fzf")
-        Plug 'kien/ctrlp.vim'
-    endif
-    Plug 'ciaranm/detectindent'
     Plug 'scrooloose/syntastic'
-    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
     Plug 'justinmk/vim-sneak'
-    Plug 'mileszs/ack.vim'
-    Plug 'sjl/gundo.vim'
+    Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
+    Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
     Plug 'junegunn/vim-easy-align'
-    Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+    Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
     "Plug 'takac/vim-hardtime'
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
@@ -60,13 +55,14 @@ if exists(":PlugInstall")
     Plug 'chriskempson/base16-vim'
 
     " language-specific bundles
-    Plug 'vim-ruby/vim-ruby'
-    Plug 'rodjek/vim-puppet'
+    Plug 'vim-ruby/vim-ruby',        { 'for': 'ruby' }
+    Plug 'rodjek/vim-puppet',        { 'for': 'puppet' }
     "Plug 'steeef/todo.txt-vim'
-    Plug 'avakhov/vim-yaml'
+    Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
     Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
     Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-    Plug 'fatih/vim-go', { 'for': 'go' }
+    Plug 'fatih/vim-go',             { 'for': 'go' }
+    Plug 'plasticboy/vim-markdown',  { 'for': 'markdown' }
 endif
 
 "}}}
@@ -779,5 +775,10 @@ command! -complete=shellcmd -nargs=* -bang Shell call s:ExecuteInShell(<q-args>,
             noremap <C-l> <C-w>l
             noremap <C-\> <C-w><C-p>
         endif
+    "}}}
+
+    " vim-commentary ----------------------------------------------------------"{{{
+        map  gc  <Plug>Commentary
+        nmap gcc <Plug>CommentaryLine
     "}}}
 "}}}
