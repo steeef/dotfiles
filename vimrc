@@ -43,11 +43,11 @@ if exists(":PlugInstall")
     endif
 
     " colorschemes
-    Plug 'nanotech/jellybeans.vim'
-    Plug 'sjl/badwolf'
+    " Plug 'nanotech/jellybeans.vim'
+    " Plug 'sjl/badwolf'
     Plug 'w0ng/vim-hybrid'
-    Plug 'junegunn/seoul256.vim'
-    Plug 'altercation/vim-colors-solarized'
+    " Plug 'junegunn/seoul256.vim'
+    " Plug 'altercation/vim-colors-solarized'
     Plug 'chriskempson/base16-vim'
 
     " language-specific bundles
