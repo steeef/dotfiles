@@ -21,7 +21,6 @@ call plug#begin(bundlepath)
 if exists(":PlugInstall")
     Plug 'bling/vim-airline'
     Plug 'vim-scripts/IndexedSearch'
-    "Plug 'sjl/clam.vim'
     Plug 'mhinz/vim-tmuxify'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'tpope/vim-surround'
@@ -38,9 +37,6 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     "Plug 'tpope/vim-dispatch'
-    if v:version >= 703
-        Plug 'myusuf3/numbers.vim'
-    endif
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
         Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
@@ -160,6 +156,15 @@ if exists("+colorcolumn")
     set colorcolumn=85
 endif
 
+" 7.4 has hybrid mode, so set both
+" 7.3 has just relative number, so set just that
+if v:version >= 703
+    set relativenumber
+endif
+if v:version != 703
+    set number
+endif
+
 " Buffers ---------------------------------------------------------------- "{{{
 
 " Allow unsaved background buffers and remember marks/undo for them
@@ -181,8 +186,6 @@ set textwidth=79
 
 " }}}
 
-set number
-
 " Prevent Vim from clearing the scrollback buffer
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
@@ -194,7 +197,7 @@ set backspace=indent,eol,start
 set formatoptions=qrn1
 " Delete comment character when joining commented lines
 if v:version > 703 || v:version == 703 && has("patch541")
-  set formatoptions+=j
+    set formatoptions+=j
 endif
 
 "indent options
@@ -297,9 +300,9 @@ if has("autocmd")
 
     " Return to last position when file is reopened
     autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+                \ if line("'\"") > 1 && line("'\"") <= line("$") |
+                \   exe "normal! g`\"" |
+                \ endif
 endif
 " }}}
 
@@ -525,46 +528,46 @@ set foldtext=MyFoldText()
 
 command! -nargs=* Stab call Stab()
 function! Stab()
-  let l:tabstop = 1 * input('set shiftwidth=')
+    let l:tabstop = 1 * input('set shiftwidth=')
 
-  if l:tabstop > 0
-    " do we want expandtab as well?
-    let l:expandtab = confirm('set expandtab?', "&Yes\n&No\n&Cancel")
-    if l:expandtab == 3
-      " abort?
-      return
+    if l:tabstop > 0
+        " do we want expandtab as well?
+        let l:expandtab = confirm('set expandtab?', "&Yes\n&No\n&Cancel")
+        if l:expandtab == 3
+            " abort?
+            return
+        endif
+
+        let &l:sts = l:tabstop
+        let &l:ts = l:tabstop
+        let &l:sw = l:tabstop
+
+        if l:expandtab == 1
+            setlocal expandtab
+        else
+            setlocal noexpandtab
+        endif
     endif
 
-    let &l:sts = l:tabstop
-    let &l:ts = l:tabstop
-    let &l:sw = l:tabstop
-
-    if l:expandtab == 1
-      setlocal expandtab
-    else
-      setlocal noexpandtab
-    endif
-  endif
-
-  " show the selected options
-  try
-    echohl ModeMsg
-    echon 'set tabstop='
-    echohl Question
-    echon &l:ts
-    echohl ModeMsg
-    echon ' shiftwidth='
-    echohl Question
-    echon &l:sw
-    echohl ModeMsg
-    echon ' sts='
-    echohl Question
-    echon &l:sts . ' ' . (&l:et ? '  ' : 'no')
-    echohl ModeMsg
-    echon 'expandtab'
-  finally
-    echohl None
-  endtry
+    " show the selected options
+    try
+        echohl ModeMsg
+        echon 'set tabstop='
+        echohl Question
+        echon &l:ts
+        echohl ModeMsg
+        echon ' shiftwidth='
+        echohl Question
+        echon &l:sw
+        echohl ModeMsg
+        echon ' sts='
+        echohl Question
+        echon &l:sts . ' ' . (&l:et ? '  ' : 'no')
+        echohl ModeMsg
+        echon 'expandtab'
+    finally
+        echohl None
+    endtry
 endfunction
 "}}}
 
@@ -604,181 +607,176 @@ command! -complete=shellcmd -nargs=* -bang Shell call s:ExecuteInShell(<q-args>,
 
 " Plugins ----------------------------------------------------------------"{{{
 
-    " CTRL-P ------------------------------------------------------------------"{{{
+" CTRL-P ------------------------------------------------------------------"{{{
 
-    let g:ctrlp_map = '<leader>,'
-    let g:ctrlp_working_path_mode = 0
-    let g:ctrlp_match_window_reversed = 1
-    let g:ctrlp_jump_to_buffer = 2
-    let g:ctrlp_max_height = 15
-    let g:ctrlp_split_window = 0
+let g:ctrlp_map = '<leader>,'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 1
+let g:ctrlp_jump_to_buffer = 2
+let g:ctrlp_max_height = 15
+let g:ctrlp_split_window = 0
 
-    " .git folders
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-    let g:ctrlp_use_caching = 0
+" .git folders
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_use_caching = 0
 
-    nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
 
-    "}}}
+"}}}
 
-    " sneak -----------------------------------------------------------------"{{{
-    " enable streak mode
-    let g:sneak#streak = 1
-    "}}}
+" sneak -----------------------------------------------------------------"{{{
+" enable streak mode
+let g:sneak#streak = 1
+"}}}
 
-    " Gundo -------------------------------------------------------------------"{{{
+" Gundo -------------------------------------------------------------------"{{{
 
-    nnoremap <F4> :GundoToggle<CR>
+nnoremap <F4> :GundoToggle<CR>
 
-    "}}}
+"}}}
 
-    " Clam --------------------------------------------------------------------"{{{
+" Clam --------------------------------------------------------------------"{{{
 
-    nnoremap <leader>l :Clam<space>
-    " puppet git commands
-    cnoremap hgdp Clam git checkout master && git pull && git checkout development
-                \ && git merge master -m "merge staging into dev" && git push;
-                \ git checkout development<CR>
-    cnoremap hgsp Clam git checkout master && git pull &&
-                \ git merge development -m "merge dev into staging" && git push;
-                \ git checkout development<CR>
-    cnoremap hgpp Clam git checkout production && git pull &&
-                \ git merge master -m "merge staging into production" && git push;
-                \ git checkout development<CR>
+nnoremap <leader>l :Clam<space>
+" puppet git commands
+cnoremap hgdp Clam git checkout master && git pull && git checkout development
+            \ && git merge master -m "merge staging into dev" && git push;
+            \ git checkout development<CR>
+cnoremap hgsp Clam git checkout master && git pull &&
+            \ git merge development -m "merge dev into staging" && git push;
+            \ git checkout development<CR>
+cnoremap hgpp Clam git checkout production && git pull &&
+            \ git merge master -m "merge staging into production" && git push;
+            \ git checkout development<CR>
 
-    "}}}
+"}}}
 
-    " easy-align --------------------------------------------------------------"{{{
-    vnoremap <silent> <Enter> :EasyAlign<Enter>
-    " hash rocket auto-aign (for Puppet)
-    inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/<CR>`z$a<Space>
-    " custom delimiters
-    let g:easy_align_delimiters = {
-    \  '-': { 'pattern': '-',  'left_margin': 0, 'right_margin': 1, 'stick_to_left': 1 }
-    \ }
-    " }}}
+" easy-align --------------------------------------------------------------"{{{
+vnoremap <silent> <Enter> :EasyAlign<Enter>
+" hash rocket auto-aign (for Puppet)
+inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/<CR>`z$a<Space>
+" custom delimiters
+let g:easy_align_delimiters = {
+            \  '-': { 'pattern': '-',  'left_margin': 0, 'right_margin': 1, 'stick_to_left': 1 }
+            \ }
+" }}}
 
-    " syntastic ---------------------------------------------------------------"{{{
+" syntastic ---------------------------------------------------------------"{{{
 
-    " autoclose window if no errors
-    let g:syntastic_auto_loc_list=2
-    let g:puppet_module_detect=1
-    " maintain list of active (check on save) and passive (check on command) filetypes
-    " avoids annoying delay when saving files
-    let g:syntastic_mode_map = { 'mode': 'active',
-                                \ 'active_filetypes': ['ruby', 'perl', 'php', 'bash',
-                                \                      'vim'],
-                                \ 'passive_filetypes': ['puppet'] }
+" autoclose window if no errors
+let g:syntastic_auto_loc_list=2
+let g:puppet_module_detect=1
+" maintain list of active (check on save) and passive (check on command) filetypes
+" avoids annoying delay when saving files
+let g:syntastic_mode_map = { 'mode': 'active',
+            \ 'active_filetypes': ['ruby', 'perl', 'php', 'bash',
+            \                      'vim'],
+            \ 'passive_filetypes': ['puppet'] }
 
-    nnoremap <leader>E :Errors<CR>
-    nnoremap <leader>S :SyntasticCheck<CR>
+nnoremap <leader>E :Errors<CR>
+nnoremap <leader>S :SyntasticCheck<CR>
 
-    "}}}
+"}}}
 
-    " Ack ---------------------------------------------------------------------"{{{
-    " Use ag if it's in PATH
-    " https://github.com/ggreer/the_silver_searcher
-    if executable("ag")
-        let g:ackprg = 'ag --nogroup --nocolor --column'
+" Ack ---------------------------------------------------------------------"{{{
+" Use ag if it's in PATH
+" https://github.com/ggreer/the_silver_searcher
+if executable("ag")
+    let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
+
+nnoremap <leader>a :Ack!<space>
+
+" Ack motions {{{
+" Steve Losh https://github.com/sjl/dotfiles
+
+" Motions to Ack for things.  Works with pretty much everything, including:
+"
+"   w, W, e, E, b, B, t*, f*, i*, a*, and custom text objects
+"
+" Awesome.
+"
+" Note: If the text covered by a motion contains a newline it won't work.  Ack
+" searches line-by-line.
+
+" \aiw will search for the word under the cursor
+" \aib will search inside braces
+nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
+xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
+
+function! s:CopyMotionForType(type)
+    if a:type ==# 'v'
+        silent execute "normal! `<" . a:type . "`>y"
+    elseif a:type ==# 'char'
+        silent execute "normal! `[v`]y"
     endif
+endfunction
 
-    nnoremap <leader>a :Ack!<space>
+function! s:AckMotion(type) abort
+    let reg_save = @@
 
-    " Ack motions {{{
-    " Steve Losh https://github.com/sjl/dotfiles
+    call s:CopyMotionForType(a:type)
 
-    " Motions to Ack for things.  Works with pretty much everything, including:
-    "
-    "   w, W, e, E, b, B, t*, f*, i*, a*, and custom text objects
-    "
-    " Awesome.
-    "
-    " Note: If the text covered by a motion contains a newline it won't work.  Ack
-    " searches line-by-line.
+    execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
 
-    " \aiw will search for the word under the cursor
-    " \aib will search inside braces
-    nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
-    xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
+    let @@ = reg_save
+endfunction
 
-    function! s:CopyMotionForType(type)
-        if a:type ==# 'v'
-            silent execute "normal! `<" . a:type . "`>y"
-        elseif a:type ==# 'char'
-            silent execute "normal! `[v`]y"
-        endif
-    endfunction
+" }}}
+" }}}
 
-    function! s:AckMotion(type) abort
-        let reg_save = @@
+" Yankstack ---------------------------------------------------------------"{{{
+let g:yankstack_map_keys = 0
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+"}}}
 
-        call s:CopyMotionForType(a:type)
+" airline -----------------------------------------------------------------"{{{
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_theme = 'jellybeans'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_section_z=''
+"}}}
 
-        execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
+" hardtime ----------------------------------------------------------------"{{{
+let g:hardtime_default_on = 1
+"}}}
 
-        let @@ = reg_save
-    endfunction
+" tmuxify -----------------------------------------------------------------"{{{
+let g:tmuxify_custom_command  = 'tmux split-window -v -l 15'
+"}}}
 
-    " }}}
-    " }}}
+" fugitive ----------------------------------------------------------------"{{{
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gw :Gwrite<CR>
+nnoremap <Leader>gc :Gcommit --all<CR>
+nnoremap <Leader>gp :Git push<CR>
+"}}}
 
-    " Yankstack ---------------------------------------------------------------"{{{
-    let g:yankstack_map_keys = 0
-    nmap <leader>p <Plug>yankstack_substitute_older_paste
-    nmap <leader>P <Plug>yankstack_substitute_newer_paste
-    "}}}
+" tmux-navigator ----------------------------------------------------------"{{{
+" If tmux-navigator is loaded
+if exists(":TmuxNavigateLeft")
+    noremap <silent> <C-h> :TmuxNavigateLeft<cr>
+    noremap <silent> <C-j> :TmuxNavigateDown<cr>
+    noremap <silent> <C-k> :TmuxNavigateUp<cr>
+    noremap <silent> <C-l> :TmuxNavigateRight<cr>
+    noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+else
+    noremap <C-h> <C-w>h
+    noremap <C-j> <C-w>j
+    noremap <C-k> <C-w>k
+    noremap <C-l> <C-w>l
+    noremap <C-\> <C-w><C-p>
+endif
+"}}}
 
-    " airline -----------------------------------------------------------------"{{{
-    let g:airline#extensions#tabline#enabled = 0
-    let g:airline#extensions#tabline#fnamemod = ':t'
-    let g:airline_theme = 'jellybeans'
-    let g:airline_left_sep=''
-    let g:airline_right_sep=''
-    let g:airline_section_z=''
-    "}}}
-
-    " numbers -----------------------------------------------------------------"{{{
-        nnoremap <leader>n :NumbersToggle<CR>
-        nnoremap <leader>N :NumbersOnOff<CR>
-    "}}}
-
-    " hardtime ----------------------------------------------------------------"{{{
-        let g:hardtime_default_on = 1
-    "}}}
-
-    " tmuxify -----------------------------------------------------------------"{{{
-        let g:tmuxify_custom_command  = 'tmux split-window -v -l 15'
-    "}}}
-
-    " fugitive ----------------------------------------------------------------"{{{
-        nnoremap <Leader>gs :Gstatus<CR>
-        nnoremap <Leader>gd :Gdiff<CR>
-        nnoremap <Leader>gb :Gblame<CR>
-        nnoremap <Leader>gr :Gread<CR>
-        nnoremap <Leader>gw :Gwrite<CR>
-        nnoremap <Leader>gc :Gcommit --all<CR>
-        nnoremap <Leader>gp :Git push<CR>
-    "}}}
-
-    " tmux-navigator ----------------------------------------------------------"{{{
-        " If tmux-navigator is loaded
-        if exists(":TmuxNavigateLeft")
-            noremap <silent> <C-h> :TmuxNavigateLeft<cr>
-            noremap <silent> <C-j> :TmuxNavigateDown<cr>
-            noremap <silent> <C-k> :TmuxNavigateUp<cr>
-            noremap <silent> <C-l> :TmuxNavigateRight<cr>
-            noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
-        else
-            noremap <C-h> <C-w>h
-            noremap <C-j> <C-w>j
-            noremap <C-k> <C-w>k
-            noremap <C-l> <C-w>l
-            noremap <C-\> <C-w><C-p>
-        endif
-    "}}}
-
-    " vim-commentary ----------------------------------------------------------"{{{
-        map  gc  <Plug>Commentary
-        nmap gcc <Plug>CommentaryLine
-    "}}}
+" vim-commentary ----------------------------------------------------------"{{{
+map  gc  <Plug>Commentary
+nmap gcc <Plug>CommentaryLine
+"}}}
 "}}}
