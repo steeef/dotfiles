@@ -654,7 +654,7 @@ cnoremap hgpp Clam git checkout production && git pull &&
 " easy-align --------------------------------------------------------------"{{{
 vnoremap <silent> <Enter> :EasyAlign<Enter>
 " hash rocket auto-aign (for Puppet)
-inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/<CR>`z$a<Space>
+" inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/<CR>`z$a<Space>
 " custom delimiters
 let g:easy_align_delimiters = {
             \  '-': { 'pattern': '-',  'left_margin': 0, 'right_margin': 1, 'stick_to_left': 1 }
