@@ -362,9 +362,8 @@ let mapleader=","
 silent! call yankstack#setup()
 
 " F2F
-if executable("fzf")
-    nnoremap <leader>, :FZF<enter>
-endif
+nnoremap <leader>, :FZF<enter>
+
 "disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>

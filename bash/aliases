@@ -60,3 +60,7 @@ alias external_ip="curl -s http://www.monip.org/ | grep 'IP : ' | sed -e 's/^.*I
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias vi='vim'
 alias v='vim'
+alias s='ssh'
+
+# todo.txt
+alias t='todo.sh'
