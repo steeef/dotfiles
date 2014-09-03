@@ -1,0 +1,3 @@
+pane	main	0	:main	1	:*	0	:/Users/sprice/.dotfiles	1	zsh	:
+window	main	0	1	:*	955d,422x114,0,0,0
+state	main	

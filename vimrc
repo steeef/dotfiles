@@ -36,29 +36,23 @@ if exists(":PlugInstall")
     "Plug 'takac/vim-hardtime'
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
-    "Plug 'tpope/vim-dispatch'
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
         Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
     endif
 
     " colorschemes
-    " Plug 'nanotech/jellybeans.vim'
-    " Plug 'sjl/badwolf'
     Plug 'w0ng/vim-hybrid'
-    " Plug 'junegunn/seoul256.vim'
-    " Plug 'altercation/vim-colors-solarized'
     Plug 'chriskempson/base16-vim'
 
     " language-specific bundles
     Plug 'vim-ruby/vim-ruby',        { 'for': 'ruby' }
     Plug 'rodjek/vim-puppet',        { 'for': 'puppet' }
-    "Plug 'steeef/todo.txt-vim'
     Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
     Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
     Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
     Plug 'fatih/vim-go',             { 'for': 'go' }
-    Plug 'plasticboy/vim-markdown',  { 'for': 'markdown' }
+    Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
 endif
 
 "}}}
