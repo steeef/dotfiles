@@ -6,4 +6,7 @@ source ~/.bin/z.sh
 if [ -f ~/.bashrc_local ]; then
     source ~/.bashrc_local
 fi
-source ~/.fzf.bash
+
+if [ -f ~/.fzf.bash ]; then
+    source ~/.fzf.bash
+fi
