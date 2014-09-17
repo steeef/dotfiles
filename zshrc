@@ -73,7 +73,7 @@ alias hgf='hg fetch'
 
 # environment variables ------------------------------------
 export EDITOR='vim'
-export PATH="${HOME}/bin:${HOME}/.bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:${PATH}"
+export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export GREP_OPTIONS='--color=auto'
 export COMMAND_MODE=unix2003
 
