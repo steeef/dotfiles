@@ -25,6 +25,7 @@ alias d='cd $HOME/.dotfiles'
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias lr='ls -ltr'
 alias h='cd ~'
+alias l='ls -G'
 
 # huffshell suggestions
 alias s='ssh'
@@ -51,10 +52,12 @@ alias gd='git diff'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit -a'
+alias gcam='git commit -a -m'
 alias gco='git checkout'
 alias gb='git branch'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
+alias gsub="git submodule"
 
 # hg
 alias hga='hg add'
