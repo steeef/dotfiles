@@ -279,6 +279,10 @@ if has("autocmd")
         autocmd FileType puppet setlocal ts=2 sts=2 sw=2 expandtab
         autocmd FileType puppet setlocal iskeyword-=:
         autocmd FileType puppet setlocal iskeyword-=_
+        " Insert a hash rocket with <c-l>
+        autocmd FileType puppet imap <c-l> <space>=>
+        " hash rocket auto-aign (for Puppet)
+        autocmd FileType puppet inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/<CR>`z$a<Space>
     augroup END
 
     " vim, vim helpfiles
@@ -453,9 +457,6 @@ nnoremap <leader>s :%s//<left>
 " insert date
 nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
 inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
-
-" Insert a hash rocket with <c-l>
-imap <c-l> <space>=>
 
 " Registers -------------------------------------------------------------- "{{{
 
@@ -646,8 +647,6 @@ cnoremap hgpp Clam git checkout production && git pull &&
 
 " easy-align --------------------------------------------------------------"{{{
 vnoremap <silent> <Enter> :EasyAlign<Enter>
-" hash rocket auto-aign (for Puppet)
-" inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/<CR>`z$a<Space>
 " custom delimiters
 let g:easy_align_delimiters = {
             \  '-': { 'pattern': '-',  'left_margin': 0, 'right_margin': 1, 'stick_to_left': 1 }
