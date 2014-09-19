@@ -21,7 +21,6 @@ call plug#begin(bundlepath)
 if exists(":PlugInstall")
     Plug 'bling/vim-airline'
     Plug 'vim-scripts/IndexedSearch'
-    Plug 'mhinz/vim-tmuxify'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
@@ -33,7 +32,6 @@ if exists(":PlugInstall")
     Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
     Plug 'junegunn/vim-easy-align'
     Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
-    "Plug 'takac/vim-hardtime'
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     " YCM requires 7.3.584
@@ -281,8 +279,10 @@ if has("autocmd")
         autocmd FileType puppet setlocal iskeyword-=_
         " Insert a hash rocket with <c-l>
         autocmd FileType puppet imap <c-l> <space>=>
-        " hash rocket auto-aign (for Puppet)
-        autocmd FileType puppet inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/<CR>`z$a<Space>
+        if exists("g:loaded_easy_align")
+            " hash rocket auto-aign (for Puppet)
+            autocmd FileType puppet inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/ ig['Comment']<CR>`z$a<Space>
+        endif
     augroup END
 
     " vim, vim helpfiles
@@ -356,10 +356,7 @@ set wildignore+=*.pyc                            " Python byte code
 
 let mapleader=","
 
-" setup yankstack before mappings
-silent! call yankstack#setup()
-
-" F2F
+" FZF
 nnoremap <leader>, :FZF<enter>
 
 "disable arrow keys
@@ -475,7 +472,7 @@ nmap <leader>p pV`]=
 
 " Abbreviations ---------------------------------------------------------- "{{{
 
-iabbrev myName Stephen Price <sprice@monsooncommerce.com>
+iabbrev myName Stephen Price <stephen@stp5.net>
 
 "}}}
 
@@ -565,58 +562,7 @@ function! Stab()
 endfunction
 "}}}
 
-" Shell() ---------------------------------------------------------------- "{{{
-" Run arbitrary shell commands in an hsplit window
-" Source: https://svn.mageekbox.net/repositories/vim/trunk/.vimrc
-" ---------------------------------------------------------
-function! s:ExecuteInShell(command, bang)
-    let _ = a:bang != '' ? s:_ : a:command == '' ? '' : join(map(split(a:command), 'expand(v:val)'))
-
-    if (_ != '')
-        let s:_ = _
-        let bufnr = bufnr('%')
-        let winnr = bufwinnr('^' . _ . '$')
-        silent! execute  winnr < 0 ? 'belowright new ' . fnameescape(_) : winnr . 'wincmd w'
-        setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile wrap number
-        silent! :%d
-        let message = 'Execute ' . _ . '...'
-        call append(0, message)
-        echo message
-        silent! 2d | resize 1 | redraw
-        silent! execute 'silent! %!'. _
-        silent! execute 'resize ' . line('$')
-        silent! execute 'syntax on'
-        silent! execute 'autocmd BufUnload <buffer> execute bufwinnr(' . bufnr . ') . ''wincmd w'''
-        silent! execute 'autocmd BufEnter <buffer> execute ''resize '' .  line(''$'')'
-        silent! execute 'nnoremap <silent> <buffer> <CR> :call <SID>ExecuteInShell(''' . _ . ''', '''')<CR>'
-        silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . _ . ''', '''')<CR>'
-        silent! execute 'nnoremap <silent> <buffer> <LocalLeader>g :execute bufwinnr(' . bufnr . ') . ''wincmd w''<CR>'
-        nnoremap <silent> <buffer> <C-W>_ :execute 'resize ' . line('$')<CR>
-        silent! syntax on
-    endif
-endfunction
-
-command! -complete=shellcmd -nargs=* -bang Shell call s:ExecuteInShell(<q-args>, '<bang>')
-"}}}
-
 " Plugins ----------------------------------------------------------------"{{{
-
-" CTRL-P ------------------------------------------------------------------"{{{
-
-let g:ctrlp_map = '<leader>,'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window_reversed = 1
-let g:ctrlp_jump_to_buffer = 2
-let g:ctrlp_max_height = 15
-let g:ctrlp_split_window = 0
-
-" .git folders
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-let g:ctrlp_use_caching = 0
-
-nnoremap <leader>b :CtrlPBuffer<CR>
-
-"}}}
 
 " sneak -----------------------------------------------------------------"{{{
 " enable streak mode
@@ -626,22 +572,6 @@ let g:sneak#streak = 1
 " Gundo -------------------------------------------------------------------"{{{
 
 nnoremap <F4> :GundoToggle<CR>
-
-"}}}
-
-" Clam --------------------------------------------------------------------"{{{
-
-nnoremap <leader>l :Clam<space>
-" puppet git commands
-cnoremap hgdp Clam git checkout master && git pull && git checkout development
-            \ && git merge master -m "merge staging into dev" && git push;
-            \ git checkout development<CR>
-cnoremap hgsp Clam git checkout master && git pull &&
-            \ git merge development -m "merge dev into staging" && git push;
-            \ git checkout development<CR>
-cnoremap hgpp Clam git checkout production && git pull &&
-            \ git merge master -m "merge staging into production" && git push;
-            \ git checkout development<CR>
 
 "}}}
 
@@ -717,12 +647,6 @@ endfunction
 " }}}
 " }}}
 
-" Yankstack ---------------------------------------------------------------"{{{
-let g:yankstack_map_keys = 0
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
-"}}}
-
 " airline -----------------------------------------------------------------"{{{
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -730,14 +654,6 @@ let g:airline_theme = 'jellybeans'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_section_z=''
-"}}}
-
-" hardtime ----------------------------------------------------------------"{{{
-let g:hardtime_default_on = 1
-"}}}
-
-" tmuxify -----------------------------------------------------------------"{{{
-let g:tmuxify_custom_command  = 'tmux split-window -v -l 15'
 "}}}
 
 " fugitive ----------------------------------------------------------------"{{{
