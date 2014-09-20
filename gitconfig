@@ -1,0 +1,30 @@
+[user]
+    name = Stephen Price
+    email = steeef@gmail.com
+[alias]
+    co = checkout
+    lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    lg = !"git lg1"
+# Create pull request for current branch  =====
+    pr  = "!open \"$(git remote -v | grep origin | grep push | cut -f 2 | cut -d \" \" -f 1 | sed -e \"s|git@\\(.*\\):\\(.*\\).git|https://\\1/\\2|\")/pull/new/$(git rev-parse --abbrev-ref HEAD)\""
+  # Go to GitHub webpage  =====
+    gh  = "!open \"$(git remote -v | grep origin | grep push | cut -f 2 | cut -d \" \" -f 1 | sed -e \"s|git@\\(.*\\):\\(.*\\).git|https://\\1/\\2|\")/tree/$(git rev-parse --abbrev-ref HEAD)\""
+  # log =====
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+    autocrlf = input
+[apply]
+    whitespace = nowarn
+[format]
+    pretty = %C(yellow)%h%Creset %s %C(red)(%cr)%Creset
+[github]
+    user = steeef
+    token = 
+[push]
+    default = current
