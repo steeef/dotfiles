@@ -1,0 +1,23 @@
+# .sshrc
+# For use with:
+# https://github.com/Russell91/sshrc
+
+# Green prompt
+PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
+
+if [ -f $HOME/bin/vim ]; then
+    alias vim='$HOME/bin/vim'
+    export EDITOR=$HOME/bin/vim
+else
+    export EDITOR=/usr/bin/vim
+fi
+
+# Start screen if in an interactive SSH session
+if [ -z "$STARTED_SCREEN" ] && [ -n "$SSH_TTY" ]; then
+  case $- in
+    (*i*)
+      STARTED_SCREEN=1; export STARTED_SCREEN
+      screen -RR -S main  ||
+        echo "Screen failed! continuing with normal bash startup"
+  esac
+fi
