@@ -75,6 +75,7 @@ alias hgb='hg branch'
 alias hgf='hg fetch'
 
 # environment variables ------------------------------------
+export VIM="${HOME}/.vim"
 export EDITOR='vim'
 export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export GREP_OPTIONS='--color=auto'
