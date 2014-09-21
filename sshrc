@@ -6,7 +6,7 @@
 PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
 
 # VIM setup
-export VIM=$SSHHOME/.sshrc.d
+export VIM=$SSHHOME/.sshrc.d/vim
 if [ -f $HOME/bin/vim ]; then
     alias vim='$HOME/bin/vim'
     export EDITOR=$HOME/bin/vim
