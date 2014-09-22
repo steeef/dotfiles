@@ -7,7 +7,7 @@ dotfiles() {
     local_repo="${HOME}/.dotfiles"
     github_repo="https://github.com/steeef/dotfiles.git"
     if command -v git >/dev/null 2>&1; then
-        if cd $local_repo; then
+        if cd $local_repo >/dev/null 2>&1; then
             git pull
             cd "${OLDPWD}"
         else
