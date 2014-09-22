@@ -9,7 +9,7 @@ mkdir -p "${HOME}/bin"
 mkdir -p "${HOME}/build"
 
 ensure_link "bin"       ".bin"
-ensure_link "vimrc"     ".vimrc"
+ensure_link "vim/vimrc" ".vimrc"
 ensure_link "vim"       ".vim"
 ensure_link "ackrc"     ".ackrc"
 ensure_link "bash"      ".bash"
