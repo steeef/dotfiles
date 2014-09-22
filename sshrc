@@ -6,9 +6,10 @@
 PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
 
 # VIM setup
-export VIMRUNTIME=$SSHHOME/.sshrc.d/vim
-alias vim="vim -u ${SSHHOME}/.sshrc.d/vim/vimrc"
-export EDITOR="vim -u ${SSHHOME}/.sshrc.d/vim/vimrc"
+if [ ! -f "${HOME}/.vimrc" ]; then
+    alias vim="vim -u ${SSHHOME}/.sshrc.d/vimrc"
+    export EDITOR="vim -u ${SSHHOME}/.sshrc.d/vimrc"
+fi
 
 # Start screen if in an interactive SSH session
 if [ -z "$STARTED_SCREEN" ] && [ -n "$SSH_TTY" ]; then
@@ -16,6 +17,6 @@ if [ -z "$STARTED_SCREEN" ] && [ -n "$SSH_TTY" ]; then
     (*i*)
       STARTED_SCREEN=1; export STARTED_SCREEN
       screen -RR -S main  ||
-        echo "Screen failed! continuing with normal bash startup"
+        echo "Screen failed."
   esac
 fi
