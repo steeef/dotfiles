@@ -14,7 +14,7 @@ else
     let bundlepath = "~/.vim/bundle"
 endif
 
-call plug#begin(bundlepath)
+silent! call plug#begin(bundlepath)
 
 " plugins ---------------------------------------------------------"{{{
 
@@ -55,7 +55,7 @@ endif
 
 "}}}
 
-call plug#end()
+silent! call plug#end()
 
 "}}}
 
