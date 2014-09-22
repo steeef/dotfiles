@@ -2,6 +2,25 @@
 # For use with:
 # https://github.com/Russell91/sshrc
 
+# setup function
+dotfiles() {
+    local_repo="${HOME}/.dotfiles"
+    github_repo="https://github.com/steeef/dotfiles.git"
+    if command -v git >/dev/null 2>&1; then
+        if cd $local_repo; then
+            git pull
+            cd "${OLDPWD}"
+        else
+            GIT_SSL_NO_VERIFY=true git clone $github_repo $local_repo
+        fi
+        # call bootstrap script to setup links
+        $local_repo/bin/bootstrap.sh
+    else
+        echo 'ERROR: git not found.'
+    fi
+}
+export -f dotfiles > /dev/null
+
 # Green prompt
 PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
 
