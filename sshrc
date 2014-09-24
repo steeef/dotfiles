@@ -8,18 +8,23 @@ dotfiles() {
     github_repo="https://github.com/steeef/dotfiles.git"
     if command -v git >/dev/null 2>&1; then
         if cd $local_repo >/dev/null 2>&1; then
+            echo 'updating dotfiles.'
             git pull
             cd "${OLDPWD}"
         else
+            echo 'cloning dotfiles.'
             GIT_SSL_NO_VERIFY=true git clone $github_repo $local_repo
         fi
         # call bootstrap script to setup links
+        echo 'bootstrapping.'
         $local_repo/bin/bootstrap.sh
     else
         echo 'ERROR: git not found.'
     fi
 }
 export -f dotfiles > /dev/null
+
+export SHELL=`command -v bash`
 
 # aliases
 shopt -s expand_aliases
@@ -44,7 +49,7 @@ if [ -z "$STARTED_SCREEN" ] && [ -n "$SSH_TTY" ]; then
         (*i*)
             if command -v screen >/dev/null 2>&1; then
                 STARTED_SCREEN=1; export STARTED_SCREEN
-                screen -RR -S main  ||
+                SHELL=$SSHHOME/bashsshrc screen -RR -S main  ||
                     echo 'Screen failed.'
             else
                 echo 'ERROR: screen not found.'
