@@ -22,6 +22,7 @@ dotfiles() {
 export -f dotfiles > /dev/null
 
 # aliases
+shopt -s expand_aliases
 alias s='ssh'
 alias h="cd ${HOME}"
 alias l='ls -G'
