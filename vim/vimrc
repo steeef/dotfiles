@@ -106,7 +106,7 @@ set background=dark
 " force terminal Vim to use 256 colors
 if !has("gui_running")
     set t_Co=256
-    let base16colorspace=16
+    let base16colorspace=256
 endif
 
 " try/catch to set colorscheme
