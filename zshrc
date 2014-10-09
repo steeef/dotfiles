@@ -21,7 +21,6 @@ unsetopt correct_all
 
 # aliases --------------------------------------------------
 alias j='z'
-alias d='cd $HOME/.dotfiles'
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias lr='ls -ltr'
 alias h='cd ~'
@@ -73,6 +72,9 @@ compdef hgu=hg
 alias hgm='hg merge'
 alias hgb='hg branch'
 alias hgf='hg fetch'
+
+# docker
+alias d='docker'
 
 # environment variables ------------------------------------
 export EDITOR='vim'
