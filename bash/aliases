@@ -1,6 +1,6 @@
 # cd
 alias ..='cd ..'
-alias d='cd $HOME/.dotfiles'
+alias h='cd ${HOME}'
 
 # sudo
 alias si='sudo -i'
@@ -48,6 +48,11 @@ alias hgu='hg update -C'
 alias hgm='hg merge'
 alias hgb='hg branch'
 alias hgf='hg fetch'
+
+# docker
+alias d='docker'
+alias drm='docker rm $(docker ps -a -q)'
+alias drmi="docker rmi \$(docker images --filter 'dangling=true')"
 
 # directories
 # uses directory_completion
