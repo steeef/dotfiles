@@ -76,7 +76,7 @@ alias hgf='hg fetch'
 # docker
 alias d='docker'
 alias drm='docker rm $(docker ps -a -q)'
-alias drmi="docker rmi \$(docker images --filter 'dangling=true')"
+alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 
 # environment variables ------------------------------------
 export EDITOR='vim'
