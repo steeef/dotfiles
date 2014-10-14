@@ -1,3 +1,13 @@
+set -g status-left '#[fg=brightwhite,bg=blue,bold] ❐ #S \
+#[fg=blue,bg=brightyellow,nobold]⮀#[fg=black] #(whoami) \
+##[fg=yellow,bg=blue,nobold]⮀'
+set -g window-status-format "#[fg=brightwhite,bg=blue,bold] #I #W "
+set -g window-status-current-format '#[fg=blue,bg=yellow,nobold]⮀\
+#[fg=black,bg=yellow,noreverse,nobold] \
+##I ⮁ #W #[fg=yellow,bg=blue,nobold]⮀'
+set -g status-right '#[fg=blue,bg=yellow]⮀#[fg=black] %a %H:%M:%S \
+#[fg=yellow,bg=blue]⮀#[fg=brightwhite,bg=blue,bold]%Y-%m-%d'
+#
 # enable copy-paste http://goo.gl/DN82E
 # enable RubyMotion http://goo.gl/WDlCy
 set -g default-command "reattach-to-user-namespace -l $(basename $SHELL)"
