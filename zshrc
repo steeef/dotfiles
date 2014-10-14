@@ -34,13 +34,6 @@ compdef v=vim
 alias tm='tmux'
 compdef tm=tmux
 
-# todo.txt
-alias t=todo.sh
-compdef t=todo.sh
-alias tv='clear; t view context'
-alias ts='t addto someday.txt'
-alias te='t edit someday'
-
 # git
 alias g='git'
 compdef g=git
@@ -75,6 +68,7 @@ alias hgf='hg fetch'
 
 # docker
 alias d='docker'
+compdef d=docker
 alias drm='docker rm $(docker ps -a -q)'
 alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 
