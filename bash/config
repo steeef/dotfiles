@@ -18,7 +18,10 @@ export PS1='\n${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w${D}\n$ '
 export EDITOR="vim"
 
 # color less
-pless() { pygmentize -f terminal256 -g -P style=monokai $* | less -FiXRM }
+function pless() {
+    pygmentize -f terminal256 -g -P style=monokai $* | less -FiXRM
+}
+export -f pless
 
 # vi mode
 set -o vi
