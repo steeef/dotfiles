@@ -10,3 +10,9 @@ set -g window-status-current-format '#[fg=blue,bg=yellow,nobold] \
 ##I #W #[fg=yellow,bg=blue,nobold] '
 set -g status-right '#[fg=blue,bg=yellow]#[fg=black] %a %H:%M:%S \
 #[fg=yellow,bg=blue] #[fg=brightwhite,bg=blue,bold]%Y-%m-%d'
+
+# vim copy/paste
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-pipe "xclip -i -sel p -f | xclip -i -sel c"
+unbind -t vi-copy Enter
+bind-key -t vi-copy Enter copy-pipe "xclip -i -sel p -f | xclip -i -sel c"

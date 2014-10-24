@@ -47,8 +47,8 @@ if exists(":PlugInstall")
     Plug 'vim-ruby/vim-ruby',        { 'for': 'ruby' }
     Plug 'rodjek/vim-puppet',        { 'for': 'puppet' }
     Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
+    Plug 'chase/vim-ansible-yaml',   { 'for': 'ansible' }
     Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
-    Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
     Plug 'fatih/vim-go',             { 'for': 'go' }
     Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
 endif
@@ -261,17 +261,13 @@ if has("autocmd")
     " turn off PASTE mode when leaving insert mode
     au InsertLeave * set nopaste
 
-    " todo.txt filetype
-    augroup ft_todotxt
-        au BufNewFile,BufRead */todo/*.txt set filetype=todotxt
-    augroup END
     " eyaml: encrypted yaml for Puppet and Hiera
     augroup ft_eyaml
         au BufNewFile,BufRead *.eyaml set filetype=yaml
     augroup END
 
     " Set ruby-specific formatting
-    autocmd FileType ruby,coffee setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
     " Set puppet stuff
     augroup ft_puppet
         autocmd FileType puppet setlocal ts=2 sts=2 sw=2 expandtab
