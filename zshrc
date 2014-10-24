@@ -19,6 +19,12 @@ fi
 # disable auto-correct
 unsetopt correct_all
 
+# environment variables ------------------------------------
+export EDITOR='vim'
+export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
+export GREP_OPTIONS='--color=auto'
+export COMMAND_MODE=unix2003
+
 # aliases --------------------------------------------------
 alias j='z'
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
@@ -68,20 +74,13 @@ alias hgf='hg fetch'
 
 # docker
 alias d='docker'
-compdef d=docker
 alias drm='docker rm $(docker ps -a -q)'
 alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 
 #Use Pygments to color less
 pless() { pygmentize -f terminal256 -g -P style=monokai $* | less -FiXRM }
 
-# environment variables ------------------------------------
-export EDITOR='vim'
-export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
-export GREP_OPTIONS='--color=auto'
-export COMMAND_MODE=unix2003
-
-# colorscheme
+# colorscheme ---------------------------------------------------------
 # https://github.com/chriskempson/base16-shell
 BASE16_SCHEME="tomorrow"
 BASE16_SHELL="$HOME/code/base16-shell/base16-$BASE16_SCHEME.dark.sh"
