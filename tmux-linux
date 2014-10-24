@@ -1,3 +1,6 @@
+# load main settings
+source-file ~/.tmux.main.conf
+
 set -g status-left '#[fg=brightwhite,bg=blue,bold] ❐ #S \
 #[fg=blue,bg=brightyellow,nobold]#[fg=black] #(whoami) \
 ##[fg=yellow,bg=blue,nobold]'

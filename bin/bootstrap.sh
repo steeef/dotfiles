@@ -25,7 +25,10 @@ ensure_link "tmux"       ".tmux"
 ensure_link "sshrc"      ".sshrc"
 ensure_link "screenrc"   ".screenrc"
 ensure_link "tmux"       ".tmux"
-ensure_link "tmux-osx"   ".tmux-osx"
-ensure_link "tmux-linux" ".tmux-linux"
-ensure_link "tmux.conf"  ".tmux.conf"
+if [ "$(uname)" == 'Darwin' ]; then
+    ensure_link "tmux-osx"   ".tmux.conf"
+else
+    ensure_link "tmux-linux" ".tmux.conf"
+fi
+ensure_link "tmux.conf"  ".tmux.main.conf"
 ensure_link "zsh"        ".zsh"
