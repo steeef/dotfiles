@@ -32,3 +32,6 @@ else
 fi
 ensure_link "tmux.conf"  ".tmux.main.conf"
 ensure_link "zsh"        ".zsh"
+ensure_link "zshrc"      ".zshrc"
+ensure_link "zpreztorc"  ".zpreztorc"
+ensure_link "slate"      ".slate"
