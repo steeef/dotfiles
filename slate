@@ -3,6 +3,7 @@ config defaultToCurrentScreen true
 config windowHintsShowIcons true
 config windowHintsIgnoreHiddenWindows false
 config windowHintsSpread true
+config windowHintsFontColor [ 0, 255, 0, 1.0 ]
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
 config secondsBetweenRepeat 0.1
