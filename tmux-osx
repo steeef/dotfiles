@@ -2,14 +2,14 @@
 source-file ~/.tmux.main.conf
 
 set -g status-left '#[fg=brightwhite,bg=blue,bold] ❐ #S \
-#[fg=blue,bg=brightyellow,nobold]#[fg=black] #(whoami) \
-##[fg=yellow,bg=blue,nobold]'
+#[fg=blue,bg=brightyellow,nobold]#[fg=black] #(whoami) \
+##[fg=yellow,bg=blue,nobold]'
 set -g window-status-format "#[fg=brightwhite,bg=blue,bold] #I #W "
-set -g window-status-current-format '#[fg=blue,bg=yellow,nobold]\
+set -g window-status-current-format '#[fg=blue,bg=yellow,nobold]\
 #[fg=black,bg=yellow,noreverse,nobold] \
-##I #W #[fg=yellow,bg=blue,nobold]'
-set -g status-right '#[fg=yellow,bg=blue]#[fg=black,bg=yellow] %a %H:%M:%S \
-#[fg=blue,bg=yellow]#[fg=brightwhite,bg=blue,bold]%Y-%m-%d'
+##I #W #[fg=yellow,bg=blue,nobold]'
+set -g status-right '#[fg=yellow,bg=blue]#[fg=black,bg=yellow] %a %H:%M:%S \
+#[fg=blue,bg=yellow]#[fg=brightwhite,bg=blue,bold]%Y-%m-%d'
 #
 # enable copy-paste http://goo.gl/DN82E
 # enable RubyMotion http://goo.gl/WDlCy
