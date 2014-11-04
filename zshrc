@@ -85,6 +85,15 @@ BASE16_SCHEME="tomorrow"
 BASE16_SHELL="$HOME/code/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
+# VI Mode -------------------------------------------------------------
+bindkey -v
+
+# Bindkeys ------------------------------------------------------------
+bindkey "^R" history-incremental-search-backward
+# PageUp/Down search history to complete command
+bindkey "^[[I" history-beginning-search-backward
+bindkey "^[[G" history-beginning-search-forward
+
 # z and fzf --------------------------------------------------------
 [[ -s $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
@@ -112,15 +121,6 @@ if [ -s $HOME/.bin/z.sh ]; then
         alias jj='zz'
     fi
 fi
-
-# VI Mode -------------------------------------------------------------
-bindkey -v
-
-# Bindkeys ------------------------------------------------------------
-bindkey "^R" history-incremental-search-backward
-# PageUp/Down search history to complete command
-bindkey "^[[I" history-beginning-search-backward
-bindkey "^[[G" history-beginning-search-forward
 
 # Local Settings -------------------------------------------------------------
 [[ -s $HOME/.zshrc_local ]] && source $HOME/.zshrc_local
