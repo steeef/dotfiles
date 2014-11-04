@@ -55,13 +55,10 @@ alias drm='docker rm $(docker ps -a -q)'
 alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 #
 # network
-alias external_ip="curl -s http://www.monip.org/ | grep 'IP : ' | sed -e 's/^.*IP : //' | cut -d '<' -f 1"
+alias external_ip="curl -s http://ipinfo.io/ip"
 
 # common
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias vi='vim'
 alias v='vim'
 alias s='ssh'
-
-# todo.txt
-alias t='todo.sh'

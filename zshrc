@@ -26,7 +26,6 @@ export GREP_OPTIONS='--color=auto'
 export COMMAND_MODE=unix2003
 
 # aliases --------------------------------------------------
-alias j='z'
 alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias lr='ls -ltr'
 alias h='cd ~'
@@ -86,11 +85,33 @@ BASE16_SCHEME="tomorrow"
 BASE16_SHELL="$HOME/code/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
-# z --------------------------------------------------------
-source ~/.bin/z.sh
-function precmd () {
-_z --add "$(pwd -P)"
-}
+# z and fzf --------------------------------------------------------
+[[ -s $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
+
+if [ -s $HOME/.bin/z.sh ]; then
+    source $HOME/.bin/z.sh
+    function precmd () {
+        _z --add "$(pwd -P)"
+    }
+    alias j='z'
+
+    if [ -s $HOME/.fzf.zsh ]; then
+        unalias z
+        z() {
+        if [[ -z "$*" ]]; then
+            cd "$(_z -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf)"
+        else
+            _last_z_args="$@"
+            _z "$@"
+        fi
+        }
+
+        zz() {
+        cd "$(_z -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf -q $_last_z_args)"
+        }
+        alias jj='zz'
+    fi
+fi
 
 # VI Mode -------------------------------------------------------------
 bindkey -v
@@ -103,4 +124,3 @@ bindkey "^[[G" history-beginning-search-forward
 
 # Local Settings -------------------------------------------------------------
 [[ -s $HOME/.zshrc_local ]] && source $HOME/.zshrc_local
-source ~/.fzf.zsh

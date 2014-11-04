@@ -1,0 +1,27 @@
+# z and fzf --------------------------------------------------------
+[[ -s $HOME/.fzf.bash ]] && source $HOME/.fzf.bash
+
+if [ -s $HOME/.bin/z.sh ]; then
+    source $HOME/.bin/z.sh
+    function precmd () {
+        _z --add "$(pwd -P)"
+    }
+    alias j='z'
+
+    if [ -s $HOME/.fzf.bash ]; then
+        unalias z
+        z() {
+        if [[ -z "$*" ]]; then
+            cd "$(_z -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf)"
+        else
+            _last_z_args="$@"
+            _z "$@"
+        fi
+        }
+
+        zz() {
+        cd "$(_z -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf -q $_last_z_args)"
+        }
+        alias jj='zz'
+    fi
+fi

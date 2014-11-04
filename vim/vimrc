@@ -352,9 +352,6 @@ set wildignore+=*.pyc                            " Python byte code
 
 let mapleader=","
 
-" FZF
-nnoremap <leader>, :FZF<enter>
-
 "disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -662,6 +659,31 @@ nnoremap <Leader>gc :Gcommit --all<CR>
 nnoremap <Leader>gp :Git push<CR>
 "}}}
 
+" fzf ---------------------------------------------------------------------"{{{
+
+nnoremap <leader>, :FZF<enter>
+
+" List of buffers
+function! BufList()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! BufOpen(e)
+  execute 'buffer '. matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader>b :call fzf#run({
+\   'source':      reverse(BufList()),
+\   'sink':        function('BufOpen'),
+\   'options':     '+m',
+\   'tmux_height': '40%'
+\ })<CR>
+
+"}}}
+
 " tmux-navigator ----------------------------------------------------------"{{{
 " If tmux-navigator is loaded
 if exists(":TmuxNavigateLeft")
@@ -682,4 +704,6 @@ endif
 " vim-commentary ----------------------------------------------------------"{{{
 map  gc  <Plug>Commentary
 nmap gcc <Plug>CommentaryLine
+"}}}
+"
 "}}}
