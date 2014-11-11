@@ -25,6 +25,7 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-endwise'
     Plug 'scrooloose/syntastic'
+    Plug 'guns/xterm-color-table.vim'
     Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
     Plug 'justinmk/vim-sneak'
     Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
@@ -271,11 +272,13 @@ augroup END
 " }}}
 
 " Status Colors: {{{
-hi User1 ctermfg=33  guifg=#268bd2  ctermbg=15 guibg=#fdf6e3
-hi User2 ctermfg=125 guifg=#d33682  ctermbg=7  guibg=#eee8d5
-hi User3 ctermfg=64  guifg=#719e07  ctermbg=7  guibg=#eee8d5
-hi User4 ctermfg=37  guifg=#2aa198  ctermbg=7  guibg=#eee8d5
+hi User1 ctermfg=33  guifg=#268bd2  ctermbg=19  guibg=#0000af
+hi User2 ctermfg=125 guifg=#d33682  ctermbg=19  guibg=#0000af
+hi User3 ctermfg=64  guifg=#719e07  ctermbg=19  guibg=#0000af
+hi User4 ctermfg=37  guifg=#2aa198  ctermbg=19  guibg=#0000af
 " }}}
+
+"}}}
 
 set modelines=0
 set encoding=utf-8
@@ -302,7 +305,6 @@ if v:version != 703
     set number
 endif
 
-" Buffers ---------------------------------------------------------------- "{{{
 
 " Allow unsaved background buffers and remember marks/undo for them
 set hidden
@@ -313,15 +315,10 @@ set switchbuf=useopen
 " Auto-reload buffers when files are changed on disk
 set autoread
 
-" }}}
-
-" Wrapping --------------------------------------------------------------- "{{{
-
+" Wrapping
 set wrap
 set showbreak=↪\  " Character to precede line wraps
 set textwidth=79
-
-" }}}
 
 " Prevent Vim from clearing the scrollback buffer
 " http://www.shallowsky.com/linux/noaltscreen.html
