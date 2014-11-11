@@ -19,7 +19,6 @@ silent! call plug#begin(bundlepath)
 " plugins ---------------------------------------------------------"{{{
 
 if exists(":PlugInstall")
-"    Plug 'bling/vim-airline'
     Plug 'vim-scripts/IndexedSearch'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'tpope/vim-surround'
@@ -94,6 +93,16 @@ if has("gui_running")
     "set guicursor+=i-ci:ver20-iCursor
 else
     " This is console Vim.
+
+    " tmux will only forward escape sequences to the terminal if surrounded by a DCS sequence
+    " http://sourceforge.net/mailarchive/forum.php?thread_name=AANLkTinkbdoZ8eNR1X2UobLTeww1jFrvfJxTMfKSq-L%2B%40mail.gmail.com&forum_name=tmux-users
+    if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    endif
 endif
 
 set shortmess=atI " Don't show the Vim intro message
@@ -128,77 +137,144 @@ endtry
 "}}}
 
 " standard options ------------------------------------------------------- "{{{
-"
+
 " statusline settings ---------------------------------------------------- "{{{
+
 set laststatus=2
 
-let g:last_mode = ''
+" Status: {{{
+function! Status(winnum)
+  let active = a:winnum == winnr()
+  let bufnum = winbufnr(a:winnum)
 
-" Change color/indicator based on current mode {{{
-function! Mode()
-  let l:mode = mode()
+  let stat = ''
 
-  if l:mode !=# g:last_mode
-    let g:last_mode = l:mode
+  " this function just outputs the content colored by the
+  " supplied colorgroup number, e.g. num = 2 -> User2
+  " it only colors the input if the window is the currently
+  " focused one
 
-    hi User2 guifg=#005f00 guibg=#dfff00 gui=BOLD ctermfg=22 ctermbg=190 cterm=BOLD
-    hi User3 guifg=#FFFFFF guibg=#414243 ctermfg=255 ctermbg=241
-    hi User4 guifg=#414234 guibg=#2B2B2B ctermfg=241 ctermbg=234
-    hi User5 guifg=#4e4e4e guibg=#FFFFFF gui=bold ctermfg=239 ctermbg=255 cterm=bold
-    hi User6 guifg=#FFFFFF guibg=#8a8a8a ctermfg=255 ctermbg=245
-    hi User7 guifg=#ffff00 guibg=#8a8a8a gui=bold ctermfg=226 ctermbg=245 cterm=bold
-    hi User8 guifg=#8a8a8a guibg=#414243 ctermfg=245 ctermbg=241
-
-    if l:mode ==# 'n'
-      hi User3 guifg=#dfff00 ctermfg=190
-    elseif l:mode ==# "i"
-      hi User2 guifg=#005fff guibg=#FFFFFF ctermfg=27 ctermbg=255
-      hi User3 guifg=#FFFFFF ctermfg=255
-    elseif l:mode ==# "R"
-      hi User2 guifg=#FFFFFF guibg=#df0000 ctermfg=255 ctermbg=160
-      hi User3 guifg=#df0000 ctermfg=160
-    elseif l:mode ==? "v" || l:mode ==# "^V"
-      hi User2 guifg=#4e4e4e guibg=#ffaf00 ctermfg=239 ctermbg=214
-      hi User3 guifg=#ffaf00 ctermfg=214
+  function! Color(active, num, content)
+    if a:active
+      return '%' . a:num . '*' . a:content . '%*'
+    else
+      return a:content
     endif
-  endif 
- 
-  if l:mode ==# "n"
-    return "  NORMAL "
-  elseif l:mode ==# "i"
-    return "  INSERT "
-  elseif l:mode ==# "R"
-    return "  REPLACE "
-  elseif l:mode ==# "v"
-    return "  VISUAL "
-  elseif l:mode ==# "V"
-    return "  V·LINE "
-  elseif l:mode ==# "^V"
-    return "  V·BLOCK "
-  else
-    return l:mode
+  endfunction
+
+  " this handles alternative statuslines
+  let usealt = 0
+  let altstat = Color(active, 4, ' »')
+
+  let type = getbufvar(bufnum, '&buftype')
+  let name = bufname(bufnum)
+
+  if type ==# 'help'
+    let altstat .= ' ' . fnamemodify(name, ':t:r')
+    let usealt = 1
+  elseif name ==# '__Gundo__'
+    let altstat .= ' Gundo'
+    let usealt = 1
+  elseif name ==# '__Gundo_Preview__'
+    let altstat .= ' Gundo Preview'
+    let usealt = 1
   endif
+
+  if usealt
+    let altstat .= Color(active, 4, ' «')
+    return altstat
+  endif
+
+  " column
+  "   this might seem a bit complicated but all it amounts to is
+  "   a calculation to see how much padding should be used for the
+  "   column number, so that it lines up nicely with the line numbers
+
+  "   an expression is needed because expressions are evaluated within
+  "   the context of the window for which the statusline is being prepared
+  "   this is crucial because the line and virtcol functions otherwise
+  "   operate on the currently focused window
+
+  function! Column()
+    let vc = virtcol('.')
+    let ruler_width = max([strlen(line('$')), (&numberwidth - 1)])
+    let column_width = strlen(vc)
+    let padding = ruler_width - column_width
+    let column = ''
+
+    if padding <= 0
+      let column .= vc
+    else
+      " + 1 becuase for some reason vim eats one of the spaces
+      let column .= repeat(' ', padding + 1) . vc
+    endif
+
+    return column . ' '
+  endfunction
+
+  let stat .= '%1*'
+  let stat .= '%{Column()}'
+  let stat .= '%*'
+
+  " file name
+  let stat .= Color(active, 4, active ? ' »' : ' «')
+  let stat .= ' %<'
+  let stat .= '%f'
+  let stat .= ' ' . Color(active, 4, active ? '«' : '»')
+
+  " file modified
+  let modified = getbufvar(bufnum, '&modified')
+  let stat .= Color(active, 2, modified ? ' +' : '')
+
+  " read only
+  let readonly = getbufvar(bufnum, '&readonly')
+  let stat .= Color(active, 2, readonly ? ' ‼' : '')
+
+  " paste
+  if active && &paste
+    let stat .= ' %2*' . 'P' . '%*'
+  endif
+
+  " right side
+  let stat .= '%='
+
+  " git branch
+  if exists('*fugitive#head')
+    let head = fugitive#head()
+
+    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+      call fugitive#detect(getcwd())
+      let head = fugitive#head()
+    endif
+  endif
+
+  if !empty(head)
+    let stat .= Color(active, 3, ' ← ') . head . ' '
+  endif
+
+  return stat
 endfunction
 " }}}
 
-set statusline=%2*%{Mode()}%3*⮀%1*
-set statusline+=%#StatusLine#
-set statusline+=%f\ %{&ro?'⭤':''}%{&mod?'+':''}%<
-set statusline+=%4*⮀
-set statusline+=%#warningmsg#
-if exists("*SyntasticStatuslineFlag")
-    set statusline+=%{SyntasticStatuslineFlag()}
-endif
-set statusline+=%=
-set statusline+=%4*⮂
-set statusline+=%#StatusLine#
-set statusline+=\ %{strlen(&fileformat)>0?&fileformat.'\ ⮃\ ':''}
-set statusline+=%{strlen(&fileencoding)>0?&fileencoding.'\ ⮃\ ':''}
-set statusline+=%{strlen(&filetype)>0?&filetype:''}
-set statusline+=\ %8*⮂
-set statusline+=%7*\ %p%%\ 
-set statusline+=%6*⮂%5*⭡\ \ %l:%c\ 
+" Status AutoCMD: {{{
 
+function! s:RefreshStatus()
+  for nr in range(1, winnr('$'))
+    call setwinvar(nr, '&statusline', '%!Status(' . nr . ')')
+  endfor
+endfunction
+
+augroup status
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * call <SID>RefreshStatus()
+augroup END
+" }}}
+
+" Status Colors: {{{
+hi User1 ctermfg=33  guifg=#268bd2  ctermbg=15 guibg=#fdf6e3
+hi User2 ctermfg=125 guifg=#d33682  ctermbg=7  guibg=#eee8d5
+hi User3 ctermfg=64  guifg=#719e07  ctermbg=7  guibg=#eee8d5
+hi User4 ctermfg=37  guifg=#2aa198  ctermbg=7  guibg=#eee8d5
 " }}}
 
 set modelines=0
