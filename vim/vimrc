@@ -137,8 +137,6 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 "}}}
 
-" standard options ------------------------------------------------------- "{{{
-
 " statusline settings ---------------------------------------------------- "{{{
 
 set laststatus=2
@@ -279,6 +277,8 @@ hi User4 ctermfg=37  guifg=#2aa198  ctermbg=19  guibg=#0000af
 " }}}
 
 "}}}
+
+" standard options ------------------------------------------------------- "{{{
 
 set modelines=0
 set encoding=utf-8
