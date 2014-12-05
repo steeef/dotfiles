@@ -124,3 +124,4 @@ fi
 
 # Local Settings -------------------------------------------------------------
 [[ -s $HOME/.zshrc_local ]] && source $HOME/.zshrc_local
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
