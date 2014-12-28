@@ -1,0 +1,4 @@
+#!/bin/sh
+# adblock for hosts file
+# store system hosts file in /etc/hosts.d/base
+cat /etc/hosts.d/* > /etc/hosts

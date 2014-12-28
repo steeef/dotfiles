@@ -1,0 +1,4 @@
+#!/bin/sh
+
+curl http://someonewhocares.org/hosts/zero/hosts -o /etc/hosts.d/adblock 2> /dev/null
+update-hosts
