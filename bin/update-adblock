@@ -1,4 +1,8 @@
 #!/bin/sh
-
-curl http://someonewhocares.org/hosts/zero/hosts -o /etc/hosts.d/adblock 2> /dev/null
-update-hosts
+if output=$(curl -s -S http://someonewhocares.org/hosts/zero/hosts -o /etc/hosts.d/adblock); then
+    echo "adblock hosts downloaded."
+    update-hosts
+else
+    echo "Error: $output"
+    exit 1
+fi
