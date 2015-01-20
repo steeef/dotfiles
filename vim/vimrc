@@ -408,6 +408,11 @@ if has("autocmd")
         au BufNewFile,BufRead *.eyaml set filetype=yaml
     augroup END
 
+    " ansible check for playbooks/*
+    augroup ft_ansible
+        au BufNewFile,BufRead playbooks/*.yml,playbooks/*.yaml set filetype=ansible
+    augroup END
+
     " Set ruby-specific formatting
     autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
     " Set puppet stuff
