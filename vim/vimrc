@@ -34,6 +34,7 @@ if exists(":PlugInstall")
     Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
+    Plug 'lepture/vim-jinja'
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
         Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
