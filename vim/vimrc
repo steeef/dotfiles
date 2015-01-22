@@ -34,7 +34,6 @@ if exists(":PlugInstall")
     Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
-    Plug 'lepture/vim-jinja'
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
         Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
@@ -45,6 +44,7 @@ if exists(":PlugInstall")
     Plug 'chriskempson/base16-vim'
 
     " language-specific bundles
+    Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
     Plug 'vim-ruby/vim-ruby',        { 'for': 'ruby' }
     Plug 'rodjek/vim-puppet',        { 'for': 'puppet' }
     Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
@@ -403,6 +403,11 @@ if has("autocmd")
     au VimResized * exe "normal! \<c-w>="
     " turn off PASTE mode when leaving insert mode
     au InsertLeave * set nopaste
+
+    " j2: Jinja2
+    augroup ft_j2
+        au BufNewFile,BufRead *.j2 set filetype=jinja
+    augroup END
 
     " eyaml: encrypted yaml for Puppet and Hiera
     augroup ft_eyaml
