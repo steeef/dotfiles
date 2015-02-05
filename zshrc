@@ -71,6 +71,8 @@ alias hgm='hg merge'
 alias hgb='hg branch'
 alias hgf='hg fetch'
 
+alias goto=". goto"
+
 # docker
 alias d='docker'
 alias drm='docker rm $(docker ps -a -q)'
