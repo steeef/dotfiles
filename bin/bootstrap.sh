@@ -25,6 +25,7 @@ ensure_link "tmux"       ".tmux"
 ensure_link "sshrc"      ".sshrc"
 ensure_link "screenrc"   ".screenrc"
 ensure_link "tmux"       ".tmux"
+ensure_link "Xresources" ".Xresources"
 if [ "$(uname)" == 'Darwin' ]; then
     ensure_link "tmux-osx"   ".tmux.conf"
 else
