@@ -49,12 +49,6 @@
 *.color20:      base04
 *.color21:      base06
 *customization:	-color
-Rxvt.preeditType:	Root
-Rxvt.saveLines:	12000
-Rxvt.scrollBar:	True
-Rxvt.scrollBar_floating:	False
-Rxvt.scrollBar_right:	True
-Rxvt.scrollstyle:	plain
 URxvt*letterSpace:	-1
 URxvt*saveLines:	12000
 URxvt*scrollBar:	false
