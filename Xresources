@@ -58,7 +58,11 @@ URxvt*shading:	10
 URxvt*transparent:	true
 URxvt.depth:	32
 URxvt.fading:	30
-URxvt.font:	xft:DejaVu Sans Mono:pixelsize=12
+!URxvt.font:	xft:DejaVu Sans Mono:pixelsize=10
+!URxvt.font:	xft:Envy Code R:pixelsize=12
+!URxvt.font:	xft:ProggyCleanTTSZ:pixelsize=11
+URxvt.font:	xft:Monaco:pixelsize=10
+URxvt.boldFont:	xft:Monaco:pixelsize=10
 URxvt.letterSpace:	-1
 URxvt.matcher.button:	1
 URxvt.perl-ext-common:	default,matcher,clipboard-osc,selection-to-clipboard
