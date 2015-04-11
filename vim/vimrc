@@ -804,7 +804,7 @@ let g:airline_section_z=''
 
 " fugitive ----------------------------------------------------------------"{{{
 nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gd :Gvdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR>
