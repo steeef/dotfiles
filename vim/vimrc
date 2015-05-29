@@ -24,7 +24,7 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-endwise'
-    Plug 'scrooloose/syntastic'
+    "Plug 'scrooloose/syntastic'
     Plug 'guns/xterm-color-table.vim'
     Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
     Plug 'justinmk/vim-sneak'
@@ -565,6 +565,11 @@ nnoremap <leader><space> :nohlsearch<Enter>
 nnoremap <leader>w <C-w>v<C-w>l
 " Easy window navigation
 " see plugin settings for tmux-navigator below
+" also use ALT combos
+nnoremap ˙ <C-w>h
+nnoremap ∆ <C-w>j
+nnoremap ˚ <C-w>k
+nnoremap ¬ <C-w>l
 
 " simplify indentation
 nnoremap > >>
