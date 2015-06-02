@@ -34,9 +34,15 @@ if exists(":PlugInstall")
     Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
+
+    function! BuildYCM(info)
+        if a:info.status == 'installed' || a:info.force
+            !./install.sh
+        endif
+    endfunction
     " YCM requires 7.3.584
     if v:version > 703 || (v:version == 703 && has('patch584'))
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.sh', 'on': [] }
+        Plug 'Valloric/YouCompleteMe', { 'for': ['yml'], 'do': function('BuildYCM') }
     endif
 
     " colorschemes
@@ -445,10 +451,7 @@ if has("autocmd")
         au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
     augroup END
 
-    augroup load_ycm
-        autocmd!
-        autocmd InsertEnter * silent call plug#load('YouCompleteMe') | silent call youcompleteme#Enable()
-    augroup END
+    autocmd! User YouCompleteMe call youcompleteme#Enable()
 
     " Return to last position when file is reopened
     autocmd BufReadPost *
