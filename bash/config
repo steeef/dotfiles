@@ -23,8 +23,8 @@ function pless() {
 }
 export -f pless
 
-HISTSIZE=-1
-HISTFILESIZE=-1
+export HISTSIZE=
+export HISTFILESIZE=
 
 # vi mode
 set -o vi
