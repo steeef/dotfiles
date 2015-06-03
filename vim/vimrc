@@ -24,10 +24,7 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-endwise'
-    "Plug 'scrooloose/syntastic'
-    Plug 'guns/xterm-color-table.vim'
     Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
-    Plug 'justinmk/vim-sneak'
     Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
     Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
     Plug 'junegunn/vim-easy-align'
@@ -46,7 +43,6 @@ if exists(":PlugInstall")
     endif
 
     " colorschemes
-    Plug 'w0ng/vim-hybrid'
     Plug 'chriskempson/base16-vim'
 
     " language-specific bundles
@@ -133,13 +129,9 @@ try
     colorscheme base16-tomorrow
 catch /^Vim\%((\a\+)\)\=:E185/
     try
-        colorscheme hybrid
+        colorscheme molokai
     catch /^Vim\%((\a\+)\)\=:E185/
-        try
-            colorscheme molokai
-        catch /^Vim\%((\a\+)\)\=:E185/
-            colorscheme desert
-        endtry
+        colorscheme desert
     endtry
 endtry
 "}}}
@@ -383,24 +375,6 @@ if !has("win32")
 endif
 
 
-" Toggle whitespace in diffs {{{
-
-set diffopt+=iwhite
-let g:diffwhitespaceon = 1
-function! ToggleDiffWhitespace() "{{{
-    if g:diffwhitespaceon
-        set diffopt-=iwhite
-        let g:diffwhitespaceon = 0
-    else
-        set diffopt+=iwhite
-        let g:diffwhitespaceon = 1
-    endif
-    diffupdate
-endfunc "}}}
-
-nnoremap <leader>dw :call ToggleDiffWhitespace()<CR>
-
-" }}}
 "}}}
 
 " autocommands ----------------------------------------------------------- "{{{
@@ -589,10 +563,6 @@ vnoremap < <gv
 
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-
-" Change case
-nnoremap <C-u> gUiw
-inoremap <C-u> <esc>gUiwea
 "
 " Remove trailing whitespace from entire buffer
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -670,56 +640,6 @@ endfunction " }}}
 set foldtext=MyFoldText()
 
 " }}}
-
-" Stab() ---------------------------------------------------------------- "{{{
-" Switch between tabs and spaces
-" Prompts for values or shows current values
-" ---------------------------------------------------------
-
-command! -nargs=* Stab call Stab()
-function! Stab()
-    let l:tabstop = 1 * input('set shiftwidth=')
-
-    if l:tabstop > 0
-        " do we want expandtab as well?
-        let l:expandtab = confirm('set expandtab?', "&Yes\n&No\n&Cancel")
-        if l:expandtab == 3
-            " abort?
-            return
-        endif
-
-        let &l:sts = l:tabstop
-        let &l:ts = l:tabstop
-        let &l:sw = l:tabstop
-
-        if l:expandtab == 1
-            setlocal expandtab
-        else
-            setlocal noexpandtab
-        endif
-    endif
-
-    " show the selected options
-    try
-        echohl ModeMsg
-        echon 'set tabstop='
-        echohl Question
-        echon &l:ts
-        echohl ModeMsg
-        echon ' shiftwidth='
-        echohl Question
-        echon &l:sw
-        echohl ModeMsg
-        echon ' sts='
-        echohl Question
-        echon &l:sts . ' ' . (&l:et ? '  ' : 'no')
-        echohl ModeMsg
-        echon 'expandtab'
-    finally
-        echohl None
-    endtry
-endfunction
-"}}}
 
 " Plugins ----------------------------------------------------------------"{{{
 
@@ -806,15 +726,6 @@ endfunction
 " }}}
 " }}}
 
-" airline -----------------------------------------------------------------"{{{
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme = 'jellybeans'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_section_z=''
-"}}}
-
 " fugitive ----------------------------------------------------------------"{{{
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gvdiff<CR>
@@ -871,5 +782,5 @@ endif
 map  gc  <Plug>Commentary
 nmap gcc <Plug>CommentaryLine
 "}}}
-"
+
 "}}}
