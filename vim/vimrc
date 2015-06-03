@@ -38,9 +38,9 @@ if exists(":PlugInstall")
         endif
     endfunction
     " YCM requires 7.3.584
-    if v:version > 703 || (v:version == 703 && has('patch584'))
-        Plug 'Valloric/YouCompleteMe', { 'for': ['yaml','ansible'], 'do': function('BuildYCM') }
-    endif
+    " if v:version > 703 || (v:version == 703 && has('patch584'))
+    "     Plug 'Valloric/YouCompleteMe', { 'for': ['yaml','ansible'], 'do': function('BuildYCM') }
+    " endif
 
     " colorschemes
     Plug 'chriskempson/base16-vim'
