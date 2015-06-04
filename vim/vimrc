@@ -487,6 +487,7 @@ set wildignore+=*.pyc                            " Python byte code
 " mapping ---------------------------------------------------------------- "{{{
 
 let mapleader=","
+map <Space> ,
 
 "disable arrow keys
 nnoremap <up> <nop>
@@ -540,9 +541,6 @@ nnoremap : ;
 
 " sudo save if not root
 cnoremap w!! w !sudo tee % >/dev/null <CR> :e! <CR>
-
-" remove search highlighting
-nnoremap <leader><space> :nohlsearch<Enter>
 
 " open new vertical window and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
@@ -611,10 +609,6 @@ set foldlevelstart=0
 
 " Make the current location sane.
 nnoremap <c-cr> zvzt
-
-" Space to toggle folds.
-nnoremap <Space> za
-vnoremap <Space> za
 
 " Make zO recursively open whatever top level fold we're in, no matter where the
 " cursor happens to be.
