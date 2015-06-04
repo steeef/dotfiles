@@ -24,6 +24,7 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-endwise'
+    Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
     Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
     Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
