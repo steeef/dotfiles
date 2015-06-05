@@ -34,6 +34,8 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
 
+    Plug 'takac/vim-hardtime'
+
     function! BuildYCM(info)
         if a:info.status == 'installed' || a:info.force
             !./install.sh
@@ -777,6 +779,12 @@ endif
 " vim-commentary ----------------------------------------------------------"{{{
 map  gc  <Plug>Commentary
 nmap gcc <Plug>CommentaryLine
+"}}}
+"
+" vim-hardtime ----------------------------------------------------------"{{{
+let g:hardtime_default_on = 1
+let g:hardtime_showmsg = 1
+
 "}}}
 
 "}}}
