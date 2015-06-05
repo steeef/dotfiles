@@ -487,8 +487,7 @@ set wildignore+=*.pyc                            " Python byte code
 
 " mapping ---------------------------------------------------------------- "{{{
 
-let mapleader=","
-map <Space> ,
+let mapleader="\<Space>"
 
 "disable arrow keys
 nnoremap <up> <nop>
@@ -734,7 +733,7 @@ nnoremap <Leader>gp :Git push<CR>
 
 " fzf ---------------------------------------------------------------------"{{{
 
-nnoremap <leader>, :FZF<enter>
+nnoremap <leader><Space> :FZF<enter>
 
 " List of buffers
 function! BufList()
