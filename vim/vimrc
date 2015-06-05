@@ -399,6 +399,7 @@ if has("autocmd")
     " ansible check for playbooks/*
     augroup ft_ansible
         au BufNewFile,BufRead playbooks/*.yml,playbooks/*.yaml set filetype=ansible
+        autocmd FileType puppet setlocal iskeyword-=_
     augroup END
 
     " Set ruby-specific formatting
