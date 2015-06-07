@@ -354,7 +354,6 @@ set showmatch
 
 "matching
 runtime macros/matchit.vim
-map <tab> %
 
 "show formatting characters
 set list
