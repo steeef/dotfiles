@@ -523,9 +523,6 @@ noremap H ^
 noremap L $
 vnoremap L g_
 
-" Make Y behave like D, C
-" nmap Y y$
-
 " gi already moves to "last place you exited insert mode", so we'll map gI to
 " something similar: move to last change
 nnoremap gI `.
@@ -556,14 +553,6 @@ nnoremap ∆ <C-w>j
 nnoremap ˚ <C-w>k
 nnoremap ¬ <C-w>l
 
-" simplify indentation
-nnoremap > >>
-nnoremap < <<
-" indentation in vmode
-" re-select visual selection after indent/outdent
-vnoremap > >gv
-vnoremap < <gv
-
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 "
@@ -573,9 +562,8 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " insert blank line below
 nnoremap <CR> o<ESC>
 
-" edit vimrc in new window, reload vimrc
+" edit vimrc in new window
 nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
-nnoremap <leader>sv :so $MYVIMRC<CR>
 
 " open current file's directory
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -661,23 +649,6 @@ let g:easy_align_delimiters = {
             \ }
 " }}}
 
-" syntastic ---------------------------------------------------------------"{{{
-
-" autoclose window if no errors
-let g:syntastic_auto_loc_list=2
-let g:puppet_module_detect=1
-" maintain list of active (check on save) and passive (check on command) filetypes
-" avoids annoying delay when saving files
-let g:syntastic_mode_map = { 'mode': 'active',
-            \ 'active_filetypes': ['ruby', 'perl', 'php', 'bash',
-            \                      'vim'],
-            \ 'passive_filetypes': ['puppet'] }
-
-nnoremap <leader>E :Errors<CR>
-nnoremap <leader>S :SyntasticCheck<CR>
-
-"}}}
-
 " Ack ---------------------------------------------------------------------"{{{
 " Use ag if it's in PATH
 " https://github.com/ggreer/the_silver_searcher
@@ -733,6 +704,10 @@ nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>gc :Gcommit --all<CR>
 nnoremap <Leader>gp :Git push<CR>
+"}}}
+
+" vim-gitgutter -----------------------------------------------------------"{{{
+let g:gitgutter_map_keys = 0
 "}}}
 
 " fzf ---------------------------------------------------------------------"{{{
