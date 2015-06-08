@@ -540,6 +540,8 @@ inoremap <C-o> <CR>
 " Swap colon, semicolon
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 " sudo save if not root
 cnoremap w!! w !sudo tee % >/dev/null <CR> :e! <CR>
