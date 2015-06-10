@@ -26,6 +26,7 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-endwise'
     Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-eunuch'
+    Plug 'tpope/vim-abolish'
     Plug 'roman/golden-ratio'
     Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
     Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
@@ -353,6 +354,17 @@ set incsearch
 set nohlsearch
 set showmatch
 
+" search forward and backward for selection
+function! s:VSetSearch()
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+
+xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+
 "matching
 runtime macros/matchit.vim
 
@@ -524,6 +536,9 @@ noremap H ^
 noremap L $
 vnoremap L g_
 
+" simplify macro playback
+nnoremap Q @q
+
 " gi already moves to "last place you exited insert mode", so we'll map gI to
 " something similar: move to last change
 nnoremap gI `.
@@ -569,12 +584,19 @@ nnoremap <leader>ev <C-w>v<C-w>j:e $MYVIMRC<CR>
 " open current file's directory
 nnoremap <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
 
-" Substitute
-nnoremap <leader>s :%s//<left>
-
 " insert date
 nnoremap <F6> "=strftime("%Y-%m-%d")<CR>P
 inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
+
+" :Qargs sets :args to every file that matches the last vimgrep search
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+    let buffer_numbers = {}
+    for quickfix_item in getqflist()
+        let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+    endfor
+    return join(map(values(buffer_numbers), 'fnameescape(v:val)')) 
+endfunction
 
 " Registers -------------------------------------------------------------- "{{{
 
@@ -759,7 +781,7 @@ nmap gcc <Plug>CommentaryLine
 "}}}
 "
 " vim-hardtime ----------------------------------------------------------"{{{
-let g:hardtime_default_on = 1
+let g:hardtime_default_on = 0
 let g:hardtime_showmsg = 1
 
 "}}}
