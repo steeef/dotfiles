@@ -49,7 +49,7 @@
 *.color20:      base04
 *.color21:      base06
 *customization:	-color
-URxvt*letterSpace:	-1
+!URxvt*letterSpace:	-1
 URxvt*saveLines:	12000
 URxvt*scrollBar:	false
 URxvt*scrollBar_right:	false
@@ -58,12 +58,9 @@ URxvt*shading:	10
 URxvt*transparent:	true
 URxvt.depth:	32
 URxvt.fading:	30
-!URxvt.font:	xft:DejaVu Sans Mono:pixelsize=10
-!URxvt.font:	xft:Envy Code R:pixelsize=12
-!URxvt.font:	xft:ProggyCleanTTSZ:pixelsize=11
 URxvt.font:	xft:Monaco:pixelsize=10
 URxvt.boldFont:	xft:Monaco:pixelsize=10
-URxvt.letterSpace:	-1
+!URxvt.letterSpace:	-1
 URxvt.matcher.button:	1
 URxvt.perl-ext-common:	default,matcher,clipboard-osc,selection-to-clipboard
 URxvt.iso14755:	false
