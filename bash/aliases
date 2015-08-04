@@ -62,3 +62,6 @@ alias space='du -ms * .[^\.]* | sort -nr | less -i'
 alias vi='vim'
 alias v='vim'
 alias s='ssh'
+
+# fuck
+alias fuck='sudo $(history -p !!)'

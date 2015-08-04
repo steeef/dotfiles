@@ -78,6 +78,9 @@ alias d='docker'
 alias drm='docker rm $(docker ps -a -q)'
 alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 
+# fuck
+alias fuck='sudo $(fc -ln -1)'
+
 #Use Pygments to color less
 pless() { pygmentize -f terminal256 -g -P style=monokai $* | less -FiXRM }
 
