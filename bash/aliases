@@ -63,5 +63,5 @@ alias vi='vim'
 alias v='vim'
 alias s='ssh'
 
-# fuck
-alias fuck='sudo $(history -p !!)'
+# sudo please
+alias please='sudo $(history -p !!)'
