@@ -25,8 +25,11 @@ export HISTCONTROL=ignoreboth
 export HISTSIZE=
 export HISTFILESIZE=
 
-export HISTIGNORE='&:bg:fg:cd*:clear:ls:pwd:history:exit:make*:* --help:'
+export HISTIGNORE='&:bg:fg:cd*:clear:ls:ll:l:pwd:history:exit:make*:* --help:'
 export HISTTIMEFORMAT="%m/%d/%y - %H:%M:%S "
+
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r;"
 
 # vi mode
 set -o vi
