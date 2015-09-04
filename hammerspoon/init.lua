@@ -17,9 +17,13 @@ function config()
   hs.hotkey.bind(hyper, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
   -- Start Screensaver
+  --
+  -- Normally I'd use the built-in function, but that doesn't seem to work
+  -- right, so call the app directly
   hs.hotkey.bind(hyper, "0", function()
     hs.timer.doAfter(1, function()
-      hs.caffeinate.startScreensaver()
+      hs.application.launchOrFocus('/System/Library/Frameworks/' ..
+        'ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app')
     end)
   end)
 
