@@ -211,6 +211,28 @@ function hs.window.fullscreenCenter(win)
   win:setFrame(minFrame)
 end
 
+function applicationWatcher(appName, eventType, appObject)
+  if (eventType == hs.application.watcher.activated) then
+    if (appName == "Finder") then
+        appObject:selectMenuItem({"Window", "Bring All to Front"})
+    elseif (appName == "Finder") then
+        appObject:selectMenuItem({"Window", "Bring All to Front"})
+    end
+  end
+
+  if (eventType == hs.application.watcher.launched) then
+
+    os.execute("sleep " .. tonumber(2))
+
+    if (appObject) then
+      local wins = appObject:allWindows()
+      for j, win in ipairs(wins) do
+          hs.alert.show(win:title())
+      end
+    end
+  end
+end
+
 --------------------------------------------------------------------------------
 -- reload config
 --------------------------------------------------------------------------------
@@ -231,3 +253,6 @@ hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 
 
 config()
+
+local appWatcher = hs.application.watcher.new(applicationWatcher)
+appWatcher:start()
