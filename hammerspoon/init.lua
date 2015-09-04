@@ -1,5 +1,13 @@
--- Define mod a la Modern Space Cadet
-mod = {"cmd", "alt", "shift", "ctrl"}
+--------------------------------------------------------------------------------
+-- constants
+--------------------------------------------------------------------------------
+local mod = {"cmd", "alt", "shift", "ctrl"}
+
+--------------------------------------------------------------------------------
+-- settings
+--------------------------------------------------------------------------------
+hs.window.animationDuration = 0
+
 
 function reloadConfig(files)
     doReload = false
@@ -20,4 +28,8 @@ hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.hotkey.bind(mod, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
 -- Start Screensaver
-hs.hotkey.bind(mod, "0", function() hs.caffeinate.startScreensaver() end)
+hs.hotkey.bind(mod, "0", function()
+    hs.timer.doAfter(1, function()
+        hs.caffeinate.startScreensaver()
+    end)
+end)
