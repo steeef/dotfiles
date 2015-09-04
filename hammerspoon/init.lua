@@ -322,18 +322,6 @@ function applicationWatcher(appName, eventType, appObject)
         appObject:selectMenuItem({"Window", "Bring All to Front"})
     end
   end
-
-  if (eventType == hs.application.watcher.launched) then
-
-    os.execute("sleep " .. tonumber(2))
-
-    if (appObject) then
-      local wins = appObject:allWindows()
-      for j, win in ipairs(wins) do
-          hs.alert.show(win:title())
-      end
-    end
-  end
 end
 
 --------------------------------------------------------------------------------
