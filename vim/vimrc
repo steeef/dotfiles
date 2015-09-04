@@ -416,6 +416,11 @@ if has("autocmd")
         autocmd FileType puppet setlocal iskeyword-=_
     augroup END
 
+    " lua
+    augroup ft_lua
+        autocmd FileType lua setlocal ts=2 sts=2 sw=2 expandtab
+    augroup END
+
     " Set ruby-specific formatting
     autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
     " Set puppet stuff
