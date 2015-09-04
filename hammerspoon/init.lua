@@ -96,6 +96,20 @@ function config()
   hs.hotkey.bind(hyper, "c", function()
     chromeTab(' - Google Play Music', 'https://play.google.com/music/listen')
   end)
+
+  -- Keychain password entry
+  hs.hotkey.bind(hyper, "w", function()
+    typeKeychainEntry('QS_1_creds', 'account')
+  end)
+  hs.hotkey.bind(hyper, "e", function()
+    typeKeychainEntry('QS_1_creds', 'password')
+  end)
+  hs.hotkey.bind(hyper, "s", function()
+    typeKeychainEntry('QS_2_creds', 'account')
+  end)
+  hs.hotkey.bind(hyper, "x", function()
+    typeKeychainEntry('QS_2_creds', 'password')
+  end)
 end
 
 --------------------------------------------------------------------------------
@@ -413,6 +427,21 @@ function chromeTab(tabName, tabUrl)
     end run
   ]])
 end
+
+function typeKeychainEntry(keychainEntry, keychainField)
+  if keychainField == 'password' then
+    command = "security find-generic-password -gl '" .. keychainEntry ..  "' -w " ..
+      "|tr -d '\\n'"
+  else
+    command = "security find-generic-password -l '" .. keychainEntry .. "'" ..
+      "| grep '\"acct\"' | sed 's/.*\"acct\".*=\"\\([a-zA-Z0-9]*\\)\"/\\1/'" ..
+      "| tr -d '\\n'"
+  end
+
+  output = hs.execute(command)
+  hs.eventtap.keyStrokes(output)
+end
+
 
 --------------------------------------------------------------------------------
 -- reload config
