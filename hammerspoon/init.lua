@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 -- constants
 --------------------------------------------------------------------------------
-local mod = {"cmd", "alt", "shift", "ctrl"}
+local hyper = {"cmd", "alt", "shift", "ctrl"}
 
 --------------------------------------------------------------------------------
 -- settings
@@ -14,37 +14,37 @@ hs.window.animationDuration = 0
 
 function config()
   -- Type clipboard
-  hs.hotkey.bind(mod, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+  hs.hotkey.bind(hyper, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
   -- Start Screensaver
-  hs.hotkey.bind(mod, "0", function()
+  hs.hotkey.bind(hyper, "0", function()
     hs.timer.doAfter(1, function()
       hs.caffeinate.startScreensaver()
     end)
   end)
 
   -- window management
-  hs.hotkey.bind(mod, "right", function()
+  hs.hotkey.bind(hyper, "right", function()
     local win = hs.window.focusedWindow()
     win:right()
   end)
 
-  hs.hotkey.bind(mod, "left", function()
+  hs.hotkey.bind(hyper, "left", function()
     local win = hs.window.focusedWindow()
     win:left()
   end)
 
-  hs.hotkey.bind(mod, "up", function()
+  hs.hotkey.bind(hyper, "up", function()
     local win = hs.window.focusedWindow()
     win:up()
   end)
 
-  hs.hotkey.bind(mod, "down", function()
+  hs.hotkey.bind(hyper, "down", function()
     local win = hs.window.focusedWindow()
     win:down()
   end)
 
-  hs.hotkey.bind(mod, "2", function()
+  hs.hotkey.bind(hyper, "2", function()
     local win = hs.window.focusedWindow()
     hs.window.fullscreenCenter(win)
   end)
