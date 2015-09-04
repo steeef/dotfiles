@@ -17,14 +17,19 @@ fi
 export PS1='\n${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w${D}\n$ '
 export EDITOR="vim"
 
-# color less
-function pless() {
-    pygmentize -f terminal256 -g -P style=monokai $* | less -FiXRM
-}
-export -f pless
+shopt -s histverify histreedit histappend
 
+# don't put duplicate lines or lines with leading spaces in the history. See bash(1) for more options
+export HISTCONTROL=ignoreboth
+# unlimited history
 export HISTSIZE=
 export HISTFILESIZE=
+
+export HISTIGNORE='&:bg:fg:cd*:clear:ls:ll:l:pwd:history:exit:make*:* --help:'
+export HISTTIMEFORMAT="%m/%d/%y - %H:%M:%S "
+
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r;"
 
 # vi mode
 set -o vi
