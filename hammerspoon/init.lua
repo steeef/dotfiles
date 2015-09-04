@@ -48,11 +48,22 @@ function config()
     local win = hs.window.focusedWindow()
     hs.window.fullscreenCenter(win)
   end)
+
+  hs.hotkey.bind(hyper, "1", hs.grid.pushWindowNextScreen)
 end
 
 --------------------------------------------------------------------------------
 -- window layout stuff
 --------------------------------------------------------------------------------
+
+function hs.screen.get(screen_name)
+  local allScreens = hs.screen.allScreens()
+  for i, screen in ipairs(allScreens) do
+    if screen:name() == screen_name then
+      return screen
+    end
+  end
+end
 
 -- Returns the width of the smaller screen size
 -- isFullscreen = false removes the toolbar
@@ -169,7 +180,7 @@ end
 -- |        |        |
 -- +-----------------+
 function hs.window.left(win)
-  local minFrame = (win:screen()):minFrame(false)
+  local minFrame = hs.screen.minFrame(win:screen(), false)
   minFrame.w = minFrame.w/2
   win:setFrame(minFrame)
 end
@@ -197,6 +208,63 @@ function hs.window.down(win)
   win:setFrame(minFrame)
 end
 
+-- +-----------------+
+-- |  HERE  |        |
+-- +--------+        |
+-- |                 |
+-- +-----------------+
+function hs.window.upLeft(win)
+  local minFrame = hs.screen.minFrame(win:screen(), false)
+  minFrame.w = minFrame.w/2
+  minFrame.h = minFrame.h/2
+  win:setFrame(minFrame)
+end
+
+-- +-----------------+
+-- |                 |
+-- +--------+        |
+-- |  HERE  |        |
+-- +-----------------+
+function hs.window.downLeft(win)
+  local minFrame = hs.screen.minFrame(win:screen(), false)
+  win:setFrame({
+    x = minFrame.x,
+    y = minFrame.y + minFrame.h/2,
+    w = minFrame.w/2,
+    h = minFrame.h/2
+  })
+end
+
+-- +-----------------+
+-- |                 |
+-- |        +--------|
+-- |        |  HERE  |
+-- +-----------------+
+function hs.window.downRight(win)
+  local minFrame = hs.screen.minFrame(win:screen(), false)
+  win:setFrame({
+    x = minFrame.x + minFrame.w/2,
+    y = minFrame.y + minFrame.h/2,
+    w = minFrame.w/2,
+    h = minFrame.h/2
+  })
+end
+
+-- +-----------------+
+-- |        |  HERE  |
+-- |        +--------|
+-- |                 |
+-- +-----------------+
+function hs.window.upRight(win)
+  local minFrame = hs.screen.minFrame(win:screen(), false)
+  win:setFrame({
+    x = minFrame.x + minFrame.w/2,
+    y = minFrame.y,
+    w = minFrame.w/2,
+    h = minFrame.h/2
+  })
+end
+
 -- +------------------+
 -- |                  |
 -- |    +--------+    +--> minY
@@ -209,6 +277,41 @@ end
 function hs.window.fullscreenCenter(win)
   local minFrame = hs.screen.minFrame(win:screen(), false)
   win:setFrame(minFrame)
+end
+
+-- +------------------+
+-- |                  |
+-- |  +------------+  +--> minY
+-- |  |    HERE    |  |
+-- |  +------------+  |
+-- |                  |
+-- +------------------+
+function hs.window.fullscreenAlmostCenter(win)
+  local offsetW = hs.screen.minX(win:screen()) - hs.screen.almostMinX(win:screen())
+  win:setFrame({
+    x = hs.screen.almostMinX(win:screen()),
+    y = hs.screen.minY(win:screen()),
+    w = hs.screen.minWidth(isFullscreen) + (2 * offsetW),
+    h = hs.screen.minHeight(isFullscreen)
+  })
+end
+
+-- It like fullscreen but with minY and minHeight values
+-- +------------------+
+-- |                  |
+-- +------------------+--> minY
+-- |       HERE       |
+-- +------------------+--> minHeight
+-- |                  |
+-- +------------------+
+function hs.window.fullscreenWidth(win)
+  local minFrame = hs.screen.minFrame(win:screen(), false)
+  win:setFrame({
+    x = win:screen():frame().x,
+    y = minFrame.y,
+    w = win:screen():frame().w,
+    h = minFrame.h
+  })
 end
 
 function applicationWatcher(appName, eventType, appObject)
