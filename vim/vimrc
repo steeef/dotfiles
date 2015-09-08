@@ -43,22 +43,15 @@ if exists(":PlugInstall")
             !./install.sh
         endif
     endfunction
-    " YCM requires 7.3.584
-    " if v:version > 703 || (v:version == 703 && has('patch584'))
-    "     Plug 'Valloric/YouCompleteMe', { 'for': ['yaml','ansible'], 'do': function('BuildYCM') }
-    " endif
 
     " colorschemes
     Plug 'chriskempson/base16-vim'
 
     " language-specific bundles
     Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
-    Plug 'vim-ruby/vim-ruby',        { 'for': 'ruby' }
-    Plug 'rodjek/vim-puppet',        { 'for': 'puppet' }
     Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
     Plug 'chase/vim-ansible-yaml',   { 'for': 'ansible' }
     Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
-    Plug 'fatih/vim-go',             { 'for': 'go' }
     Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
 endif
 
