@@ -1,3 +1,6 @@
+# Add zsh-completions to $fpath.
+fpath=("${HOME}/.zsh/completion" $fpath)
+
 # prezto --------------------------------------------------
 
 # Source Prezto.
