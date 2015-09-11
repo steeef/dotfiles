@@ -14,7 +14,7 @@ hs.grid.MARGINY = 0
 hs.grid.GRIDHEIGHT = 2
 hs.grid.GRIDWIDTH = 2
 
-
+require "pass"
 
 function config()
   -- Type clipboard
@@ -119,6 +119,11 @@ function config()
     typeKeychainEntry('QS_2_creds', 'password')
   end)
 end
+
+  -- Pass
+  hs.hotkey.bind(hyper, "u", function()
+    getPassword()
+  end)
 
 --------------------------------------------------------------------------------
 -- window layout stuff
