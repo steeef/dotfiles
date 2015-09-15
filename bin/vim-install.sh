@@ -9,6 +9,7 @@ GITCLONED=$(cd $DOWNLOADDIR && git rev-parse --git-dir);GITCLONEDERR=$?
 if [ $GITCLONEDERR == 0 ]; then
     cd $DOWNLOADDIR && git pull
 else
+    rm -rf $DOWNLOADDIR
     git clone $VIMREPO $DOWNLOADDIR
     cd $DOWNLOADDIR
 fi
