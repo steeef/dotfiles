@@ -530,6 +530,9 @@ nnoremap k gk
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc><right>
 
+" replace word under cursor
+:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
 " F5 = toggle paste mode
 nnoremap <F5> :set invpaste paste?<Enter>
 inoremap <F5> <C-O><F5>
