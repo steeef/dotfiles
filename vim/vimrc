@@ -790,11 +790,16 @@ endif
 map  gc  <Plug>Commentary
 nmap gcc <Plug>CommentaryLine
 "}}}
-"
+
 " vim-hardtime ----------------------------------------------------------"{{{
 let g:hardtime_default_on = 0
 let g:hardtime_showmsg = 1
 
+"}}}
+
+" LaTeX-Box ---------------------------------------------------------------"{{{
+let g:LatexBox_latexmk_preview_continuously = 1
+let g:LatexBox_viewer = "open -a Skim"
 "}}}
 
 "}}}
