@@ -28,6 +28,7 @@ if exists(":PlugInstall")
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-abolish'
     Plug 'roman/golden-ratio'
+    Plug 'jiangmiao/auto-pairs'
     Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
     Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
     Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
@@ -794,6 +795,12 @@ nmap gcc <Plug>CommentaryLine
 " vim-hardtime ----------------------------------------------------------"{{{
 let g:hardtime_default_on = 0
 let g:hardtime_showmsg = 1
+
+"}}}
+
+" auto-pairs --------------------------------------------------------------"{{{
+
+let g:AutoPairsShortcutToggle = ''
 
 "}}}
 
