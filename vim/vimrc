@@ -8,10 +8,10 @@ set nocompatible
 " vim-plug --------------------------------------------------------------- "{{{
 
 if !empty($SUDO_USER)
-    " Use sudo user's bundle path
-    let bundlepath = "/home/$SUDO_USER/.vim/bundle"
+  " Use sudo user's bundle path
+  let bundlepath = "/home/$SUDO_USER/.vim/bundle"
 else
-    let bundlepath = "~/.vim/bundle"
+  let bundlepath = "~/.vim/bundle"
 endif
 
 silent! call plug#begin(bundlepath)
@@ -19,44 +19,46 @@ silent! call plug#begin(bundlepath)
 " plugins ---------------------------------------------------------"{{{
 
 if exists(":PlugInstall")
-    Plug 'vim-scripts/IndexedSearch'
+  Plug 'vim-scripts/IndexedSearch'
+  if executable("ag")
     Plug 'christoomey/vim-tmux-navigator'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-endwise'
-    Plug 'tpope/vim-unimpaired'
-    Plug 'tpope/vim-eunuch'
-    Plug 'tpope/vim-abolish'
-    Plug 'roman/golden-ratio'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
-    Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
-    Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
-    Plug 'junegunn/vim-easy-align'
-    Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
+  endif
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-abolish'
+  Plug 'roman/golden-ratio'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
+  Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
+  Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
+  Plug 'junegunn/vim-easy-align'
+  Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
 
-    " Test if current directory is a git repo. If true, load git plugins
-    " NOTE: This means if you cd to a git repo or open a file that's a member
-    " of a git repo, these plugins won't activate. I think that's a fair
-    " tradeoff for the startup time these plugins add, when working on a remote
-    " system.
-    silent let o=system('git rev-parse --git-dir >/dev/null 2>&1')
-    if !v:shell_error
-        Plug 'tpope/vim-fugitive'
-        Plug 'airblade/vim-gitgutter'
-    endif
+  " Test if current directory is a git repo. If true, load git plugins
+  " NOTE: This means if you cd to a git repo or open a file that's a member
+  " of a git repo, these plugins won't activate. I think that's a fair
+  " tradeoff for the startup time these plugins add, when working on a remote
+  " system.
+  silent let o=system('git rev-parse --git-dir >/dev/null 2>&1')
+  if !v:shell_error
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+  endif
 
-    Plug 'takac/vim-hardtime'
+  Plug 'takac/vim-hardtime'
 
-    " colorschemes
-    Plug 'chriskempson/base16-vim'
+  " colorschemes
+  Plug 'chriskempson/base16-vim'
 
-    " language-specific bundles
-    Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
-    Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
-    Plug 'chase/vim-ansible-yaml',   { 'for': 'ansible' }
-    Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
-    Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
+  " language-specific bundles
+  Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
+  Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
+  Plug 'chase/vim-ansible-yaml',   { 'for': 'ansible' }
+  Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
+  Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
 endif
 
 "}}}
@@ -67,49 +69,49 @@ silent! call plug#end()
 
 " appearance/font -------------------------------------------------------- "{{{
 if has("gui_running")
-    " Set font and window size based on operating system
-    if has ("unix")
-        if has ("gui_macvim")
-            " Must be MacVim
-            set guifont=Monaco:h10
-            set noantialias
+  " Set font and window size based on operating system
+  if has ("unix")
+    if has ("gui_macvim")
+      " Must be MacVim
+      set guifont=Monaco:h10
+      set noantialias
 
-            " Full screen means FULL screen
-            set fuoptions=maxvert,maxhorz
-        else
-            " Must be Linux
-            set guifont=DejaVu\ Sans\ Mono\ 8
-        endif
+      " Full screen means FULL screen
+      set fuoptions=maxvert,maxhorz
     else
-        " Must be Windows
-        set guifont=DejaVu\ Sans\ Mono:h9
+      " Must be Linux
+      set guifont=DejaVu\ Sans\ Mono\ 8
     endif
+  else
+    " Must be Windows
+    set guifont=DejaVu\ Sans\ Mono:h9
+  endif
 
-    set guioptions-=m  "remove menu bar
-    set guioptions-=T  "remove toolbar
-    set guioptions-=r  "remove right-hand scroll bar
-    set guioptions-=R  "remove right-hand scroll bar for vert split
-    set guioptions-=l  "remove left-hand scroll bar
-    set guioptions-=L  "remove left-hand scroll bar for vert split
-    set guioptions+=c  "use text-based dialogs instead of popups
+  set guioptions-=m  "remove menu bar
+  set guioptions-=T  "remove toolbar
+  set guioptions-=r  "remove right-hand scroll bar
+  set guioptions-=R  "remove right-hand scroll bar for vert split
+  set guioptions-=l  "remove left-hand scroll bar
+  set guioptions-=L  "remove left-hand scroll bar for vert split
+  set guioptions+=c  "use text-based dialogs instead of popups
 
-    " Different cursors for different modes.
-    set guicursor=n-c:block-Cursor-blinkon0
-    set guicursor+=v:block-vCursor-blinkon0
-    " commented out INSERT mode cursor for compatibilty with other colorschemes
-    "set guicursor+=i-ci:ver20-iCursor
+  " Different cursors for different modes.
+  set guicursor=n-c:block-Cursor-blinkon0
+  set guicursor+=v:block-vCursor-blinkon0
+  " commented out INSERT mode cursor for compatibilty with other colorschemes
+  "set guicursor+=i-ci:ver20-iCursor
 else
-    " This is console Vim.
+  " This is console Vim.
 
-    " tmux will only forward escape sequences to the terminal if surrounded by a DCS sequence
-    " http://sourceforge.net/mailarchive/forum.php?thread_name=AANLkTinkbdoZ8eNR1X2UobLTeww1jFrvfJxTMfKSq-L%2B%40mail.gmail.com&forum_name=tmux-users
-    if exists('$TMUX')
+  " tmux will only forward escape sequences to the terminal if surrounded by a 
+  " DCS sequence
+  if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-    else
+  else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-    endif
+  endif
 endif
 
 set shortmess=atI " Don't show the Vim intro message
@@ -121,21 +123,21 @@ set background=dark
 
 " force terminal Vim to use 256 colors
 if !has("gui_running")
-    set t_Co=256
-    let base16colorspace=256
+  set t_Co=256
+  let base16colorspace=256
 endif
 
 " try/catch to set colorscheme
 " Vim will throw an error if the colorscheme doesn't exist, so we try another
 " in the catch block
 try
-    colorscheme base16-tomorrow
+  colorscheme base16-tomorrow
 catch /^Vim\%((\a\+)\)\=:E185/
-    try
-        colorscheme molokai
-    catch /^Vim\%((\a\+)\)\=:E185/
-        colorscheme desert
-    endtry
+  try
+    colorscheme molokai
+  catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme desert
+  endtry
 endtry
 "}}}
 
@@ -249,7 +251,7 @@ function! Status(winnum)
     endif
 
     if !empty(head)
-        let stat .= Color(active, 3, ' ← ') . head . ' '
+      let stat .= Color(active, 3, ' ← ') . head . ' '
     endif
   endif
 
@@ -295,16 +297,16 @@ set lazyredraw
 set ruler
 set confirm
 if exists("+colorcolumn")
-    set colorcolumn=85
+  set colorcolumn=85
 endif
 
 " 7.4 has hybrid mode, so set both
 " 7.3 has just relative number, so set just that
 if v:version >= 703
-    set relativenumber
+  set relativenumber
 endif
 if v:version != 703
-    set number
+  set number
 endif
 
 
@@ -333,7 +335,7 @@ set backspace=indent,eol,start
 set formatoptions=qrn1
 " Delete comment character when joining commented lines
 if v:version > 703 || v:version == 703 && has("patch541")
-    set formatoptions+=j
+  set formatoptions+=j
 endif
 
 "indent options
@@ -372,7 +374,7 @@ set listchars=tab:»\ ,trail:·,extends:❯,precedes:❮
 "use vertical line (CTRL-K+VV) for vertical splits
 "see :help digraphs
 if !has("gui_running")
-    set fillchars=vert:┃
+  set fillchars=vert:┃
 endif
 
 "window options
@@ -384,8 +386,8 @@ set splitright
 " Disable on Windows since it will complain if you're
 " running in a path where it's not allowed.
 if !has("win32")
-    set exrc    " enable per-directory .vimrc files
-    set secure  " disable unsafe commands in local .vimrc files
+  set exrc    " enable per-directory .vimrc files
+  set secure  " disable unsafe commands in local .vimrc files
 endif
 
 
@@ -393,66 +395,66 @@ endif
 
 " autocommands ----------------------------------------------------------- "{{{
 if has("autocmd")
-    " Resize splits when the window is resized
-    au VimResized * exe "normal! \<c-w>="
-    " turn off PASTE mode when leaving insert mode
-    au InsertLeave * set nopaste
+  " Resize splits when the window is resized
+  au VimResized * exe "normal! \<c-w>="
+  " turn off PASTE mode when leaving insert mode
+  au InsertLeave * set nopaste
 
-    " j2: Jinja2
-    augroup ft_j2
-        au BufNewFile,BufRead *.j2 set filetype=jinja
-    augroup END
+  " j2: Jinja2
+  augroup ft_j2
+    au BufNewFile,BufRead *.j2 set filetype=jinja
+  augroup END
 
-    " eyaml: encrypted yaml for Puppet and Hiera
-    augroup ft_eyaml
-        au BufNewFile,BufRead *.eyaml set filetype=yaml
-    augroup END
+  " eyaml: encrypted yaml for Puppet and Hiera
+  augroup ft_eyaml
+    au BufNewFile,BufRead *.eyaml set filetype=yaml
+  augroup END
 
-    " ansible check for playbooks/*
-    augroup ft_ansible
-        au BufNewFile,BufRead playbooks/*.yml,playbooks/*.yaml set filetype=ansible
-        autocmd FileType puppet setlocal iskeyword-=_
-    augroup END
+  " ansible check for playbooks/*
+  augroup ft_ansible
+    au BufNewFile,BufRead playbooks/*.yml,playbooks/*.yaml set filetype=ansible
+    autocmd FileType puppet setlocal iskeyword-=_
+  augroup END
 
-    " Set puppet stuff
-    augroup ft_puppet
-        autocmd FileType puppet setlocal iskeyword-=:
-        autocmd FileType puppet setlocal iskeyword-=_
-        " Insert a hash rocket with <c-l>
-        autocmd FileType puppet imap <c-l> <space>=>
-        if exists("g:loaded_easy_align")
-            " hash rocket auto-aign (for Puppet)
-            autocmd FileType puppet inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/ ig['Comment']<CR>`z$a<Space>
-        endif
-    augroup END
+  " Set puppet stuff
+  augroup ft_puppet
+    autocmd FileType puppet setlocal iskeyword-=:
+    autocmd FileType puppet setlocal iskeyword-=_
+    " Insert a hash rocket with <c-l>
+    autocmd FileType puppet imap <c-l> <space>=>
+    if exists("g:loaded_easy_align")
+      " hash rocket auto-aign (for Puppet)
+      autocmd FileType puppet inoremap <silent> => =><Esc>mzvip:EasyAlign/=>/ ig['Comment']<CR>`z$a<Space>
+    endif
+  augroup END
 
-    " vim, vim helpfiles
-    augroup ft_vim
-        au!
+  " vim, vim helpfiles
+  augroup ft_vim
+    au!
 
-        au FileType vim setlocal foldmethod=marker
-        au FileType help setlocal textwidth=78
-        " use Enter to follow links
-        au FileType help nmap <buffer> <CR> <C-]>
-        au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
-    augroup END
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+    " use Enter to follow links
+    au FileType help nmap <buffer> <CR> <C-]>
+    au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
+  augroup END
 
-    autocmd! User YouCompleteMe call youcompleteme#Enable()
+  autocmd! User YouCompleteMe call youcompleteme#Enable()
 
-    " Return to last position when file is reopened
-    autocmd BufReadPost *
-                \ if line("'\"") > 1 && line("'\"") <= line("$") |
-                \   exe "normal! g`\"" |
-                \ endif
+  " Return to last position when file is reopened
+  autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
 endif
 " }}}
 
 " backup ----------------------------------------------------------------- "{{{
 let vimbackupdir = $HOME . '/.vimbackup'
 if exists("*mkdir")
-    if !isdirectory(vimbackupdir)
-        call mkdir(vimbackupdir)
-    endif
+  if !isdirectory(vimbackupdir)
+    call mkdir(vimbackupdir)
+  endif
 endif
 set backup
 set noswapfile
@@ -464,16 +466,16 @@ set backupskip=/tmp/*,/private/tmp/*"
 
 " undo feature requires > 7.3
 if has("undofile")
-    let vimundodir = $HOME . '/.vimundo'
-    if exists("*mkdir")
-        if !isdirectory(vimundodir)
-            call mkdir(vimundodir)
-        endif
+  let vimundodir = $HOME . '/.vimundo'
+  if exists("*mkdir")
+    if !isdirectory(vimundodir)
+      call mkdir(vimundodir)
     endif
-    set undofile
-    let &undodir=vimundodir
-    set undolevels=1000
-    set undoreload=10000
+  endif
+  set undofile
+  let &undodir=vimundodir
+  set undolevels=1000
+  set undoreload=10000
 endif
 "}}}
 
@@ -482,8 +484,8 @@ set wildmenu
 set wildmode=list:longest
 
 set wildignore+=.hg,.svn,CVS                     " Version control
-                                                 " ignoring .git has
-                                                 " consequences
+" ignoring .git has
+" consequences
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
@@ -596,11 +598,11 @@ inoremap <F6> <C-R>=strftime("%Y-%m-%d")<CR>
 " :Qargs sets :args to every file that matches the last vimgrep search
 command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
 function! QuickfixFilenames()
-    let buffer_numbers = {}
-    for quickfix_item in getqflist()
-        let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-    endfor
-    return join(map(values(buffer_numbers), 'fnameescape(v:val)')) 
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)')) 
 endfunction
 
 " Registers -------------------------------------------------------------- "{{{
@@ -638,19 +640,19 @@ nnoremap zO zCzO
 nnoremap <leader>z zMzvzz
 
 function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
+  let line = getline(v:foldstart)
 
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth - 3
+  let foldedlinecount = v:foldend - v:foldstart
 
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
+  " expand tabs into spaces
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
 
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+  return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
 
@@ -673,15 +675,15 @@ nnoremap <F4> :GundoToggle<CR>
 vnoremap <silent> <Enter> :EasyAlign<Enter>
 " custom delimiters
 let g:easy_align_delimiters = {
-            \  '-': { 'pattern': '-',  'left_margin': 0, 'right_margin': 1, 'stick_to_left': 1 }
-            \ }
+      \  '-': { 'pattern': '-',  'left_margin': 0, 'right_margin': 1, 'stick_to_left': 1 }
+      \ }
 " }}}
 
 " Ack ---------------------------------------------------------------------"{{{
 " Use ag if it's in PATH
 " https://github.com/ggreer/the_silver_searcher
 if executable("ag")
-    let g:ackprg = 'ag --nogroup --nocolor --column'
+  let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 
 nnoremap <leader>a :Ack!<space>
@@ -704,21 +706,21 @@ nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
 xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
 
 function! s:CopyMotionForType(type)
-    if a:type ==# 'v'
-        silent execute "normal! `<" . a:type . "`>y"
-    elseif a:type ==# 'char'
-        silent execute "normal! `[v`]y"
-    endif
+  if a:type ==# 'v'
+    silent execute "normal! `<" . a:type . "`>y"
+  elseif a:type ==# 'char'
+    silent execute "normal! `[v`]y"
+  endif
 endfunction
 
 function! s:AckMotion(type) abort
-    let reg_save = @@
+  let reg_save = @@
 
-    call s:CopyMotionForType(a:type)
+  call s:CopyMotionForType(a:type)
 
-    execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
+  execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
 
-    let @@ = reg_save
+  let @@ = reg_save
 endfunction
 
 " }}}
@@ -755,28 +757,28 @@ function! BufOpen(e)
 endfunction
 
 nnoremap <silent> <Leader>b :call fzf#run({
-\   'source':      reverse(BufList()),
-\   'sink':        function('BufOpen'),
-\   'options':     '+m',
-\   'tmux_height': '40%'
-\ })<CR>
+      \   'source':      reverse(BufList()),
+      \   'sink':        function('BufOpen'),
+      \   'options':     '+m',
+      \   'tmux_height': '40%'
+      \ })<CR>
 
 "}}}
 
 " tmux-navigator ----------------------------------------------------------"{{{
 " If tmux-navigator is loaded
 if exists(":TmuxNavigateLeft")
-    noremap <silent> <C-h> :TmuxNavigateLeft<cr>
-    noremap <silent> <C-j> :TmuxNavigateDown<cr>
-    noremap <silent> <C-k> :TmuxNavigateUp<cr>
-    noremap <silent> <C-l> :TmuxNavigateRight<cr>
-    noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+  noremap <silent> <C-h> :TmuxNavigateLeft<cr>
+  noremap <silent> <C-j> :TmuxNavigateDown<cr>
+  noremap <silent> <C-k> :TmuxNavigateUp<cr>
+  noremap <silent> <C-l> :TmuxNavigateRight<cr>
+  noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 else
-    noremap <C-h> <C-w>h
-    noremap <C-j> <C-w>j
-    noremap <C-k> <C-w>k
-    noremap <C-l> <C-w>l
-    noremap <C-\> <C-w><C-p>
+  noremap <C-h> <C-w>h
+  noremap <C-j> <C-w>j
+  noremap <C-k> <C-w>k
+  noremap <C-l> <C-w>l
+  noremap <C-\> <C-w><C-p>
 endif
 "}}}
 
