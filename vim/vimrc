@@ -294,6 +294,8 @@ set ttyfast
 set lazyredraw
 set ruler
 set confirm
+set complete-=i     " Searching includes can be slow
+set dictionary+=/usr/share/dict/words
 if exists("+colorcolumn")
   set colorcolumn=85
 endif
@@ -309,7 +311,8 @@ endif
 
 " mapping timeout
 set ttimeout
-set ttimeoutlen=100
+set ttimeoutlen=50
+set timeoutlen=1200
 
 
 " Allow unsaved background buffers and remember marks/undo for them
@@ -440,8 +443,6 @@ if has("autocmd")
     au FileType help nmap <buffer> <CR> <C-]>
     au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
   augroup END
-
-  autocmd! User YouCompleteMe call youcompleteme#Enable()
 
   " Return to last position when file is reopened
   autocmd BufReadPost *
