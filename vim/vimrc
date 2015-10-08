@@ -29,6 +29,7 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-dispatch'
   Plug 'roman/golden-ratio'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
@@ -735,8 +736,9 @@ nnoremap <Leader>gd :Gvdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR>
-nnoremap <Leader>gc :Gcommit --all<CR>
-nnoremap <Leader>gp :Git push<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gl :Gpull<CR>
 "}}}
 
 " vim-gitgutter -----------------------------------------------------------"{{{
