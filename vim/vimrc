@@ -434,15 +434,28 @@ if has("autocmd")
     endif
   augroup END
 
+  augroup ft_git
+    autocmd!
+
+    " Place the cursor at the top of the buffer
+    autocmd VimEnter .git/COMMIT_EDITMSG exe 'normal! gg'
+
+    " make 3-way diffs easier to navigate
+    autocmd User Fugitive nnoremap <leader>2 :diffget 2<CR> :diffupdate<CR>
+    autocmd User Fugitive nnoremap <leader>3 :diffget 3<CR> :diffupdate<CR>
+    autocmd User Fugitive nnoremap dp dp:diffupdate<CR>
+    autocmd User Fugitive nnoremap do do:diffupdate<CR>
+  augroup END
+
   " vim, vim helpfiles
   augroup ft_vim
-    au!
+    autocmd!
 
-    au FileType vim setlocal foldmethod=marker
-    au FileType help setlocal textwidth=78
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType help setlocal textwidth=78
     " use Enter to follow links
-    au FileType help nmap <buffer> <CR> <C-]>
-    au BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
+    autocmd FileType help nmap <buffer> <CR> <C-]>
+    autocmd BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
   augroup END
 
   " Return to last position when file is reopened
