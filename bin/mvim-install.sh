@@ -23,7 +23,7 @@ GITCLONED=$(cd $DOWNLOADDIR && git rev-parse --git-dir 2> /dev/null);GITCLONEDER
 if [ $GITCLONEDERR == 0 ]; then
     # Check if remote is expected repo. Remove dir if not
     REMOTE=$(cd $DOWNLOADDIR; git remote -v | grep fetch | tr ' ' '\t' | cut -f2)
-    [ "${REMOTE}" -eq "${MVIMREPO}" ] || rm -rf $DOWNLOADDIR
+    [ "${REMOTE}" = "${MVIMREPO}" ] || rm -rf $DOWNLOADDIR
     cd $DOWNLOADDIR && git pull
 else
     rm -rf $DOWNLOADDIR
