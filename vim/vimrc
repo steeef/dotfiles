@@ -294,7 +294,6 @@ set cursorline
 set ttyfast
 set lazyredraw
 set ruler
-set confirm
 set complete-=i     " Searching includes can be slow
 set dictionary+=/usr/share/dict/words
 if exists("+colorcolumn")
