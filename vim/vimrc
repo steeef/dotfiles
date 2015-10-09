@@ -444,6 +444,8 @@ if has("autocmd")
     autocmd User Fugitive nnoremap <leader>3 :diffget //3<CR> :diffupdate<CR>
     autocmd User Fugitive nnoremap dp dp:diffupdate<CR>
     autocmd User Fugitive nnoremap do do:diffupdate<CR>
+    " remove unused buffers when browsing commits
+    autocmd BufReadPost fugitive://* set bufhidden=delete
   augroup END
 
   " vim, vim helpfiles
