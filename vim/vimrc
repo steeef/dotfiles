@@ -440,8 +440,8 @@ if has("autocmd")
     autocmd VimEnter .git/COMMIT_EDITMSG exe 'normal! gg'
 
     " make 3-way diffs easier to navigate
-    autocmd User Fugitive nnoremap <leader>2 :diffget 2<CR> :diffupdate<CR>
-    autocmd User Fugitive nnoremap <leader>3 :diffget 3<CR> :diffupdate<CR>
+    autocmd User Fugitive nnoremap <leader>2 :diffget //2<CR> :diffupdate<CR>
+    autocmd User Fugitive nnoremap <leader>3 :diffget //3<CR> :diffupdate<CR>
     autocmd User Fugitive nnoremap dp dp:diffupdate<CR>
     autocmd User Fugitive nnoremap do do:diffupdate<CR>
   augroup END
