@@ -20,7 +20,7 @@ silent! call plug#begin(bundlepath)
 
 if exists(":PlugInstall")
   Plug 'vim-scripts/IndexedSearch'
-  if executable("ag")
+  if executable("tmux")
     Plug 'christoomey/vim-tmux-navigator'
   endif
   Plug 'tpope/vim-surround'
