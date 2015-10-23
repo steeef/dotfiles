@@ -21,9 +21,6 @@ command -v git >/dev/null 2>&1 || { echo >&2 "git not installed."; exit 1; }
 # Check if $DOWNLOADDIR is a git repo
 GITCLONED=$(cd $DOWNLOADDIR && git rev-parse --git-dir);GITCLONEDERR=$?
 if [ $GITCLONEDERR == 0 ]; then
-    # Check if remote is expected repo. Remove dir if not
-    REMOTE=$(cd $DOWNLOADDIR; git remote -v | grep fetch | tr ' ' '\t' | cut -f2)
-    [ "${REMOTE}" = "${MVIMREPO}" ] || rm -rf $DOWNLOADDIR
     cd $DOWNLOADDIR && git pull
 else
     rm -rf $DOWNLOADDIR
