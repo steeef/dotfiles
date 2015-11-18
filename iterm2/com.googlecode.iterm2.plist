@@ -542,7 +542,7 @@
 			<key>Columns</key>
 			<integer>120</integer>
 			<key>Command</key>
-			<string>tmux_main</string>
+      <string>~/.bin/tmux_main</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
