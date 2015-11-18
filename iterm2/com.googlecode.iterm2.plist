@@ -306,7 +306,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>269 338 606 456 0 0 1920 1177 </string>
+	<string>269 396 606 456 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>1920 2 1918 1175 1920 0 1920 1177 </string>
 	<key>New Bookmarks</key>
@@ -542,7 +542,7 @@
 			<key>Columns</key>
 			<integer>120</integer>
 			<key>Command</key>
-			<string></string>
+			<string>tmux_main</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -579,7 +579,7 @@
 				<real>0.11372549019607843</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -987,13 +987,13 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-      <string>~/</string>
+			<string>~/</string>
 		</dict>
 	</array>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>469560114.905361</real>
 	<key>OnlyWhenMoreTabs</key>
