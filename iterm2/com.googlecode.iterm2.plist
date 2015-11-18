@@ -839,7 +839,7 @@
 				<real>0.11372549019607843</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>No</string>
+			<string>Yes</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -1227,7 +1227,7 @@
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
-			<string>screen-256color</string>
+			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
 			<false/>
 			<key>Transparency</key>
