@@ -31,23 +31,15 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-dispatch'
   Plug 'roman/golden-ratio'
-  Plug 'Raimondi/delimitMate'
+  Plug 'rstacruz/vim-closer'
+  Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
   Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
   Plug 'junegunn/vim-easy-align'
   Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
-
-  " Test if current directory is a git repo. If true, load git plugins
-  " NOTE: This means if you cd to a git repo or open a file that's a member
-  " of a git repo, these plugins won't activate. I think that's a fair
-  " tradeoff for the startup time these plugins add, when working on a remote
-  " system.
-  silent let o=system('git rev-parse --git-dir >/dev/null 2>&1')
-  if !v:shell_error
-    Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter'
-  endif
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
 
   " colorschemes
   Plug 'chriskempson/base16-vim'
