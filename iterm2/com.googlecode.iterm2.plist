@@ -570,7 +570,7 @@
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>1920 2 1918 1175 1920 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2146 155 730 727 1920 0 1920 1177 </string>
+	<string>1920 2 1918 1175 1920 0 1920 1177 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1223,7 +1223,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -1262,6 +1262,10 @@
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>1</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
+	<key>NoSyncSilenceAnnoyingBellAutomatically</key>
+	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>469560114.905361</real>
 	<key>OnlyWhenMoreTabs</key>
@@ -1312,11 +1316,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-11-18T17:44:35Z</date>
+	<date>2015-12-03T22:37:46Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1447880192</real>
+	<real>1448295424</real>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
