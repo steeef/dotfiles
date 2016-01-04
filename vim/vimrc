@@ -400,6 +400,7 @@ if has("autocmd")
   " j2: Jinja2
   augroup ft_j2
     au BufNewFile,BufRead *.j2 set filetype=jinja
+    au BufNewFile,BufRead *.j2 set modelines=2
   augroup END
 
   " eyaml: encrypted yaml for Puppet and Hiera
