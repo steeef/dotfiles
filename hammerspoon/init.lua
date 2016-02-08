@@ -99,10 +99,10 @@ function config()
 
   -- Google Chrome - tab switching
   hs.hotkey.bind(hyper, "g", function()
-    chromeTab('Inbox - steeef@gmail.com', 'https://inbox.google.com')
+    hs.application.launchOrFocus('Inbox')
   end)
   hs.hotkey.bind(hyper, "c", function()
-    chromeTab(' - Google Play Music', 'https://play.google.com/music/listen')
+    hs.application.launchOrFocus('Google Music')
   end)
 
   -- Keychain password entry
