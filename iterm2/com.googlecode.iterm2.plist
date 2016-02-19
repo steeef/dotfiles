@@ -1267,7 +1267,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>0</integer>
+			<integer>12</integer>
 			<key>Working Directory</key>
 			<string>~/</string>
 		</dict>
@@ -1334,12 +1334,12 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-01-13T22:17:57Z</date>
+	<date>2016-02-19T15:56:53Z</date>
 	<key>UKCrashReporterLastCrashReportDate</key>
 	<real>1451844096</real>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.9.20160102</string>
+	<string>2.9.20160206</string>
 </dict>
 </plist>
