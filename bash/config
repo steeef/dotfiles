@@ -17,15 +17,45 @@ fi
 export PS1='\n${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w${D}\n$ '
 export EDITOR="vim"
 
-shopt -s histverify histreedit histappend
+
+# yoinked from https://github.com/mrzool/bash-sensible
+
+# Prevent file overwrite on stdout redirection
+# Use `>|` to force redirection to an existing file
+set -o noclobber
+
+# Update window size after every command
+shopt -s checkwinsize
+
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+PROMPT_DIRTRIM=2
+
+# Allows space to complete and expand !$ eg:
+# $ ls Projects
+# $ cd !$<space> # completes to `cd Projects`
+bind Space:magic-space
+
+## SMARTER TAB-COMPLETION (Readline bindings) ##
+
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+
+# Treat hyphens and underscores as equivalent
+bind "set completion-map-case on"
+
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
+
+
+shopt -s histverify histreedit histappend cmdhist
 
 # don't put duplicate lines or lines with leading spaces in the history. See bash(1) for more options
-export HISTCONTROL=ignoreboth
+export HISTCONTROL="erasedups:ignoreboth"
 # unlimited history
 export HISTSIZE=
 export HISTFILESIZE=
 
-export HISTIGNORE='&:bg:fg:cd*:clear:ls:ll:l:pwd:history:exit:make*:* --help:'
+export HISTIGNORE='&:[ ]*:bg:fg:cd*:clear:ls:ll:l:pwd:history:exit:make*:* --help:'
 export HISTTIMEFORMAT="%m/%d/%y - %H:%M:%S "
 
 # After each command, append to the history file and reread it
