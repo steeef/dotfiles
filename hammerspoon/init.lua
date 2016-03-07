@@ -61,7 +61,7 @@ function config()
 
   -- Applications
   hs.hotkey.bind(hyper, "k", function()
-    hs.application.launchOrFocus('Xccello')
+    hs.application.launchOrFocus('/Applications/Trello.app')
   end)
   hs.hotkey.bind(hyper, "f", function()
     hs.application.launchOrFocus('Finder')
