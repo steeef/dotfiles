@@ -30,23 +30,6 @@ shopt -s checkwinsize
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 PROMPT_DIRTRIM=2
 
-# Allows space to complete and expand !$ eg:
-# $ ls Projects
-# $ cd !$<space> # completes to `cd Projects`
-bind Space:magic-space
-
-## SMARTER TAB-COMPLETION (Readline bindings) ##
-
-# Perform file completion in a case insensitive fashion
-bind "set completion-ignore-case on"
-
-# Treat hyphens and underscores as equivalent
-bind "set completion-map-case on"
-
-# Display matches for ambiguous patterns at first tab press
-bind "set show-all-if-ambiguous on"
-
-
 shopt -s histverify histreedit histappend cmdhist
 
 # don't put duplicate lines or lines with leading spaces in the history. See bash(1) for more options
