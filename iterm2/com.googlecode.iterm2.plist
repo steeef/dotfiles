@@ -527,6 +527,8 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>C2F20648-6DD5-4E7C-AA3E-4B9A29CBE325</string>
+	<key>HideScrollbar</key>
+	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSColorPanelMode</key>
@@ -582,7 +584,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 150 745 727 0 0 1440 877 </string>
+	<string>0 164 730 704 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>347 126 745 626 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1334,7 +1336,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-02-19T15:56:53Z</date>
+	<date>2016-02-22T16:32:02Z</date>
 	<key>UKCrashReporterLastCrashReportDate</key>
 	<real>1451844096</real>
 	<key>WordCharacters</key>
