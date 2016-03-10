@@ -4,8 +4,5 @@ TMUX=/usr/local/bin/tmux
 
 if ! $TMUX has-session -t $SESSION; then
     $TMUX new-session -s $SESSION -n main -d
-    # modify panels
-    $TMUX split-window -h -t $SESSION
-    $TMUX last-pane -t $SESSION
 fi
 $TMUX attach -d -t $SESSION
