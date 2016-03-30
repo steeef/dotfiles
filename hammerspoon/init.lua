@@ -96,13 +96,14 @@ function config()
   hs.hotkey.bind(hyper, "n", function()
     hs.application.launchOrFocus('nvALT')
   end)
-
-  -- Google Chrome - tab switching
   hs.hotkey.bind(hyper, "g", function()
     hs.application.launchOrFocus('/Applications/Inbox.app')
   end)
   hs.hotkey.bind(hyper, "c", function()
     hs.application.launchOrFocus('/Applications/Google Music.app')
+  end)
+  hs.hotkey.bind(hyper, "u", function()
+    hs.application.launchOrFocus('1Password 6')
   end)
 
   -- Keychain password entry
@@ -121,9 +122,6 @@ function config()
 end
 
   -- Pass
-  hs.hotkey.bind(hyper, "u", function()
-    getPassword()
-  end)
 
 --------------------------------------------------------------------------------
 -- window layout stuff
