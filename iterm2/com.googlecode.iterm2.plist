@@ -584,7 +584,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 5 1438 872 0 0 1440 877 </string>
+	<string>0 173 730 704 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 164 730 704 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -861,7 +861,7 @@
 				<real>0.11372549019607843</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -1278,6 +1278,10 @@
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
 	<integer>0</integer>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
+	<integer>1</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1340,7 +1344,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-03-18T06:25:01Z</date>
+	<date>2016-03-30T00:05:52Z</date>
 	<key>UKCrashReporterLastCrashReportDate</key>
 	<real>1451844096</real>
 	<key>WordCharacters</key>
