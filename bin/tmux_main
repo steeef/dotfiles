@@ -6,3 +6,4 @@ if ! $TMUX has-session -t $SESSION; then
     $TMUX new-session -s $SESSION -n main -d
 fi
 $TMUX attach -d -t $SESSION
+exit 0
