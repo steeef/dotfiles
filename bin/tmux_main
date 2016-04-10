@@ -1,9 +1,3 @@
 #!/bin/bash
 SESSION=main
-TMUX=/usr/local/bin/tmux
-
-if ! $TMUX has-session -t $SESSION; then
-    $TMUX new-session -s $SESSION -n main -d
-fi
-$TMUX attach -d -t $SESSION
-exit 0
+tmux attach -t main || tmux new -s main
