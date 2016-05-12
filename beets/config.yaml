@@ -54,7 +54,7 @@ match:
 
 plugins: [
   discogs,
-  # lyrics,
+  lyrics,
   fetchart,
   embedart,
   lastgenre,
@@ -68,12 +68,13 @@ pluginpath: []
 # Plugins Config -------------------------------------------------------------
 
 lyrics:
-  sources: musixmatch google
-  fallback: ''
+  auto: no
+  sources: musixmatch
 
 fetchart:
   cautious: yes
   cover_names: cover folder
+  sources: itunes coverart amazon albumart
 
 duplicates:
   checksum: no  # expensive
