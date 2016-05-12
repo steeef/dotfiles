@@ -54,6 +54,7 @@ match:
 
 plugins: [
   discogs,
+  echonest,
   lyrics,
   fetchart,
   embedart,
@@ -78,3 +79,6 @@ fetchart:
 
 duplicates:
   checksum: no  # expensive
+
+echonest:
+  upload: no
