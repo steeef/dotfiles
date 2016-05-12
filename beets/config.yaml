@@ -3,57 +3,14 @@ library: ~/Documents/beets.blb
 import:
   move: yes
   copy: no
-  delete: no
-  write: yes
-
-  # use auto-tagging where possible
-  # do not require confirmation on strong matches
-  autotag: yes
-  timid: no
-
-  resume: ask
-  incremental: no
-  none_rec_action: ask
-  log:
-
-  quiet: no  # enable with command line option
-  quiet_fallback: skip
-  default_action: apply
-
-  singletons: no
-  languages: []
-  detail: no
-  flat: no
-
-# use the release-date of the original (first) release of an album?
-original_date: yes
-
-# on multi-disk releases, assign track numbers for the whole album.
-# If "per disk", make sure tracknames do not collide ("paths" setting).
-per_disc_numbering: no
 
 # files matching these patterns are deleted from source after import
 clutter: ["Thumbs.DB", ".DS_Store", "*.m3u", ".pls", "*.jpg"]
-
-# files/directories matching one of these patterns are ignored during import
-ignore: [".*", "*~", "System Volume Information"]
 
 paths:
   default: %asciify{$albumartist}/%asciify{$album}%aunique{}/$track %asciify{$title}
   singleton: Non-Album/%asciify{$artist}/%asciify{$title}
   comp: Compilations/%asciify{$album}%aunique{}/$track %asciify{$title}
-
-path_sep_replace: _
-
-# filename for the album art
-art_filename: cover  # results in "cover.jpg"
-
-max_filename_length: 0  # unlimited
-
-# use mutliple threads during import
-threaded: yes
-timeout: 5.0
-verbose: no
 
 # Auto Tagger ----------------------------------------------------------------
 
@@ -97,15 +54,12 @@ match:
 
 plugins: [
   discogs,
-  lyrics,
-  echonest,
+  # lyrics,
   fetchart,
   embedart,
   lastgenre,
   scrub,
   mbsync,
-  mpdupdate,
-  #mpdstats,
   missing,
   duplicates
 ]
@@ -114,54 +68,12 @@ pluginpath: []
 # Plugins Config -------------------------------------------------------------
 
 lyrics:
-  auto: yes
+  sources: musixmatch google
   fallback: ''
-
-echonest_tempo:
-  auto: yes
-
-lastgenre:
-  # whitelist: ~/.config/beets/genres.txt
-  # canoncical: ~/.config/beets/genres-tree.yaml
-  fallback: ''
-  source: artist
 
 fetchart:
-  auto: yes
-  maxwidth: 300
-  cautious: true
+  cautious: yes
   cover_names: cover folder
 
-embedart:
-  auto: yes
-  maxwidth: 300
-
-replaygain:
-  auto: yes
-  overwrite: yes
-  albumgain: yes
-
-scrub:
-  auto: yes
-
-    # required for mpdstats
-  mpd:
-    host: localhost
-    port: 6600
-    password:  # none
-
-  mpdstats:
-    rating: False
-    # two ratings are calculated:
-    # "rolling" based on recent development
-    # "stable" based on all-time development
-    # rating mix 0.0 is all "rolling", 1.0 is all "stable"
-    rating_mix: 0.75
-
-    missing:
-      format: $albumartist - $album - $track - $title
-    count: no
-    total: no
-
-    duplicates:
-      checksum: no  # expensive
+duplicates:
+  checksum: no  # expensive
