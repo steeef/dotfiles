@@ -73,6 +73,7 @@ lyrics:
   sources: musixmatch lyricwiki
 
 fetchart:
+  auto: no
   cautious: yes
   cover_names: cover folder
   sources: itunes coverart amazon albumart
