@@ -83,3 +83,14 @@ duplicates:
 
 echonest:
   upload: no
+
+convert:
+  format: car
+  formats:
+    car:
+      command: ffmpeg -i $source -y -codec:a libmp3lame -qscale:a 2 $dest
+      extension: mp3
+      dest: ~/Desktop/carmp3
+      max_bitrate: 256
+      paths: %asciify{$albumartist} - %asciify{$album}%aunique{}/$track %asciify{$title}
+
