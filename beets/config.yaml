@@ -62,6 +62,7 @@ plugins: [
   scrub,
   mbsync,
   missing,
+  convert,
   duplicates
 ]
 pluginpath: []
