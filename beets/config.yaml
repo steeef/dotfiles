@@ -4,6 +4,7 @@ import:
   write: no
   move: no
   copy: no
+  autotag: no
 
 # files matching these patterns are deleted from source after import
 clutter: ["Thumbs.DB", ".DS_Store", "*.m3u", ".pls", "*.jpg"]
