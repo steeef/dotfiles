@@ -1,7 +1,7 @@
 directory: /Volumes/music
 library: ~/Documents/beets.blb
 import:
-  move: yes
+  move: no
   copy: no
 
 # files matching these patterns are deleted from source after import
