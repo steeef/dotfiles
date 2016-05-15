@@ -1,6 +1,7 @@
 directory: /Volumes/music
 library: ~/Documents/beets.blb
 import:
+  write: no
   move: no
   copy: no
 
