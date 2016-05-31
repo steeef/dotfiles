@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function ensure_link {
     test -L "$HOME/$2" || ln -s "$HOME/.dotfiles/$1" "$HOME/$2"
