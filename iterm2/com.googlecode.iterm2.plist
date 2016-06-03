@@ -565,16 +565,18 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>2888 385 626 287 1920 0 1920 1177 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>-211 418 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>2570 589 620 392 1920 0 1920 1177 </string>
+	<string>370 192 700 622 0 0 1440 877 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>155 593 592 584 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 173 730 704 0 0 1440 877 </string>
+	<string>0 5 1438 872 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 173 730 704 0 0 1440 877 </string>
+	<string>1920 473 712 704 1920 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>197 47 730 704 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1268,6 +1270,8 @@
 	<true/>
 	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
 	<integer>1</integer>
+	<key>NoSyncInstallationId</key>
+	<string>3A78B440-E88F-4D3A-98EB-0ECC2B43CAC8</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1322,11 +1326,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing3.xml</string>
+	<string>https://iterm2.com/appcasts/testing3.xml?shard=86</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-04-10T16:01:06Z</date>
+	<date>2016-06-03T22:08:38Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
@@ -1334,6 +1338,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.9.20160313</string>
+	<string>3.0.0</string>
 </dict>
 </plist>
