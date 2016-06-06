@@ -23,13 +23,13 @@ ensure_link "hgignore"          ".hgignore"
 ensure_link "irbrc"             ".irbrc"
 ensure_link "inputrc"           ".inputrc"
 ensure_link "maid"              ".maid"
-ensure_link "tmux"              ".tmux"
+#ensure_link "tmux"              ".tmux"
 ensure_link "iterm2"            ".iterm2"
 ensure_link "sshrc"             ".sshrc"
 ensure_link "screenrc"          ".screenrc"
 ensure_link "tmux"              ".tmux"
 ensure_link "Xresources"        ".Xresources"
-ensure_link "tmux.conf"         ".tmux.main.conf"
+#ensure_link "tmux.conf"         ".tmux.main.conf"
 ensure_link "zsh"               ".zsh"
 ensure_link "zshrc"             ".zshrc"
 ensure_link "zpreztorc"         ".zpreztorc"
@@ -38,9 +38,8 @@ ensure_link "fonts"             ".fonts"
 ensure_link "i3"                ".i3"
 ensure_link "i3/i3status.conf"  ".i3status.conf"
 ensure_link "hammerspoon"       ".hammerspoon"
-if [ "$(uname)" == 'Darwin' ]; then
-    ensure_link "tmux-osx"   ".tmux.conf"
-else
-    ensure_link "tmux-linux" ".tmux.conf"
-
-fi
+#if [ "$(uname)" == 'Darwin' ]; then
+#    ensure_link "tmux-osx"   ".tmux.conf"
+#else
+#    ensure_link "tmux-linux" ".tmux.conf"
+#fi
