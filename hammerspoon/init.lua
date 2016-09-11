@@ -14,7 +14,7 @@ hs.grid.MARGINY = 0
 hs.grid.GRIDHEIGHT = 2
 hs.grid.GRIDWIDTH = 2
 
-require "pass"
+require "yubikey"
 
 function config()
   -- Type clipboard
