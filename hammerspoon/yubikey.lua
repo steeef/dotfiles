@@ -12,6 +12,7 @@ function usbDeviceCallback(data)
       -- wake the screen up, so knock will activate
       -- get knock here http://www.knocktounlock.com
       -- os.execute("caffeinate -u -t 5")
+      os.execute("~/.bin/fix-gpg")
     elseif (data["eventType"] == "removed") then
       -- replace +000000000000 with a phone number registered to iMessage
       -- hs.messages.iMessage("+", "Your Yubikey was just removed.")
