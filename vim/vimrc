@@ -452,6 +452,10 @@ if has("autocmd")
     autocmd BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
   augroup END
 
+  augroup ft_python
+    autocmd FileType python let b:dispatch = 'python %'
+  augroup END
+
   " Return to last position when file is reopened
   autocmd BufReadPost *
         \ if line("'\"") > 1 && line("'\"") <= line("$") |
