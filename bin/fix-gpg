@@ -1,2 +1,2 @@
 #!/bin/bash
-killall -i gpg-agent; /usr/local/bin/gpgconf --launch gpg-agent
+pgrep gpg-agent | xargs kill -9; /usr/local/bin/gpgconf --launch gpg-agent
