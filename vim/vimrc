@@ -277,7 +277,7 @@ hi User4 ctermfg=37  guifg=#2aa198  ctermbg=19  guibg=#373b41
 
 set modelines=0
 set encoding=utf-8
-set scrolloff=5
+set scrolloff=999
 set showmode
 set showcmd
 set title
@@ -537,6 +537,12 @@ vnoremap <F1> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" for scrolling up and down quickly
+nnoremap J 7j
+nnoremap K 7k
+vnoremap J 7j
+vnoremap K 7k
+
 " Split line (sister to [J]oin lines)
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc><right>
@@ -548,11 +554,6 @@ nnoremap S i<cr><esc><right>
 nnoremap <F5> :set invpaste paste?<Enter>
 inoremap <F5> <C-O><F5>
 set pastetoggle=<F5>
-
-" map easier-to-use keys
-noremap H ^
-noremap L $
-vnoremap L g_
 
 " simplify macro playback
 nnoremap Q @q
