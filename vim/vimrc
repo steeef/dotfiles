@@ -537,12 +537,6 @@ vnoremap <F1> <nop>
 nnoremap j gj
 nnoremap k gk
 
-" for scrolling up and down quickly
-nnoremap J 7j
-nnoremap K 7k
-vnoremap J 7j
-vnoremap K 7k
-
 " Split line (sister to [J]oin lines)
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc><right>
