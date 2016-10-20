@@ -60,9 +60,6 @@ function config()
   hs.hotkey.bind(hyper, "1", hs.grid.pushWindowNextScreen)
 
   -- Applications
-  hs.hotkey.bind(hyper, "k", function()
-    hs.application.launchOrFocus('/Applications/Trello.app')
-  end)
   hs.hotkey.bind(hyper, "f", function()
     hs.application.launchOrFocus('Finder')
   end)
