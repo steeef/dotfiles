@@ -109,6 +109,17 @@ function config()
     hs.application.launchOrFocus('1Password 6')
   end)
 
+  -- media keys
+  hs.hotkey.bind(hyper, "9", function()
+    hs.eventtap.event.newSystemKeyEvent('PLAY', true):post()
+  end)
+  hs.hotkey.bind(hyper, "8", function()
+    hs.eventtap.event.newSystemKeyEvent('PREVIOUS', true):post()
+  end)
+  hs.hotkey.bind(hyper, "0", function()
+    hs.eventtap.event.newSystemKeyEvent('NEXT', true):post()
+  end)
+
   -- Keychain password entry
   hs.hotkey.bind(hyper, "w", function()
     typeKeychainEntry('QS_1_creds', 'account')
