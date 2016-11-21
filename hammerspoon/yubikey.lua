@@ -10,7 +10,7 @@ function usbDeviceCallback(data)
   if string.match(data["productName"], "Yubikey NEO") then
     if (data["eventType"] == "added") then
       hs.notify.show("Yubikey", "You just connected", data["productName"])
-      os.execute("~/.bin/fix-gpg")
+      -- os.execute("~/.bin/fix-gpg")
     elseif (data["eventType"] == "removed") then
       hs.timer.doAfter(1, function()
         hs.application.launchOrFocus('/System/Library/Frameworks/' ..
