@@ -119,6 +119,9 @@ function config()
   hs.hotkey.bind(hyper, "0", function()
     hs.eventtap.event.newSystemKeyEvent('NEXT', true):post()
   end)
+  hs.hotkey.bind(hyper, "-", function()
+                   hs.eventtap.event.newSystemKeyEvent('STOP', true):post()
+  end)
 
   -- Keychain password entry
   hs.hotkey.bind(hyper, "w", function()
