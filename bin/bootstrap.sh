@@ -5,6 +5,7 @@ function ensure_link {
 }
 
 mkdir -p "${HOME}/.config/beets"
+mkdir -p "${HOME}/.config/Code/User"
 mkdir -p "${HOME}/code"
 mkdir -p "${HOME}/bin"
 mkdir -p "${HOME}/build"
@@ -16,7 +17,7 @@ ensure_link "ackrc"              ".ackrc"
 ensure_link "bash"               ".bash"
 ensure_link "bashrc"             ".bashrc"
 ensure_link "beets/config.yaml"  ".config/beets/config.yaml"
-ensure_link "code/settings.json" ".code.settings.json"
+ensure_link "code/settings.json" ".config/Code/User/settings.json"
 ensure_link "gemrc"              ".gemrc"
 ensure_link "gitignore"          ".gitignore"
 ensure_link "git_template"       ".git_template"
