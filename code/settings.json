@@ -1,0 +1,13 @@
+{
+    "editor.cursorStyle": "block",
+    "editor.lineNumbers": "relative",
+    "editor.rulers": [
+        80
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": [";"],
+            "after": [":"]
+        }
+    ]
+}
