@@ -1,2 +1,2 @@
 #!/bin/bash
-pgrep gpg-agent | xargs kill -9; gpgconf --reload gpg-agent
+pgrep gpg-agent | xargs kill -9; gpg-agent --daemon
