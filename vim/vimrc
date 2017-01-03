@@ -38,7 +38,7 @@ if exists(":PlugInstall")
   Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
   Plug 'junegunn/vim-easy-align'
   Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
-  Plug 'tpope/vim-fugitive'
+  Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
 
   " colorschemes
