@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# A git hook to make sure user.email exists before committing
+
+EMAIL=$(git config user.email)
+
+if [ -z "$EMAIL" ]; then
+    # user.email is empty
+    echo "ERROR: [pre-commit hook] Aborting commit because user.email is missing."
+    exit 1
+fi
