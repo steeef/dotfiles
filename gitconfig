@@ -43,3 +43,5 @@
     verbose = true
 [diff]
     compactionHeuristic = true
+[user]
+	name = Stephen Price
