@@ -31,7 +31,7 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-dispatch'
   Plug 'roman/golden-ratio'
-  Plug 'cohama/lexima.vim'
+  "Plug 'cohama/lexima.vim'
   Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
