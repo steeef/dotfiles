@@ -45,3 +45,5 @@
     compactionHeuristic = true
 [user]
 	name = Stephen Price
+[http "https://gopkg.in"]
+	followRedirects = true
