@@ -691,6 +691,8 @@
 	<string>520 562 400 129 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>370 192 700 622 0 0 1440 877 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>269 148 1018 447 0 0 1440 877 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -2074,6 +2076,8 @@
 	<true/>
 	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
 	<integer>1</integer>
+	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
+	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>191C80B5-AF8D-4DE1-B71A-A4F2E01A6895</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
@@ -2094,6 +2098,8 @@
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
+	<key>PasteTabToStringTabStopSize</key>
+	<integer>4</integer>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -2140,7 +2146,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-01-17T21:56:48Z</date>
+	<date>2017-01-27T17:09:51Z</date>
 	<key>UKCrashReporterLastCrashReportDate</key>
 	<real>1451844096</real>
 	<key>WordCharacters</key>
