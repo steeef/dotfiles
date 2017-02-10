@@ -31,6 +31,7 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-dispatch'
   Plug 'roman/golden-ratio'
+  Plug 'itchyny/calendar.vim'
   "Plug 'cohama/lexima.vim'
   Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
@@ -801,6 +802,10 @@ nmap gcc <Plug>CommentaryLine
 " LaTeX-Box ---------------------------------------------------------------"{{{
 let g:LatexBox_latexmk_preview_continuously = 1
 let g:LatexBox_viewer = "open -a Skim"
+"}}}
+
+" calendar.vim ------------------------------------------------------------"{{{
+let g:calendar_google_calendar = 1
 "}}}
 
 "}}}
