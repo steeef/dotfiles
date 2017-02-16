@@ -66,3 +66,11 @@ alias s='ssh'
 
 # sudo please
 alias please='sudo $(history -p !!)'
+
+# delete ssh host when keys are bad
+function delhost() {
+  sed -i -e "$@d" ~/.ssh/known_hosts
+}
+
+# add alias for `fuck` command
+command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"

@@ -88,6 +88,14 @@ alias please='sudo $(fc -ln -1)'
 #Use Pygments to color less
 pless() { pygmentize -f terminal256 -g -P style=monokai $* | less -FiXRM }
 
+# delete ssh host when keys are bad
+function delhost() {
+  sed -i -e "$@d" ~/.ssh/known_hosts
+}
+
+# add alias for `fuck` command
+command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
+
 # colorscheme ---------------------------------------------------------
 # https://github.com/chriskempson/base16-shell
 BASE16_SCHEME="tomorrow"
