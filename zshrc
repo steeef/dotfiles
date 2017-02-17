@@ -108,10 +108,23 @@ function docker_alias() {
     -p 27017:27017 \
     ${@:2}
 }
-alias python="docker_alias /directory python:2.7 python"
-alias pip="docker_alias /directory python:2.7 pip"
-alias python3="docker_alias /directory python:3 python"
-alias pip3="docker_alias /directory python:2.7 python"
+function docker_python_alias() {
+  docker run -it --rm \
+    -e WORKON_HOME=/virtualenvs \
+    -v $HOME/.virtualenvs:/virtualenvs \
+    -v $(pwd):$1 -w $1 \
+    -p 3000:3000 \
+    -p 8080:8080 \
+    -p 8000:8000 \
+    -p 80:80 \
+    -p 3306:3306 \
+    -p 27017:27017 \
+    ${@:2}
+}
+alias python="docker_python_alias /directory python:2.7 python"
+alias pip="docker_python_alias /directory python:2.7 pip"
+alias python3="docker_python_alias /directory python:3 python"
+alias pip3="docker_python_alias /directory python:2.7 python"
 
 # colorscheme ---------------------------------------------------------
 # https://github.com/chriskempson/base16-shell
