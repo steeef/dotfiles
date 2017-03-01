@@ -1,5 +1,6 @@
 {
     "editor.cursorStyle": "block",
+    "editor.minimap.enabled": true,
     "editor.lineNumbers": "relative",
     "editor.rulers": [
         80
@@ -10,5 +11,7 @@
             "after": [":"]
         }
     ],
-    "workbench.welcome.enabled": false
+    "workbench.welcome.enabled": false,
+    "workbench.colorTheme": "Base16 Dark Tomorrow",
+    "window.zoomLevel": 3
 }
