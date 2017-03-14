@@ -1,9 +1,0 @@
-#!/bin/sh
-# adblock for hosts file
-# store system hosts file in /etc/hosts.d/base
-if output=$(cat /etc/hosts.d/* > /etc/hosts); then
-    echo "hosts updated."
-else
-    echo "Error: $output"
-    exit 1
-fi

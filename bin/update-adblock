@@ -1,8 +1,33 @@
 #!/bin/sh
-if output=$(curl -s -S http://someonewhocares.org/hosts/zero/hosts -o /etc/hosts.d/adblock); then
-    echo "adblock hosts downloaded."
-    update-hosts
+REPO=https://github.com/zant95/hBlock.git
+DOWNLOADDIR=${HOME}/code/hblock
+HBLOCK=/usr/local/bin/hblock
+
+command -v git >/dev/null 2>&1 || { echo >&2 "git not installed."; exit 1; }
+
+/bin/mkdir -p $DOWNLOADDIR
+GITCLONED=$(cd $DOWNLOADDIR && git rev-parse --git-dir);GITCLONEDERR=$?
+
+UPDATED=0
+if [ $GITCLONEDERR == 0 ]; then
+  cd $DOWNLOADDIR
+  git fetch
+  if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
+    git pull
+    UPDATED=1
+  fi
+  cd -
 else
-    echo "Error: $output"
-    exit 1
+  rm -rf $DOWNLOADDIR
+  git clone $REPO $DOWNLOADDIR
+  UPDATED=1
+fi
+
+if [ "${UPDATED}" = "1" ]; then
+  cp -f ${DOWNLOADDIR}/hblock ${HBLOCK}
+  chmod +x ${HBLOCK}
+fi
+if ! sudo ${HBLOCK}; then
+  echo "ERROR running hblock"
+  exit 1
 fi
