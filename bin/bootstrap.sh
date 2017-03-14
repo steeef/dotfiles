@@ -10,6 +10,7 @@ mkdir -p "${HOME}/code"
 mkdir -p "${HOME}/bin"
 mkdir -p "${HOME}/build"
 
+ensure_link "Brewfile"           ".Brewfile"
 ensure_link "bin"                ".bin"
 ensure_link "vim/vimrc"          ".vimrc"
 ensure_link "vim"                ".vim"
@@ -41,3 +42,20 @@ ensure_link "i3"                 ".i3"
 ensure_link "i3/i3status.conf"   ".i3status.conf"
 ensure_link "hammerspoon"        ".hammerspoon"
 ensure_link "editorconfig"       ".editorconfig"
+
+if [ "$(uname)" = "Darwin" ]; then
+  # install XCode Command Line Tools if not installed
+  if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
+     xcode-select --install
+  fi
+
+  # install Homebrew
+  if ! command -v brew >/dev/null 2>&1; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+
+  # Install packages in ~/.Bundlefile
+  brew update
+  brew tap homebrew/bundle
+  brew bundle --global
+fi
