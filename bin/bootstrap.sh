@@ -46,25 +46,58 @@ ensure_link "editorconfig"       ".editorconfig"
 if [ "$(uname)" = "Darwin" ]; then
   # install XCode Command Line Tools if not installed
   if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
+     echo "INFO: Installing XCode Command Line Tools"
      xcode-select --install
   fi
 
   # install Homebrew
   if ! command -v brew >/dev/null 2>&1; then
+     echo "INFO: Installing homebrew"
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 
   # Install packages in ~/.Bundlefile
+  echo "INFO: Updating homebrew and packages"
   brew update
   brew tap homebrew/bundle
   brew bundle --global
 fi
 
+# base16-shell setup
+base16dir="${HOME}/code/base16-shell"
+base16repo="https://github.com/chriskempson/base16-shell.git"
+mkdir -p "${base16dir}"
+GITCLONED=$(cd ${base16dir} && git rev-parse --git-dir);GITCLONEDERR=$?
+if [ $GITCLONEDERR == 0 ]; then
+  echo "INFO: Updating base16-shell"
+  (cd ${base16dir} && git pull)
+else
+  echo "INFO: Installing base16-shell"
+  rm -rf "${base16dir}"
+  git clone ${base16repo} "${base16dir}"
+fi
+
+# prezto setup
+preztodir="${HOME}/.zprezto"
+preztorepo="https://github.com/sorin-ionescu/prezto.git"
+mkdir -p "${preztodir}"
+GITCLONED=$(cd ${preztodir} && git rev-parse --git-dir);GITCLONEDERR=$?
+if [ $GITCLONEDERR == 0 ]; then
+  echo "INFO: Updating prezto"
+  (cd ${preztodir} && git pull --recurse-submodules)
+else
+  echo "INFO: Installing base16-shell"
+  rm -rf "${preztodir}"
+  git clone --recursive ${preztorepo} "${preztodir}"
+fi
+
 # install vim
 if [ ! -x "${HOME}/bin/vim" ]; then
+  echo "INFO: Installing vim"
   ${HOME}/.bin/vim-install.sh
 fi
 if [ -x "${HOME}/bin/vim" ]; then
   # Install plugins with vim-plug
-  ${HOME}/bin/vim +PlugInstall +qall
-vi
+  echo "INFO: Installing vim-plug plugins"
+  ${HOME}/bin/vim -c 'PlugInstall --sync' +qall
+fi
