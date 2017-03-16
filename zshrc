@@ -155,11 +155,11 @@ fi
 # Local Settings -------------------------------------------------------------
 [[ -s $HOME/.zshrc_local ]] && source $HOME/.zshrc_local
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Host completion
 # skip /etc/hosts since it contains adblock info
 zstyle -e ':completion:*:hosts' hosts 'reply=(
   ${=${=${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//\]:[0-9]*/ }//,/ }//\[/ }
   ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
 )'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

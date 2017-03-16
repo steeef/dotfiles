@@ -59,3 +59,12 @@ if [ "$(uname)" = "Darwin" ]; then
   brew tap homebrew/bundle
   brew bundle --global
 fi
+
+# install vim
+if [ ! -x "${HOME}/bin/vim" ]; then
+  ${HOME}/.bin/vim-install.sh
+fi
+if [ -x "${HOME}/bin/vim" ]; then
+  # Install plugins with vim-plug
+  ${HOME}/bin/vim +PlugInstall +qall
+vi
