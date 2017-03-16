@@ -38,7 +38,7 @@ if exists(":PlugInstall")
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
   Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
   Plug 'junegunn/vim-easy-align'
-  Plug 'junegunn/fzf',         { 'do': 'yes \| ./install' }
+  Plug 'junegunn/fzf',         { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
 
