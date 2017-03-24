@@ -41,6 +41,8 @@ if exists(":PlugInstall")
   Plug 'junegunn/fzf',         { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
+  Plug 'w0rp/ale',             { 'for': ['python', 'ruby', 'sh', 'yaml', 'vim', 'puppet', 'ansible', 'json', 'go', 'markdown', 'html', 'docker', 'lua'] }
+  Plug 'metakirby5/codi.vim',  { 'on': 'Codi' }
 
   " colorschemes
   Plug 'chriskempson/base16-vim'
@@ -51,6 +53,7 @@ if exists(":PlugInstall")
   Plug 'chase/vim-ansible-yaml',   { 'for': 'ansible' }
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
+  Plug 'davidhalter/jedi-vim',     { 'for': 'python' }
 endif
 
 "}}}
@@ -455,6 +458,7 @@ if has("autocmd")
 
   augroup ft_python
     autocmd FileType python let b:dispatch = 'python %'
+    autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
   augroup END
 
   " Return to last position when file is reopened
