@@ -812,4 +812,9 @@ let g:LatexBox_viewer = "open -a Skim"
 let g:calendar_google_calendar = 1
 "}}}
 
+" ale ---------------------------------------------------------------------"{{{
+let g:ale_python_pylint_options = '--max-line-length=100'
+let g:ale_python_flake8_args = '--max-line-length=100'
+"}}}
+
 "}}}
