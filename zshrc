@@ -96,7 +96,7 @@ function delhost() {
 # bootstrap dotfiles
 function sshboot() {
   if [ -n "$1" ]; then
-    ssh -t $1 "curl -sL https://gist.githubusercontent.com/steeef/2cf6345055bdec2c9b8781267e8299ab/raw/7be1817da0fcbedbbcca0800c7477beaa34442f3/download_and_bootstrap.sh | bash -ex; bash -l"
+    ssh -t $1 "curl -sL https://gist.githubusercontent.com/steeef/2cf6345055bdec2c9b8781267e8299ab/raw/download_and_bootstrap.sh | bash -ex; bash -l"
   else
     echo "USAGE: sshboot <host>"
   fi
