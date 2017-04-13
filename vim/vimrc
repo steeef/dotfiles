@@ -14,6 +14,16 @@ else
   let bundlepath = "~/.vim/bundle"
 endif
 
+" Ale check
+" A flag for detecting if the required features are set.
+if has('nvim')
+  let s:has_ale_features = has('timers')
+else
+  " Check if Job and Channel functions are available, instead of the
+  " features. This works better on old MacVim versions.
+  let s:has_ale_features = has('timers') && exists('*job_start') && exists('*ch_close_in')
+endif
+
 silent! call plug#begin(bundlepath)
 
 " plugins ---------------------------------------------------------"{{{
@@ -41,7 +51,9 @@ if exists(":PlugInstall")
   Plug 'junegunn/fzf',         { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
-  Plug 'w0rp/ale',             { 'for': ['python', 'ruby', 'sh', 'yaml', 'vim', 'puppet', 'ansible', 'json', 'go', 'markdown', 'html', 'docker', 'lua'] }
+  if s:has_ale_features
+    Plug 'w0rp/ale',             { 'for': ['python', 'ruby', 'sh', 'yaml', 'vim', 'puppet', 'ansible', 'json', 'go', 'markdown', 'html', 'docker', 'lua'] }
+  endif
   Plug 'metakirby5/codi.vim',  { 'on': 'Codi' }
 
   " colorschemes
