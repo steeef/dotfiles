@@ -92,13 +92,8 @@ else
   git clone --recursive ${preztorepo} "${preztodir}"
 fi
 
-# install vim
-if [ ! -x "${HOME}/bin/vim" ]; then
-  echo "INFO: Installing vim"
-  ${HOME}/.bin/vim-install.sh
-fi
-if [ -x "${HOME}/bin/vim" ]; then
+if command -v vim >/dev/null 2>&1; then
   # Install plugins with vim-plug
   echo "INFO: Installing vim-plug plugins"
-  ${HOME}/bin/vim -c 'PlugInstall --sync' +qall
+  vim -c 'PlugInstall --sync' +qall
 fi
