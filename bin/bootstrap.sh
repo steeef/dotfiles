@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
 function ensure_link {
-    test -L "$HOME/$2" || ln -s "$HOME/.dotfiles/$1" "$HOME/$2"
+  if [ ! -L "$HOME/$2" ]; then
+    if [ "$3" = "force" ]; then
+      ln -sfn "$HOME/.dotfiles/$1" "$HOME/$2"
+    else
+      ln -s "$HOME/.dotfiles/$1" "$HOME/$2"
+    fi
+  fi
 }
 
 mkdir -p "${HOME}/.config/beets"
@@ -16,7 +22,7 @@ ensure_link "vim/vimrc"          ".vimrc"
 ensure_link "vim"                ".vim"
 ensure_link "ackrc"              ".ackrc"
 ensure_link "bash"               ".bash"
-ensure_link "bashrc"             ".bashrc"
+ensure_link "bashrc"             ".bashrc"                         "force"
 ensure_link "beets/config.yaml"  ".config/beets/config.yaml"
 ensure_link "code/settings.json" ".config/Code/User/settings.json"
 ensure_link "gemrc"              ".gemrc"
