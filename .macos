@@ -38,6 +38,11 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
     "/System/Library/CoreServices/Menu Extras/User.menu"
 done
 
+# Dark theme
+defaults write ~/Library/Preferences/.GlobalPreferences AppleInterfaceStyle Dark
+# Graphite appearance
+defaults write NSGlobalDomain AppleAquaColorVariant 6
+
 # Set highlight color to green
 defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
 
