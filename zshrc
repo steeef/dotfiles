@@ -161,6 +161,21 @@ if [ -s $HOME/.bin/z.sh ]; then
     fi
 fi
 
+# Ctrl-Z --------------------------------------------------------------------
+
+# Make Ctrl-z also resume background process
+fancy-ctrl-z () {
+    if [[ $#BUFFER -eq 0 ]]; then
+        BUFFER="fg"
+        zle accept-line
+    else
+        zle flush-input
+        zle clear-screen
+    fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 # Local Settings -------------------------------------------------------------
 [[ -s $HOME/.zshrc_local ]] && source $HOME/.zshrc_local
 
@@ -170,5 +185,3 @@ zstyle -e ':completion:*:hosts' hosts 'reply=(
   ${=${=${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//\]:[0-9]*/ }//,/ }//\[/ }
   ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
 )'
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
