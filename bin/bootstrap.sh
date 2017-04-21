@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+PYTHON_VERSIONS=(
+  2.7.13
+  3.6.0
+)
+PYTHON_DEFAULT=2.7.13
+RUBY_VERSIONS=(
+  2.4.0
+)
+RUBY_DEFAULT=2.4.0
 
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
@@ -10,7 +19,8 @@ function ensure_link {
   fi
 }
 
-mkdir -p "${HOME}/.config/beets"
+mkdir -p "${HOME}/.config"
+mkdir -p "${HOME}/.config/nvim"
 mkdir -p "${HOME}/.config/Code/User"
 mkdir -p "${HOME}/code"
 mkdir -p "${HOME}/bin"
@@ -37,7 +47,7 @@ ensure_link "inputrc"            ".inputrc"
 ensure_link "irbrc"              ".irbrc"
 ensure_link "iterm2"             ".iterm2"
 ensure_link "maid"               ".maid"
-ensure_link "nvim"               ".config/nvim"
+ensure_link "nvim/init.vim"      ".config/nvim/init.vim"
 ensure_link "screenrc"           ".screenrc"
 ensure_link "sshrc"              ".sshrc"
 ensure_link "tmux"               ".tmux"
@@ -67,6 +77,54 @@ if [ "$(uname)" = "Darwin" ]; then
   brew tap homebrew/bundle
   brew bundle --global
 fi
+
+# pyenv and rbenv setup
+for file in "${HOME}/.zshrc_local" "${HOME}/.bashrc_local"; do
+  for bin in "pyenv init -" "rbenv init -" "pyenv virtualenv-init -"; do
+    grep -q "${bin}" "${file}" \
+      || echo 'eval "$('${bin}')"' >> "${file}"
+  done
+done
+if [ "$(basename ${SHELL})" = "zsh" ]; then
+  source "${HOME}/.zshrc_local"
+elif [ "$(basename ${SHELL})" = "bash" ]; then
+  source "${HOME}/.bashrc_local"
+fi
+
+# Install python versions and setup for Neovim
+for python in "${PYTHON_VERSIONS[@]}"; do
+  (pyenv versions --bare --skip-aliases | grep -q '^'${python}'$') \
+  || pyenv install ${python}
+  venv="neovim$(echo ${python} | cut -d'.' -f1)"
+  pyenv virtualenv ${python} ${venv}
+  (pyenv activate ${venv} && pip install neovim && pyenv deactivate)
+  if [ "${venv}" = "neovim2" ]; then
+    var="g:python_host_prog"
+  elif [ "${venv}" = "neovim3" ]; then
+    var="g:python3_host_prog"
+  fi
+  if ! grep -q "^let ${var}=" "${HOME}/.config/nvim/python.vim"; then
+    touch "${HOME}/.config/nvim/python.vim"
+    echo "let ${var}='${HOME}/.pyenv/versions/${venv}/bin/python'" \
+    >> "${HOME}/.config/nvim/python.vim"
+  fi
+done
+
+# set default
+(pyenv global | grep -q '^'${PYTHON_DEFAULT}'$') \
+  || pyenv global  ${PYTHON_DEFAULT}
+
+# now ruby
+for ruby in "${RUBY_VERSIONS[@]}"; do
+  (rbenv versions --bare --skip-aliases | grep -q '^'${ruby}'$') \
+  || rbenv install ${ruby}
+done
+
+# set default
+(rbenv global | grep -q '^'${RUBY_DEFAULT}'$') \
+  || rbenv global ${RUBY_DEFAULT}
+
+gem install neovim
 
 # base16-shell setup
 base16dir="${HOME}/code/base16-shell"

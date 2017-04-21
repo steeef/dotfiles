@@ -1,3 +1,5 @@
-let g:python_host_prog = '/Users/sprice/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/sprice/.pyenv/versions/neovim3/bin/python'
+let my_home = expand("$HOME/")
 
+if filereadable(my_home . '.config/nvim/python.vim')
+  source ~/.config/nvim/python.vim
+endif
