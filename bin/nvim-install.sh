@@ -20,5 +20,6 @@ else
     git clone $VIMREPO $DOWNLOADDIR
     cd $DOWNLOADDIR
 fi
-make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME" \
+make clean \
+  && make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME -DCMAKE_BUILD_TYPE=RelWithDebInfo" \
   && make install
