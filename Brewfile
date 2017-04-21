@@ -27,6 +27,7 @@ brew 'pcre'
 brew 'pkg-config'
 brew 'privoxy', restart_service: true
 brew 'pyenv'
+brew 'pyenv-virtualenv'
 brew 'ruby-build'
 brew 'rbenv'
 brew 'reattach-to-user-namespace'
