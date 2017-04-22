@@ -33,7 +33,8 @@ if exists(":PlugInstall")
   Plug 'zchee/deoplete-jedi'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
-  Plug 'junegunn/fzf',         { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf',         { 'dir': '~/.fzf',
+                               \ 'do': './install --completion --key-bindings' }
   Plug 'junegunn/vim-easy-align'
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
@@ -500,6 +501,8 @@ nnoremap <C-l> <C-w>l
 
 " enter insert mode when entering terminal
 autocmd BufEnter term://* startinsert
+" allow modification of terminal content
+autocmd TermOpen * setlocal modifiable
 
 " ESC to go back to normal mode
 tnoremap <Esc> <C-\><C-n>
