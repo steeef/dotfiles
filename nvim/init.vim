@@ -28,12 +28,9 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-dispatch'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'zchee/deoplete-jedi'
-  Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
   Plug 'junegunn/fzf',         { 'dir': '~/.fzf', 'do': './install --all' }
