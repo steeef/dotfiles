@@ -2,11 +2,12 @@
 
 scriptencoding utf-8
 
+let my_home = expand("$HOME/")
+let viminit = expand(my_home . '.config/nvim/init.vim')
+
 "}}}
 
 " python --------------------------------------------------------------------- "{{{
-
-let my_home = expand("$HOME/")
 
 " include python settings
 if filereadable(my_home . '.config/nvim/python.vim')
@@ -60,15 +61,12 @@ silent! call plug#end()
 " prefs  --------------------------------------------------------------------- "{{{
 
 set modelines=0
-set encoding=utf-8
-set scrolloff=999
 set showmode
 set showcmd
 set title
 set visualbell
 set cursorline
 set ttyfast
-set lazyredraw
 set ruler
 set complete-=i     " Searching includes can be slow
 set dictionary+=/usr/share/dict/words
@@ -141,6 +139,9 @@ set fillchars=vert:┃
 "window options
 set splitbelow
 set splitright
+
+"use system clipboard for default register
+set clipboard+=unnamedplus
 
 " backup --------------------------------------------------------------------- "{{{
 
@@ -392,7 +393,6 @@ hi User4 ctermfg=37  guifg=#2aa198  ctermbg=19  guibg=#373b41
 
 "}}}
 
-
 " autocommands --------------------------------------------------------------- "{{{
 
 " Resize splits when the window is resized
@@ -477,10 +477,17 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " insert blank line below
 nnoremap <CR> o<ESC>
 
+" Quickly edit/reload this configuration file
+nnoremap <leader>ev :e ~/.config/nvim/init.vim<CR>
+nnoremap <leader>sv :so ~/.config/nvim/init.vim<CR>
+
 " windows -------------------------------------------------------------------- "{{{
 
 " open new vertical window and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
+
+" open new vertical window for terminal and switch to it
+nnoremap <leader>t <C-w>v<C-w>l:terminal<CR>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
