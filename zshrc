@@ -136,6 +136,9 @@ bindkey "^[[G" history-beginning-search-forward
 # z and fzf --------------------------------------------------------
 [[ -s $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
+# fix CTRL-R within Neovim terminal
+[ -n "$NVIM_LISTEN_ADDRESS" ] && export FZF_DEFAULT_OPTS='--no-height'
+
 if [ -s $HOME/.bin/z.sh ]; then
     source $HOME/.bin/z.sh
     function precmd () {
