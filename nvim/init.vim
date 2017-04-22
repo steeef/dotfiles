@@ -61,15 +61,6 @@ silent! call plug#end()
 " prefs  --------------------------------------------------------------------- "{{{
 
 set modelines=0
-set showmode
-set showcmd
-set title
-set visualbell
-set cursorline
-set ttyfast
-set ruler
-set complete-=i     " Searching includes can be slow
-set dictionary+=/usr/share/dict/words
 set colorcolumn=85
 
 " use both relative number and display current line
@@ -121,7 +112,6 @@ set shiftround
 "search options
 set ignorecase
 set smartcase
-set incsearch
 set nohlsearch
 set showmatch
 
@@ -129,7 +119,7 @@ set showmatch
 runtime macros/matchit.vim
 
 "show formatting characters
-set list
+"set list
 set listchars=tab:»\ ,trail:·,extends:❯,precedes:❮
 
 "use vertical line (CTRL-K+VV) for vertical splits
