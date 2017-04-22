@@ -31,6 +31,8 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-dispatch'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-jedi'
   Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
@@ -61,7 +63,6 @@ if exists(":PlugInstall")
   Plug 'chase/vim-ansible-yaml',   { 'for': 'ansible' }
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
-  Plug 'davidhalter/jedi-vim',     { 'for': 'python' }
 endif
 
 "}}}
@@ -615,6 +616,10 @@ let g:LatexBox_viewer = "open -a Skim"
 " ale -------------------------------------------------------------------------"{{{
 let g:ale_python_pylint_options = '--max-line-length=100'
 let g:ale_python_flake8_args = '--max-line-length=100'
+"}}}
+
+" deoplete --------------------------------------------------------------------"{{{
+let g:deoplete#enable_at_startup = 1
 "}}}
 
 "}}}
