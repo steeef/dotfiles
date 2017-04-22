@@ -38,7 +38,19 @@ if exists(":PlugInstall")
   Plug 'junegunn/vim-easy-align'
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
-  Plug 'w0rp/ale',             { 'for': ['python', 'ruby', 'sh', 'yaml', 'vim', 'puppet', 'ansible', 'json', 'go', 'markdown', 'html', 'docker', 'lua'] }
+  Plug 'w0rp/ale',             { 'for': [ 'python',
+                                        \ 'ruby',
+                                        \ 'sh',
+                                        \ 'yaml',
+                                        \ 'vim',
+                                        \ 'puppet',
+                                        \ 'ansible',
+                                        \ 'json',
+                                        \ 'go',
+                                        \ 'markdown',
+                                        \ 'html',
+                                        \ 'docker',
+                                        \ 'lua'] }
 
   " colorschemes
   Plug 'chriskempson/base16-vim'
