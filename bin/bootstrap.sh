@@ -154,9 +154,3 @@ else
   rm -rf "${preztodir}"
   git clone --recursive ${preztorepo} "${preztodir}"
 fi
-
-if command -v vim >/dev/null 2>&1; then
-  # Install plugins with vim-plug
-  echo "INFO: Installing vim-plug plugins"
-  vim -c 'PlugInstall --sync' +qall
-fi
