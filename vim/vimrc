@@ -39,16 +39,13 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-dispatch'
   Plug 'roman/golden-ratio'
-  Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
-  "Plug 'cohama/lexima.vim'
   Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
   Plug 'sjl/gundo.vim',        { 'on': 'GundoToggle' }
   Plug 'junegunn/vim-easy-align'
-  Plug 'junegunn/fzf',         { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf',         { 'dir': '~/.fzf', 'do': './install --completion --key-bindings' }
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
   if s:has_ale_features
