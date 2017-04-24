@@ -8,14 +8,15 @@ command -v git >/dev/null 2>&1 || { echo >&2 "git not installed."; exit 1; }
 /bin/mkdir -p "${DOWNLOADDIR}"
 
 UPDATED=0
-if (cd "${DOWNLOADDIR}" && git rev-parse --git-dir); then
-  cd "${DOWNLOADDIR}"
-  git fetch
-  if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
-    git pull
-    UPDATED=1
-  fi
-  cd -
+if (cd "${DOWNLOADDIR}" && git rev-parse --git-dir >/dev/null 2>&1); then
+  (
+    cd "${DOWNLOADDIR}"
+    git fetch
+    if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
+      git pull
+      UPDATED=1
+    fi
+  )
 else
   rm -rf "${DOWNLOADDIR}"
   git clone "${REPO}" "${DOWNLOADDIR}"
