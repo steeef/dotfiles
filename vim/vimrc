@@ -589,8 +589,8 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <CR> o<ESC>
 
 " Quickly edit/reload this configuration file
-nnoremap <leader>ev :e ~/.config/nvim/init.vim<CR>
-nnoremap <leader>sv :so ~/.config/nvim/init.vim<CR>
+nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>sv :so $MYVIMRC<CR>
 
 " windows -------------------------------------------------------------------- "{{{
 
