@@ -1,16 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 REPO=https://github.com/zant95/hBlock.git
 DOWNLOADDIR=${HOME}/code/hblock
 HBLOCK=/usr/local/bin/hblock
 
 command -v git >/dev/null 2>&1 || { echo >&2 "git not installed."; exit 1; }
 
-/bin/mkdir -p $DOWNLOADDIR
-GITCLONED=$(cd $DOWNLOADDIR && git rev-parse --git-dir);GITCLONEDERR=$?
+/bin/mkdir -p "${DOWNLOADDIR}"
 
 UPDATED=0
-if [ $GITCLONEDERR == 0 ]; then
-  cd $DOWNLOADDIR
+if (cd "${DOWNLOADDIR}" && git rev-parse --git-dir); then
+  cd "${DOWNLOADDIR}"
   git fetch
   if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
     git pull
@@ -18,13 +17,13 @@ if [ $GITCLONEDERR == 0 ]; then
   fi
   cd -
 else
-  rm -rf $DOWNLOADDIR
-  git clone $REPO $DOWNLOADDIR
+  rm -rf "${DOWNLOADDIR}"
+  git clone "${REPO}" "${DOWNLOADDIR}"
   UPDATED=1
 fi
 
 if [ "${UPDATED}" = "1" ]; then
-  cp -f ${DOWNLOADDIR}/hblock ${HBLOCK}
+  cp -f "${DOWNLOADDIR}/hblock" "${HBLOCK}"
   chmod +x ${HBLOCK}
 fi
 if ! sudo ${HBLOCK}; then
