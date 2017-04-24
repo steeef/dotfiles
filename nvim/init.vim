@@ -1,15 +1,14 @@
 " initial settings  ---------------------------------------------------------- "{{{
 
 scriptencoding utf-8
-
-let my_home = expand("$HOME/")
-let viminit = expand(my_home . '.config/nvim/init.vim')
+set nocompatible
 
 "}}}
 
 " python --------------------------------------------------------------------- "{{{
 
 " include python settings
+let my_home = expand("$HOME")
 if filereadable(my_home . '.config/nvim/python.vim')
   source ~/.config/nvim/python.vim
 endif
@@ -18,19 +17,40 @@ endif
 
 " vim-plug ------------------------------------------------------------------- "{{{
 
-let bundlepath = "~/.config/nvim/bundle"
+let bundlepath = "~/.vim/bundle"
+
+" Ale check
+" A flag for detecting if the required features are set.
+if has('nvim')
+  let s:has_ale_features = has('timers')
+else
+  " Check if Job and Channel functions are available, instead of the
+  " features. This works better on old MacVim versions.
+  let s:has_ale_features = has('timers') && exists('*job_start') && exists('*ch_close_in')
+endif
 
 silent! call plug#begin(bundlepath)
 " plugins ---------------------------------------------------------------------"{{{
 
 if exists(":PlugInstall")
+  if !has('nvim')
+    " plugins for vanilla Vim
+    Plug 'vim-scripts/IndexedSearch'
+    Plug 'ConradIrwin/vim-bracketed-paste'
+    Plug 'davidhalter/jedi-vim',     { 'for': 'python' }
+    if executable("tmux")
+      Plug 'christoomey/vim-tmux-navigator'
+    endif
+  else
+    " plugins for Neovim 
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'zchee/deoplete-jedi'
+  endif
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-abolish'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-jedi'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
   Plug 'junegunn/fzf',         { 'dir': '~/.fzf',
@@ -38,19 +58,21 @@ if exists(":PlugInstall")
   Plug 'junegunn/vim-easy-align'
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
-  Plug 'w0rp/ale',             { 'for': [ 'python',
-                                        \ 'ruby',
-                                        \ 'sh',
-                                        \ 'yaml',
-                                        \ 'vim',
-                                        \ 'puppet',
-                                        \ 'ansible',
-                                        \ 'json',
-                                        \ 'go',
-                                        \ 'markdown',
-                                        \ 'html',
-                                        \ 'docker',
-                                        \ 'lua'] }
+  if s:has_ale_features
+    Plug 'w0rp/ale',             { 'for': [ 'python',
+                                          \ 'ruby',
+                                          \ 'sh',
+                                          \ 'yaml',
+                                          \ 'vim',
+                                          \ 'puppet',
+                                          \ 'ansible',
+                                          \ 'json',
+                                          \ 'go',
+                                          \ 'markdown',
+                                          \ 'html',
+                                          \ 'docker',
+                                          \ 'lua'] }
+  endif
 
   " colorschemes
   Plug 'chriskempson/base16-vim'
@@ -72,11 +94,30 @@ silent! call plug#end()
 " prefs  --------------------------------------------------------------------- "{{{
 
 set modelines=0
-set colorcolumn=85
+set encoding=utf-8
+set scrolloff=999
+set showmode
+set showcmd
+set title
+set visualbell
+set cursorline
+set ttyfast
+set lazyredraw
+set ruler
+set complete-=i     " Searching includes can be slow
+set dictionary+=/usr/share/dict/words
+if exists("+colorcolumn")
+  set colorcolumn=85
+endif
 
-" use both relative number and display current line
-set relativenumber
-set number
+" 7.4 has hybrid mode, so set both
+" 7.3 has just relative number, so set just that
+if v:version >= 703
+  set relativenumber
+endif
+if v:version != 703
+  set number
+endif
 
 " mapping timeout
 set ttimeout
@@ -123,6 +164,7 @@ set shiftround
 "search options
 set ignorecase
 set smartcase
+set incsearch
 set nohlsearch
 set showmatch
 
@@ -130,7 +172,7 @@ set showmatch
 runtime macros/matchit.vim
 
 "show formatting characters
-"set list
+set list
 set listchars=tab:»\ ,trail:·,extends:❯,precedes:❮
 
 "use vertical line (CTRL-K+VV) for vertical splits
@@ -142,7 +184,11 @@ set splitbelow
 set splitright
 
 "use system clipboard for default register
-set clipboard+=unnamedplus
+if has("nvim")
+  set clipboard+=unnamedplus
+else
+  set clipboard^=unnamed
+endif
 
 " backup --------------------------------------------------------------------- "{{{
 
@@ -160,14 +206,19 @@ set history=1000
 " Make Vim able to edit crontab files again.
 set backupskip=/tmp/*,/private/tmp/*"
 
-let vimundodir = $HOME . '/.vimundo'
-if !isdirectory(vimundodir)
-  call mkdir(vimundodir)
+" undo feature requires > 7.3
+if has("undofile")
+  let vimundodir = $HOME . '/.vimundo'
+  if exists("*mkdir")
+    if !isdirectory(vimundodir)
+      call mkdir(vimundodir)
+    endif
+  endif
+  set undofile
+  let &undodir=vimundodir
+  set undolevels=1000
+  set undoreload=10000
 endif
-set undofile
-let &undodir=vimundodir
-set undolevels=1000
-set undoreload=10000
 
 "}}}
 
@@ -224,6 +275,58 @@ function! MyFoldText() " {{{
   return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
+
+"}}}
+
+" appearance ----------------------------------------------------------------- "{{{
+
+if has("gui_running")
+  " Set font and window size based on operating system
+  if has ("unix")
+    if has ("gui_macvim")
+      " Must be MacVim
+      set guifont=Monaco:h10
+      set noantialias
+
+      " Full screen means FULL screen
+      set fuoptions=maxvert,maxhorz
+    else
+      " Must be Linux
+      set guifont=DejaVu\ Sans\ Mono\ 8
+    endif
+  else
+    " Must be Windows
+    set guifont=DejaVu\ Sans\ Mono:h9
+  endif
+
+  set guioptions-=m  "remove menu bar
+  set guioptions-=T  "remove toolbar
+  set guioptions-=r  "remove right-hand scroll bar
+  set guioptions-=R  "remove right-hand scroll bar for vert split
+  set guioptions-=l  "remove left-hand scroll bar
+  set guioptions-=L  "remove left-hand scroll bar for vert split
+  set guioptions+=c  "use text-based dialogs instead of popups
+
+  " Different cursors for different modes.
+  set guicursor=n-c:block-Cursor-blinkon0
+  set guicursor+=v:block-vCursor-blinkon0
+  " commented out INSERT mode cursor for compatibilty with other colorschemes
+  "set guicursor+=i-ci:ver20-iCursor
+else
+  " This is console Vim.
+
+  if !has("nvim")
+    " tmux will only forward escape sequences to the terminal if surrounded by a 
+    " DCS sequence
+    if exists('$TMUX')
+      let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+      let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    else
+      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    endif
+  endif
+endif
 
 "}}}
 
@@ -396,33 +499,35 @@ hi User4 ctermfg=37  guifg=#2aa198  ctermbg=19  guibg=#373b41
 
 " autocommands --------------------------------------------------------------- "{{{
 
-" Resize splits when the window is resized
-au VimResized * exe "normal! \<c-w>="
-" turn off PASTE mode when leaving insert mode
-au InsertLeave * set nopaste
+if has("autocmd")
+  " Resize splits when the window is resized
+  au VimResized * exe "normal! \<c-w>="
+  " turn off PASTE mode when leaving insert mode
+  au InsertLeave * set nopaste
 
-augroup ft_git
-  autocmd!
-  " Place the cursor at the top of the buffer
-  autocmd VimEnter .git/COMMIT_EDITMSG exe 'normal! gg'
-augroup END
+  augroup ft_git
+    autocmd!
+    " Place the cursor at the top of the buffer
+    autocmd VimEnter .git/COMMIT_EDITMSG exe 'normal! gg'
+  augroup END
 
-" vim, vim helpfiles
-augroup ft_vim
-  autocmd!
+  " vim, vim helpfiles
+  augroup ft_vim
+    autocmd!
 
-  autocmd FileType vim setlocal foldmethod=marker
-  autocmd FileType help setlocal textwidth=78
-  " use Enter to follow links
-  autocmd FileType help nmap <buffer> <CR> <C-]>
-  autocmd BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
-augroup END
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType help setlocal textwidth=78
+    " use Enter to follow links
+    autocmd FileType help nmap <buffer> <CR> <C-]>
+    autocmd BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
+  augroup END
 
-" Return to last position when file is reopened
-autocmd BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \   exe "normal! g`\"" |
-      \ endif
+  " Return to last position when file is reopened
+  autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
+endif
 
 "}}}
 
@@ -490,28 +595,41 @@ nnoremap <leader>w <C-w>v<C-w>l
 " open new vertical window for terminal and switch to it
 nnoremap <leader>t <C-w>v<C-w>l:terminal<CR>
 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+if exists(":TmuxNavigateLeft")
+  " Easy window navigation
+  " see plugin settings for tmux-navigator below
+  " also use ALT combos
+  nnoremap ˙ <C-w>h
+  nnoremap ∆ <C-w>j
+  nnoremap ˚ <C-w>k
+  nnoremap ¬ <C-w>l
+else
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
+  nnoremap <C-\> <C-w><C-p>
+endif
 
 "}}}
 
 " terminal ------------------------------------------------------------------- "{{{
 
-" enter insert mode when entering terminal
-autocmd BufEnter term://* startinsert
-" allow modification of terminal content
-autocmd TermOpen * setlocal modifiable
+if has("nvim")
+  " enter insert mode when entering terminal
+  autocmd BufEnter term://* startinsert
+  " allow modification of terminal content
+  autocmd TermOpen * setlocal modifiable
 
-" ESC to go back to normal mode
-tnoremap <Esc> <C-\><C-n>
+  " ESC to go back to normal mode
+  tnoremap <Esc> <C-\><C-n>
 
-" Easier motion between buffers
-tmap <C-j> <ESC><C-j>
-tmap <C-h> <ESC><C-h>
-tmap <C-l> <ESC><C-l>
-tmap <C-k> <ESC><C-k>
+  " Easier motion between buffers
+  tmap <C-j> <ESC><C-j>
+  tmap <C-h> <ESC><C-h>
+  tmap <C-l> <ESC><C-l>
+  tmap <C-k> <ESC><C-k>
+endif
 
 "}}}
 
@@ -620,6 +738,23 @@ let g:ale_python_flake8_args = '--max-line-length=100'
 
 " deoplete --------------------------------------------------------------------"{{{
 let g:deoplete#enable_at_startup = 1
+"}}}
+
+" tmux-navigator ----------------------------------------------------------"{{{
+" If tmux-navigator is loaded
+if exists(":TmuxNavigateLeft")
+  noremap <silent> <C-h> :TmuxNavigateLeft<cr>
+  noremap <silent> <C-j> :TmuxNavigateDown<cr>
+  noremap <silent> <C-k> :TmuxNavigateUp<cr>
+  noremap <silent> <C-l> :TmuxNavigateRight<cr>
+  noremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+else
+  noremap <C-h> <C-w>h
+  noremap <C-j> <C-w>j
+  noremap <C-k> <C-w>k
+  noremap <C-l> <C-w>l
+  noremap <C-\> <C-w><C-p>
+endif
 "}}}
 
 "}}}
