@@ -97,6 +97,8 @@ fi
 for python in "${PYTHON_VERSIONS[@]}"; do
   (pyenv versions --bare --skip-aliases | grep -q '^'${python}'$') \
   || pyenv install ${python}
+  # install linter
+  (PYENV_VERSION=${python} pip install flake8)
   venv="neovim$(echo ${python} | cut -d'.' -f1)"
   pyenv virtualenv ${python} ${venv}
   (pyenv activate ${venv} && pip install neovim && pyenv deactivate)
