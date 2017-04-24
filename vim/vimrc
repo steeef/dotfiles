@@ -37,7 +37,6 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-abolish'
   Plug 'roman/golden-ratio'
   Plug 'ConradIrwin/vim-bracketed-paste'
@@ -51,7 +50,6 @@ if exists(":PlugInstall")
   if s:has_ale_features
     Plug 'w0rp/ale',             { 'for': ['python', 'ruby', 'sh', 'yaml', 'vim', 'puppet', 'ansible', 'json', 'go', 'markdown', 'html', 'docker', 'lua'] }
   endif
-  Plug 'metakirby5/codi.vim',  { 'on': 'Codi' }
 
   " colorschemes
   Plug 'chriskempson/base16-vim'

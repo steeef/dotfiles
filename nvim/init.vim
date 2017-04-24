@@ -51,6 +51,7 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-abolish'
+  Plug 'roman/golden-ratio'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
   Plug 'junegunn/fzf',         { 'dir': '~/.fzf',
