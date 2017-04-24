@@ -17,7 +17,11 @@ endif
 
 " vim-plug ------------------------------------------------------------------- "{{{
 
-let bundlepath = "~/.vim/bundle"
+if has('nvim')
+  let bundlepath = "~/.config/nvim/bundle"
+else
+  let bundlepath = "~/.vim/bundle"
+endif
 
 " Ale check
 " A flag for detecting if the required features are set.
