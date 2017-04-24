@@ -589,16 +589,21 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <CR> o<ESC>
 
 " Quickly edit/reload this configuration file
-nnoremap <leader>ev :e $MYVIMRC<CR>
+if has("nvim")
+  nnoremap <leader>ev <C-w>v:e $MYVIMRC<CR>
+else
+  nnoremap <leader>ev <C-w>v<C-w>l:e $MYVIMRC<CR>
+endif
 nnoremap <leader>sv :so $MYVIMRC<CR>
 
 " windows -------------------------------------------------------------------- "{{{
 
 " open new vertical window and switch to it
-nnoremap <leader>w <C-w>v<C-w>l
-
-" open new vertical window for terminal and switch to it
-nnoremap <leader>t <C-w>v<C-w>l:terminal<CR>
+if has("nvim")
+  nnoremap <leader>w <C-w>v
+else
+  nnoremap <leader>w <C-w>v<C-w>l
+endif
 
 if exists(":TmuxNavigateLeft")
   " Easy window navigation
@@ -621,6 +626,9 @@ endif
 " terminal ------------------------------------------------------------------- "{{{
 
 if has("nvim")
+  " open new vertical window for terminal and switch to it
+  nnoremap <leader>t <C-w>v:terminal<CR>
+
   " enter insert mode when entering terminal
   autocmd BufEnter term://* startinsert
   " allow modification of terminal content
