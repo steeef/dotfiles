@@ -629,8 +629,6 @@ if has("nvim")
   " open new vertical window for terminal and switch to it
   nnoremap <leader>t <C-w>v:terminal<CR>
 
-  " enter insert mode when entering terminal
-  autocmd BufEnter term://* startinsert
   " allow modification of terminal content
   autocmd TermOpen * setlocal modifiable
 
