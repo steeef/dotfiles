@@ -61,6 +61,8 @@ ensure_link "zsh"                ".zsh"
 ensure_link "zshrc"              ".zshrc"
 
 if [ "$(uname)" = "Darwin" ]; then
+  echo "INFO: Copying fonts."
+  rsync -aW "${HOME}/.dotfiles/fonts/" ~/Library/Fonts/
   # install XCode Command Line Tools if not installed
   if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
      echo "INFO: Installing XCode Command Line Tools"
