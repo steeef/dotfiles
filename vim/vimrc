@@ -632,14 +632,14 @@ if has("nvim")
   " allow modification of terminal content
   autocmd TermOpen * setlocal modifiable
 
-  " ESC to go back to normal mode
-  tnoremap <Esc> <C-\><C-n>
+  " go back to normal mode
+  tnoremap <C-Space> <C-\><C-n>
 
   " Easier motion between buffers
-  tmap <C-j> <ESC><C-j>
-  tmap <C-h> <ESC><C-h>
-  tmap <C-l> <ESC><C-l>
-  tmap <C-k> <ESC><C-k>
+  tmap <C-j> <C-Space><C-j>
+  tmap <C-h> <C-Space><C-h>
+  tmap <C-l> <C-Space><C-l>
+  tmap <C-k> <C-Space><C-k>
 endif
 
 "}}}
