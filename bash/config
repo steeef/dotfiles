@@ -15,7 +15,7 @@ else
 fi
 
 export PS1='\n${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}\w${D}\n$ '
-export EDITOR="vim"
+export EDITOR="nvim"
 
 
 # yoinked from https://github.com/mrzool/bash-sensible
