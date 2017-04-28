@@ -82,6 +82,10 @@ if [ "$(uname)" = "Darwin" ]; then
   brew bundle --global
 fi
 
+# fzf install
+[ -f "/usr/local/opt/fzf/install" ] \
+  && /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
+
 # pyenv and rbenv setup
 for file in "${HOME}/.zshrc_local" "${HOME}/.bashrc_local"; do
   for bin in "pyenv init -" "rbenv init -" "pyenv virtualenv-init -"; do
