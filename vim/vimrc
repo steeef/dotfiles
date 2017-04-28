@@ -734,7 +734,7 @@ let g:ale_python_flake8_args = '--max-line-length=100'
 let g:deoplete#enable_at_startup = 1
 "}}}
 
-" tmux-navigator ----------------------------------------------------------"{{{
+" tmux-navigator --------------------------------------------------------------"{{{
 " If tmux-navigator is loaded
 if exists(":TmuxNavigateLeft")
   noremap <silent> <C-h> :TmuxNavigateLeft<cr>
@@ -749,6 +749,14 @@ else
   noremap <C-l> <C-w>l
   noremap <C-\> <C-w><C-p>
 endif
+"}}}
+
+" Magit -----------------------------------------------------------------------"{{{
+
+if exists(":Magit")
+  nnoremap <leader>g :Magit<Enter>
+endif
+
 "}}}
 
 "}}}
