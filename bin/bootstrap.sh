@@ -80,11 +80,27 @@ if [ "$(uname)" = "Darwin" ]; then
   brew update
   brew tap homebrew/bundle
   brew bundle --global
-fi
 
-# fzf install
-[ -f "/usr/local/opt/fzf/install" ] \
-  && /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
+  # fzf install
+  [ -f "/usr/local/opt/fzf/install" ] \
+    && /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
+else
+  FZFDIR="${HOME}/.fzf"
+  if (cd "${FZFDIR}" && git rev-parse --git-dir >/dev/null 2>&1); then
+    (
+      cd "${FZFDIR}"
+      git fetch
+      if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
+        git pull
+      fi
+    )
+  else
+    rm -rf "${FZFDIR}"
+    mkdir -p "${FZFDIR}"
+    git clone https://github.com/junegunn/fzf.git "${FZFDIR}"
+  fi
+  "${FZFDIR}/install" --key-bindings --completion --no-update-rc
+fi
 
 # pyenv and rbenv setup
 for file in "${HOME}/.zshrc_local" "${HOME}/.bashrc_local"; do
