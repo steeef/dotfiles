@@ -58,8 +58,8 @@ if exists(":PlugInstall")
   Plug 'roman/golden-ratio'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug 'mileszs/ack.vim',      { 'on': 'Ack' }
-  Plug 'junegunn/fzf',         { 'dir': '~/.fzf',
-                               \ 'do': './install --completion --key-bindings' }
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
