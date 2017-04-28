@@ -55,6 +55,7 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-fugitive'
   Plug 'roman/golden-ratio'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug '/usr/local/opt/fzf'
