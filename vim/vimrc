@@ -709,26 +709,9 @@ let g:gitgutter_map_keys = 0
 
 " fzf -------------------------------------------------------------------------"{{{
 
-nnoremap <leader><Space> :FZF<enter>
-
-" List of buffers
-function! BufList()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! BufOpen(e)
-  execute 'buffer '. matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-nnoremap <silent> <Leader>b :call fzf#run({
-      \   'source':      reverse(BufList()),
-      \   'sink':        function('BufOpen'),
-      \   'options':     '+m',
-      \   'tmux_height': '40%'
-      \ })<CR>
+nnoremap <leader><Space> :Files<enter>
+nnoremap <silent> <Leader>b :Buffers<enter>
+nnoremap <silent> <Leader>h :History:<enter>
 
 "}}}
 
