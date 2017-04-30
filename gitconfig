@@ -23,7 +23,6 @@
     branch = auto
 [core]
     excludesfile = ~/.gitignore
-    editor = vim
     autocrlf = input
 [apply]
     whitespace = nowarn
