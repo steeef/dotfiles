@@ -57,7 +57,6 @@ def exit(*a, **kw):
         nvim.command('augroup END')
         nvim.command('sb %s' % termbuf)
         nvim.command('set swb=' + (swb or ''))
-        nvim.input('i')
         nvim.stop_loop()
     except:
         import traceback
