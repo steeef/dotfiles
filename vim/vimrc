@@ -510,9 +510,6 @@ if has("autocmd")
   " turn off PASTE mode when leaving insert mode
   au InsertLeave * set nopaste
 
-  " open quickfix when commands posted
-  autocmd QuickFixCmdPost * botright copen 8
-
   augroup ft_git
     autocmd!
     " Place the cursor at the top of the buffer
@@ -719,6 +716,19 @@ endif
 if exists(":Magit")
   autocmd User VimagitEnterCommit startinsert
   nnoremap <leader>g :Magit<Enter>
+endif
+
+"}}}
+
+" Asyncrun --------------------------------------------------------------------"{{{
+
+if exists(":AsyncRun")
+  nnoremap <leader>p :AsyncRun git push<Enter>
+
+  " open quickfix when commands posted
+  autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
+else
+  autocmd QuickFixCmdPost * botright copen 8
 endif
 
 "}}}
