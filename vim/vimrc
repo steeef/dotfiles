@@ -510,6 +510,9 @@ if has("autocmd")
   " turn off PASTE mode when leaving insert mode
   au InsertLeave * set nopaste
 
+  " open quickfix when commands posted
+  autocmd QuickFixCmdPost * botright copen 8
+
   augroup ft_git
     autocmd!
     " Place the cursor at the top of the buffer
