@@ -46,7 +46,7 @@ if exists(":PlugInstall")
       Plug 'christoomey/vim-tmux-navigator'
     endif
   else
-    " plugins for Neovim 
+    " plugins for Neovim
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-jedi'
   endif
@@ -722,14 +722,21 @@ endif
 
 " Asyncrun --------------------------------------------------------------------"{{{
 
-if exists(":AsyncRun")
-  nnoremap <leader>p :AsyncRun git push<Enter>
+nnoremap <leader>p :AsyncRun git push<Enter>
 
   " open quickfix when commands posted
+if exists("*asyncrun#quickfix_toggle")
   autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
 else
   autocmd QuickFixCmdPost * botright copen 8
 endif
+
+"}}}
+
+" Asyncrun --------------------------------------------------------------------"{{{
+
+let g:golden_ratio_autocommand = 0
+nnoremap <leader>m :GoldenRatioToggle<Enter>
 
 "}}}
 
