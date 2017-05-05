@@ -63,6 +63,7 @@ if exists(":PlugInstall")
   Plug 'junegunn/vim-easy-align'
   Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
+  Plug 'metakirby5/codi.vim',    { 'on': 'Codi' }
   if s:has_ale_features
     Plug 'w0rp/ale',             { 'for': [ 'python',
                                           \ 'ruby',
