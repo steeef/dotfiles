@@ -629,6 +629,7 @@ endif
 if has("nvim")
   " huge scrollback buffer
   let g:terminal_scrollback_buffer_size = 100000
+  set scrollback=100000
 
   " open new vertical window for terminal and switch to it
   nnoremap <leader>t <C-w>v:terminal<CR>
