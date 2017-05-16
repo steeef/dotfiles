@@ -5,20 +5,25 @@
 # Dependencies:
 # https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
 
-VIMREPO=https://github.com/neovim/neovim.git
+REPO=https://github.com/neovim/neovim.git
 DOWNLOADDIR=$HOME/code/neovim
 
 command -v git >/dev/null 2>&1 || { echo >&2 "git not installed."; exit 1; }
 
-/bin/mkdir -p $DOWNLOADDIR
+/bin/mkdir -p "${DOWNLOADDIR}"
 # Check if $DOWNLOADDIR is a git repo
-GITCLONED=$(cd $DOWNLOADDIR && git rev-parse --git-dir);GITCLONEDERR=$?
-if [ $GITCLONEDERR == 0 ]; then
-    cd $DOWNLOADDIR && git pull
+if (cd "${DOWNLOADDIR}" && git rev-parse --git-dir >/dev/null 2>&1); then
+  (
+    cd "${DOWNLOADDIR}"
+    git fetch
+    if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
+      git fetch --all
+      git pull
+    fi
+  )
 else
-    rm -rf $DOWNLOADDIR
-    git clone $VIMREPO $DOWNLOADDIR
-    cd $DOWNLOADDIR
+  rm -rf "${DOWNLOADDIR}"
+  git clone "${REPO}" "${DOWNLOADDIR}"
 fi
 rm -rf "build" \
   && make clean \
