@@ -716,7 +716,6 @@ endif
 " vimagit ---------------------------------------------------------------------"{{{
 
 if exists(":Magit")
-  autocmd User VimagitEnterCommit startinsert
   nnoremap <leader>g :Magit<Enter>
 endif
 
