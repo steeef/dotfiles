@@ -53,6 +53,7 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-abolish'
   Plug 'skywind3000/asyncrun.vim'
@@ -61,7 +62,6 @@ if exists(":PlugInstall")
   Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'
-  Plug 'jreybert/vimagit',     { 'on': 'Magit' }
   Plug 'airblade/vim-gitgutter'
   Plug 'metakirby5/codi.vim',    { 'on': 'Codi' }
   if s:has_ale_features
@@ -713,14 +713,6 @@ else
 endif
 "}}}
 
-" vimagit ---------------------------------------------------------------------"{{{
-
-if exists(":Magit")
-  nnoremap <leader>g :Magit<Enter>
-endif
-
-"}}}
-
 " Asyncrun --------------------------------------------------------------------"{{{
 
 nnoremap <leader>p :AsyncRun git push<Enter>
@@ -734,11 +726,17 @@ endif
 
 "}}}
 
-" Asyncrun --------------------------------------------------------------------"{{{
+" GoldenRatio -----------------------------------------------------------------"{{{
 
 let g:golden_ratio_autocommand = 0
 nnoremap <leader>m :GoldenRatioToggle<Enter>
 
+"}}}
+
+" fugitive --------------------------------------------------------------------"{{{
+
+nnoremap <leader>m :Gstatus<Enter>
+ 
 "}}}
 
 "}}}
