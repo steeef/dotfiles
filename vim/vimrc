@@ -515,6 +515,7 @@ if has("autocmd")
     autocmd!
     " Place the cursor at the top of the buffer
     autocmd VimEnter .git/COMMIT_EDITMSG exe 'normal! gg'
+    autocmd VimEnter .git/COMMIT_EDITMSG startinsert
   augroup END
 
   " vim, vim helpfiles
@@ -663,7 +664,13 @@ vnoremap <silent> <Enter> :EasyAlign<Enter>
 "}}}
 
 " vim-gitgutter ---------------------------------------------------------------"{{{
+
 let g:gitgutter_map_keys = 0
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
+nmap <Leader>c <Plug>GitGutterStageHunk
+nmap <Leader>u <Plug>GitGutterUndoHunk
+
 "}}}
 
 " fzf -------------------------------------------------------------------------"{{{
@@ -735,7 +742,7 @@ nnoremap <leader>m :GoldenRatioToggle<Enter>
 
 " fugitive --------------------------------------------------------------------"{{{
 
-nnoremap <leader>m :Gstatus<Enter>
+nnoremap <leader>g :Gstatus<Enter>
  
 "}}}
 
