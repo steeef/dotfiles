@@ -1,3 +1,13 @@
+# profiling -------------------------------------------------------------------
+# https://kev.inburke.com/kevin/profiling-zsh-startup-time/
+PROFILE_STARTUP=false
+if [[ "$PROFILE_STARTUP" == true ]]; then
+  # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+  PS4=$'%D{%M%S%.} %N:%i> '
+  exec 3>&2 2>/tmp/startlog.$$
+  setopt xtrace prompt_subst
+fi
+
 # Add zsh-completions to $fpath.
 fpath=("${HOME}/.zsh/completion" $fpath)
 
@@ -102,9 +112,6 @@ function sshboot() {
   fi
 }
 
-# add alias for `fuck` command
-command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
-
 # docker_alias stuff
 function docker_alias() {
   docker run -it --rm \
@@ -179,6 +186,25 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+# pyenv ----------------------------------------------------------------------
+pyenv() {
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  pyenv "$@"
+}
+
+# rbenv ----------------------------------------------------------------------
+rbenv() {
+  eval "$(rbenv init -)"
+  rbenv "$@"
+}
+
+# nodenv ----------------------------------------------------------------------
+nodenv() {
+  eval "$(nodenv init -)"
+  nodenv "$@"
+}
+
 # Local Settings -------------------------------------------------------------
 [[ -s $HOME/.zshrc_local ]] && source $HOME/.zshrc_local
 
@@ -188,3 +214,9 @@ zstyle -e ':completion:*:hosts' hosts 'reply=(
   ${=${=${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//\]:[0-9]*/ }//,/ }//\[/ }
   ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
 )'
+
+# end profiling --------------------------------------------------------------
+if [[ "$PROFILE_STARTUP" == true ]]; then
+unsetopt xtrace
+exec 2>&3 3>&-
+fi
