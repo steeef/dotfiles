@@ -188,20 +188,20 @@ bindkey '^Z' fancy-ctrl-z
 
 # pyenv ----------------------------------------------------------------------
 pyenv() {
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  eval "$(command pyenv init -)"
+  eval "$(command pyenv virtualenv-init -)"
   pyenv "$@"
 }
 
 # rbenv ----------------------------------------------------------------------
 rbenv() {
-  eval "$(rbenv init -)"
+  eval "$(command rbenv init -)"
   rbenv "$@"
 }
 
 # nodenv ----------------------------------------------------------------------
 nodenv() {
-  eval "$(nodenv init -)"
+  eval "$(command nodenv init -)"
   nodenv "$@"
 }
 
