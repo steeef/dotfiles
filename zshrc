@@ -205,6 +205,15 @@ nodenv() {
   nodenv "$@"
 }
 
+# neovim autocd --------------------------------------------------------------
+
+if command -v neovim-autocd.py >/dev/null 2>&1; then
+  neovim_autocd() {
+    [[ $NVIM_LISTEN_ADDRESS ]] && neovim-autocd.py
+  }
+  chpwd_functions+=( neovim_autocd )
+fi
+
 # Local Settings -------------------------------------------------------------
 [[ -s $HOME/.zshrc_local ]] && source $HOME/.zshrc_local
 
