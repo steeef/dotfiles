@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 PYTHON_VERSIONS=(
   2.7.13
-  3.6.0
+  3.6.1
 )
 PYTHON_DEFAULT=2.7.13
 RUBY_VERSIONS=(
