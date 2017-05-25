@@ -1,8 +1,6 @@
 [alias]
 # log =====
     lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
     lg = !"git lg1"
 
     s = status -s
@@ -16,6 +14,13 @@
 # Remove branches that have already been merged with master
 # a.k.a. ‘delete merged’
     dm = "!git branch --merged | grep -Ev \"(\\*|master|develop|staging)\" | xargs -n 1 git branch -d"
+
+  # https://csswizardry.com/2017/05/little-things-i-like-to-do-with-git/
+  stats = shortlog -sn --since='10 weeks'
+  recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+  overview = log --all --since='2 weeks' --oneline --no-merges
+  recap = "!git log --all --oneline --no-merges --author=$(git config --get user.email)"
+  today = "!git log --since=00:00:00 --all --oneline --no-merges --author=$(git config --get user.email)"
 
 [color]
     diff = auto
