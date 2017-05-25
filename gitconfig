@@ -39,7 +39,8 @@
 [commit]
     verbose = true
 [diff]
-    compactionHeuristic = true
+	compactionHeuristic = off
+	indentHeuristic = on
 [user]
 	name = Stephen Price
 [http "https://gopkg.in"]
