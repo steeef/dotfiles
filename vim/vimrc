@@ -63,6 +63,7 @@ if exists(":PlugInstall")
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-easy-align'
   Plug 'airblade/vim-gitgutter'
+  Plug 'mtth/scratch.vim',       { 'on': 'Scratch' }
   Plug 'metakirby5/codi.vim',    { 'on': 'Codi' }
   if s:has_ale_features
     Plug 'w0rp/ale',             { 'for': [ 'python',
@@ -739,6 +740,12 @@ endif
 
 let g:golden_ratio_autocommand = 0
 nnoremap <leader>m :GoldenRatioToggle<Enter>
+
+"}}}
+
+" scratch ---------------------------------------------------------------------"{{{
+
+let g:scratch_insert_autohide = 0
 
 "}}}
 
