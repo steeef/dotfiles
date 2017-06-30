@@ -700,6 +700,7 @@ let g:LatexBox_viewer = "open -a Skim"
 " ale -------------------------------------------------------------------------"{{{
 let g:ale_python_pylint_options = '--max-line-length=120'
 let g:ale_python_flake8_args = '--max-line-length=120'
+let g:ale_python_flake8_use_global = 1
 "}}}
 
 " deoplete --------------------------------------------------------------------"{{{
