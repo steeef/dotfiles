@@ -95,6 +95,8 @@ alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 # sudo please
 alias please='sudo $(fc -ln -1)'
 
+whitenoise() { play -q -c 2 -n synth brownnoise band -n 1600 1500 tremolo .1 30 & }
+
 #Use Pygments to color less
 pless() { pygmentize -f terminal256 -g -P style=monokai $* | less -FiXRM }
 
