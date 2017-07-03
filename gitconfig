@@ -48,5 +48,8 @@
 	indentHeuristic = on
 [user]
 	name = Stephen Price
+	email = stephen@stp5.net
+[includeIf "gitdir:~/code/work/"]
+  path = .gitconfig-work
 [http "https://gopkg.in"]
 	followRedirects = true
