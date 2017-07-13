@@ -90,6 +90,7 @@ if exists(":PlugInstall")
   Plug 'chase/vim-ansible-yaml',   { 'for': 'ansible' }
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
+  Plug 'hashivim/vim-terraform',   { 'for': 'terraform' }
 endif
 
 "}}}
