@@ -26,6 +26,11 @@ function config()
   -- Type clipboard
   hs.hotkey.bind(hyper, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
+  -- paste as code in JIRA
+  hs.hotkey.bind(hyper, "b", function()
+    hs.eventtap.keyStrokes('{code}' .. hs.pasteboard.getContents() .. '{code}')
+  end)
+
   -- Start Screensaver
   --
   -- Normally I'd use the built-in function, but that doesn't seem to work
