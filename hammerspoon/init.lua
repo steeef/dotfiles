@@ -28,7 +28,9 @@ function config()
 
   -- paste as code in JIRA
   hs.hotkey.bind(hyper, "b", function()
-    hs.eventtap.keyStrokes('{code}' .. hs.pasteboard.getContents() .. '{code}')
+    hs.eventtap.keyStrokes('{code}')
+    hs.eventtap.keyStroke('cmd', 'v')
+    hs.eventtap.keyStrokes('{code}')
   end)
 
   -- Start Screensaver
