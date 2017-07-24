@@ -189,23 +189,14 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # pyenv ----------------------------------------------------------------------
-pyenv() {
-  eval "$(command pyenv init -)"
-  eval "$(command pyenv virtualenv-init -)"
-  pyenv "$@"
-}
+eval "$(command pyenv init -)"
+eval "$(command pyenv virtualenv-init -)"
 
 # rbenv ----------------------------------------------------------------------
-rbenv() {
-  eval "$(command rbenv init -)"
-  rbenv "$@"
-}
+eval "$(command rbenv init -)"
 
 # nodenv ----------------------------------------------------------------------
-nodenv() {
-  eval "$(command nodenv init -)"
-  nodenv "$@"
-}
+eval "$(command nodenv init -)"
 
 # neovim autocd --------------------------------------------------------------
 

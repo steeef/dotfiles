@@ -42,6 +42,7 @@ if exists(":PlugInstall")
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
     Plug 'davidhalter/jedi-vim',     { 'for': 'python' }
+    Plug 'roman/golden-ratio'
     if executable("tmux")
       Plug 'christoomey/vim-tmux-navigator'
     endif
@@ -57,7 +58,6 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-abolish'
   Plug 'skywind3000/asyncrun.vim'
-  Plug 'roman/golden-ratio'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
@@ -748,6 +748,7 @@ nnoremap <leader>m :GoldenRatioToggle<Enter>
 " scratch ---------------------------------------------------------------------"{{{
 
 let g:scratch_insert_autohide = 0
+nnoremap gs :Scratch<Enter>
 
 "}}}
 
