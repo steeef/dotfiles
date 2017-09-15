@@ -255,7 +255,7 @@ set wildignore+=*.pyc                            " Python byte code
 
 " folding -------------------------------------------------------------------- "{{{
 
-set foldlevelstart=0
+set foldlevelstart=99
 
 " Make the current location sane.
 nnoremap <c-cr> zvzt
@@ -773,7 +773,15 @@ nnoremap gs :Scratch<Enter>
 " fugitive --------------------------------------------------------------------"{{{
 
 nnoremap <leader>g :Gstatus<Enter>
- 
+
+"}}}
+"
+" vim-terraform ---------------------------------------------------------------"{{{
+
+let g:terraform_fmt_on_save = 1
+let g:terraform_align = 1
+autocmd FileType terraform setlocal commentstring=#%s
+
 "}}}
 
 "}}}
