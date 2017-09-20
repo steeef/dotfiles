@@ -690,9 +690,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>2189 139 606 456 1920 0 1920 1058 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2162 130 796 473 1680 -30 1920 1080 </string>
+	<string>490 333 796 473 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 324 730 704 0 0 1680 1028 </string>
+	<string>0 4 1680 1024 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1920 354 730 704 1920 0 1920 1058 </string>
 	<key>NeverWarnAboutShortLivedSessions_C2F20648-6DD5-4E7C-AA3E-4B9A29CBE325</key>
@@ -2124,7 +2124,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-09-19T18:12:03Z</date>
+	<date>2017-09-20T03:00:32Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
@@ -2136,6 +2136,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.0</string>
+	<string>3.1.1</string>
 </dict>
 </plist>
