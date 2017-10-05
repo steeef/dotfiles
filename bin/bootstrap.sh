@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 PYTHON_VERSIONS=(
-  2.7.13
-  3.6.1
+  2.7.14
+  3.6.3
 )
-PYTHON_DEFAULT=2.7.13
+PYTHON_DEFAULT=3.6.3
+PYTHON_MODULES="flake8 ipython neovim neovim-remote"
 RUBY_VERSIONS=(
-  2.4.0
+  2.4.2
 )
-RUBY_DEFAULT=2.4.0
+RUBY_DEFAULT=2.4.2
+RUBY_MODULES="neovim"
 
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
@@ -120,7 +122,7 @@ for python in "${PYTHON_VERSIONS[@]}"; do
   (pyenv versions --bare --skip-aliases | grep -q '^'${python}'$') \
   || pyenv install ${python}
   # install linter
-  (PYENV_VERSION=${python} pip install flake8)
+  (PYENV_VERSION=${python} pip install "${PYTHON_MODULES}")
   venv="neovim$(echo ${python} | cut -d'.' -f1)"
   pyenv virtualenv ${python} ${venv}
   (pyenv activate ${venv} && pip install neovim && pyenv deactivate)
@@ -150,7 +152,7 @@ done
 (rbenv global | grep -q '^'${RUBY_DEFAULT}'$') \
   || rbenv global ${RUBY_DEFAULT}
 
-gem install neovim
+gem install "${RUBY_MODULES}"
 
 # base16-shell setup
 base16dir="${HOME}/code/base16-shell"
@@ -175,7 +177,7 @@ if [ $GITCLONEDERR == 0 ]; then
   echo "INFO: Updating prezto"
   (cd ${preztodir} && git pull --recurse-submodules)
 else
-  echo "INFO: Installing base16-shell"
+  echo "INFO: Installing prezto"
   rm -rf "${preztodir}"
   git clone --recursive ${preztorepo} "${preztodir}"
 fi
