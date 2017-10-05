@@ -33,7 +33,7 @@ fi
 unsetopt correct_all
 
 # environment variables ------------------------------------
-export EDITOR='nvim-inner'
+export EDITOR='nvim'
 export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export GREP_OPTIONS='--color=auto'
 export COMMAND_MODE=unix2003
