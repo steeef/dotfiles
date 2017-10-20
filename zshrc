@@ -114,19 +114,6 @@ function sshboot() {
   fi
 }
 
-# docker_alias stuff
-function docker_alias() {
-  docker run -it --rm \
-    -v $(pwd):$1 -w $1 \
-    -p 3000:3000 \
-    -p 8080:8080 \
-    -p 8000:8000 \
-    -p 80:80 \
-    -p 3306:3306 \
-    -p 27017:27017 \
-    ${@:2}
-}
-
 # colorscheme ---------------------------------------------------------
 # https://github.com/chriskempson/base16-shell
 BASE16_SCHEME="tomorrow-night"
@@ -172,6 +159,10 @@ if [ -s $HOME/.bin/z.sh ]; then
         alias jj='zz'
     fi
 fi
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="bfs ~ -nohidden -type d -printf '~/%P\n'"
 
 # Ctrl-Z --------------------------------------------------------------------
 
