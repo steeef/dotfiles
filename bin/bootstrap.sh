@@ -4,7 +4,12 @@ PYTHON_VERSIONS=(
   3.6.3
 )
 PYTHON_DEFAULT=3.6.3
-PYTHON_MODULES="flake8 ipython neovim neovim-remote"
+PYTHON_MODULES=(
+  flake8
+  ipython
+  neovim
+  neovim-remote
+)
 RUBY_VERSIONS=(
   2.4.2
 )
@@ -111,21 +116,21 @@ for file in "${HOME}/.zshrc_local" "${HOME}/.bashrc_local"; do
       || echo 'eval "$('${bin}')"' >> "${file}"
   done
 done
-if [ "$(basename ${SHELL})" = "zsh" ]; then
+if [ "$(basename "${SHELL}")" = "zsh" ]; then
   source "${HOME}/.zshrc_local"
-elif [ "$(basename ${SHELL})" = "bash" ]; then
+elif [ "$(basename "${SHELL}")" = "bash" ]; then
   source "${HOME}/.bashrc_local"
 fi
 
 # Install python versions and setup for Neovim
 for python in "${PYTHON_VERSIONS[@]}"; do
   (pyenv versions --bare --skip-aliases | grep -q '^'${python}'$') \
-  || pyenv install ${python}
+  || pyenv install "${python}"
   # install linter
-  (PYENV_VERSION=${python} pip install "${PYTHON_MODULES}")
-  venv="neovim$(echo ${python} | cut -d'.' -f1)"
-  pyenv virtualenv ${python} ${venv}
-  (pyenv activate ${venv} && pip install neovim && pyenv deactivate)
+  (PYENV_VERSION="${python}" pip install ${PYTHON_MODULES})
+  venv="neovim$(echo "${python}" | cut -d'.' -f1)"
+  pyenv virtualenv "${python}" "${venv}"
+  (pyenv activate "${venv}" && pip install neovim && pyenv deactivate)
   if [ "${venv}" = "neovim2" ]; then
     var="g:python_host_prog"
   elif [ "${venv}" = "neovim3" ]; then
@@ -145,7 +150,7 @@ done
 # now ruby
 for ruby in "${RUBY_VERSIONS[@]}"; do
   (rbenv versions --bare --skip-aliases | grep -q '^'${ruby}'$') \
-  || rbenv install ${ruby}
+  || rbenv install "${ruby}"
 done
 
 # set default
@@ -158,10 +163,10 @@ gem install "${RUBY_MODULES}"
 base16dir="${HOME}/code/base16-shell"
 base16repo="https://github.com/chriskempson/base16-shell.git"
 mkdir -p "${base16dir}"
-GITCLONED=$(cd ${base16dir} && git rev-parse --git-dir);GITCLONEDERR=$?
+(cd "${base16dir}" && git rev-parse --git-dir);GITCLONEDERR=$?
 if [ $GITCLONEDERR == 0 ]; then
   echo "INFO: Updating base16-shell"
-  (cd ${base16dir} && git pull)
+  (cd "${base16dir}" && git pull)
 else
   echo "INFO: Installing base16-shell"
   rm -rf "${base16dir}"
@@ -172,10 +177,10 @@ fi
 preztodir="${HOME}/.zprezto"
 preztorepo="https://github.com/sorin-ionescu/prezto.git"
 mkdir -p "${preztodir}"
-GITCLONED=$(cd ${preztodir} && git rev-parse --git-dir);GITCLONEDERR=$?
+(cd "${preztodir}" && git rev-parse --git-dir);GITCLONEDERR=$?
 if [ $GITCLONEDERR == 0 ]; then
   echo "INFO: Updating prezto"
-  (cd ${preztodir} && git pull --recurse-submodules)
+  (cd "${preztodir}" && git pull --recurse-submodules)
 else
   echo "INFO: Installing prezto"
   rm -rf "${preztodir}"
