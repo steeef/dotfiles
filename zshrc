@@ -129,40 +129,27 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^[[I" history-beginning-search-backward
 bindkey "^[[G" history-beginning-search-forward
 
-# z and fzf --------------------------------------------------------
+# fasd ----------------------------------------------------------------------
+eval "$(fasd --init auto)"
+
+# fzf -----------------------------------------------------------------------
 [[ -s $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
 # fix CTRL-R within Neovim terminal
 [ -n "$NVIM_LISTEN_ADDRESS" ] && export FZF_DEFAULT_OPTS='--no-height'
 
-if [ -s $HOME/.bin/z.sh ]; then
-    source $HOME/.bin/z.sh
-    function precmd () {
-        _z --add "$(pwd -P)"
-    }
-    alias j='z'
-
-    if [ -s $HOME/.fzf.zsh ]; then
-        unalias z
-        z() {
-        if [[ -z "$*" ]]; then
-            cd "$(_z -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf)"
-        else
-            _last_z_args="$@"
-            _z "$@"
-        fi
-        }
-
-        zz() {
-        cd "$(_z -l 2>&1 | sed -n 's/^[ 0-9.,]*//p' | fzf -q $_last_z_args)"
-        }
-        alias jj='zz'
-    fi
-fi
-
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="bfs ~ -nohidden -type d -printf '~/%P\n'"
+
+# fasd & fzf change directory - jump using `fasd` if given argument,
+# filter output of `fasd` using `fzf` else
+unalias z
+z() {
+    [ $# -gt 0 ] && fasd_cd -d "$*" && return
+    local dir
+    dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
 
 # Ctrl-Z --------------------------------------------------------------------
 

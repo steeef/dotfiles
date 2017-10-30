@@ -77,6 +77,7 @@ if exists(":PlugInstall")
                                           \ 'go',
                                           \ 'markdown',
                                           \ 'html',
+                                          \ 'terraform',
                                           \ 'docker',
                                           \ 'lua'] }
   endif
@@ -263,9 +264,6 @@ nnoremap <c-cr> zvzt
 " Make zO recursively open whatever top level fold we're in, no matter where the
 " cursor happens to be.
 nnoremap zO zCzO
-
-" Use ,z to "focus" the current fold.
-nnoremap <leader>z zMzvzz
 
 function! MyFoldText() " {{{
   let line = getline(v:foldstart)
@@ -668,6 +666,26 @@ endif
 
 "}}}
 
+" fasd integration ----------------------------------------------------------- "{{{
+
+if executable("fasd")
+  " Z - cd to recent / frequent directories
+  command! -nargs=* Z :call Z(<f-args>)
+  function! Z(...)
+    let cmd = 'fasd -d -e printf'
+    for arg in a:000
+      let cmd = cmd . ' ' . arg
+    endfor
+    let path = system(cmd)
+    if isdirectory(path)
+      echo path
+      exec 'cd ' . "\"${path}\""
+    endif
+  endfunction
+
+  nnoremap <leader>z :Z<Space>
+endif
+
 "}}}
 
 " plugin settings ------------------------------------------------------------ "{{{
@@ -715,12 +733,11 @@ nnoremap <silent> <Leader>h :History:<enter>
 nnoremap <leader>a :Ag<Space>
 nnoremap <silent> <Leader>A :Ag <C-R><C-W><CR>
 
+" use rg
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
   \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
   \ -g "!{.git,node_modules,vendor}/*" '
-
-command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 
 "}}}
 
