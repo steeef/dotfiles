@@ -642,8 +642,8 @@ if has("nvim")
   " Leave in normal mode
   autocmd BufLeave term://* stopinsert
 
-  " allow modification of terminal content
-  autocmd TermOpen * setlocal modifiable
+  " allow modification of terminal content, disable number lines
+  autocmd TermOpen * setlocal modifiable nonumber norelativenumber
 
   " go back to normal mode
   tnoremap <C-Space> <C-\><C-n>
