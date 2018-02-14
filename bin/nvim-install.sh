@@ -25,7 +25,9 @@ else
   rm -rf "${DOWNLOADDIR}"
   git clone "${REPO}" "${DOWNLOADDIR}"
 fi
+pushd "${DOWNLOADDIR}"
 rm -rf "build" \
   && make clean \
   && make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME -DCMAKE_BUILD_TYPE=RelWithDebInfo" \
   && make install
+popd
