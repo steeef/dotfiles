@@ -92,6 +92,10 @@ alias d='docker'
 alias drm='docker rm $(docker ps -a -q)'
 alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 
+# homebrew
+alias bup='brew -v update && brew -v upgrade && brew cu -a -y --cleanup'
+alias bclean='brew -v cleanup; brew -v cask cleanup'
+
 # sudo please
 alias please='sudo $(fc -ln -1)'
 
