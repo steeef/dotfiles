@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo mv /etc/hosts.orig /etc/hosts
