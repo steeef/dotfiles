@@ -39,8 +39,7 @@ function config()
   -- right, so call the app directly
   hs.hotkey.bind(hyper, "0", function()
     hs.timer.doAfter(1, function()
-      hs.application.launchOrFocus('/System/Library/Frameworks/' ..
-        'ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app')
+      os.execute(os.getenv("HOME") .. '/.bin/maclock -q')
     end)
   end)
 
