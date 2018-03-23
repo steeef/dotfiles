@@ -99,6 +99,10 @@ alias bclean='brew -v cleanup; brew -v cask cleanup'
 # sudo please
 alias please='sudo $(fc -ln -1)'
 
+# aws-vault
+alias av='aws-vault'
+alias ave='aws-vault exec'
+
 whitenoise() { play -q -c 2 -n synth brownnoise band -n 1600 1500 tremolo .1 30 & }
 
 #Use Pygments to color less
@@ -213,6 +217,15 @@ eval "$(command rbenv init -)"
 
 # nodenv ----------------------------------------------------------------------
 eval "$(command nodenv init -)"
+
+# aws-vault login ------------------------------------------------------------
+
+function awslogin() {
+  aws-vault login $1 --stdout \
+    | xargs -t /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+    --args --incognito --new-window
+}
+alias avl='awslogin'
 
 # neovim autocd --------------------------------------------------------------
 
