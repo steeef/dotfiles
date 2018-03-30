@@ -221,9 +221,12 @@ eval "$(command nodenv init -)"
 # aws-vault login ------------------------------------------------------------
 
 function awslogin() {
-  aws-vault login $1 --stdout \
-    | xargs -t /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-    --args --incognito --new-window
+  url="$(aws-vault login ${1} --stdout)"
+  /Applications/Firefox.app/Contents/MacOS/firefox \
+    -P "aws_${1}" \
+    -no-remote \
+    "${url}" \
+    2>/dev/null &
 }
 alias avl='awslogin'
 
