@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 PYTHON_VERSIONS=(
   2.7.14
-  3.6.3
+  3.6.5
 )
-PYTHON_DEFAULT=3.6.3
+PYTHON_DEFAULT=3.6.5
 PYTHON_MODULES=(
   flake8
   ipython
