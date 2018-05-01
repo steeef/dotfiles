@@ -101,7 +101,7 @@ alias please='sudo $(fc -ln -1)'
 
 # aws-vault
 alias av='aws-vault'
-alias ave='aws-vault exec'
+alias ave='aws-vault exec --session-ttl=8h --assume-role-ttl=1h'
 
 whitenoise() { play -q -c 2 -n synth brownnoise band -n 1600 1500 tremolo .1 30 & }
 
@@ -222,11 +222,14 @@ eval "$(command nodenv init -)"
 
 function awslogin() {
   url="$(aws-vault login ${1} --stdout)"
-  /Applications/Firefox.app/Contents/MacOS/firefox \
-    -P "aws_${1}" \
-    -no-remote \
-    "${url}" \
-    2>/dev/null &
+  if [[ ${url} =~ ^https://.* ]]; then
+    /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+      --args --no-first-run --new-window --profile-directory="aws_${1}" \
+      "${url}" \
+      2>/dev/null &
+  else
+    echo "ERROR: ${url}"
+  fi
 }
 alias avl='awslogin'
 

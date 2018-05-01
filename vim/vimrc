@@ -42,7 +42,6 @@ if exists(":PlugInstall")
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
     Plug 'davidhalter/jedi-vim',     { 'for': 'python' }
-    Plug 'roman/golden-ratio'
     if executable("tmux")
       Plug 'christoomey/vim-tmux-navigator'
     endif
@@ -51,6 +50,7 @@ if exists(":PlugInstall")
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-jedi'
   endif
+  Plug 'roman/golden-ratio'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
@@ -793,7 +793,7 @@ endif
 
 " GoldenRatio -----------------------------------------------------------------"{{{
 
-let g:golden_ratio_autocommand = 0
+let g:golden_ratio_autocommand = 1
 nnoremap <leader>m :GoldenRatioToggle<Enter>
 
 "}}}
