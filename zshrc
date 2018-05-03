@@ -103,6 +103,12 @@ alias please='sudo $(fc -ln -1)'
 alias av='aws-vault'
 alias ave='aws-vault exec --session-ttl=8h --assume-role-ttl=1h'
 
+# terraform
+alias tf='terraform'
+alias tfa='terraform apply'
+alias tfi='terraform init'
+alias tfs='terraform workspace show'
+
 whitenoise() { play -q -c 2 -n synth brownnoise band -n 1600 1500 tremolo .1 30 & }
 
 #Use Pygments to color less
