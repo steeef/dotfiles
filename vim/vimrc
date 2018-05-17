@@ -92,6 +92,7 @@ if exists(":PlugInstall")
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
   Plug 'hashivim/vim-terraform',   { 'for': 'terraform' }
+  Plug 'faith/vim-go',             { 'for': 'go' }
 endif
 
 "}}}
@@ -816,6 +817,12 @@ nnoremap <leader>g :Gstatus<Enter>
 let g:terraform_fmt_on_save = 1
 let g:terraform_align = 1
 autocmd FileType terraform setlocal commentstring=#%s
+
+"}}}
+"
+" vim-go ----------------------------------------------------------------------"{{{
+
+let g:go_fmt_autosave = 1
 
 "}}}
 
