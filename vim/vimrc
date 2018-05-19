@@ -639,7 +639,7 @@ if exists(":terminal")
   if has("nvim")
     nnoremap <leader>t :vnew<CR>:terminal<CR>
   else
-    nnoremap <leader>t :vnew<CR>:terminal ++curwin<CR>
+    nnoremap <leader>t :vert term<CR>
   endif
 
   " Start in insert mode
