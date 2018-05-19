@@ -788,6 +788,7 @@ endif
 " Asyncrun --------------------------------------------------------------------"{{{
 
 nnoremap <leader>p :AsyncRun git push<Enter>
+nnoremap <leader>r :AsyncRun git pr<Enter>
 
   " open quickfix when commands posted
 if exists("*asyncrun#quickfix_toggle")
