@@ -653,13 +653,24 @@ if exists(":terminal")
   endif
 
   " go back to normal mode
-  tnoremap <C-n> <C-w>N
+  if has("nvim")
+    tnoremap <C-Space> <C-\><C-n>
+  else
+    tnoremap <C-n> <C-w>N
+  endif
 
   " Easier motion between buffers
-  tmap <C-j> <C-w><C-j>
-  tmap <C-h> <C-w><C-h>
-  tmap <C-l> <C-w><C-l>
-  tmap <C-k> <C-w><C-k>
+  if has("nvim")
+    tmap <C-j> <C-Space><C-j>
+    tmap <C-h> <C-Space><C-h>
+    tmap <C-l> <C-Space><C-l>
+    tmap <C-k> <C-Space><C-k>
+  else
+    tmap <C-j> <C-w><C-j>
+    tmap <C-h> <C-w><C-h>
+    tmap <C-l> <C-w><C-l>
+    tmap <C-k> <C-w><C-k>
+  endif
 
  " make vim behave a bit more like a terminal
   noremap <C-d> :q<CR>
