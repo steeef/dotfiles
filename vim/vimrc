@@ -1,6 +1,7 @@
 " initial settings  ---------------------------------------------------------- "{{{
 
 scriptencoding utf-8
+set encoding=utf-8
 set nocompatible
 
 "}}}
@@ -41,9 +42,11 @@ if exists(":PlugInstall")
     " plugins for vanilla Vim
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
-    Plug 'davidhalter/jedi-vim',     { 'for': 'python' }
-    if executable("tmux")
-      Plug 'christoomey/vim-tmux-navigator'
+    if has("python3")
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+      Plug 'zchee/deoplete-jedi'
     endif
   else
     " plugins for Neovim
@@ -603,11 +606,7 @@ nnoremap <leader>sv :so $MYVIMRC<CR>
 " windows -------------------------------------------------------------------- "{{{
 
 " open new vertical window and switch to it
-if has("nvim")
-  nnoremap <leader>w :vnew<CR>
-else
-  nnoremap <leader>w <C-w>v<C-w>l
-endif
+nnoremap <leader>w :vnew<CR>
 
 if exists(":TmuxNavigateLeft")
   " Easy window navigation
@@ -629,30 +628,38 @@ endif
 
 " terminal ------------------------------------------------------------------- "{{{
 
-if has("nvim")
+if exists(":terminal")
   " huge scrollback buffer
   let g:terminal_scrollback_buffer_size = 100000
-  set scrollback=100000
+  if has("nvim")
+    set scrollback=100000
+  endif
 
   " open new vertical window for terminal and switch to it
-  nnoremap <leader>t :vnew<CR>:terminal<CR>
+  if has("nvim")
+    nnoremap <leader>t :vnew<CR>:terminal<CR>
+  else
+    nnoremap <leader>t :vnew<CR>:terminal ++curwin<CR>
+  endif
 
   " Start in insert mode
   autocmd BufWinEnter,WinEnter term://* startinsert
   " Leave in normal mode
   autocmd BufLeave term://* stopinsert
 
-  " allow modification of terminal content, disable number lines
-  autocmd TermOpen * setlocal modifiable nonumber norelativenumber
+  if has("nvim")
+    " allow modification of terminal content, disable number lines
+    autocmd TermOpen * setlocal modifiable nonumber norelativenumber
+  endif
 
   " go back to normal mode
   tnoremap <C-Space> <C-\><C-n>
 
   " Easier motion between buffers
-  tmap <C-j> <C-Space><C-j>
-  tmap <C-h> <C-Space><C-h>
-  tmap <C-l> <C-Space><C-l>
-  tmap <C-k> <C-Space><C-k>
+  tmap <C-j> <C-w><C-j>
+  tmap <C-h> <C-w><C-h>
+  tmap <C-l> <C-w><C-l>
+  tmap <C-k> <C-w><C-k>
 
  " make vim behave a bit more like a terminal
   noremap <C-d> :q<CR>
