@@ -653,7 +653,7 @@ if exists(":terminal")
   endif
 
   " go back to normal mode
-  tnoremap <C-Space> <C-\><C-n>
+  tnoremap <C-n> <C-w>N
 
   " Easier motion between buffers
   tmap <C-j> <C-w><C-j>
