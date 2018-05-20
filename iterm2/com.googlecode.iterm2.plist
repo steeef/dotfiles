@@ -987,7 +987,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string>vim -c 'vert term'</string>
+			<string>vim -c 'terminal ++curwin'</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
