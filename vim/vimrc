@@ -643,9 +643,9 @@ if exists(":terminal")
   endif
 
   " Start in insert mode
-  autocmd BufWinEnter,WinEnter term://* startinsert
+  " autocmd BufWinEnter,WinEnter term://* startinsert
   " Leave in normal mode
-  autocmd BufLeave term://* stopinsert
+  " autocmd BufLeave term://* stopinsert
 
   if has("nvim")
     " allow modification of terminal content, disable number lines
