@@ -227,7 +227,7 @@ eval "$(command nodenv init -)"
 # aws-vault login ------------------------------------------------------------
 
 function awslogin() {
-  url="$(aws-vault login ${1} --stdout)"
+  url="$(~/code/go/bin/aws-vault login ${1} --stdout)"
   if [[ ${url} =~ ^https://.* ]]; then
     /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
       --args --no-first-run --new-window --profile-directory="aws_${1}" \
