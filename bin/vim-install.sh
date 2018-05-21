@@ -27,8 +27,15 @@ else
     git clone $VIMREPO $DOWNLOADDIR
     cd $DOWNLOADDIR
 fi
-./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp \
-    --enable-cscope --prefix=$HOME \
+./configure \
+    --with-features=huge \
+    --enable-rubyinterp \
+    --disable-pythoninterp \
+    --enable-python3interp \
+    --with-python3-config-dir="${HOME}/.pyenv/versions/3.6.5/lib/python3.6/config-3.6m-darwin" \
+    --enable-cscope \
+    --prefix=$HOME \
+    --enable-fail-if-missing \
     && /usr/bin/make clean \
     && /usr/bin/make \
     && /usr/bin/make install
