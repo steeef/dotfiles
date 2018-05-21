@@ -643,11 +643,6 @@ if exists(":terminal")
     nnoremap <leader>t :vert term<CR>
   endif
 
-  " Start in insert mode
-  " autocmd BufWinEnter,WinEnter term://* startinsert
-  " Leave in normal mode
-  " autocmd BufLeave term://* stopinsert
-
   if has("nvim")
     " allow modification of terminal content, disable number lines
     autocmd TermOpen * setlocal modifiable nonumber norelativenumber
