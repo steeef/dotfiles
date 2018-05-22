@@ -41,7 +41,7 @@ if exists(":PlugInstall")
   if !has('nvim')
     " plugins for vanilla Vim
     Plug 'vim-scripts/IndexedSearch'
-    Plug 'ConradIrwin/vim-bracketed-paste'
+    "Plug 'ConradIrwin/vim-bracketed-paste'
     if has("python3")
       Plug 'Shougo/deoplete.nvim'
       Plug 'roxma/nvim-yarp'
@@ -644,8 +644,6 @@ if exists(":terminal")
   endif
 
   if has("nvim")
-
-  if has("nvim")
     " Start in insert mode
     autocmd BufWinEnter,WinEnter term://* startinsert
     " Leave in normal mode
@@ -654,20 +652,15 @@ if exists(":terminal")
     autocmd TermOpen * setlocal nonumber norelativenumber
   endif
 
-  " go back to normal mode
-  if has("nvim")
-    tnoremap <C-Space> <C-\><C-n>
-  else
-    tnoremap <C-n> <C-w>N
-  endif
-
   " Easier motion between buffers
   if has("nvim")
+    tnoremap <C-Space> <C-\><C-n>
     tmap <C-j> <C-Space><C-j>
     tmap <C-h> <C-Space><C-h>
     tmap <C-l> <C-Space><C-l>
     tmap <C-k> <C-Space><C-k>
   else
+    tnoremap <C-n> <C-w>N
     tmap <C-j> <C-w><C-j>
     tmap <C-h> <C-w><C-h>
     tmap <C-l> <C-w><C-l>

@@ -32,7 +32,8 @@ fi
     --enable-rubyinterp \
     --disable-pythoninterp \
     --enable-python3interp \
-    --with-python3-config-dir="${HOME}/.pyenv/versions/3.6.5/lib/python3.6/config-3.6m-darwin" \
+    --with-python3-config-dir=/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python3.6/config-3.6m-darwin \
+    --with-python3-command=/usr/local/bin/python3 \
     --enable-cscope \
     --prefix=$HOME \
     --enable-fail-if-missing \
