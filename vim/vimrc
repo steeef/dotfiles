@@ -636,6 +636,13 @@ if exists(":terminal")
     set scrollback=100000
   endif
 
+  " colors
+  if !has("nvim")
+    " set colors for status line since Base 16 doesn't support them yet.
+    call Base16hi("StatusLineTerm", g:base16_gui0B, g:base16_gui02, g:base16_cterm0B, g:base16_cterm02, "none", "")
+    call Base16hi("StatusLineTermNC", g:base16_gui0B, g:base16_gui01, g:base16_cterm0B, g:base16_cterm01, "none", "")
+  endif
+
   " open new vertical window for terminal and switch to it
   if has("nvim")
     nnoremap <leader>t :vnew<CR>:terminal<CR>
