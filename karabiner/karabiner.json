@@ -30,7 +30,7 @@
                     "left_command"
                 ]
             },
-            "selected": false,
+            "selected": true,
             "simple_modifications": {
                 "caps_lock": "left_control"
             },
@@ -61,7 +61,7 @@
             },
             "name": "ergodox",
             "one_to_many_mappings": {},
-            "selected": true,
+            "selected": false,
             "simple_modifications": {},
             "standalone_keys": {},
             "virtual_hid_keyboard": {
