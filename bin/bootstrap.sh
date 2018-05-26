@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+#
+# requirements:
+# - pyenv
+# - pyenv-virtualenv
+# - rbenv
+# - ruby-build
+#
+
 PYTHON_VERSIONS=(
   2.7.14
   3.6.5
