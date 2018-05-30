@@ -25,12 +25,6 @@ function usbDeviceCallback(data)
         'ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app')
       end)
     end
-  elseif string.match(data["productName"], "ErgoDox EZ") then
-    if (data["eventType"] == "added") then
-      switchKarabinerElementsProfile("ergodox")
-    elseif (data["eventType"] == "removed") then
-      switchKarabinerElementsProfile("default")
-    end
   end
 end
 
