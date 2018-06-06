@@ -10,6 +10,7 @@ maid/maid.log
 log/.zsh_history
 projects.zsh
 doc/tags*
+vim/black
 vim/doc/bundles.txt
 vim/doc/bundle-log.txt
 vim/.netrwhist
