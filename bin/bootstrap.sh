@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
 # requirements:
+# - fasd
+# - nodenv
 # - pyenv
 # - pyenv-virtualenv
 # - rbenv
@@ -56,8 +58,6 @@ ensure_link "gitconfig"          ".gitconfig"
 ensure_link "gitignore"          ".gitignore"
 ensure_link "hammerspoon"        ".hammerspoon"
 ensure_link "hgignore"           ".hgignore"
-ensure_link "i3"                 ".i3"
-ensure_link "i3/i3status.conf"   ".i3status.conf"
 ensure_link "karabiner"          ".config/karabiner" "force"
 ensure_link "inputrc"            ".inputrc"
 ensure_link "irbrc"              ".irbrc"
