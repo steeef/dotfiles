@@ -45,6 +45,7 @@ mkdir -p "${HOME}/build"
 
 ensure_link "Brewfile"           ".Brewfile"
 ensure_link "Xresources"         ".Xresources"
+ensure_link "xprofile"           ".xprofile"
 ensure_link "ackrc"              ".ackrc"
 ensure_link "bash"               ".bash"
 ensure_link "bashrc"             ".bashrc" "force"
