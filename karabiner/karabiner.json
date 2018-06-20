@@ -156,9 +156,9 @@
                     {
                         "manipulators": [
                             {
-                                "description": "right_ctrl bracket",
+                                "description": "right_alt bracket",
                                 "from": {
-                                    "key_code": "right_control",
+                                    "key_code": "right_alt",
                                     "modifiers": {
                                         "optional": [
                                             "any"
@@ -167,7 +167,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "right_option"
+                                        "key_code": "right_alt"
                                     }
                                 ],
                                 "to_if_alone": [
