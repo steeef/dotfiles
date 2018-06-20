@@ -1,8 +1,9 @@
 light-locker --lock-after-screensaver 5 --lock-on-lid &
-polybar default &
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
+
+/usr/bin/greenclip daemon &
 
 # capslock to ctrl
 setxkbmap -option ctrl:nocaps
