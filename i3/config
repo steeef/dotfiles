@@ -35,17 +35,11 @@ bindsym $mod+Return exec urxvt
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi (a program launcher and window switcher)
-bindsym $mod+space exec "rofi -combi-modi window,drun -show combi -modi combi \
-# rofi with greenclip clipboard history
-bindsym $mod+Mod4+c exec "rofi -modi 'clipboard:greenclip print' -show clipboard \
-  -theme Arc-Dark -font 'mono 10' -run-command '{cmd}'"
-
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -54,36 +48,16 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -121,7 +95,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 #-old-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec xfce4-session-logout
+bindsym $mod+Shift+e exec "sudo kill $(pidof Xorg)"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -131,10 +105,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym l resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -156,6 +130,18 @@ bindsym $mod+r mode "resize"
 #-old-#bar {
 #-old-#       status_command i3status
 #-old-#}
+
+# start rofi (a program launcher and window switcher)
+bindsym $mod+space exec "rofi -combi-modi window,drun -show combi -modi combi \
+  -theme Arc-Dark -font 'mono 10' -show-icons"
+# rofi with greenclip clipboard history
+bindsym $mod+Mod4+c exec "rofi -modi 'clipboard:greenclip print' -show clipboard \
+  -theme Arc-Dark -font 'mono 10' -run-command '{cmd}'"
+
+# Program switching hotkeys
+bindsym Mod3+j exec jumpapp google-chrome-beta
+bindsym Mod3+i exec jumpapp mate-terminal
+bindsym Mod3+0 exec light-locker-command -l
 
 # Startup commands
 #exec --no-startup-id nitrogen --restore
