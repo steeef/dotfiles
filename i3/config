@@ -144,5 +144,6 @@ bindsym Mod3+i exec jumpapp mate-terminal
 bindsym Mod3+0 exec light-locker-command -l
 
 # Startup commands
-#exec --no-startup-id nitrogen --restore
-#exec --no-startup-id synergy
+exec PYENV_VERSION=system blueman-applet
+exec dropbox
+exec nm-applet

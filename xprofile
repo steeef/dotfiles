@@ -7,6 +7,8 @@ export SSH_AUTH_SOCK
 
 /usr/bin/greenclip daemon &
 
+redshift &
+
 # capslock to ctrl
 setxkbmap -option ctrl:nocaps
 # ctrl to escape if pressed alone
