@@ -22,8 +22,13 @@ set $base0F #a3685a
 
 bar {
     position top
+    mode dock
+    modifier none
 
-    status_command i3status
+    status_command python ~/.i3/status.py
+
+    separator_symbol " "
+    tray_output primary
 
     colors {
         background $base00
