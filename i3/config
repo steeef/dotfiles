@@ -149,6 +149,10 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# multimedia keys
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+
 # start rofi (a program launcher and window switcher)
 bindsym $mod+space exec "rofi -combi-modi window,drun -show combi -modi combi \
   -theme Arc-Dark -font 'mono 10' -show-icons"

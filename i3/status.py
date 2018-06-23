@@ -12,6 +12,8 @@ stat.register(
     format=[("%-m/%-d %-H:%M %Z", "America/Los_Angeles"), ("%-m/%-d %-H:%M %Z", "UTC")],
 )
 
+stat.register("alsa", format=" {volume}%", format_muted=" M", on_leftclick=["mate-volume-control"])
+
 stat.register(
     "battery",
     interval=11,
