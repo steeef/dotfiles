@@ -106,7 +106,7 @@ function config()
     hs.application.launchOrFocus('Google Play Music Desktop Player')
   end)
   hs.hotkey.bind(hyper, "u", function()
-    hs.application.launchOrFocus('1Password 6')
+    hs.application.launchOrFocus('1Password 7')
   end)
 
   -- media keys
