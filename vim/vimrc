@@ -62,6 +62,7 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-obsession'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
   Plug '/usr/local/opt/fzf'
