@@ -56,7 +56,7 @@ client.background       $base07
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -165,7 +165,7 @@ bindsym $mod+Mod4+c exec "rofi -modi 'clipboard:greenclip print' -show clipboard
 
 # Program switching hotkeys
 bindsym Mod3+j exec jumpapp google-chrome-beta
-bindsym Mod3+i exec jumpapp mate-terminal
+bindsym Mod3+i exec jumpapp urxvt
 bindsym Mod3+0 exec light-locker-command -l
 
 # Startup commands
