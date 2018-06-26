@@ -33,7 +33,7 @@ fi
 unsetopt correct_all
 
 # environment variables ------------------------------------
-export EDITOR='nvim'
+export EDITOR='vim'
 export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export COMMAND_MODE=unix2003
 
