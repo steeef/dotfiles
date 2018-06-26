@@ -694,7 +694,7 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>2189 144 606 469 1920 0 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>577 578 796 473 0 0 1920 1058 </string>
+	<string>2664 435 796 473 1920 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>1920 0 1920 1080 1920 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
@@ -934,7 +934,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>120</integer>
+			<integer>200</integer>
 			<key>Command</key>
 			<string>tmux -CC</string>
 			<key>Cursor Color</key>
@@ -1002,7 +1002,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string></string>
+			<string>tmux attach -t main || tmux new -s main</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -1323,7 +1323,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>2</integer>
 			<key>Rows</key>
-			<integer>50</integer>
+			<integer>75</integer>
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
@@ -1395,6 +1395,10 @@
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>511743543.09677899</real>
 	<key>OnlyWhenMoreTabs</key>
+	<false/>
+	<key>OpenArrangementAtStartup</key>
+	<false/>
+	<key>OpenNoWindowsAtStartup</key>
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
