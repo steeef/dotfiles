@@ -16,9 +16,9 @@ VIMREPO=https://github.com/vim/vim.git
 DOWNLOADDIR=$HOME/code/vim
 
 if [ "$(uname)" = "Darwin" ]; then
-  EXTRA_ARGS="--with-python3-config-dir=/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/lib/python3.6/config-3.6m-darwin --with-python3-command=/usr/local/bin/python3"
-else
-  EXTRA_ARGS=""
+  EXTRA_ARGS="--with-python3-config-dir=$(locate python.o \
+    | grep '/usr/local/Cellar/python/3.6' | xargs dirname) \
+    --with-python3-command=/usr/local/bin/python3"
 fi
 
 command -v git >/dev/null 2>&1 || { echo >&2 "git not installed."; exit 1; }
