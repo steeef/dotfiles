@@ -53,6 +53,8 @@ if exists(":PlugInstall")
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-jedi'
   endif
+  " tmux
+  Plug 'christoomey/vim-tmux-navigator'
   Plug 'roman/golden-ratio'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
@@ -627,65 +629,6 @@ else
   nnoremap <C-k> <C-w>k
   nnoremap <C-l> <C-w>l
   nnoremap <C-\> <C-w><C-p>
-endif
-
-"}}}
-
-" terminal ------------------------------------------------------------------- "{{{
-
-if exists(":terminal")
-  " huge scrollback buffer
-  let g:terminal_scrollback_buffer_size = 100000
-  if has("nvim")
-    set scrollback=100000
-  endif
-
-  " colors
-  if !has("nvim")
-    " set colors for status line since Base 16 doesn't support them yet.
-    call Base16hi("StatusLineTerm", g:base16_gui0B, g:base16_gui02, g:base16_cterm0B, g:base16_cterm02, "none", "")
-    call Base16hi("StatusLineTermNC", g:base16_gui0B, g:base16_gui01, g:base16_cterm0B, g:base16_cterm01, "none", "")
-  endif
-
-  " open new vertical window for terminal and switch to it
-  if has("nvim")
-    nnoremap <leader>t :vnew<CR>:terminal<CR>
-  else
-    nnoremap <leader>t :vert term<CR>
-  endif
-
-  if has("nvim")
-    " Start in insert mode
-    autocmd BufWinEnter,WinEnter term://* startinsert
-    " Leave in normal mode
-    autocmd BufLeave term://* stopinsert
-    " disable line numbers
-    autocmd TermOpen * setlocal nonumber norelativenumber
-  endif
-
-  " Easier motion between buffers
-  if has("nvim")
-    tnoremap <C-Space> <C-\><C-n>
-    tmap <C-j> <C-Space><C-j>
-    tmap <C-h> <C-Space><C-h>
-    tmap <C-l> <C-Space><C-l>
-    tmap <C-k> <C-Space><C-k>
-  else
-    tnoremap <C-n> <C-w>N
-    tmap <C-j> <C-w><C-j>
-    tmap <C-h> <C-w><C-h>
-    tmap <C-l> <C-w><C-l>
-    tmap <C-k> <C-w><C-k>
-  endif
-
- " make vim behave a bit more like a terminal
-  noremap <C-d> :q<CR>
-
- " neovim-remote
-  " https://github.com/mhinz/neovim-remote
-  if executable("nvr")
-    let $VISUAL = 'nvr -cc split --remote-wait'
-  endif
 endif
 
 "}}}
