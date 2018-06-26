@@ -42,6 +42,9 @@ xmodmap -e "add control = Control_L Control_R"
 # no beeping!
 xset b off
 
+# mute all sound
+amixer sset Master mute &
+
 # powersaving
 xbacklight -set 30
 xset +dpms

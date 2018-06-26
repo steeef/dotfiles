@@ -149,6 +149,23 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# System menu
+set $sysmenu "system:  [s]uspend [l]ock [r]eload re[b]oot [p]oweroff [c]onf [e]xit"
+bindsym $mod+q mode $sysmenu
+mode $sysmenu {
+    bindsym s exec systemctl suspend; mode "default"
+    bindsym l exec light-locker-command -l; mode "default"
+    # restart i3 inplace (preserves your layout/session)
+    bindsym r restart
+    bindsym b exec systemctl reboot
+    bindsym p exec systemctl shutdown
+    bindsym c exec i3-sensible-terminal -e vim .i3/config; mode "default"
+    bindsym e exit
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+q mode "default"
+}
+
 # multimedia keys
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
