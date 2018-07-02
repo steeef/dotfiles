@@ -187,6 +187,5 @@ bindsym Mod3+0 exec light-locker-command -l
 
 # Startup commands
 exec PYENV_VERSION=system blueman-applet
-exec redshift-gtk
 exec dropbox
 exec nm-applet

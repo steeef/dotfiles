@@ -50,3 +50,4 @@ xbacklight -set 30
 xset +dpms
 xset dpms 1200 0 0
 xautolock -time 21 -locker "${HOME}/.bin/lock_or_sleep.sh" &
+redshift &
