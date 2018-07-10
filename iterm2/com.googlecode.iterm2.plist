@@ -686,7 +686,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1288 408 445 77 0 0 1920 1058 </string>
+	<string>1288 274 445 77 0 0 1920 1058 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>760 697 400 129 0 0 1920 1058 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -694,9 +694,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>2189 144 606 469 1920 0 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2664 435 796 473 1920 0 1920 1080 </string>
+	<string>585 446 796 473 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1920 0 1920 1080 1920 0 1920 1080 </string>
+	<string>0 0 1680 1028 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1920 364 730 704 1920 0 1920 1080 </string>
 	<key>NeverWarnAboutShortLivedSessions_C2F20648-6DD5-4E7C-AA3E-4B9A29CBE325</key>
@@ -1446,7 +1446,7 @@
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
@@ -1454,7 +1454,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-06-26T16:05:29Z</date>
+	<date>2018-07-10T22:06:28Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
@@ -1468,6 +1468,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.6</string>
+	<string>3.1.7</string>
 </dict>
 </plist>
