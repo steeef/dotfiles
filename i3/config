@@ -158,7 +158,7 @@ mode $sysmenu {
     # restart i3 inplace (preserves your layout/session)
     bindsym r restart
     bindsym b exec systemctl reboot
-    bindsym p exec systemctl shutdown
+    bindsym p exec systemctl poweroff
     bindsym c exec i3-sensible-terminal -e vim .i3/config; mode "default"
     bindsym e exit
     bindsym Return mode "default"
