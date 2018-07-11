@@ -11,9 +11,9 @@
 
 PYTHON_VERSIONS=(
   2.7.14
-  3.6.5
+  3.7.0
 )
-PYTHON_DEFAULT=3.6.5
+PYTHON_DEFAULT=3.7.0
 PYTHON_MODULES=(
   flake8
   ipython
