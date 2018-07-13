@@ -65,8 +65,15 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-obsession'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
-  Plug '/usr/local/opt/fzf'
+
+  " fzf plugin
+  if filereadable(my_home . '/.fzf/plugin/fzf.vim')
+    Plug '~/.fzf'
+  elseif filereadable('/usr/local/opt/fzf/plugin/fzf.vim')
+    Plug '/usr/local/opt/fzf'
+  endif
   Plug 'junegunn/fzf.vim'
+
   Plug 'junegunn/vim-easy-align'
   Plug 'airblade/vim-gitgutter'
   Plug 'mtth/scratch.vim',       { 'on': 'Scratch' }
