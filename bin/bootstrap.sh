@@ -122,16 +122,10 @@ else
 fi
 
 # pyenv and rbenv setup
-for file in "${HOME}/.zshrc_local" "${HOME}/.bashrc_local"; do
-  for bin in "pyenv init -" "rbenv init -" "pyenv virtualenv-init -"; do
-    grep -q "${bin}" "${file}" \
-      || echo 'eval "$('${bin}')"' >> "${file}"
-  done
-done
 if [ "$(basename "${SHELL}")" = "zsh" ]; then
-  source "${HOME}/.zshrc_local"
+  source "${HOME}/.zshrc"
 elif [ "$(basename "${SHELL}")" = "bash" ]; then
-  source "${HOME}/.bashrc_local"
+  source "${HOME}/.bashrc"
 fi
 
 # Install python versions and setup for Neovim

@@ -46,8 +46,8 @@ alias l='ls -G'
 # huffshell suggestions
 alias s='ssh'
 compdef s=ssh
-alias v='nvim'
-compdef v=nvim
+alias v='vim'
+compdef v=vim
 alias tm='tmux'
 compdef tm=tmux
 
