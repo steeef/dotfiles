@@ -47,4 +47,6 @@ stat.register(
 
 stat.register("shell", command="~/.i3/status_scripts/update-stat.sh", interval=120)
 
+stat.register("cpu_usage", format=" {usage:02}%")
+
 stat.run()
