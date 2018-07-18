@@ -65,6 +65,7 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-obsession'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'tpope/vim-commentary', { 'on': '<Plug>Commentary' }
+  Plug 'jreybert/vimagit'
 
   " fzf plugin
   if filereadable(my_home . '/.fzf/plugin/fzf.vim')
