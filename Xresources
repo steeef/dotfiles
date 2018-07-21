@@ -62,8 +62,8 @@ URxvt*shading:	10
 URxvt*transparent:	true
 URxvt.depth:	32
 URxvt.fading:	30
-URxvt.font: xft:xos4 Terminus:size=10:antialias=false
-URxvt.boldFont: xft:xos4 Terminus:size=10:antialias=false
+URxvt.font: xft:xos4 Terminus:size=6:antialias=false
+URxvt.boldFont: xft:xos4 Terminus:size=6:antialias=false
 !URxvt.letterSpace:	-1
 URxvt.matcher.button:	1
 URxvt.perl-ext-common:	default,matcher,clipboard-osc,selection-to-clipboard
@@ -73,3 +73,5 @@ URxvt.keysym.Mod4-c:	perl:clipboard:copy
 URxvt.keysym.Mod4-v:	perl:clipboard:paste
 URxvt.url-select.launcher:	firefox
 URxvt.url-select.underline:	true
+
+Xft.dpi:	158

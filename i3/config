@@ -1,6 +1,6 @@
 set $mod Mod1
 
-font pango:Liberation Mono,FontAwesome 10
+font pango:Liberation Mono,FontAwesome 6
 
 # base 16 tomorrow night
 set $base00 #1d1f21
