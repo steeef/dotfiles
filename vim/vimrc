@@ -41,7 +41,7 @@ if exists(":PlugInstall")
   if !has('nvim')
     " plugins for vanilla Vim
     Plug 'vim-scripts/IndexedSearch'
-    "Plug 'ConradIrwin/vim-bracketed-paste'
+    Plug 'ConradIrwin/vim-bracketed-paste'
     if has("python3")
       Plug 'Shougo/deoplete.nvim'
       Plug 'roxma/nvim-yarp'
