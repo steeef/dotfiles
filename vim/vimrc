@@ -42,19 +42,21 @@ if exists(":PlugInstall")
     " plugins for vanilla Vim
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
-    if has("python3")
-      Plug 'Shougo/deoplete.nvim'
-      Plug 'roxma/nvim-yarp'
-      Plug 'roxma/vim-hug-neovim-rpc'
-      Plug 'zchee/deoplete-jedi'
-    endif
-  else
-    " plugins for Neovim
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'zchee/deoplete-jedi'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
   endif
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+  endif
+  Plug 'zchee/deoplete-jedi'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+
   " tmux
   Plug 'christoomey/vim-tmux-navigator'
+
   Plug 'roman/golden-ratio'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
@@ -660,16 +662,22 @@ let g:terraform_align = 1
 autocmd FileType terraform setlocal commentstring=#%s
 
 "}}}
-"
+
 " vim-go ----------------------------------------------------------------------"{{{
 
 let g:go_fmt_autosave = 1
 
 "}}}
-"
+
 " vim-black -------------------------------------------------------------------"{{{
 
 let g:black_linelength = 120
+
+"}}}
+
+" ultisnips and deoplete  -----------------------------------------------------"{{{
+
+call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 "}}}
 
