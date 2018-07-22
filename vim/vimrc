@@ -679,6 +679,9 @@ let g:black_linelength = 120
 
 call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 
+" include custom snippets
+let g:UltiSnipsSnippetDirectories = ['~/.vim/snippets', 'UltiSnips']
+
 "}}}
 
 "}}}
