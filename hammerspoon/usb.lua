@@ -1,10 +1,3 @@
--- Switch between Karabiner-Elements profiles by keyboard
-
-function switchKarabinerElementsProfile(name)
-  hs.execute("~/.bin/karabiner_cli --select-profile " .. name)
-  hs.notify.show("ErgoDox", "Switching to profile", name)
-end
-
 -- from https://gist.github.com/ojkelly/45dda0a5a7066c6a79a038ece8bde55a
 local usbWatcher = nil
 
@@ -21,8 +14,7 @@ function usbDeviceCallback(data)
       -- os.execute("~/.bin/fix-gpg")
     elseif (data["eventType"] == "removed") then
       hs.timer.doAfter(1, function()
-        hs.application.launchOrFocus('/System/Library/Frameworks/' ..
-        'ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app')
+        os.execute(os.getenv("HOME") .. '/.bin/maclock -q')
       end)
     end
   end
