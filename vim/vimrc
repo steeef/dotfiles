@@ -61,7 +61,6 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
-  Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-obsession'
@@ -649,9 +648,9 @@ nnoremap gs :Scratch<Enter>
 
 "}}}
 
-" fugitive --------------------------------------------------------------------"{{{
+" git -------------------------------------------------------------------------"{{{
 
-nnoremap <leader>g :Gstatus<Enter>
+nnoremap <leader>g :Magit<Enter>
 
 "}}}
 "
