@@ -42,15 +42,7 @@ if exists(":PlugInstall")
     " plugins for vanilla Vim
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
   endif
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-  endif
-  Plug 'zchee/deoplete-jedi'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 
@@ -600,10 +592,6 @@ let g:ale_python_flake8_options = '--max-line-length=120'
 let g:ale_python_flake8_use_global = 1
 "}}}
 
-" deoplete --------------------------------------------------------------------"{{{
-let g:deoplete#enable_at_startup = 1
-"}}}
-
 " tmux-navigator --------------------------------------------------------------"{{{
 " If tmux-navigator is loaded
 if exists(":TmuxNavigateLeft")
@@ -675,9 +663,7 @@ let g:black_linelength = 120
 
 "}}}
 
-" ultisnips and deoplete  -----------------------------------------------------"{{{
-
-call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+" ultisnips -------------------------------------------------------------------"{{{
 
 " include custom snippets
 let g:UltiSnipsSnippetDirectories = ['~/.vim/snippets', 'UltiSnips']
