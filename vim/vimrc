@@ -45,8 +45,8 @@ if exists(":PlugInstall")
   endif
 
   " snippets
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
+"  Plug 'SirVer/ultisnips'
+"  Plug 'honza/vim-snippets'
 
   " tmux
   Plug 'christoomey/vim-tmux-navigator'
@@ -54,9 +54,10 @@ if exists(":PlugInstall")
   " autocomplete
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/vim-lsp' { 'for': 'python' }
+  Plug 'prabirshrestha/asyncomplete-lsp.vim' { 'for': 'python' }
   Plug 'prabirshrestha/asyncomplete-file.vim'
+  Plug 'yami-beta/asyncomplete-omni.vim'
 
   Plug 'roman/golden-ratio'
   Plug 'tpope/vim-surround'
@@ -668,6 +669,19 @@ let g:go_fmt_autosave = 1
 
 " asyncomplete ----------------------------------------------------------------"{{{
 
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_auto_popup = 1
+let g:lsp_async_completion = 1
+set completeopt=menuone,menu,longest,preview
+au CompleteDone,CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+" Use tab
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+imap <C-Space> <Plug>(asyncomplete_force_refresh)
+
+" file
 try
   au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
       \ 'name': 'file',
@@ -677,13 +691,26 @@ try
       \ }))
 endtry
 
+" omni
+try
+  call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+\ 'name': 'omni',
+\ 'whitelist': ['*'],
+\ 'blacklist': ['c', 'cpp', 'html'],
+\ 'completor': function('asyncomplete#sources#omni#completor')
+\  }))
+endtry
+
+" python
 if executable('pyls')
-  " pip install python-language-server
-  au User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': {server_info->['pyls']},
-      \ 'whitelist': ['python'],
-      \ })
+  try
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+  endtry
 endif
 
 "}}}
