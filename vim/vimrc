@@ -43,11 +43,20 @@ if exists(":PlugInstall")
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
   endif
+
+  " snippets
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
 
   " tmux
   Plug 'christoomey/vim-tmux-navigator'
+
+  " autocomplete
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/asyncomplete-file.vim'
 
   Plug 'roman/golden-ratio'
   Plug 'tpope/vim-surround'
@@ -660,6 +669,28 @@ let g:go_fmt_autosave = 1
 " vim-black -------------------------------------------------------------------"{{{
 
 let g:black_linelength = 120
+
+"}}}
+
+" asyncomplete ----------------------------------------------------------------"{{{
+
+try
+  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'whitelist': ['*'],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#file#completor')
+      \ }))
+endtry
+
+if executable('pyls')
+  " pip install python-language-server
+  au User lsp_setup call lsp#register_server({
+      \ 'name': 'pyls',
+      \ 'cmd': {server_info->['pyls']},
+      \ 'whitelist': ['python'],
+      \ })
+endif
 
 "}}}
 
