@@ -54,10 +54,11 @@ if exists(":PlugInstall")
   " autocomplete
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/vim-lsp' { 'for': 'python' }
-  Plug 'prabirshrestha/asyncomplete-lsp.vim' { 'for': 'python' }
+  Plug 'prabirshrestha/vim-lsp', { 'for': 'python' }
+  Plug 'prabirshrestha/asyncomplete-lsp.vim', { 'for': 'python' }
   Plug 'prabirshrestha/asyncomplete-file.vim'
   Plug 'yami-beta/asyncomplete-omni.vim'
+  Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
   Plug 'roman/golden-ratio'
   Plug 'tpope/vim-surround'
@@ -676,9 +677,9 @@ set completeopt=menuone,menu,longest,preview
 au CompleteDone,CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 " Use tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 imap <C-Space> <Plug>(asyncomplete_force_refresh)
 
 " file
@@ -699,6 +700,16 @@ try
 \ 'blacklist': ['c', 'cpp', 'html'],
 \ 'completor': function('asyncomplete#sources#omni#completor')
 \  }))
+endtry
+
+" buffer
+try
+  call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'whitelist': ['*'],
+    \ 'blacklist': ['go'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
 endtry
 
 " python
