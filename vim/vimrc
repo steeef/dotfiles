@@ -110,7 +110,6 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
   Plug 'hashivim/vim-terraform',   { 'for': 'terraform' }
   Plug 'fatih/vim-go',             { 'for': 'go' }
-  Plug 'ambv/black',               { 'for': 'python' }
 endif
 
 "}}}
@@ -410,7 +409,6 @@ if has("autocmd")
     autocmd!
 
     autocmd FileType python setlocal colorcolumn=120
-    autocmd BufWritePost *.py execute ':Black'
   augroup END
 
   " vim, vim helpfiles
@@ -599,6 +597,8 @@ let g:LatexBox_viewer = "open -a Skim"
 let g:ale_python_pylint_options = '--max-line-length=120'
 let g:ale_python_flake8_options = '--max-line-length=120'
 let g:ale_python_flake8_use_global = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {'python': ['black', 'isort']}
 "}}}
 
 " tmux-navigator --------------------------------------------------------------"{{{
@@ -646,9 +646,9 @@ nnoremap gs :Scratch<Enter>
 
 "}}}
 
-" fugitive --------------------------------------------------------------------"{{{
+" vimagit ---------------------------------------------------------------------"{{{
 
-nnoremap <leader>g :Gstatus<Enter>
+nnoremap <leader>g :Magit<Enter>
 
 "}}}
 "
@@ -663,12 +663,6 @@ autocmd FileType terraform setlocal commentstring=#%s
 " vim-go ----------------------------------------------------------------------"{{{
 
 let g:go_fmt_autosave = 1
-
-"}}}
-
-" vim-black -------------------------------------------------------------------"{{{
-
-let g:black_linelength = 120
 
 "}}}
 
