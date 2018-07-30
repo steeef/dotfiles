@@ -42,20 +42,23 @@ if exists(":PlugInstall")
     " plugins for vanilla Vim
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
   endif
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-  endif
-  Plug 'zchee/deoplete-jedi'
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
+
+  " snippets
+"  Plug 'SirVer/ultisnips'
+"  Plug 'honza/vim-snippets'
 
   " tmux
   Plug 'christoomey/vim-tmux-navigator'
+
+  " autocomplete
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp', { 'for': 'python' }
+  Plug 'prabirshrestha/asyncomplete-lsp.vim', { 'for': 'python' }
+  Plug 'prabirshrestha/asyncomplete-file.vim'
+  Plug 'yami-beta/asyncomplete-omni.vim'
+  Plug 'prabirshrestha/asyncomplete-buffer.vim'
 
   Plug 'roman/golden-ratio'
   Plug 'tpope/vim-surround'
@@ -108,7 +111,6 @@ if exists(":PlugInstall")
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
   Plug 'hashivim/vim-terraform',   { 'for': 'terraform' }
   Plug 'fatih/vim-go',             { 'for': 'go' }
-  Plug 'ambv/black',               { 'for': 'python' }
 endif
 
 "}}}
@@ -408,7 +410,6 @@ if has("autocmd")
     autocmd!
 
     autocmd FileType python setlocal colorcolumn=120
-    autocmd BufWritePost *.py execute ':Black'
   augroup END
 
   " vim, vim helpfiles
@@ -597,10 +598,8 @@ let g:LatexBox_viewer = "open -a Skim"
 let g:ale_python_pylint_options = '--max-line-length=120'
 let g:ale_python_flake8_options = '--max-line-length=120'
 let g:ale_python_flake8_use_global = 1
-"}}}
-
-" deoplete --------------------------------------------------------------------"{{{
-let g:deoplete#enable_at_startup = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {'python': ['black', 'isort']}
 "}}}
 
 " tmux-navigator --------------------------------------------------------------"{{{
@@ -668,15 +667,65 @@ let g:go_fmt_autosave = 1
 
 "}}}
 
-" vim-black -------------------------------------------------------------------"{{{
+" asyncomplete ----------------------------------------------------------------"{{{
 
-let g:black_linelength = 120
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_auto_popup = 1
+let g:lsp_async_completion = 1
+set completeopt=menuone,menu,longest,preview
+au CompleteDone,CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+" Use tab
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+imap <C-Space> <Plug>(asyncomplete_force_refresh)
+
+" file
+try
+  au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'whitelist': ['*'],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#file#completor')
+      \ }))
+endtry
+
+" omni
+try
+  call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+\ 'name': 'omni',
+\ 'whitelist': ['*'],
+\ 'blacklist': ['c', 'cpp', 'html'],
+\ 'completor': function('asyncomplete#sources#omni#completor')
+\  }))
+endtry
+
+" buffer
+try
+  call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'whitelist': ['*'],
+    \ 'blacklist': ['go'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
+endtry
+
+" python
+if executable('pyls')
+  try
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+  endtry
+endif
 
 "}}}
 
-" ultisnips and deoplete  -----------------------------------------------------"{{{
-
-call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+" ultisnips -------------------------------------------------------------------"{{{
 
 " include custom snippets
 let g:UltiSnipsSnippetDirectories = ['~/.vim/snippets', 'UltiSnips']
