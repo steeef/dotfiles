@@ -597,6 +597,7 @@ let g:LatexBox_viewer = "open -a Skim"
 " ale -------------------------------------------------------------------------"{{{
 let g:ale_python_pylint_options = '--max-line-length=120'
 let g:ale_python_flake8_options = '--max-line-length=120'
+let g:ale_python_black_options = '--line-length=120'
 let g:ale_python_flake8_use_global = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {'python': ['black', 'isort']}
@@ -672,6 +673,8 @@ let g:go_fmt_autosave = 1
 let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_auto_popup = 1
 let g:lsp_async_completion = 1
+let g:asyncomplete_min_chars = 3
+
 set completeopt=menuone,menu,longest,preview
 au CompleteDone,CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
@@ -706,7 +709,7 @@ try
   call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
     \ 'name': 'buffer',
     \ 'whitelist': ['*'],
-    \ 'blacklist': ['go'],
+    \ 'blacklist': ['go','magit'],
     \ 'completor': function('asyncomplete#sources#buffer#completor'),
     \ }))
 endtry
