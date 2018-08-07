@@ -54,8 +54,9 @@ if exists(":PlugInstall")
   " autocomplete
   Plug 'prabirshrestha/asyncomplete.vim'
   Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/vim-lsp', { 'for': 'python' }
-  Plug 'prabirshrestha/asyncomplete-lsp.vim', { 'for': 'python' }
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'ryanolsonx/vim-lsp-python', { 'for': 'python' }
   Plug 'prabirshrestha/asyncomplete-file.vim'
   Plug 'yami-beta/asyncomplete-omni.vim'
   Plug 'prabirshrestha/asyncomplete-buffer.vim'
@@ -676,7 +677,7 @@ let g:lsp_async_completion = 1
 let g:asyncomplete_min_chars = 3
 
 set completeopt=menuone,menu,longest,preview
-au CompleteDone,CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+au CompleteDone * if pumvisible() == 0|silent! pclose|endif
 
 " Use tab
 "inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -709,22 +710,10 @@ try
   call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
     \ 'name': 'buffer',
     \ 'whitelist': ['*'],
-    \ 'blacklist': ['go','magit'],
+    \ 'blacklist': ['go','magit','markdown'],
     \ 'completor': function('asyncomplete#sources#buffer#completor'),
     \ }))
 endtry
-
-" python
-if executable('pyls')
-  try
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-  endtry
-endif
 
 "}}}
 
