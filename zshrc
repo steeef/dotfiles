@@ -172,6 +172,8 @@ if command -v fasd >/dev/null 2>&1; then
 fi
 
 # fzf -----------------------------------------------------------------------
+# fzf in tmux pane
+[ -n "$TMUX" ] && export FZF_TMUX=1
 [[ -s $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
 # fix CTRL-R within Neovim terminal
