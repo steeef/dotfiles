@@ -53,6 +53,7 @@ if exists(":PlugInstall")
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+  Plug 'juliosueiras/vim-terraform-completion', { 'for': 'terraform' }
 
   " snippets
 "  Plug 'SirVer/ultisnips'
@@ -671,6 +672,9 @@ let g:go_fmt_autosave = 1
 
 " deoplete --------------------------------------------------------------------"{{{
 
+let g:terraform_completion_keys = 1
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 let g:deoplete#enable_at_startup = 1
 
 "}}}
