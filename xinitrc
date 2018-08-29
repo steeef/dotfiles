@@ -15,6 +15,8 @@ export SSH_AUTH_SOCK
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
+xrandr --dpi 158
+
 # lock
 light-locker --lock-after-screensaver 5 --lock-on-lid --lock-on-suspend &
 

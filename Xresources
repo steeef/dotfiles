@@ -75,3 +75,4 @@ URxvt.url-select.launcher:	firefox
 URxvt.url-select.underline:	true
 
 Xft.dpi:	158
+Xcursor.size:	16

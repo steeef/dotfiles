@@ -1,6 +1,6 @@
 from i3pystatus import Status
 
-stat = Status(standalone=True, logfile="/home/sprice/i3status.log")
+stat = Status(standalone=True)
 
 
 cal_cmd = "notify-send 'Calendar' \"<tt>$(cal)</tt>\""
