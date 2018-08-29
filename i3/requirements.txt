@@ -1,0 +1,6 @@
+i3pystatus
+basiciw
+colour
+pyalsaaudio
+pytz
+netifaces
