@@ -25,7 +25,7 @@ bar {
     mode dock
     modifier none
 
-    status_command python ~/.i3/status.py
+    status_command ~/.i3/status.sh
 
     separator_symbol " "
     tray_output primary
