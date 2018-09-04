@@ -43,34 +43,6 @@ function config()
     end)
   end)
 
-  -- window management
-  hs.hotkey.bind(hyper, "right", function()
-    local win = hs.window.focusedWindow()
-    win:right()
-  end)
-
-  hs.hotkey.bind(hyper, "left", function()
-    local win = hs.window.focusedWindow()
-    win:left()
-  end)
-
-  hs.hotkey.bind(hyper, "up", function()
-    local win = hs.window.focusedWindow()
-    win:up()
-  end)
-
-  hs.hotkey.bind(hyper, "down", function()
-    local win = hs.window.focusedWindow()
-    win:down()
-  end)
-
-  hs.hotkey.bind(hyper, "2", function()
-    local win = hs.window.focusedWindow()
-    hs.grid.maximizeWindow(win)
-  end)
-
-  hs.hotkey.bind(hyper, "1", hs.grid.pushWindowNextScreen)
-
   -- Applications
   hs.hotkey.bind(hyper, "f", function()
     hs.application.launchOrFocus('Finder')
@@ -139,74 +111,6 @@ function config()
   hs.hotkey.bind(hyper, "x", function()
     typeKeychainEntry('QS_2_creds', 'password')
   end)
-end
-
-  -- Pass
-
---------------------------------------------------------------------------------
--- window layout stuff
---------------------------------------------------------------------------------
-
--- get the frame size of the current screen. If it's not the primary screen, it
--- shouldn't have a menu bar, so don't include it in the sizing.
-function hs.screen.getMax(screen)
-  local max
-  if screen:id() == hs.screen.primaryScreen():id() then
-    max = screen:frame()
-  else
-    max = screen:fullFrame()
-  end
-  return max
-end
-
--- +-----------------+
--- |        |        |
--- |        |  HERE  |
--- |        |        |
--- +-----------------+
-function hs.window.right(win)
-  local f = hs.screen.getMax(win:screen())
-
-  f.x = f.x + (f.w / 2)
-  f.w = f.w / 2
-  win:setFrame(f)
-end
-
--- +-----------------+
--- |        |        |
--- |  HERE  |        |
--- |        |        |
--- +-----------------+
-function hs.window.left(win)
-  local f = hs.screen.getMax(win:screen())
-
-  f.w = f.w / 2
-  win:setFrame(f)
-end
-
--- +-----------------+
--- |      HERE       |
--- +-----------------+
--- |                 |
--- +-----------------+
-function hs.window.up(win)
-  local f = hs.screen.getMax(win:screen())
-
-  f.h = f.h / 2
-  win:setFrame(f)
-end
-
--- +-----------------+
--- |                 |
--- +-----------------+
--- |      HERE       |
--- +-----------------+
-function hs.window.down(win)
-  local f = hs.screen.getMax(win:screen())
-
-  f.y = f.y + (f.h / 2)
-  f.h = f.h / 2
-  win:setFrame(f)
 end
 
 function applicationWatcher(appName, eventType, appObject)
