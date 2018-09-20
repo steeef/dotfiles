@@ -53,11 +53,10 @@ if exists(":PlugInstall")
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-  Plug 'juliosueiras/vim-terraform-completion', { 'for': 'terraform' }
 
   " snippets
-"  Plug 'SirVer/ultisnips'
-"  Plug 'honza/vim-snippets'
+  "  Plug 'SirVer/ultisnips'
+  "  Plug 'honza/vim-snippets'
 
   " tmux
   Plug 'christoomey/vim-tmux-navigator'
@@ -597,6 +596,7 @@ let g:LatexBox_viewer = "open -a Skim"
 "}}}
 
 " ale -------------------------------------------------------------------------"{{{
+let g:ale_lint_on_text_changed = 'normal'
 let g:ale_python_pylint_options = '--max-line-length=120'
 let g:ale_python_flake8_options = '--max-line-length=120'
 let g:ale_python_black_options = '--line-length=120'
