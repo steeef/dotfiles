@@ -3,6 +3,7 @@
     "editor.minimap.enabled": true,
     "editor.lineNumbers": "relative",
     "editor.rulers": [80],
+    "editor.wordWrap": "on",
     "[python]": {
         "editor.rulers": [120]
     },
@@ -12,10 +13,14 @@
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
     "python.linting.flake8Args": ["--max-line-length=120"],
-    "vim.otherModesKeyBindingsNonRecursive": [
+    "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [";"],
             "after": [":"]
+        },
+        {
+            "before": [":"],
+            "after": [";"]
         }
     ],
     "workbench.welcome.enabled": false,
