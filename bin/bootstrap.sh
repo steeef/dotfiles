@@ -51,7 +51,9 @@ ensure_link "ackrc"              ".ackrc"
 ensure_link "bash"               ".bash"
 ensure_link "bashrc"             ".bashrc" "force"
 ensure_link "bin"                ".bin"
-ensure_link "code/settings.json" ".config/Code/User/settings.json"
+ensure_link "code/settings.json" "Library/Application Support/Code/User/settings.json"
+ensure_link "code/keybindings.json" "Library/Application Support/Code/User/keybindings.json"
+ensure_link "code/snippets" "Library/Application Support/Code/User/snippets"
 ensure_link "editorconfig"       ".editorconfig"
 ensure_link "fonts"              ".fonts"
 ensure_link "gemrc"              ".gemrc"
@@ -120,6 +122,9 @@ else
     git clone https://github.com/junegunn/fzf.git "${FZFDIR}"
   fi
   "${FZFDIR}/install" --key-bindings --completion --no-update-rc
+
+  # vscode extensions
+  ${HOME}/.bin/vscode-install-extensions.sh
 fi
 
 # pyenv and rbenv setup
