@@ -38,7 +38,7 @@ function ensure_link {
 
 mkdir -p "${HOME}/.config"
 mkdir -p "${HOME}/.config/nvim"
-mkdir -p "${HOME}/.config/Code/User"
+mkdir -p "${HOME}/Library/Application Support/Code/User"
 mkdir -p "${HOME}/code"
 mkdir -p "${HOME}/bin"
 mkdir -p "${HOME}/build"
