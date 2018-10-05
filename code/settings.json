@@ -2,6 +2,11 @@
     "editor.cursorStyle": "block",
     "editor.minimap.enabled": true,
     "editor.lineNumbers": "relative",
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
     "editor.rulers": [80],
     "editor.wordWrap": "on",
     "[python]": {
