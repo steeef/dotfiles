@@ -13,7 +13,11 @@
         "editor.rulers": [120]
     },
     "files.associations": {
-        "*.tmpl": "go"
+        "*.tmpl": "go",
+        "**/playbooks/**/*.yml": "ansible",
+        "**/playbooks/**/*.j2": "ansible",
+        "**/roles/**/*.yml": "ansible",
+        "**/roles/**/*.j2": "ansible"
     },
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": ["--line-length", "120"],
