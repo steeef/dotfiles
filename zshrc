@@ -34,7 +34,7 @@ unsetopt correct_all
 
 # environment variables ------------------------------------
 export EDITOR='vim'
-export PATH="${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
+export PATH="${HOME}/bin:${HOME}/.bin:${HOME}/.pyenv/bin:${HOME}/.rbenv/bin:${HOME}/.nodenv/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export COMMAND_MODE=unix2003
 
 # aliases --------------------------------------------------

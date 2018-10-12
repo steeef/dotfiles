@@ -10,7 +10,7 @@
 #
 
 PYTHON_VERSIONS=(
-  2.7.14
+  2.7.15
   3.7.0
 )
 PYTHON_DEFAULT=3.7.0
@@ -21,9 +21,9 @@ PYTHON_MODULES=(
   neovim-remote
 )
 RUBY_VERSIONS=(
-  2.4.2
+  2.5.1
 )
-RUBY_DEFAULT=2.4.2
+RUBY_DEFAULT=2.5.1
 RUBY_MODULES="neovim"
 
 function ensure_link {
