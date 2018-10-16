@@ -122,9 +122,11 @@ else
     git clone https://github.com/junegunn/fzf.git "${FZFDIR}"
   fi
   "${FZFDIR}/install" --key-bindings --completion --no-update-rc
+fi
 
-  # vscode extensions
-  ${HOME}/.bin/vscode-install-extensions.sh
+# vscode extensions
+if command -v code >/dev/null 2>&1; then
+  "${HOME}/.bin/vscode-install-extensions.sh"
 fi
 
 # pyenv and rbenv setup
