@@ -1,5 +1,6 @@
 {
     "editor.cursorStyle": "block",
+    "editor.formatOnSave": true,
     "editor.minimap.enabled": true,
     "editor.lineNumbers": "relative",
     "editor.quickSuggestions": {
@@ -25,6 +26,7 @@
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
     "python.linting.flake8Args": ["--max-line-length=120"],
+    "python.pythonPath": "~/.pyenv/versions/3.7.0/bin/python",
     "vim.leader": "<space>",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
