@@ -2,6 +2,7 @@
 REPO=https://github.com/zant95/hBlock.git
 DOWNLOADDIR=${HOME}/code/hblock
 HBLOCK=${HOME}/bin/hblock
+WHITELIST=".*\.amazonaws\.com"
 
 command -v git >/dev/null 2>&1 || { echo >&2 "git not installed."; exit 1; }
 
@@ -27,7 +28,7 @@ if [ "${UPDATED}" = "1" ]; then
   cp -f "${DOWNLOADDIR}/hblock" "${HBLOCK}"
   chmod +x ${HBLOCK}
 fi
-if ! sudo ${HBLOCK}; then
+if ! sudo ${HBLOCK} -W "${WHITELIST}"; then
   echo "ERROR running hblock"
   exit 1
 fi
