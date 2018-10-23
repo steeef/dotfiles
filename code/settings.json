@@ -8,10 +8,14 @@
         "comments": false,
         "strings": true
     },
-    "editor.rulers": [80],
+    "editor.rulers": [
+        80
+    ],
     "editor.wordWrap": "on",
     "[python]": {
-        "editor.rulers": [120]
+        "editor.rulers": [
+            120
+        ]
     },
     "files.associations": {
         "*.tmpl": "go",
@@ -21,30 +25,49 @@
         "**/roles/**/*.j2": "ansible"
     },
     "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["--line-length", "120"],
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "120"
+    ],
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "python.linting.flake8Args": ["--max-line-length=120"],
+    "python.linting.flake8Args": [
+        "--max-line-length=120"
+    ],
     "python.pythonPath": "~/.pyenv/versions/3.7.0/bin/python",
     "vim.leader": "<space>",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": [";"],
-            "after": [":"]
+            "before": [
+                ";"
+            ],
+            "after": [
+                ":"
+            ]
         },
         {
-            "before": [":"],
-            "after": [";"]
+            "before": [
+                ":"
+            ],
+            "after": [
+                ";"
+            ]
         },
         {
-            "before": ["<leader>", "<space>"],
+            "before": [
+                "<leader>",
+                "<space>"
+            ],
             "commands": [
                 "workbench.action.quickOpen"
             ]
         },
         {
-            "before": ["<leader>", "w"],
+            "before": [
+                "<leader>",
+                "w"
+            ],
             "commands": [
                 "workbench.action.splitEditorRight"
             ]
