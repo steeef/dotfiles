@@ -42,21 +42,11 @@ if exists(":PlugInstall")
     " plugins for vanilla Vim
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
+    if v:version >= 800 && (has ('python') || has ('python3'))
+      " autocomplete
+      Plug 'maralla/completor.vim'
+    endif
   endif
-
-  " deoplete: autocomplete
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
-  Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-
-  " snippets
-  "  Plug 'SirVer/ultisnips'
-  "  Plug 'honza/vim-snippets'
 
   " tmux
   Plug 'christoomey/vim-tmux-navigator'
