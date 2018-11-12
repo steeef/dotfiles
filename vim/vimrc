@@ -660,4 +660,10 @@ let g:go_fmt_autosave = 1
 
 "}}}
 
+" competor --------------------------------------------------------------------"{{{
+
+let g:completor_blacklist = ['tagbar', 'qf', 'netrw', 'unite', 'vimwiki', 'magit']
+
+"}}}
+
 "}}}
