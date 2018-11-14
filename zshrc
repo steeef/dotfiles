@@ -56,7 +56,7 @@ alias g='git'
 compdef g=git
 alias ga='git add'
 alias gl='git pull'
-alias gp='git push'
+alias gp='git publish'
 alias gd='git diff'
 alias gc='git commit'
 alias gcm='git commit -m'
@@ -68,21 +68,6 @@ alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias gsub="git submodule"
 alias gbpurge='git branch --merged | grep -Ev "(\*|master|feature|develop|staging)" | xargs -n 1 git branch -d'
-
-# hg
-alias hga='hg add'
-alias hgl='hg pull --rebase'
-alias hgr='hg rebase'
-alias hgp='hg push'
-alias hgd='hg diff'
-alias hgc='hg commit'
-alias hgcm='hg commit -m'
-alias hgs='hg status'
-alias hgu='hg update -C'
-compdef hgu=hg
-alias hgm='hg merge'
-alias hgb='hg branch'
-alias hgf='hg fetch'
 
 alias goto=". goto"
 
