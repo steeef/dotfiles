@@ -660,22 +660,9 @@ let g:go_fmt_autosave = 1
 
 "}}}
 
-" deoplete --------------------------------------------------------------------"{{{
+" competor --------------------------------------------------------------------"{{{
 
-let g:terraform_completion_keys = 1
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
-let g:deoplete#enable_at_startup = 1
-
-autocmd FileType magit
-       \ call deoplete#custom#buffer_option('auto_complete', v:false)
-
-"}}}
-
-" ultisnips -------------------------------------------------------------------"{{{
-
-" include custom snippets
-let g:UltiSnipsSnippetDirectories = ['~/.vim/snippets', 'UltiSnips']
+let g:completor_blacklist = ['tagbar', 'qf', 'netrw', 'unite', 'vimwiki', 'magit']
 
 "}}}
 
