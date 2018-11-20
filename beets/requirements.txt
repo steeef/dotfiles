@@ -1,4 +1,4 @@
-beets
+https://github.com/beetbox/beets/tarball/master
 beets[fetchart,lastgenre,lyrics]
 BeautifulSoup4
 discogs-client
