@@ -1,4 +1,3 @@
-directory: /mnt/user/Music
 import:
   write: yes
   move: no
@@ -82,3 +81,5 @@ fetchart:
 
 duplicates:
   checksum: no  # expensive
+
+include: credentials.yaml
