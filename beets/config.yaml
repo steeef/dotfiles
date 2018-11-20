@@ -82,4 +82,4 @@ fetchart:
 duplicates:
   checksum: no  # expensive
 
-include: credentials.yaml
+include: [credentials.yaml]
