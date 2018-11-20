@@ -1,0 +1,5 @@
+beets
+beets[fetchart,lastgenre,lyrics]
+BeautifulSoup4
+discogs-client
+requests
