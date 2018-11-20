@@ -1,10 +1,9 @@
-directory: /Volumes/music
-library: ~/Documents/beets.blb
+directory: /mnt/usr/Music
+library: ~/beets.blb
 import:
-  write: no
+  write: yes
   move: no
-  copy: no
-  autotag: no
+  copy: yes
 
 # files matching these patterns are deleted from source after import
 clutter: ["Thumbs.DB", ".DS_Store", "*.m3u", ".pls", "*.jpg"]
@@ -56,7 +55,7 @@ match:
 
 plugins: [
   discogs,
-  echonest,
+  acousticbrainz,
   lyrics,
   fetchart,
   embedart,
@@ -72,28 +71,15 @@ pluginpath: []
 # Plugins Config -------------------------------------------------------------
 
 lyrics:
-  auto: no
-  sources: musixmatch lyricwiki
+  auto: yes
 
 fetchart:
-  auto: no
-  cautious: yes
-  cover_names: cover folder
-  sources: itunes coverart amazon albumart
+  auto: yes
+  cautious: no
+  sources: filesystem coverart albumart itunes amazon *
+  minwidth: 500
+  maxwidth: 1500
+  enforce_ratio: yes
 
 duplicates:
   checksum: no  # expensive
-
-echonest:
-  upload: no
-
-convert:
-  format: car
-  formats:
-    car:
-      command: ffmpeg -i $source -y -codec:a libmp3lame -qscale:a 2 $dest
-      extension: mp3
-      dest: ~/Desktop/carmp3
-      max_bitrate: 256
-      paths: %asciify{$albumartist} - %asciify{$album}%aunique{}/$track %asciify{$title}
-
