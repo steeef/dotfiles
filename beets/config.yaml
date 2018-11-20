@@ -1,4 +1,4 @@
-directory: /mnt/usr/Music
+directory: /mnt/user/Music
 library: ~/beets.blb
 import:
   write: yes
