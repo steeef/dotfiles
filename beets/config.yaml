@@ -74,7 +74,7 @@ lyrics:
 fetchart:
   auto: yes
   cautious: no
-  sources: filesystem coverart albumart itunes amazon *
+  sources: filesystem coverart albumart itunes amazon google *
   minwidth: 500
   maxwidth: 1500
   enforce_ratio: yes
