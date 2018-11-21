@@ -1,5 +1,5 @@
-https://github.com/beetbox/beets/tarball/master
-beets[fetchart,lastgenre,lyrics]
-BeautifulSoup4
+beets
+beets[fetchart,lastgenre]
+beautifulsoup4
 discogs-client
 requests
