@@ -2,4 +2,5 @@ beets
 beets[fetchart,lastgenre]
 beautifulsoup4
 discogs-client
+pylast
 requests
