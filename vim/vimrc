@@ -52,6 +52,7 @@ if exists(":PlugInstall")
   Plug 'christoomey/vim-tmux-navigator'
 
   Plug 'roman/golden-ratio'
+  Plug 'spf13/vim-autoclose'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
