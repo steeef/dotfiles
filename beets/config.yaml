@@ -18,7 +18,7 @@ match:
   medium_rec_thresh: 0.25
   rec_gap_thresh: 0.25
   max_rec:
-    missing_tracks: medium
+    missing_tracks: strong
     unmatched_tracks: medium
   distance_weights:
     source: 2.0
