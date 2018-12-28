@@ -2,5 +2,5 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 while read -r p; do
-  code --install-extension "${p}"
+  code --install-extension --force "${p}"
 done < "${DIR}/../code/extensions"

@@ -11,19 +11,20 @@
 
 PYTHON_VERSIONS=(
   2.7.15
-  3.7.0
+  3.7.1
 )
-PYTHON_DEFAULT=3.7.0
+PYTHON_DEFAULT=3.7.1
 PYTHON_MODULES=(
   flake8
   ipython
   neovim
   neovim-remote
+  pip
 )
 RUBY_VERSIONS=(
-  2.5.1
+  2.5.3
 )
-RUBY_DEFAULT=2.5.1
+RUBY_DEFAULT=2.5.3
 RUBY_MODULES="neovim"
 
 function ensure_link {
@@ -37,6 +38,7 @@ function ensure_link {
 }
 
 mkdir -p "${HOME}/.config"
+mkdir -p "${HOME}/.config/beets"
 mkdir -p "${HOME}/.config/nvim"
 mkdir -p "${HOME}/.config/kitty"
 mkdir -p "${HOME}/Library/Application Support/Code/User"
@@ -132,22 +134,20 @@ if command -v code >/dev/null 2>&1; then
   "${HOME}/.bin/vscode-install-extensions.sh"
 fi
 
-# pyenv and rbenv setup
-if [ "$(basename "${SHELL}")" = "zsh" ]; then
-  source "${HOME}/.zshrc"
-elif [ "$(basename "${SHELL}")" = "bash" ]; then
-  source "${HOME}/.bashrc"
-fi
+eval "$(command pyenv init -)"
+eval "$(command pyenv virtualenv-init -)"
+eval "$(command rbenv init -)"
+eval "$(command nodenv init -)"
 
 # Install python versions and setup for Neovim
 for python in "${PYTHON_VERSIONS[@]}"; do
   (pyenv versions --bare --skip-aliases | grep -q '^'${python}'$') \
   || pyenv install "${python}"
   # install linter
-  (PYENV_VERSION="${python}" pip install ${PYTHON_MODULES})
+  (PYENV_VERSION="${python}" pip install --upgrade ${PYTHON_MODULES})
   venv="neovim$(echo "${python}" | cut -d'.' -f1)"
   pyenv virtualenv "${python}" "${venv}"
-  (pyenv activate "${venv}" && pip install neovim && pyenv deactivate)
+  (pyenv activate "${venv}" && pip install --upgrade pip neovim && pyenv deactivate)
   if [ "${venv}" = "neovim2" ]; then
     var="g:python_host_prog"
   elif [ "${venv}" = "neovim3" ]; then
