@@ -33,15 +33,16 @@ else
     git clone "${VIMREPO}" "${DOWNLOADDIR}"
     cd "${DOWNLOADDIR}"
 fi
-./configure \
-    --with-features=huge \
-    --enable-rubyinterp \
-    --disable-pythoninterp \
-    --enable-python3interp \
-    ${EXTRA_ARGS} \
-    --enable-cscope \
-    --prefix="${HOME}" \
-    --enable-fail-if-missing \
+/usr/bin/make distclean \
+  && ./configure \
+      --with-features=huge \
+      --enable-rubyinterp \
+      --disable-pythoninterp \
+      --enable-python3interp \
+      ${EXTRA_ARGS} \
+      --enable-cscope \
+      --prefix="${HOME}" \
+      --enable-fail-if-missing \
     && /usr/bin/make clean \
     && /usr/bin/make \
     && /usr/bin/make install
