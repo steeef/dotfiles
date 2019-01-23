@@ -11,15 +11,16 @@
 
 PYTHON_VERSIONS=(
   2.7.15
-  3.7.1
+  3.7.2
 )
-PYTHON_DEFAULT=3.7.1
+PYTHON_DEFAULT=3.7.2
 PYTHON_MODULES=(
+  pip
+  awscli
   flake8
   ipython
   neovim
   neovim-remote
-  pip
 )
 RUBY_VERSIONS=(
   2.5.3
