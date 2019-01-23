@@ -112,6 +112,11 @@ function sshboot() {
   fi
 }
 
+# lookup cheatsheets
+function cheat() {
+  curl cht.sh/$1
+}
+
 # colorscheme ---------------------------------------------------------
 # https://github.com/chriskempson/base16-shell
 BASE16_SCHEME="tomorrow-night"
