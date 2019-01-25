@@ -17,6 +17,7 @@ PYTHON_DEFAULT=3.7.2
 PYTHON_MODULES=(
   pip
   awscli
+  black
   flake8
   ipython
   neovim
@@ -92,7 +93,7 @@ if [ "$(uname)" = "Darwin" ]; then
   echo "INFO: Copying fonts."
   rsync -aW "${HOME}/.dotfiles/fonts/" ~/Library/Fonts/
   # install XCode Command Line Tools if not installed
-  if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
+  if ! xcode-select -p &> /dev/null; then
      echo "INFO: Installing XCode Command Line Tools"
      xcode-select --install
   fi
@@ -116,7 +117,7 @@ else
   FZFDIR="${HOME}/.fzf"
   if (cd "${FZFDIR}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
-      cd "${FZFDIR}"
+      cd "${FZFDIR}" || return
       git fetch
       if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
         git pull
@@ -142,10 +143,9 @@ eval "$(command nodenv init -)"
 
 # Install python versions and setup for Neovim
 for python in "${PYTHON_VERSIONS[@]}"; do
-  (pyenv versions --bare --skip-aliases | grep -q '^'${python}'$') \
+  (pyenv versions --bare --skip-aliases | grep -q "^${python}\$") \
   || pyenv install "${python}"
-  # install linter
-  (PYENV_VERSION="${python}" pip install --upgrade ${PYTHON_MODULES})
+  (PYENV_VERSION="${python}" pip install --upgrade "${PYTHON_MODULES[@]}")
   venv="neovim$(echo "${python}" | cut -d'.' -f1)"
   pyenv virtualenv "${python}" "${venv}"
   (pyenv activate "${venv}" && pip install --upgrade pip neovim && pyenv deactivate)
@@ -167,7 +167,7 @@ done
 
 # now ruby
 for ruby in "${RUBY_VERSIONS[@]}"; do
-  (rbenv versions --bare --skip-aliases | grep -q '^'${ruby}'$') \
+  (rbenv versions --bare --skip-aliases | grep -q "^${ruby}\$") \
   || rbenv install "${ruby}"
 done
 
