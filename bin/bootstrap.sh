@@ -17,6 +17,7 @@ PYTHON_DEFAULT=3.7.2
 PYTHON_MODULES=(
   pip
   awscli
+  boto3
   black
   flake8
   ipython

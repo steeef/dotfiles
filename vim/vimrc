@@ -589,7 +589,7 @@ let g:LatexBox_viewer = "open -a Skim"
 " ale -------------------------------------------------------------------------"{{{
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_python_pylint_options = '--max-line-length=120'
-let g:ale_python_flake8_options = '--max-line-length=120'
+let g:ale_python_flake8_options = '--max-line-length=120 --ignore=E203,W503'
 let g:ale_python_black_options = '--line-length=120'
 let g:ale_python_flake8_use_global = 1
 let g:ale_fix_on_save = 1
