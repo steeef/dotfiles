@@ -21,6 +21,7 @@ PYTHON_MODULES=(
   black
   flake8
   ipython
+  isort
   neovim
   neovim-remote
 )
