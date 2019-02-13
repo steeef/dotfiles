@@ -16,6 +16,8 @@ PYTHON_VERSIONS=(
 PYTHON_DEFAULT=3.7.2
 PYTHON_MODULES=(
   pip
+  ansible
+  ansible-lint
   awscli
   boto3
   black
@@ -24,6 +26,7 @@ PYTHON_MODULES=(
   isort
   neovim
   neovim-remote
+  virtualenv
 )
 RUBY_VERSIONS=(
   2.5.3
