@@ -26,11 +26,10 @@ function config()
   -- Type clipboard
   hs.hotkey.bind(hyper, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
-  -- paste as code in JIRA
+  -- paste as Markdown code
   hs.hotkey.bind(hyper, "b", function()
-    hs.eventtap.keyStrokes('{code}')
+    hs.eventtap.keyStrokes("```")
     hs.eventtap.keyStroke('cmd', 'v')
-    hs.eventtap.keyStrokes('{code}')
   end)
 
   -- Start Screensaver
