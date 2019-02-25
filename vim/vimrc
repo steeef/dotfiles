@@ -93,7 +93,8 @@ if exists(":PlugInstall")
   endif
 
   " colorschemes
-  Plug 'chriskempson/base16-vim'
+  "Plug 'chriskempson/base16-vim'
+  Plug '~/code/base16-vim'
 
   " language-specific bundles
   Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
