@@ -72,3 +72,5 @@
   path = .gitconfig-work
 [http "https://gopkg.in"]
 	followRedirects = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
