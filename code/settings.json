@@ -36,6 +36,7 @@
         "--max-line-length=120"
     ],
     "python.pythonPath": "~/.pyenv/versions/3.7.0/bin/python",
+    "vim.useSystemClipboard": true,
     "vim.leader": "<space>",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
@@ -76,5 +77,6 @@
     "workbench.editor.enablePreview": false,
     "workbench.welcome.enabled": false,
     "workbench.colorTheme": "Base16 Dark Tomorrow",
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "git.autofetch": true
 }
