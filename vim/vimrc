@@ -52,7 +52,6 @@ if exists(":PlugInstall")
   Plug 'christoomey/vim-tmux-navigator'
 
   Plug 'roman/golden-ratio'
-  Plug 'spf13/vim-autoclose'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
@@ -483,6 +482,14 @@ else
   nnoremap <leader>ev <C-w>v<C-w>l:e $MYVIMRC<CR>
 endif
 nnoremap <leader>sv :so $MYVIMRC<CR>
+
+" expand code brackets or parens
+inoremap (; (<CR>);<C-c>O
+inoremap (, (<CR>),<C-c>O
+inoremap {; {<CR>};<C-c>O
+inoremap {, {<CR>},<C-c>O
+inoremap [; [<CR>];<C-c>O
+inoremap [, [<CR>],<C-c>O
 
 " windows -------------------------------------------------------------------- "{{{
 
