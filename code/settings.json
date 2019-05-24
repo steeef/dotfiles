@@ -79,5 +79,15 @@
     "workbench.colorTheme": "Base16 Dark Tomorrow",
     "window.zoomLevel": 0,
     "git.autofetch": true,
-    "diffEditor.ignoreTrimWhitespace": false
+    "diffEditor.ignoreTrimWhitespace": false,
+    "explorer.confirmDelete": false,
+    "[terraform]": {
+        "editor.detectIndentation": false,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.wordWrapColumn": 80
+    }
 }

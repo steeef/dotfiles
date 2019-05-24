@@ -226,10 +226,8 @@ eval "$(command nodenv init -)"
 function awslogin() {
   url="$(aws-vault login ${1} --stdout)"
   if [[ ${url} =~ ^https://.* ]]; then
-    /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-      --args --no-first-run --new-window --profile-directory="aws_${1}" \
-      "${url}" \
-      2>/dev/null &
+    /Applications/Firefox.app/Contents/MacOS/firefox -P "aws_${1}" \
+      -profile "${HOME}/Library/Application Support/Firefox/Profiles/aws_${1}" "${url}" 2>/dev/null &
   else
     echo "ERROR: ${url}"
   fi
