@@ -218,13 +218,10 @@ eval "$(command pyenv virtualenv-init -)"
 # rbenv ----------------------------------------------------------------------
 eval "$(command rbenv init -)"
 
-# nodenv ----------------------------------------------------------------------
-eval "$(command nodenv init -)"
-
 # aws-vault login ------------------------------------------------------------
 
 function awslogin() {
-  url="$(aws-vault login ${1} --stdout)"
+  url="$(aws-vault login --assume-role-ttl=1h ${1} --stdout)"
   if [[ ${url} =~ ^https://.* ]]; then
     /Applications/Firefox.app/Contents/MacOS/firefox -P "aws_${1}" \
       -profile "${HOME}/Library/Application Support/Firefox/Profiles/aws_${1}" "${url}" 2>/dev/null &
