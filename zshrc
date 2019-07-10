@@ -223,8 +223,11 @@ eval "$(command rbenv init -)"
 function awslogin() {
   url="$(aws-vault login --assume-role-ttl=1h ${1} --stdout)"
   if [[ ${url} =~ ^https://.* ]]; then
-    /Applications/Firefox.app/Contents/MacOS/firefox -P "aws_${1}" \
-      -profile "${HOME}/Library/Application Support/Firefox/Profiles/aws_${1}" "${url}" 2>/dev/null &
+    /Applications/Firefox.app/Contents/MacOS/firefox \
+      -no-remote  -foreground \
+      -profile "${HOME}/Library/Application Support/Firefox/Profiles/aws_${1}" \
+      -P "aws_${1}" \
+      -new-window "${url}"
   else
     echo "ERROR: ${url}"
   fi
