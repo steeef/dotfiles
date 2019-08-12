@@ -10,10 +10,10 @@
 #
 
 PYTHON_VERSIONS=(
-  2.7.15
-  3.7.2
+  2.7.16
+  3.7.4
 )
-PYTHON_DEFAULT=3.7.2
+PYTHON_DEFAULT=3.7.4
 PYTHON_MODULES=(
   pip
   ansible
