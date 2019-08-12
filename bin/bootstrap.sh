@@ -14,7 +14,6 @@ PYTHON_VERSIONS=(
 )
 PYTHON_DEFAULT=3.7.4
 PYTHON_MODULES=(
-  pip
   ansible
   ansible-lint
   awscli
@@ -148,6 +147,7 @@ eval "$(command rbenv init -)"
 for python in "${PYTHON_VERSIONS[@]}"; do
   (pyenv versions --bare --skip-aliases | grep -q "^${python}\$") \
   || pyenv install "${python}"
+  (PYENV_VERSION="${python}" pip install --upgrade pip)
   (PYENV_VERSION="${python}" pip install --upgrade "${PYTHON_MODULES[@]}")
   venv="neovim$(echo "${python}" | cut -d'.' -f1)"
   pyenv virtualenv "${python}" "${venv}"
