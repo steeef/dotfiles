@@ -15,11 +15,12 @@ PYTHON_VERSIONS=(
 PYTHON_DEFAULT=3.7.4
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
 
+RUBY_GEMFILE="${HOME}/.dotfiles/Gemfile"
+
 RUBY_VERSIONS=(
   2.6.3
 )
 RUBY_DEFAULT=2.6.3
-RUBY_MODULES="neovim"
 
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
@@ -167,7 +168,7 @@ done
 (rbenv global | grep -q '^'${RUBY_DEFAULT}'$') \
   || rbenv global ${RUBY_DEFAULT}
 
-gem install "${RUBY_MODULES}"
+bundle install --gemfile="${RUBY_GEMFILE}"
 
 # base16-shell setup
 base16dir="${HOME}/code/base16-shell"
