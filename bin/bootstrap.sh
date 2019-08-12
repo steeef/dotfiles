@@ -13,19 +13,8 @@ PYTHON_VERSIONS=(
   3.7.4
 )
 PYTHON_DEFAULT=3.7.4
-PYTHON_MODULES=(
-  ansible
-  ansible-lint
-  awscli
-  boto3
-  black
-  flake8
-  ipython
-  isort
-  neovim
-  neovim-remote
-  virtualenv
-)
+PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
+
 RUBY_VERSIONS=(
   2.6.3
 )
@@ -148,7 +137,7 @@ for python in "${PYTHON_VERSIONS[@]}"; do
   (pyenv versions --bare --skip-aliases | grep -q "^${python}\$") \
   || pyenv install "${python}"
   (PYENV_VERSION="${python}" pip install --upgrade pip)
-  (PYENV_VERSION="${python}" pip install --upgrade "${PYTHON_MODULES[@]}")
+  (PYENV_VERSION="${python}" pip install --upgrade -r "${PYTHON_MODULES}")
   venv="neovim$(echo "${python}" | cut -d'.' -f1)"
   pyenv virtualenv "${python}" "${venv}"
   (pyenv activate "${venv}" && pip install --upgrade pip neovim && pyenv deactivate)

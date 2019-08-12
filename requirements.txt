@@ -1,0 +1,11 @@
+  ansible
+  ansible-lint
+  awscli
+  boto3
+  black; python_version > '3'
+  flake8
+  ipython
+  isort
+  neovim
+  neovim-remote; python_version > '3'
+  virtualenv
