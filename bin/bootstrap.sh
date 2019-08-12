@@ -28,9 +28,9 @@ PYTHON_MODULES=(
   virtualenv
 )
 RUBY_VERSIONS=(
-  2.5.3
+  2.6.3
 )
-RUBY_DEFAULT=2.5.3
+RUBY_DEFAULT=2.6.3
 RUBY_MODULES="neovim"
 
 function ensure_link {
