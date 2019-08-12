@@ -2,7 +2,6 @@
 #
 # requirements:
 # - fasd
-# - nodenv
 # - pyenv
 # - pyenv-virtualenv
 # - rbenv
@@ -144,7 +143,6 @@ fi
 eval "$(command pyenv init -)"
 eval "$(command pyenv virtualenv-init -)"
 eval "$(command rbenv init -)"
-eval "$(command nodenv init -)"
 
 # Install python versions and setup for Neovim
 for python in "${PYTHON_VERSIONS[@]}"; do
