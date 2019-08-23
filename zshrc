@@ -221,7 +221,7 @@ eval "$(command rbenv init -)"
 # aws-vault login ------------------------------------------------------------
 
 function awslogin() {
-  url="$(aws-vault login --assume-role-ttl=1h ${1} --stdout)"
+  url="$(aws-vault login --assume-role-ttl=8h ${1} --no-session --stdout)"
   if [[ ${url} =~ ^https://.* ]]; then
     nohup /Applications/Firefox.app/Contents/MacOS/firefox \
       -no-remote  -foreground \
