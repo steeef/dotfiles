@@ -83,11 +83,24 @@
     "explorer.confirmDelete": false,
     "[terraform]": {
         "editor.detectIndentation": false,
-        "editor.tabSize": 4,
+        "editor.tabSize": 2,
         "editor.insertSpaces": true
     },
     "[markdown]": {
         "editor.wordWrap": "on",
         "editor.wordWrapColumn": 80
+    },
+    "terraform.indexing": {
+        "enabled": true,
+        "liveIndexing": false,
+        "delay": 500,
+        "exclude": [
+            ".terraform/**/*",
+            "**/.terraform/**/*"
+        ]
+    },
+    "terraform.languageServer": {
+        "enabled": true,
+        "args": []
     }
 }
