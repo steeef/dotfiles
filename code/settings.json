@@ -91,7 +91,7 @@
         "editor.wordWrapColumn": 80
     },
     "terraform.indexing": {
-        "enabled": true,
+        "enabled": false,
         "liveIndexing": false,
         "delay": 500,
         "exclude": [
