@@ -121,6 +121,14 @@ function cheat() {
   curl cht.sh/$1
 }
 
+function notify() {
+  if [ -n "$1" ]; then
+    osascript -e 'display notification "'"$1"'" with title "Notify"' && say "$1"
+  else
+    echo "USAGE: notify <message>"
+  fi
+}
+
 # colorscheme ---------------------------------------------------------
 # https://github.com/chriskempson/base16-shell
 BASE16_SCHEME="tomorrow-night"
