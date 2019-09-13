@@ -1,0 +1,25 @@
+let mapleader = " "
+
+set relativenumber
+
+"search options
+set ignorecase
+set smartcase
+
+set scrolloff=999
+
+" switch : and ;
+nnoremap ; :
+nnoremap : ;
+
+" Integrate with system clipboard
+set clipboard=unnamedplus,unnamed
+
+nmap <leader><space> :action SearchEverywhere<cr>
+
+" easy window movement
+nmap <leader><w> :action SplitVertically<cr>
+nmap <ctrl><h> <c-w>h
+nmap <ctrl><l> <c-w>l
+nmap <ctrl><j> <c-w>j
+nmap <ctrl><k> <c-w>k

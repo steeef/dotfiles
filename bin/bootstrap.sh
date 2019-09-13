@@ -81,6 +81,7 @@ ensure_link "vim/vimrc"          ".vimrc"
 ensure_link "zpreztorc"          ".zpreztorc"
 ensure_link "zsh"                ".zsh"
 ensure_link "zshrc"              ".zshrc"
+ensure_link "ideavimrc"          ".ideavimrc"
 
 if [ "$(uname)" = "Darwin" ]; then
   echo "INFO: Copying fonts."
