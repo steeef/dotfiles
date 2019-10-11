@@ -2,6 +2,8 @@ let mapleader = " "
 
 set relativenumber
 
+set showmode
+
 "search options
 set ignorecase
 set smartcase
@@ -15,11 +17,21 @@ nnoremap : ;
 " Integrate with system clipboard
 set clipboard=unnamedplus,unnamed
 
-nmap <leader><space> :action SearchEverywhere<cr>
+nnoremap <leader><space> :action SearchEverywhere<cr>
 
 " easy window movement
-nmap <leader><w> :action SplitVertically<cr>
-nmap <ctrl><h> <c-w>h
-nmap <ctrl><l> <c-w>l
-nmap <ctrl><j> <c-w>j
-nmap <ctrl><k> <c-w>k
+nnoremap <leader>w :action VimWindowSplitVertical<cr>
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+
+" Moving blocks of text in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap / :action Find<CR>
+
+" Quickly edit/reload this configuration file
+nnoremap <leader>ev <C-w>v<C-w>l:e ~/.ideavimrc<CR>
+nnoremap <leader>sv :so ~/.ideavimrc<CR>
