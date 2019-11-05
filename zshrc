@@ -12,6 +12,11 @@ fi
 fpath=("${HOME}/.zsh/completion" $fpath)
 
 # prezto --------------------------------------------------
+#
+#
+# Workaround for: https://github.com/sorin-ionescu/prezto/issues/1744
+#
+export HISTFILE="${ZDOTDIR:-$HOME}/.zhistory" # The path to the history file.
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
