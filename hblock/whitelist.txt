@@ -1,2 +1,3 @@
+kinesis.us-east-1.amazonaws.com
 amazonaws.com
 fast.appcues.com
