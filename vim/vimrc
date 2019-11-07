@@ -469,6 +469,9 @@ cnoremap w!! w !sudo tee % >/dev/null <CR> :e! <CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" select pasted text
+nnoremap gp `[v`]
+
 " Remove trailing whitespace from entire buffer
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
