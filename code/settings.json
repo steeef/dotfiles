@@ -102,5 +102,7 @@
     "terraform.languageServer": {
         "enabled": true,
         "args": []
-    }
+    },
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true
 }
