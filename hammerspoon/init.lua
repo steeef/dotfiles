@@ -15,6 +15,7 @@ hs.grid.GRIDHEIGHT = 2
 hs.grid.GRIDWIDTH = 2
 
 require "usb"
+require "amphetamine"
 
 function config()
   -- Force reload
