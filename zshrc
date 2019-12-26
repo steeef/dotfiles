@@ -94,7 +94,7 @@ alias please='sudo $(fc -ln -1)'
 
 # aws-vault
 alias av='aws-vault'
-alias ave='aws-vault exec --session-ttl=8h --assume-role-ttl=1h'
+alias ave='aws-vault exec --duration=1h'
 
 # terraform
 alias tf='terraform'
@@ -234,7 +234,7 @@ eval "$(command rbenv init -)"
 # aws-vault login ------------------------------------------------------------
 
 function awslogin() {
-  url="$(aws-vault login --assume-role-ttl=8h ${1} --no-session --stdout)"
+  url="$(aws-vault login --duration=1h ${1} --stdout)"
   if [[ ${url} =~ ^https://.* ]]; then
     nohup /Applications/Firefox.app/Contents/MacOS/firefox \
       -no-remote  -foreground \
