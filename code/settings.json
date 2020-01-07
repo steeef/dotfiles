@@ -24,6 +24,14 @@
         "**/roles/**/*.yml": "ansible",
         "**/roles/**/*.j2": "ansible"
     },
+    "macros": {
+        "splitPane": [
+            "workbench.action.splitEditor",
+            "workbench.action.files.newUntitledFile",
+            "workbench.action.moveEditorLeftInGroup",
+            "workbench.action.closeEditorsToTheRight"
+        ]
+    },
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": [
         "--line-length",
@@ -70,7 +78,7 @@
                 "w"
             ],
             "commands": [
-                "workbench.action.splitEditorRight"
+                "macros.splitPane"
             ]
         }
     ],
