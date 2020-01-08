@@ -9,10 +9,11 @@
 #
 
 PYTHON_VERSIONS=(
-  2.7.16
-  3.7.4
+  2.7.17
+  3.7.6
+  3.8.1
 )
-PYTHON_DEFAULT=3.7.4
+PYTHON_DEFAULT=3.8.1
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
 
 RUBY_GEMFILE="${HOME}/.dotfiles/Gemfile"
