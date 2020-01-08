@@ -78,7 +78,25 @@
                 "w"
             ],
             "commands": [
-                "macros.splitPane"
+                "workbench.action.splitEditorRight"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<"
+            ],
+            "after": [
+                "<gv"
+            ]
+        },
+        {
+            "before": [
+                ">"
+            ],
+            "after": [
+                ">gv"
             ]
         }
     ],
