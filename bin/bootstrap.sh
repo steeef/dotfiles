@@ -130,11 +130,6 @@ else
   "${FZFDIR}/install" --key-bindings --completion --no-update-rc
 fi
 
-# vscode extensions
-if command -v code >/dev/null 2>&1; then
-  "${HOME}/.bin/vscode-install-extensions.sh"
-fi
-
 eval "$(command pyenv init -)"
 eval "$(command pyenv virtualenv-init -)"
 eval "$(command rbenv init -)"
