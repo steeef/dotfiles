@@ -1,6 +1,7 @@
   ansible
   ansible-lint
   awscli
+  awslogs
   boto3
   black; python_version > '3'
   flake8
