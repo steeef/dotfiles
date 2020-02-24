@@ -130,5 +130,6 @@
         "args": []
     },
     "editor.fontFamily": "Fira Code",
-    "editor.fontLigatures": true
+    "editor.fontLigatures": true,
+    "go.useLanguageServer": true
 }
