@@ -18,12 +18,6 @@ require "usb"
 require "amphetamine"
 
 function config()
-  -- Force reload
-  hs.hotkey.bind(hyper, "k", function()
-    hs.reload()
-    hs.notify.show("Hammerspoon", "Config reloaded.")
-  end)
-
   -- Type clipboard
   hs.hotkey.bind(hyper, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
