@@ -87,16 +87,16 @@
             "before": [
                 "<"
             ],
-            "after": [
-                "<gv"
+            "commands": [
+                "editor.action.outdentLines"
             ]
         },
         {
             "before": [
                 ">"
             ],
-            "after": [
-                ">gv"
+            "commands": [
+                "editor.action.indentLines"
             ]
         }
     ],
