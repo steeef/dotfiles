@@ -2,6 +2,7 @@
 #
 # requirements:
 # - fasd
+# - openssl@1.1
 # - pyenv
 # - pyenv-virtualenv
 # - rbenv
@@ -10,18 +11,20 @@
 
 PYTHON_VERSIONS=(
   2.7.17
-  3.7.6
-  3.8.1
+  3.8.2
 )
-PYTHON_DEFAULT=3.8.1
+PYTHON_DEFAULT=3.8.2
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
 
 RUBY_GEMFILE="${HOME}/.dotfiles/Gemfile"
 
 RUBY_VERSIONS=(
-  2.6.3
+  2.7.1
 )
-RUBY_DEFAULT=2.6.3
+RUBY_DEFAULT=2.7.1
+
+OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
+DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
 
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
@@ -137,7 +140,7 @@ eval "$(command rbenv init -)"
 # Install python versions and setup for Neovim
 for python in "${PYTHON_VERSIONS[@]}"; do
   (pyenv versions --bare --skip-aliases | grep -q "^${python}\$") \
-  || pyenv install "${python}"
+    || (export DYLD_LIBRARY_PATH; pyenv install "${python}")
   (PYENV_VERSION="${python}" pip install --upgrade pip)
   (PYENV_VERSION="${python}" pip install --upgrade -r "${PYTHON_MODULES}")
   venv="neovim$(echo "${python}" | cut -d'.' -f1)"
