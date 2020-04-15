@@ -1,0 +1,23 @@
+{
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["bash","sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
+    }
+  },
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length=120"],
+  "python.linting.flake8Args": ["--max-line-length=120","--ignore=E203,W503"]
+}
