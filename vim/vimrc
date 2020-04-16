@@ -57,14 +57,10 @@ if exists(":PlugInstall")
   Plug 'junegunn/fzf.vim'
 
   Plug 'junegunn/vim-easy-align'
-  Plug 'airblade/vim-gitgutter'
   Plug 'mtth/scratch.vim',       { 'on': 'Scratch' }
-  Plug 'metakirby5/codi.vim',    { 'on': 'Codi' }
 
   " coc and extensions
   Plug 'neoclide/coc.nvim',    { 'branch': 'release'}
-  Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 
   " colorschemes
   " base16 needs a fix with recent versions of Vim, where the 'a:' dict has
@@ -530,10 +526,6 @@ vnoremap <silent> <Enter> :EasyAlign<Enter>
 " vim-gitgutter ---------------------------------------------------------------"{{{
 
 let g:gitgutter_map_keys = 0
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
-nmap <Leader>c <Plug>GitGutterStageHunk
-nmap <Leader>u <Plug>GitGutterUndoHunk
 
 "}}}
 
@@ -584,6 +576,23 @@ let g:LatexBox_viewer = "open -a Skim"
 
 " coc-vim ---------------------------------------------------------------------"{{{
 
+let g:coc_global_extensions = [
+      \ 'coc-vimlsp',
+      \ 'coc-lists',
+      \ 'coc-json',
+      \ 'coc-yaml',
+      \ 'coc-dictionary',
+      \ 'coc-word',
+      \ 'coc-syntax',
+      \ 'coc-emoji',
+      \ 'coc-highlight',
+      \ 'coc-python',
+      \ 'coc-pairs',
+      \ 'coc-git',
+      \ 'coc-go',
+      \ 'coc-docker',
+      \ ]
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -607,6 +616,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+nmap <leader>c :CocList<cr>
 
 "}}}
 

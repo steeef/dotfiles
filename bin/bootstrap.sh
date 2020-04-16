@@ -33,7 +33,6 @@ NODE_DEFAULT=12.16.2
 COC_EXTENSIONS_PATH="${HOME}/.config/coc/extensions"
 COC_EXTENSIONS=(
   bash-language-server
-  dockerfile-language-server-nodejs
 )
 
 OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
