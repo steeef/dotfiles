@@ -1,13 +1,13 @@
 {
   "languageserver": {
     "bash": {
-      "command": "bash-language-server",
+      "command": "~/.config/coc/extensions/node_modules/.bin/bash-language-server",
       "args": ["start"],
       "filetypes": ["bash","sh"],
       "ignoredRootPaths": ["~"]
     },
     "dockerfile": {
-      "command": "docker-langserver",
+      "command": "~/.config/coc/extensions/node_modules/.bin/bash-language-server",
       "filetypes": ["dockerfile"],
       "args": ["--stdio"]
     },
