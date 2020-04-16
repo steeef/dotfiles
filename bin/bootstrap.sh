@@ -2,6 +2,8 @@
 #
 # requirements:
 # - fasd
+# - node-build
+# - nodenv
 # - openssl@1.1
 # - pyenv
 # - pyenv-virtualenv
@@ -22,6 +24,17 @@ RUBY_VERSIONS=(
   2.7.1
 )
 RUBY_DEFAULT=2.7.1
+
+NODE_VERSIONS=(
+  12.16.2
+)
+NODE_DEFAULT=12.16.2
+
+COC_EXTENSIONS_PATH="${HOME}/.config/coc/extensions"
+COC_EXTENSIONS=(
+  bash-language-server
+  dockerfile-language-server-nodejs
+)
 
 OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
 DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
@@ -133,6 +146,7 @@ else
   "${FZFDIR}/install" --key-bindings --completion --no-update-rc
 fi
 
+eval "$(command nodenv init -)"
 eval "$(command pyenv init -)"
 eval "$(command pyenv virtualenv-init -)"
 eval "$(command rbenv init -)"
@@ -162,6 +176,16 @@ done
 (pyenv global | grep -q '^'${PYTHON_DEFAULT}'$') \
   || pyenv global  ${PYTHON_DEFAULT}
 
+# now node
+for node in "${NODE_VERSIONS[@]}"; do
+  (nodenv versions --bare --skip-aliases | grep -q "^${node}\$") \
+  || nodenv install "${node}"
+done
+
+# set default
+(nodenv global | grep -q '^'${NODE_DEFAULT}'$') \
+  || nodenv global ${NODE_DEFAULT}
+
 # now ruby
 for ruby in "${RUBY_VERSIONS[@]}"; do
   (rbenv versions --bare --skip-aliases | grep -q "^${ruby}\$") \
@@ -173,6 +197,12 @@ done
   || rbenv global ${RUBY_DEFAULT}
 
 bundle install --gemfile="${RUBY_GEMFILE}"
+
+# coc language server installs
+mkdir -p "${COC_EXTENSIONS_PATH}"
+for extension in "${COC_EXTENSIONS[@]}"; do
+  (cd  "${COC_EXTENSIONS_PATH}" && npm install "${extension}")
+done
 
 # base16-shell setup
 base16dir="${HOME}/code/base16-shell"

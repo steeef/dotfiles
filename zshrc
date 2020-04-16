@@ -231,6 +231,9 @@ eval "$(command pyenv virtualenv-init -)"
 # rbenv ----------------------------------------------------------------------
 eval "$(command rbenv init -)"
 
+# nodenv ----------------------------------------------------------------------
+eval "$(command nodenv init -)"
+
 # aws-vault login ------------------------------------------------------------
 
 function awslogin() {

@@ -24,16 +24,6 @@ else
   let bundlepath = "~/.vim/bundle"
 endif
 
-" Ale check
-" A flag for detecting if the required features are set.
-if has('nvim')
-  let s:has_ale_features = has('timers')
-else
-  " Check if Job and Channel functions are available, instead of the
-  " features. This works better on old MacVim versions.
-  let s:has_ale_features = has('timers') && exists('*job_start') && exists('*ch_close_in')
-endif
-
 silent! call plug#begin(bundlepath)
 " plugins ---------------------------------------------------------------------"{{{
 
@@ -42,10 +32,6 @@ if exists(":PlugInstall")
     " plugins for vanilla Vim
     Plug 'vim-scripts/IndexedSearch'
     Plug 'ConradIrwin/vim-bracketed-paste'
-    if v:version >= 800 && (has ('python') || has ('python3'))
-      " autocomplete
-      Plug 'maralla/completor.vim'
-    endif
   endif
 
   " tmux
@@ -74,9 +60,11 @@ if exists(":PlugInstall")
   Plug 'airblade/vim-gitgutter'
   Plug 'mtth/scratch.vim',       { 'on': 'Scratch' }
   Plug 'metakirby5/codi.vim',    { 'on': 'Codi' }
-  if s:has_ale_features
-    Plug 'neoclide/coc.nvim',    { 'branch': 'release'}
-  endif
+
+  " coc and extensions
+  Plug 'neoclide/coc.nvim',    { 'branch': 'release'}
+  Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 
   " colorschemes
   " base16 needs a fix with recent versions of Vim, where the 'a:' dict has
