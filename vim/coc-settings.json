@@ -7,7 +7,7 @@
       "ignoredRootPaths": ["~"]
     },
     "dockerfile": {
-      "command": "~/.config/coc/extensions/node_modules/.bin/bash-language-server",
+      "command": "~/.config/coc/extensions/node_modules/.bin/docker-langserver",
       "filetypes": ["dockerfile"],
       "args": ["--stdio"]
     },
