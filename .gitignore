@@ -1,5 +1,6 @@
 fonts/.uuid
 vim/bundle/
+vim/sessions/
 vim/.netrwhist
 maid/maid.log
 tmux/plugins/
