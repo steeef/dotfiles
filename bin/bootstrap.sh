@@ -180,6 +180,7 @@ done
 for node in "${NODE_VERSIONS[@]}"; do
   (nodenv versions --bare --skip-aliases | grep -q "^${node}\$") \
   || nodenv install "${node}"
+  (nodenv shell "${node}" && npm install -g yarn && nodenv shell --unset)
 done
 
 # set default
