@@ -233,6 +233,8 @@ eval "$(command rbenv init -)"
 
 # nodenv ----------------------------------------------------------------------
 eval "$(command nodenv init -)"
+alias yarn="$(nodenv which yarn)"
+
 
 # aws-vault login ------------------------------------------------------------
 
