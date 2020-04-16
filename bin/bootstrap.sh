@@ -205,6 +205,9 @@ for extension in "${COC_EXTENSIONS[@]}"; do
   (cd  "${COC_EXTENSIONS_PATH}" && npm install "${extension}")
 done
 
+# coc terraform-lsp install
+"${HOME}/.bin/terraform-lsp_install.sh"
+
 # base16-shell setup
 base16dir="${HOME}/code/base16-shell"
 base16repo="https://github.com/chriskempson/base16-shell.git"
