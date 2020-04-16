@@ -589,6 +589,9 @@ let g:coc_global_extensions = [
       \ 'coc-go',
       \ 'coc-docker',
       \ ]
+ let g:coc_filetype_map = {
+ \ 'yaml.ansible': 'yaml',
+ \ }
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by

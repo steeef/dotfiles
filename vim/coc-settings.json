@@ -16,5 +16,10 @@
   "python.formatting.provider": "black",
   "python.sortImports.path": "isort",
   "python.formatting.blackArgs": ["--line-length=120"],
-  "python.linting.flake8Args": ["--max-line-length=120","--ignore=E203,W503"]
+  "python.linting.flake8Args": ["--max-line-length=120","--ignore=E203,W503"],
+  "yaml.completion": true,
+  "yaml.validate": true,
+  "yaml.schemas": {
+    "http://json.schemastore.org/ansible-stable-2.9": "yaml.ansible"
+  }
 }
