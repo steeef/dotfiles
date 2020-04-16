@@ -553,9 +553,6 @@ nnoremap <leader><Space> :Files<enter>
 nnoremap <silent> <Leader>b :Buffers<enter>
 nnoremap <silent> <Leader>h :History:<enter>
 
-nnoremap <leader>a :Ag<Space>
-nnoremap <silent> <Leader>A :Ag <C-R><C-W><CR>
-
 " use rg
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
@@ -617,7 +614,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nmap <leader>c :CocList<cr>
+nnoremap <leader>c :<C-u>CocList<CR>
+nnoremap <leader>a :<C-u>CocList -I grep<CR>
 
 "}}}
 
