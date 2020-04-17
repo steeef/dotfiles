@@ -63,13 +63,7 @@ if exists(":PlugInstall")
   Plug 'neoclide/coc.nvim',    { 'branch': 'release'}
 
   " colorschemes
-  " base16 needs a fix with recent versions of Vim, where the 'a:' dict has
-  " been made immutable.
-  " https://github.com/chriskempson/base16-vim/issues/197
-  function FixupBase16(info)
-    execute "sed -i '/Base16hi/\! s/a:\(attr\|guisp\)/l:\1/g' " . bundlepath . "/base16-vim/colors/*.vim"
-  endfunction
-  Plug 'chriskempson/base16-vim', { 'do': function('FixupBase16') }
+  Plug 'chriskempson/base16-vim',
 
   " language-specific bundles
   Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
