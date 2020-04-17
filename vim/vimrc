@@ -66,7 +66,7 @@ if exists(":PlugInstall")
   Plug 'chriskempson/base16-vim',
 
   " language-specific bundles
-  Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
+  Plug 'leshill/vim-json', { 'for': 'json' }
   Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
   Plug 'pearofducks/ansible-vim',  { 'for': 'yaml.ansible' }
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
