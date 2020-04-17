@@ -68,7 +68,7 @@ if exists(":PlugInstall")
   " language-specific bundles
   Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
   Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
-  Plug 'chase/vim-ansible-yaml',   { 'for': 'ansible' }
+  Plug 'pearofducks/ansible-vim',  { 'for': 'yaml.ansible' }
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
   Plug 'hashivim/vim-terraform',   { 'for': 'terraform' }
@@ -388,6 +388,12 @@ if has("autocmd")
     " use Enter to follow links
     autocmd FileType help nmap <buffer> <CR> <C-]>
     autocmd BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
+  augroup END
+
+  " ansible
+  augroup ft_ansible
+    autocmd!
+    au BufRead,BufNewFile */ansible/**/*.y*ml set filetype=yaml.ansible
   augroup END
 endif
 
