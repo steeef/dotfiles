@@ -57,6 +57,7 @@ if exists(":PlugInstall")
   Plug 'junegunn/fzf.vim'
 
   Plug 'junegunn/vim-easy-align'
+  Plug 'jiangmiao/auto-pairs'
   Plug 'mtth/scratch.vim',       { 'on': 'Scratch' }
 
   " coc and extensions
@@ -583,10 +584,10 @@ let g:coc_global_extensions = [
       \ 'coc-emoji',
       \ 'coc-highlight',
       \ 'coc-python',
-      \ 'coc-pairs',
       \ 'coc-git',
       \ 'coc-go',
       \ 'coc-docker',
+      \ 'coc-sh',
       \ ]
  let g:coc_filetype_map = {
  \ 'yaml.ansible': 'yaml',

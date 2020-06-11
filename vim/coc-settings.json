@@ -3,7 +3,7 @@
   "coc.preferences.formatOnSaveFiletypes": ["python"],
   "languageserver": {
     "bash": {
-      "command": "~/.config/coc/extensions/node_modules/.bin/bash-language-server",
+      "command": "~/.config/coc/extensions/node_modules/coc-sh/node_modules/.bin/bash-language-server",
       "args": ["start"],
       "filetypes": ["bash","sh"],
       "ignoredRootPaths": ["~"]
