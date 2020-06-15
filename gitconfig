@@ -11,9 +11,9 @@
   # Create pull request for current branch  =====
   pr  = "!open \"$(git remote -v | grep origin | grep push | cut -f 2 | cut -d \" \" -f 1 | sed -e \"s|git@\\(.*\\):\\(.*\\).git|https://\\1/\\2|\")/pull/new/$(git rev-parse --abbrev-ref HEAD)\""
 
-  # Remove branches that have already been merged with master
+  # Remove branches that have already been merged with default branch
   # a.k.a. ‘delete merged’
-  dm = "!git branch --merged | grep -Ev \"(\\*|master|develop|staging)\" | xargs -n 1 git branch -d"
+  dm = "!git branch --merged | grep -Ev \"(\\*|master|main|develop|staging)\" | xargs -n 1 git branch -d"
 
   # https://zarino.co.uk/post/git-set-upstream/
   set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`

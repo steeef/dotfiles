@@ -76,7 +76,7 @@ alias gb='git branch'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias gsub="git submodule"
-alias gbpurge='git branch --merged | grep -Ev "(\*|master|feature|develop|staging)" | xargs -n 1 git branch -d'
+alias gbpurge='git branch --merged | grep -Ev "(\*|main|master|feature|develop|staging)" | xargs -n 1 git branch -d'
 
 alias goto=". goto"
 
