@@ -78,3 +78,5 @@
 	insteadOf = https://github.com/
 [fetch]
 	prune = true
+[pull]
+	rebase = false
