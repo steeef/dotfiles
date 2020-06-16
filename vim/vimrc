@@ -71,6 +71,7 @@ if exists(":PlugInstall")
   Plug 'pearofducks/ansible-vim',  { 'for': 'yaml.ansible' }
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
+  Plug 'google/vim-jsonnet',       { 'for': 'jsonnet' }
   Plug 'hashivim/vim-terraform',   { 'for': 'terraform' }
   Plug 'fatih/vim-go',             { 'for': 'go' }
 endif
@@ -388,6 +389,12 @@ if has("autocmd")
     " use Enter to follow links
     autocmd FileType help nmap <buffer> <CR> <C-]>
     autocmd BufWinEnter *.txt if &ft == 'help' | wincmd J | endif
+  augroup END
+
+  " jsonnet
+  augroup ft_jsonnet
+    autocmd!
+    au BufRead,BufNewFile *.jsonnet set filetype=jsonnet
   augroup END
 
   " ansible
