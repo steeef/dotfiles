@@ -126,8 +126,10 @@
         ]
     },
     "terraform.languageServer": {
-        "enabled": true,
-        "args": []
+        "external": true,
+        "args": [
+            "serve"
+        ]
     },
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
