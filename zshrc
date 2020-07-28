@@ -86,7 +86,7 @@ alias drm='docker rm $(docker ps -a -q)'
 alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 
 # homebrew
-alias bup='brew update && brew upgrade && brew cu -a -y'
+alias bup='brew update && brew upgrade && brew cask upgrade --greedy && brew cu -a -y'
 alias bclean='brew cleanup'
 
 # sudo please
