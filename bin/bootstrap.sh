@@ -35,9 +35,6 @@ COC_EXTENSIONS=(
   bash-language-server
 )
 
-OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
-DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
-
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
     if [ "$3" = "force" ]; then
@@ -115,7 +112,7 @@ if [ "$(uname)" = "Darwin" ]; then
   # install Homebrew
   if ! command -v brew >/dev/null 2>&1; then
      echo "INFO: Installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
 
   # Install packages in ~/.Bundlefile
@@ -123,6 +120,9 @@ if [ "$(uname)" = "Darwin" ]; then
   brew update
   brew tap homebrew/bundle
   brew bundle --global
+
+  OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
+  DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
 
   # fzf install
   [ -f "/usr/local/opt/fzf/install" ] \
