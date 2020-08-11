@@ -8,14 +8,10 @@ local hyper = {"cmd", "alt", "shift", "ctrl"}
 --------------------------------------------------------------------------------
 -- settings
 --------------------------------------------------------------------------------
-hs.window.animationDuration = 0
-hs.grid.MARGINX = 0
-hs.grid.MARGINY = 0
-hs.grid.GRIDHEIGHT = 2
-hs.grid.GRIDWIDTH = 2
 
 require "usb"
 require "amphetamine"
+local wm = require('window-management')
 
 function config()
   -- Type clipboard
@@ -72,6 +68,26 @@ function config()
     hs.application.launchOrFocus('1Password 7')
   end)
 
+  -- window management
+  hs.hotkey.bind(hyper, "1", function()
+    hs.window.focusedWindow():moveOneScreenEast()
+  end)
+  hs.hotkey.bind(hyper, "2", function()
+    wm.windowMaximize(0)
+  end)
+  hs.hotkey.bind(hyper, "up", function()
+    wm.moveWindowToPosition(wm.screenPositions.top)
+  end)
+  hs.hotkey.bind(hyper, "down", function()
+    wm.moveWindowToPosition(wm.screenPositions.bottom)
+  end)
+  hs.hotkey.bind(hyper, "left", function()
+    wm.moveWindowToPosition(wm.screenPositions.left)
+  end)
+  hs.hotkey.bind(hyper, "right", function()
+    wm.moveWindowToPosition(wm.screenPositions.right)
+  end)
+
   -- media keys
   hs.hotkey.bind(hyper, "9", function()
     hs.eventtap.event.newSystemKeyEvent('PLAY', true):post()
@@ -80,7 +96,7 @@ function config()
     hs.eventtap.event.newSystemKeyEvent('PREVIOUS', true):post()
   end)
   hs.hotkey.bind(hyper, "-", function()
-                   hs.eventtap.event.newSystemKeyEvent('STOP', true):post()
+    hs.eventtap.event.newSystemKeyEvent('STOP', true):post()
   end)
 
   -- Keychain password entry
