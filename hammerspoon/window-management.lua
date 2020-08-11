@@ -8,7 +8,7 @@ local HALF_GRID_SIZE = GRID_SIZE / 2
 -- Set the grid size and add a few pixels of margin
 -- Also, don't animate window changes... That's too slow
 hs.grid.setGrid(GRID_SIZE .. 'x' .. GRID_SIZE)
-hs.grid.setMargins({5, 5})
+hs.grid.setMargins({0, 0})
 hs.window.animationDuration = 0
 
 -- Defining screen positions
