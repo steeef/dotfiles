@@ -106,50 +106,6 @@ function applicationWatcher(appName, eventType, appObject)
   end
 end
 
-function chromeTab(tabName, tabUrl)
-  hs.applescript.applescript([[
-    on run
-      tell application "Google Chrome"
-        set found to false
-        set allWins to every window
-        repeat with currWin in allWins
-          set allTabs to every tab of currWin
-          set i to 0
-          repeat with currTab in allTabs
-            set i to i + 1
-            try
-              if URL of currTab contains "]] .. tabUrl .. [[" then
-                set (active tab index of (currWin)) to i
-                # tell window currWin to activate
-                set the index of currWin to 1
-                set found to true
-              end if
-            end try
-          end repeat
-        end repeat
-        if (found = false) then
-          set myTab to make new tab at end of tabs of window 1
-          set URL of myTab to "]] .. tabUrl .. [["
-        end if
-        activate
-      end tell
-      tell application "System Events" to tell process "Google Chrome"
-        set frontmost to true
-        set windowMenu to menu bar item "Window" of menu bar 1
-        set allUIElements to entire contents of windowMenu
-        repeat with m in allUIElements
-          try
-            if name of m contains "]] .. tabName .. [[" then
-              click m
-              exit repeat
-            end if
-          end try
-        end repeat
-      end tell
-    end run
-  ]])
-end
-
 function typeKeychainEntry(keychainEntry, keychainField)
   if keychainField == 'password' then
     command = "security find-generic-password -gl '" .. keychainEntry ..  "' -w " ..
