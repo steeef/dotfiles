@@ -9,6 +9,7 @@ config = {}
 config.applications = {}
 
 require "amphetamine"
+require "control-escape"
 
 hyper = require('hyper')
 hyper.start(config)

@@ -1,43 +1,47 @@
--- Credit for this implementation goes to @arbelt and @jasoncodes 🙇⚡️😻
---
---   https://gist.github.com/arbelt/b91e1f38a0880afb316dd5b5732759f1
---   https://github.com/jasoncodes/dotfiles/blob/ac9f3ac/hammerspoon/control_escape.lua
+-- from https://gist.github.com/zcmarine/f65182fe26b029900792fa0b59f09d7f
+-- Inspired by https://github.com/jasoncodes/dotfiles/blob/master/hammerspoon/control_escape.lua
+-- You'll also have to use hidutil to map Caps Lock to Left Control:
+-- https://developer.apple.com/library/archive/technotes/tn2450/_index.html
 
-sendEscape = false
-lastMods = {}
-
-ctrlKeyHandler = function()
-  sendEscape = false
-end
-
-ctrlKeyTimer = hs.timer.delayed.new(0.15, ctrlKeyHandler)
-
-ctrlHandler = function(evt)
-  local newMods = evt:getFlags()
-  if lastMods["ctrl"] == newMods["ctrl"] then
-    return false
-  end
-  if not lastMods["ctrl"] then
-    lastMods = newMods
-    sendEscape = true
-    ctrlKeyTimer:start()
-  else
-    if sendEscape then
-      keyUpDown({}, 'escape')
+len = function(t)
+    local length = 0
+    for k, v in pairs(t) do
+    	length = length + 1
     end
-    lastMods = newMods
-    ctrlKeyTimer:stop()
-  end
-  return false
+    return length
 end
 
-ctrlTap = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, ctrlHandler)
-ctrlTap:start()
 
-otherHandler = function(evt)
-  sendEscape = false
-  return false
+send_escape = false
+prev_modifiers = {}
+
+modifier_handler = function(evt)
+    -- evt:getFlags() holds the modifiers that are currently held down
+    local curr_modifiers = evt:getFlags()
+
+    if curr_modifiers["ctrl"] and len(curr_modifiers) == 1 and len(prev_modifiers) == 0 then
+        -- We need this here because we might have had additional modifiers, which
+        -- we don't want to lead to an escape, e.g. [Ctrl + Cmd] —> [Ctrl] —> [ ]
+        send_escape = true
+    elseif prev_modifiers["ctrl"]  and len(curr_modifiers) == 0 and send_escape then
+		send_escape = false
+        hs.eventtap.keyStroke({}, "ESCAPE")
+    else
+        send_escape = false
+	end
+    prev_modifiers = curr_modifiers
+	return false
 end
 
-otherTap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, otherHandler)
-otherTap:start()
+
+-- Call the modifier_handler function anytime a modifier key is pressed or released
+modifier_tap = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, modifier_handler)
+modifier_tap:start()
+
+
+-- If any non-modifier key is pressed, we know we won't be sending an escape
+non_modifier_tap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(evt)
+    send_escape = false
+	return false
+end)
+non_modifier_tap:start()
