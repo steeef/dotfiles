@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
+#
+# hidutil.sh
+#
+# Remap keyboard keys
 
+# map left ctrl to F19 for use with Hammerspoon hyper key
 hidutil property --set '{
   "UserKeyMapping":[
     {
