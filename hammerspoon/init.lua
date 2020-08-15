@@ -1,23 +1,27 @@
 -- Lots of stuff from https://github.com/rtoshiro/hammerspoon-init
-
---------------------------------------------------------------------------------
--- constants
---------------------------------------------------------------------------------
-local hyper = {"cmd", "alt", "shift", "ctrl"}
+-- hyper from https://github.com/evantravers/hammerspoon
 
 --------------------------------------------------------------------------------
 -- settings
 --------------------------------------------------------------------------------
 
-require "usb"
+config = {}
+config.applications = {}
+
 require "amphetamine"
+
+hyper = require('hyper')
+hyper.start(config)
+
 local wm = require('window-management')
 
 -- Type clipboard
-hs.hotkey.bind(hyper, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+hyper:bind({}, 'V', nil, function()
+  hs.eventtap.keyStrokes(hs.pasteboard.getContents())
+end)
 
 -- paste as Markdown code
-hs.hotkey.bind(hyper, "b", function()
+hyper:bind({}, 'b', nil, function()
   hs.eventtap.keyStrokes("```")
   hs.eventtap.keyStroke('cmd', 'v')
 end)
@@ -26,49 +30,49 @@ end)
 --
 -- Normally I'd use the built-in function, but that doesn't seem to work
 -- right, so call the app directly
-hs.hotkey.bind(hyper, "0", function()
+hyper:bind({}, '0', nil, function()
   hs.timer.doAfter(1, function()
     os.execute(os.getenv("HOME") .. '/.bin/maclock -q')
   end)
 end)
 
 -- Applications
-hs.hotkey.bind(hyper, "f", function()
+hyper:bind({}, 'f', nil, function()
   hs.application.launchOrFocus('Finder')
 end)
-hs.hotkey.bind(hyper, "m", function()
+hyper:bind({}, 'm', nil, function()
   hs.application.launchOrFocus('Messages')
 end)
-hs.hotkey.bind(hyper, "p", function()
+hyper:bind({}, 'p', nil, function()
   hs.application.launchOrFocus('Slack')
 end)
-hs.hotkey.bind(hyper, "j", nil, function()
+hyper:bind({}, 'j', nil, function()
   hs.application.launchOrFocus('Firefox')
 end)
-hs.hotkey.bind(hyper, "k", nil, function()
+hyper:bind({}, 'k', nil, function()
   hs.application.launchOrFocus('Visual Studio Code - Insiders')
 end)
-hs.hotkey.bind(hyper, "l", function()
+hyper:bind({}, 'l', nil, function()
   hs.application.launchOrFocus('Spotify')
 end)
-hs.hotkey.bind(hyper, "r", function()
+hyper:bind({}, 'r', nil, function()
   hs.application.launchOrFocus('Reminders')
 end)
-hs.hotkey.bind(hyper, "i", function()
+hyper:bind({}, 'i', nil, function()
   hs.application.launchOrFocus('iTerm')
 end)
-hs.hotkey.bind(hyper, "g", function()
+hyper:bind({}, 'g', nil, function()
   hs.application.launchOrFocus('Mailplane')
 end)
-hs.hotkey.bind(hyper, "t", function()
+hyper:bind({}, 't', nil, function()
   hs.application.launchOrFocus('Tweetbot')
 end)
-hs.hotkey.bind(hyper, "u", function()
+hyper:bind({}, 'u', nil, function()
   hs.application.launchOrFocus('1Password 7')
 end)
 
 -- window management
-hs.hotkey.bind(hyper, "1", function()
+hyper:bind({}, '1', nil, function()
   -- get the focused window
   local win = hs.window.focusedWindow()
   -- get the screen where the focused window is displayed, a.k.a. current screen
@@ -77,44 +81,33 @@ hs.hotkey.bind(hyper, "1", function()
   -- and move the window to the next screen setting the same unitRect 
   win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
 end)
-hs.hotkey.bind(hyper, "2", function()
+hyper:bind({}, '2', nil, function()
   wm.windowMaximize(0)
 end)
-hs.hotkey.bind(hyper, "up", function()
+hyper:bind({}, 'up', nil, function()
   wm.moveWindowToPosition(wm.screenPositions.top)
 end)
-hs.hotkey.bind(hyper, "down", function()
+hyper:bind({}, 'down', nil, function()
   wm.moveWindowToPosition(wm.screenPositions.bottom)
 end)
-hs.hotkey.bind(hyper, "left", function()
+hyper:bind({}, 'left', nil, function()
   wm.moveWindowToPosition(wm.screenPositions.left)
 end)
-hs.hotkey.bind(hyper, "right", function()
+hyper:bind({}, 'right', nil, function()
   wm.moveWindowToPosition(wm.screenPositions.right)
 end)
 
--- media keys
-hs.hotkey.bind(hyper, "9", function()
-  hs.eventtap.event.newSystemKeyEvent('PLAY', true):post()
-end)
-hs.hotkey.bind(hyper, "8", function()
-  hs.eventtap.event.newSystemKeyEvent('PREVIOUS', true):post()
-end)
-hs.hotkey.bind(hyper, "-", function()
-  hs.eventtap.event.newSystemKeyEvent('STOP', true):post()
-end)
-
 -- Keychain password entry
-hs.hotkey.bind(hyper, "w", function()
+hyper:bind({}, 'w', nil, function()
   typeKeychainEntry('QS_1_creds', 'account')
 end)
-hs.hotkey.bind(hyper, "e", function()
+hyper:bind({}, 'e', nil, function()
   typeKeychainEntry('QS_1_creds', 'password')
 end)
-hs.hotkey.bind(hyper, "s", function()
+hyper:bind({}, 's', nil, function()
   typeKeychainEntry('QS_2_creds', 'account')
 end)
-hs.hotkey.bind(hyper, "x", function()
+hyper:bind({}, 'x', nil, function()
   typeKeychainEntry('QS_2_creds', 'password')
 end)
 
