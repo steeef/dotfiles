@@ -29,7 +29,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_control"
+                                        "key_code": "right_control"
                                     }
                                 ],
                                 "to_if_alone": [
