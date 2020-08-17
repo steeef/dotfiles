@@ -43,7 +43,6 @@
     "python.linting.flake8Args": [
         "--max-line-length=120"
     ],
-    "python.pythonPath": "~/.pyenv/versions/3.7.4/bin/python",
     "vim.useSystemClipboard": true,
     "vim.leader": "<space>",
     "vim.normalModeKeyBindingsNonRecursive": [
@@ -133,5 +132,6 @@
     },
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
-    "go.useLanguageServer": true
+    "go.useLanguageServer": true,
+    "python.defaultInterpreterPath": "~/.pyenv/shims/python"
 }
