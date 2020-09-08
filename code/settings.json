@@ -133,5 +133,6 @@
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
     "go.useLanguageServer": true,
-    "python.defaultInterpreterPath": "~/.pyenv/shims/python"
+    "python.defaultInterpreterPath": "~/.pyenv/shims/python",
+    "editor.accessibilitySupport": "on"
 }
