@@ -36,6 +36,13 @@ hyper:bind({}, '0', nil, function()
   end)
 end)
 
+-- system sleep
+hyper:bind({'ctrl'}, '0', nil, function()
+  hs.timer.doAfter(1, function()
+    hs.caffeinate.systemSleep()
+  end)
+end)
+
 -- Applications
 hyper:bind({}, 'f', nil, function()
   hs.application.launchOrFocus('Finder')
