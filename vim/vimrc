@@ -86,7 +86,11 @@ silent! call plug#end()
 
 set modelines=0
 set encoding=utf-8
-set scrolloff=999
+
+" setting to roughly winheight/2 + 2 due to bug in recent Vim 8.2 version
+" https://github.com/junegunn/fzf.vim/issues/980
+set scrolloff=50
+
 set cmdheight=2
 set showmode
 set showcmd
@@ -537,6 +541,7 @@ let g:gitgutter_map_keys = 0
 "}}}
 
 " fzf -------------------------------------------------------------------------"{{{
+
 " Files with preview
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
