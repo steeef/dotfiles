@@ -21,14 +21,14 @@ PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
 RUBY_GEMFILE="${HOME}/.dotfiles/Gemfile"
 
 RUBY_VERSIONS=(
-  2.7.1
+  2.7.2
 )
-RUBY_DEFAULT=2.7.1
+RUBY_DEFAULT=2.7.2
 
 NODE_VERSIONS=(
-  12.16.2
+  12.19.0
 )
-NODE_DEFAULT=12.16.2
+NODE_DEFAULT=12.19.0
 
 COC_EXTENSIONS_PATH="${HOME}/.config/coc/extensions"
 COC_EXTENSIONS=(
