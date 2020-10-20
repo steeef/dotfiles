@@ -703,7 +703,7 @@
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>1280 0 1276 1417 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1280 0 1276 1417 0 0 2560 1417 </string>
+	<string>1280 0 1487 1417 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>1282 0 1276 1417 0 0 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_C2F20648-6DD5-4E7C-AA3E-4B9A29CBE325</key>
@@ -1429,7 +1429,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>F1D8E76B-7439-44A4-B147-E5B510144FCA</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>138</integer>
+	<integer>150</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2228,7 +2228,7 @@
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>VisualIndicatorForEsc</key>
