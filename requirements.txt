@@ -9,4 +9,5 @@
   isort
   neovim
   neovim-remote; python_version > '3'
+  requests
   virtualenv
