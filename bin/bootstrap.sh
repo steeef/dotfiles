@@ -152,21 +152,7 @@ done
 
 # set default
 (pyenv global | grep -q '^'"${PYTHON_DEFAULT}"'$') \
-  || pyenv global  ${PYTHON_DEFAULT}
+  || pyenv global "${PYTHON_DEFAULT}"
 
 # coc terraform-lsp install
 "${HOME}/.bin/terraform-lsp_install.sh"
-
-# base16-shell setup
-base16dir="${HOME}/code/base16-shell"
-base16repo="https://github.com/chriskempson/base16-shell.git"
-mkdir -p "${base16dir}"
-(cd "${base16dir}" && git rev-parse --git-dir);GITCLONEDERR=$?
-if [ $GITCLONEDERR == 0 ]; then
-  echo "INFO: Updating base16-shell"
-  (cd "${base16dir}" && git pull)
-else
-  echo "INFO: Installing base16-shell"
-  rm -rf "${base16dir}"
-  git clone ${base16repo} "${base16dir}"
-fi

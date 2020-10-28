@@ -16,12 +16,17 @@ if ! zgen saved; then
   # directories.
   zgen load supercrabtree/k
 
+  # fzf
   zgen load junegunn/fzf shell/completion.zsh
   zgen load junegunn/fzf shell/key-bindings.zsh
 
   zgen load blimmer/zsh-aws-vault
 
   zgen load davidparsson/zsh-pyenv-lazy
+
+  # colorschemes
+  zgen load chrissicool/zsh-256color
+  zgen load chriskempson/base16-shell
 
   zgen bin clvv/fasd
 
