@@ -139,11 +139,11 @@ done
 
 # set default
 (pyenv global | grep -q '^'"${PYTHON_DEFAULT}"'$') \
-  || pyenv global "${PYTHON_DEFAULT}"
+  || pyenv global ${PYTHON_DEFAULT}
 
 # coc terraform-lsp install
 "${HOME}/.bin/terraform-lsp_install.sh"
 
 # vim plug install
-curl -fLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
+curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
