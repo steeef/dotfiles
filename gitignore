@@ -10,6 +10,8 @@ maid/maid.log
 log/.zsh_history
 projects.zsh
 doc/tags*
+vim/autoload/plug.vim
+vim/autoload/plug.vim.old
 vim/black
 vim/doc/bundles.txt
 vim/doc/bundle-log.txt
