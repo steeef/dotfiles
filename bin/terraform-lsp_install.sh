@@ -19,7 +19,7 @@ if ! command -v terraform-lsp >/dev/null 2>&1 \
 
   TERRAFORM_LSP_DOWNLOAD_DIR="$(mktemp -d)"
   (curl -fsSL "${TERRAFORM_LSP_URL}" -o "${TERRAFORM_LSP_DOWNLOAD_DIR}/terraform-lsp.tar.gz" \
-    && cd ${TERRAFORM_LSP_DOWNLOAD_DIR} \
+    && cd "${TERRAFORM_LSP_DOWNLOAD_DIR}" \
     && echo "${TERRAFORM_LSP_CHECKSUM} *terraform-lsp.tar.gz" | gsha256sum -c - \
     && tar zxf terraform-lsp.tar.gz \
     && mv "${TERRAFORM_LSP_DOWNLOAD_DIR}/terraform-lsp" "${HOME}/bin/terraform-lsp")
