@@ -26,4 +26,7 @@ if ! zgen saved; then
   zgen bin clvv/fasd
 
   zgen save
+
+  zgen compile "${HOME}/.zshrc"
+  zgen compile "${ZSHDIR}"
 fi

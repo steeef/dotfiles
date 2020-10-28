@@ -17,3 +17,5 @@ vim/.netrwhist
 vim/Trashed-Bundles
 oh-my-zsh/cache
 tmux/resurrect
+zsh/**/*.zwc
+zsh/.zsh_history

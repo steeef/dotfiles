@@ -1,5 +1,5 @@
-ZDOTDIR="${HOME}/.zsh"
-export ZDOTDIR
+ZSHDIR="${HOME}/.zsh"
+export ZSHDIR
 ZGEN_COMPINIT_FLAGS='-i'
 ZGEN_CUSTOM_COMPDUMP="${HOME}/.zcompdump_${ZSH_VERSION}"
 
@@ -38,16 +38,16 @@ export PATH
 
 # Load and recompile before plugins
 setopt nullglob
-for file in ${ZDOTDIR}/before/*.zsh; do
+for file in ${ZSHDIR}/before/*.zsh; do
   source "${file}"
 done
 unsetopt nullglob
 
-[ -f "${ZDOTDIR}/zgenom_setup.zsh" ] && source "${ZDOTDIR}/zgenom_setup.zsh"
+[ -f "${ZSHDIR}/zgenom_setup.zsh" ] && source "${ZSHDIR}/zgenom_setup.zsh"
 
 # Load and recompile after plugins
 setopt nullglob
-for file in ${ZDOTDIR}/after/*.zsh; do
+for file in ${ZSHDIR}/after/*.zsh; do
   source "${file}"
 done
 unsetopt nullglob
