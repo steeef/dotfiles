@@ -16,25 +16,8 @@ PYTHON_VERSIONS=(
   3.8.6
   3.9.0
 )
-PYTHON_DEFAULT=3.9.0
+PYTHON_DEFAULT="3.9.0 3.8.6 2.7.17"
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
-
-RUBY_GEMFILE="${HOME}/.dotfiles/Gemfile"
-
-RUBY_VERSIONS=(
-  2.7.2
-)
-RUBY_DEFAULT=2.7.2
-
-NODE_VERSIONS=(
-  12.19.0
-)
-NODE_DEFAULT=12.19.0
-
-COC_EXTENSIONS_PATH="${HOME}/.config/coc/extensions"
-COC_EXTENSIONS=(
-  bash-language-server
-)
 
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
@@ -147,10 +130,8 @@ else
   "${FZFDIR}/install" --key-bindings --completion --no-update-rc
 fi
 
-eval "$(command nodenv init -)"
 eval "$(command pyenv init -)"
 eval "$(command pyenv virtualenv-init -)"
-eval "$(command rbenv init -)"
 
 # Install python versions and setup for Neovim
 for python in "${PYTHON_VERSIONS[@]}"; do
@@ -177,35 +158,6 @@ done
 (pyenv global | grep -q '^'${PYTHON_DEFAULT}'$') \
   || pyenv global  ${PYTHON_DEFAULT}
 
-# now node
-for node in "${NODE_VERSIONS[@]}"; do
-  (nodenv versions --bare --skip-aliases | grep -q "^${node}\$") \
-  || nodenv install "${node}"
-  (nodenv shell "${node}" && npm install -g yarn && nodenv shell --unset)
-done
-
-# set default
-(nodenv global | grep -q '^'${NODE_DEFAULT}'$') \
-  || nodenv global ${NODE_DEFAULT}
-
-# now ruby
-for ruby in "${RUBY_VERSIONS[@]}"; do
-  (rbenv versions --bare --skip-aliases | grep -q "^${ruby}\$") \
-  || rbenv install "${ruby}"
-done
-
-# set default
-(rbenv global | grep -q '^'${RUBY_DEFAULT}'$') \
-  || rbenv global ${RUBY_DEFAULT}
-
-bundle install --gemfile="${RUBY_GEMFILE}"
-
-# coc language server installs
-mkdir -p "${COC_EXTENSIONS_PATH}"
-for extension in "${COC_EXTENSIONS[@]}"; do
-  (cd  "${COC_EXTENSIONS_PATH}" && npm install "${extension}")
-done
-
 # coc terraform-lsp install
 "${HOME}/.bin/terraform-lsp_install.sh"
 
@@ -221,18 +173,4 @@ else
   echo "INFO: Installing base16-shell"
   rm -rf "${base16dir}"
   git clone ${base16repo} "${base16dir}"
-fi
-
-# prezto setup
-preztodir="${HOME}/.zprezto"
-preztorepo="https://github.com/sorin-ionescu/prezto.git"
-mkdir -p "${preztodir}"
-(cd "${preztodir}" && git rev-parse --git-dir);GITCLONEDERR=$?
-if [ $GITCLONEDERR == 0 ]; then
-  echo "INFO: Updating prezto"
-  (cd "${preztodir}" && git pull --recurse-submodules)
-else
-  echo "INFO: Installing prezto"
-  rm -rf "${preztodir}"
-  git clone --recursive ${preztorepo} "${preztodir}"
 fi
