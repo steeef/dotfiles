@@ -1,6 +1,6 @@
 alias h='cd ~'
-alias ll='ls -l'
-alias lr='ls -ltr'
+alias ll='ls -la'
+alias lr='ls -latr'
 
 alias s='ssh'
 alias v='vim'
