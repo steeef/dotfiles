@@ -24,7 +24,7 @@ unsetopt hist_beep
 
 HISTSIZE=100000
 SAVEHIST=100000
-export HISTFILE="${ZDOTDIR:-$HOME}/.zhistory" # The path to the history file.
+export HISTFILE="${HOME}/.zhistory" # The path to the history file.
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
 bindkey -v # vi mode
