@@ -82,7 +82,7 @@ ensure_link "vim"                ".vim"
 ensure_link "vim/vimrc"          ".vimrc"
 ensure_link "zpreztorc"          ".zpreztorc"
 ensure_link "zsh"                ".zsh"
-ensure_link "zshrc"              ".zshrc"
+ensure_link "zsh/zshrc"          ".zshrc" "force"
 ensure_link "ideavimrc"          ".ideavimrc"
 
 if [ "$(uname)" = "Darwin" ]; then
@@ -108,10 +108,6 @@ if [ "$(uname)" = "Darwin" ]; then
 
   OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
   DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
-
-  # fzf install
-  [ -f "/usr/local/opt/fzf/install" ] \
-    && /usr/local/opt/fzf/install --key-bindings --completion --no-update-rc
 else
   FZFDIR="${HOME}/.fzf"
   if (cd "${FZFDIR}" && git rev-parse --git-dir >/dev/null 2>&1); then
@@ -155,7 +151,7 @@ for python in "${PYTHON_VERSIONS[@]}"; do
 done
 
 # set default
-(pyenv global | grep -q '^'${PYTHON_DEFAULT}'$') \
+(pyenv global | grep -q '^'"${PYTHON_DEFAULT}"'$') \
   || pyenv global  ${PYTHON_DEFAULT}
 
 # coc terraform-lsp install

@@ -1,0 +1,53 @@
+ZDOTDIR="${HOME}/.zsh"
+export ZDOTDIR
+ZGEN_COMPINIT_FLAGS='-i'
+ZGEN_CUSTOM_COMPDUMP="${HOME}/.zcompdump_${ZSH_VERSION}"
+
+export EDITOR='vim'
+
+# correct spelling for commands
+setopt correct
+# turn off correct for filenames
+unsetopt correctall
+
+# history options
+setopt hist_expire_dups_first
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
+unsetopt hist_beep
+
+HISTSIZE=100000
+SAVEHIST=100000
+export HISTFILE="${ZDOTDIR:-$HOME}/.zhistory" # The path to the history file.
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+
+bindkey -v # vi mode
+bindkey "^R" history-incremental-search-backward
+# PageUp/Down search history to complete command
+bindkey "^[[I" history-beginning-search-backward
+bindkey "^[[G" history-beginning-search-forward
+
+# Load and recompile before plugins
+setopt nullglob
+for file in ${ZDOTDIR}/before/*.zsh; do
+  source "${file}"
+done
+unsetopt nullglob
+
+[ -f "${ZDOTDIR}/zgenom_setup.zsh" ] && source "${ZDOTDIR}/zgenom_setup.zsh"
+
+# Load and recompile after plugins
+setopt nullglob
+for file in ${ZDOTDIR}/after/*.zsh; do
+  source "${file}"
+done
+unsetopt nullglob
+
+# starship prompt
+eval "$(starship init zsh)"
