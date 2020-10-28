@@ -135,19 +135,6 @@ for python in "${PYTHON_VERSIONS[@]}"; do
     || (export DYLD_LIBRARY_PATH; pyenv install "${python}")
   (PYENV_VERSION="${python}" pip install --upgrade pip)
   (PYENV_VERSION="${python}" pip install --upgrade -r "${PYTHON_MODULES}")
-  venv="neovim$(echo "${python}" | cut -d'.' -f1)"
-  pyenv virtualenv "${python}" "${venv}"
-  (pyenv activate "${venv}" && pip install --upgrade pip neovim && pyenv deactivate)
-  if [ "${venv}" = "neovim2" ]; then
-    var="g:python_host_prog"
-  elif [ "${venv}" = "neovim3" ]; then
-    var="g:python3_host_prog"
-  fi
-  if ! grep -q "^let ${var}=" "${HOME}/.config/nvim/python.vim"; then
-    touch "${HOME}/.config/nvim/python.vim"
-    echo "let ${var}='${HOME}/.pyenv/versions/${venv}/bin/python'" \
-    >> "${HOME}/.config/nvim/python.vim"
-  fi
 done
 
 # set default
