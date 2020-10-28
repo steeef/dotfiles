@@ -33,6 +33,9 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^[[I" history-beginning-search-backward
 bindkey "^[[G" history-beginning-search-forward
 
+PATH="${HOME}/bin:${HOME}/.bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
+export PATH
+
 # Load and recompile before plugins
 setopt nullglob
 for file in ${ZDOTDIR}/before/*.zsh; do
