@@ -20,7 +20,8 @@ if ! zgen saved; then
   zgen load junegunn/fzf shell/completion.zsh
   zgen load junegunn/fzf shell/key-bindings.zsh
 
-  zgen load blimmer/zsh-aws-vault
+  zgen load blimmer/zsh-aws-vault # aliases
+  zgen load reegnz/aws-vault-zsh-plugin # completion
 
   zgen load davidparsson/zsh-pyenv-lazy
 

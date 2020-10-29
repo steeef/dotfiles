@@ -14,4 +14,4 @@ function awslogin() {
   fi
 }
 alias avl='awslogin'
-alias ave='aws-vault exec --duration=1h'
+alias ave='aws-vault exec'
