@@ -13,6 +13,7 @@ PYTHON_VERSIONS=(
 PYTHON_DEFAULT="3.9.0 3.8.6 2.7.17"
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
 
+
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
     if [ "$3" = "force" ]; then
@@ -132,6 +133,8 @@ else
   if is_debian; then
     if "${DIR}/version-compare" distro_version 10; then
       sudo apt-get -y install ripgrep
+    else
+      "${DIR}/ripgrep_debian_install.sh"
     fi
   fi
 
