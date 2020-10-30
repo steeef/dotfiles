@@ -123,6 +123,23 @@ else
     git clone https://github.com/junegunn/fzf.git "${FZFDIR}"
   fi
   "${FZFDIR}/install" --key-bindings --completion --no-update-rc
+
+  # pyenv
+  PYENV_ROOT="${HOME}/.pyenv"
+  if (cd "${PYENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
+    (
+      cd "${PYENV_ROOT}" || return
+      git fetch
+      if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
+        git pull
+      fi
+    )
+  else
+    rm -rf "${PYENV_ROOT}"
+    mkdir -p "${PYENV_ROOT}"
+    git clone https://github.com/pyenv/pyenv.git "${PYENV_ROOT}"
+  fi
+  export PATH="$PYENV_ROOT/bin:$PATH"
 fi
 
 eval "$(command pyenv init -)"
