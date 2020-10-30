@@ -138,6 +138,9 @@ else
     fi
   fi
 
+  # install bfs
+  "${DIR}/bfs_install.sh"
+
   # fzf
   echo "INFO: Installing fzf"
   FZFDIR="${HOME}/.fzf"
