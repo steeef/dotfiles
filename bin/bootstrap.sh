@@ -131,7 +131,7 @@ else
   "${FZFDIR}/install" --key-bindings --completion --no-update-rc
 
   # pyenv
-  echo "INFO: Installing fzf"
+  echo "INFO: Installing pyenv"
   PYENV_ROOT="${HOME}/.pyenv"
   if (cd "${PYENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
@@ -148,6 +148,7 @@ else
   fi
   export PATH="$PYENV_ROOT/bin:$PATH"
 
+  echo "INFO: Installing pyenv-virtualenv"
   PYENV_VIRTUALENV_ROOT="${PYENV_ROOT}/plugins/pyenv-virtualenv"
   if (cd "${PYENV_VIRTUALENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
@@ -167,7 +168,7 @@ fi
 eval "$(command pyenv init -)"
 eval "$(command pyenv virtualenv-init -)"
 
-# Install python versions and setup for Neovim
+# Install python versions
 for python in "${PYTHON_VERSIONS[@]}"; do
   (pyenv versions --bare --skip-aliases | grep -q "^${python}\$") \
     || (export DYLD_LIBRARY_PATH; pyenv install "${python}")
