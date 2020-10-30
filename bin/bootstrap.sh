@@ -10,7 +10,12 @@ PYTHON_VERSIONS=(
   3.8.6
   3.9.0
 )
-PYTHON_DEFAULT="3.9.0 3.8.6 2.7.17"
+PYTHON_DEFAULT=(
+  3.9.0
+  3.8.6
+  2.7.17
+)
+
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
 
 
@@ -22,23 +27,6 @@ function ensure_link {
       ln -s "$HOME/.dotfiles/$1" "$HOME/$2"
     fi
   fi
-}
-
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
-distro_and_version="$("${DIR}/get-distro")"
-
-function is_macos {
-  [[ ${distro_and_version} =~ ^MacOS .*$ ]]
-}
-
-function is_debian {
-  [[ ${distro_and_version} =~ ^Debian .*$ ]]
-}
-
-function distro_version {
-  echo "$(echo "${distro_and_version}" | awk '{print $2}')"
 }
 
 mkdir -p "${HOME}/.config"
@@ -90,6 +78,24 @@ ensure_link "vim/vimrc"          ".vimrc"
 ensure_link "zsh"                ".zsh"
 ensure_link "zsh/zshrc"          ".zshrc" "force"
 ensure_link "ideavimrc"          ".ideavimrc"
+
+PATH="${HOME}/bin:${HOME}/.bin:${PATH}"
+export PATH
+
+distro_and_version="$(get-distro)"
+
+function is_macos() {
+  [[ $distro_and_version =~ MacOS ]]
+}
+
+function is_debian() {
+  [[ $distro_and_version =~ Debian ]]
+}
+
+function distro_version() {
+  echo "$(echo "${distro_and_version}" | awk '{print $2}')"
+}
+
 if is_macos; then
   ensure_link "code/settings.json" "Library/Application Support/Code/User/settings.json"
   ensure_link "code/settings.json" "Library/Application Support/Code - Insiders/User/settings.json"
@@ -131,15 +137,16 @@ else
 
   # install ripgrep
   if is_debian; then
-    if "${DIR}/version-compare" distro_version 10; then
+    if version-compare distro_version 10; then
       sudo apt-get -y install ripgrep
     else
-      "${DIR}/ripgrep_debian_install.sh"
+      ripgrep_debian_install.sh
     fi
   fi
 
   # install bfs
-  "${DIR}/bfs_install.sh"
+  sudo apt-get -y install acl-dev libcap-dev
+  bfs_install.sh
 
   # fzf
   echo "INFO: Installing fzf"
@@ -206,8 +213,7 @@ for python in "${PYTHON_VERSIONS[@]}"; do
 done
 
 # set default
-(pyenv global | grep -q '^'"${PYTHON_DEFAULT}"'$') \
-  || pyenv global ${PYTHON_DEFAULT}
+pyenv global "${PYTHON_DEFAULT[@]}"
 
 # coc terraform-lsp install
 "${HOME}/.bin/terraform-lsp_install.sh"
