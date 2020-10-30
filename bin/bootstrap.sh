@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #
 # requirements:
 # - zsh
@@ -21,6 +21,15 @@ function ensure_link {
       ln -s "$HOME/.dotfiles/$1" "$HOME/$2"
     fi
   fi
+}
+
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+distro_and_version="$("${DIR}/get-distro")"
+
+function is_macos {
+  return [[ ${distro_and_version} =~ ^MacOS .*$ ]]
 }
 
 mkdir -p "${HOME}/.config"
@@ -72,8 +81,7 @@ ensure_link "vim/vimrc"          ".vimrc"
 ensure_link "zsh"                ".zsh"
 ensure_link "zsh/zshrc"          ".zshrc" "force"
 ensure_link "ideavimrc"          ".ideavimrc"
-
-if [ "$(uname)" = "Darwin" ]; then
+if is_macos; then
   ensure_link "code/settings.json" "Library/Application Support/Code/User/settings.json"
   ensure_link "code/settings.json" "Library/Application Support/Code - Insiders/User/settings.json"
   ensure_link "code/keybindings.json" "Library/Application Support/Code/User/keybindings.json"
@@ -82,7 +90,7 @@ if [ "$(uname)" = "Darwin" ]; then
   ensure_link "code/snippets" "Library/Application Support/Code - Insiders/User/snippets"
 fi
 
-if [ "$(uname)" = "Darwin" ]; then
+if is_macos; then
   echo "INFO: Copying fonts."
   rsync -aW "${HOME}/.dotfiles/fonts/" ~/Library/Fonts/
   # install XCode Command Line Tools if not installed
