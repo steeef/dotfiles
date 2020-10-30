@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+current_version="$1"
+required_version="$2"
+
+if [ $# -lt 2 ]; then
+  echo "USAGE: $(basename "$0") <current_version> <required_version"
+  exit 2
+fi
+
+if [ "$(printf '%s\n' "${required_version}" "${current_version}" | sort -V | head -n1)" = "${required_version}" ]; then
+      exit 0
+else
+      exit 1
+fi

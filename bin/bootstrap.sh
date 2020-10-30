@@ -29,7 +29,15 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 distro_and_version="$("${DIR}/get-distro")"
 
 function is_macos {
-  return [[ ${distro_and_version} =~ ^MacOS .*$ ]]
+  [[ ${distro_and_version} =~ ^MacOS .*$ ]]
+}
+
+function is_debian {
+  [[ ${distro_and_version} =~ ^Debian .*$ ]]
+}
+
+function distro_version {
+  echo "$(echo "${distro_and_version}" | awk '{print $2}')"
 }
 
 mkdir -p "${HOME}/.config"
@@ -114,9 +122,18 @@ if is_macos; then
   OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
   DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
 else
+  sudo apt-get update
+
   # starship
   echo "INFO: Installing starship"
   curl -fsSL https://starship.rs/install.sh | bash
+
+  # install ripgrep
+  if is_debian; then
+    if "${DIR}/version-compare" distro_version 10; then
+      sudo apt-get -y install ripgrep
+    fi
+  fi
 
   # fzf
   echo "INFO: Installing fzf"
