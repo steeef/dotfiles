@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 #
 # requirements:
-# MacOS/Linux:
-# - fasd
-# - openssl@1.1
 # - zsh
-# Linux:
-# - pyenv
-# - pyenv-virtualenv
 
 set -e
 
