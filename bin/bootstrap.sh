@@ -43,12 +43,6 @@ ensure_link "bash"               ".bash"
 ensure_link "bashrc"             ".bashrc" "force"
 ensure_link "beets/config.yaml"  ".config/beets/config.yaml" "force"
 ensure_link "bin"                ".bin"
-ensure_link "code/settings.json" "Library/Application Support/Code/User/settings.json"
-ensure_link "code/settings.json" "Library/Application Support/Code - Insiders/User/settings.json"
-ensure_link "code/keybindings.json" "Library/Application Support/Code/User/keybindings.json"
-ensure_link "code/keybindings.json" "Library/Application Support/Code - Insiders/User/keybindings.json"
-ensure_link "code/snippets" "Library/Application Support/Code/User/snippets"
-ensure_link "code/snippets" "Library/Application Support/Code - Insiders/User/snippets"
 ensure_link "editorconfig"       ".editorconfig"
 ensure_link "fonts"              ".fonts"
 ensure_link "gemrc"              ".gemrc"
@@ -80,6 +74,15 @@ ensure_link "vim/vimrc"          ".vimrc"
 ensure_link "zsh"                ".zsh"
 ensure_link "zsh/zshrc"          ".zshrc" "force"
 ensure_link "ideavimrc"          ".ideavimrc"
+
+if [ "$(uname)" = "Darwin" ]; then
+  ensure_link "code/settings.json" "Library/Application Support/Code/User/settings.json"
+  ensure_link "code/settings.json" "Library/Application Support/Code - Insiders/User/settings.json"
+  ensure_link "code/keybindings.json" "Library/Application Support/Code/User/keybindings.json"
+  ensure_link "code/keybindings.json" "Library/Application Support/Code - Insiders/User/keybindings.json"
+  ensure_link "code/snippets" "Library/Application Support/Code/User/snippets"
+  ensure_link "code/snippets" "Library/Application Support/Code - Insiders/User/snippets"
+fi
 
 if [ "$(uname)" = "Darwin" ]; then
   echo "INFO: Copying fonts."
