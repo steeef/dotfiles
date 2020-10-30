@@ -61,7 +61,9 @@ if exists(":PlugInstall")
   Plug 'mtth/scratch.vim',       { 'on': 'Scratch' }
 
   " coc and extensions
-  Plug 'neoclide/coc.nvim',    { 'branch': 'release'}
+  if v:version >= 802
+    Plug 'neoclide/coc.nvim',    { 'branch': 'release'}
+  endif
 
   " colorschemes
   Plug 'chriskempson/base16-vim',
