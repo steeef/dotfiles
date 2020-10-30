@@ -108,6 +108,12 @@ if [ "$(uname)" = "Darwin" ]; then
   OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
   DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
 else
+  # starship
+  echo "INFO: Installing starship"
+  curl -fsSL https://starship.rs/install.sh | bash
+
+  # fzf
+  echo "INFO: Installing fzf"
   FZFDIR="${HOME}/.fzf"
   if (cd "${FZFDIR}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
@@ -125,6 +131,7 @@ else
   "${FZFDIR}/install" --key-bindings --completion --no-update-rc
 
   # pyenv
+  echo "INFO: Installing fzf"
   PYENV_ROOT="${HOME}/.pyenv"
   if (cd "${PYENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
