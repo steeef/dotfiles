@@ -133,7 +133,8 @@ else
 
   # starship
   echo "INFO: Installing starship"
-  curl -fsSL https://starship.rs/install.sh | bash
+  curl -fsSL https://starship.rs/install.sh \
+    | bash -s -- --force --bin-dir "${HOME}/bin"
 
   # install ripgrep
   if is_debian; then
