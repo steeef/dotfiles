@@ -20,6 +20,6 @@ if ! command -v rg >/dev/null 2>&1 \
   RIPGREP_DOWNLOAD_DIR="$(mktemp -d)"
   (curl -fsSL "${RIPGREP_URL}" -o "${RIPGREP_DOWNLOAD_DIR}/ripgrep.deb" \
     && cd "${RIPGREP_DOWNLOAD_DIR}" \
-    && echo "${RIPGREP_CHECKSUM} *terraform-lsp.tar.gz" | sha256sum -c - \
+    && echo "${RIPGREP_CHECKSUM} *ripgrep.deb" | sha256sum -c - \
     && sudo dpkg -i ripgrep.deb)
 fi
