@@ -1,15 +1,11 @@
 #!/usr/bin/env bash
 #
 # requirements:
-# - fasd
-# - node-build
-# - nodenv
 # - openssl@1.1
 # - pyenv
 # - pyenv-virtualenv
-# - rbenv
-# - ruby-build
-#
+
+set -e
 
 PYTHON_VERSIONS=(
   2.7.17
