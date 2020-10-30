@@ -4,7 +4,7 @@ set -e
 
 BFS_VERSION="2.0"
 BFS_URL="https://github.com/tavianator/bfs/archive/${BFS_VERSION}.tar.gz"
-BFS_CHECKSUM="97266bc48c082caa344f1c349fa08ef87b252b692e1b7d2362cb7f641bf3582d"
+BFS_CHECKSUM="afbde70742f4bac3f3b030b36531fe0bd67dbdda61ce0457f3a1e5681405df33"
 
 function cleanup {
   if [ -d "${BFS_DOWNLOAD_DIR}" ]; then
