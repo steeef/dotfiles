@@ -83,6 +83,7 @@ PATH="${HOME}/bin:${HOME}/.bin:${PATH}"
 export PATH
 
 distro_and_version="$(get-distro)"
+distro_version="$(echo "${distro_and_version}" | awk '{print $2}')"
 
 function is_macos() {
   [[ $distro_and_version =~ MacOS ]]
@@ -90,10 +91,6 @@ function is_macos() {
 
 function is_debian() {
   [[ $distro_and_version =~ Debian ]]
-}
-
-function distro_version() {
-  echo "$(echo "${distro_and_version}" | awk '{print $2}')"
 }
 
 if is_macos; then
@@ -138,7 +135,7 @@ else
 
   # install ripgrep
   if is_debian; then
-    if version-compare distro_version 10; then
+    if version-compare ${distro_version} 10; then
       sudo apt-get -y install ripgrep
     else
       ripgrep_debian_install.sh
