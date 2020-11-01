@@ -125,6 +125,8 @@ if is_macos; then
 
   OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
   DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
+
+  macos_setup.sh
 else
   sudo apt-get update
 
