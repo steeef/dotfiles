@@ -148,24 +148,6 @@ else
   sudo apt-get -y install acl-dev libcap-dev
   bfs_install.sh
 
-  # fzf
-  echo "INFO: Installing fzf"
-  FZFDIR="${HOME}/.fzf"
-  if (cd "${FZFDIR}" && git rev-parse --git-dir >/dev/null 2>&1); then
-    (
-      cd "${FZFDIR}" || return
-      git fetch
-      if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
-        git pull
-      fi
-    )
-  else
-    rm -rf "${FZFDIR}"
-    mkdir -p "${FZFDIR}"
-    git clone https://github.com/junegunn/fzf.git "${FZFDIR}"
-  fi
-  "${FZFDIR}/install" --key-bindings --completion --no-update-rc
-
   # pyenv
   echo "INFO: Installing pyenv"
   PYENV_ROOT="${HOME}/.pyenv"
