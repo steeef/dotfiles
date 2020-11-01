@@ -30,6 +30,7 @@ if ! zgen saved; then
   zgen load chriskempson/base16-shell
 
   zgen bin clvv/fasd
+  zgen bin junegunn/fzf
 
   zgen save
 
