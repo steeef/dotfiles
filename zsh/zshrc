@@ -27,6 +27,35 @@ SAVEHIST=100000
 export HISTFILE="${HOME}/.zhistory" # The path to the history file.
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
+# Add some completions settings
+setopt ALWAYS_TO_END     # Move cursor to the end of a completed word.
+setopt AUTO_LIST         # Automatically list choices on ambiguous completion.
+setopt AUTO_MENU         # Show completion menu on a successive tab press.
+setopt AUTO_PARAM_SLASH  # If completed parameter is a directory, add a trailing slash.
+setopt COMPLETE_IN_WORD  # Complete from both ends of a word.
+unsetopt MENU_COMPLETE   # Do not autoselect the first completion entry.
+
+# Miscellaneous settings
+setopt INTERACTIVE_COMMENTS  # Enable comments in interactive shell.
+
+# Long running processes should return time after they complete. Specified
+# in seconds.
+REPORTTIME=2
+TIMEFMT="%U user %S system %P cpu %*Es total"
+
+# Expand aliases inline - see http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
+globalias() {
+   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+     zle _expand_alias
+     zle expand-word
+   fi
+   zle self-insert
+}
+
+zle -N globalias
+
+bindkey " " globalias
+
 bindkey -v # vi mode
 bindkey "^R" history-incremental-search-backward
 # PageUp/Down search history to complete command
