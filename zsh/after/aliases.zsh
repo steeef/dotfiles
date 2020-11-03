@@ -3,7 +3,6 @@ alias ll='ls -la'
 alias lr='ls -latr'
 
 alias s='ssh'
-alias v='vim'
 
 # git
 alias g='git'
@@ -26,3 +25,8 @@ alias gbpurge='git branch --merged | grep -Ev "(\*|main|master|feature|develop|s
 alias d='docker'
 alias drm='docker rm $(docker ps -a -q)'
 alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
+
+# vim
+alias v='vim'
+alias plugupgrade='vim +PlugUpgrade +qall'
+alias plugupdate='vim +PlugUpdate +qall'
