@@ -2,6 +2,8 @@ fonts/.uuid
 vim/bundle/
 vim/sessions/
 vim/.netrwhist
+vim/autoload/plug.vim
+vim/autoload/plug.vim.old
 maid/maid.log
 tmux/plugins/
 !tmux/plugins/tpm/
