@@ -11,6 +11,8 @@ if ! zgen saved; then
 
   zgen load jandamm/vi-mode.zsh # Show line cursor in vi mode
 
+  zgen load larkery/zsh-histdb
+
   # k is a zsh script / plugin to make directory listings more readable,
   # adding a bit of color and some git status information on files and
   # directories.
