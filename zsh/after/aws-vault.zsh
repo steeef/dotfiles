@@ -1,6 +1,8 @@
 export AWS_VAULT_KEYCHAIN_NAME=login
 export AWS_VAULT_PROMPT=ykman
 
+# open AWS Console in a separate Firefox profile (so I can customize things
+# like color and title bar in a disowned process)
 function awslogin() {
   url="$(aws-vault login --duration=8h --no-session ${1} --stdout)"
   if [[ ${url} =~ ^https://.* ]]; then
@@ -8,7 +10,7 @@ function awslogin() {
       -no-remote  -foreground \
       -profile "${HOME}/Library/Application Support/Firefox/Profiles/aws_${1}" \
       -P "aws_${1}" \
-      -new-window "${url}" >/dev/null 2>&1 &
+      -new-window "${url}" >/dev/null 2>&1 &!
   else
     echo "ERROR: ${url}"
   fi
