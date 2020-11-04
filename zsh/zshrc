@@ -58,6 +58,10 @@ zle -N globalias
 bindkey " " globalias
 
 bindkey -v # vi mode
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd "^V" edit-command-line # open vim to edit command
+
 bindkey "^R" history-incremental-search-backward
 # PageUp/Down search history to complete command
 bindkey "^[[I" history-beginning-search-backward
