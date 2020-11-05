@@ -39,6 +39,8 @@ unsetopt MENU_COMPLETE   # Do not autoselect the first completion entry.
 # Miscellaneous settings
 setopt INTERACTIVE_COMMENTS  # Enable comments in interactive shell.
 
+setopt AUTO_CD # cd to directory if not a command
+
 # Long running processes should return time after they complete. Specified
 # in seconds.
 REPORTTIME=2
@@ -66,6 +68,12 @@ bindkey "^R" history-incremental-search-backward
 # PageUp/Down search history to complete command
 bindkey "^[[I" history-beginning-search-backward
 bindkey "^[[G" history-beginning-search-forward
+
+# Speed up autocomplete, force prefix mapping
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zcache
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==34=34}:${(s.:.)LS_COLORS}")';
 
 PATH="${HOME}/bin:${HOME}/.bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export PATH
