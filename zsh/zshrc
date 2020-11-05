@@ -26,7 +26,7 @@ unsetopt hist_beep
 HISTSIZE=100000
 SAVEHIST=100000
 export HISTFILE="${HOME}/.zhistory" # The path to the history file.
-export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+export HISTORY_IGNORE="(ls|cd|cd ..|h|fc|pwd|exit|date|* --help)"
 
 # Add some completions settings
 setopt ALWAYS_TO_END     # Move cursor to the end of a completed word.
