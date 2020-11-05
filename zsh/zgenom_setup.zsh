@@ -32,6 +32,8 @@ if ! zgen saved; then
   zgen load chrissicool/zsh-256color
   zgen load chriskempson/base16-shell
 
+  zgen load romkatv/powerlevel10k powerlevel10k
+
   zgen bin clvv/fasd
   zgen bin junegunn/fzf
 
