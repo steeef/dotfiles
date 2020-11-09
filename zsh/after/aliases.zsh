@@ -29,4 +29,4 @@ alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 # vim
 alias v='vim'
 alias plugupgrade='vim +PlugUpgrade +qall'
-alias plugupdate='vim +PlugUpdate +qall'
+alias plugupdate='vim +PlugUpdate'
