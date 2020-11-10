@@ -404,6 +404,13 @@ if has("autocmd")
     autocmd!
     au BufRead,BufNewFile */ansible/**/*.y*ml set filetype=yaml.ansible
   augroup END
+
+  " terraform
+  augroup ft_terraform
+    autocmd!
+    autocmd FileType terraform set colorcolumn=120
+    autocmd FileType help setlocal textwidth=118
+  augroup END
 endif
 
 "}}}
