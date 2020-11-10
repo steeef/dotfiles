@@ -5,6 +5,8 @@ fi
 source "${ZGENOM_DIR}/zgenom.zsh"
 
 if ! zgen saved; then
+  zgen oh-my-zsh
+
   zgen load zsh-users/zsh-completions src # Load more completions
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-history-substring-search
@@ -12,11 +14,6 @@ if ! zgen saved; then
   zgen load jandamm/vi-mode.zsh # Show line cursor in vi mode
 
   zgen load larkery/zsh-histdb
-
-  # k is a zsh script / plugin to make directory listings more readable,
-  # adding a bit of color and some git status information on files and
-  # directories.
-  zgen load supercrabtree/k
 
   # fzf
   zgen load junegunn/fzf shell/completion.zsh
@@ -27,6 +24,8 @@ if ! zgen saved; then
   zgen load reegnz/aws-vault-zsh-plugin # completion
 
   zgen load davidparsson/zsh-pyenv-lazy
+
+  zgen load ohmyzsh/ohmyzsh plugins/kubectl
 
   # colorschemes
   zgen load chrissicool/zsh-256color
