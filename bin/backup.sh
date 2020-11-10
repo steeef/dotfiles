@@ -24,6 +24,7 @@ if ! command -v rdiff-backup >/dev/null 2>&1; then
 fi
 
 read -r -d '' include_list <<EOF
+${HOME}/code
 ${HOME}/.histdb
 ${HOME}/.zhistory
 - **
