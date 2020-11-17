@@ -411,6 +411,12 @@ if has("autocmd")
     autocmd FileType terraform set colorcolumn=120
     autocmd FileType help setlocal textwidth=118
   augroup END
+
+  " markdown
+  augroup ft_markdown
+    autocmd!
+    autocmd FileType markdown let b:surround_{char2nr('c')} = "```\r```"
+  augroup END
 endif
 
 "}}}
