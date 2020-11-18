@@ -5,8 +5,6 @@ fi
 source "${ZGENOM_DIR}/zgenom.zsh"
 
 if ! zgen saved; then
-  zgen oh-my-zsh
-
   zgen load zsh-users/zsh-completions src # Load more completions
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-history-substring-search
@@ -18,14 +16,15 @@ if ! zgen saved; then
   # fzf
   zgen load junegunn/fzf shell/completion.zsh
   zgen load junegunn/fzf shell/key-bindings.zsh
-  "${ZGEN_DIR}/junegunn/fzf-master/install" --bin
+  "${ZGEN_DIR}/junegunn/fzf-___/install" --bin
 
   zgen load blimmer/zsh-aws-vault # aliases
   zgen load reegnz/aws-vault-zsh-plugin # completion
 
   zgen load davidparsson/zsh-pyenv-lazy
 
-  zgen load ohmyzsh/ohmyzsh plugins/kubectl
+  zgen oh-my-zsh
+  zgen oh-my-zsh plugins/kubectl
 
   # colorschemes
   zgen load chrissicool/zsh-256color
