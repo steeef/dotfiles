@@ -25,6 +25,7 @@ if ! zgen saved; then
 
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/kubectl
+  zgen oh-my-zsh plugins/vi-mode
 
   # colorschemes
   zgen load chrissicool/zsh-256color
