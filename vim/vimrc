@@ -49,7 +49,7 @@ if exists(":PlugInstall")
   Plug 'jreybert/vimagit'
 
   " fzf plugin
-  Plug '~/.zgenom/junegunn/fzf-master'
+  Plug '~/.zgenom/sources/junegunn/fzf-___'
   Plug 'junegunn/fzf.vim'
 
   Plug 'junegunn/vim-easy-align'
