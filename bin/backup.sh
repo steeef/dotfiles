@@ -36,7 +36,7 @@ if [ -d "${destination}" ]; then
       "${source}" "${destination}" <<<"${include_list}"
 
     echo "INFO: Removing backups older than ${keep_days} days from ${destination}"
-    rdiff-backup "${rdiff_backup_opts[@]}" --remove-older-than "${keep_days}D" \
+    rdiff-backup "${rdiff_backup_opts[@]}" --force --remove-older-than "${keep_days}D" \
       "${destination}"
 else
   echo "ERROR: Destination directory ${destination} not found"
