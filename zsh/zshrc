@@ -96,7 +96,4 @@ for file in ${ZSHDIR}/after/*.zsh; do
 done
 unsetopt nullglob
 
-# starship prompt
-#eval "$(starship init zsh)"
-
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
