@@ -45,7 +45,7 @@ setopt AUTO_CD # cd to directory if not a command
 
 # Long running processes should return time after they complete. Specified
 # in seconds.
-REPORTTIME=2
+REPORTTIME=60
 TIMEFMT="%U user %S system %P cpu %*Es total"
 
 # Expand aliases inline - see http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
