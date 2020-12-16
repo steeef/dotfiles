@@ -596,6 +596,9 @@ let g:LatexBox_viewer = "open -a Skim"
 
 " coc-vim ---------------------------------------------------------------------"{{{
 
+" set node path
+let  g:coc_node_path = '~/.nodenv/versions/15.4.0/bin/node'
+
 let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ 'coc-lists',
