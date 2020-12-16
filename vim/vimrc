@@ -712,7 +712,7 @@ nnoremap <leader>g :Magit<Enter>
 "
 " vim-terraform ---------------------------------------------------------------"{{{
 
-let g:terraform_fmt_on_save = 1
+let g:terraform_fmt_on_save = 0
 let g:terraform_align = 1
 autocmd FileType terraform setlocal commentstring=#%s
 
@@ -720,7 +720,7 @@ autocmd FileType terraform setlocal commentstring=#%s
 
 " vim-go ----------------------------------------------------------------------"{{{
 
-let g:go_fmt_autosave = 1
+let g:go_fmt_autosave = 0
 
 "}}}
 
