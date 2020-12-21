@@ -7,6 +7,9 @@ export ZSH_COMPDUMP
 
 export EDITOR='vim'
 
+# disable oh-my-zsh update
+export DISABLE_AUTO_UPDATE='true'
+
 # correct spelling for commands
 setopt correct
 # turn off correct for filenames
