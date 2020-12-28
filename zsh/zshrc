@@ -80,7 +80,7 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zcache
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==34=34}:${(s.:.)LS_COLORS}")';
 
-PATH="${HOME}/bin:${HOME}/.bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
+PATH="${HOME}/bin:${HOME}/.bin:/usr/local/opt/ruby@2.7/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export PATH
 
 # Load and recompile before plugins

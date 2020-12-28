@@ -24,9 +24,9 @@ if [ "$(uname)" = "Darwin" ]; then
     --with-python3-command=${python_command}"
 
   # use ruby from Homebrew
-  export LDFLAGS="-L/usr/local/opt/ruby/lib"
-  export CPPFLAGS="-I/usr/local/opt/ruby/include"
-  export PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
+  export LDFLAGS="-L/usr/local/opt/ruby@2.7/lib"
+  export CPPFLAGS="-I/usr/local/opt/ruby@2.7/include"
+  export PKG_CONFIG_PATH="/usr/local/opt/ruby@2.7/lib/pkgconfig"
 
 fi
 
