@@ -8,11 +8,15 @@ function upgrade_versioned_casks() {
   unversioned_casks="$(brew list --cask --versions | grep -w 'latest' \
     | awk '{print $1}' | tr '\n' ' ')"
 
-  while read -r cask; do
-    if ! [[ ${unversioned_casks} =~ ${cask} ]]; then
-      brew upgrade --cask "${cask}"
-    fi
-  done <<< "${outdated_casks}"
+  if [ -n "${outdated_casks}" ]; then
+    echo "brew: upgrading casks:"
+    echo "${outdated_casks}"
+    while read -r cask; do
+      if ! [[ ${unversioned_casks} =~ ${cask} ]]; then
+        brew upgrade --cask "${cask}"
+      fi
+    done <<< "${outdated_casks}"
+  fi
 }
 alias bup='brew update; brew upgrade; upgrade_versioned_casks'
 alias bclean='brew cleanup'
