@@ -1,5 +1,6 @@
 kinesis.us-east-1.amazonaws.com
 amazonaws.com
+buff.ly
 fast.appcues.com
 gstaticadssl.l.google.com
 rpm.newrelic.com
