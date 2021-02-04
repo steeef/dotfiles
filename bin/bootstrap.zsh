@@ -8,10 +8,10 @@ set -e
 PYTHON_VERSIONS=(
   2.7.17
   3.8.6
-  3.9.0
+  3.9.1
 )
 PYTHON_DEFAULT=(
-  3.9.0
+  3.9.1
   3.8.6
   2.7.17
 )
