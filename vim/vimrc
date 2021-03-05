@@ -613,7 +613,7 @@ let g:coc_global_extensions = [
       \ 'coc-syntax',
       \ 'coc-emoji',
       \ 'coc-highlight',
-      \ 'coc-python',
+      \ 'coc-pyright',
       \ 'coc-git',
       \ 'coc-go',
       \ 'coc-docker',
