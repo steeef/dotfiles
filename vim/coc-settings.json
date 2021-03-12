@@ -29,6 +29,7 @@
     }
   },
   "python.formatting.provider": "black",
+  "python.jediEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": false,
   "python.sortImports.path": "isort",
