@@ -65,7 +65,7 @@ if exists(":PlugInstall")
   Plug 'chriskempson/base16-vim',
 
   " language-specific bundles
-  Plug 'avakhov/vim-yaml',         { 'for': 'yaml' }
+  Plug 'stephpy/vim-yaml',         { 'for': 'yaml' }
   Plug 'pearofducks/ansible-vim',  { 'for': 'yaml.ansible' }
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
   Plug 'tpope/vim-markdown',       { 'for': 'markdown' }
@@ -403,6 +403,7 @@ if has("autocmd")
   augroup ft_ansible
     autocmd!
     au BufRead,BufNewFile */ansible/**/*.y*ml set filetype=yaml.ansible
+    au BufRead,BufNewFile */ansible/*.y*ml set filetype=yaml.ansible
   augroup END
 
   " terraform
@@ -730,6 +731,21 @@ let g:go_fmt_autosave = 0
 " competor --------------------------------------------------------------------"{{{
 
 let g:completor_blacklist = ['tagbar', 'qf', 'netrw', 'unite', 'vimwiki', 'magit']
+
+"}}}
+
+" ansible-vim -----------------------------------------------------------------"{{{
+
+" ansible-vim: set indent to 0 after two newlines in insert-mode
+let g:ansible_unindent_after_newline = 1
+
+" ansible-vim settings
+let g:ansible_yamlKeyName = 'yamlKey'
+let g:ansible_attribute_highlight = 'od'
+let g:ansible_name_highlight = 'd'
+let g:ansible_extra_keywords_highlight = 1
+let g:ansible_normal_keywords_highlight = 'Constant'
+let g:ansible_with_keywords_highlight = 'Constant'
 
 "}}}
 
