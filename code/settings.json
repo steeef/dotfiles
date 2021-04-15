@@ -134,5 +134,11 @@
     "editor.fontLigatures": true,
     "go.useLanguageServer": true,
     "python.defaultInterpreterPath": "~/.pyenv/shims/python",
-    "editor.accessibilitySupport": "on"
+    "editor.accessibilitySupport": "on",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter-notebook",
+            "filenamePattern": "*.ipynb"
+        }
+    ]
 }
