@@ -23,7 +23,9 @@ end)
 -- paste as Markdown code
 hyper:bind({}, 'b', nil, function()
   hs.eventtap.keyStrokes("```")
-  hs.eventtap.keyStroke('cmd', 'v')
+  hs.timer.doAfter(1/5, function()
+    hs.eventtap.keyStroke('cmd', 'v')
+  end)
 end)
 
 -- Start Screensaver
