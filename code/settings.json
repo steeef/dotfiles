@@ -140,5 +140,9 @@
             "viewType": "jupyter-notebook",
             "filenamePattern": "*.ipynb"
         }
-    ]
+    ],
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    }
 }
