@@ -68,7 +68,6 @@ ensure_link "vim/autoload"       ".config/nvim/autoload"
 ensure_link "redshift"           ".config/redshift"
 ensure_link "screenrc"           ".screenrc"
 ensure_link "sshrc"              ".sshrc"
-ensure_link "starship.toml"      ".config/starship.toml"
 ensure_link "tmux"               ".tmux"
 ensure_link "tmux.conf"          ".tmux.conf"
 ensure_link "vim"                ".vim"
@@ -140,20 +139,6 @@ if is_macos; then
   macos_setup.sh
 else
   sudo apt-get update
-
-  # starship
-  echo "INFO: Installing starship"
-  curl -fsSL https://starship.rs/install.sh \
-    | bash -s -- --force --bin-dir "${HOME}/bin"
-
-  # install ripgrep
-  if is_debian; then
-    if version-compare ${distro_version} 10; then
-      sudo apt-get -y install ripgrep
-    else
-      ripgrep_debian_install.sh
-    fi
-  fi
 
   # install bfs
   sudo apt-get -y install acl-dev libcap-dev
