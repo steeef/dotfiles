@@ -101,7 +101,7 @@ set ruler
 set complete-=i     " Searching includes can be slow
 set dictionary+=/usr/share/dict/words
 if exists("+colorcolumn")
-  set colorcolumn=85
+  set colorcolumn=120
 endif
 
 " Always show the signcolumn, otherwise it would shift the text each time
@@ -136,7 +136,7 @@ set autoread
 " Wrapping
 set wrap
 set showbreak=↪\  " Character to precede line wraps
-set textwidth=79
+set textwidth=119
 
 " Prevent Vim from clearing the scrollback buffer
 " http://www.shallowsky.com/linux/noaltscreen.html
