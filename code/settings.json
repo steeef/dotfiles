@@ -135,12 +135,9 @@
     "go.useLanguageServer": true,
     "python.defaultInterpreterPath": "~/.pyenv/shims/python",
     "editor.accessibilitySupport": "on",
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter-notebook",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
