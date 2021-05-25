@@ -2,15 +2,15 @@
 
 set -e
 
-TERRAFORM_LS_VERSION=0.15.0
+TERRAFORM_LS_VERSION=0.17.0
 
 if [ "$(uname)" = "Darwin" ]; then
   SHA256SUM="$(which gsha256sum)"
-  TERRAFORM_LS_CHECKSUM=6248cdf24cf0d37fff13826012a4677b3c95f1c12e2c77f2a6bcd5e9dafb83a3
+  TERRAFORM_LS_CHECKSUM=156c817c0fc23283c2eeaa1c267c26662f0a84db4538bac024780705da2c497a
   TERRAFORM_LS_URL="https://github.com/hashicorp/terraform-ls/releases/download/v${TERRAFORM_LS_VERSION}/terraform-ls_${TERRAFORM_LS_VERSION}_darwin_amd64.zip"
 else
   SHA256SUM="$(which sha256sum)"
-  TERRAFORM_LS_CHECKSUM=9dd5de3030ac2d80b9465987b5294dfc18b2846bc89c12a9d95ed0ed21761ed8
+  TERRAFORM_LS_CHECKSUM=23d327f4e627c3740a63fec1b10a6c02c9fc781647079690aa0f43aa74c06d27
   TERRAFORM_LS_URL="https://github.com/hashicorp/terraform-ls/releases/download/v${TERRAFORM_LS_VERSION}/terraform-ls_${TERRAFORM_LS_VERSION}_linux_amd64.zip"
 fi
 
