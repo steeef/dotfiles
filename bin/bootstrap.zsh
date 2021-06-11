@@ -201,3 +201,5 @@ pyenv global "${PYTHON_DEFAULT[@]}"
 # vim plug install
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+mkdir -p "${HOME}/.config/nvim/autoload"
+cp -f "${HOME}/.vim/autoload/plug.vim" "${HOME}/.config/nvim/autoload/plug.vim"
