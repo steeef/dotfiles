@@ -1,4 +1,4 @@
-local api, g = vim.api, vim.g
+local api, cmd, g = vim.api, vim.cmd, vim.g
 
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
@@ -25,3 +25,12 @@ map('n', ';', ':')
 map('n', ':', ';')
 map('v', ';', ':')
 map('v', ':', ';')
+
+---- create new vertical window and switch to it
+function vsplit()
+  cmd('vsplit')
+  local win = vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_create_buf(true, true)
+  api.nvim_win_set_buf(win, buf)
+end
+map('n', '<leader>w', ':lua vsplit()<CR>', {silent = true})
