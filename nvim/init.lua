@@ -15,6 +15,12 @@ require('packer').startup(function()
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 end)
 
+-- options
+
+--- colorscheme
+api.nvim_command('let base16colorspace=256')
+api.nvim_command('colorscheme base16-tomorrow-night')
+
 -- mapping
 
 --- set leader to space
