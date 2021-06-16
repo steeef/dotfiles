@@ -12,6 +12,8 @@ require('packer').startup(function()
 
   use {'chriskempson/base16-vim'}
 
+  use {'christoomey/vim-tmux-navigator'}
+
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 end)
 
@@ -36,3 +38,9 @@ map('v', ':', ';')
 
 --- new vertical window
 map('n', '<leader>w', '<Cmd>botright vnew<CR>', {silent = true})
+
+--- window navigation with tmux-navigator
+map('n', '<C-l>', ':TmuxNavigateRight <CR>', {silent = true})
+map('n', '<C-j>', ':TmuxNavigateDown <CR>', {silent = true})
+map('n', '<C-k>', ':TmuxNavigateUp <CR>', {silent = true})
+map('n', '<C-h>', ':TmuxNavigateLeft <CR>', {silent = true})
