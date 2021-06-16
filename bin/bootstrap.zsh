@@ -62,7 +62,7 @@ ensure_link "polybar"            ".config/polybar"
 ensure_link "irbrc"              ".irbrc"
 ensure_link "iterm2"             ".iterm2"
 ensure_link "maid"               ".maid"
-ensure_link "nvim/init.vim"      ".config/nvim/init.vim" "force"
+ensure_link "nvim/init.lua"      ".config/nvim/init.lua" "force"
 ensure_link "p10k.zsh"           ".p10k.zsh"
 ensure_link "redshift"           ".config/redshift"
 ensure_link "screenrc"           ".screenrc"
@@ -201,5 +201,7 @@ pyenv global "${PYTHON_DEFAULT[@]}"
 # vim plug install
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-mkdir -p "${HOME}/.config/nvim/autoload"
-cp -f "${HOME}/.vim/autoload/plug.vim" "${HOME}/.config/nvim/autoload/plug.vim"
+
+# neovim paq install
+git clone --depth=1 https://github.com/savq/paq-nvim.git \
+    "${HOME}/.local/share/nvim/site/pack/paqs/start/paq-nvim" || true
