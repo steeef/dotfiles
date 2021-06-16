@@ -12,10 +12,11 @@ require 'paq-nvim' {
   {'nvim-treesitter/nvim-treesitter', run=function() vim.cmd 'TSUpdate' end};
 }
 
+-- options
 
 -- mapping
 
----- set leader to space
+--- set leader to space
 map('', '<Space>', '<Nop>', {silent = true})
 g.mapleader = " "
 g.maplocalleader = " "
@@ -26,12 +27,5 @@ map('n', ':', ';')
 map('v', ';', ':')
 map('v', ':', ';')
 
----- create new vertical window and switch to it
-function vsplit()
-  cmd('vsplit')
-  local win = vim.api.nvim_get_current_win()
-  local buf = vim.api.nvim_create_buf(true, true)
-  api.nvim_win_set_buf(win, buf)
-end
--- map('n', '<leader>w', ':lua vsplit()<CR>', {silent = true})
-map('n', '<leader>w', '<Cmd>vsplit<CR>', {silent = true})
+--- new vertical window
+map('n', '<leader>w', '<Cmd>botright vnew<CR>', {silent = true})
