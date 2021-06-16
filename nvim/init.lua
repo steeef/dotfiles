@@ -9,10 +9,15 @@ end
 -- plugins with paq
 require 'paq-nvim' {
   'savq/paq-nvim';
+  'norcalli/nvim-base16.lua';
   {'nvim-treesitter/nvim-treesitter', run=function() vim.cmd 'TSUpdate' end};
 }
 
 -- options
+
+--- colorscheme
+local base16 = require 'base16'
+base16(base16.themes['tomorrow-night'], true)
 
 -- mapping
 
