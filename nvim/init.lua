@@ -33,4 +33,5 @@ function vsplit()
   local buf = vim.api.nvim_create_buf(true, true)
   api.nvim_win_set_buf(win, buf)
 end
-map('n', '<leader>w', ':lua vsplit()<CR>', {silent = true})
+-- map('n', '<leader>w', ':lua vsplit()<CR>', {silent = true})
+map('n', '<leader>w', '<Cmd>vsplit<CR>', {silent = true})
