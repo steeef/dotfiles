@@ -6,18 +6,14 @@ local function map(mode, lhs, rhs, opts)
   api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- plugins with paq
-require 'paq-nvim' {
-  'savq/paq-nvim';
-  'norcalli/nvim-base16.lua';
-  {'nvim-treesitter/nvim-treesitter', run=function() vim.cmd 'TSUpdate' end};
-}
+-- plugins with packer
+require('packer').startup(function()
+  use {'wbthomason/packer.nvim'}
 
--- options
+  use {'chriskempson/base16-vim'}
 
---- colorscheme
-local base16 = require 'base16'
-base16(base16.themes['tomorrow-night'], true)
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+end)
 
 -- mapping
 

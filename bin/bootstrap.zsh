@@ -202,6 +202,6 @@ pyenv global "${PYTHON_DEFAULT[@]}"
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# neovim paq install
-git clone --depth=1 https://github.com/savq/paq-nvim.git \
-    "${HOME}/.local/share/nvim/site/pack/paqs/start/paq-nvim" || true
+# neovim packer install
+git clone --depth=1 https://github.com/wbthomason/packer.nvim \
+    "${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim" || true
