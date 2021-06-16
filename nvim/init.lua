@@ -1,4 +1,4 @@
-local api = vim.api
+local api, g = vim.api, vim.g
 
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
@@ -14,6 +14,11 @@ require 'paq-nvim' {
 
 
 -- mapping
+
+---- set leader to space
+map('', '<Space>', '<Nop>', {silent = true})
+g.mapleader = " "
+g.maplocalleader = " "
 
 ---- swap colon with semicolon
 map('n', ';', ':')
