@@ -30,7 +30,7 @@ map('', '<Space>', '<Nop>', {silent = true})
 g.mapleader = " "
 g.maplocalleader = " "
 
----- swap colon with semicolon
+--- swap colon with semicolon
 map('n', ';', ':')
 map('n', ':', ';')
 map('v', ';', ':')
