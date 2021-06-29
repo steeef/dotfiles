@@ -15,6 +15,12 @@ require('packer').startup(function()
   use {'christoomey/vim-tmux-navigator'}
 
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
+  --- use lens.vim to resize windows automatically when switched
+  use {'camspiers/lens.vim'}
+
+  --- dim inactive windows
+  use {'blueyed/vim-diminactive'}
 end)
 
 -- options
