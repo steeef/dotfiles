@@ -50,3 +50,10 @@ map('n', '<C-l>', ':TmuxNavigateRight <CR>', {silent = true})
 map('n', '<C-j>', ':TmuxNavigateDown <CR>', {silent = true})
 map('n', '<C-k>', ':TmuxNavigateUp <CR>', {silent = true})
 map('n', '<C-h>', ':TmuxNavigateLeft <CR>', {silent = true})
+
+-- plugin settings
+--- tree-sitter
+require('nvim-treesitter.configs').setup {
+  ensure_installed = 'maintained',
+  highlight = {enable = true},
+}
