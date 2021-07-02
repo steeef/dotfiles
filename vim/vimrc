@@ -37,7 +37,7 @@ if exists(":PlugInstall")
   " tmux
   Plug 'christoomey/vim-tmux-navigator'
 
-  Plug 'roman/golden-ratio'
+  Plug 'camspiers/lens.vim'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-endwise'
