@@ -4,40 +4,40 @@ if ! [ -d "${ZGENOM_DIR}" ]; then
 fi
 source "${ZGENOM_DIR}/zgenom.zsh"
 
-if ! zgen saved; then
-  zgen load zsh-users/zsh-completions src # Load more completions
-  zgen load zsh-users/zsh-syntax-highlighting
-  zgen load zsh-users/zsh-history-substring-search
+if ! zgenom saved; then
+  zgenom load zsh-users/zsh-completions src # Load more completions
+  zgenom load zsh-users/zsh-syntax-highlighting
+  zgenom load zsh-users/zsh-history-substring-search
 
-  zgen load jandamm/vi-mode.zsh # Show line cursor in vi mode
+  zgenom load jandamm/vi-mode.zsh # Show line cursor in vi mode
 
-  zgen load larkery/zsh-histdb
+  zgenom load larkery/zsh-histdb
 
   # fzf
-  zgen load junegunn/fzf shell/completion.zsh
-  zgen load junegunn/fzf shell/key-bindings.zsh
+  zgenom load junegunn/fzf shell/completion.zsh
+  zgenom load junegunn/fzf shell/key-bindings.zsh
   "${ZGEN_DIR}/junegunn/fzf-___/install" --bin
 
-  zgen load blimmer/zsh-aws-vault # aliases
-  zgen load reegnz/aws-vault-zsh-plugin # completion
+  zgenom load blimmer/zsh-aws-vault # aliases
+  zgenom load reegnz/aws-vault-zsh-plugin # completion
 
-  zgen load davidparsson/zsh-pyenv-lazy
+  zgenom load davidparsson/zsh-pyenv-lazy
 
-  zgen oh-my-zsh
-  zgen oh-my-zsh plugins/kubectl
-  zgen oh-my-zsh plugins/vi-mode
+  zgenom oh-my-zsh
+  zgenom oh-my-zsh plugins/kubectl
+  zgenom oh-my-zsh plugins/vi-mode
 
   # colorschemes
-  zgen load chrissicool/zsh-256color
-  zgen load chriskempson/base16-shell
+  zgenom load chrissicool/zsh-256color
+  zgenom load chriskempson/base16-shell
 
-  zgen load romkatv/powerlevel10k powerlevel10k
+  zgenom load romkatv/powerlevel10k powerlevel10k
 
-  zgen bin clvv/fasd
-  zgen bin junegunn/fzf
+  zgenom bin clvv/fasd
+  zgenom bin junegunn/fzf
 
-  zgen save
+  zgenom save
 
-  zgen compile "${HOME}/.zshrc"
-  zgen compile "${ZSHDIR}"
+  zgenom compile "${HOME}/.zshrc"
+  zgenom compile "${ZSHDIR}"
 fi
