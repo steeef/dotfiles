@@ -136,6 +136,12 @@ if is_macos; then
     launchctl load "${launch_agent_dst_dir}/${launch_agent_file}"
   done
 
+  # iterm2 preferences
+  # Specify the preferences directory
+  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.iterm2"
+  # Tell iTerm2 to use the custom preferences in the directory
+  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
   macos_setup.sh
 else
   sudo apt-get update
