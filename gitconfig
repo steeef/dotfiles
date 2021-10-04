@@ -71,8 +71,6 @@
 	email = stephen@stp5.net
 [includeIf "gitdir:~/code/work/"]
   path = .gitconfig-work
-[includeIf "gitdir:~/go/src/github.com/radartools/"]
-  path = .gitconfig-work
 [http "https://gopkg.in"]
 	followRedirects = true
 [url "git@github.com:"]
