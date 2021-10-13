@@ -133,7 +133,6 @@
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
     "go.useLanguageServer": true,
-    "python.defaultInterpreterPath": "~/.pyenv/shims/python",
     "editor.accessibilitySupport": "on",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
@@ -141,5 +140,7 @@
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
-    }
+    },
+    "python.defaultInterpreterPath": "/usr/local/bin/python3",
+    "security.workspace.trust.untrustedFiles": "open"
 }
