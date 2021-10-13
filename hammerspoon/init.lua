@@ -123,6 +123,14 @@ hyper:bind({}, 'x', nil, function()
   typeKeychainEntry('QS_2_creds', 'password')
 end)
 
+-- Apple Music shortcuts
+hyper:bind({}, '6', nil, function()
+  hs.applescript([[tell application "Music" to set loved of current track to true]])
+end)
+hyper:bind({}, '7', nil, function()
+  hs.applescript([[tell application "Music" to set loved of current track to false]])
+end)
+
 function applicationWatcher(appName, eventType, appObject)
   if (eventType == hs.application.watcher.activated) then
     if (appName == "Finder") then
