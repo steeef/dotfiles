@@ -6,22 +6,7 @@ local function map(mode, lhs, rhs, opts)
   api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- plugins with packer
-require('packer').startup(function()
-  use {'wbthomason/packer.nvim'}
-
-  use {'chriskempson/base16-vim'}
-
-  use {'christoomey/vim-tmux-navigator'}
-
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-
-  --- use lens.vim to resize windows automatically when switched
-  use {'camspiers/lens.vim'}
-
-  --- dim inactive windows
-  use {'blueyed/vim-diminactive'}
-end)
+require('plugins')
 
 -- options
 
@@ -52,12 +37,3 @@ map('n', '<C-l>', ':TmuxNavigateRight <CR>', {silent = true})
 map('n', '<C-j>', ':TmuxNavigateDown <CR>', {silent = true})
 map('n', '<C-k>', ':TmuxNavigateUp <CR>', {silent = true})
 map('n', '<C-h>', ':TmuxNavigateLeft <CR>', {silent = true})
-
--- plugin settings
---- tree-sitter
-if pcall(require, 'nvim-treesitter') then
-  require('nvim-treesitter.configs').setup {
-    ensure_installed = 'maintained',
-    highlight = {enable = true},
-  }
-end
