@@ -1,4 +1,4 @@
-local api, cmd, g = vim.api, vim.cmd, vim.g
+local api, cmd, g, opt = vim.api, vim.cmd, vim.g, vim.opt
 
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
@@ -26,8 +26,10 @@ end)
 -- options
 
 --- colorscheme
+opt.background = "dark"
+opt.termguicolors = true
 api.nvim_command('let base16colorspace=256')
-api.nvim_command('colorscheme base16-tomorrow-night')
+cmd('silent! colorscheme base16-tomorrow-night')
 
 -- mapping
 
@@ -53,7 +55,9 @@ map('n', '<C-h>', ':TmuxNavigateLeft <CR>', {silent = true})
 
 -- plugin settings
 --- tree-sitter
-require('nvim-treesitter.configs').setup {
-  ensure_installed = 'maintained',
-  highlight = {enable = true},
-}
+if pcall(require, 'nvim-treesitter') then
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = 'maintained',
+    highlight = {enable = true},
+  }
+end
