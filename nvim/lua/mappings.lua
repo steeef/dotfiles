@@ -1,4 +1,4 @@
-local api, g, = vim.api, vim.g
+local api, g = vim.api, vim.g
 
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}

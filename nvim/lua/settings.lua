@@ -15,7 +15,7 @@ opt.ttimeoutlen = 50
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- case insensitive unless specified
 opt.incsearch = true -- start searching immediately
-opt.nohlsearch = true -- don't highlight search
+opt.hlsearch = false -- don't highlight search
 
 -- display options
 opt.showmatch = true -- show matching brackets
