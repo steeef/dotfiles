@@ -1,4 +1,4 @@
-local cmd, opt = vim.cmd, vim.opt
+local api, cmd, opt = vim.api vim.cmd, vim.opt
 
 --- colorscheme
 opt.background = "dark"
