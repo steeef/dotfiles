@@ -31,3 +31,6 @@ rm -rf "build" \
   && make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX:PATH=$HOME -DCMAKE_BUILD_TYPE=RelWithDebInfo" \
   && make install
 popd
+
+# packer install plugins
+"${HOME}/bin/nvim" --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
