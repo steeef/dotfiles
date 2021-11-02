@@ -27,3 +27,8 @@ map('n', '<C-l>', ':TmuxNavigateRight <CR>', {silent = true})
 map('n', '<C-j>', ':TmuxNavigateDown <CR>', {silent = true})
 map('n', '<C-k>', ':TmuxNavigateUp <CR>', {silent = true})
 map('n', '<C-h>', ':TmuxNavigateLeft <CR>', {silent = true})
+
+-- Telescope
+map('n', '<leader> ', ':Telescope find_files<CR>', {silent = true})
+map('n', '<leader>b', ':Telescope buffers<CR>', {silent = true})
+map('n', '<leader>a', ':Telescope live_grep<CR>', {silent = true})

@@ -69,8 +69,8 @@ opt.formatoptions = 'cjnq1' -- see :help fo-table
 opt.backup = true
 opt.writebackup = false -- don't backup file before writing
 opt.swapfile = false
-opt.undodir = HOME .. ".vimundo//"
-opt.backupdir = HOME .. ".vimbackup//"
+opt.undodir = HOME .. "/.vimundo//"
+opt.backupdir = HOME .. "/.vimbackup//"
 
 -- wildcard menu in command section
 opt.cmdheight = 2
