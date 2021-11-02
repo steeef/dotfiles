@@ -1,6 +1,7 @@
 local api, cmd, g, opt = vim.api, vim.cmd, vim.g, vim.opt
 
 require('plugins')
+require('mappings')
 
 -- options
 
