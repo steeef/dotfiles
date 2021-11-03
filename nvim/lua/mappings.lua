@@ -1,32 +1,32 @@
 local api, g = vim.api, vim.g
 
-local function map(mode, shortcut, command)
-  local options = {noremap = true, silent = true}
+local function map(mode, shortcut, command, options)
+  options = vim.tbl_extend('keep', opts or {}, {noremap = true, silent = true, expr = false})
   api.nvim_set_keymap(mode, shortcut, command, options)
 end
 
-local function nmap(shortcut, command)
-  map('n', shortcut, command)
+local function nmap(shortcut, command, options)
+  map('n', shortcut, command, options)
 end
 
-local function imap(shortcut, command)
-  map('i', shortcut, command)
+local function imap(shortcut, command, options)
+  map('i', shortcut, command, options)
 end
 
-local function vmap(shortcut, command)
-  map('v', shortcut, command)
+local function vmap(shortcut, command, options)
+  map('v', shortcut, command, options)
 end
 
-local function cmap(shortcut, command)
-  map('c', shortcut, command)
+local function cmap(shortcut, command, options)
+  map('c', shortcut, command, options)
 end
 
-local function tmap(shortcut, command)
-  map('t', shortcut, command)
+local function tmap(shortcut, command, options)
+  map('t', shortcut, command, options)
 end
 
-local function omap(shortcut, command)
-  map('o', shortcut, command)
+local function omap(shortcut, command, options)
+  map('o', shortcut, command, options)
 end
 
 -- mapping
@@ -37,10 +37,10 @@ g.mapleader = " "
 g.maplocalleader = " "
 
 --- swap colon with semicolon
-nmap(';', ':')
-nmap(':', ';')
-vmap(';', ':')
-vmap(':', ';')
+nmap(';', ':', {noremap = true, silent = false, expr = false})
+nmap(':', ';', {noremap = true, silent = false, expr = false})
+vmap(';', ':', {noremap = true, silent = false, expr = false})
+vmap(':', ';', {noremap = true, silent = false, expr = false})
 
 -- more natural movement with wrap on
 nmap('j', 'gj')

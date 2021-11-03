@@ -8,7 +8,16 @@ require('packer').startup(function()
   use {'junegunn/vim-easy-align'} -- easily align by character
 
   -- colorschemes
-  use {'chriskempson/base16-vim'}
+  use {'RRethy/nvim-base16'}
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    config = function()
+      require('lualine').setup {
+        options = { theme = 'onedark' }
+      }
+    end
+  }
 
   use {'christoomey/vim-tmux-navigator'} -- easier navigation between windows and terminals with tmux
 
