@@ -87,3 +87,7 @@ nmap('<leader>a', ':Telescope live_grep<CR>')
 
 -- vimagit
 nmap('<leader>g', ':Magit<Enter>')
+
+-- vim-commentary
+nmap('gc', '<Plug>Commentary')
+nmap('gcc', '<Plug>CommentaryLine')

@@ -2,6 +2,8 @@
 require('packer').startup(function()
   use {'wbthomason/packer.nvim'}
 
+  use {'andymass/vim-matchup'}
+
   -- colorschemes
   use {'chriskempson/base16-vim'}
 
@@ -9,19 +11,6 @@ require('packer').startup(function()
 
   -- git
   use {'jreybert/vimagit'}
-
-  -- languages
-  use {'neovim/nvim-lspconfig'}
-  use {'kabouzeid/nvim-lspinstall'}
-  use {'hrsh7th/nvim-compe'}
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-
-  --- use lens.vim to resize windows automatically when switched
-  use {'camspiers/lens.vim'}
-
-  --- dim inactive windows
-  use {'blueyed/vim-diminactive'}
-
   use { 'lewis6991/gitsigns.nvim', -- git added/removed in sidebar + inline blame
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
@@ -30,6 +19,17 @@ require('packer').startup(function()
       })
     end
   }
+
+  -- languages
+  use {'tpope/vim-commentary'}
+  use {'neovim/nvim-lspconfig'}
+  use {'kabouzeid/nvim-lspinstall'}
+  use {'hrsh7th/nvim-compe'}
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
+  -- windows
+  use {'camspiers/lens.vim'} -- resize windows automatically when switching
+  use {'blueyed/vim-diminactive'} -- dim inactive windows
 
   use { 'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
   use {'kyazdani42/nvim-web-devicons'}
