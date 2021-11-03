@@ -37,10 +37,10 @@ g.mapleader = " "
 g.maplocalleader = " "
 
 --- swap colon with semicolon
-nmap(';', ':', {noremap = true, silent = false, expr = false})
-nmap(':', ';', {noremap = true, silent = false, expr = false})
-vmap(';', ':', {noremap = true, silent = false, expr = false})
-vmap(':', ';', {noremap = true, silent = false, expr = false})
+api.nvim_set_keymap('n', ';', ':', {noremap = true, silent = false, expr = false})
+api.nvim_set_keymap('n', ':', ';', {noremap = true, silent = false, expr = false})
+api.nvim_set_keymap('v', ';', ':', {noremap = true, silent = false, expr = false})
+api.nvim_set_keymap('v', ':', ';', {noremap = true, silent = false, expr = false})
 
 -- more natural movement with wrap on
 nmap('j', 'gj')

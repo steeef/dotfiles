@@ -5,6 +5,10 @@ cmp.setup({
   }, {
     { name = 'buffer' },
   });
+
+  mapping = {
+    ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+  }
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
