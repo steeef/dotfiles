@@ -84,3 +84,6 @@ nmap('<C-h>', ':TmuxNavigateLeft <CR>')
 nmap('<leader> ', ':Telescope find_files<CR>')
 nmap('<leader>b', ':Telescope buffers<CR>')
 nmap('<leader>a', ':Telescope live_grep<CR>')
+
+-- vimagit
+nmap('<leader>g', ':Magit<Enter>')

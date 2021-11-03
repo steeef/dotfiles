@@ -7,6 +7,9 @@ require('packer').startup(function()
 
   use {'christoomey/vim-tmux-navigator'}
 
+  -- git
+  use {'jreybert/vimagit'}
+
   -- languages
   use {'neovim/nvim-lspconfig'}
   use {'kabouzeid/nvim-lspinstall'}
