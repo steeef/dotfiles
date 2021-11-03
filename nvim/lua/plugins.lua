@@ -2,12 +2,15 @@
 require('packer').startup(function()
   use {'wbthomason/packer.nvim'}
 
-  use {'andymass/vim-matchup'}
+  use {'andymass/vim-matchup'} -- match if/endif etc
+  use {'tpope/vim-surround'} -- surround characters shortcuts
+  use {'tpope/vim-repeat'} -- add . functionality to plugins
+  use {'junegunn/vim-easy-align'} -- easily align by character
 
   -- colorschemes
   use {'chriskempson/base16-vim'}
 
-  use {'christoomey/vim-tmux-navigator'}
+  use {'christoomey/vim-tmux-navigator'} -- easier navigation between windows and terminals with tmux
 
   -- git
   use {'jreybert/vimagit'}

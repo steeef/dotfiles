@@ -91,3 +91,6 @@ nmap('<leader>g', ':Magit<Enter>')
 -- vim-commentary
 nmap('gc', '<Plug>Commentary')
 nmap('gcc', '<Plug>CommentaryLine')
+
+-- vim-easy-align
+vmap('<Enter>', ':EasyAlign<Enter>')
