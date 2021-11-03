@@ -25,6 +25,10 @@ local function tmap(shortcut, command)
   map('t', shortcut, command)
 end
 
+local function omap(shortcut, command)
+  map('o', shortcut, command)
+end
+
 -- mapping
 
 --- set leader to space
@@ -38,10 +42,39 @@ nmap(':', ';')
 vmap(';', ':')
 vmap(':', ';')
 
---- new vertical window
-nmap('<leader>w', '<Cmd>botright vnew<CR>')
+-- more natural movement with wrap on
+nmap('j', 'gj')
+nmap('k', 'gk')
+vmap('j', 'gj')
+vmap('k', 'gk')
 
---- window navigation with tmux-navigator
+-- Split line (sister to [J]oin lines)
+-- The normal use of S is covered by cc, so don't worry about shadowing it.
+nmap('S', 'i<cr><esc><right>')
+
+nmap('Q', '@q') -- simplify macro playback
+
+-- Use Enter to exit normal,visual,command mode
+nmap('<CR>', '<Esc>')
+vmap('<CR>', '<Esc>gV')
+omap('<CR>', '<Esc>')
+-- Use CTRL-O to create new line in insert mode
+imap('<C-o>', '<CR>')
+
+-- Reselect visual block after indent/outdent
+vmap('<', '<gv')
+vmap('>', '>gv')
+
+
+nmap('<leader>W', ":%s/\\s\\+$//<cr>:let @/=''<CR>") -- Remove trailing whitespace from entire buffer
+
+
+nmap('<CR>', 'o<ESC>') -- insert blank line below
+
+
+nmap('<leader>w', '<Cmd>botright vnew<CR>') -- new vertical window
+
+-- window navigation with tmux-navigator
 nmap('<C-l>', ':TmuxNavigateRight <CR>')
 nmap('<C-j>', ':TmuxNavigateDown <CR>')
 nmap('<C-k>', ':TmuxNavigateUp <CR>')
