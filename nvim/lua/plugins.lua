@@ -24,24 +24,25 @@ require('packer').startup(function()
   }
 
   -- languages
-  use {'tpope/vim-commentary'}
+  use {'tpope/vim-commentary'} -- commenting helper
+  use {'RRethy/vim-illuminate'} -- highlight other occurrences of word under cursor
   use {'neovim/nvim-lspconfig'}
   use {'kabouzeid/nvim-lspinstall'}
-  use {'hrsh7th/nvim-compe'}
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use {'hrsh7th/nvim-compe'} -- completion
+  use {'p00f/nvim-ts-rainbow'} -- rainbow parenthesis
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      if pcall(require, 'nvim-treesitter') then
+        require('treesitter')
+      end
+    end
+  }
 
   -- windows
   use {'camspiers/lens.vim'} -- resize windows automatically when switching
   use {'blueyed/vim-diminactive'} -- dim inactive windows
-
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
   use {'kyazdani42/nvim-web-devicons'}
 end)
-
---- tree-sitter bootstrap and update
-if pcall(require, 'nvim-treesitter') then
-  require('nvim-treesitter.configs').setup {
-    ensure_installed = 'maintained',
-    highlight = {enable = true},
-  }
-end
