@@ -36,7 +36,6 @@ require('packer').startup(function()
   -- languages
   use {'tpope/vim-commentary'} -- commenting helper
   use {'RRethy/vim-illuminate'} -- highlight other occurrences of word under cursor
-  use {'neovim/nvim-lspconfig'}
   use {'kabouzeid/nvim-lspinstall'}
   use {
     'hrsh7th/nvim-cmp', -- completion
@@ -49,6 +48,14 @@ require('packer').startup(function()
     config = function()
       if pcall(require, 'cmp') then
         require('autocompletion')
+      end
+    end
+  }
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      if pcall(require, 'lspconfig') then
+        require('lsp')
       end
     end
   }
