@@ -36,7 +36,14 @@ require('packer').startup(function()
   -- languages
   use {'tpope/vim-commentary'} -- commenting helper
   use {'RRethy/vim-illuminate'} -- highlight other occurrences of word under cursor
-  use {'kabouzeid/nvim-lspinstall'}
+  use {
+    'kabouzeid/nvim-lspinstall',
+    config = function()
+      if pcall(require, 'lspinstall') then
+        require('lspinstall').setup()
+      end
+    end
+  }
   use {
     'hrsh7th/nvim-cmp', -- completion
     requires = {

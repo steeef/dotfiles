@@ -1,12 +1,9 @@
 local lspconfig = require('lspconfig')
+local servers = require('lspinstall').installed_servers()
+local lsp_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local servers = {
-  'pyright',
-  'terraformls',
-}
-
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+for _, server in pairs(servers) do
+  lspconfig[server].setup {
     capabilities = lsp_capabilities,
     on_attach = on_attach,
     flags = {
