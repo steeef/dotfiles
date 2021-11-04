@@ -9,6 +9,7 @@ require('packer').startup(function()
 
   -- colorschemes
   use {'RRethy/nvim-base16'}
+  use {'navarasu/onedark.nvim'}
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -66,7 +67,6 @@ require('packer').startup(function()
       end
     end
   }
-  use {'p00f/nvim-ts-rainbow'} -- rainbow parenthesis
   use {
     'nvim-treesitter/nvim-treesitter',
     cmd = {"TSInstall","TSInstallInfo", "TSUpdate"},
@@ -77,6 +77,9 @@ require('packer').startup(function()
         require('treesitter')
       end
     end
+  }
+  use { 'p00f/nvim-ts-rainbow',  -- rainbow parenthesis
+    after = 'nvim-treesitter',
   }
 
   -- windows
