@@ -86,6 +86,17 @@ require('packer').startup(function()
   use {'camspiers/lens.vim'} -- resize windows automatically when switching
   use {'blueyed/vim-diminactive'} -- dim inactive windows
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use { 'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'}
+    },
+    config = function()
+      if pcall(require, 'telescope') then
+        require('telescope-config')
+      end
+    end
+  }
   use {'kyazdani42/nvim-web-devicons'}
 end)
