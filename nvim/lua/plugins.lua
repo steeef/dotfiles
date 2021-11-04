@@ -69,6 +69,9 @@ require('packer').startup(function()
   use {'p00f/nvim-ts-rainbow'} -- rainbow parenthesis
   use {
     'nvim-treesitter/nvim-treesitter',
+    cmd = {"TSInstall","TSInstallInfo", "TSUpdate"},
+    event = "BufRead",
+    after = "telescope.nvim",
     config = function()
       if pcall(require, 'nvim-treesitter') then
         require('treesitter')
