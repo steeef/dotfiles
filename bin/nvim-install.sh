@@ -33,4 +33,4 @@ rm -rf "build" \
 popd
 
 # packer install plugins
-"${HOME}/bin/nvim" --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+"${HOME}/bin/nvim" -c 'PackerSync'
