@@ -9,9 +9,7 @@ require('packer').startup(function()
   use {
     'windwp/nvim-autopairs', -- bracket pairs
     config = function()
-      require('nvim-autopairs').setup {
-        disable_filetype = { "TelescopePrompt" , "vim" },
-      }
+      require('autopairs')
     end
   }
 
