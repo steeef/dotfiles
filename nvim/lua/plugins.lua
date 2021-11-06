@@ -6,6 +6,14 @@ require('packer').startup(function()
   use {'tpope/vim-surround'} -- surround characters shortcuts
   use {'tpope/vim-repeat'} -- add . functionality to plugins
   use {'junegunn/vim-easy-align'} -- easily align by character
+  use {
+    'windwp/nvim-autopairs', -- bracket pairs
+    config = function()
+      require('nvim-autopairs').setup {
+        disable_filetype = { "TelescopePrompt" , "vim" },
+      }
+    end
+  }
 
   -- colorschemes
   use {'RRethy/nvim-base16'}
