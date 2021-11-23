@@ -80,6 +80,8 @@ require('packer').startup(function()
   use { 'p00f/nvim-ts-rainbow',  -- rainbow parenthesis
     after = 'nvim-treesitter',
   }
+  -- neomake for linters
+  use { 'neomake/neomake', config = function() require('neomake_conf') end }
 
   -- windows
   use {'camspiers/lens.vim'} -- resize windows automatically when switching
