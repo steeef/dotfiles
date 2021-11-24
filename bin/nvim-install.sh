@@ -32,11 +32,9 @@ rm -rf "build" \
   && make install
 popd
 
-# packer install plugins
+echo "Install Packer"
+"${HOME}/bin/nvim" --headless +"autocmd User PackerComplete quitall" +PackerInstall
+
+
 echo "Update plugins, LSPs, Treesitter addons"
-"${HOME}/bin/nvim" --headless \
-  +PackerSync +PackerCompile \
-  +"PackerLoad nvim-treesitter" +TSUpdateSync \
-  +"PackerLoad nvim-lsp-installer" \
-  +"LspInstall --sync bashls pyright terraformls yamlls" \
-  +messages +quit
+nvim-update.sh

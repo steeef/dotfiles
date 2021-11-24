@@ -9,7 +9,9 @@ require('packer').startup(function()
   use {
     'windwp/nvim-autopairs', -- bracket pairs
     config = function()
-      require('autopairs')
+      if pcall(require, 'nvim-autopairs') then
+        require('autopairs')
+      end
     end
   }
 
@@ -21,9 +23,11 @@ require('packer').startup(function()
     'nvim-lualine/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function()
-      require('lualine').setup {
-        options = { theme = 'onedark' }
-      }
+      if pcall(require, 'lualine') then
+        require('lualine').setup {
+          options = { theme = 'onedark' }
+        }
+      end
     end
   }
 
@@ -34,9 +38,11 @@ require('packer').startup(function()
   use { 'lewis6991/gitsigns.nvim', -- git added/removed in sidebar + inline blame
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require('gitsigns').setup({
-        current_line_blame = false
-      })
+      if pcall(require, 'gitsigns') then
+        require('gitsigns').setup({
+          current_line_blame = false
+        })
+      end
     end
   }
 
