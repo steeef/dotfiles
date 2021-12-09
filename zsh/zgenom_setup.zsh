@@ -30,6 +30,7 @@ if ! zgenom saved; then
   # colorschemes
   zgenom load chrissicool/zsh-256color
   zgenom load chriskempson/base16-shell
+  zgenom load dracula/zsh
 
   zgenom load romkatv/powerlevel10k powerlevel10k
 

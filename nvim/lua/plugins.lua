@@ -18,6 +18,7 @@ require('packer').startup(function()
   -- colorschemes
   use {'RRethy/nvim-base16'}
   use {'navarasu/onedark.nvim'}
+  use {'Mofiqul/dracula.nvim'}
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -25,7 +26,7 @@ require('packer').startup(function()
     config = function()
       if pcall(require, 'lualine') then
         require('lualine').setup {
-          options = { theme = 'onedark' }
+          options = { theme = 'dracula-nvim' }
         }
       end
     end
