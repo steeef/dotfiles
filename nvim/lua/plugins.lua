@@ -49,6 +49,14 @@ require('packer').startup(function()
 
   -- languages
   use {'tpope/vim-commentary'} -- commenting helper
+  use {
+    'monkoose/matchparen.nvim',
+    config = function()
+      if pcall(require, 'matchparen') then
+        require ('matchparen')
+      end
+    end
+  }
   use {'RRethy/vim-illuminate'} -- highlight other occurrences of word under cursor
   use { 'williamboman/nvim-lsp-installer' }
   use {
