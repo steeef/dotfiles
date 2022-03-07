@@ -77,12 +77,12 @@ ensure_link "zsh"                ".zsh"
 ensure_link "zsh/zshrc"          ".zshrc" "force"
 ensure_link "ideavimrc"          ".ideavimrc"
 
-PATH="${HOME}/bin:${HOME}/.bin:${PATH}"
-export PATH
 PYENV_ROOT="${HOME}/.pyenv"
 export PYENV_ROOT
 PYENV_VIRTUALENV_ROOT="${PYENV_ROOT}/plugins/pyenv-virtualenv"
 export PYENV_VIRTUALENV_ROOT
+PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${HOME}/bin:${HOME}/.bin:${PATH}"
+export PATH
 
 distro_and_version="$(get-distro)"
 distro_version="$(echo "${distro_and_version}" | awk '{print $2}')"
@@ -170,7 +170,6 @@ else
     mkdir -p "${PYENV_ROOT}"
     git clone https://github.com/pyenv/pyenv.git "${PYENV_ROOT}"
   fi
-  export PATH="${PYENV_ROOT}/bin:${PATH}"
 
   echo "INFO: Installing pyenv-virtualenv"
   if (cd "${PYENV_VIRTUALENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
@@ -188,8 +187,6 @@ else
   fi
 fi
 
-PATH="${PYENV_ROOT}/bin:${PATH}"
-export PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
