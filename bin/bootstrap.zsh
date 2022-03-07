@@ -79,6 +79,10 @@ ensure_link "ideavimrc"          ".ideavimrc"
 
 PATH="${HOME}/bin:${HOME}/.bin:${PATH}"
 export PATH
+PYENV_ROOT="${HOME}/.pyenv"
+export PYENV_ROOT
+PYENV_VIRTUALENV_ROOT="${PYENV_ROOT}/plugins/pyenv-virtualenv"
+export PYENV_VIRTUALENV_ROOT
 
 distro_and_version="$(get-distro)"
 distro_version="$(echo "${distro_and_version}" | awk '{print $2}')"
@@ -153,7 +157,6 @@ else
 
   # pyenv
   echo "INFO: Installing pyenv"
-  PYENV_ROOT="${HOME}/.pyenv"
   if (cd "${PYENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
       cd "${PYENV_ROOT}" || return
@@ -167,10 +170,9 @@ else
     mkdir -p "${PYENV_ROOT}"
     git clone https://github.com/pyenv/pyenv.git "${PYENV_ROOT}"
   fi
-  export PATH="$PYENV_ROOT/bin:$PATH"
+  export PATH="${PYENV_ROOT}/bin:${PATH}"
 
   echo "INFO: Installing pyenv-virtualenv"
-  PYENV_VIRTUALENV_ROOT="${PYENV_ROOT}/plugins/pyenv-virtualenv"
   if (cd "${PYENV_VIRTUALENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
       cd "${PYENV_VIRTUALENV_ROOT}" || return
@@ -186,10 +188,10 @@ else
   fi
 fi
 
-export PATH="${PYENV_ROOT}/bin:${PATH}"
-
-eval "$(command pyenv init -)"
-eval "$(command pyenv virtualenv-init -)"
+PATH="${PYENV_ROOT}/bin:${PATH}"
+export PATH
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Install python versions
 for python in "${PYTHON_VERSIONS[@]}"; do
