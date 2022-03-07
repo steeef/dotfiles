@@ -109,6 +109,8 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
       source "${dotfile}"
     fi
   done
-fi
+f
+PATH="${HOME}/.zgenom/bin:${PATH}"
+export PATH
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
