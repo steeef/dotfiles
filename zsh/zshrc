@@ -109,7 +109,7 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
       source "${dotfile}"
     fi
   done
-f
+fi
 PATH="${HOME}/.zgenom/bin:${PATH}"
 export PATH
 
