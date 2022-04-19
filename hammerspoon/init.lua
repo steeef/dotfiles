@@ -80,7 +80,7 @@ hyper:bind({}, 't', nil, function()
   hs.application.launchOrFocus('Tweetbot')
 end)
 hyper:bind({}, 'u', nil, function()
-  hs.application.launchOrFocus('1Password 7')
+  hs.application.launchOrFocus('1Password')
 end)
 
 -- window management
