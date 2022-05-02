@@ -3,6 +3,7 @@ local opt = vim.opt
 HOME = os.getenv("HOME")
 
 opt.encoding = "utf-8"
+opt.fileformats="unix,dos"
 
 opt.backspace = "indent,eol,start" -- work for every character in insert mode
 opt.completeopt = "menuone,noselect"
