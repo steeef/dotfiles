@@ -191,6 +191,11 @@ eval "$(pyenv virtualenv-init -)"
 
 # Install python versions
 for python in "${PYTHON_VERSIONS[@]}"; do
+  if is_debian; then
+    CFLAGS=-I/usr/include/openssl
+    LDFLAGS=-L/usr/lib
+    export CFLAGS LDFLAGS
+  fi
   (pyenv versions --bare --skip-aliases | grep -q "^${python}\$") \
     || (export DYLD_LIBRARY_PATH; pyenv install "${python}")
   (PYENV_VERSION="${python}" pip install --upgrade pip)
