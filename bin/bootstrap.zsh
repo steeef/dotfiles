@@ -6,12 +6,12 @@
 set -e
 
 PYTHON_VERSIONS=(
-  3.8.12
-  3.9.10
-  3.10.2
+  3.8.13
+  3.9.13
+  3.10.4
 )
 PYTHON_DEFAULT=(
-  3.9.10
+  3.10.4
 )
 
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
