@@ -69,7 +69,6 @@ ensure_link "p10k.zsh"           ".p10k.zsh"
 ensure_link "redshift"           ".config/redshift"
 ensure_link "screenrc"           ".screenrc"
 ensure_link "sshrc"              ".sshrc"
-ensure_link "tmux"               ".tmux"
 ensure_link "tmux.conf"          ".tmux.conf"
 ensure_link "vim"                ".vim"
 ensure_link "vim/vimrc"          ".vimrc"
@@ -208,3 +207,6 @@ curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
 # neovim packer install
 git clone --depth=1 https://github.com/wbthomason/packer.nvim \
     "${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim" 2>/dev/null || true
+
+# tpm install
+tpm-install.sh
