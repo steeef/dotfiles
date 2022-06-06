@@ -154,8 +154,23 @@ else
   sudo apt-get -y install acl-dev libcap-dev
   bfs_install.sh
 
+  debian_major_version="$(lsb_release -s -d | awk '{print $3}' | grep -oP '.*?(?=\.)')"
+  if [ "${debian_major_version}" = "9" ]; then
+
+    PYTHON_VERSIONS=(
+      3.8.13
+      3.9.13
+    )
+    PYTHON_DEFAULT=(
+      3.9.13
+    )
+  fi
+
   # pyenv
   echo "INFO: Installing pyenv"
+  sudo apt-get -y install make build-essential libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+  libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
   if (cd "${PYENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
       cd "${PYENV_ROOT}" || return
