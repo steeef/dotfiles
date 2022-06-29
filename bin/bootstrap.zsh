@@ -150,6 +150,8 @@ if is_macos; then
 else
   sudo apt-get update
 
+  bat_install.sh
+
   # install bfs
   sudo apt-get -y install acl-dev libcap-dev
   bfs_install.sh
