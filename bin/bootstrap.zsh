@@ -6,12 +6,12 @@
 set -e
 
 PYTHON_VERSIONS=(
-  3.8.12
-  3.9.10
-  3.10.2
+  3.8.13
+  3.9.13
+  3.10.4
 )
 PYTHON_DEFAULT=(
-  3.9.10
+  3.10.4
 )
 
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
@@ -69,7 +69,6 @@ ensure_link "p10k.zsh"           ".p10k.zsh"
 ensure_link "redshift"           ".config/redshift"
 ensure_link "screenrc"           ".screenrc"
 ensure_link "sshrc"              ".sshrc"
-ensure_link "tmux"               ".tmux"
 ensure_link "tmux.conf"          ".tmux.conf"
 ensure_link "vim"                ".vim"
 ensure_link "vim/vimrc"          ".vimrc"
@@ -151,12 +150,29 @@ if is_macos; then
 else
   sudo apt-get update
 
+  bat_install.sh
+
   # install bfs
   sudo apt-get -y install acl-dev libcap-dev build-essential
   bfs_install.sh
 
+  debian_major_version="$(lsb_release -s -d | awk '{print $3}' | grep -oP '.*?(?=\.)')"
+  if [ "${debian_major_version}" = "9" ]; then
+
+    PYTHON_VERSIONS=(
+      3.8.13
+      3.9.13
+    )
+    PYTHON_DEFAULT=(
+      3.9.13
+    )
+  fi
+
   # pyenv
   echo "INFO: Installing pyenv"
+  sudo apt-get -y install make build-essential libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+  libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
   if (cd "${PYENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
       cd "${PYENV_ROOT}" || return
@@ -194,6 +210,11 @@ echo "PATH: ${PATH}"
 
 # Install python versions
 for python in "${PYTHON_VERSIONS[@]}"; do
+  if is_debian; then
+    CFLAGS=-I/usr/include/openssl
+    LDFLAGS=-L/usr/lib
+    export CFLAGS LDFLAGS
+  fi
   (pyenv versions --bare --skip-aliases | grep -q "^${python}\$") \
     || (export DYLD_LIBRARY_PATH; pyenv install "${python}")
   (export PYENV_VERSION="${python}"; pip install --upgrade pip)
@@ -210,3 +231,6 @@ curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
 # neovim packer install
 git clone --depth=1 https://github.com/wbthomason/packer.nvim \
     "${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim" 2>/dev/null || true
+
+# tpm install
+tpm-install.sh

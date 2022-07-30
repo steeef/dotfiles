@@ -5,6 +5,7 @@ require('packer').startup(function()
   use {'andymass/vim-matchup'} -- match if/endif etc
   use {'tpope/vim-surround'} -- surround characters shortcuts
   use {'tpope/vim-repeat'} -- add . functionality to plugins
+  use {'tpope/vim-unimpaired'} -- pairs of handy bracket mappings
   use {'junegunn/vim-easy-align'} -- easily align by character
   use {
     'windwp/nvim-autopairs', -- bracket pairs
@@ -114,5 +115,11 @@ require('packer').startup(function()
       end
     end
   }
-  use {'kyazdani42/nvim-web-devicons'}
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
+  }
 end)

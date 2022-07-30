@@ -110,6 +110,8 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
     fi
   done
 fi
+PATH="${HOME}/.zgenom/bin:${PATH}"
+export PATH
 
 export PATH="${HOME}/.zgenom/bin:${PATH}"
 

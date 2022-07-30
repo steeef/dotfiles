@@ -3,6 +3,7 @@ local opt = vim.opt
 HOME = os.getenv("HOME")
 
 opt.encoding = "utf-8"
+opt.fileformats="unix,dos"
 
 opt.backspace = "indent,eol,start" -- work for every character in insert mode
 opt.completeopt = "menuone,noselect"
@@ -28,7 +29,7 @@ opt.cursorline = true
 opt.lazyredraw = true
 opt.scrolloff = 3 -- always show 3 rows from edge
 opt.synmaxcol = 300 -- stop syntax highlight after x lines for performance
-opt.laststatus = 2 -- always show status line
+opt.laststatus = 3 -- always show global status line
 opt.colorcolumn = "120" -- vertical bar at 120 chars
 -- matching brackets
 opt.showmatch = true -- show matching bracket pairs
