@@ -111,4 +111,6 @@ if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
   done
 fi
 
+export PATH="${HOME}/.zgenom/bin:${PATH}"
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
