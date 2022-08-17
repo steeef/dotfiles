@@ -78,8 +78,6 @@ ensure_link "ideavimrc"          ".ideavimrc"
 
 PYENV_ROOT="${HOME}/.pyenv"
 export PYENV_ROOT
-PYENV_VIRTUALENV_ROOT="${PYENV_ROOT}/plugins/pyenv-virtualenv"
-export PYENV_VIRTUALENV_ROOT
 PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${HOME}/bin:${HOME}/.bin:${PATH}"
 export PATH
 
@@ -143,6 +141,7 @@ if is_macos; then
 
   macos_setup.sh
 else
+  asdf_dir="${HOME}/.asdf"
   sudo apt-get update
 
   bat_install.sh
@@ -167,47 +166,31 @@ else
   sudo apt-get -y install make build-essential libssl-dev zlib1g-dev \
   libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
   libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-  if (cd "${PYENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
+  if (cd "${asdf_dir}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
-      cd "${PYENV_ROOT}" || return
+      cd "${asdf_dir}" || return
       git fetch
       if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
         git pull
       fi
     )
   else
-    rm -rf "${PYENV_ROOT}"
-    mkdir -p "${PYENV_ROOT}"
-    git clone https://github.com/pyenv/pyenv.git "${PYENV_ROOT}"
+    rm -rf "${asdf_dir}"
+    mkdir -p "${asdf_dir}"
+    git clone https://github.com/asdf-vm/asdf.git "${asdf_dir}"
   fi
+fi
 
-  echo "INFO: Installing pyenv-virtualenv"
-  if (cd "${PYENV_VIRTUALENV_ROOT}" && git rev-parse --git-dir >/dev/null 2>&1); then
-    (
-      cd "${PYENV_VIRTUALENV_ROOT}" || return
-      git fetch
-      if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
-        git pull
-      fi
-    )
-  else
-    rm -rf "${PYENV_VIRTUALENV_ROOT}"
-    mkdir -p "${PYENV_VIRTUALENV_ROOT}"
-    git clone https://github.com/pyenv/pyenv-virtualenv.git "${PYENV_VIRTUALENV_ROOT}"
-  fi
+if is_debian; then
+  source "${asdf_dir}/asdf.sh"
+elif is_macos; then
+  source $(brew --prefix asdf)/libexec/asdf.sh
 fi
 
 # Install python versions
 (asdf plugin list | grep -q 'python') || asdf plugin add python
 asdf plugin update python
 for python in "${PYTHON_VERSIONS[@]}"; do
-  if is_debian; then
-    CFLAGS=-I/usr/include/openssl
-    LDFLAGS=-L/usr/lib
-    export CFLAGS LDFLAGS
-  elif is_macos; then
-    source $(brew --prefix asdf)/libexec/asdf.sh
-  fi
   asdf install python "${python}"
   (asdf shell python "${python}"; pip install --upgrade pip)
   (asdf shell python "${python}"; pip install --upgrade -r "${PYTHON_MODULES}")
