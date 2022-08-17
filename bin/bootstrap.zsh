@@ -76,9 +76,7 @@ ensure_link "zsh"                ".zsh"
 ensure_link "zsh/zshrc"          ".zshrc" "force"
 ensure_link "ideavimrc"          ".ideavimrc"
 
-PYENV_ROOT="${HOME}/.pyenv"
-export PYENV_ROOT
-PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${HOME}/bin:${HOME}/.bin:${PATH}"
+PATH="${HOME}/bin:${HOME}/.bin:${PATH}"
 export PATH
 
 distro_and_version="$(get-distro)"
@@ -165,8 +163,8 @@ else
     )
   fi
 
-  # pyenv
-  echo "INFO: Installing pyenv"
+  # asdf
+  echo "INFO: Installing asdf"
   if (cd "${asdf_dir}" && git rev-parse --git-dir >/dev/null 2>&1); then
     (
       cd "${asdf_dir}" || return
