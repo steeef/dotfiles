@@ -140,17 +140,19 @@ if is_macos; then
   macos_setup.sh
 else
   asdf_dir="${HOME}/.asdf"
+  debian_major_version="$(lsb_release -s -d | awk '{print $3}' | grep -o '^[0-9]\+')"
   sudo apt-get update
-  sudo apt-get -y install acl-dev glibc libcap-dev build-essential make libssl-dev zlib1g-dev \
+  sudo apt-get -y install acl-dev libcap-dev build-essential make libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
-  bat_install.sh
+  if [[ ${debian_major_version} -gt 10 ]]; then
+    bat_install.sh
+  fi
 
   # install bfs
   bfs_install.sh
 
-  debian_major_version="$(lsb_release -s -d | awk '{print $3}' | grep -o '^[0-9]\+')"
   if [ "${debian_major_version}" = "9" ]; then
     PYTHON_VERSIONS=(
       3.8.13
