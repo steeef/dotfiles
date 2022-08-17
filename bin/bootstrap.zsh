@@ -122,9 +122,6 @@ if is_macos; then
   brew tap homebrew/bundle
   brew bundle --global
 
-  OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
-  DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
-
   # Launch Agent setup
   launch_agent_src_dir="${HOME}/.dotfiles/launch_agents"
   launch_agent_dst_dir="${HOME}/Library/LaunchAgents"
@@ -200,26 +197,25 @@ else
   fi
 fi
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-echo "PATH: ${PATH}"
-
 # Install python versions
+(asdf plugin list | grep -q 'python') || asdf plugin add python
+asdf plugin update python
 for python in "${PYTHON_VERSIONS[@]}"; do
   if is_debian; then
     CFLAGS=-I/usr/include/openssl
     LDFLAGS=-L/usr/lib
     export CFLAGS LDFLAGS
+  elif is_macos; then
+    source $(brew --prefix asdf)/libexec/asdf.sh
   fi
-  (pyenv versions --bare --skip-aliases | grep -q "^${python}\$") \
-    || (export DYLD_LIBRARY_PATH; pyenv install "${python}")
-  (export PYENV_VERSION="${python}"; pip install --upgrade pip)
-  (export PYENV_VERSION="${python}"; pip install --upgrade -r "${PYTHON_MODULES}")
+  asdf install python "${python}"
+  (asdf shell python "${python}"; pip install --upgrade pip)
+  (asdf shell python "${python}"; pip install --upgrade -r "${PYTHON_MODULES}")
+  asdf reshim python
 done
 
 # set default
-pyenv global "${PYTHON_DEFAULT[@]}"
+asdf global python "${PYTHON_DEFAULT[@]}"
 
 # vim plug install
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
