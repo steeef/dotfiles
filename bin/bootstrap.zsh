@@ -150,7 +150,9 @@ else
   sudo apt-get -y install acl-dev libcap-dev build-essential
   bfs_install.sh
 
-  debian_major_version="$(lsb_release -s -d | awk '{print $3}' | grep -oP '.*?(?=\.)')"
+  debian_version="$(lsb_release -s -d | awk '{print $3}')"
+  semver=( ${debian_version//./} )
+  debian_major_version="${semver[0]}"
   if [ "${debian_major_version}" = "9" ]; then
     PYTHON_VERSIONS=(
       3.8.13
