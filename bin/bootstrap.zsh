@@ -141,7 +141,7 @@ if is_macos; then
 else
   asdf_dir="${HOME}/.asdf"
   sudo apt-get update
-  sudo apt-get -y install acl-dev libcap-dev build-essential make libssl-dev zlib1g-dev \
+  sudo apt-get -y install acl-dev glibc libcap-dev build-essential make libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
