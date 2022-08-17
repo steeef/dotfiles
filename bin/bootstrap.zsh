@@ -150,9 +150,7 @@ else
   # install bfs
   bfs_install.sh
 
-  debian_version="$(lsb_release -s -d | awk '{print $3}')"
-  semver=( ${debian_version//./} )
-  debian_major_version="${semver[0]}"
+  debian_major_version="$(lsb_release -s -d | awk '{print $3}' | grep -o '^[0-9]\+')"
   if [ "${debian_major_version}" = "9" ]; then
     PYTHON_VERSIONS=(
       3.8.13
