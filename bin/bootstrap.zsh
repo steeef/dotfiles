@@ -193,8 +193,8 @@ for python in "${PYTHON_VERSIONS[@]}"; do
   asdf install python "${python}"
   (asdf shell python "${python}"; pip install --upgrade pip)
   (asdf shell python "${python}"; pip install --upgrade -r "${PYTHON_MODULES}")
-  asdf reshim python
 done
+asdf reshim python
 
 # set default
 asdf global python "${PYTHON_DEFAULT[@]}"
