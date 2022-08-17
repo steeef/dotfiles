@@ -101,9 +101,7 @@ if is_macos; then
   ensure_link "code/keybindings.json" "Library/Application Support/Code - Insiders/User/keybindings.json"
   ensure_link "code/snippets" "Library/Application Support/Code/User/snippets"
   ensure_link "code/snippets" "Library/Application Support/Code - Insiders/User/snippets"
-fi
 
-if is_macos; then
   echo "INFO: Copying fonts."
   rsync -aW "${HOME}/.dotfiles/fonts/" ~/Library/Fonts/
   # install XCode Command Line Tools if not installed
