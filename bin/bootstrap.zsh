@@ -123,9 +123,6 @@ if is_macos; then
   brew update
   brew tap homebrew/bundle
   brew bundle --global
-  
-  # link asdf directory
-  ln -s /usr/local/opt/asdf/libexec "${HOME}/.asdf"
 
   OPENSSL_LIB="$(find /usr/local/Cellar/openssl@1.1 -type d -depth 1)/lib"
   DYLD_LIBRARY_PATH="${OPENSSL_LIB}"
