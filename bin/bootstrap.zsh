@@ -16,7 +16,7 @@ PYTHON_DEFAULT=(
 
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
 
-DIRENV_VERSION=2.31.1
+DIRENV_VERSION=2.32.1
 
 
 function ensure_link {
