@@ -16,6 +16,8 @@ PYTHON_DEFAULT=(
 
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
 
+DIRENV_VERSION=2.31.1
+
 
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
@@ -47,6 +49,7 @@ ensure_link "bashrc"             ".bashrc" "force"
 ensure_link "beets/config.yaml"  ".config/beets/config.yaml" "force"
 ensure_link "bin"                ".bin"
 ensure_link "editorconfig"       ".editorconfig"
+ensure_link "envrc"              ".envrc"
 ensure_link "fonts"              ".fonts"
 ensure_link "gemrc"              ".gemrc"
 ensure_link "git_template"       ".git_template"
@@ -198,6 +201,11 @@ asdf reshim python
 
 # set default
 asdf global python "${PYTHON_DEFAULT[@]}"
+
+# direnv setup
+(asdf plugin list | grep -q 'direnv') || asdf plugin add direnv
+asdf install direnv "${DIRENV_VERSION}"
+asdf global direnv "${DIRENV_VERSION}"
 
 # vim plug install
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
