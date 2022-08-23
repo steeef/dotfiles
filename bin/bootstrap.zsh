@@ -206,6 +206,8 @@ asdf global python "${PYTHON_DEFAULT[@]}"
 (asdf plugin list | grep -q 'direnv') || asdf plugin add direnv
 asdf install direnv "${DIRENV_VERSION}"
 asdf global direnv "${DIRENV_VERSION}"
+asdf direnv setup --shell zsh --version "${DIRENV_VERSION}"
+asdf exec direnv allow "${HOME}"
 
 # vim plug install
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
