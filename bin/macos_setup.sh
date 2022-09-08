@@ -23,6 +23,26 @@ function get_sudo {
   fi
 }
 
+function enable_reattach_sudo {
+  # enable_reattach_sudo
+  #   Check if already enabled in /etc pam.d/sudo
+  #   Use vim to insert required text to sudo
+  
+  if grep -q 'pam_reattach.so' /etc/pam.d/sudo; then
+    echo "[✅] Reattach Sudo Already Enabled"
+    return 0
+  fi
+
+  if sudo ex -s -c '2i|auth       optional       pam_reattach.so' -c x! -c x! /etc/pam.d/sudo; then
+    # Invoke Vim in ex mode
+    # Select line 2, enter insert mode, insert that text write changes and exit
+    # Need to exit twice to get passed the read only file warning
+    echo "[✅] Reattach Sudo Enabled"
+  else
+    echo "[❌] Failed to enable Reattach Sudo"
+  fi
+}
+
 function enable_touchid_sudo {
   # enable_touchid_sudo
   #   Check if already enabled in /etc pam.d/sudo
@@ -43,6 +63,7 @@ function enable_touchid_sudo {
   fi
 }
 
+enable_reattach_sudo
 enable_touchid_sudo
 
 defaults write com.apple.finder AppleShowAllFiles YES
