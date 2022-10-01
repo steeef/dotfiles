@@ -6,6 +6,7 @@ keep_days=14
 rdiff_backup_opts=(
   --exclude-other-filesystems
   --exclude-special-files
+  --force
   --no-carbonfile
   --no-hard-links
   --print-statistics
