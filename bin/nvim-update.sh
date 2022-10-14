@@ -5,7 +5,16 @@
 echo "Updating plugins with Packer"
 "${HOME}/bin/nvim" --headless \
   +PackerSync +PackerCompile \
-  +"PackerLoad nvim-treesitter" +TSUpdateSync \
+  +messages +qa
+echo
+echo "Updating Treesitter modules"
+"${HOME}/bin/nvim" --headless \
+  +"PackerLoad nvim-treesitter" \
+  +TSUpdateSync \
+  +messages +qa
+echo
+echo "Updating LSP servers"
+"${HOME}/bin/nvim" --headless \
   +"PackerLoad nvim-lsp-installer" \
   +"LspInstall --sync bashls pyright terraformls yamlls" \
-  +messages +quit
+  +messages +qa
