@@ -12,9 +12,3 @@ echo "Updating Treesitter modules"
   +"PackerLoad nvim-treesitter" \
   +TSUpdateSync \
   +messages +qa
-echo
-echo "Updating LSP servers"
-"${HOME}/bin/nvim" --headless \
-  +"PackerLoad nvim-lsp-installer" \
-  +"LspInstall --sync bashls pyright terraformls yamlls" \
-  +messages +qa

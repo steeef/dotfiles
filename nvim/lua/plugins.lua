@@ -1,4 +1,4 @@
--- plugins with packer
+-- plugins with packep
 require('packer').startup(function()
   use {'wbthomason/packer.nvim'}
 
@@ -59,7 +59,36 @@ require('packer').startup(function()
     end
   }
   use {'RRethy/vim-illuminate'} -- highlight other occurrences of word under cursor
-  use { 'williamboman/nvim-lsp-installer' }
+
+  -- lsp
+  use { "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup {
+        ui = {
+          icons = {
+            package_installed = "✓"
+          }
+        }
+      }
+    end
+  }
+  use { "williamboman/mason-lspconfig.nvim",
+    requires = { 'neovim/nvim-lspconfig' },
+    config = function()
+      require("mason-lspconfig").setup {
+        ensure_installed = {
+          "bashls",
+          "pyright",
+          "sumneko_lua",
+          "terraformls",
+          "tflint",
+          "yamlls",
+        },
+        automatic_installation = true,
+      }
+    end
+  }
+
   use {
     'hrsh7th/nvim-cmp', -- completion
     requires = {
@@ -71,14 +100,6 @@ require('packer').startup(function()
     config = function()
       if pcall(require, 'cmp') then
         require('autocompletion')
-      end
-    end
-  }
-  use {
-    'neovim/nvim-lspconfig',
-    config = function()
-      if pcall(require, 'lspconfig') then
-        require('lsp')
       end
     end
   }
