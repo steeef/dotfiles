@@ -1,5 +1,5 @@
 local servers = {
-  "bashls",
+  "bashls"
 }
 
 local mason_installed, mason = pcall(require, "mason")
@@ -17,6 +17,8 @@ if mason_tool_installer_installed then
   mason_tool_installer.setup{
     ensure_installed = {
       "bash-language-server",
+      "black",
+      "isort",
       "lua-language-server",
       "marksman",
       "pyright",
