@@ -1,4 +1,3 @@
-require('packer_init')
 require('plugins')
 require('settings')
 require('mappings')

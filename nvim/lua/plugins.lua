@@ -17,8 +17,6 @@ require('packer').startup(function()
   }
 
   -- colorschemes
-  use {'RRethy/nvim-base16'}
-  use {'navarasu/onedark.nvim'}
   use {'Mofiqul/dracula.nvim'}
 
   use {
@@ -32,7 +30,7 @@ require('packer').startup(function()
       end
     end
   }
-
+  
   use {'christoomey/vim-tmux-navigator'} -- easier navigation between windows and terminals with tmux
 
   -- git
@@ -61,32 +59,11 @@ require('packer').startup(function()
   use {'RRethy/vim-illuminate'} -- highlight other occurrences of word under cursor
 
   -- lsp
-  use { "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup {
-        ui = {
-          icons = {
-            package_installed = "✓"
-          }
-        }
-      }
-    end
-  }
-  use { "williamboman/mason-lspconfig.nvim",
-    requires = { 'neovim/nvim-lspconfig' },
-    config = function()
-      require("mason-lspconfig").setup {
-        ensure_installed = {
-          "bashls",
-          "pyright",
-          "sumneko_lua",
-          "terraformls",
-          "tflint",
-          "yamlls",
-        },
-        automatic_installation = true,
-      }
-    end
+  use {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'neovim/nvim-lspconfig',
   }
 
   use {
@@ -137,3 +114,7 @@ require('packer').startup(function()
     end
   }
 end)
+
+-- run lsp setup after all plugins loaded
+require('lsp-setup')
+
