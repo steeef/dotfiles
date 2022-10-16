@@ -74,16 +74,25 @@ if formatter_installed then
     }
   end
 
+  local tffmt = function()
+    return {
+      exe = "terraform",
+      args = { "fmt", "-" },
+      stdin = true,
+    }
+  end
+
   formatter.setup({
     filetype = {
-      python = {black, isort}
+      python = {black, isort},
+      terraform = {tffmt},
     }
   })
 
   vim.cmd([[
     augroup MyFormatAutoCmd
     autocmd!
-    autocmd BufWritePost *.js,*.py,*.lua FormatWrite
+    autocmd BufWritePost *.py,*.tf FormatWrite
     augroup END
   ]])
 end
