@@ -56,6 +56,7 @@ require('packer').startup(function()
       end
     end
   }
+  use {'mhartington/formatter.nvim'} -- automatically format specific filetypes
   use {'RRethy/vim-illuminate'} -- highlight other occurrences of word under cursor
 
   -- lsp
