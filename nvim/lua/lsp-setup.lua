@@ -1,15 +1,6 @@
-local servers = {
-  "bashls"
-}
-
 local mason_installed, mason = pcall(require, "mason")
 if mason_installed then
   mason.setup()
-end
-
-local mason_lspconfig_installed, mason_lspconfig = pcall(require, "mason-lspconfig")
-if mason_lspconfig_installed then
-  mason_lspconfig.setup()
 end
 
 local mason_tool_installer_installed, mason_tool_installer = pcall(require, "mason-tool-installer")
@@ -30,12 +21,31 @@ if mason_tool_installer_installed then
       "yamllint",
     },
     automatic_installation = true,
+    auto_update = false,
+    run_on_start = true,
   }
 end
 
-local lspconfig_installed, lspconfig = pcall(require, "lspconfig")
-if lspconfig_installed then
-  for server, _ in pairs(servers) do
-    lspconfig[server].setup()
+local mason_lspconfig_installed, mason_lspconfig = pcall(require, "mason-lspconfig")
+if mason_lspconfig_installed then
+  mason_lspconfig.setup{
+    ensure_installed = {
+      "bashls",
+      "jsonls",
+      "pyright",
+      "sumneko_lua",
+      "terraform-ls",
+      "yamlls",
+    },
+    automatic_installation = true,
+  }
+
+  local lspconfig_installed, lsp = pcall(require, "lspconfig")
+  if lspconfig_installed then
+    mason_lspconfig.setup_handlers{
+      function(server)
+        lsp[server].setup({})
+      end,
+    }
   end
 end
