@@ -1,3 +1,17 @@
+vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
+  if err ~= nil or result == nil then
+    return
+  end
+  if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+    local view = vim.fn.winsaveview()
+    vim.lsp.util.apply_text_edits(result, bufnr)
+    vim.fn.winrestview(view)
+    if bufnr == vim.api.nvim_get_current_buf() then
+      vim.api.nvim_command("noautocmd :update")
+    end
+  end
+end
+
 local mason_installed, mason = pcall(require, "mason")
 if mason_installed then
   mason.setup()
@@ -11,6 +25,7 @@ if mason_tool_installer_installed then
       "black",
       "isort",
       "lua-language-server",
+      "markdownlint",
       "marksman",
       "pyright",
       "shellcheck",
@@ -28,24 +43,47 @@ end
 
 local mason_lspconfig_installed, mason_lspconfig = pcall(require, "mason-lspconfig")
 if mason_lspconfig_installed then
-  mason_lspconfig.setup{
-    ensure_installed = {
-      "bashls",
-      "jsonls",
-      "pyright",
-      "sumneko_lua",
-      "terraform-ls",
-      "yamlls",
-    },
-    automatic_installation = true,
-  }
+  mason_lspconfig.setup()
 
   local lspconfig_installed, lsp = pcall(require, "lspconfig")
   if lspconfig_installed then
     mason_lspconfig.setup_handlers{
       function(server)
         lsp[server].setup({})
-      end,
+      end
     }
   end
+end
+
+local formatter_installed, formatter = pcall(require, "formatter")
+if formatter_installed then
+
+  local isort = function()
+    return {
+      exe = "isort",
+      args = { "-q", "-" },
+      stdin = true,
+    }
+  end
+
+  local black = function()
+    return {
+      exe = "black",
+      args = { "-q", "-" },
+      stdin = true,
+    }
+  end
+
+  formatter.setup({
+    filetype = {
+      python = {black, isort}
+    }
+  })
+
+  vim.cmd([[
+    augroup MyFormatAutoCmd
+    autocmd!
+    autocmd BufWritePost *.js,*.py,*.lua FormatWrite
+    augroup END
+  ]])
 end
