@@ -69,7 +69,7 @@ if formatter_installed then
   local black = function()
     return {
       exe = "black",
-      args = { "-q", "-" },
+      args = { "--line-length 120", "-q", "-" },
       stdin = true,
     }
   end
