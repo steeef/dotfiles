@@ -3,8 +3,17 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
   }, {
-    { name = 'buffer' },
-  });
+      { name = 'buffer' },
+    }, {
+      { name = 'spell',
+        option = {
+          enable_in_context = function()
+            return true
+          end
+        }
+      },
+    }
+  );
 
   mapping = {
     ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -21,10 +30,12 @@ cmp.setup.cmdline('/', {
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  });
+    {
+      name = 'path' }
+    },
+    {
+      { name = 'cmdline' }
+    });
 
   mapping = {
     ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Command }),

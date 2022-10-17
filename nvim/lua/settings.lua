@@ -91,3 +91,4 @@ opt.autoread = true
 
 -- spelling
 opt.spelllang = 'en,cjk'
+opt.spellsuggest='best,9'
