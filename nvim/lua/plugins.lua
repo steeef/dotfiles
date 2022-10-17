@@ -1,5 +1,15 @@
--- plugins with packep
-require('packer').startup(function()
+-- plugins with packer
+local packer = require('packer')
+
+packer.init {
+  display = {
+    open_fn = function()
+      return require("packer.util").float { border = "rounded" }
+    end,
+  }
+}
+
+packer.startup(function()
   use {'wbthomason/packer.nvim'}
 
   use {'andymass/vim-matchup'} -- match if/endif etc
@@ -30,7 +40,7 @@ require('packer').startup(function()
       end
     end
   }
-  
+
   use {'christoomey/vim-tmux-navigator'} -- easier navigation between windows and terminals with tmux
 
   -- git
@@ -134,4 +144,3 @@ end)
 
 -- run lsp setup after all plugins loaded
 require('lsp-setup')
-
