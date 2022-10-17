@@ -88,3 +88,6 @@ opt.switchbuf = "useopen"
 
 -- saving files
 opt.autoread = true
+
+-- spelling
+opt.spelllang = 'en,cjk'
