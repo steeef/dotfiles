@@ -35,6 +35,4 @@ popd
 echo "Install Packer"
 "${HOME}/bin/nvim" --headless +"autocmd User PackerComplete quitall" +PackerInstall
 
-
-echo "Update plugins, LSPs, Treesitter addons"
 nvim-update.sh

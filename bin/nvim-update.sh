@@ -2,13 +2,14 @@
 
 # Installs/updates addons for Neovim
 
-echo "Updating plugins with Packer"
+printf "\nUpdating plugins with Packer\n"
 "${HOME}/bin/nvim" --headless \
-  +PackerSync +PackerCompile \
-  +messages +qa
-echo
-echo "Updating Treesitter modules"
+  +"autocmd User PackerComplete quitall" \
+  +PackerSync \
+  +messages
+printf "\nUpdating Treesitter modules\n"
 "${HOME}/bin/nvim" --headless \
   +"PackerLoad nvim-treesitter" \
   +TSUpdateSync \
   +messages +qa
+printf "\n"
