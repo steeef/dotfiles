@@ -75,8 +75,8 @@ nmap('<CR>', 'o<ESC>') -- insert blank line below
 nmap('<leader>w', '<Cmd>botright vnew<CR>') -- new vertical window
 
 -- spellcheck
-nmap('<leader>s', ':set spell!<CR>')
-imap('<leader>s', '<C-O>:set spell!<CR>')
+nmap('F11', ':set spell!<CR>')
+imap('F11', '<C-O>:set spell!<CR>')
 
 -- window navigation with tmux-navigator
 nmap('<C-l>', ':TmuxNavigateRight <CR>')
