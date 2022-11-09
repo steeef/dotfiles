@@ -84,6 +84,7 @@ packer.startup(function()
       end
     end
   }
+  use {'towolf/vim-helm'} -- commenting helper
 
   -- lsp
   use {
