@@ -2,6 +2,13 @@ vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
   if err ~= nil or result == nil then
     return
   end
+
+  -- Short-circuit for Helm template files
+  if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
+    require('user').diagnostic.disable(bufnr)
+    return
+  end
+
   if not vim.api.nvim_buf_get_option(bufnr, "modified") then
     local view = vim.fn.winsaveview()
     vim.lsp.util.apply_text_edits(result, bufnr)
