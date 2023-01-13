@@ -3,10 +3,14 @@
 source="${HOME}/"
 include_file="${HOME}/.backup_include_file"
 keep_days=14
+rdiff_global_opts=(
+  --force
+  --new
+)
 rdiff_backup_opts=(
   --exclude-other-filesystems
   --exclude-special-files
-  --force
+  --include-globbing-filelist-stdin
   --no-carbonfile
   --no-hard-links
   --print-statistics
@@ -33,11 +37,13 @@ EOF
 
 if [ -d "${destination}" ]; then
     echo "INFO: Running backup from ${source} to ${destination}"
-    rdiff-backup "${rdiff_backup_opts[@]}" --include-globbing-filelist-stdin \
+    rdiff-backup "${rdiff_global_opts[@]}" \
+      backup "${rdiff_backup_opts[@]}" \
       "${source}" "${destination}" <<<"${include_list}"
 
     echo "INFO: Removing backups older than ${keep_days} days from ${destination}"
-    rdiff-backup "${rdiff_backup_opts[@]}" --force --remove-older-than "${keep_days}D" \
+    rdiff-backup "${rdiff_global_opts[@]}" \
+      remove increments --older-than "${keep_days}D" \
       "${destination}"
 else
   echo "ERROR: Destination directory ${destination} not found"
