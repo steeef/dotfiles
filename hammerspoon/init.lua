@@ -77,7 +77,7 @@ hyper:bind({}, 'c', nil, function()
   hs.application.launchOrFocus('Fantastical')
 end)
 hyper:bind({}, 't', nil, function()
-  hs.application.launchOrFocus('Tweetbot')
+  hs.application.launchOrFocus('Ivory')
 end)
 hyper:bind({}, 'u', nil, function()
   hs.application.launchOrFocus('1Password')
@@ -90,7 +90,7 @@ hyper:bind({}, '1', nil, function()
   -- get the screen where the focused window is displayed, a.k.a. current screen
   local screen = win:screen()
   -- compute the unitRect of the focused window relative to the current screen
-  -- and move the window to the next screen setting the same unitRect 
+  -- and move the window to the next screen setting the same unitRect
   win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
 end)
 hyper:bind({}, '2', nil, function()
