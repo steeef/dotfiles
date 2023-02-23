@@ -68,7 +68,7 @@ if formatter_installed then
   local isort = function()
     return {
       exe = "isort",
-      args = { "-q", "-" },
+      args = { "--sl", "-q", "-" },
       stdin = true,
     }
   end
