@@ -1,20 +1,21 @@
--- plugins with packer
-local packer = require('packer')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-  }
-}
+--- set leader to space
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-packer.startup(function()
-  use {'wbthomason/packer.nvim'}
-
-  -- performance improvements
-  use { "lewis6991/impatient.nvim", config = [[require('impatient')]] }
-
+require('lazy').setup({
   use {'andymass/vim-matchup'} -- match if/endif etc
   use {'tpope/vim-surround'} -- surround characters shortcuts
   use {'tpope/vim-repeat'} -- add . functionality to plugins
@@ -145,7 +146,7 @@ packer.startup(function()
       end
     end
   }
-end)
+})
 
 -- run lsp setup after all plugins loaded
 require('lsp-setup')
