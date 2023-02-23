@@ -65,10 +65,10 @@ end
 local formatter_installed, formatter = pcall(require, "formatter")
 if formatter_installed then
 
-  local isort = function()
+  local reorder_python_imports = function()
     return {
-      exe = "isort",
-      args = { "--sl", "-q", "-" },
+      exe = "reorder-python-imports",
+      args = { "-" },
       stdin = true,
     }
   end
@@ -91,7 +91,7 @@ if formatter_installed then
 
   formatter.setup({
     filetype = {
-      python = {black, isort},
+      python = {black, reorder_python_imports},
       terraform = {tffmt},
     }
   })
