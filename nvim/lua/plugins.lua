@@ -13,8 +13,7 @@ packer.startup(function()
   use {'wbthomason/packer.nvim'}
 
   -- performance improvements
-  use { "lewis6991/impatient.nvim" }
-  pcall(require, "impatient")
+  use { "lewis6991/impatient.nvim", config = [[require('impatient')]] }
 
   use {'andymass/vim-matchup'} -- match if/endif etc
   use {'tpope/vim-surround'} -- surround characters shortcuts
