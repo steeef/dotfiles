@@ -41,8 +41,6 @@ packer.startup(function()
     end
   }
 
-  use { "nathom/filetype.nvim" } -- faster filetype.vim replacement
-
   use {'christoomey/vim-tmux-navigator'} -- easier navigation between windows and terminals with tmux
 
   -- git
