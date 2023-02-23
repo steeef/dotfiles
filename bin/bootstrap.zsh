@@ -194,12 +194,12 @@ fi
 # Install python versions
 (asdf plugin list | grep -q 'python') || asdf plugin add python
 asdf plugin update python
+export ASDF_PYTHON_SKIP_RESHIM=1
 for python in "${PYTHON_VERSIONS[@]}"; do
   asdf install python "${python}"
   (asdf shell python "${python}"; pip install --upgrade pip)
   (asdf shell python "${python}"; pip install --upgrade -r "${PYTHON_MODULES}")
 done
-asdf reshim python
 
 # set default
 asdf global python "${PYTHON_DEFAULT[@]}"
@@ -213,7 +213,8 @@ for python in "${PYTHON_DEFAULT[@]}"; do
     "${HOME}/.config/nvim/venv/bin/pip" install pynvim neovim-remote
   )
 done
-
+export ASDF_PYTHON_SKIP_RESHIM=
+asdf reshim python
 
 # direnv setup
 (asdf plugin list | grep -q 'direnv') || asdf plugin add direnv
