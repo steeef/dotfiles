@@ -204,6 +204,17 @@ asdf reshim python
 # set default
 asdf global python "${PYTHON_DEFAULT[@]}"
 
+# neovim python setup
+for python in "${PYTHON_DEFAULT[@]}"; do
+  (
+    asdf shell python "${python}"
+    python -m venv "${HOME}/.config/nvim/venv"
+    "${HOME}/.config/nvim/venv/bin/pip" install --upgrade pip
+    "${HOME}/.config/nvim/venv/bin/pip" install pynvim neovim-remote
+  )
+done
+
+
 # direnv setup
 (asdf plugin list | grep -q 'direnv') || asdf plugin add direnv
 asdf install direnv "${DIRENV_VERSION}"
