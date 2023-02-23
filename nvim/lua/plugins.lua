@@ -12,6 +12,10 @@ packer.init {
 packer.startup(function()
   use {'wbthomason/packer.nvim'}
 
+  -- performance improvements
+  use { "lewis6991/impatient.nvim" }
+  pcall(require, "impatient")
+
   use {'andymass/vim-matchup'} -- match if/endif etc
   use {'tpope/vim-surround'} -- surround characters shortcuts
   use {'tpope/vim-repeat'} -- add . functionality to plugins
