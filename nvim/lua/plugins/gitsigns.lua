@@ -6,5 +6,6 @@ return {
       current_line_blame = false
     })
   end,
-  event = 'VeryLazy',
+  cmd = 'Gitsigns',
+  event = 'User FileOpened',
 }
