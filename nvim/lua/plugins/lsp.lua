@@ -1,28 +1,33 @@
 return {
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v1.x',
-    dependencies = {
-      -- LSP Support
-      'neovim/nvim-lspconfig',
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
-    }
-  },
-  {
-    'williamboman/mason.nvim',
+    'neovim/nvim-lspconfig',
     lazy = true,
-    config = function()
-      require('mason').setup()
-    end
+    dependencies = { 'mason-lspconfig.nvim', 'nlsp-settings.nvim' },
   },
   {
     'williamboman/mason-lspconfig.nvim',
-    dependencies = { 'williamboman/mason.nvim' },
+    dependencies = { 'mason.nvim' },
+    cmd = { 'LspInstall', 'LspUninstall' }
     lazy = true,
     config = function()
       require('mason-lspconfig').setup()
+    end
+  },
+  {
+    'tamago324/nlsp-settings.nvim',
+    cmd = 'LspSettings',
+    lazy = true
+  },
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    lazy = true
+  },
+  {
+    'williamboman/mason.nvim',
+    cmd = { 'Mason', 'MasonInstall', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
+    lazy = true,
+    config = function()
+      require('mason').setup()
     end
   },
   {
@@ -51,9 +56,4 @@ return {
       }
     end
   },
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = { 'williamboman/mason-lspconfig.nvim' },
-    event = { 'BufReadPre', 'BufNewFile' },
-  }
 }
