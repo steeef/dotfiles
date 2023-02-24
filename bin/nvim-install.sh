@@ -32,7 +32,4 @@ rm -rf "build" \
   && make install
 popd
 
-echo "Install Packer"
-"${HOME}/bin/nvim" --headless +"autocmd User PackerComplete quitall" +PackerInstall
-
 nvim-update.sh

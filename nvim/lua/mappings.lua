@@ -31,11 +31,6 @@ end
 
 -- mapping
 
---- set leader to space
-map('', '<Space>', '<Nop>')
-g.mapleader = " "
-g.maplocalleader = " "
-
 --- swap colon with semicolon
 nmap(';', ':', {noremap = true, silent = false, expr = false})
 nmap(':', ';', {noremap = true, silent = false, expr = false})
