@@ -27,9 +27,6 @@ return {
     'neovim/nvim-lspconfig',
   },
 
-  -- neomake for linters
-  {'neomake/neomake', config = function() require('neomake_conf') end},
-
   -- windows
   'camspiers/lens.vim', -- resize windows automatically when switching
   'blueyed/vim-diminactive', -- dim inactive windows
