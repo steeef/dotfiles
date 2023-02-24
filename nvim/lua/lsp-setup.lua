@@ -27,24 +27,6 @@ end
 local mason_tool_installer_installed, mason_tool_installer = pcall(require, "mason-tool-installer")
 if mason_tool_installer_installed then
   mason_tool_installer.setup{
-    ensure_installed = {
-      "bash-language-server",
-      "black",
-      "isort",
-      "lua-language-server",
-      "markdownlint",
-      "marksman",
-      "pyright",
-      "shellcheck",
-      "shfmt",
-      "terraform-ls",
-      "tflint",
-      "yaml-language-server",
-      "yamllint",
-    },
-    automatic_installation = true,
-    auto_update = false,
-    run_on_start = true,
   }
 end
 
@@ -60,46 +42,4 @@ if mason_lspconfig_installed then
       end
     }
   end
-end
-
-local formatter_installed, formatter = pcall(require, "formatter")
-if formatter_installed then
-
-  local reorder_python_imports = function()
-    return {
-      exe = "reorder-python-imports",
-      args = { "-" },
-      stdin = true,
-    }
-  end
-
-  local black = function()
-    return {
-      exe = "black",
-      args = { "-q", "-" },
-      stdin = true,
-    }
-  end
-
-  local tffmt = function()
-    return {
-      exe = "terraform",
-      args = { "fmt", "-" },
-      stdin = true,
-    }
-  end
-
-  formatter.setup({
-    filetype = {
-      python = {black, reorder_python_imports},
-      terraform = {tffmt},
-    }
-  })
-
-  vim.cmd([[
-    augroup MyFormatAutoCmd
-    autocmd!
-    autocmd BufWritePost *.py,*.tf FormatWrite
-    augroup END
-  ]])
 end

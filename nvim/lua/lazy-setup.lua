@@ -16,6 +16,3 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 require('lazy').setup('plugins')
-
--- run lsp setup after all plugins loaded
-require('lsp-setup')

@@ -15,7 +15,6 @@ return {
 
   -- languages
   'tpope/vim-commentary', -- commenting helper
-  'mhartington/formatter.nvim', -- automatically format specific filetypes
   'RRethy/vim-illuminate', -- highlight other occurrences of word under cursor
   'towolf/vim-helm', -- commenting helper
 
