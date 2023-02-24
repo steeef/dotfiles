@@ -227,9 +227,5 @@ asdf exec direnv allow "${HOME}"
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# neovim packer install
-git clone --depth=1 https://github.com/wbthomason/packer.nvim \
-    "${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim" 2>/dev/null || true
-
 # tpm install
 tpm-install.sh
