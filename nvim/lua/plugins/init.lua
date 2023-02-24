@@ -1,4 +1,5 @@
 return {
+  { "folke/lazy.nvim", tag = "stable" },
   'andymass/vim-matchup', -- match if/endif etc
   'tpope/vim-surround', -- surround characters shortcuts
   'tpope/vim-repeat', -- add . functionality to plugins
@@ -23,7 +24,15 @@ return {
   'towolf/vim-helm', -- commenting helper
 
   -- windows
+  {
+    'nvim-lua/popup.nvim',
+    lazy = true
+  },
+  {
+    'nvim-lua/plenary.nvim',
+    cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" },
+    lazy = true
+  },
   'camspiers/lens.vim', -- resize windows automatically when switching
   'blueyed/vim-diminactive', -- dim inactive windows
-  {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
 }
