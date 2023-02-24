@@ -2,14 +2,16 @@
 
 # Installs/updates addons for Neovim
 
-printf "\nUpdating plugins with Packer\n"
+printf "\nUpdating plugins with lazy.nvim\n"
 "${HOME}/bin/nvim" --headless \
-  +"autocmd User PackerComplete quitall" \
-  +PackerSync \
-  +messages
+  "+Lazy! sync" \
+  +messages +qa
 printf "\nUpdating Treesitter modules\n"
 "${HOME}/bin/nvim" --headless \
-  +"PackerLoad nvim-treesitter" \
   +TSUpdateSync \
   +messages +qa
+printf "\nUpdating LSP modules\n"
+"${HOME}/bin/nvim" --headless \
+  -c 'autocmd User MasonToolsUpdateCompleted quitall' -c 'MasonToolsUpdate' \
+  +messages
 printf "\n"

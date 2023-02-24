@@ -32,4 +32,8 @@ rm -rf "build" \
   && make install
 popd
 
+# lazy.nvim install
+git clone --filter=blob:none "https://github.com/folke/lazy.nvim.git" --branch=stable \
+  "${HOME}/.local/share/nvim/lazy/lazy.nvim" 2>/dev/null || true
+
 nvim-update.sh
