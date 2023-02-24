@@ -60,14 +60,6 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = { 'williamboman/mason-lspconfig.nvim' },
-    config = function()
-      local lsp = pcall(require, 'lspconfig')
-      require('mason-lspconfig').setup_handlers{
-        function(server)
-          lsp[server].setup({})
-        end
-      }
-    end,
     event = { 'BufReadPre', 'BufNewFile' },
   }
 }

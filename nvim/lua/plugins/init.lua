@@ -6,7 +6,11 @@ return {
   'junegunn/vim-easy-align', -- easily align by character
 
   -- colorschemes
-  'Mofiqul/dracula.nvim',
+  {
+    'Mofiqul/dracula.nvim',
+    lazy = false,
+    priority = 1000,
+  },
 
   'christoomey/vim-tmux-navigator', -- easier navigation between windows and terminals with tmux
 
@@ -17,14 +21,6 @@ return {
   'tpope/vim-commentary', -- commenting helper
   'RRethy/vim-illuminate', -- highlight other occurrences of word under cursor
   'towolf/vim-helm', -- commenting helper
-
-  -- lsp
-  {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    'neovim/nvim-lspconfig',
-  },
 
   -- windows
   'camspiers/lens.vim', -- resize windows automatically when switching

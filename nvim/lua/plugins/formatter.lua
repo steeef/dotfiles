@@ -1,5 +1,9 @@
 return {
   'mhartington/formatter.nvim', -- automatically format specific filetypes
+  ft = {
+    'python',
+    'terraform',
+  },
   config = function()
     local reorder_python_imports = function()
       return {
