@@ -51,5 +51,6 @@ return {
         ['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Command }),
       }
     })
-  end
+  end,
+  event = 'InsertEnter'
 }

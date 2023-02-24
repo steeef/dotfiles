@@ -16,5 +16,6 @@ return {
         file_ignore_patterns = { '%.jpg', '%.jpeg', '%.png', '%.otf', '%.ttf', '.git/' },
       },
     }
-  end
+  end,
+  event = 'VeryLazy',
 }
