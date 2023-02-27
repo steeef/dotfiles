@@ -1,20 +1,3 @@
-local lsp_tools = {
-  "bash-language-server",
-  "black",
-  "lua-language-server",
-  "markdownlint",
-  "marksman",
-  "pyright",
-  "reorder-python-imports",
-  "rome",
-  "shellcheck",
-  "shfmt",
-  "terraform-ls",
-  "tflint",
-  "yaml-language-server",
-  "yamllint",
-}
-
 local lsps = {
   "bashls",
   "jsonls",
@@ -51,19 +34,6 @@ local lsp_plugins = {
         end
       })
     end,
-  },
-  {
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    dependencies = { 'mason.nvim' },
-    cmd = { 'MasonToolsUpdate' },
-    config = function()
-      require("mason-tool-installer").setup({
-        ensure_installed = lsp_tools,
-        automatic_installation = true,
-        auto_update = false,
-        run_on_start = true,
-      })
-    end
   },
   {
     'jose-elias-alvarez/null-ls.nvim',
