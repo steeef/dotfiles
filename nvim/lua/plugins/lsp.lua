@@ -46,6 +46,7 @@ local lsp_plugins = {
         sources = {
           null_ls.builtins.code_actions.gitsigns,
           null_ls.builtins.code_actions.shellcheck,
+          null_ls.builtins.diagnostics.actionlint,
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.reorder_python_imports,
           null_ls.builtins.formatting.rome,
@@ -54,6 +55,10 @@ local lsp_plugins = {
         },
         -- you can reuse a shared lspconfig on_attach callback here
         on_attach = function(client, bufnr)
+          -- short-circuit helm template files
+          if client.config.name == 'yamlls' and vim.bo.filetype == 'helm' then
+              vim.lsp.buf_detach_client(bufnr, client.id)
+          end
           if client.supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
             vim.api.nvim_create_autocmd("BufWritePre", {
