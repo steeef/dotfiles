@@ -2,6 +2,11 @@ return {
   { "folke/lazy.nvim", tag = "stable" },
   'andymass/vim-matchup', -- match if/endif etc
   'tpope/vim-surround', -- surround characters shortcuts
+  {
+    'tpope/vim-sleuth', -- discover appropriate tab settings
+    lazy = true,
+    event = { 'BufNewFile', 'BufReadPost' },
+  },
   'tpope/vim-repeat', -- add . functionality to plugins
   'tpope/vim-unimpaired', -- pairs of handy bracket mappings
   'junegunn/vim-easy-align', -- easily align by character
@@ -30,9 +35,17 @@ return {
   },
 
   -- languages
-  'tpope/vim-commentary', -- commenting helper
+  {
+    'numToStr/Comment.nvim', -- aid commenting
+    lazy = true,
+    event = { 'BufNewFile', 'BufReadPost' },
+
+    config = function()
+        require('Comment').setup()
+    end,
+  },
   'RRethy/vim-illuminate', -- highlight other occurrences of word under cursor
-  'towolf/vim-helm', -- commenting helper
+  'towolf/vim-helm',
 
   -- windows
   {
