@@ -37,11 +37,12 @@ return {
     dependencies = {
       'plenary.nvim'
     },
-    config = function()
-      require('neogit').setup {
-        kind = 'vsplit',
-      }
-    end,
+    opts = {
+      disable_signs = false,
+      disable_context_highlighting = false,
+      disable_commit_confirmation = true,
+      kind = 'vsplit',
+    },
     lazy = true,
     cmd = 'Neogit',
   },
