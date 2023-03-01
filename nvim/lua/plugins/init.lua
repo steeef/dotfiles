@@ -33,16 +33,22 @@ return {
     cmd = 'Magit',
     lazy = true,
   },
+  {
+    'TimUntersberger/neogit',
+    dependencies = {
+      'plenary.nvim'
+    },
+    config = true,
+    lazy = true,
+    cmd = 'Neogit',
+  },
 
   -- languages
   {
     'numToStr/Comment.nvim', -- aid commenting
+    config = true,
     lazy = true,
     event = { 'BufNewFile', 'BufReadPost' },
-
-    config = function()
-        require('Comment').setup()
-    end,
   },
   'RRethy/vim-illuminate', -- highlight other occurrences of word under cursor
   'towolf/vim-helm',
