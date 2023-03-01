@@ -28,11 +28,6 @@ return {
 
   -- git
   {
-    'jreybert/vimagit',
-    cmd = 'Magit',
-    lazy = true,
-  },
-  {
     'TimUntersberger/neogit',
     dependencies = {
       'plenary.nvim'
