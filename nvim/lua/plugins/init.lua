@@ -14,7 +14,6 @@ return {
   -- lua utilities
   {
     'nvim-lua/plenary.nvim',
-    cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" },
     lazy = true
   },
 
@@ -56,7 +55,9 @@ return {
   -- windows
   {
     'nvim-lua/popup.nvim',
-    lazy = true,
+    dependencies = {
+      'plenary.nvim'
+    },
   },
   'camspiers/lens.vim', -- resize windows automatically when switching
   'blueyed/vim-diminactive', -- dim inactive windows
