@@ -1,7 +1,7 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   cmd = {"TSInstall","TSInstallInfo", "TSUpdate"},
-  dependencies = {'p00f/nvim-ts-rainbow'},
+  dependencies = {'HiPhish/nvim-ts-rainbow2'},
   event = "BufRead",
   config = function()
     require('nvim-treesitter.configs').setup {
@@ -12,6 +12,8 @@ return {
         enable = true,
         extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
         max_file_lines = 1000, -- Do not enable for files with more than n lines, int
+        query = 'rainbow-parens', -- Which query to use for finding delimiters
+        strategy = require 'ts-rainbow.strategy.global', -- Highlight the entire buffer all at once
         colors = { -- Dracula theme
           '#ff5555',
           '#ffb86c',

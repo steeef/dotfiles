@@ -50,15 +50,9 @@ return {
     event = { 'BufNewFile', 'BufReadPost' },
   },
   'RRethy/vim-illuminate', -- highlight other occurrences of word under cursor
-  'towolf/vim-helm',
+  'towolf/vim-helm', -- helm template helper
 
   -- windows
-  {
-    'nvim-lua/popup.nvim',
-    dependencies = {
-      'plenary.nvim'
-    },
-  },
   'camspiers/lens.vim', -- resize windows automatically when switching
   'blueyed/vim-diminactive', -- dim inactive windows
 }
