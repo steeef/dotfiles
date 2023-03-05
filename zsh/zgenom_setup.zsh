@@ -21,8 +21,6 @@ if ! zgenom saved; then
   zgenom load blimmer/zsh-aws-vault # aliases
   zgenom load reegnz/aws-vault-zsh-plugin # completion
 
-  zgenom load davidparsson/zsh-pyenv-lazy
-
   zgenom oh-my-zsh
   zgenom oh-my-zsh plugins/asdf
   zgenom oh-my-zsh plugins/kubectl
