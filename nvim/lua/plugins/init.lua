@@ -14,7 +14,6 @@ return {
   -- lua utilities
   {
     'nvim-lua/plenary.nvim',
-    cmd = { "PlenaryBustedFile", "PlenaryBustedDirectory" },
     lazy = true
   },
 
@@ -29,29 +28,31 @@ return {
 
   -- git
   {
-    'jreybert/vimagit',
-    cmd = 'Magit',
+    'TimUntersberger/neogit',
+    dependencies = {
+      'plenary.nvim'
+    },
+    opts = {
+      disable_signs = false,
+      disable_context_highlighting = false,
+      disable_commit_confirmation = true,
+      kind = 'vsplit',
+    },
     lazy = true,
+    cmd = 'Neogit',
   },
 
   -- languages
   {
     'numToStr/Comment.nvim', -- aid commenting
+    config = true,
     lazy = true,
     event = { 'BufNewFile', 'BufReadPost' },
-
-    config = function()
-        require('Comment').setup()
-    end,
   },
   'RRethy/vim-illuminate', -- highlight other occurrences of word under cursor
-  'towolf/vim-helm',
+  'towolf/vim-helm', -- helm template helper
 
   -- windows
-  {
-    'nvim-lua/popup.nvim',
-    lazy = true,
-  },
   'camspiers/lens.vim', -- resize windows automatically when switching
   'blueyed/vim-diminactive', -- dim inactive windows
 }
