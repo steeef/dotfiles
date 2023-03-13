@@ -22,7 +22,9 @@ function is_debian() {
 arch="$(uname -m)"
 
 # install nix via https://zero-to-nix.com
-curl --proto '=https' --tlsv1.2 -sSf -L "https://install.determinate.systems/nix" | sh -s -- install
+if ! command -v nix >/dev/null 2>&1; then
+  curl --proto '=https' --tlsv1.2 -sSf -L "https://install.determinate.systems/nix" | sh -s -- install
+fi
 
 if [ "${arch}" = "x86_64" ]; then
   if is_macos; then
