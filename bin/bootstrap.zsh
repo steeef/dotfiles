@@ -151,13 +151,6 @@ else
     libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
-  if [[ ${debian_major_version} -gt 10 ]]; then
-    bat_install.sh
-  fi
-
-  # install bfs
-  bfs_install.sh
-
   if [ "${debian_major_version}" = "9" ]; then
     PYTHON_VERSIONS=(
       3.8.13
