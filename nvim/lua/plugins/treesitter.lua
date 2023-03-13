@@ -11,11 +11,15 @@ vim.api.nvim_set_hl(0, 'DraculaRed',  {fg = colors.red})
 return {
   'nvim-treesitter/nvim-treesitter',
   cmd = {"TSInstall","TSInstallInfo", "TSUpdate"},
-  dependencies = {'HiPhish/nvim-ts-rainbow2'},
+  dependencies = {
+    'HiPhish/nvim-ts-rainbow2',
+    'RRethy/nvim-treesitter-endwise',
+  },
   event = "BufRead",
   config = function()
     require('nvim-treesitter.configs').setup {
       ensure_installed = 'all',
+      endwise = {enable = true},
       highlight = {enable = true},
       indent = {enable = true},
       rainbow = {
