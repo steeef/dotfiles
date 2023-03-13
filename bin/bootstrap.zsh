@@ -8,10 +8,11 @@ set -e
 PYTHON_VERSIONS=(
   3.8.13
   3.9.13
-  3.10.6
+  3.10.10
+  3.11.2
 )
 PYTHON_DEFAULT=(
-  3.10.6
+  3.11.2
 )
 
 PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
@@ -48,6 +49,7 @@ ensure_link "bash"               ".bash"
 ensure_link "bashrc"             ".bashrc" "force"
 ensure_link "beets/config.yaml"  ".config/beets/config.yaml" "force"
 ensure_link "bin"                ".bin"
+ensure_link "black"              ".config/black"
 ensure_link "editorconfig"       ".editorconfig"
 ensure_link "envrc"              ".envrc"
 ensure_link "fonts"              ".fonts"
@@ -192,15 +194,27 @@ fi
 # Install python versions
 (asdf plugin list | grep -q 'python') || asdf plugin add python
 asdf plugin update python
+export ASDF_PYTHON_SKIP_RESHIM=1
 for python in "${PYTHON_VERSIONS[@]}"; do
   asdf install python "${python}"
   (asdf shell python "${python}"; pip install --upgrade pip)
   (asdf shell python "${python}"; pip install --upgrade -r "${PYTHON_MODULES}")
 done
-asdf reshim python
 
 # set default
 asdf global python "${PYTHON_DEFAULT[@]}"
+
+# neovim python setup
+for python in "${PYTHON_DEFAULT[@]}"; do
+  (
+    asdf shell python "${python}"
+    python -m venv "${HOME}/.config/nvim/venv"
+    "${HOME}/.config/nvim/venv/bin/pip" install --upgrade pip
+    "${HOME}/.config/nvim/venv/bin/pip" install pynvim neovim-remote
+  )
+done
+export ASDF_PYTHON_SKIP_RESHIM=
+asdf reshim python
 
 # direnv setup
 (asdf plugin list | grep -q 'direnv') || asdf plugin add direnv
@@ -212,10 +226,6 @@ asdf exec direnv allow "${HOME}"
 # vim plug install
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# neovim packer install
-git clone --depth=1 https://github.com/wbthomason/packer.nvim \
-    "${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim" 2>/dev/null || true
 
 # tpm install
 tpm-install.sh

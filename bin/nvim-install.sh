@@ -32,9 +32,8 @@ rm -rf "build" \
   && make install
 popd
 
-echo "Install Packer"
-"${HOME}/bin/nvim" --headless +"autocmd User PackerComplete quitall" +PackerInstall
+# lazy.nvim install
+git clone --filter=blob:none "https://github.com/folke/lazy.nvim.git" --branch=stable \
+  "${HOME}/.local/share/nvim/lazy/lazy.nvim" 2>/dev/null || true
 
-
-echo "Update plugins, LSPs, Treesitter addons"
 nvim-update.sh

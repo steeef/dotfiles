@@ -31,11 +31,6 @@ end
 
 -- mapping
 
---- set leader to space
-map('', '<Space>', '<Nop>')
-g.mapleader = " "
-g.maplocalleader = " "
-
 --- swap colon with semicolon
 nmap(';', ':', {noremap = true, silent = false, expr = false})
 nmap(':', ';', {noremap = true, silent = false, expr = false})
@@ -74,6 +69,10 @@ nmap('<CR>', 'o<ESC>') -- insert blank line below
 
 nmap('<leader>w', '<Cmd>botright vnew<CR>') -- new vertical window
 
+-- spellcheck
+nmap('F11', ':set spell!<CR>')
+imap('F11', '<C-O>:set spell!<CR>')
+
 -- window navigation with tmux-navigator
 nmap('<C-l>', ':TmuxNavigateRight <CR>')
 nmap('<C-j>', ':TmuxNavigateDown <CR>')
@@ -86,7 +85,7 @@ nmap('<leader>b', ':Telescope buffers<CR>')
 nmap('<leader>a', ':Telescope live_grep<CR>')
 
 -- vimagit
-nmap('<leader>g', ':Magit<Enter>')
+nmap('<leader>g', ':Neogit<Enter>')
 
 -- vim-commentary
 nmap('gc', '<Plug>Commentary')

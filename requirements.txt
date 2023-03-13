@@ -1,9 +1,8 @@
-  boto3
-  black; python_version > '3'
-  flake8
-  ipython
-  isort
-  neovim
-  neovim-remote; python_version > '3'
-  requests
-  virtualenv
+boto3
+black
+flake8
+ipython
+pyright
+reorder-python-imports
+requests
+virtualenv

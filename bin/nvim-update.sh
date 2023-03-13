@@ -2,10 +2,11 @@
 
 # Installs/updates addons for Neovim
 
-echo "Updating plugins with Packer"
+printf "\nUpdating plugins with lazy.nvim\n"
 "${HOME}/bin/nvim" --headless \
-  +PackerSync +PackerCompile \
-  +"PackerLoad nvim-treesitter" +TSUpdateSync \
-  +"PackerLoad nvim-lsp-installer" \
-  +"LspInstall --sync bashls pyright terraformls yamlls" \
-  +messages +quit
+        "+Lazy! sync" \
+        +messages +qa
+printf "\nUpdating Treesitter modules\n"
+"${HOME}/bin/nvim" --headless \
+        +TSUpdateSync \
+        +messages +qa

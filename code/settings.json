@@ -124,12 +124,6 @@
             "**/.terraform/**/*"
         ]
     },
-    "terraform.languageServer": {
-        "external": true,
-        "args": [
-            "serve"
-        ]
-    },
     "editor.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
     "go.useLanguageServer": true,
@@ -142,5 +136,7 @@
         "jupyter-notebook": "left"
     },
     "python.defaultInterpreterPath": "/usr/local/bin/python3",
-    "security.workspace.trust.untrustedFiles": "open"
+    "security.workspace.trust.untrustedFiles": "open",
+    "redhat.telemetry.enabled": true,
+    "terraform.languageServer.enable": true
 }

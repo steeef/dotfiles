@@ -5,6 +5,10 @@ HOME = os.getenv("HOME")
 opt.encoding = "utf-8"
 opt.fileformats="unix,dos"
 
+vim.g.python_host_prog = HOME .. "/.config/nvim/venv/bin/python"
+vim.g.python3_host_prog = HOME .. "/.config/nvim/venv/bin/python"
+
+
 opt.backspace = "indent,eol,start" -- work for every character in insert mode
 opt.completeopt = "menuone,noselect"
 opt.dictionary = "/usr/share/dict/words"
@@ -88,3 +92,7 @@ opt.switchbuf = "useopen"
 
 -- saving files
 opt.autoread = true
+
+-- spelling
+opt.spelllang = 'en,cjk'
+opt.spellsuggest='best,9'
