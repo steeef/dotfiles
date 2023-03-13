@@ -13,6 +13,5 @@
     curl
     ripgrep
     wget
-    zsh
   ];
 }
