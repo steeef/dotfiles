@@ -11,5 +11,6 @@
     bat
     bfs
     ripgrep
+    wget
   ];
 }
