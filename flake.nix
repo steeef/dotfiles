@@ -9,17 +9,20 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations.myhome = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
+  outputs = { nixpkgs, home-manager, ... }: {
+    homeConfigurations = {
+      macbook = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-darwin;
+        modules = [
+          ./home.nix
+        ];
+      };
+      linux = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./home.nix
         ];
       };
     };
+  };
 }
