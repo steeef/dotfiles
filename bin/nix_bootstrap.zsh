@@ -26,6 +26,8 @@ if ! command -v nix >/dev/null 2>&1; then
   curl --proto '=https' --tlsv1.2 -sSf -L "https://install.determinate.systems/nix" | sh -s -- install
 fi
 
+source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
 if [ "${arch}" = "x86_64" ]; then
   if is_macos; then
     nix run ~/.dotfiles#homeConfigurations.macbook.activationPackage
