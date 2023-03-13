@@ -10,7 +10,9 @@
   home.packages = with pkgs; [
     bat
     bfs
+    curl
     ripgrep
     wget
+    zsh
   ];
 }
