@@ -1,6 +1,6 @@
-{ ... }: {
-  home.username = builtins.getEnv "USER";
-  home.homeDirectory = builtins.getEnv "HOME";
+{ config, pkgs, ... }: {
+  home.username = "sprice";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/sprice" else "/home/sprice";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
