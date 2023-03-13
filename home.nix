@@ -7,8 +7,8 @@
 
   home.stateVersion = "23.05";
 
-  home.packages = [
-    pkgs.bat
-    pkgs.bfs
+  home.packages = with pkgs; [
+    bat
+    bfs
   ];
 }
