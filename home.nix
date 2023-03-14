@@ -11,7 +11,10 @@
     bat
     bfs
     curl
+    jq
     ripgrep
+    tree
+    watch
     wget
   ];
 }
