@@ -3,7 +3,7 @@ return {
   config = function()
     if pcall(require, 'trim') then
       require('trim').setup({
-        disable = {'markdown'},
+        ft_blocklist = {'markdown'},
 
         patterns = {
           [[%s/\s\+$//e]],           -- remove unwanted spaces
