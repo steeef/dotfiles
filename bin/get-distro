@@ -57,6 +57,6 @@ if ! (( $+distro )) && [[ -n "$OSTYPE" ]]; then
 fi
 
 (( $+distro )) || distro="unknown"
-distro+=" ($(uname -m))"
+distro+=" $(uname -m)"
 
 echo $distro
