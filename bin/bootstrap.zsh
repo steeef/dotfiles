@@ -5,21 +5,6 @@
 
 set -e
 
-PYTHON_VERSIONS=(
-  3.8.13
-  3.9.13
-  3.10.10
-  3.11.2
-)
-PYTHON_DEFAULT=(
-  3.11.2
-)
-
-PYTHON_MODULES="${HOME}/.dotfiles/requirements.txt"
-
-DIRENV_VERSION=2.32.1
-
-
 function ensure_link {
   if [ ! -L "$HOME/$2" ]; then
     if [ "$3" = "force" ]; then
@@ -143,78 +128,10 @@ if is_macos; then
   defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
   macos_setup.sh
-else
-  asdf_dir="${HOME}/.asdf"
-  debian_major_version="$(lsb_release -s -d | awk '{print $3}' | grep -o '^[0-9]\+')"
-  sudo apt-get update
-  sudo apt-get -y install acl-dev libcap-dev build-essential make libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-
-  if [ "${debian_major_version}" = "9" ]; then
-    PYTHON_VERSIONS=(
-      3.8.13
-      3.9.13
-    )
-    PYTHON_DEFAULT=(
-      3.9.13
-    )
-  fi
-
-  # asdf
-  echo "INFO: Installing asdf"
-  if (cd "${asdf_dir}" && git rev-parse --git-dir >/dev/null 2>&1); then
-    (
-      cd "${asdf_dir}" || return
-      git fetch
-      if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
-        git pull
-      fi
-    )
-  else
-    rm -rf "${asdf_dir}"
-    mkdir -p "${asdf_dir}"
-    git clone https://github.com/asdf-vm/asdf.git "${asdf_dir}"
-  fi
-fi
-
-if is_debian; then
-  source "${asdf_dir}/asdf.sh"
-elif is_macos; then
-  source $(brew --prefix asdf)/libexec/asdf.sh
-fi
-
-# Install python versions
-(asdf plugin list | grep -q 'python') || asdf plugin add python
-asdf plugin update python
-export ASDF_PYTHON_SKIP_RESHIM=1
-for python in "${PYTHON_VERSIONS[@]}"; do
-  asdf install python "${python}"
-  (asdf shell python "${python}"; pip install --upgrade pip)
-  (asdf shell python "${python}"; pip install --upgrade -r "${PYTHON_MODULES}")
-done
-
-# set default
-asdf global python "${PYTHON_DEFAULT[@]}"
 
 # neovim python setup
-for python in "${PYTHON_DEFAULT[@]}"; do
-  (
-    asdf shell python "${python}"
-    python -m venv "${HOME}/.config/nvim/venv"
-    "${HOME}/.config/nvim/venv/bin/pip" install --upgrade pip
-    "${HOME}/.config/nvim/venv/bin/pip" install pynvim neovim-remote
-  )
-done
-export ASDF_PYTHON_SKIP_RESHIM=
-asdf reshim python
-
-# direnv setup
-(asdf plugin list | grep -q 'direnv') || asdf plugin add direnv
-asdf install direnv "${DIRENV_VERSION}"
-asdf global direnv "${DIRENV_VERSION}"
-asdf direnv setup --shell zsh --version "${DIRENV_VERSION}"
-asdf exec direnv allow "${HOME}"
+python -m venv "${HOME}/.config/nvim/venv"
+"${HOME}/.config/nvim/venv/bin/pip" install pynvim neovim-remote
 
 # vim plug install
 curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
