@@ -39,5 +39,3 @@ elif [ "${arch}" = "aarch64" ]; then
 else
         echo "ERROR: unknown architecture"
 fi
-
-nix flake new -t github:steeef/dev-templates#python311 "${HOME}/.config/nvim/python"
