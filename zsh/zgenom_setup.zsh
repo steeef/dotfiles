@@ -22,7 +22,6 @@ if ! zgenom saved; then
   zgenom load reegnz/aws-vault-zsh-plugin # completion
 
   zgenom oh-my-zsh
-  zgenom oh-my-zsh plugins/asdf
   zgenom oh-my-zsh plugins/kubectl
   zgenom oh-my-zsh plugins/vi-mode
 
