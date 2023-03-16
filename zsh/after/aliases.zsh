@@ -29,8 +29,6 @@ alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 
 # vim
 alias v='vim'
-alias plugupgrade='vim +PlugUpgrade +qall'
-alias plugupdate='vim +PlugUpdate'
 
 # bat
 if command -v bat >/dev/null 2>&1; then
