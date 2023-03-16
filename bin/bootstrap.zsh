@@ -128,14 +128,6 @@ if is_macos; then
 
   macos_setup.sh
 fi
-
-# neovim python setup
-python3 -m venv "${HOME}/.config/nvim/venv"
-"${HOME}/.config/nvim/venv/bin/pip" install pynvim neovim-remote
-
-# vim plug install
-curl -sfLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+#
 # tpm install
 tpm-install.sh
