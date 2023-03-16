@@ -13,11 +13,6 @@ if ! zgenom saved; then
 
   zgenom load larkery/zsh-histdb
 
-  # fzf
-  zgenom load junegunn/fzf shell/completion.zsh
-  zgenom load junegunn/fzf shell/key-bindings.zsh
-  "${ZGEN_DIR}/junegunn/fzf/___/install" --bin
-
   zgenom load blimmer/zsh-aws-vault # aliases
   zgenom load reegnz/aws-vault-zsh-plugin # completion
 
@@ -34,7 +29,6 @@ if ! zgenom saved; then
   zgenom load dracula/zsh
 
   zgenom bin clvv/fasd
-  zgenom bin junegunn/fzf
 
   zgenom save
 
