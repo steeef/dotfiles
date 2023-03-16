@@ -23,4 +23,8 @@
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
+
+  programs.neovim = {
+    enable = true;
+  };
 }
