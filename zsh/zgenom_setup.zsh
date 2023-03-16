@@ -27,8 +27,8 @@ if ! zgenom saved; then
   zgenom oh-my-zsh plugins/vi-mode
 
   # colorschemes
-  #zgenom load chrissicool/zsh-256color
-  #zgenom load chriskempson/base16-shell
+  zgenom load chrissicool/zsh-256color
+  zgenom load chriskempson/base16-shell
 
   zgenom load romkatv/powerlevel10k powerlevel10k
   zgenom load dracula/zsh

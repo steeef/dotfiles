@@ -1,1 +1,1 @@
-ZSH_THEME="dracula"
+ZSH_THEME="powerlevel10k/powerlevel10k"
