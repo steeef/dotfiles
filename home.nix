@@ -10,6 +10,7 @@
   home.packages = with pkgs; [
     bfs
     curl
+    fasd
     jq
     ripgrep
     tree

@@ -28,8 +28,6 @@ if ! zgenom saved; then
   zgenom load romkatv/powerlevel10k powerlevel10k
   zgenom load dracula/zsh
 
-  zgenom bin clvv/fasd
-
   zgenom save
 
   zgenom compile "${HOME}/.zshrc"
