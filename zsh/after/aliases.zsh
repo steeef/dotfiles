@@ -28,7 +28,10 @@ alias drm='docker rm $(docker ps -a -q)'
 alias drmi="docker rmi \$(docker images -q --filter 'dangling=true')"
 
 # vim
+alias vim='nvim'
 alias v='vim'
+alias vimdiff='nvim -d'
+
 
 # bat
 if command -v bat >/dev/null 2>&1; then

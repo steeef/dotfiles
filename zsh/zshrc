@@ -49,6 +49,11 @@ setopt AUTO_CD # cd to directory if not a command
 REPORTTIME=60
 TIMEFMT="%U user %S system %P cpu %*Es total"
 
+# editor settings
+EDITOR=nvim
+VISUAL=nvim
+export EDITOR VISUAL
+
 # Expand aliases inline - see http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
 globalias() {
    if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
