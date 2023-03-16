@@ -1,8 +1,0 @@
-boto3
-black
-flake8
-ipython
-pyright
-reorder-python-imports
-requests
-virtualenv
