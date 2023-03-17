@@ -11,30 +11,31 @@
   };
 
   outputs = { nixpkgs, home-manager, neovim-nightly-overlay, ... }:
-  let
-    overlays = [
-      neovim-nightly-overlay.overlay
-    ];
-  in {
-    homeConfigurations = {
-      macbook = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-darwin;
-        modules = [
-          ({
-            nixpkgs.overlays = overlays;
-          })
-          ./home.nix
-        ];
-      };
-      linux = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [
-          ({
-            nixpkgs.overlays = overlays;
-          })
-          ./home.nix
-        ];
+    let
+      overlays = [
+        neovim-nightly-overlay.overlay
+      ];
+    in
+    {
+      homeConfigurations = {
+        macbook = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-darwin;
+          modules = [
+            ({
+              nixpkgs.overlays = overlays;
+            })
+            ./home.nix
+          ];
+        };
+        linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [
+            ({
+              nixpkgs.overlays = overlays;
+            })
+            ./home.nix
+          ];
+        };
       };
     };
-  };
 }
