@@ -3,7 +3,6 @@ local lsps = {
   "jsonls",
   "lua_ls",
   "marksman",
-  "nil_ls",
   "pyright",
   "terraformls",
   "tflint",
@@ -34,6 +33,7 @@ local lsp_plugins = {
           require("lspconfig")[server_name].setup {}
         end
       })
+      require("lspconfig").nil_ls.setup{}
     end,
   },
   {
