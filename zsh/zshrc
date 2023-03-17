@@ -116,4 +116,10 @@ fi
 PATH="${HOME}/.zgenom/bin:${PATH}"
 export PATH
 
+if [ -d "${HOME}/.nix-profile/bin" ]; then
+  PATH="${HOME}/.nix-profile/bin:${PATH}"
+  export PATH
+fi
+
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
