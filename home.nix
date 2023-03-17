@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, lib, ... }: {
   home.username = "sprice";
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/sprice" else "/home/sprice";
 
