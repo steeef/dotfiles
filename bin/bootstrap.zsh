@@ -128,6 +128,3 @@ if is_macos; then
 
   macos_setup.sh
 fi
-#
-# tpm install
-tpm-install.sh

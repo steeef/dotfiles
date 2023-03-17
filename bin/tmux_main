@@ -1,3 +1,0 @@
-#!/bin/bash
-SESSION=main
-tmux attach -t main || tmux new -s main

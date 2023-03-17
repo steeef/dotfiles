@@ -1,6 +1,0 @@
-#!/bin/bash
-if [ $# -ne 1 ]; then
-    echo "USAGE: $(basename 0) <fontsize>"
-    exit 1
-fi
-printf '\33]50;%s%d\007' "xft:Monaco:pixelsize=" $1
