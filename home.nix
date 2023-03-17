@@ -11,8 +11,15 @@
     bfs
     curl
     fasd
+    coreutils
+    findutils
+    gnugrep
+    gnused
     jq
+    reattach-to-user-namespace
+    rename
     ripgrep
+    ssh-copy-id
     tree
     watch
     wget
