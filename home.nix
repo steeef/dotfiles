@@ -31,12 +31,13 @@
   programs.bat = {
     enable = true;
     themes = {
-      dracula = builtins.readFile (pkgs.fetchFromGitHub {
-        owner = "dracula";
-        repo = "sublime"; # Bat uses sublime syntax for its themes
-        rev = "26c57ec282abcaa76e57e055f38432bd827ac34e";
-        sha256 = "019hfl4zbn4vm4154hh3bwk6hm7bdxbr1hdww83nabxwjn99ndhv";
-      } + "/Dracula.tmTheme");
+      dracula = builtins.readFile (pkgs.fetchFromGitHub
+        {
+          owner = "dracula";
+          repo = "sublime"; # Bat uses sublime syntax for its themes
+          rev = "26c57ec282abcaa76e57e055f38432bd827ac34e";
+          sha256 = "019hfl4zbn4vm4154hh3bwk6hm7bdxbr1hdww83nabxwjn99ndhv";
+        } + "/Dracula.tmTheme");
     };
   };
 
@@ -72,7 +73,7 @@
     extraConfig = {
       apply = {
         whitespace = "nowarn";
-        };
+      };
       color = {
         diff = "auto";
         status = "auto";
@@ -93,7 +94,7 @@
         indentHeuristic = "on";
       };
       fetch = {
-          prune = "true";
+        prune = "true";
       };
       init = {
         templatedir = "~/.git_template";
@@ -114,7 +115,7 @@
       };
       url = {
         "git@github.com:" = {
-            insteadOf = "https://github.com/";
+          insteadOf = "https://github.com/";
         };
       };
     };
@@ -125,15 +126,19 @@
   };
 
   programs.tmux = {
+    enable = true;
+    secureSocket = if pkgs.stdenv.isDarwin then false else true;
     mouse = true;
+    escapeTime = 0;
+    historyLimit = 30000;
     newSession = true;
     prefix = "C-Space";
     terminal = "screen-256color";
 
-    plugins = with pkgs; [
-      tmuxPlugins.dracula
+    plugins = with pkgs.tmuxPlugins; [
+      dracula
       {
-        plugin = tmuxPlugin.resurrect;
+        plugin = resurrect;
         extraConfig = ''
           set -g @resurrect-capture-pane-contents 'on'
           set -g @resurrect-strategy-vim 'session'
@@ -141,7 +146,7 @@
         '';
       }
       {
-        plugin = tmuxPlugin.continuum;
+        plugin = continuum;
         extraConfig = ''
           set -g @continuum-boot 'on'
           set -g @continuum-restore 'on'
