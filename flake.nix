@@ -24,7 +24,7 @@
             ({
               nixpkgs.overlays = overlays;
             })
-            ./home.nix
+            ./nix
           ];
         };
         linux = home-manager.lib.homeManagerConfiguration {
@@ -33,7 +33,7 @@
             ({
               nixpkgs.overlays = overlays;
             })
-            ./home.nix
+            ./nix
           ];
         };
       };
