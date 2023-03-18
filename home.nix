@@ -162,10 +162,6 @@
     extraConfig = lib.strings.fileContents ./tmux.conf;
   };
 
-  home.activation.zgenom = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    $DRY_RUN_CMD git clone "https://github.com/jandamm/zgenom.git" "''${HOME}/.zgenom" 2> /dev/null || git -C "''${HOME}/.zgenom" pull
-  '';
-
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -187,6 +183,12 @@
       setopt COMPLETE_IN_WORD  # Complete from both ends of a word.
       unsetopt MENU_COMPLETE   # Do not autoselect the first completion entry.
 
+      # install and load zgenom
+      ZGEN_DIR="''${HOME}/.zgenom"
+      export ZGEN_DIR
+      if ! [ -d "''${ZGEN_DIR}" ]; then
+        git clone "https://github.com/jandamm/zgenom.git" "''${ZGEN_DIR}"
+      fi
       source "''${ZGEN_DIR}/zgenom.zsh"
     '';
     completionInit = ''
@@ -277,6 +279,7 @@
 
       # zgenom setup
       ZSHDIR="''${HOME}/.zsh"
+
       # Load and recompile before plugins
       setopt nullglob
       for file in ''${ZSHDIR}/before/*.zsh; do
@@ -284,7 +287,7 @@
       done
       unsetopt nullglob
 
-      zgenom autoupdate --background
+      zgenom autoupdate --background --self 7
       if ! zgenom saved; then
         zgenom load zsh-users/zsh-completions src # Load more completions
         zgenom load zsh-users/zsh-syntax-highlighting
