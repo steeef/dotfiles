@@ -30,6 +30,6 @@
       }
     ];
 
-    extraConfig = lib.strings.fileContents ../tmux.conf;
+    extraConfig = lib.strings.fileContents ./tmux.conf;
   };
 }
