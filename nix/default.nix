@@ -1,11 +1,6 @@
-{ pkgs, lib, ... }: {
-  home.username = "sprice";
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/sprice" else "/home/sprice";
-
+{ pkgs, ... }: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  home.stateVersion = "23.05";
 
   # get some paths on Linux set
   targets.genericLinux.enable = if pkgs.stdenv.isDarwin then false else true;
