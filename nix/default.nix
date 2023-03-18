@@ -39,7 +39,7 @@
     ./fzf.nix
     ./git.nix
     ./neovim.nix
-    ./tmux.nix
+    ./tmux
     ./zsh
   ];
 }
