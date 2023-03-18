@@ -12,6 +12,7 @@
 
   home.packages = with pkgs; [
     bfs
+    cowsay
     curl
     fasd
     coreutils
@@ -21,6 +22,7 @@
     jq
     nil
     nixpkgs-fmt
+    ponysay
     reattach-to-user-namespace
     rename
     ripgrep
