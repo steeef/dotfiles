@@ -7,7 +7,8 @@
 
   home.stateVersion = "23.05";
 
-  targets.genericLinux.enable = true;
+  # get some paths on Linux set
+  targets.genericLinux.enable = if pkgs.stdenv.isDarwin then false else true;
 
   home.packages = with pkgs; [
     bfs
@@ -271,7 +272,7 @@
       bindkey "^[[I" history-beginning-search-backward
       bindkey "^[[G" history-beginning-search-forward
 
-      PATH="''${HOME}/bin:''${HOME}/.bin:/usr/local/bin:/usr/local/sbin:''${PATH}"
+      PATH="''${HOME}/.zgenom/bin:''${HOME}/bin:''${HOME}/.bin:/usr/local/bin:/usr/local/sbin:''${PATH}"
       export PATH
 
       # zgenom setup
