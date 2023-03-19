@@ -133,11 +133,8 @@
       AppleShowAllFiles = true;
       InitialKeyRepeat = 10;
       KeyRepeat = 2;
-
-      com.apple = {
-        mouse.tapBehavior = 1;
-        swipescrolldirection = false;
-      };
+      "com.apple.mouse.tapBehavior" = 1;
+      "com.apple.swipescrolldirection" = false;
 
       NSAutomaticDashSubstitutionEnabled = false;
       NSAutomaticQuoteSubstitutionEnabled = false;
