@@ -31,7 +31,7 @@
           inherit (args) machine;
         };
         modules = [
-          ./darwin-configuration.nix
+          ./nix/darwin
         ];
       };
 
@@ -47,7 +47,7 @@
           ];
         };
         modules = [
-          ./nix
+          ./nix/home
           {
             home = {
               inherit username;
