@@ -6,6 +6,7 @@
   targets.genericLinux.enable = if pkgs.stdenv.isDarwin then false else true;
 
   home.packages = with pkgs; [
+    bash
     bfs
     cowsay
     curl
