@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -37,5 +37,8 @@
     ./neovim.nix
     ./tmux
     ./zsh
+  ]
+  ++ lib.optionals pkgs.stdenv.isDarwin [
+    ./iterm2
   ];
 }
