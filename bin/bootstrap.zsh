@@ -38,7 +38,6 @@ ensure_link "gitignore"          ".gitignore"
 ensure_link "hammerspoon"        ".hammerspoon"
 ensure_link "karabiner"          ".config/karabiner" "force"
 ensure_link "inputrc"            ".inputrc"
-ensure_link "iterm2"             ".iterm2"
 ensure_link "nvim/init.lua"      ".config/nvim/init.lua" "force"
 ensure_link "nvim/lua"           ".config/nvim/lua" "force"
 ensure_link "zsh/p10k.zsh"       ".p10k.zsh"
@@ -83,10 +82,4 @@ if is_macos; then
      echo "INFO: Installing homebrew"
      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
-
-  # iterm2 preferences
-  # Specify the preferences directory
-  defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.iterm2"
-  # Tell iTerm2 to use the custom preferences in the directory
-  defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 fi
