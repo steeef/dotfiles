@@ -11,10 +11,14 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mkalias = {
+      url = "github:reckenrode/mkalias";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { nixpkgs, home-manager, darwin, neovim-nightly-overlay, ... }:
+  outputs = { nixpkgs, home-manager, darwin, neovim-nightly-overlay, ... }@inputs:
     let
       username = "sprice";
 
@@ -47,10 +51,15 @@
           inherit (args) system;
           config = {
             allowUnfree = true;
+            allowInsecure = false;
             allowUnsupportedSystem = true;
+            allowUnfreePredicate = (pkg: true);
+            allowBroken = false;
           };
+
           overlays = [
             neovim-nightly-overlay.overlay
+            (final: prev: { mkalias = inputs.mkalias.outputs.apps.${prev.stdenv.system}.default.program; })
           ];
         };
         modules = [

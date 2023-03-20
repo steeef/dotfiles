@@ -8,6 +8,7 @@
     cowsay
     curl
     fasd
+    fd
     coreutils
     findutils
     gnugrep
