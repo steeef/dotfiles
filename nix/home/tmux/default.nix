@@ -11,7 +11,6 @@
     terminal = "screen-256color";
 
     plugins = with pkgs.tmuxPlugins; [
-      dracula
       {
         plugin = resurrect;
         extraConfig = ''
