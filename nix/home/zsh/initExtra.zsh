@@ -60,10 +60,6 @@ if ! zgenom saved; then
   zgenom load blimmer/zsh-aws-vault # aliases
   zgenom load reegnz/aws-vault-zsh-plugin # completion
 
-  zgenom oh-my-zsh
-  zgenom oh-my-zsh plugins/kubectl
-  zgenom oh-my-zsh plugins/kubectx
-
   # colorschemes
   zgenom load chrissicool/zsh-256color
   zgenom load chriskempson/base16-shell
