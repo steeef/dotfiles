@@ -28,9 +28,9 @@ fi
 
 if [ "${arch}" = "x86_64" ]; then
         if is_macos; then
-                nix run ~/.dotfiles#homeConfigurations.macbook.activationPackage
+                nix run ~/.dotfiles#homeConfigurations.${USER}@macbook.activationPackage
         elif is_debian; then
-                nix run ~/.dotfiles#homeConfigurations.linux.activationPackage
+                nix run ~/.dotfiles#homeConfigurations.${USER}@linux.activationPackage
         else
                 echo "ERROR: unknown distribution"
         fi
