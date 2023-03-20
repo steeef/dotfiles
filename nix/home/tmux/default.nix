@@ -1,16 +1,17 @@
 { pkgs, lib, ... }: {
   programs.tmux = {
     enable = true;
+    shell = "${pkgs.zsh}/bin/zsh";
     secureSocket = if pkgs.stdenv.isDarwin then false else true;
     mouse = true;
     escapeTime = 0;
     historyLimit = 30000;
+    keyMode = "vi";
     newSession = true;
     prefix = "C-Space";
     terminal = "screen-256color";
 
     plugins = with pkgs.tmuxPlugins; [
-      dracula
       {
         plugin = resurrect;
         extraConfig = ''
@@ -30,6 +31,6 @@
       }
     ];
 
-    extraConfig = lib.strings.fileContents ./tmux.conf;
+    extraConfig = lib.strings.fileContents ./extraConfig.conf;
   };
 }

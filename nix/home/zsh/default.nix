@@ -15,15 +15,13 @@
       compinit
     '';
 
-    defaultKeymap = "viins";
-
     history = {
       expireDuplicatesFirst = true;
       extended = true;
       ignoreDups = true;
       ignorePatterns = [ "ls" "cd" "cd .." "h" "fc" "pwd" "exit" "date" "* --help" ];
       ignoreSpace = true;
-      path = "$HOME/.zshistory";
+      path = "$HOME/.zhistory";
       size = 100000;
       save = 100000;
       share = true;
