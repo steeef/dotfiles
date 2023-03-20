@@ -1,6 +1,7 @@
 { pkgs, lib, ... }: {
   programs.tmux = {
     enable = true;
+    shell = "${pkgs.zsh}/bin/zsh";
     secureSocket = if pkgs.stdenv.isDarwin then false else true;
     mouse = true;
     escapeTime = 0;
@@ -30,6 +31,6 @@
       }
     ];
 
-    extraConfig = lib.strings.fileContents ./tmux.conf;
+    extraConfig = lib.strings.fileContents ./extraConfig.conf;
   };
 }
