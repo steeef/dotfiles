@@ -26,6 +26,9 @@ EDITOR=nvim
 VISUAL=nvim
 export EDITOR VISUAL
 
+# vi mode
+bindkey -v
+
 # command line editing with vi helpers
 autoload -z edit-command-line
 zle -N edit-command-line
