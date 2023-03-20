@@ -44,6 +44,7 @@
     ./fzf.nix
     ./git.nix
     ./neovim.nix
+    ./symlinks.nix
     ./tmux
     ./zsh
   ];
