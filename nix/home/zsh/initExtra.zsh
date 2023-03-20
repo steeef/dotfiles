@@ -43,12 +43,6 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd "^V" edit-command-line # open vim to edit command
 
-# history searching
-bindkey "^R" history-incremental-search-backward
-# PageUp/Down search history to complete command
-bindkey "^[[I" history-beginning-search-backward
-bindkey "^[[G" history-beginning-search-forward
-
 PATH="${HOME}/.zgenom/bin:${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export PATH
 
@@ -67,8 +61,6 @@ if ! zgenom saved; then
   zgenom load zsh-users/zsh-completions src # Load more completions
   zgenom load zsh-users/zsh-syntax-highlighting
   zgenom load zsh-users/zsh-history-substring-search
-
-  zgenom load jandamm/vi-mode.zsh # Show line cursor in vi mode
 
   zgenom load chisui/zsh-nix-shell
 
