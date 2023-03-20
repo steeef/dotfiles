@@ -12,6 +12,13 @@
   environment = {
     loginShell = "${pkgs.zsh}/bin/zsh";
     shells = [ pkgs.zsh ];
+
+    userLaunchAgents = {
+      backup = {
+        enable = true;
+        source = ./backup.plist;
+      };
+    };
   };
 
   homebrew = {
