@@ -84,25 +84,6 @@ if is_macos; then
      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   fi
 
-  # Install packages in ~/.Bundlefile
-  echo "INFO: Updating homebrew and packages"
-  brew update
-  brew tap homebrew/bundle
-  brew bundle --global
-
-  # Launch Agent setup
-  launch_agent_src_dir="${HOME}/.dotfiles/launch_agents"
-  launch_agent_dst_dir="${HOME}/Library/LaunchAgents"
-  for launch_agent_file in $(gfind "${launch_agent_src_dir}" -type f \
-    -name '*.plist' -printf '%P\n'); do
-    echo "configuring Launch Agent ${launch_agent_file}"
-    cp -f "${launch_agent_src_dir}/${launch_agent_file}" "${launch_agent_dst_dir}/"
-    if launchctl list | grep -q "${launch_agent_file%.plist}"; then
-      launchctl unload "${launch_agent_dst_dir}/${launch_agent_file}"
-    fi
-    launchctl load "${launch_agent_dst_dir}/${launch_agent_file}"
-  done
-
   # iterm2 preferences
   # Specify the preferences directory
   defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.iterm2"
