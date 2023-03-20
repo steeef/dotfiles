@@ -5,6 +5,7 @@
     mouse = true;
     escapeTime = 0;
     historyLimit = 30000;
+    keyMode = "vi";
     newSession = true;
     prefix = "C-Space";
     terminal = "screen-256color";
