@@ -71,15 +71,21 @@
     casks = [
       "1password"
       "1password-cli"
+      "aerial"
       "alfred"
+      "anylist"
       "aws-vault"
       "bartender"
       "blockblock"
       "calibre"
       "contexts"
       "dash"
+      "elgato-stream-deck"
+      "fantastical"
+      "github"
       "hammerspoon"
       "hazel"
+      "home-assistant"
       "istat-menus"
       "iterm2"
       "karabiner-elements"
@@ -87,6 +93,8 @@
       "font-fira-mono"
       "font-fira-sans"
       "font-mononoki-nerd-font"
+      "lastfm"
+      "mullvadvpn"
       "nvalt"
       "qlvideo"
       "slack"
@@ -99,6 +107,7 @@
       "vlc"
       "xld"
       "xscreensaver"
+      "yubico-authenticator"
     ];
   };
 
