@@ -19,6 +19,7 @@
     marksman
     nil
     nixpkgs-fmt
+    nodePackages.yaml-language-server
     ponysay
     rdiff-backup
     reattach-to-user-namespace

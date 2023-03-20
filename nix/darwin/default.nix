@@ -61,7 +61,6 @@
       "pam-reattach"
       "python3"
       "sox"
-      "yaml-language-server"
       "ykman"
       "ykpers"
     ];
