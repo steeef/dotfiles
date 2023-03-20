@@ -14,7 +14,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { lib, nixpkgs, home-manager, darwin, neovim-nightly-overlay, ... }:
+  outputs = { nixpkgs, home-manager, darwin, neovim-nightly-overlay, ... }:
     let
       username = "sprice";
 
@@ -24,6 +24,13 @@
         else if isLinux then
           "/home/${username}"
         else "";
+
+      getExtraModules = system: with nixpkgs.legacyPackages.${system}.stdenv;
+        if isDarwin then
+          [ ./nix/home/darwin ]
+        else if isLinux then
+          [ ./nix/home/linux ]
+        else [ ];
 
       mkDarwinConfig = args: darwin.lib.darwinSystem {
         inherit (args) system;
@@ -37,7 +44,7 @@
 
       mkHomeConfig = args: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-          inherit (args) system lib;
+          inherit (args) system;
           config = {
             allowUnfree = true;
             allowUnsupportedSystem = true;
@@ -55,11 +62,8 @@
               stateVersion = "23.05";
             };
           }
-        ] ++ lib.optionals nixpkgs.stdenv.isDarwin [
-          ./nix/home/darwin
-        ] ++ lib.optionals nixpkgs.stdenv.isLinux [
-          ./nix/home/linux
-        ];
+        ] ++ getExtraModules args.system;
+
         extraSpecialArgs = {
           inherit (args) machine;
         };
