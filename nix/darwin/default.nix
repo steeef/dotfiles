@@ -155,4 +155,12 @@
     enable = true;
     text = lib.strings.fileContents ./activation_script.sh;
   };
+
+  system.keyboard = {
+    enableKeyMapping = true;
+    userKeyMapping = [
+      # remap Left Control to F19 as Hyper key for Hammerspoon
+      { HIDKeyboardModifierMappingSrc = 30064771296; HIDKeyboardModifierMappingDst = 30064771182; }
+    ];
+  };
 }
