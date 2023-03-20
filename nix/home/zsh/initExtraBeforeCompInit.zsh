@@ -14,7 +14,7 @@ unsetopt MENU_COMPLETE   # Do not autoselect the first completion entry.
 # install and load zgenom
 ZGEN_DIR="${HOME}/.zgenom"
 export ZGEN_DIR
-if ! [ -d "${ZGEN_DIR}" ]; then
+if [ ! -d "${ZGEN_DIR}" ]; then
   git clone "https://github.com/jandamm/zgenom.git" "${ZGEN_DIR}"
 fi
 source "${ZGEN_DIR}/zgenom.zsh"
