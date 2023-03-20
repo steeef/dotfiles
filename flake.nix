@@ -14,7 +14,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { nixpkgs, home-manager, darwin, neovim-nightly-overlay, ... }:
+  outputs = { lib, nixpkgs, home-manager, darwin, neovim-nightly-overlay, ... }:
     let
       username = "sprice";
 
@@ -37,7 +37,7 @@
 
       mkHomeConfig = args: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-          inherit (args) system;
+          inherit (args) system lib;
           config = {
             allowUnfree = true;
             allowUnsupportedSystem = true;
@@ -55,6 +55,10 @@
               stateVersion = "23.05";
             };
           }
+        ] ++ lib.optionals nixpkgs.stdenv.isDarwin [
+          ./nix/home/darwin
+        ] ++ lib.optionals nixpkgs.stdenv.isLinux [
+          ./nix/home/linux
         ];
         extraSpecialArgs = {
           inherit (args) machine;

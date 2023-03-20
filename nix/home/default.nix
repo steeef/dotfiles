@@ -1,9 +1,6 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # get some paths on Linux set
-  targets.genericLinux.enable = if pkgs.stdenv.isDarwin then false else true;
 
   home.packages = with pkgs; [
     bash
@@ -37,8 +34,5 @@
     ./neovim.nix
     ./tmux
     ./zsh
-  ]
-  ++ lib.optionals pkgs.stdenv.isDarwin [
-    ./iterm2
   ];
 }
