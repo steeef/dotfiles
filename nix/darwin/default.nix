@@ -94,7 +94,6 @@
       "hazel"
       "home-assistant"
       "istat-menus"
-      "iterm2"
       "karabiner-elements"
       "font-fira-code"
       "font-fira-mono"
