@@ -9,3 +9,4 @@ tmux/plugins/
 !tmux/plugins/tpm/
 karabiner/automatic_backups/
 result/
+*.zwc

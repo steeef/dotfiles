@@ -71,6 +71,11 @@
         machine = "io";
       };
 
+      darwinConfigurations.ltm-7797 = mkDarwinConfig {
+        system = "x86_64-darwin";
+        machine = "ltm-7797";
+      };
+
       homeConfigurations."${username}@macbook" = mkHomeConfig {
         system = "x86_64-darwin";
       };
