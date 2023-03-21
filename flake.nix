@@ -37,7 +37,16 @@
         else [ ];
 
       mkDarwinConfig = args: darwin.lib.darwinSystem {
-        inherit (args) system;
+        pkgs = import nixpkgs {
+          inherit (args) system;
+          config = {
+            allowUnfree = true;
+            allowInsecure = false;
+            allowUnsupportedSystem = true;
+            allowUnfreePredicate = (pkg: true);
+            allowBroken = false;
+          };
+        };
         specialArgs = {
           inherit (args) machine;
         };

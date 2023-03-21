@@ -30,7 +30,6 @@
     };
     taps = [
       "homebrew/cask-drivers"
-      "homebrew/cask-fonts"
       "homebrew/cask-versions"
       "homebrew/bundle"
       "homebrew/core"
@@ -84,10 +83,6 @@
       "home-assistant"
       "istat-menus"
       "karabiner-elements"
-      "font-fira-code"
-      "font-fira-mono"
-      "font-fira-sans"
-      "font-mononoki-nerd-font"
       "lastfm"
       "mullvadvpn"
       "nvalt"
@@ -165,6 +160,17 @@
     userKeyMapping = [
       # remap Left Control to F19 as Hyper key for Hammerspoon
       { HIDKeyboardModifierMappingSrc = 30064771296; HIDKeyboardModifierMappingDst = 30064771182; }
+    ];
+  };
+
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      fira-code
+      hack-font
+      (pkgs.nerdfonts.override { fonts = [ "Mononoki" ]; })
+      source-code-pro
+      ttf-envy-code-r
     ];
   };
 }
