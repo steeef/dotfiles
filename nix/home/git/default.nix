@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
   programs.git = {
     enable = true;
     aliases = {
@@ -9,6 +9,7 @@
     };
     userEmail = "stephen@stp5.net";
     userName = "Stephen Price";
+    ignores = lib.splitString "\n" (lib.strings.fileContents ./gitignore);
     extraConfig = {
       apply = {
         whitespace = "nowarn";
@@ -22,7 +23,6 @@
         verbose = true;
       };
       core = {
-        excludesfile = "~/.gitignore";
         autocrlf = "input";
       };
       credential = {

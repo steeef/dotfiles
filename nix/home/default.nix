@@ -42,7 +42,7 @@
     ./bat.nix
     ./direnv.nix
     ./fzf.nix
-    ./git.nix
+    ./git
     ./neovim.nix
     ./symlinks.nix
     ./tmux
