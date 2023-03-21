@@ -60,12 +60,6 @@ if is_macos; then
   ensure_link "code/snippets" "Library/Application Support/Code/User/snippets"
   ensure_link "code/snippets" "Library/Application Support/Code - Insiders/User/snippets"
 
-  # install XCode Command Line Tools if not installed
-  if ! xcode-select -p &> /dev/null; then
-     echo "INFO: Installing XCode Command Line Tools"
-     xcode-select --install
-  fi
-
   # install Homebrew
   if ! command -v brew >/dev/null 2>&1; then
      echo "INFO: Installing homebrew"
