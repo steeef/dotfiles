@@ -21,6 +21,7 @@
     nixpkgs-fmt
     nodePackages.yaml-language-server
     ponysay
+    postgresql
     rdiff-backup
     reattach-to-user-namespace
     rename
@@ -34,6 +35,7 @@
     terraform-ls
     tflint
     tree
+    vault
     watch
     wget
   ];
