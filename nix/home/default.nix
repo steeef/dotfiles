@@ -41,6 +41,7 @@
   imports = [
     ./bat.nix
     ./direnv.nix
+    ./editorconfig.nix
     ./fzf.nix
     ./git
     ./neovim.nix
