@@ -51,6 +51,11 @@ return {
   },
   'RRethy/vim-illuminate', -- highlight other occurrences of word under cursor
   'towolf/vim-helm', -- helm template helper
+  {
+    'LnL7/vim-nix', -- nix language
+    lazy = true,
+    ft = { 'nix' },
+  },
 
   -- windows
   'camspiers/lens.vim', -- resize windows automatically when switching
