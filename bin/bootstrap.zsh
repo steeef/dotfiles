@@ -18,8 +18,6 @@ function ensure_link {
 mkdir -p "${HOME}/.config"
 mkdir -p "${HOME}/.config/beets"
 mkdir -p "${HOME}/.config/nvim"
-mkdir -p "${HOME}/Library/Application Support/Code/User"
-mkdir -p "${HOME}/Library/Application Support/Code - Insiders/User"
 mkdir -p "${HOME}/code"
 mkdir -p "${HOME}/bin"
 mkdir -p "${HOME}/build"
@@ -53,13 +51,6 @@ function is_debian() {
 }
 
 if is_macos; then
-  ensure_link "code/settings.json" "Library/Application Support/Code/User/settings.json"
-  ensure_link "code/settings.json" "Library/Application Support/Code - Insiders/User/settings.json"
-  ensure_link "code/keybindings.json" "Library/Application Support/Code/User/keybindings.json"
-  ensure_link "code/keybindings.json" "Library/Application Support/Code - Insiders/User/keybindings.json"
-  ensure_link "code/snippets" "Library/Application Support/Code/User/snippets"
-  ensure_link "code/snippets" "Library/Application Support/Code - Insiders/User/snippets"
-
   # install Homebrew
   if ! command -v brew >/dev/null 2>&1; then
      echo "INFO: Installing homebrew"

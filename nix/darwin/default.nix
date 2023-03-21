@@ -92,7 +92,6 @@
       "swinsian"
       "vagrant"
       "virtualbox"
-      "visual-studio-code-insiders"
       "vnc-viewer"
       "vlc"
       "xld"
