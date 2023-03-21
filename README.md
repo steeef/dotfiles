@@ -21,9 +21,5 @@ Theoretically, you can install things with:
 
 ```
 git clone <this-repo> ~/.dotfiles
-./.dotfiles/bin/bootstrap.zsh
-./.dotfiles/bin/nix_bootstrap.zsh
+./.dotfiles/bin/bootstrap.sh
 ```
-
-I'm currently working on consolidating things into a single script that just downloads Nix and builds things with [Home
-Manager](https://github.com/nix-community/home-manager).
