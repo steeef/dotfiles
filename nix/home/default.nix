@@ -23,7 +23,6 @@
     ponysay
     postgresql
     rdiff-backup
-    reattach-to-user-namespace
     rename
     ripgrep
     shellcheck

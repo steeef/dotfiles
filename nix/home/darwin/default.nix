@@ -3,6 +3,7 @@
 
   home.packages = with pkgs; [
     iterm2
+    reattach-to-user-namespace
   ];
 
   home.shellAliases = {
