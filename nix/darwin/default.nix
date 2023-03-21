@@ -98,6 +98,9 @@
       "xscreensaver"
       "yubico-authenticator"
     ];
+    masApps = {
+      "tailscale" = 1475387142;
+    };
   };
 
   # Whether to enable Enable sudo authentication with Touch ID
