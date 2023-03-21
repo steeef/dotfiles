@@ -21,7 +21,13 @@ return {
       ensure_installed = 'all',
       endwise = {enable = true},
       highlight = {enable = true},
-      indent = {enable = true},
+      indent = {
+        enable = true,
+        disable = {
+          "nix",
+          "yaml",
+        },
+      },
       rainbow = {
         enable = true,
         extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
