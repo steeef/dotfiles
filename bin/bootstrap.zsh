@@ -22,8 +22,6 @@ mkdir -p "${HOME}/code"
 mkdir -p "${HOME}/bin"
 mkdir -p "${HOME}/build"
 
-ensure_link "bash"               ".bash"
-ensure_link "bashrc"             ".bashrc" "force"
 ensure_link "beets/config.yaml"  ".config/beets/config.yaml" "force"
 ensure_link "bin"                ".bin"
 ensure_link "black"              ".config/black"

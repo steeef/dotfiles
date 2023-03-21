@@ -1,4 +1,0 @@
-source ~/.bash/completion_scripts/git_completion
-source ~/.bash/completion_scripts/mercurial_completion
-source ~/.bash/completion_scripts/ssh_completion
-source ~/.bash/completion_scripts/todo_completion
