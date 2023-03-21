@@ -1,22 +1,19 @@
-#!/usr/bin/env zsh
-#
-# requirements:
-# - zsh
+#!/usr/bin/env bash
 
 set -e
 
 PATH="${HOME}/bin:${HOME}/.bin:${PATH}"
 export PATH
 
-distro_and_version="$(get-distro)"
-arch="$(echo "${distro_and_version}" | awk '{print $3}')"
+os="$(uname -s)"
+arch="$(uname -m)"
 
 function is_macos() {
-        [[ $distro_and_version =~ MacOS ]]
+        [[ $os =~ Darwin ]]
 }
 
-function is_debian() {
-        [[ $distro_and_version =~ Debian ]]
+function is_linux() {
+        [[ $os =~ Linux ]]
 }
 
 # install nix via https://zero-to-nix.com
@@ -29,7 +26,7 @@ fi
 if [ "${arch}" = "x86_64" ]; then
         if is_macos; then
                 nix run ~/.dotfiles#homeConfigurations.${USER}@macbook.activationPackage
-        elif is_debian; then
+        elif is_linux; then
                 nix run ~/.dotfiles#homeConfigurations.${USER}@linux.activationPackage
         else
                 echo "ERROR: unknown distribution"
