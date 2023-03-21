@@ -8,6 +8,14 @@ DOTFILES_DIR=$(dirname "${SCRIPT_DIR}")
 os="$(uname -s)"
 arch="$(uname -m)"
 
+# install Homebrew first
+if [ "${os}" = "Darwin" ]; then
+        if ! command -v brew >/dev/null 2>&1; then
+                echo "INFO: Installing homebrew"
+                /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+fi
+
 # install nix via https://zero-to-nix.com
 if ! command -v nix >/dev/null 2>&1; then
         curl --proto '=https' --tlsv1.2 -sSf -L "https://install.determinate.systems/nix" | sh -s -- install
