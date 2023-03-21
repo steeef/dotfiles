@@ -20,7 +20,7 @@ I'm currently in the process of rewriting a lot of this in Nix (based on the [Ze
 installer and documentation), so a lot of this is in flux.
 
 To both install Nix and get [Home Manager](https://github.com/nix-community/home-manager) to set up your home
-directory, you can run the bootstrap script:
+directory, you can run the [bootstrap script](/bin/bootstrap.sh):
 
 ```
 git clone <this-repo> ~/.dotfiles
@@ -56,11 +56,11 @@ after that the `dr` alias should run `darwin-rebuild switch`.
 In flux, but you should get:
 
 * The same list of command line utilities available on Linux and MacOS hosts.
-* `iTerm2` also installed via Home Manager on MacOS and synchronized to
-[its config](/nix/home/darwin/iterm2/com.googlecode.iterm2.plist).
-* `Virtual Studio Code` installed via Home Manager on MacOS.
-* Home Manager should create aliases in MacOS for its GUI apps in `~/Applications/Nix`.
 * Neovim as the default editor with a whole bunch of plugins installed.
 * `fzf` for fuzzy-finding in lists (e.g., zsh command history, directories, git branches)
-* `nix-darwin` should configure global settings according to my liking.
-* `Alfred` with a (hopefully) synchronized preferences directory.
+* Mac: `iTerm2` also installed via Home Manager on MacOS and synchronized to
+[its config](/nix/home/darwin/iterm2/com.googlecode.iterm2.plist).
+* Mac: `Virtual Studio Code` installed via Home Manager on MacOS.
+* Mac: Home Manager should create aliases in MacOS for its GUI apps in `~/Applications/Nix`.
+* Mac: `nix-darwin` should configure global settings according to my liking.
+* Mac: `Alfred` with a (hopefully) synchronized preferences directory.
