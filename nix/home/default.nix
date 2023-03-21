@@ -43,6 +43,7 @@
   imports = [
     ./bat.nix
     ./direnv.nix
+    ./directories.nix
     ./editorconfig.nix
     ./fzf.nix
     ./gh.nix
