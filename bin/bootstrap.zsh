@@ -60,8 +60,6 @@ if is_macos; then
   ensure_link "code/snippets" "Library/Application Support/Code/User/snippets"
   ensure_link "code/snippets" "Library/Application Support/Code - Insiders/User/snippets"
 
-  echo "INFO: Copying fonts."
-  rsync -aW "${HOME}/.dotfiles/fonts/" ~/Library/Fonts/
   # install XCode Command Line Tools if not installed
   if ! xcode-select -p &> /dev/null; then
      echo "INFO: Installing XCode Command Line Tools"
