@@ -175,4 +175,11 @@
       ttf-envy-code-r
     ];
   };
+
+  system.activationScripts.alfred-preferences = {
+    enable = true;
+    text = ''
+      defaults write com.runningwithcrayons.Alfred-Preferences NSNavLastRootDirectory -string  "~/.dotfiles/alfred"
+    '';
+  };
 }
