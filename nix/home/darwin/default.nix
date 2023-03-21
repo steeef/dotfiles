@@ -8,6 +8,7 @@
   imports = [
     ./iterm2
     ./aliasApplications.nix
+    ./symlinks.nix
     ./vscode
   ];
 }

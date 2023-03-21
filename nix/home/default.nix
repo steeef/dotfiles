@@ -46,7 +46,6 @@
     ./gh.nix
     ./git
     ./neovim.nix
-    ./symlinks.nix
     ./tmux
     ./zsh
   ];
