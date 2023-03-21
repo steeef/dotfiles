@@ -2,19 +2,11 @@
 
 set -e
 
-PATH="${HOME}/bin:${HOME}/.bin:${PATH}"
-export PATH
+SCRIPT_DIR=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+DOTFILES_DIR=$(dirname "${SCRIPT_DIR}")
 
 os="$(uname -s)"
 arch="$(uname -m)"
-
-function is_macos() {
-        [[ $os =~ Darwin ]]
-}
-
-function is_linux() {
-        [[ $os =~ Linux ]]
-}
 
 # install nix via https://zero-to-nix.com
 if ! command -v nix >/dev/null 2>&1; then
@@ -23,16 +15,16 @@ fi
 
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
-if [ "${arch}" = "x86_64" ]; then
-        if is_macos; then
-                nix run ~/.dotfiles#homeConfigurations.${USER}@macbook.activationPackage
-        elif is_linux; then
-                nix run ~/.dotfiles#homeConfigurations.${USER}@linux.activationPackage
-        else
-                echo "ERROR: unknown distribution"
-        fi
-elif [ "${arch}" = "aarch64" ]; then
-        echo "ERROR: aarch64 not supported (yet)"
-else
-        echo "ERROR: unknown architecture"
-fi
+case "${os}-${arch}" in
+"Darwin-x86_64")
+        echo "Running Home Manager configuration for MacOS ${arch}"
+        nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@macbook.activationPackage"
+        ;;
+"Linux-x86_64")
+        echo "Running Home Manager configuration for Linux ${arch}"
+        nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@linux.activationPackage"
+        ;;
+*)
+        echo "ERROR: unsupported OS and arch: ${os}-${arch}"
+        ;;
+esac
