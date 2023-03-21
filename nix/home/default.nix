@@ -43,6 +43,7 @@
     ./direnv.nix
     ./editorconfig.nix
     ./fzf.nix
+    ./gh.nix
     ./git
     ./neovim.nix
     ./symlinks.nix

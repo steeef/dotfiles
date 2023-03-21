@@ -50,7 +50,6 @@
       "libtool"
       "cmake"
       "fswatch"
-      "gh"
       "hugo"
       "kubectx"
       "libevent"
