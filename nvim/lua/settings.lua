@@ -96,6 +96,10 @@ opt.autoread = true
 opt.spelllang = 'en,cjk'
 opt.spellsuggest='best,9'
 autocmd("Filetype", {
-  pattern = {"markdown"},
+  pattern = {
+    "NeogitCommitMessage",
+    "gitcommit",
+    "markdown",
+  },
   command = "setlocal spell",
 })
