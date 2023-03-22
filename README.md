@@ -52,6 +52,9 @@ sudo ln -sfn /etc/static/nix/nix.conf /etc/nix/nix.conf
 
 after that the `dr` alias should run `darwin-rebuild switch`.
 
+*NOTE:* if at any point you see errors like "Operation not permitted", it's likely you need to give `nix` `Full Disk
+Access` permissions (System Preferences/Settings -> Security & Privacy -> Privacy tab -> Full Disk Access).
+
 # What you get
 
 In flux, but you should get:
@@ -65,3 +68,11 @@ In flux, but you should get:
 * Mac: Home Manager should create aliases in MacOS for its GUI apps in `~/Applications/Nix`.
 * Mac: `nix-darwin` should configure global settings according to my liking.
 * Mac: `Alfred` with a (hopefully) synchronized preferences directory.
+
+# Acknowledgements
+
+* Julia Evans' article ["Some notes on using nix"](https://jvns.ca/blog/2023/02/28/some-notes-on-using-nix/) was what
+  originally got me excited about trying out Nix, since her guides are very thorough and explain everything plainly.
+* [Zero to Nix](https://zero-to-nix.com/), a site run by Determinate Systems with a good introduction to Nix concepts.
+* xyno's [blog article](https://xyno.space/post/nix-darwin-introduction) explaining how he learned about Nix via
+  installing and developing flakes in MacOS. It helped me when troubleshooting my installs on MacOS as well.
