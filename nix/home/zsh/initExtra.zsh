@@ -50,7 +50,7 @@ for file in ${ZSHDIR}/before/*.zsh; do
 done
 unsetopt nullglob
 
-zgenom autoupdate --background --self 7
+zgenom autoupdate --background 7
 if ! zgenom saved; then
   zgenom load zsh-users/zsh-completions src # Load more completions
   zgenom load zsh-users/zsh-syntax-highlighting
