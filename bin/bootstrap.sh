@@ -2,6 +2,8 @@
 
 set -e
 
+PATH="/usr/local/bin:${PATH}"
+
 SCRIPT_DIR=$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 DOTFILES_DIR=$(dirname "${SCRIPT_DIR}")
 
