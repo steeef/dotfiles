@@ -20,6 +20,9 @@ fi
 
 # install nix
 if ! command -v nix >/dev/null 2>&1; then
+  # deal with https://github.com/NixOS/nix/issues/3861
+  sudo chmod 0644 /etc/synthetic.conf
+
   sh <(curl -L https://nixos.org/nix/install)
 fi
 
