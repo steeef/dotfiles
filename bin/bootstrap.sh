@@ -16,12 +16,23 @@ if [ "${os}" = "Darwin" ]; then
   fi
 fi
 
-# install nix via https://zero-to-nix.com
+# install nix
 if ! command -v nix >/dev/null 2>&1; then
-  curl --proto '=https' --tlsv1.2 -sSf -L "https://install.determinate.systems/nix" | sh -s -- install
+  sh <(curl -L https://nixos.org/nix/install)
 fi
 
-. /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+# enable flakes permanently
+file="/etc/nix/nix.conf"
+key="experimental-features"
+value="nix-command flakes"
+
+if ! grep -qR "^[#]*\s*${key}\s*=.*" $file; then
+  echo "INFO: appending: ${key} = ${value}"
+  echo "$key = $value" | sudo tee -a $file >/dev/null
+else
+  echo "INFO: setting: ${key} = ${value}"
+  sudo sed -i '' r "s/^[#]*\s*${key}\s*=.*/$key = $value/" $file
+fi
 
 case "${os}-${arch}" in
 "Darwin-x86_64")
