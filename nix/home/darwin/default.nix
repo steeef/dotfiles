@@ -3,6 +3,8 @@
 
   home.packages = with pkgs; [
     cmake
+    colima
+    docker
     fswatch
     iterm2
     reattach-to-user-namespace
