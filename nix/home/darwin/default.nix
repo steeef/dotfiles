@@ -5,6 +5,7 @@
     cmake
     fswatch
     iterm2
+    mullvad-vpn
     reattach-to-user-namespace
   ];
 
