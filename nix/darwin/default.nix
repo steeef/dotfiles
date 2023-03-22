@@ -1,7 +1,7 @@
 { lib, pkgs, machine, ... }: {
   nix = {
     settings = {
-      auto-optimise-store = true;
+      auto-optimise-store = false;
     };
     extraOptions = ''
       experimental-features = nix-command flakes
