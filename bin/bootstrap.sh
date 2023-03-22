@@ -39,7 +39,7 @@ load_nix_environment
 # enable flakes
 local_config_file="${HOME}/.config/nix/nix.conf"
 mkdir -p "$(dirname "${local_config_file}")"
-if ! grep -qR "^experimental-features = nix-command flakes" "${local_config_file}"; then
+if ! grep -qR "^experimental-features = nix-command flakes" "${local_config_file}" 2>/dev/null; then
   echo "experimental-features = nix-command flakes" >>"${local_config_file}"
 fi
 
