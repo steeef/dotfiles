@@ -46,7 +46,7 @@ if ! grep -qR "^[#]*\s*${key}\s*=.*" $file; then
   echo "$key = $value" | sudo tee -a $file >/dev/null
 else
   echo "INFO: setting: ${key} = ${value}"
-  sudo sed -i '' r "s/^[#]*\s*${key}\s*=.*/$key = $value/" $file
+  sudo sed -i '' -r "s/^[#]*\s*${key}\s*=.*/$key = $value/" $file
 fi
 
 case "${os}-${arch}" in
