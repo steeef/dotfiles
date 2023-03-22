@@ -5,6 +5,8 @@ HOME = os.getenv("HOME")
 opt.encoding = "utf-8"
 opt.fileformats="unix,dos"
 
+vim.g.loaded_perl_provider = 0 -- disable perl provider
+
 opt.backspace = "indent,eol,start" -- work for every character in insert mode
 opt.completeopt = "menuone,noselect"
 opt.dictionary = "/usr/share/dict/words"
