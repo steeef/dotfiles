@@ -36,17 +36,11 @@ fi
 
 load_nix_environment
 
-# enable flakes permanently
-file="/etc/nix/nix.conf"
-key="experimental-features"
-value="nix-command flakes"
-
-if ! grep -qR "^[#]*\s*${key}\s*=.*" $file; then
-  echo "INFO: appending: ${key} = ${value}"
-  echo "$key = $value" | sudo tee -a $file >/dev/null
-else
-  echo "INFO: setting: ${key} = ${value}"
-  sudo sed -i '' -r "s/^[#]*\s*${key}\s*=.*/$key = $value/" $file
+# enable flakes
+local_config_file="${HOME}/.config/nix/nix.conf"
+mkdir -p "$(dirname "${local_config_file}")"
+if ! grep -qR "^experimental-features = nix-command flakes" "${local_config_file}"; then
+  echo "experimental-features = nix-command flakes" >>"${local_config_file}"
 fi
 
 case "${os}-${arch}" in
