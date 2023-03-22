@@ -35,7 +35,7 @@ configure my MacOS machines, but this install is not yet currently automated. Yo
 configure it via:
 
 ```
-nix build .#darwinConfigurations.<your-hostname>.system --extra-experimental-features "nix-command flakes"
+nix build $HOME/.dotfiles#darwinConfigurations.<your-hostname>.system
 # allow Nix to create a symlink:
 printf 'run\tprivate/var/run\n' | sudo tee -a /etc/synthetic.conf
 sudo /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t
