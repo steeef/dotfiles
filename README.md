@@ -18,8 +18,7 @@
 
 <img src="https://user-images.githubusercontent.com/77589/226965659-00882024-4c02-49f3-a367-0a8da62669d6.svg" width="100" height="87" alt="Nix logo">
 
-I'm currently in the process of rewriting a lot of this in Nix (based on the [Zero to Nix](https://zero-to-nix.com/)
-installer and documentation), so a lot of this is in flux.
+I'm currently in the process of rewriting a lot of this in Nix installer and documentation), so a lot of this is in flux.
 
 To both install Nix and get [Home Manager](https://github.com/nix-community/home-manager) to set up your home
 directory, you can run the [bootstrap script](/bin/bootstrap.sh):
