@@ -11,8 +11,17 @@ os="$(uname -s)"
 arch="$(uname -m)"
 
 load_nix_environment() {
-  if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
-    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  if [ "${os}" = "Darwin" ]; then
+    profile_path="/nix/var/nix/profiles/default"
+  elif [ "${os}" = "Linux" ]; then
+    profile_path="${HOME}/.nix-profile"
+  else
+    echo "ERROR: Unknown OS: ${os}"
+    exit 1
+  fi
+
+  if [ -f "${profile_path}/etc/profile.d/nix.sh" ]; then
+    . "${profile_path}/etc/profile.d/nix.sh"
   fi
 }
 
