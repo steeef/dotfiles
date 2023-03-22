@@ -16,6 +16,8 @@
 
 # Dotfiles with Nix, Home Manager, and nix-darwin
 
+<img src="https://user-images.githubusercontent.com/77589/226965659-00882024-4c02-49f3-a367-0a8da62669d6.svg" width="100" height="87" alt="Nix logo">
+
 I'm currently in the process of rewriting a lot of this in Nix (based on the [Zero to Nix](https://zero-to-nix.com/)
 installer and documentation), so a lot of this is in flux.
 
