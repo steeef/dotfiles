@@ -11,7 +11,7 @@ os="$(uname -s)"
 arch="$(uname -m)"
 
 load_nix_environment() {
-  if [ -f ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
+  if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
     . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   fi
 }
