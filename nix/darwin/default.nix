@@ -5,7 +5,6 @@
     };
     extraOptions = ''
       experimental-features = nix-command flakes
-      extra-nix-path = nixpkgs=flake:nixpkg
     '';
   };
 
