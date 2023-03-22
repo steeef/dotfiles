@@ -1,4 +1,5 @@
 local opt = vim.opt
+local autocmd = vim.api.nvim_create_autocmd
 
 HOME = os.getenv("HOME")
 
@@ -94,3 +95,7 @@ opt.autoread = true
 -- spelling
 opt.spelllang = 'en,cjk'
 opt.spellsuggest='best,9'
+autocmd("Filetype", {
+  pattern = {"markdown"},
+  command = "setlocal spell",
+})
