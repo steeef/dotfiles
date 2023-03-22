@@ -16,6 +16,7 @@
     gnugrep
     gnused
     jq
+    kubectx
     marksman
     nil
     nixpkgs-fmt
@@ -37,6 +38,8 @@
     vault
     watch
     wget
+    yubikey-manager
+    yubikey-personalization
   ];
 
   imports = [

@@ -2,6 +2,8 @@
   targets.genericLinux.enable = false;
 
   home.packages = with pkgs; [
+    cmake
+    fswatch
     iterm2
     reattach-to-user-namespace
   ];
