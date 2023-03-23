@@ -69,6 +69,7 @@
           overlays = [
             neovim-nightly-overlay.overlay
             (final: prev: { mkalias = inputs.mkalias.outputs.apps.${prev.stdenv.system}.default.program; })
+            (import ./nix/pkgs)
           ];
         };
         modules = [

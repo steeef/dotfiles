@@ -16,7 +16,10 @@
     gnugrep
     gnused
     jq
+    k9s
     kubectx
+    kubectl
+    kubernetes-helm
     marksman
     nil
     nixpkgs-fmt
