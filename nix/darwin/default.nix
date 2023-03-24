@@ -33,7 +33,6 @@
       "homebrew/bundle"
       "homebrew/core"
       "homebrew/services"
-      "1password/tap"
     ];
     brews = [
       "mas"
@@ -41,11 +40,9 @@
     ];
     casks = [
       "1password"
-      "1password-cli"
       "aerial"
       "alfred"
       "anylist"
-      "aws-vault"
       "bartender"
       "blockblock"
       "calibre"

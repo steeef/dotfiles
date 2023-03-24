@@ -3,7 +3,9 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
+    _1password
     actionlint
+    aws-vault
     awscli2
     bash
     bfs
