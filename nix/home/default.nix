@@ -17,6 +17,7 @@
     findutils
     gnugrep
     gnused
+    hidapitester
     jq
     k9s
     kubectx
