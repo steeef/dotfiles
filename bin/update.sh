@@ -40,6 +40,12 @@ main() {
   home-manager expire-generations '-30 days'
   footer
 
+  if [ "${os}" = "Darwin" ]; then
+    header 'nix-darwin switch'
+    darwin-rebuild switch --flake "path:${real_script_dir}"
+    footer
+  fi
+
   echo '> Done.'
 }
 
