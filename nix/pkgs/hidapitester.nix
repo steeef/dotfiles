@@ -31,8 +31,8 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     for src in $srcs; do
-      local name=$(stripHash $src)
-      install -m755 -D $src $out/bin/$name
+      local name="hidapitester"
+      install -m755 -D hidapitester $out/bin/hidapitester
     done
   '';
 
