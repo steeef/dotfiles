@@ -18,5 +18,5 @@ function upgrade_versioned_casks() {
     done <<< "${outdated_casks}"
   fi
 }
-alias bup='brew update; brew upgrade; upgrade_versioned_casks; brew upgrade visual-studio-code-insiders'
+alias bup='brew update; brew upgrade; upgrade_versioned_casks'
 alias bclean='brew cleanup'
