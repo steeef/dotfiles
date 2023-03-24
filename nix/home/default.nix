@@ -23,6 +23,7 @@
     marksman
     nil
     nixpkgs-fmt
+    nodePackages.bash-language-server
     nodePackages.yaml-language-server
     ponysay
     postgresql
