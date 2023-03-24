@@ -42,6 +42,7 @@
     terraform-ls
     tflint
     tree
+    vagrant
     vault
     watch
     wget
