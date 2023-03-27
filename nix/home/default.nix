@@ -15,6 +15,7 @@
     fd
     coreutils
     findutils
+    git-delete-merged-branches
     gnugrep
     gnused
     hidapitester
