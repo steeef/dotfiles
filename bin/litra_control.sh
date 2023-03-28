@@ -8,8 +8,41 @@ if ! command -v hidapitester >/dev/null 2>&1; then
   exit 1
 fi
 
+state_file="${HOME/.litra_brightness/}"
+set_brightness_prefix="0x11,0xff,0x04,0x4c,0x00,"
+
 function hid() {
-  hidapitester --vidpid 046D/C900 --open --length 20 --send-output $1
+  hidapitester --vidpid 046D/C900 --open --length 20 --send-output "$1"
+}
+
+function get_brightness() {
+  declare -i litra_brightness
+  # shellcheck source=/dev/null
+  . "${state_file}" 2>/dev/null || :
+  : ${litra_brightness:=0}
+  echo "${litra_brightness}"
+}
+
+function set_brightness() {
+  brightness_value="$1"
+  if [ -n "${brightness_value}" ]; then
+    declare -i litra_brightness
+    litra_brightness=$brightness_value
+    declare -p litra_brightness >"${state_file}"
+    hid "${set_brightness_prefix}${brightness_value}"
+  fi
+}
+
+function raise_brightness() {
+  state=$(get_brightness)
+  litra_brightness=$((state + 10))
+  set_brightness "${litra_brightness}"
+}
+
+function lower_brightness() {
+  state=$(get_brightness)
+  litra_brightness=$((state - 10))
+  set_brightness "${litra_brightness}"
 }
 
 case "${1}" in
@@ -19,20 +52,20 @@ case "${1}" in
 "off")
   hid "0x11,0xff,0x04,0x1c"
   ;;
-"glow")
-  hid "0x11,0xff,0x04,0x4c,0x00,20"
+"up")
+  raise_brightness
   ;;
-"dim")
-  hid "0x11,0xff,0x04,0x4c,0x00,50"
+"down")
+  lower_brightness
   ;;
-"normal")
-  hid "0x11,0xff,0x04,0x4c,0x00,70"
+"min")
+  set_brightness 20
   ;;
 "medium")
-  hid "0x11,0xff,0x04,0x4c,0x00,100"
+  set_brightness 70
   ;;
-"bright")
-  hid "0x11,0xff,0x04,0x4c,0x00,204"
+"max")
+  set_brightness 240
   ;;
 "2700K")
   hid "0x11,0xff,0x04,0x9c,10,140"
