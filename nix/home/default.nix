@@ -43,6 +43,7 @@
     terraform-ls
     tflint
     tree
+    unzip
     vagrant
     vault
     watch

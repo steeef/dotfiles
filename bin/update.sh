@@ -25,11 +25,13 @@ footer() {
 }
 
 main() {
-  header 'brew update'
-  brew update
-  brew upgrade
-  brew upgrade --cask
-  footer
+  if [ "${os}" = "Darwin" ]; then
+    header 'brew update'
+    brew update
+    brew upgrade
+    brew upgrade --cask
+    footer
+  fi
 
   header 'home-manager switch'
   nix flake update "${real_script_dir}"
