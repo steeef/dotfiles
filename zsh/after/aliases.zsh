@@ -20,7 +20,6 @@ alias gb='git branch'
 alias gs='git status'
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias gsub="git submodule"
-alias gbp='git-delete-merged-branches --remote origin --yes'
 
 # docker
 alias d='docker'
