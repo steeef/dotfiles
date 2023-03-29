@@ -60,4 +60,10 @@ return {
   -- windows
   'camspiers/lens.vim', -- resize windows automatically when switching
   'blueyed/vim-diminactive', -- dim inactive windows
+
+  {
+    'github/copilot.vim',
+    lazy = true,
+    cmd = 'Copilot',
+  },
 }
