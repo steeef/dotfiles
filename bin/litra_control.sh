@@ -8,7 +8,7 @@ if ! command -v hidapitester >/dev/null 2>&1; then
   exit 1
 fi
 
-state_file="${HOME/.litra_brightness/}"
+state_file="${HOME}/.litra_brightness"
 set_brightness_prefix="0x11,0xff,0x04,0x4c,0x00,"
 
 function hid() {
