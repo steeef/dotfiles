@@ -62,8 +62,11 @@ return {
   'blueyed/vim-diminactive', -- dim inactive windows
 
   {
-    'github/copilot.vim',
-    lazy = true,
-    cmd = 'Copilot',
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
   },
 }
