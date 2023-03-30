@@ -45,6 +45,7 @@
     unzip
     vagrant
     vault
+    vendir
     watch
     wget
     yubikey-manager
