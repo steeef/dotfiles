@@ -18,8 +18,7 @@ return {
   event = "BufRead",
   config = function()
     require('nvim-treesitter.configs').setup {
-      ensure_installed = {},
-      auto_install = false,
+      ensure_installed = 'none',
       endwise = {enable = true},
       highlight = {enable = true},
       indent = {
