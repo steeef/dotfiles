@@ -13,6 +13,7 @@ return {
   cmd = {"TSInstall","TSInstallInfo", "TSUpdate"},
   dependencies = {
     'HiPhish/nvim-ts-rainbow2',
+    'nvim-treesitter/nvim-treesitter-context',
     'RRethy/nvim-treesitter-endwise',
   },
   event = {'BufReadPost', 'BufNewFile'},
