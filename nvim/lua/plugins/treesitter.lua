@@ -15,10 +15,11 @@ return {
     'HiPhish/nvim-ts-rainbow2',
     'RRethy/nvim-treesitter-endwise',
   },
-  event = "BufRead",
+  event = {'BufReadPost', 'BufNewFile'},
   config = function()
     require('nvim-treesitter.configs').setup {
-      ensure_installed = 'none',
+      ensure_installed = 'all',
+      auto_install = true,
       endwise = {enable = true},
       highlight = {enable = true},
       indent = {
