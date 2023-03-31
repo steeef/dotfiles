@@ -4,7 +4,6 @@
 
   home.packages = with pkgs; [
     _1password
-    actionlint
     aws-vault
     awscli2
     bash
@@ -23,24 +22,14 @@
     kubectx
     kubectl
     kubernetes-helm
-    marksman
-    nil
     nixpkgs-fmt
-    nodePackages.bash-language-server
-    nodePackages.yaml-language-server
     ponysay
     postgresql
     rdiff-backup
     rename
     ripgrep
-    shellcheck
-    shfmt
     sqlite
     ssh-copy-id
-    statix
-    sumneko-lua-language-server
-    terraform-ls
-    tflint
     tree
     unzip
     vagrant
