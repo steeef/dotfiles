@@ -19,9 +19,7 @@
       nodePackages.yaml-language-server
     ];
 
-    plugins = with pkgs.unstable.vimPlugins; [
-      lazy-nvim
-
+    plugins = with pkgs.vimPlugins; [
       (nvim-treesitter.withPlugins (
         plugins: with plugins; [
           bash
