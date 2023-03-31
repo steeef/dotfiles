@@ -30,6 +30,7 @@
     ripgrep
     sqlite
     ssh-copy-id
+    terraform
     tree
     unzip
     vagrant

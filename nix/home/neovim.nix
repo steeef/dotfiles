@@ -5,6 +5,7 @@
 
     extraPackages = with pkgs; [
       actionlint
+      black
       marksman
       nil
       ripgrep
