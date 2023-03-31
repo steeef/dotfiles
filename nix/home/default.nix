@@ -22,6 +22,7 @@
     kubectx
     kubectl
     kubernetes-helm
+    kustomize
     nixpkgs-fmt
     ponysay
     postgresql
