@@ -17,6 +17,6 @@ vim.g.maplocalleader = ' '
 
 require('lazy').setup('plugins', {
   performance = {
-    reset_packpath = false,
+    reset_packpath = true,
   }
 })
