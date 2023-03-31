@@ -19,8 +19,8 @@ return {
   event = {'BufReadPost', 'BufNewFile'},
   config = function()
     require('nvim-treesitter.configs').setup {
-      ensure_installed = 'all',
-      auto_install = true,
+      ensure_installed = {},
+      auto_install = false,
       endwise = {enable = true},
       highlight = {enable = true},
       indent = {
