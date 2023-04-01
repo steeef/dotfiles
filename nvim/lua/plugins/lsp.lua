@@ -52,7 +52,6 @@ local lsp_plugins = {
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.nixpkgs_fmt,
           null_ls.builtins.formatting.reorder_python_imports,
-          null_ls.builtins.formatting.rome,
           null_ls.builtins.formatting.shfmt,
           null_ls.builtins.formatting.terraform_fmt,
         },
