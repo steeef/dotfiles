@@ -9,7 +9,7 @@ vim.api.nvim_set_hl(0, 'DraculaPurple',  {fg = colors.purple})
 vim.api.nvim_set_hl(0, 'DraculaRed',  {fg = colors.red})
 
 return {
-  'nvim-treesitter/nvim-treesitter',
+  dir = os.getenv('HOME') .. './.local/share/nvim/site/pack/myNeovimPackages/start/nvim-treesitter',
   cmd = {"TSInstall","TSInstallInfo", "TSUpdate"},
   dependencies = {
     'HiPhish/nvim-ts-rainbow2',
@@ -19,29 +19,8 @@ return {
   event = {'BufReadPost', 'BufNewFile'},
   config = function()
     require('nvim-treesitter.configs').setup {
-      ensure_installed = {
-        'bash',
-        'c',
-        'css',
-        'go',
-        'hcl',
-        'html',
-        'java',
-        'json',
-        'lua',
-        'make',
-        'markdown',
-        'markdown_inline',
-        'nix',
-        'python',
-        'rust',
-        'toml',
-        'tsx',
-        'typescript',
-        'vim',
-        'yaml',
-      },
-      auto_install = true,
+      ensure_installed = {},
+      auto_install = false,
       endwise = {enable = true},
       highlight = {enable = true},
       indent = {

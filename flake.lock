@@ -154,30 +154,13 @@
         "type": "github"
       }
     },
-    "nvim-treesitter": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1680427027,
-        "narHash": "sha256-rHKnNBnsBY9cVFKkP62kHFpNuaPM+TPsuD30V9rWWNM=",
-        "owner": "nvim-treesitter",
-        "repo": "nvim-treesitter",
-        "rev": "cbfa7cae1b38e1b843b2275d633ddbb05a105906",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-treesitter",
-        "repo": "nvim-treesitter",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "darwin": "darwin",
         "home-manager": "home-manager",
         "mkalias": "mkalias",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
-        "nixpkgs": "nixpkgs",
-        "nvim-treesitter": "nvim-treesitter"
+        "nixpkgs": "nixpkgs"
       }
     },
     "utils": {
