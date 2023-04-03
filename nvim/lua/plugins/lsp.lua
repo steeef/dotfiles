@@ -6,7 +6,12 @@ local lsp_plugins = {
     config = function()
       local lsp = require('lspconfig')
 
+      lsp.bashls.setup {}
       lsp.lua_ls.setup {}
+      lsp.marksman.setup {}
+      lsp.nil_ls.setup {}
+      lsp.terraformls.setup {}
+      lsp.yamlls.setup {}
     end
   },
   {
