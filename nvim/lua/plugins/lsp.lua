@@ -1,5 +1,3 @@
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
 local lsp_plugins = {
   {
     'neovim/nvim-lspconfig',
@@ -8,15 +6,7 @@ local lsp_plugins = {
     config = function()
       local lsp = require('lspconfig')
 
-      lsp.lua_ls.setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          Lua = {
-            format = { enable = true },
-          },
-        },
-      }
+      lsp.lua_ls.setup {}
     end
   },
   {
