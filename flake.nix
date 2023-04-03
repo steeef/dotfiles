@@ -19,6 +19,10 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvim-treesitter = {
+      url = "github:nvim-treesitter/nvim-treesitter";
+      flake = false;
+    };
   };
 
   outputs = { nixpkgs, home-manager, darwin, neovim-nightly-overlay, ... }@inputs:
@@ -31,6 +35,20 @@
         else if isLinux then
           "/home/${username}"
         else "";
+
+      plugins = [ "nvim-treesitter" ];
+
+      pluginOverlay = top: last:
+        let
+          buildPlug = name: top.vimUtils.buildVimPluginFrom2Nix {
+            pname = name;
+            version = "master";
+            src = builtins.getAttr name inputs;
+          };
+        in
+        {
+          neovimPlugins = builtins.listToAttrs (map (name: { inherit name; value = buildPlug name; }) plugins);
+        };
 
       getExtraModules = system: with nixpkgs.legacyPackages.${system}.stdenv;
         if isDarwin then
@@ -71,6 +89,7 @@
 
           overlays = [
             neovim-nightly-overlay.overlay
+            pluginOverlay
             (final: prev: { mkalias = inputs.mkalias.outputs.apps.${prev.stdenv.system}.default.program; })
             (import ./nix/pkgs)
           ];

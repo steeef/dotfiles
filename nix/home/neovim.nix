@@ -18,5 +18,9 @@
       nodePackages.bash-language-server
       nodePackages.yaml-language-server
     ];
+
+    plugins = with pkgs.neovimPlugins; [
+      nvim-treesitter
+    ];
   };
 }
