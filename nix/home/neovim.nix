@@ -15,6 +15,7 @@
       sumneko-lua-language-server
       terraform-ls
       tflint
+      tree-sitter
       nodePackages.bash-language-server
       nodePackages.yaml-language-server
     ];
