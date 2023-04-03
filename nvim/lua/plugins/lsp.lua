@@ -1,40 +1,18 @@
-local lsps = {
-  "bashls",
-  "jsonls",
-  "lua_ls",
-  "marksman",
-  "pyright",
-  "terraformls",
-  "tflint",
-  "yamlls",
-}
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
 local lsp_plugins = {
   {
     'neovim/nvim-lspconfig',
     lazy = true,
-    dependencies = { 'mason-lspconfig.nvim' },
-  },
-  {
-    'williamboman/mason-lspconfig.nvim',
-    dependencies = { 'mason.nvim' },
-    cmd = { 'LspInstall', 'LspUninstall' },
-    event = { 'BufNewFile', 'BufReadPost' },
-    lazy = true,
+    event = { "BufNewFile", "BufReadPost" },
     config = function()
-      local mason_lspconfig = require("mason-lspconfig")
-      mason_lspconfig.setup({
-        ensure_installed = lsps
-      })
-      mason_lspconfig.setup_handlers({
-        function (server_name)
-          require("lspconfig")[server_name].setup {}
-        end
-      })
-      require("lspconfig").nil_ls.setup{}
-    end,
+      local lsp = require('lspconfig')
+
+      lsp.bashls.setup {}
+      lsp.lua_ls.setup {}
+      lsp.marksman.setup {}
+      lsp.nil_ls.setup {}
+      lsp.terraformls.setup {}
+      lsp.yamlls.setup {}
+    end
   },
   {
     'jose-elias-alvarez/null-ls.nvim',
@@ -79,14 +57,6 @@ local lsp_plugins = {
           end
         end,
       })
-    end
-  },
-  {
-    'williamboman/mason.nvim',
-    cmd = { 'Mason', 'MasonInstall', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
-    lazy = true,
-    config = function()
-      require('mason').setup()
     end
   },
 }
