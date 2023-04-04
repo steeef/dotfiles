@@ -39,6 +39,7 @@
     vendir
     watch
     wget
+    yq-go
     yubikey-manager
     yubikey-personalization
   ];
