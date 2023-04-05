@@ -11,7 +11,18 @@ local lsp_plugins = {
       lsp.marksman.setup {}
       lsp.nil_ls.setup {}
       lsp.terraformls.setup {}
-      lsp.yamlls.setup {}
+      lsp.yamlls.setup {
+        settings = {
+          redhat = {
+            telemetry = {
+              enabled = false
+            }
+          },
+          yaml = {
+            keyOrdering = false
+          }
+        }
+      }
     end
   },
   {
