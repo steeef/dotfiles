@@ -40,6 +40,7 @@
     watch
     wget
     yq-go
+    yt-dlp
     yubikey-manager
     yubikey-personalization
   ];
