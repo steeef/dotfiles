@@ -5,6 +5,7 @@
     cmake
     colima
     docker
+    fatsort
     fswatch
     iterm2
     reattach-to-user-namespace
