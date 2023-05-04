@@ -12,9 +12,9 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 nvram SystemAudioVolume=" "
 # power settings
 # battery
-pmset -b displaysleep 2 sleep 5 disksleep 10 womp 0
+pmset -b displaysleep 2 sleep 5 disksleep 10 womp 0 powernap 0
 # AC
-pmset -c displaysleep 20 sleep 0 disksleep 0 womp 1
+pmset -c displaysleep 20 sleep 0 disksleep 0 womp 0 powernap 0
 # standby delay to 1 day
 pmset -a standbydelay 86400
 # disable hibernation
