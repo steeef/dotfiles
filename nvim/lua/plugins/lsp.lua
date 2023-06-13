@@ -47,8 +47,11 @@ local lsp_plugins = {
         -- you can reuse a shared lspconfig on_attach callback here
         on_attach = function(client, bufnr)
           -- short-circuit helm template files
-          if client.config.name == 'yamlls' and vim.bo.filetype == 'helm' then
-              vim.lsp.buf_detach_client(bufnr, client.id)
+          if vim.bo.filetype == 'helm' then
+            vim.diagnostic.disable(bufnr)
+            vim.defer_fn(function()
+              vim.diagnostic.reset(nil, bufnr)
+            end, 1000)
           end
           if client.supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
