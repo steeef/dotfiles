@@ -6,6 +6,7 @@
     colima
     docker
     fatsort
+    ffmpeg_6-headless
     fswatch
     iterm2
     reattach-to-user-namespace
