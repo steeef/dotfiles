@@ -4,7 +4,7 @@
     enableAutosuggestions = true;
     autocd = true;
 
-    syntaxHighlightling = {
+    syntaxHighlighting = {
       enable = true;
     };
 
