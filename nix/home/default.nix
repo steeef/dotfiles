@@ -23,6 +23,7 @@
     kubectl
     kubernetes-helm
     kustomize
+    lazygit
     nixpkgs-fmt
     ponysay
     postgresql
