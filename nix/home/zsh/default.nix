@@ -2,8 +2,11 @@
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
     autocd = true;
+
+    syntaxHighlightling = {
+      enable = true;
+    };
 
     enableCompletion = true;
     initExtraBeforeCompInit = lib.strings.fileContents ./initExtraBeforeCompInit.zsh;
