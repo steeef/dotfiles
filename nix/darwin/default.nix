@@ -31,7 +31,6 @@
       "homebrew/cask-drivers"
       "homebrew/cask-versions"
       "homebrew/bundle"
-      "homebrew/core"
       "homebrew/services"
     ];
     brews = [
