@@ -1,4 +1,2 @@
-require('lazy-setup')
-require('settings')
-require('mappings')
-require('theme')
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
