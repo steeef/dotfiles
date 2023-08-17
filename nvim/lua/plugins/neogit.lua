@@ -12,5 +12,8 @@ return {
     },
     lazy = true,
     cmd = 'Neogit',
+    keys = {
+      { "<leader>g", ":Neogit<Enter>" }
+    }
   },
 }
