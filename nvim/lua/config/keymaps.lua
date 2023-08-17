@@ -5,3 +5,6 @@
 --- swap colon with semicolon
 map({"n", "v"}, ";", ":", { noremap = true, silent = false, expr = false })
 map({"n", "v"}, ":", ";", { noremap = true, silent = false, expr = false })
+
+--- neogit
+map("n", '<leader>g', ':Neogit<Enter>')
