@@ -8,7 +8,6 @@
     awscli2
     bash
     bfs
-    cargo
     cowsay
     curl
     fasd

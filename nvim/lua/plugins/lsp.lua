@@ -18,7 +18,6 @@ return {
           },
         },
         marksman = {},
-        nil_ls = {},
         yamlls = {
           settings = {
             redhat = {
@@ -39,15 +38,15 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = vim.list_extend(opts.sources, {
-          nls.builtins.code_actions.gitsigns,
-          nls.builtins.code_actions.shellcheck,
-          nls.builtins.code_actions.statix,
-          nls.builtins.diagnostics.actionlint,
-          nls.builtins.formatting.black,
-          nls.builtins.formatting.nixpkgs_fmt,
-          nls.builtins.formatting.reorder_python_imports,
-          nls.builtins.formatting.shfmt,
+        nls.builtins.code_actions.gitsigns,
+        nls.builtins.code_actions.shellcheck,
+        nls.builtins.code_actions.statix,
+        nls.builtins.diagnostics.actionlint,
+        nls.builtins.formatting.black,
+        nls.builtins.formatting.nixpkgs_fmt,
+        nls.builtins.formatting.reorder_python_imports,
+        nls.builtins.formatting.shfmt,
       })
     end,
-  }
+  },
 }
