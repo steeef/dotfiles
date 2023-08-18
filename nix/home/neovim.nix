@@ -38,6 +38,7 @@
           markdown_inline
           nix
           python
+          regex
           rust
           toml
           tsx
