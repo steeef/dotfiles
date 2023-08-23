@@ -24,6 +24,7 @@
       };
       core = {
         autocrlf = "input";
+        sshCommand = "ssh -i ~/.ssh/id_github.pub";
       };
       credential = {
         helper = "osxkeychain";
