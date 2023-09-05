@@ -46,7 +46,6 @@
       "blockblock"
       "calibre"
       "contexts"
-      "dash"
       "elgato-stream-deck"
       "fantastical"
       "github"
