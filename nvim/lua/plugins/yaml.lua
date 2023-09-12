@@ -90,6 +90,26 @@ return {
       require("telescope").load_extension("yaml_schema")
       local cfg = require("yaml-companion").setup({
         -- Add any options here, or leave empty to use the default settings
+        lspconfig = {
+          flags = {
+            debounce_text_changes = 150,
+          },
+          settings = {
+            redhat = { telemetry = { enabled = false } },
+            yaml = {
+              validate = true,
+              format = { enable = false },
+              hover = true,
+              schemaStore = {
+                enable = true,
+                url = "https://www.schemastore.org/api/json/catalog.json",
+              },
+              schemaDownload = { enable = true },
+              schemas = {},
+              trace = { server = "debug" },
+            },
+          },
+        },
         -- Additional schemas available in Telescope picker
         schemas = {
           {
