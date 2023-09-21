@@ -32,6 +32,7 @@
     ripgrep
     sqlite
     ssh-copy-id
+    stern
     terraform
     tree
     unzip
