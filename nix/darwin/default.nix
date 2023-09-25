@@ -56,6 +56,7 @@
       "karabiner-elements"
       "lastfm"
       "mullvadvpn"
+      "omnidisksweeper"
       "qlvideo"
       "slack"
       "steam"

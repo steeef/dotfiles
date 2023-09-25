@@ -24,6 +24,7 @@
     kubernetes-helm
     kustomize
     lazygit
+    ncdu
     nixpkgs-fmt
     ponysay
     postgresql
