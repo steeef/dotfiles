@@ -12,6 +12,7 @@
     curl
     fasd
     fd
+    go
     coreutils
     findutils
     gnugrep
