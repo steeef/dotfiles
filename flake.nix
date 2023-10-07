@@ -91,7 +91,7 @@
       # Available through 'nixos-rebuild --flake .#nixos'
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs; };
           # > Our main nixos configuration file <
           modules = [ ./nix/nixos/configuration.nix ];
         };
