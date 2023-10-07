@@ -87,6 +87,16 @@
       };
     in
     {
+      # NixOS configuration entrypoint
+      # Available through 'nixos-rebuild --flake .#nixos'
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          # > Our main nixos configuration file <
+          modules = [ ./nix/nixos/configuration.nix ];
+        };
+      };
+
       homeConfigurations."${username}@linux" = mkHomeConfig {
         system = "x86_64-linux";
       };
