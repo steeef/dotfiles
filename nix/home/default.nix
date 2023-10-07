@@ -12,6 +12,8 @@
     curl
     fasd
     fd
+    gcc
+    gnumake
     go
     coreutils
     findutils
