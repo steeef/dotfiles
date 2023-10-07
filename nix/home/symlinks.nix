@@ -20,6 +20,10 @@
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/black";
     };
+    ".config/kitty" = {
+      enable = true;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/kitty";
+    };
     ".git_template" = {
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/git_template";
