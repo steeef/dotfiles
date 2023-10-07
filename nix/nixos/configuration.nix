@@ -100,7 +100,7 @@
 
   environment.variables = { EDITOR = "vim"; };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     fira-code
     (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
   ];
