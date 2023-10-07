@@ -88,7 +88,7 @@ unsetopt nullglob
 # Make it easy to append your own customizations that override the above by
 # loading all files from the ~/.zshrc.d directory
 mkdir -p ~/.zshrc.d
-if [ -n "$(/bin/ls ~/.zshrc.d)" ]; then
+if [ -n "$(ls ~/.zshrc.d)" ]; then
   for dotfile in ~/.zshrc.d/*
   do
     if [ -r "${dotfile}" ]; then
