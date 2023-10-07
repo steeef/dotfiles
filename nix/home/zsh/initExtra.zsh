@@ -98,6 +98,8 @@ if [ -n "$(ls ~/.zshrc.d)" ]; then
 fi
 
 if [ "$(uname -s)" = "Linux" ]; then
-  SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-  export SSH_AUTH_SOCK
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    export SSH_AUTH_SOCK
+  fi
 fi
