@@ -81,6 +81,7 @@
     packages = with pkgs; [
       firefox
       gnomeExtensions.simple-system-monitor
+      gnome3.gnome-tweaks
       kitty
     ];
   };
