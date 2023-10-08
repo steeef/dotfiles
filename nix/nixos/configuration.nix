@@ -100,6 +100,7 @@
   ];
 
   environment.variables = { EDITOR = "vim"; };
+  environment.wordlist.enable = true;
 
   fonts.packages = with pkgs; [
     dejavu_fonts
