@@ -16,6 +16,10 @@
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/beets/config.yaml";
     };
+    ".config/alacritty" = {
+      enable = true;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/alacritty";
+    };
     ".config/black" = {
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/black";
