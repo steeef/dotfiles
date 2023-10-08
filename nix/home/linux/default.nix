@@ -7,6 +7,7 @@
 
   home.shellAliases = {
     hms = "home-manager switch --flake $HOME/.dotfiles#$USER@linux";
+    nr = "sudo nixos-rebuild switch --flake $HOME/.dotfiles#nixos";
   };
 
   systemd.user.services.ssh-agent = {
