@@ -105,6 +105,7 @@
     dejavu_fonts
     fira-code
     hack-font
+    jetbrains-mono
     source-code-pro
     victor-mono
     (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
