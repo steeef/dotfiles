@@ -79,7 +79,6 @@
     description = "Stephen Price";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
       gnomeExtensions.simple-system-monitor
       gnome3.gnome-tweaks
       kitty
@@ -92,6 +91,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    chromium
+    firefox
     fprintd
     git
     lsof
