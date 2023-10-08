@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +18,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, darwin, ... }@inputs:
+  outputs = { nixpkgs, nixos-hardware, home-manager, darwin, ... }@inputs:
     let
       username = "sprice";
 
@@ -93,7 +94,10 @@
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           # > Our main nixos configuration file <
-          modules = [ ./nix/nixos/configuration.nix ];
+          modules = [
+            nixos-hardware.nixosModules.lenovo-thinkpad-t440s
+            ./nix/nixos/configuration.nix
+          ];
         };
       };
 
