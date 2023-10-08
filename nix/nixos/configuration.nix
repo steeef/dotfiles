@@ -86,6 +86,11 @@
     ];
   };
 
+  users.users.malcolm = {
+    isNormalUser = true;
+    description = "Malcolm";
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
