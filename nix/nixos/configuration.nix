@@ -79,6 +79,7 @@
     description = "Stephen Price";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      alacritty
       gnomeExtensions.simple-system-monitor
       gnome3.gnome-tweaks
       kitty
