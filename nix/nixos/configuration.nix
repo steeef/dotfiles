@@ -102,7 +102,11 @@
   environment.variables = { EDITOR = "vim"; };
 
   fonts.packages = with pkgs; [
+    dejavu_fonts
     fira-code
+    hack-font
+    source-code-pro
+    victor-mono
     (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
   ];
 
