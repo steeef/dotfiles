@@ -76,6 +76,7 @@
     git
     lsof
     tailscale
+    tigervnc
     vim
     wget
   ];
