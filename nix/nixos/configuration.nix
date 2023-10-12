@@ -124,6 +124,7 @@
       tod.driver = pkgs.libfprint-2-tod1-goodix;
     };
 
+    mullvad-vpn.enable = true;
 
     pipewire = {
       enable = true;
