@@ -37,6 +37,7 @@
     sqlite
     ssh-copy-id
     stern
+    stylua
     terraform
     tree
     unzip
