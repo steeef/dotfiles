@@ -33,6 +33,7 @@
     postgresql
     rdiff-backup
     rename
+    ruff
     sqlite
     ssh-copy-id
     stern
