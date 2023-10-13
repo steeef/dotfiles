@@ -4,6 +4,6 @@
     arguments = [
       "--hidden",
       "--glob='!.git/'",
-    ]
-      };
-  }
+    ];
+  };
+}
