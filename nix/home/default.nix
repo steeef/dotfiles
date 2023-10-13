@@ -33,7 +33,6 @@
     postgresql
     rdiff-backup
     rename
-    ripgrep
     sqlite
     ssh-copy-id
     stern
@@ -62,6 +61,7 @@
     ./git
     ./neovim.nix
     ./nix-index.nix
+    ./ripgrep.nix
     ./symlinks.nix
     ./tmux
     ./zsh
