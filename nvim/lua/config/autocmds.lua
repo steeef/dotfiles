@@ -26,3 +26,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.softtabstop = 0
   end,
 })
+
+-- wrap and check for spell in Markdown filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown" },
+  group = augroup("wrap_spell_markdown"),
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
