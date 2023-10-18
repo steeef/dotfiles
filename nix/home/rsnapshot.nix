@@ -14,7 +14,7 @@
     retain	gamma	4
 
     verbose		2
-    lockfile	/run/rsnapshot.pid
+    lockfile	${config.home.homeDirectory}/.rsnapshot.pid
 
     rsync_short_args	-a
     rsync_long_args		--delete --numeric-ids --relative --delete-excluded --no-perms --no-owner --no-group --no-specials --no-devices
