@@ -8,7 +8,7 @@
         <string>/Users/sprice/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin</string>
     </dict>
     <key>Label</key>
-    <string>com.user.backup</string>
+    <string>com.user.backup.alpha</string>
     <key>ProgramArguments</key>
     <array>
         <string>bash</string>
