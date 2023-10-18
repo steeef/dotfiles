@@ -17,7 +17,7 @@
     lockfile	${config.home.homeDirectory}/.rsnapshot.pid
 
     rsync_short_args	-a
-    rsync_long_args		--delete --numeric-ids --relative --delete-excluded --no-perms --no-owner --no-group --no-specials --no-devices
+    rsync_long_args		--delete --verbose --numeric-ids --relative --delete-excluded --no-perms --no-owner --no-group --no-specials --no-devices
 
     one_fs	1
 
