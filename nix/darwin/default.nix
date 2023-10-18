@@ -17,6 +17,14 @@
         enable = true;
         source = ./backup.alpha.plist;
       };
+      "com.user.backup.beta.plist" = {
+        enable = true;
+        source = ./backup.beta.plist;
+      };
+      "com.user.backup.gamma.plist" = {
+        enable = true;
+        source = ./backup.gamma.plist;
+      };
     };
   };
 
