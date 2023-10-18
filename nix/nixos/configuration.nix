@@ -66,7 +66,7 @@
   };
 
   fileSystems."/mnt/sprice" = {
-    device = "//store/sprice";
+    device = "//10.0.0.51/sprice";
     fsType = "cifs";
     options =
       let
