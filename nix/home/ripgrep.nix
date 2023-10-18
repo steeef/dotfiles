@@ -3,7 +3,6 @@
     enable = true;
     arguments = [
       "--hidden"
-      "--glob='!.git/'"
     ];
   };
 }
