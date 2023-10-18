@@ -21,6 +21,8 @@
 
     one_fs	1
 
+    exclude	".venv/"
+
     backup	${config.home.homeDirectory}/code/	localhost/
     backup	${config.home.homeDirectory}/.histdb/	localhost/
     backup	${config.home.homeDirectory}/.zhistory	localhost/
