@@ -1,9 +1,9 @@
 { config, pkgs, ... }: {
-  systemd.user.services."backup@" = {
+  systemd.user.services."backup-alpha" = {
     Unit = {
-      Description = "Backup %I";
+      Description = "Backup Alpha";
       StartLimitIntervalSec = 120;
-      tTartLimitBurst = 2;
+      StartLimitBurst = 2;
     };
 
     Service = {
@@ -11,7 +11,7 @@
       Nice = 19;
       IOSchedulingClass = "idle";
       ExecStart = ''
-        ${pkgs.rsnapshot}/bin/rsnapshot -c ${config.home.homeDirectory}/.rsnapshot.conf %I
+        ${pkgs.rsnapshot}/bin/rsnapshot -c ${config.home.homeDirectory}/.rsnapshot.conf alpha
       '';
       Restart = "on-failure";
       RestartSec = 60;
@@ -22,6 +22,51 @@
     };
   };
 
+  systemd.user.services."backup-beta" = {
+    Unit = {
+      Description = "Backup Beta";
+      StartLimitIntervalSec = 120;
+      StartLimitBurst = 2;
+    };
+
+    Service = {
+      Type = "simple";
+      Nice = 19;
+      IOSchedulingClass = "idle";
+      ExecStart = ''
+        ${pkgs.rsnapshot}/bin/rsnapshot -c ${config.home.homeDirectory}/.rsnapshot.conf beta
+      '';
+      Restart = "on-failure";
+      RestartSec = 60;
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
+  systemd.user.services."backup-gamma" = {
+    Unit = {
+      Description = "Backup Gamma";
+      StartLimitIntervalSec = 120;
+      StartLimitBurst = 2;
+    };
+
+    Service = {
+      Type = "simple";
+      Nice = 19;
+      IOSchedulingClass = "idle";
+      ExecStart = ''
+        ${pkgs.rsnapshot}/bin/rsnapshot -c ${config.home.homeDirectory}/.rsnapshot.conf gamma
+      '';
+      Restart = "on-failure";
+      RestartSec = 60;
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
   systemd.user.services."backup-alpha.timer" = {
     Unit = {
       Description = "Backup Alpha timer";
@@ -31,7 +76,7 @@
       OnCalendar = "00/3:17";
       RandomizedDelaySec = 60;
       Persistent = true;
-      Unit = "backup@alpha.service";
+      Unit = "backup-alpha.service";
     };
 
     Install = {
@@ -48,7 +93,7 @@
       OnCalendar = "17:09:00";
       RandomizedDelaySec = 60;
       Persistent = true;
-      Unit = "backup@beta.service";
+      Unit = "backup-beta.service";
     };
 
     Install = {
@@ -65,7 +110,7 @@
       OnCalendar = "Sat 13:27:00";
       RandomizedDelaySec = 60;
       Persistent = true;
-      Unit = "backup@gamma.service";
+      Unit = "backup-gamma.service";
     };
 
     Install = {
