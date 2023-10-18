@@ -50,6 +50,7 @@
   users.users.sprice = {
     isNormalUser = true;
     description = "Stephen Price";
+    uid = 1000;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       alacritty
@@ -64,6 +65,18 @@
     description = "Malcolm";
   };
 
+  fileSystems."/mnt/sprice" = {
+    device = "//store/sprice";
+    fsType = "smb";
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+      in
+      [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=${config.users.users.sprice.uid},gid=100" ];
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -75,6 +88,7 @@
     fprintd
     git
     lsof
+    samba
     tailscale
     tigervnc
     vim
