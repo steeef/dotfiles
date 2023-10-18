@@ -67,7 +67,7 @@
 
   fileSystems."/mnt/sprice" = {
     device = "//store/sprice";
-    fsType = "smb";
+    fsType = "cifs";
     options =
       let
         # this line prevents hanging on network split
@@ -88,7 +88,7 @@
     fprintd
     git
     lsof
-    samba
+    cifs-utils
     tailscale
     tigervnc
     vim
