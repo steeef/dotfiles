@@ -21,10 +21,10 @@
 
     one_fs	1
 
-    exclude	"*"
     include	"${config.home.homeDirectory}/code/"
     include	"${config.home.homeDirectory}/.histdb/"
     include	"${config.home.homeDirectory}/.zhistory"
+    exclude	"*"
 
     backup	${config.home.homeDirectory}/	localhost/
   '';
