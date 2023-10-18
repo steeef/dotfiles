@@ -33,6 +33,7 @@
     postgresql
     rdiff-backup
     rename
+    rsnapshot
     ruff
     sqlite
     ssh-copy-id
