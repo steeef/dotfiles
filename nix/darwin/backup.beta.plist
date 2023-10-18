@@ -22,5 +22,9 @@
       <key>Minute</key>
       <integer>46</integer>
     </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/sprice/rsnapshot-beta.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/sprice/rsnapshot-beta.log</string>
 </dict>
 </plist>

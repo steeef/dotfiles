@@ -17,5 +17,9 @@
     </array>
     <key>StartInterval</key>
     <integer>7200</integer>
+    <key>StandardOutPath</key>
+    <string>/Users/sprice/rsnapshot-alpha.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/sprice/rsnapshot-alpha.log</string>
 </dict>
 </plist>
