@@ -13,9 +13,9 @@
     shells = [ pkgs.zsh ];
 
     userLaunchAgents = {
-      "com.user.backup.plist" = {
+      "com.user.backup.alpha.plist" = {
         enable = true;
-        source = ./backup.plist;
+        source = ./backup.alpha.plist;
       };
     };
   };

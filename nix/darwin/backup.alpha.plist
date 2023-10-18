@@ -5,7 +5,7 @@
     <key>EnvironmentVariables</key>
     <dict>
         <key>PATH</key>
-        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin</string>
+        <string>/Users/sprice/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin</string>
     </dict>
     <key>Label</key>
     <string>com.user.backup</string>
@@ -13,9 +13,9 @@
     <array>
         <string>bash</string>
         <string>-c</string>
-        <string>"${HOME}/.bin/backup.sh" "${HOME}/remote/backup"</string>
+        <string>"rsnapshot" "-c" "${HOME}/.rsnapshot.conf" "alpha"</string>
     </array>
     <key>StartInterval</key>
-    <integer>3600</integer>
+    <integer>7200</integer>
 </dict>
 </plist>
