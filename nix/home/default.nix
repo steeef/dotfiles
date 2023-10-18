@@ -8,6 +8,7 @@
     awscli2
     bash
     bfs
+    coreutils
     cowsay
     curl
     fasd

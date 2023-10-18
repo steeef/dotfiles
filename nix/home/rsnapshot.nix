@@ -4,8 +4,9 @@
     snapshot_root		${config.home.homeDirectory}/remote/backup/
     no_create_root	1
 
-    cmd_cp		/bin/cp
-    cmd_rm		/bin/rm
+    cmd_cp		${pkgs.coreutils}/bin/cp
+    cmd_du		${pkgs.coreutils}/bin/du
+    cmd_rm		${pkgs.coreutils}/bin/rm
     cmd_rsync	${pkgs.rsync}/bin/rsync
 
     retain	alpha	6
