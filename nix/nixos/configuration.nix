@@ -50,7 +50,6 @@
   users.users.sprice = {
     isNormalUser = true;
     description = "Stephen Price";
-    # uid = 1000;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       alacritty
@@ -66,7 +65,7 @@
   };
 
   fileSystems."/mnt/sprice" = {
-    device = "//10.0.0.51/sprice";
+    device = "//store/sprice";
     fsType = "cifs";
     options =
       let
