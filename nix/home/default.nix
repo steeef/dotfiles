@@ -34,6 +34,7 @@
     rdiff-backup
     rename
     rsnapshot
+    rsync
     ruff
     sqlite
     ssh-copy-id
@@ -64,6 +65,7 @@
     ./neovim.nix
     ./nix-index.nix
     ./ripgrep.nix
+    ./rsnapshot.nix
     ./symlinks.nix
     ./tmux
     ./zsh
