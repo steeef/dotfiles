@@ -67,7 +67,7 @@
       WantedBy = [ "default.target" ];
     };
   };
-  systemd.user.services."backup-alpha.timer" = {
+  systemd.user.timers."backup-alpha" = {
     Unit = {
       Description = "Backup Alpha timer";
     };
@@ -84,7 +84,7 @@
     };
   };
 
-  systemd.user.services."backup-beta.timer" = {
+  systemd.user.timers."backup-beta" = {
     Unit = {
       Description = "Backup Beta timer";
     };
@@ -101,7 +101,7 @@
     };
   };
 
-  systemd.user.services."backup-gamma.timer" = {
+  systemd.user.timers."backup-gamma" = {
     Unit = {
       Description = "Backup Gamma timer";
     };
