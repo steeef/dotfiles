@@ -21,7 +21,10 @@
 
     one_fs	1
 
-    exclude	".venv/"
+    exclude	".direnv/"
+    exclude	".mypy_cache/"
+    exclude	".terraform/"
+    exclude	".venv*/"
 
     backup	${config.home.homeDirectory}/code/	localhost/
     backup	${config.home.homeDirectory}/.histdb/	localhost/
