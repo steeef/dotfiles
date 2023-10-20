@@ -42,6 +42,7 @@
     stern
     stylua
     terraform
+    tig
     tree
     unzip
     vagrant
