@@ -24,6 +24,8 @@
       <key>Weekday</key>
       <integer>5</integer>
     </dict>
+    <key>Nice</key>
+    <integer>19</integer>
     <key>StandardOutPath</key>
     <string>/Users/sprice/rsnapshot-gamma.log</string>
     <key>StandardErrorPath</key>
