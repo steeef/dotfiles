@@ -11,7 +11,7 @@
       Nice = 19;
       IOSchedulingClass = "idle";
       ExecStart = ''
-        ${pkgs.rsnapshot}/bin/rsnapshot -c ${config.home.homeDirectory}/.rsnapshot.conf alpha
+        ${pkgs.rsnapshot}/bin/rsnapshot -v -c ${config.home.homeDirectory}/.rsnapshot.conf alpha
       '';
       Restart = "on-failure";
       RestartSec = 60;
@@ -34,7 +34,7 @@
       Nice = 19;
       IOSchedulingClass = "idle";
       ExecStart = ''
-        ${pkgs.rsnapshot}/bin/rsnapshot -c ${config.home.homeDirectory}/.rsnapshot.conf beta
+        ${pkgs.rsnapshot}/bin/rsnapshot -v -c ${config.home.homeDirectory}/.rsnapshot.conf beta
       '';
       Restart = "on-failure";
       RestartSec = 60;
@@ -57,7 +57,7 @@
       Nice = 19;
       IOSchedulingClass = "idle";
       ExecStart = ''
-        ${pkgs.rsnapshot}/bin/rsnapshot -c ${config.home.homeDirectory}/.rsnapshot.conf gamma
+        ${pkgs.rsnapshot}/bin/rsnapshot -v -c ${config.home.homeDirectory}/.rsnapshot.conf gamma
       '';
       Restart = "on-failure";
       RestartSec = 60;
