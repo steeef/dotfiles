@@ -9,11 +9,14 @@
     ];
 
   # Bootloader.
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/sda";
-    useOSProber = true;
-    enableCryptodisk = true;
+  boot = {
+    loader.grub = {
+      enable = true;
+      device = "/dev/sda";
+      useOSProber = true;
+      enableCryptodisk = true;
+    };
+    kernelModules = [ "coretemp" ];
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -86,6 +89,7 @@
     firefox
     fprintd
     git
+    lm_sensors
     lsof
     cifs-utils
     tailscale
@@ -93,6 +97,10 @@
     vim
     wget
   ];
+
+  environment.etc."sysconfig/lm_sensors".text = ''
+    HWMON_MODULES="coretemp"
+  '';
 
   environment.variables = { EDITOR = "vim"; };
   environment.wordlist.enable = true;
@@ -148,6 +156,8 @@
     };
 
     tailscale.enable = true;
+
+    thermald.enable = true;
 
     # Enable the X11 windowing system.
     xserver = {
