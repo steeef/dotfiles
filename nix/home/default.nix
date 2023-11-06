@@ -44,6 +44,7 @@
     terraform
     tig
     tree
+    tree-sitter
     unzip
     vagrant
     vault
