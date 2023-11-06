@@ -21,12 +21,6 @@ setopt INTERACTIVE_COMMENTS # Enable comments in interactive shell.
 REPORTTIME=60
 TIMEFMT="%U user %S system %P cpu %*Es total"
 
-# editor settings
-EDITOR=nvim
-SUDO_EDITOR=nvim
-VISUAL=nvim
-export EDITOR VISUAL SUDO_EDITOR
-
 # vi mode
 bindkey -v
 

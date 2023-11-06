@@ -30,6 +30,12 @@
       share = true;
     };
 
+    sessionVariables = {
+      EDITOR = "nvim";
+      SUDO_EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+
     initExtraFirst = lib.strings.fileContents ./initExtraFirst.zsh;
     initExtra = lib.strings.fileContents ./initExtra.zsh;
   };
