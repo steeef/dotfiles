@@ -14,7 +14,7 @@ setopt hist_verify
 setopt inc_append_history
 unsetopt hist_beep
 
-setopt INTERACTIVE_COMMENTS  # Enable comments in interactive shell.
+setopt INTERACTIVE_COMMENTS # Enable comments in interactive shell.
 
 # Long running processes should return time after they complete. Specified
 # in seconds.
@@ -23,8 +23,9 @@ TIMEFMT="%U user %S system %P cpu %*Es total"
 
 # editor settings
 EDITOR=nvim
+SUDO_EDITOR=nvim
 VISUAL=nvim
-export EDITOR VISUAL
+export EDITOR VISUAL SUDO_EDITOR
 
 # vi mode
 bindkey -v
@@ -35,7 +36,7 @@ zle -N edit-command-line
 bindkey -M vicmd "^V" edit-command-line # open vim to edit command
 
 # select the command suggested inline
-bindkey '^[[Z' autosuggest-accept  # shift + tab
+bindkey '^[[Z' autosuggest-accept # shift + tab
 
 PATH="${HOME}/.zgenom/bin:${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export PATH
@@ -62,7 +63,7 @@ if ! zgenom saved; then
 
   zgenom load peterhurford/git-it-on.zsh # open github from repo
 
-  zgenom load blimmer/zsh-aws-vault # aliases
+  zgenom load blimmer/zsh-aws-vault       # aliases
   zgenom load reegnz/aws-vault-zsh-plugin # completion
 
   # colorschemes
@@ -89,8 +90,7 @@ unsetopt nullglob
 # loading all files from the ~/.zshrc.d directory
 mkdir -p ~/.zshrc.d
 if [ -n "$(ls ~/.zshrc.d)" ]; then
-  for dotfile in ~/.zshrc.d/*
-  do
+  for dotfile in ~/.zshrc.d/*; do
     if [ -r "${dotfile}" ]; then
       source "${dotfile}"
     fi
