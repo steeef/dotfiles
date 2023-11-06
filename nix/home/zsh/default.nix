@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -32,7 +32,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
-      SUDO_EDITOR = "nvim";
+      SUDO_EDITOR = "${pkgs.neovim}/bin/nvim";
       VISUAL = "nvim";
     };
 
