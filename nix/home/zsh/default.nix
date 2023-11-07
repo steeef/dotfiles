@@ -34,7 +34,13 @@
       EDITOR = "nvim";
       SUDO_EDITOR = "${pkgs.neovim}/bin/nvim";
       VISUAL = "nvim";
+      GRANTED_ALIAS_CONFIGURED = "true";
+      GRANTED_ENABLE_AUTO_REASSUME = true;
     };
+
+    envExtra = ''
+      alias assume="source ${pkgs.granted}/bin/.assume-wrapped"
+    '';
 
     initExtraFirst = lib.strings.fileContents ./initExtraFirst.zsh;
     initExtra = lib.strings.fileContents ./initExtra.zsh;
