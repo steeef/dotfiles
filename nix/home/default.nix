@@ -20,6 +20,7 @@
     findutils
     gnugrep
     gnused
+    granted
     hidapitester
     jq
     k9s
