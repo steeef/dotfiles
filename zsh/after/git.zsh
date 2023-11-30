@@ -2,9 +2,9 @@
 fbr() {
   local branches branch
   branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
-  branch=$(echo "${branches}" |
-    fzf -d $(( 2 + $(wc -l <<< "${branches}") )) +m) &&
-  git checkout $(echo "${branch}" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+    branch=$(echo "${branches}" |
+      fzf -d $((2 + $(wc -l <<<"${branches}"))) +m) &&
+    git checkout $(echo "${branch}" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
 # https://blog.takanabe.tokyo/en/2020/04/remove-squash-merged-local-git-branches/
@@ -45,6 +45,7 @@ function git_remove_squash_merged_local_branch() {
 
 # Clean up remote and local branches
 function gcl() {
+  git pull origin main
   git_prune_remote
   git_remove_merged_local_branch
   git_remove_squash_merged_local_branch
