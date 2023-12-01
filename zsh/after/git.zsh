@@ -45,7 +45,7 @@ function git_remove_squash_merged_local_branch() {
 
 # Clean up remote and local branches
 function gcl() {
-  git pull origin main
+  (git checkout main && git pull)
   git_prune_remote
   git_remove_merged_local_branch
   git_remove_squash_merged_local_branch
