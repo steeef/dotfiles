@@ -8,7 +8,8 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
+    #nixpkgs.url = "github:nixos/nixpkgs/5e4c2ada4fcd54b99d56d7bd62f384511a7e2593";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager";
