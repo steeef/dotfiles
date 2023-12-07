@@ -2,6 +2,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # do not install fish
+  programs.fish.enable = false;
+
   home.packages = with pkgs; [
     _1password
     aws-vault
@@ -75,3 +78,4 @@
     ./zsh
   ];
 }
+
