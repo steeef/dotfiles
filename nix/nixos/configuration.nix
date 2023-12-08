@@ -82,6 +82,27 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    gnome-text-editor
+    gnome-console
+    gedit # text editor
+  ]) ++ (with pkgs.gnome; [
+    gnome-music
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+    gnome-contacts
+    gnome-weather
+    gnome-maps
+  ]);
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -89,8 +110,7 @@
     firefox
     fprintd
     git
-    gtop
-    libgtop
+    gnomeExtensions.tophat
     lm_sensors
     lsof
     cifs-utils
