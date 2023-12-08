@@ -56,9 +56,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       alacritty
-      gnomeExtensions.tophat
       gnome3.gnome-tweaks
-      kitty
     ];
   };
 
