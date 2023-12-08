@@ -56,7 +56,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       alacritty
-      gnomeExtensions.simple-system-monitor
+      gnomeExtensions.tophat
       gnome3.gnome-tweaks
       kitty
     ];
@@ -90,6 +90,7 @@
     fprintd
     git
     gtop
+    libgtop
     lm_sensors
     lsof
     cifs-utils
