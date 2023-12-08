@@ -89,6 +89,7 @@
     firefox
     fprintd
     git
+    gtop
     lm_sensors
     lsof
     cifs-utils
