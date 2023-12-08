@@ -109,6 +109,7 @@
     fprintd
     git
     gnomeExtensions.tophat
+    libgtop
     lm_sensors
     lsof
     cifs-utils
