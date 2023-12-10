@@ -166,6 +166,8 @@
       tod.driver = pkgs.libfprint-2-tod1-goodix;
     };
 
+    fwupd.enable = true;
+
     mullvad-vpn.enable = true;
     pcscd.enable = true;
 
