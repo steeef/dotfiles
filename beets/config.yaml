@@ -50,6 +50,13 @@ match:
   track_length_grace: 10
   track_length_max: 30
 
+bandcamp:                    # Beetcamp. Uses the bandcamp URL as id (for both albums and songs).
+                             # If no matching release is found when importing you can select enter Id and paste the bandcamp URL.
+  preferred_media: Digital # A comma-separated list of media to prioritise when fetching albums.
+  include_digital_only_tracks: true
+  search_max: 10           # Maximum number of items to fetch through search queries. Default: 10.
+  art: true                # Add a source to the FetchArt plug-in to download album art for Bandcamp albums
+                             # (requires FetchArt plug-in enabled).
 
 # Plugins --------------------------------------------------------------------
 
