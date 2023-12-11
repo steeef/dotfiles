@@ -1,6 +1,6 @@
 beautifulsoup4
 beetcamp
-beets
+beets[fetchart,lastgenre]
 pylast
 python3-discogs-client
 requests
