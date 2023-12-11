@@ -1,1 +1,5 @@
-beets==1.6.0
+beautifulsoup4
+beets
+pylast
+python3-discogs-client
+requests
