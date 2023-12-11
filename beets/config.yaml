@@ -1,7 +1,10 @@
+include:
+  - local.yaml
+  - secrets.yaml
+
 import:
   write: yes
-  move: no
-  copy: yes
+  move: yes
 
 # files matching these patterns are deleted from source after import
 clutter: ["Thumbs.DB", ".DS_Store", "*.m3u", ".pls", "*.jpg"]
@@ -51,6 +54,7 @@ match:
 # Plugins --------------------------------------------------------------------
 
 plugins: [
+  bandcamp,
   discogs,
   acousticbrainz,
   lyrics,
@@ -73,12 +77,17 @@ lyrics:
 fetchart:
   auto: yes
   cautious: no
-  sources: filesystem coverart albumart itunes amazon google *
+  sources:
+    - filesystem
+    - coverart
+    - albumart
+    - bandcamp
+    - itunes
+    - amazon
+    - google
   minwidth: 500
   maxwidth: 1500
   enforce_ratio: yes
 
 duplicates:
   checksum: no  # expensive
-
-include: [credentials.yaml]
