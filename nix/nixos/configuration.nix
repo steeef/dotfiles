@@ -56,9 +56,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       alacritty
-      gnomeExtensions.simple-system-monitor
       gnome3.gnome-tweaks
-      kitty
     ];
   };
 
@@ -82,6 +80,27 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    gnome-text-editor
+    gnome-console
+    gedit # text editor
+  ]) ++ (with pkgs.gnome; [
+    gnome-music
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+    gnome-contacts
+    gnome-weather
+    gnome-maps
+  ]);
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -89,6 +108,8 @@
     firefox
     fprintd
     git
+    gnomeExtensions.tophat
+    libgtop
     lm_sensors
     lsof
     cifs-utils
@@ -144,6 +165,8 @@
       tod.enable = true;
       tod.driver = pkgs.libfprint-2-tod1-goodix;
     };
+
+    fwupd.enable = true;
 
     mullvad-vpn.enable = true;
     pcscd.enable = true;

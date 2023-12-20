@@ -1,7 +1,10 @@
+include:
+  - local.yaml
+  - secrets.yaml
+
 import:
   write: yes
-  move: no
-  copy: yes
+  move: yes
 
 # files matching these patterns are deleted from source after import
 clutter: ["Thumbs.DB", ".DS_Store", "*.m3u", ".pls", "*.jpg"]
@@ -47,10 +50,16 @@ match:
   track_length_grace: 10
   track_length_max: 30
 
+bandcamp:
+  preferred_media: Digital
+  include_digital_only_tracks: true
+  search_max: 10
+  art: true
 
 # Plugins --------------------------------------------------------------------
 
 plugins: [
+  bandcamp,
   discogs,
   acousticbrainz,
   lyrics,
@@ -69,16 +78,27 @@ pluginpath: []
 
 lyrics:
   auto: yes
+  sources:
+    - bandcamp
+    - genius
+    - lyricwiki
+    - google
+    - musixmatch
 
 fetchart:
   auto: yes
   cautious: no
-  sources: filesystem coverart albumart itunes amazon google *
+  sources:
+    - filesystem
+    - coverart
+    - albumart
+    - bandcamp
+    - itunes
+    - amazon
+    - google
   minwidth: 500
   maxwidth: 1500
   enforce_ratio: yes
 
 duplicates:
   checksum: no  # expensive
-
-include: [credentials.yaml]
