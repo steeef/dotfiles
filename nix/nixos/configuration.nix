@@ -108,6 +108,7 @@
     firefox
     fprintd
     git
+    gtop
     gnomeExtensions.tophat
     libgtop
     lm_sensors
