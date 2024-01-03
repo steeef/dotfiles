@@ -108,7 +108,6 @@
     firefox
     fprintd
     git
-    gtop
     gnomeExtensions.tophat
     libgtop
     lm_sensors
@@ -124,7 +123,10 @@
     HWMON_MODULES="coretemp"
   '';
 
-  environment.variables = { EDITOR = "vim"; };
+  environment.variables = {
+    EDITOR = "vim";
+    GI_TYPELIB_PATH = "/run/current-system/sw/lib/girepository-1.0";
+  };
   environment.wordlist.enable = true;
 
   fonts.packages = with pkgs; [
