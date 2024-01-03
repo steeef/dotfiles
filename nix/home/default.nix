@@ -50,7 +50,6 @@
     tree
     tree-sitter
     unzip
-    vagrant
     vault
     vendir
     watch
