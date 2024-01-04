@@ -1,17 +1,17 @@
 { stdenv, fetchurl, installShellFiles }:
 let
-  version = "1.25.5";
+  version = "1.27.9";
   sources = {
     x86_64-linux = [
       (fetchurl {
         url = "https://dl.k8s.io/release/v${version}/bin/linux/amd64/kubectl";
-        sha256 = "6a660cd44db3d4bfe1563f6689cbe2ffb28ee4baf3532e04fff2d7b909081c29";
+        sha256 = "d0caae91072297b2915dd65f6ef3055d27646dce821ec67d18da35ba9a8dc85b";
       })
     ];
     x86_64-darwin = [
       (fetchurl {
         url = "https://dl.k8s.io/release/v${version}/bin/darwin/amd64/kubectl";
-        sha256 = "d2d63e0096b14e2c150bd8a1a50964aa1b917c98423f6fcb93b63e4ca3d2271a";
+        sha256 = "0b2b965f471768b68d7a06deb85d2d2202551db5cc62a7100bb8c309e636a717";
       })
     ];
   };
