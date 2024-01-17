@@ -28,7 +28,7 @@
     };
   };
 
-  outputs = { nixpkgs-stable, nixpkgs, nixos-hardware, home-manager, darwin, ... }@inputs:
+  outputs = { nixpkgs-unstable, nixpkgs, nixos-hardware, home-manager, darwin, ... }@inputs:
     let
       username = "sprice";
 
