@@ -77,7 +77,17 @@
           };
 
           overlays = [
-            (final: prev: { mkalias = inputs.mkalias.outputs.apps.${prev.stdenv.system}.default.program; })
+            (final: prev: {
+              mkalias = inputs.mkalias.outputs.apps.${prev.stdenv.system}.default.program;
+            })
+            (self: super: {
+              # Import neovim from nixpkgs-unstable specifically
+              neovim =
+                let
+                  unstablePkgs = import nixpkgs-unstable { inherit (args) system; };
+                in
+                unstablePkgs.neovim;
+            })
             (import ./nix/pkgs)
           ];
         };
