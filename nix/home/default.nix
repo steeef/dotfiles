@@ -3,7 +3,10 @@
   programs.home-manager.enable = true;
 
   # do not install fish
-  programs.fish.enable = false;
+  programs.fish = {
+    enable = false;
+    package = { };
+  };
 
   home.packages = with pkgs; [
     _1password
