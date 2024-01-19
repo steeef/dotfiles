@@ -6,9 +6,11 @@
     extraPackages = with pkgs; [
       actionlint
       black
+      helm-ls
       marksman
       nil
       ripgrep
+      ruff-lsp
       shellcheck
       shfmt
       statix
@@ -16,6 +18,7 @@
       terraform-ls
       tflint
       nodePackages.bash-language-server
+      nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
     ];
   };

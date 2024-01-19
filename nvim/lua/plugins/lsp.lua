@@ -4,6 +4,7 @@ return {
     opts = {
       servers = {
         bashls = {},
+        helm_ls = {},
         jsonls = {},
         lua_ls = {
           settings = {
