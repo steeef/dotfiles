@@ -18,8 +18,8 @@
       terraform-ls
       tflint
       nodePackages.bash-language-server
-      nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
+      vscode-langservers-extracted
     ];
   };
 }
