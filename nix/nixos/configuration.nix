@@ -115,6 +115,7 @@
     cifs-utils
     tailscale
     tigervnc
+    usbutils
     vim
     wget
   ];
