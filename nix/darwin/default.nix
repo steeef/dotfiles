@@ -25,8 +25,18 @@
   };
 
   environment = {
+    # remove once https://github.com/LnL7/nix-darwin/pull/787 merged
+    etc."pam.d/sudo_local".text = ''
+      auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so
+      auth       sufficient     pam_tid.so
+    '';
+
     loginShell = "${pkgs.zsh}/bin/zsh";
     shells = [ pkgs.zsh ];
+
+    systemPackages = with pkgs; [
+      pam-reattach
+    ];
 
     userLaunchAgents = {
       "com.user.backup.alpha.plist" = {
@@ -99,7 +109,8 @@
   };
 
   # Whether to enable Enable sudo authentication with Touch ID
-  security.pam.enableSudoTouchIdAuth = true;
+  # Waiting on https://github.com/LnL7/nix-darwin/pull/787 for Sonoma compatibility
+  # security.pam.enableSudoTouchIdAuth = true;
 
   networking = {
     computerName = machine;
