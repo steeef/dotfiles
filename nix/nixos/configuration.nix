@@ -165,8 +165,8 @@
 
   services = {
     fprintd = {
-      enable = false;
-      tod.enable = false;
+      enable = true;
+      tod.enable = true;
       tod.driver = pkgs.libfprint-2-tod1-goodix;
     };
 
