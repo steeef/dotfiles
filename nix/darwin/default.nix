@@ -93,6 +93,7 @@
       "mullvadvpn"
       "omnidisksweeper"
       "qlvideo"
+      "rocket"
       "slack"
       "steam"
       "swinsian"
