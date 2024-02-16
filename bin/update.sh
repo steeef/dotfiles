@@ -4,6 +4,7 @@
 set -euo pipefail
 
 os="$(uname -s)"
+nodename="$(uname -n)"
 
 if [ "${os}" = "Darwin" ]; then
   home_manager_config='macbook'
@@ -35,6 +36,13 @@ main() {
 
   header 'home-manager switch'
   nix flake update "${real_script_dir}"
+
+  if [ -f "/etc/NIXOS" ]; then
+    header 'nixos update'
+    sudo nixos-rebuild switch --flake "${real_script_dir}#${nodename}"
+    footer
+  fi
+
   home-manager switch --flake "path:${real_script_dir}#${USER}@${home_manager_config}"
   footer
 
