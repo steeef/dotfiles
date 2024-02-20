@@ -9,6 +9,7 @@ config = {}
 config.applications = {}
 
 require("amphetamine")
+require("camera-lights")
 
 hyper = require("hyper")
 hyper.start(config)
