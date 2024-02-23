@@ -14,6 +14,7 @@
     awscli2
     bash
     bfs
+    btop
     coreutils
     cowsay
     curl
