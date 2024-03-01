@@ -29,6 +29,7 @@
         helper = "osxkeychain";
       };
       diff = {
+        algorithm = "histogram";
         compactionHeuristic = "off";
         indentHeuristic = "on";
       };
@@ -43,6 +44,7 @@
         pretty = "%C(yellow)%h%Creset %s %C(red)(%cr)%Creset";
       };
       merge = {
+        conflictstyle = "zdiff3";
         tool = "vimdiff";
         prompt = "false";
       };
