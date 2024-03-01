@@ -2,6 +2,7 @@
   targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [
+    ncdu
     stdenv.cc.cc.lib
   ];
 
