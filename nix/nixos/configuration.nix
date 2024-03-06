@@ -117,6 +117,7 @@
     tigervnc
     usbutils
     vim
+    vlc
     wget
   ];
 
