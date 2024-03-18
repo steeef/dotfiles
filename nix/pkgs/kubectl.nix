@@ -14,6 +14,12 @@ let
         sha256 = "0b2b965f471768b68d7a06deb85d2d2202551db5cc62a7100bb8c309e636a717";
       })
     ];
+    arm64-darwin = [
+      (fetchurl {
+        url = "https://dl.k8s.io/release/v${version}/bin/darwin/arm64/kubectl";
+        sha256 = "a5dd031329a357e4c06fc6404a5601773bba9ada075a481ef1008a0e7aa885f5";
+      })
+    ];
   };
 in
 stdenv.mkDerivation rec {
