@@ -7,7 +7,7 @@ os="$(uname -s)"
 nodename="$(uname -n)"
 
 if [ "${os}" = "Darwin" ]; then
-  home_manager_config='macbook'
+  home_manager_config="$(hostname)"
 else
   home_manager_config='linux'
 fi
