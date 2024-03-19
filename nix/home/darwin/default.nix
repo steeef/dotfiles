@@ -23,6 +23,6 @@
     ./aliasApplications.nix
     ./symlinks.nix
     ./vscode
-    ./_1password.nix
+    # ./_1password.nix
   ];
 }
