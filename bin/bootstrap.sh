@@ -20,8 +20,8 @@ load_nix_environment() {
     exit 1
   fi
 
-  if [ -f "${profile_path}/etc/profile.d/nix.sh" ]; then
-    . "${profile_path}/etc/profile.d/nix.sh"
+  if [ -f "${profile_path}/etc/profile.d/nix-daemon.sh" ]; then
+    . "${profile_path}/etc/profile.d/nix-daemon.sh"
   fi
 }
 
@@ -52,8 +52,8 @@ fi
 case "${os}-${arch}" in
 "Darwin-x84-64" | "Darwin-arm64")
   echo "INFO: Running Home Manager configuration for MacOS ${arch}"
-  nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@$(hostname).activationPackage"
   nix run nix-darwin -- switch --flake "${DOTFILES_DIR}"
+  nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@$(hostname).activationPackage"
   ;;
 "Linux-x86_64")
   echo "INFO: Running Home Manager configuration for Linux ${arch}"
