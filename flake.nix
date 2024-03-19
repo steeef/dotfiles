@@ -125,6 +125,12 @@
         system = "x86_64-linux";
       };
 
+
+      darwinConfigurations.sp = mkDarwinConfig {
+        system = "aarch64-darwin";
+        machine = "sp";
+      };
+
       darwinConfigurations.io = mkDarwinConfig {
         system = "x86_64-darwin";
         machine = "io";
