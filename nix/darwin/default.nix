@@ -96,7 +96,6 @@
       "slack"
       "steam"
       "swinsian"
-      "virtualbox"
       "vnc-viewer"
       "vlc"
       "xld"
