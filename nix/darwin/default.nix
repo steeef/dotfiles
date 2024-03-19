@@ -62,7 +62,6 @@
       upgrade = true;
     };
     taps = [
-      "homebrew/cask-drivers"
       "homebrew/cask-versions"
       "homebrew/bundle"
       "homebrew/services"
