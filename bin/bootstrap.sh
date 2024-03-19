@@ -52,7 +52,7 @@ fi
 case "${os}-${arch}" in
 "Darwin-x84-64" | "Darwin-arm64")
   echo "INFO: Running Home Manager configuration for MacOS ${arch}"
-  nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@macbook.activationPackage"
+  nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@$(hostname).activationPackage"
   ;;
 "Linux-x86_64")
   echo "INFO: Running Home Manager configuration for Linux ${arch}"
