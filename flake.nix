@@ -142,7 +142,7 @@
       };
 
       homeConfigurations."${username}@macbook" = mkHomeConfig {
-        system = "x86_64-darwin";
+        system = builtins.currentSystem;
       };
     };
 }
