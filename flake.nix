@@ -141,10 +141,8 @@
       };
 
       homeConfigurations."${username}@macbook" = builtins.mapAttrs mkHomeConfig {
-        default = {
-          system = builtins.currentSystem;
-          machine = "macbook";
-        };
+        system = builtins.currentSystem;
+        machine = "macbook";
       };
     };
 }
