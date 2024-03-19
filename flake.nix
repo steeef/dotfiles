@@ -41,7 +41,7 @@
         else "";
 
       getExtraModules = system: with nixpkgs.legacyPackages.${system}.stdenv;
-        if isDarwin then
+        if isDarwin || isAarch64 then
           [ ./nix/home/darwin ]
         else if isLinux then
           [ ./nix/home/linux ]
