@@ -125,7 +125,6 @@
         system = "x86_64-linux";
       };
 
-
       darwinConfigurations.sp = mkDarwinConfig {
         system = "aarch64-darwin";
         machine = "sp";
@@ -141,8 +140,11 @@
         machine = "ltm-7797";
       };
 
-      homeConfigurations."${username}@macbook" = mkHomeConfig {
-        system = builtins.currentSystem;
+      homeConfigurations."${username}@macbook" = builtins.mapAttrs mkHomeConfig {
+        default = {
+          system = builtins.currentSystem;
+          machine = "macbook";
+        };
       };
     };
 }
