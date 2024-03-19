@@ -30,6 +30,7 @@
 
   outputs = { nixpkgs-unstable, nixpkgs, nixos-hardware, home-manager, darwin, ... }@inputs:
     let
+      inherit builtins;
       username = "sprice";
 
       getHomeDirectory = system: with nixpkgs.legacyPackages.${system}.stdenv;
