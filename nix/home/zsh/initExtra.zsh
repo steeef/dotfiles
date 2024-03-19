@@ -32,7 +32,7 @@ bindkey -M vicmd "^V" edit-command-line # open vim to edit command
 # select the command suggested inline
 bindkey '^[[Z' autosuggest-accept # shift + tab
 
-PATH="${HOME}/.zgenom/bin:${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:${PATH}"
+PATH="${HOME}/.zgenom/bin:${HOME}/bin:${HOME}/.bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export PATH
 
 # zgenom setup
