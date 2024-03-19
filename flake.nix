@@ -122,11 +122,6 @@
         };
       };
 
-      homeConfigurations."${username}@linux" = mkHomeConfig {
-        system = "x86_64-linux";
-      };
-
-
       darwinConfigurations.sp = mkDarwinConfig {
         system = "aarch64-darwin";
         machine = "sp";
@@ -142,8 +137,16 @@
         machine = "ltm-7797";
       };
 
-      homeConfigurations."${username}@macbook" = mkHomeConfig {
-        system = builtins.currentSystem;
+      homeConfigurations."${username}@linux" = mkHomeConfig {
+        system = "x86_64-linux";
+      };
+
+      homeConfigurations."${username}@ltm-7797" = mkHomeConfig {
+        system = "x86_64-darwin";
+      };
+
+      homeConfigurations."${username}@sp" = mkHomeConfig {
+        system = "aarch64-darwin";
       };
     };
 }
