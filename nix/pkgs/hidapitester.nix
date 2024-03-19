@@ -14,7 +14,7 @@ let
         sha256 = "07d12bfcd830076c459e35df88a0a85840b989f6228324255da6c907ba53ebf2";
       })
     ];
-    arm64-darwin = [
+    aarch64-darwin = [
       (fetchurl {
         url = "https://github.com/todbot/hidapitester/releases/download/${version}/hidapitester-macos-arm64-x86_64.zip";
         sha256 = "07d12bfcd830076c459e35df88a0a85840b989f6228324255da6c907ba53ebf2";
