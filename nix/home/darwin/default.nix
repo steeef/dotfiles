@@ -24,5 +24,6 @@
     ./symlinks.nix
     ./vscode
     # ./_1password.nix
+    ./firefox
   ];
 }
