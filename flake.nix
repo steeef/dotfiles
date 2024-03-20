@@ -28,7 +28,7 @@
     };
   };
 
-  outputs = { nixpkgs-unstable, nixpkgs, nixos-hardware, home-manager, darwin, ... }@inputs:
+  outputs = { nixpkgs-unstable, nixpkgs, nixos-hardware, nur, home-manager, darwin, ... }@inputs:
     let
       inherit builtins;
       username = "sprice";

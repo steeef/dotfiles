@@ -109,6 +109,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1710953147,
+        "narHash": "sha256-sqja0/7Gi2K3WEVc/Q9UKlgOmQ530qcmNmRt8H/nb2Y=",
+        "owner": "nix-community",
+        "repo": "nur",
+        "rev": "572fa5e564e2150a1247ba5b7079b824f6a13c41",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nur",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "darwin": "darwin",
@@ -116,7 +131,8 @@
         "mkalias": "mkalias",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nur": "nur"
       }
     }
   },
