@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   programs.firefox = {
     enable = true;
+    package = null;
     profiles.nix = {
       id = 0;
       settings = {
