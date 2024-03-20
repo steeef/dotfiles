@@ -5,11 +5,20 @@
     profiles.nix = {
       id = 0;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        add-custom-search-engine
+        clearurls
+        container-proxy
         darkreader
+        don-t-fuck-with-paste
         facebook-container
+        libredirect
         multi-account-containers
+        onepassword-password-manager
+        reddit-enhancement-suite
         sidebery
+        streetpass-for-mastodon
         ublock-origin
+        web-archives
       ];
       settings = {
         "general.warnOnAboutConfig" = false;
