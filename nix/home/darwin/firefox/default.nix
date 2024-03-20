@@ -3,7 +3,7 @@
     enable = true;
     profiles.nix = {
       id = 0;
-      extensions = with pkgs.inputs.firefox-addons; [
+      extensions = with pkgs.firefox-addons; [
         darkreader
         facebook-container
         multi-account-containers
