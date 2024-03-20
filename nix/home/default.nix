@@ -68,6 +68,7 @@
     ./direnv.nix
     ./directories.nix
     ./editorconfig.nix
+    ./firefox
     ./fzf.nix
     ./gh.nix
     ./git
