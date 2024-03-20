@@ -4,6 +4,13 @@
     package = null;
     profiles.nix = {
       id = 0;
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        darkreader
+        facebook-container
+        multi-account-containers
+        sidebery
+        ublock-origin
+      ];
       settings = {
         "general.warnOnAboutConfig" = false;
         "privacy.trackingprotection.enabled" = true;

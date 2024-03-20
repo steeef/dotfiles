@@ -26,9 +26,10 @@
       url = "github:reckenrode/mkalias";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { nixpkgs-unstable, nixpkgs, nixos-hardware, home-manager, darwin, ... }@inputs:
+  outputs = { nixpkgs-unstable, nixpkgs, nixos-hardware, home-manager, darwin, nur, ... }@inputs:
     let
       inherit builtins;
       username = "sprice";
@@ -89,6 +90,7 @@
                 in
                 unstablePkgs.neovim;
             })
+            (nur.overlay)
             (import ./nix/pkgs)
           ];
         };
