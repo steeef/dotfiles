@@ -1,13 +1,13 @@
 { pkgs, ... }: {
   programs.firefox = {
-    enable = true;
+    enable = false; # needs work
     package = null;
     profiles = {
       personal = {
-        id = 1;
+        id = 0;
       };
       nix = {
-        id = 0;
+        id = 1;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           add-custom-search-engine
           clearurls
