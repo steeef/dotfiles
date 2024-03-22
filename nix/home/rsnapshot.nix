@@ -16,6 +16,7 @@
     verbose		2
     lockfile	${config.home.homeDirectory}/.rsnapshot.pid
 
+    link_dest	1
     rsync_short_args	-a
     rsync_long_args		--delete --verbose --numeric-ids --relative --delete-excluded --no-perms --no-owner --no-group --no-specials --no-devices
 
