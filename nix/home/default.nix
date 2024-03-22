@@ -18,6 +18,7 @@
     coreutils
     cowsay
     curl
+    difftastic
     fasd
     fd
     gcc

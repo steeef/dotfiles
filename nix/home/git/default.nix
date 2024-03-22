@@ -10,6 +10,10 @@
     userEmail = "stephen@stp5.net";
     userName = "Stephen Price";
     ignores = lib.splitString "\n" (lib.strings.fileContents ./gitignore);
+    difftastic = {
+      enable = true;
+      background = "dark";
+    };
     extraConfig = {
       apply = {
         whitespace = "nowarn";
