@@ -65,7 +65,7 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        nix = { "nixpkgs_fmt" },
+        nix = { "alejandra" },
         python = { "black", "reorder_python_imports" },
         bash = { "shfmt" },
         sh = { "shfmt" },

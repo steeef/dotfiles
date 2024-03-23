@@ -1,15 +1,16 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   # do not install fish
   programs.fish = {
     enable = false;
-    package = { };
+    package = {};
   };
 
   home.packages = with pkgs; [
     _1password
+    alejandra
     aws-vault
     awscli2
     bash
@@ -82,4 +83,3 @@
     ./zsh
   ];
 }
-
