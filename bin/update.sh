@@ -34,7 +34,7 @@ main() {
     footer
   fi
 
-  header 'home-manager switch'
+  header 'nix flake update'
   nix flake update "${real_script_dir}"
 
   if [ -f "/etc/NIXOS" ]; then
@@ -43,6 +43,7 @@ main() {
     footer
   fi
 
+  header 'home-manager switch'
   home-manager switch --flake "path:${real_script_dir}#${USER}@${home_manager_config}"
   footer
 
