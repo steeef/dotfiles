@@ -11,11 +11,10 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {
@@ -29,7 +28,7 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { nixpkgs-unstable, nixpkgs, nixos-hardware, home-manager, darwin, nur, ... }@inputs:
+  outputs = { nixpkgs, nixos-hardware, home-manager, darwin, nur, ... }@inputs:
     let
       inherit builtins;
       username = "sprice";
@@ -81,14 +80,6 @@
           overlays = [
             (final: prev: {
               mkalias = inputs.mkalias.outputs.apps.${prev.stdenv.system}.default.program;
-            })
-            (self: super: {
-              # Import neovim from nixpkgs-unstable specifically
-              neovim =
-                let
-                  unstablePkgs = import nixpkgs-unstable { inherit (args) system; };
-                in
-                unstablePkgs.neovim;
             })
             (nur.overlay)
             (import ./nix/pkgs)
