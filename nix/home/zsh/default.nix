@@ -1,7 +1,11 @@
-{ lib, pkgs, ... }: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     autocd = true;
 
     syntaxHighlighting = {
@@ -22,7 +26,7 @@
       expireDuplicatesFirst = true;
       extended = true;
       ignoreDups = true;
-      ignorePatterns = [ "ls" "cd" "cd .." "h" "fc" "pwd" "exit" "date" "* --help" ];
+      ignorePatterns = ["ls" "cd" "cd .." "h" "fc" "pwd" "exit" "date" "* --help"];
       ignoreSpace = true;
       path = "$HOME/.zhistory";
       size = 100000;
