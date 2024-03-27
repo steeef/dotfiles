@@ -33,6 +33,7 @@
     hidapitester
     jq
     k9s
+    kind
     kubectx
     kubectl
     kubernetes-helm
