@@ -1,12 +1,13 @@
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./keyboard.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./keyboard.nix
+  ];
 
   # Bootloader.
   boot = {
@@ -16,7 +17,7 @@
       useOSProber = true;
       enableCryptodisk = true;
     };
-    kernelModules = [ "coretemp" ];
+    kernelModules = ["coretemp"];
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -53,7 +54,7 @@
   users.users.sprice = {
     isNormalUser = true;
     description = "Stephen Price";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       alacritty
       gnome3.gnome-tweaks
@@ -68,38 +69,37 @@
   fileSystems."/mnt/sprice" = {
     device = "//store/sprice";
     fsType = "cifs";
-    options =
-      let
-        # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-
-      in
-      [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100,file_mode=0600,dir_mode=0700,rw" ];
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+    in ["${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100,file_mode=0600,dir_mode=0700,rw"];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
-    gnome-text-editor
-    gnome-console
-    gedit # text editor
-  ]) ++ (with pkgs.gnome; [
-    gnome-music
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-    gnome-contacts
-    gnome-weather
-    gnome-maps
-  ]);
+  environment.gnome.excludePackages =
+    (with pkgs; [
+      gnome-photos
+      gnome-tour
+      gnome-text-editor
+      gnome-console
+      gedit # text editor
+    ])
+    ++ (with pkgs.gnome; [
+      gnome-music
+      epiphany # web browser
+      geary # email reader
+      evince # document viewer
+      totem # video player
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
+      gnome-contacts
+      gnome-weather
+      gnome-maps
+    ]);
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -138,7 +138,7 @@
     jetbrains-mono
     source-code-pro
     victor-mono
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -197,12 +197,10 @@
     };
   };
 
-
   system.stateVersion = "23.05"; # Did you read the comment?
 
-
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = ["nix-command" "flakes"];
 
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -220,4 +218,9 @@
     ];
   };
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 }

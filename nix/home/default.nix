@@ -2,6 +2,12 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   # do not install fish
   programs.fish = {
     enable = false;
