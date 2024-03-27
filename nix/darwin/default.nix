@@ -117,6 +117,10 @@
       "yubico-authenticator"
     ];
     masApps = {
+      "1password-for-safari" = 1569813296;
+      "automounter" = 1160435653;
+      "ivory-for-mastodon" = 6444602274;
+      "paprika-recipe-manager-3" = 1303222628;
       "tailscale" = 1475387142;
     };
   };
