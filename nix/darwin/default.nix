@@ -28,7 +28,11 @@
     '';
     gc = {
       automatic = true;
-      dates = "weekly";
+      interval = {
+        Weekday = 2;
+        Hour = 11;
+        Minute = 23;
+      };
       options = "--delete-older-than 30d";
     };
   };
@@ -77,6 +81,7 @@
     ];
     brews = [
       "mas"
+      "ncdu"
       "pam-reattach"
     ];
     casks = [
@@ -98,7 +103,6 @@
       "istat-menus"
       "karabiner-elements"
       "mullvadvpn"
-      "ncdu"
       "omnidisksweeper"
       "plex"
       "qlvideo"
