@@ -1,4 +1,9 @@
-{ lib, pkgs, machine, ... }: {
+{
+  lib,
+  pkgs,
+  machine,
+  ...
+}: {
   nix = {
     settings = {
       auto-optimise-store = false;
@@ -17,7 +22,6 @@
         "root"
         "sprice"
       ];
-
     };
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -32,7 +36,7 @@
     '';
 
     loginShell = "${pkgs.zsh}/bin/zsh";
-    shells = [ pkgs.zsh ];
+    shells = [pkgs.zsh];
 
     systemPackages = with pkgs; [
       pam-reattach
@@ -89,6 +93,7 @@
       "istat-menus"
       "karabiner-elements"
       "mullvadvpn"
+      "ncdu"
       "omnidisksweeper"
       "plex"
       "qlvideo"
@@ -166,7 +171,10 @@
     enableKeyMapping = true;
     userKeyMapping = [
       # remap Left Control to F19 as Hyper key for Hammerspoon
-      { HIDKeyboardModifierMappingSrc = 30064771296; HIDKeyboardModifierMappingDst = 30064771182; }
+      {
+        HIDKeyboardModifierMappingSrc = 30064771296;
+        HIDKeyboardModifierMappingDst = 30064771182;
+      }
     ];
   };
 
@@ -175,7 +183,7 @@
     fonts = with pkgs; [
       fira-code
       hack-font
-      (pkgs.nerdfonts.override { fonts = [ "Mononoki" ]; })
+      (pkgs.nerdfonts.override {fonts = ["Mononoki"];})
       source-code-pro
       ttf-envy-code-r
     ];
