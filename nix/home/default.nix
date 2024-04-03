@@ -62,7 +62,6 @@
     tree
     tree-sitter
     unzip
-    vault
     vendir
     watch
     wget
