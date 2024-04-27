@@ -64,6 +64,7 @@ plugins: [
   acousticbrainz,
   lyrics,
   fetchart,
+  fromfilename,
   embedart,
   lastgenre,
   scrub,
