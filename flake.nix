@@ -120,9 +120,9 @@
         machine = "sp";
       };
 
-      darwinConfigurations.io = mkDarwinConfig {
-        system = "x86_64-darwin";
-        machine = "io";
+      darwinConfigurations.statari = mkDarwinConfig {
+        system = "aarch64-darwin";
+        machine = "statari";
       };
 
       darwinConfigurations.ltm-7797 = mkDarwinConfig {
@@ -136,6 +136,10 @@
 
       homeConfigurations."${username}@ltm-7797" = mkHomeConfig {
         system = "x86_64-darwin";
+      };
+
+      homeConfigurations."${username}@statari" = mkHomeConfig {
+        system = "aarch64-darwin";
       };
 
       homeConfigurations."${username}@sp" = mkHomeConfig {
