@@ -10,3 +10,4 @@ tmux/plugins/
 karabiner/automatic_backups/
 result/
 *.zwc
+.DS_Store
