@@ -113,7 +113,6 @@
       "swinsian"
       "vnc-viewer"
       "vlc"
-      "whisky"
       "xld"
       "xscreensaver"
       "yubico-authenticator"
