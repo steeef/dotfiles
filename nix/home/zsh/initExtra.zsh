@@ -57,8 +57,7 @@ if ! zgenom saved; then
 
   zgenom load peterhurford/git-it-on.zsh # open github from repo
 
-  zgenom load blimmer/zsh-aws-vault       # aliases
-  zgenom load reegnz/aws-vault-zsh-plugin # completion
+  zgenom load blimmer/zsh-aws-vault       # aliases and prompt
 
   # colorschemes
   zgenom load chrissicool/zsh-256color
