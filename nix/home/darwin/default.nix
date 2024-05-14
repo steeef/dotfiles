@@ -5,7 +5,7 @@
     cmake
     colima
     docker
-    docker-credential-helper
+    docker-credential-helpers
     fatsort
     ffmpeg_6-headless
     fswatch
