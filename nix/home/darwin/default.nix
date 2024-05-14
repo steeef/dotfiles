@@ -1,10 +1,11 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   targets.genericLinux.enable = false;
 
   home.packages = with pkgs; [
     cmake
     colima
     docker
+    docker-credential-helper
     fatsort
     ffmpeg_6-headless
     fswatch
@@ -16,7 +17,6 @@
     hms = "home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)";
     dr = "darwin-rebuild switch --flake $HOME/.dotfiles";
   };
-
 
   imports = [
     ./iterm2
