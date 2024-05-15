@@ -28,33 +28,42 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { nixpkgs, nixos-hardware, home-manager, darwin, nur, ... }@inputs:
-    let
-      inherit builtins;
-      username = "sprice";
+  outputs = {
+    nixpkgs,
+    nixos-hardware,
+    home-manager,
+    darwin,
+    nur,
+    ...
+  } @ inputs: let
+    inherit builtins;
+    username = "sprice";
 
-      getHomeDirectory = system: with nixpkgs.legacyPackages.${system}.stdenv;
-        if isDarwin then
-          "/Users/${username}"
-        else if isLinux then
-          "/home/${username}"
+    getHomeDirectory = system:
+      with nixpkgs.legacyPackages.${system}.stdenv;
+        if isDarwin
+        then "/Users/${username}"
+        else if isLinux
+        then "/home/${username}"
         else "";
 
-      getExtraModules = system: with nixpkgs.legacyPackages.${system}.stdenv;
-        if isDarwin || isAarch64 then
-          [ ./nix/home/darwin ]
-        else if isLinux then
-          [ ./nix/home/linux ]
-        else [ ];
+    getExtraModules = system:
+      with nixpkgs.legacyPackages.${system}.stdenv;
+        if isDarwin || isAarch64
+        then [./nix/home/darwin]
+        else if isLinux
+        then [./nix/home/linux]
+        else [];
 
-      mkDarwinConfig = args: darwin.lib.darwinSystem {
+    mkDarwinConfig = args:
+      darwin.lib.darwinSystem {
         pkgs = import nixpkgs {
           inherit (args) system;
           config = {
             allowUnfree = true;
             allowInsecure = false;
             allowUnsupportedSystem = true;
-            allowUnfreePredicate = (pkg: true);
+            allowUnfreePredicate = pkg: true;
             allowBroken = false;
           };
         };
@@ -66,14 +75,15 @@
         ];
       };
 
-      mkHomeConfig = args: home-manager.lib.homeManagerConfiguration {
+    mkHomeConfig = args:
+      home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit (args) system;
           config = {
             allowUnfree = true;
             allowInsecure = false;
             allowUnsupportedSystem = true;
-            allowUnfreePredicate = (pkg: true);
+            allowUnfreePredicate = pkg: true;
             allowBroken = false;
           };
 
@@ -85,65 +95,57 @@
             (import ./nix/pkgs)
           ];
         };
-        modules = [
-          ./nix/home
-          {
-            home = {
-              inherit username;
-              homeDirectory = getHomeDirectory args.system;
-              stateVersion = "23.05";
-            };
-          }
-        ] ++ getExtraModules args.system;
+        modules =
+          [
+            ./nix/home
+            {
+              home = {
+                inherit username;
+                homeDirectory = getHomeDirectory args.system;
+                stateVersion = "23.05";
+              };
+            }
+          ]
+          ++ getExtraModules args.system;
 
         extraSpecialArgs = {
           inherit (args) machine;
         };
       };
-    in
-    {
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#nixos'
-      nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          # > Our main nixos configuration file <
-          modules = [
-            nixos-hardware.nixosModules.lenovo-thinkpad-t440s
-            ./nix/nixos/configuration.nix
-          ];
-        };
-      };
-
-      darwinConfigurations.sp = mkDarwinConfig {
-        system = "aarch64-darwin";
-        machine = "sp";
-      };
-
-      darwinConfigurations.statari = mkDarwinConfig {
-        system = "aarch64-darwin";
-        machine = "statari";
-      };
-
-      darwinConfigurations.ltm-7797 = mkDarwinConfig {
-        system = "x86_64-darwin";
-        machine = "ltm-7797";
-      };
-
-      homeConfigurations."${username}@linux" = mkHomeConfig {
-        system = "x86_64-linux";
-      };
-
-      homeConfigurations."${username}@ltm-7797" = mkHomeConfig {
-        system = "x86_64-darwin";
-      };
-
-      homeConfigurations."${username}@statari" = mkHomeConfig {
-        system = "aarch64-darwin";
-      };
-
-      homeConfigurations."${username}@sp" = mkHomeConfig {
-        system = "aarch64-darwin";
+  in {
+    # NixOS configuration entrypoint
+    # Available through 'nixos-rebuild --flake .#nixos'
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        # > Our main nixos configuration file <
+        modules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-t440s
+          ./nix/nixos/configuration.nix
+        ];
       };
     };
+
+    darwinConfigurations.sp = mkDarwinConfig {
+      system = "aarch64-darwin";
+      machine = "sp";
+    };
+
+    darwinConfigurations.ltm-3914 = mkDarwinConfig {
+      system = "aarch64-darwin";
+      machine = "ltm-3914";
+    };
+
+    homeConfigurations."${username}@linux" = mkHomeConfig {
+      system = "x86_64-linux";
+    };
+
+    homeConfigurations."${username}@ltm-3914" = mkHomeConfig {
+      system = "aarch64-darwin";
+    };
+
+    homeConfigurations."${username}@sp" = mkHomeConfig {
+      system = "aarch64-darwin";
+    };
+  };
 }
