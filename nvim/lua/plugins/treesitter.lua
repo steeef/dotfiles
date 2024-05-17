@@ -1,13 +1,10 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
-    'nvim-treesitter/nvim-treesitter-context',
-    'RRethy/nvim-treesitter-endwise',
+    "nvim-treesitter/nvim-treesitter-context",
   },
   opts = {
-    endwise = {enable = true},
     ensure_installed = {
-      "bash",
       "c",
       "diff",
       "hcl",
@@ -32,5 +29,5 @@ return {
       "vimdoc",
       "yaml",
     },
-  }
+  },
 }
