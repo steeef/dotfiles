@@ -14,7 +14,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.coding.copilot" },
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.terraform" },
-    { import = "lazyvim.plugins.extras.ui.treesitter-rewrite" },
     -- import/override with your plugins
     { import = "plugins" },
   },
