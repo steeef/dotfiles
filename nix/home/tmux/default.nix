@@ -1,8 +1,18 @@
-{ pkgs, lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  tmux = pkgs.callPackage ./tmux.nix {};
+in {
   programs.tmux = {
     enable = true;
+    package = tmux;
     shell = "${pkgs.zsh}/bin/zsh";
-    secureSocket = if pkgs.stdenv.isDarwin then false else true;
+    secureSocket =
+      if pkgs.stdenv.isDarwin
+      then false
+      else true;
     mouse = true;
     escapeTime = 0;
     historyLimit = 30000;

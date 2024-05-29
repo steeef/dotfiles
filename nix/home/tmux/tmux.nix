@@ -45,7 +45,7 @@ in
       # fix https://github.com/neovim/neovim/issues/28827
       (fetchpatch {
         url = "https://github.com/tmux/tmux/commit/aa17f0e0c1c8b3f1d6fc8617613c74f07de66fae.diff";
-        hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+        hash = "sha256-jhWGnC9tsGqTTA5tU+i4G3wlwZ7HGz4P0UHl17dVRU4=";
       })
     ];
 
