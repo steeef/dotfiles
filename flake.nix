@@ -26,6 +26,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -34,6 +38,7 @@
     home-manager,
     darwin,
     nur,
+    nix-index-database,
     ...
   } @ inputs: let
     inherit builtins;
@@ -105,6 +110,7 @@
                 stateVersion = "23.05";
               };
             }
+            nix-index-database.hmModules.nix-index
           ]
           ++ getExtraModules args.system;
 
