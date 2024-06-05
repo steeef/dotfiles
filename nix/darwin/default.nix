@@ -91,7 +91,6 @@
       "alfred"
       "anylist"
       "balenaetcher"
-      "bartender"
       "blockblock"
       "calibre"
       "contexts"
