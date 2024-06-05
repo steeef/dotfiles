@@ -36,3 +36,7 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 defaults write com.apple.commerce AutoUpdate -bool true
+
+# menu bar spacing
+defaults -currentHost write -globalDomain NSStatusItemSpacing -int 5
+defaults -currentHost write -globalDomain NSStatusSelectionPadding -int 5
