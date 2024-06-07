@@ -78,6 +78,7 @@
       "homebrew/cask-versions"
       "homebrew/bundle"
       "homebrew/services"
+      "nikitabobko/tap"
     ];
     brews = [
       "mas"
@@ -87,7 +88,7 @@
     ];
     casks = [
       "1password"
-      "aerial"
+      "aerospace"
       "alfred"
       "anylist"
       "balenaetcher"
