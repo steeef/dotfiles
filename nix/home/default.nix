@@ -37,6 +37,7 @@
     gnused
     granted
     hidapitester
+    istioctl
     jq
     k9s
     kind
