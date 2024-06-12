@@ -32,6 +32,7 @@
     gnumake
     go
     coreutils
+    ffmpeg-headless
     findutils
     gnugrep
     gnused
