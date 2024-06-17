@@ -92,6 +92,7 @@
       "balenaetcher"
       "blockblock"
       "calibre"
+      "cameracontroller"
       "contexts"
       "elgato-stream-deck"
       "fantastical"
