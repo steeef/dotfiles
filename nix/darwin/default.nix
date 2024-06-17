@@ -191,8 +191,7 @@
   };
 
   fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       fira-code
       hack-font
       (pkgs.nerdfonts.override {fonts = ["Mononoki"];})
