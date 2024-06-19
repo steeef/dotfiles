@@ -92,6 +92,7 @@
       "balenaetcher"
       "blockblock"
       "calibre"
+      "cameracontroller"
       "contexts"
       "elgato-stream-deck"
       "fantastical"
@@ -191,8 +192,7 @@
   };
 
   fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       fira-code
       hack-font
       (pkgs.nerdfonts.override {fonts = ["Mononoki"];})
