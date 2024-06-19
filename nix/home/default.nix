@@ -48,6 +48,7 @@
     kustomize
     lazygit
     nixpkgs-fmt
+    nmap
     ponysay
     postgresql
     rdiff-backup
