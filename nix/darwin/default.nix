@@ -102,6 +102,10 @@
       "home-assistant"
       "istat-menus"
       "karabiner-elements"
+      {
+        name = "librewolf";
+        args = {no_quarantine = true;};
+      }
       "mullvadvpn"
       "omnidisksweeper"
       "plex"
