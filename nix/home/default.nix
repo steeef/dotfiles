@@ -50,6 +50,7 @@
     nmap
     ponysay
     postgresql
+    pyright
     rdiff-backup
     rename
     rsnapshot
