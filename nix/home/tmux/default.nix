@@ -25,18 +25,16 @@ in {
       {
         plugin = dracula;
         extraConfig = ''
-          set -g @dracula-plugins "cpu-usage ram-usage time"
+          set -g @dracula-plugins "time"
 
           set -g @dracula-refresh-rate 5
           set -g @dracula-show-left-icon session
           set -g @dracula-show-left-sep 
           set -g @dracula-show-right-sep 
           set -g @dracula-show-empty-plugins false
-          set -g @dracula-military-time true
           set -g @dracula-show-powerline true
           set -g @dracula-show-timezone false
-
-          set -g @dracula-day-month true
+          set -g @dracula-time-format '%a %d/%m'
         '';
       }
       {
