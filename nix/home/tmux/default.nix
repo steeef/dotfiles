@@ -34,6 +34,7 @@ in {
           set -g @dracula-show-empty-plugins false
           set -g @dracula-military-time true
           set -g @dracula-show-powerline true
+          set -g @dracula-show-timezone false
 
           set -g @dracula-day-month true
         '';
@@ -58,7 +59,8 @@ in {
     ];
 
     extraConfig = ''
-      set-window-option -g automatic-rename
+      set-option -g automatic-rename on
+      set-option -g automatic-rename-format '#{?#{==:#{pane_current_command},zsh},#{b:pane_current_path},#{pane_current_command}}'
 
       # quick pane cycling
       unbind ^A
