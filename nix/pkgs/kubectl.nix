@@ -1,6 +1,9 @@
-{ stdenv, fetchurl, installShellFiles }:
-let
-  version = "1.27.9";
+{
+  stdenv,
+  fetchurl,
+  installShellFiles,
+}: let
+  version = "1.30.4";
   sources = {
     x86_64-linux = [
       (fetchurl {
@@ -22,26 +25,26 @@ let
     ];
   };
 in
-stdenv.mkDerivation rec {
-  inherit version;
-  pname = "kubectl";
-  srcs = sources.${stdenv.hostPlatform.system};
+  stdenv.mkDerivation rec {
+    inherit version;
+    pname = "kubectl";
+    srcs = sources.${stdenv.hostPlatform.system};
 
-  dontUnpack = true;
+    dontUnpack = true;
 
-  nativeBuildInputs = [ installShellFiles ];
+    nativeBuildInputs = [installShellFiles];
 
-  installPhase = ''
-    for src in $srcs; do
-      local name=$(stripHash $src)
-      install -m755 -D $src $out/bin/$name
-      installShellCompletion --cmd $name \
-      --zsh <($out/bin/kubectl completion zsh)
-    done
-  '';
+    installPhase = ''
+      for src in $srcs; do
+        local name=$(stripHash $src)
+        install -m755 -D $src $out/bin/$name
+        installShellCompletion --cmd $name \
+        --zsh <($out/bin/kubectl completion zsh)
+      done
+    '';
 
-  platforms = [
-    "x86_64-linux"
-    "x86_64-darwin"
-  ];
-}
+    platforms = [
+      "x86_64-linux"
+      "x86_64-darwin"
+    ];
+  }
