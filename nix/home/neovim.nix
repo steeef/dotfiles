@@ -18,7 +18,6 @@
       terraform-ls
       tflint
       nodePackages.bash-language-server
-      nodePackages.markdownlint-cli2
       nodePackages.yaml-language-server
       vscode-langservers-extracted
     ];
