@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.neovim = {
     enable = true;
     withNodeJs = true;
@@ -18,6 +18,7 @@
       terraform-ls
       tflint
       nodePackages.bash-language-server
+      nodePackages.markdownlint-cli2
       nodePackages.yaml-language-server
       vscode-langservers-extracted
     ];
