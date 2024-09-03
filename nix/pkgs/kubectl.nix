@@ -8,7 +8,7 @@
     x86_64-linux = [
       (fetchurl {
         url = "https://dl.k8s.io/release/v${version}/bin/linux/amd64/kubectl";
-        sha256 = "d0caae91072297b2915dd65f6ef3055d27646dce821ec67d18da35ba9a8dc85b";
+        sha256 = "sha256-L/0CNxK7wak5Db2MDBUgHBZaadOUeH7wPto+zLS5rAY=";
       })
     ];
     aarch64-darwin = [
