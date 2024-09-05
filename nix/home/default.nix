@@ -60,7 +60,7 @@
     ssh-copy-id
     stern
     stylua
-    terraform
+    tenv
     tig
     tree
     tree-sitter
