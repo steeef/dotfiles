@@ -57,7 +57,7 @@
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       alacritty
-      gnome3.gnome-tweaks
+      gnome-tweaks
     ];
   };
 
@@ -80,25 +80,23 @@
 
   environment.gnome.excludePackages =
     (with pkgs; [
-      gnome-photos
-      gnome-tour
-      gnome-text-editor
-      gnome-console
-      gedit # text editor
-    ])
-    ++ (with pkgs.gnome; [
-      gnome-music
-      epiphany # web browser
-      geary # email reader
-      evince # document viewer
-      totem # video player
-      tali # poker game
-      iagno # go game
-      hitori # sudoku game
       atomix # puzzle game
+      epiphany # web browser
+      evince # document viewer
+      geary # email reader
+      gedit # text editor
+      gnome-console
       gnome-contacts
-      gnome-weather
       gnome-maps
+      gnome-music
+      gnome-photos
+      gnome-text-editor
+      gnome-tour
+      gnome-weather
+      hitori # sudoku game
+      iagno # go game
+      tali # poker game
+      totem # video player
     ]);
 
   # List packages installed in system profile. To search, run:
@@ -155,7 +153,6 @@
   };
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
@@ -192,8 +189,10 @@
       enable = true;
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      layout = "us";
-      xkbVariant = "";
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
     };
   };
 
