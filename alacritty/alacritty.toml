@@ -1,0 +1,30 @@
+import = ["/home/sprice/.config/alacritty/dracula.toml"]
+live_config_reload = true
+
+[font]
+size = 10.0
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 99999
+
+[selection]
+save_to_clipboard = true
+
+[shell]
+args = ["-l", "-c", "tmux attach -t main || tmux new -s main"]
+program = "zsh"
+
+[window]
+decorations = "none"
+startup_mode = "Maximized"
+
+[window.dimensions]
+columns = 140
+lines = 55
