@@ -77,6 +77,9 @@
         };
         modules = [
           ./nix/darwin
+          ({...}: {
+            system.stateVersion = 4;
+          })
         ];
       };
 
