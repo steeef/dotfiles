@@ -80,6 +80,9 @@ end)
 hyper:bind({}, "u", nil, function()
   hs.application.launchOrFocus("1Password")
 end)
+hyper:bind({}, "z", nil, function()
+  hs.application.launchOrFocus("Unread")
+end)
 
 -- window management
 hyper:bind({}, "1", nil, function()
