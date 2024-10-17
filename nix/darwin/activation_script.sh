@@ -40,3 +40,7 @@ defaults write com.apple.commerce AutoUpdate -bool true
 # menu bar spacing
 defaults -currentHost write -globalDomain NSStatusItemSpacing -int 5
 defaults -currentHost write -globalDomain NSStatusSelectionPadding -int 5
+
+# Unread App: add shortcuts
+defaults write com.goldenhillsoftware.Unread2 NSUserKeyEquivalents -dict-add "Next Source" -string "@j"
+defaults write com.goldenhillsoftware.Unread2 NSUserKeyEquivalents -dict-add "Previous Source" -string "@k"
