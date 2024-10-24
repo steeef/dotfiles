@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{lib, ...}: {
   programs.git = {
     enable = true;
     aliases = {
@@ -58,15 +58,21 @@
       push = {
         default = "current";
       };
+      rerere = {
+        enabled = "true";
+        autoUpdate = "true";
+      };
       url = {
         "git@github.com:" = {
           insteadOf = "https://github.com/";
         };
       };
     };
-    includes = [{
-      condition = "gitdir:~/code/work/";
-      path = "~/.gitconfig-work";
-    }];
+    includes = [
+      {
+        condition = "gitdir:~/code/work/";
+        path = "~/.gitconfig-work";
+      }
+    ];
   };
 }
