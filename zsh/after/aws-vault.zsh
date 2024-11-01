@@ -1,5 +1,5 @@
 export AWS_VAULT_KEYCHAIN_NAME=login
-export AWS_VAULT_PROMPT=ykman
+#export AWS_VAULT_PROMPT=ykman
 
 # open AWS Console in a separate Firefox profile (so I can customize things
 # like color and title bar in a disowned process)
