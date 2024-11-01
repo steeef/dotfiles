@@ -15,7 +15,7 @@
   };
 
   home.packages = with pkgs; [
-    _1password
+    _1password-cli
     alejandra
     aws-vault
     awscli2
@@ -70,7 +70,7 @@
     wget
     yq-go
     yt-dlp
-    yubikey-manager
+    #    yubikey-manager
     yubikey-personalization
   ];
 
