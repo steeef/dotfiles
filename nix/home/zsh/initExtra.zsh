@@ -57,7 +57,7 @@ if ! zgenom saved; then
 
   zgenom load peterhurford/git-it-on.zsh # open github from repo
 
-  zgenom load blimmer/zsh-aws-vault       # aliases and prompt
+  zgenom load blimmer/zsh-aws-vault # aliases and prompt
 
   # colorschemes
   zgenom load chrissicool/zsh-256color
@@ -65,6 +65,7 @@ if ! zgenom saved; then
 
   zgenom load romkatv/powerlevel10k powerlevel10k
   zgenom load dracula/zsh
+  zgenom load catppuccin/zsh-syntax-highlighting themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 
   zgenom save
 
