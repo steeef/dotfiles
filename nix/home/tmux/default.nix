@@ -26,6 +26,10 @@ in {
         plugin = catppuccin;
         extraConfig = ''
           set -g @catppuccin_flavor 'mocha' # latte, frappe, macchiato or mocha
+          set -g @catppuccin_window_status_style "rounded"
+          set -g @catppuccin_date_time_text "%a %M/%D"
+          set -ag status-left "#{E:@catppuccin_status_session}"
+          set -ag status-right "#{E:@catppuccin_status_date_time}"
         '';
       }
       {
