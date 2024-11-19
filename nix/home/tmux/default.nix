@@ -23,18 +23,9 @@ in {
 
     plugins = with pkgs.tmuxPlugins; [
       {
-        plugin = dracula;
+        plugin = catppuccin;
         extraConfig = ''
-          set -g @dracula-plugins "time"
-
-          set -g @dracula-refresh-rate 5
-          set -g @dracula-show-left-icon session
-          set -g @dracula-show-left-sep 
-          set -g @dracula-show-right-sep 
-          set -g @dracula-show-empty-plugins false
-          set -g @dracula-show-powerline true
-          set -g @dracula-show-timezone false
-          set -g @dracula-time-format '%a %d/%m'
+          set -g @catppuccin_flavor 'mocha' # latte, frappe, macchiato or mocha
         '';
       }
       {
