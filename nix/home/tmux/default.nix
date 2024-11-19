@@ -20,20 +20,11 @@ in {
     newSession = true;
     prefix = "C-Space";
     terminal = "screen-256color";
-    catppuccin = {
-      enable = true;
-      extraConfig = ''
-        set -g @catppuccin_flavor "macchiato" # latte, frappe, macchiato or mocha
-        set -g @catppuccin_window_status_style "rounded"
-        set -g @catppuccin_date_time_text "%a %M/%D"
-
-        # status bar settings
-        set -g status-left "#{E:@catppuccin_status_session}"
-        set -g status-right "#{E:@catppuccin_status_date_time}"
-      '';
-    };
 
     plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = catppuccin;
+      }
       {
         plugin = resurrect;
         extraConfig = ''
@@ -90,6 +81,13 @@ in {
       bind-key -T copy-mode-vi y send -X copy-pipe "reattach-to-user-namespace pbcopy"
       unbind -T copy-mode-vi Enter
       bind-key -T copy-mode-vi Enter send -X copy-pipe "reattach-to-user-namespace pbcopy"
+
+      # status bar settings
+      set -g @catppuccin_flavor "macchiato" # latte, frappe, macchiato or mocha
+      set -g @catppuccin_window_status_style "rounded"
+      set -g @catppuccin_date_time_text "%a %M/%D"
+      set -g status-left "#{E:@catppuccin_status_session}"
+      set -g status-right "#{E:@catppuccin_status_date_time}"
     '';
 
     # extraConfig = lib.strings.fileContents ./extraConfig.conf;
