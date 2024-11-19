@@ -85,9 +85,6 @@ in {
       # status bar settings
       set -g @catppuccin_flavor "macchiato" # latte, frappe, macchiato or mocha
       set -g @catppuccin_window_status_style "rounded"
-      set -g @catppuccin_date_time_text "%a %M/%D"
-      set -g status-left "#{E:@catppuccin_status_session}"
-      set -g status-right "#{E:@catppuccin_status_date_time}"
     '';
 
     # extraConfig = lib.strings.fileContents ./extraConfig.conf;
