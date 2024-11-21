@@ -79,7 +79,7 @@ blocks:
     properties:
       display_mode: files
       fetch_virtual_env: false
-    background: "#FFDE57"
+    background: "#a6da95"
     foreground: "#111111"
   - type: ruby
     style: powerline
