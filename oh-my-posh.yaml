@@ -112,6 +112,17 @@ blocks:
     properties:
       display_default: false
     foreground: "#ffffff"
+  - type: kubectl
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    background_templates:
+    - "{{if contains \"prod\" .Profile}}#ed8796{{end}}"
+    template: "\u2388 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+    properties:
+      display_default: false
+    background: "#7dc4e4"
+    foreground: "#000000"
   - type: root
     style: powerline
     powerline_symbol: 
