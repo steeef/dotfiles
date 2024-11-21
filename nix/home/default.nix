@@ -85,6 +85,7 @@
     ./git
     ./neovim.nix
     ./nix-index.nix
+    ./oh-my-posh
     ./ripgrep.nix
     ./rsnapshot.nix
     ./symlinks.nix
