@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   home.file = {
     ".bin" = {
       enable = true;
@@ -11,6 +11,10 @@
     ".config/nvim/lua" = {
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/lua";
+    };
+    ".config/iterm2" = {
+      enable = true;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/iterm2";
     };
     ".config/beets/config.yaml" = {
       enable = true;
