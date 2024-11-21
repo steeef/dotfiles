@@ -19,6 +19,8 @@
 [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
+source ~/.bin/set_catppuccin.sh macchiato
+
 () {
   emulate -L zsh -o extended_glob
 
