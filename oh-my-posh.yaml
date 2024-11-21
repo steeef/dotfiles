@@ -14,25 +14,25 @@ blocks:
   - type: os
     style: powerline
     template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
-    background: "#d3d7cf"
-    foreground: "#000000"
+    background: "#5b6078"
+    foreground: "#cad3f5"
   - type: path
     style: powerline
     powerline_symbol: 
-    template: " \uf07c {{ .Path }} "
+    template: "\uf07c  {{ .Path }} "
     properties:
       home_icon: "~"
       style: full
-    background: "#3465a4"
-    foreground: "#e4e4e4"
+    background: "#5b6078"
+    foreground: "#cad3f5"
   - type: git
     style: powerline
     powerline_symbol: 
     background_templates:
-    - "{{ if or (.Working.Changed) (.Staging.Changed) }}#c4a000{{ end }}"
-    - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#f26d50{{ end }}"
-    - "{{ if gt .Ahead 0 }}#89d1dc{{ end }}"
-    - "{{ if gt .Behind 0 }}#4e9a06{{ end }}"
+    - "{{ if or (.Working.Changed) (.Staging.Changed) }}#f5a97f{{ end }}"
+    - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ed8796{{ end }}"
+    - "{{ if gt .Ahead 0 }}#8bd5ca{{ end }}"
+    - "{{ if gt .Behind 0 }}#a6da95{{ end }}"
     template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
     properties:
       branch_icon: "\uf126 "
@@ -141,8 +141,8 @@ blocks:
     style: diamond
     invert_powerline: true
     template: " {{ .CurrentDate | date .Format }} \uf017 "
-    background: "#d3d7cf"
-    foreground: "#000000"
+    background: "#5b6078"
+    foreground: "#cad3f5"
 - type: prompt
   alignment: left
   segments:
