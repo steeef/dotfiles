@@ -12,8 +12,7 @@ blocks:
   alignment: left
   segments:
   - type: os
-    style: diamond
-    leading_diamond: ╭─
+    style: powerline
     template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
     background: "#d3d7cf"
     foreground: "#000000"
@@ -141,7 +140,6 @@ blocks:
   - type: time
     style: diamond
     invert_powerline: true
-    trailing_diamond: ─╮
     template: " {{ .CurrentDate | date .Format }} \uf017 "
     background: "#d3d7cf"
     foreground: "#000000"
@@ -150,12 +148,6 @@ blocks:
   segments:
   - type: text
     style: plain
-    template: ╰─
+    template: "\u276f"
     foreground: "#d3d7cf"
   newline: true
-- type: rprompt
-  segments:
-  - type: text
-    style: plain
-    template: ─╯
-    foreground: "#d3d7cf"
