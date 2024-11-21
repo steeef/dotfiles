@@ -1,0 +1,161 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version: 2
+final_space: true
+console_title_template: "{{ .Shell }} in {{ .Folder }}"
+transient_prompt:
+  background: transparent
+  foreground: "#ffffff"
+  template: "\u276f "
+blocks:
+- type: prompt
+  alignment: left
+  segments:
+  - type: os
+    style: diamond
+    leading_diamond: ╭─
+    template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
+    background: "#d3d7cf"
+    foreground: "#000000"
+  - type: path
+    style: powerline
+    powerline_symbol: 
+    template: " \uf07c {{ .Path }} "
+    properties:
+      home_icon: "~"
+      style: full
+    background: "#3465a4"
+    foreground: "#e4e4e4"
+  - type: git
+    style: powerline
+    powerline_symbol: 
+    background_templates:
+    - "{{ if or (.Working.Changed) (.Staging.Changed) }}#c4a000{{ end }}"
+    - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#f26d50{{ end }}"
+    - "{{ if gt .Ahead 0 }}#89d1dc{{ end }}"
+    - "{{ if gt .Behind 0 }}#4e9a06{{ end }}"
+    template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
+    properties:
+      branch_icon: "\uf126 "
+      fetch_stash_count: true
+      fetch_status: true
+      fetch_upstream_icon: true
+    background: "#4e9a06"
+    foreground: "#000000"
+- type: prompt
+  alignment: right
+  segments:
+  - type: node
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    template: " {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} \ue718 "
+    properties:
+      fetch_version: true
+    background: "#689f63"
+    foreground: "#ffffff"
+  - type: go
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} \ue627 "
+    properties:
+      fetch_version: true
+    background: "#00acd7"
+    foreground: "#111111"
+  - type: julia
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} \ue624 "
+    properties:
+      fetch_version: true
+    background: "#4063D8"
+    foreground: "#111111"
+  - type: python
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} \ue235 "
+    properties:
+      display_mode: files
+      fetch_virtual_env: false
+    background: "#FFDE57"
+    foreground: "#111111"
+  - type: ruby
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} \ue791 "
+    properties:
+      display_mode: files
+      fetch_version: true
+    background: "#AE1401"
+    foreground: "#ffffff"
+  - type: azfunc
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} \uf0e7"
+    properties:
+      display_mode: files
+      fetch_version: false
+    background: "#FEAC19"
+    foreground: "#ffffff"
+  - type: aws
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    background_templates:
+    - "{{if contains \"default\" .Profile}}#FFA400{{end}}"
+    - "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
+    template: " {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} \ue7ad "
+    properties:
+      display_default: false
+    foreground: "#ffffff"
+  - type: root
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    template: " \uf0ad "
+    background: "#ffff66"
+    foreground: "#111111"
+  - type: executiontime
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    template: " {{ .FormattedMs }} \uf252 "
+    background: "#c4a000"
+    foreground: "#000000"
+  - type: status
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    background_templates:
+    - "{{ if gt .Code 0 }}#cc2222{{ end }}"
+    template: " {{ if gt .Code 0 }}{{ reason .Code }}{{ else }}\uf42e{{ end }} "
+    properties:
+      always_enabled: true
+    background: "#000000"
+    foreground: "#d3d7cf"
+  - type: time
+    style: diamond
+    invert_powerline: true
+    trailing_diamond: ─╮
+    template: " {{ .CurrentDate | date .Format }} \uf017 "
+    background: "#d3d7cf"
+    foreground: "#000000"
+- type: prompt
+  alignment: left
+  segments:
+  - type: text
+    style: plain
+    template: ╰─
+    foreground: "#d3d7cf"
+  newline: true
+- type: rprompt
+  segments:
+  - type: text
+    style: plain
+    template: ─╯
+    foreground: "#d3d7cf"
