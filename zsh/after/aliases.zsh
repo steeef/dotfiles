@@ -1,6 +1,6 @@
 alias h='cd ~'
-alias ll='ls -la'
-alias lr='ls -latr'
+alias ll='ls --color=auto -la'
+alias lr='ls --color=auto -latr'
 
 alias s='ssh'
 
