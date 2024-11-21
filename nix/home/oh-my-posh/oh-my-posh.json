@@ -149,9 +149,9 @@
           "powerline_symbol": "\ue0b2",
           "invert_powerline": true,
           "background_templates": [
-            "{{if contains \"prod\" .Profile}}#ed8796{{end}}"
+            "{{if regexMatch \"prod\" .Context}}#ed8796{{end}}"
           ],
-          "template": "\u2388 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
+          "template": "\u2388 {{.Context}} ",
           "properties": {
             "display_default": false
           },
