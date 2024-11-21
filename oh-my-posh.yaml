@@ -39,7 +39,7 @@ blocks:
       fetch_stash_count: true
       fetch_status: true
       fetch_upstream_icon: true
-    background: "#4e9a06"
+    background: "#91d7e3"
     foreground: "#000000"
 - type: prompt
   alignment: right
