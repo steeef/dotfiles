@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>darkthemeuid</key>
+	<string>theme.fileimport.B62E1396-9F3A-44A9-9D89-B8E7E3D2152A</string>
+</dict>
 </plist>
