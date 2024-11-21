@@ -12,7 +12,7 @@
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/lua";
     };
-    ".config/iterm2" = {
+    ".iterm2" = {
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/iterm2";
     };
