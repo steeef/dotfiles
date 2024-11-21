@@ -5,6 +5,6 @@
 }: {
   programs.oh-my-posh = {
     enable = true;
-    useTheme = "powerlevel10k_rainbow";
+    settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile ./oh-my-posh.json));
   };
 }
