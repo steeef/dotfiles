@@ -63,7 +63,6 @@ if ! zgenom saved; then
   zgenom load chrissicool/zsh-256color
   zgenom load chriskempson/base16-shell
 
-  zgenom load romkatv/powerlevel10k powerlevel10k
   zgenom load dracula/zsh
   zgenom load catppuccin/zsh-syntax-highlighting themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 
