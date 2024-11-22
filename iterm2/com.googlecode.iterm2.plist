@@ -3286,7 +3286,7 @@
 			<key>Use Selected Text Color</key>
 			<true/>
 			<key>Use Separate Colors for Light and Dark Mode</key>
-			<false/>
+			<true/>
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Use Underline Color</key>
