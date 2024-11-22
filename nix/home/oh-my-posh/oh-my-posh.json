@@ -40,8 +40,8 @@
           "type": "os",
           "style": "powerline",
           "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "background": "#5b6078",
-          "foreground": "#cad3f5"
+          "background": "p:surface2",
+          "foreground": "p:text"
         },
         {
           "type": "path",
@@ -52,18 +52,18 @@
             "home_icon": "~",
             "style": "full"
           },
-          "background": "#5b6078",
-          "foreground": "#cad3f5"
+          "background": "p:surface2",
+          "foreground": "p:text"
         },
         {
           "type": "git",
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
           "background_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}#f5a97f{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ed8796{{ end }}",
-            "{{ if gt .Ahead 0 }}#8bd5ca{{ end }}",
-            "{{ if gt .Behind 0 }}#a6da95{{ end }}"
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:peach{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:red{{ end }}",
+            "{{ if gt .Ahead 0 }}p:teal{{ end }}",
+            "{{ if gt .Behind 0 }}p:green{{ end }}"
           ],
           "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "properties": {
@@ -72,7 +72,7 @@
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
-          "background": "#91d7e3",
+          "background": "p:sky",
           "foreground": "#000000"
         }
       ]
@@ -106,18 +106,6 @@
           "foreground": "#111111"
         },
         {
-          "type": "julia",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b2",
-          "invert_powerline": true,
-          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} \ue624 ",
-          "properties": {
-            "fetch_version": true
-          },
-          "background": "#4063D8",
-          "foreground": "#111111"
-        },
-        {
           "type": "python",
           "style": "powerline",
           "powerline_symbol": "\ue0b2",
@@ -127,8 +115,8 @@
             "display_mode": "files",
             "fetch_virtual_env": false
           },
-          "background": "#a6da95",
-          "foreground": "#111111"
+          "background": "p:green",
+          "foreground": "#000000"
         },
         {
           "type": "ruby",
@@ -144,46 +132,18 @@
           "foreground": "#ffffff"
         },
         {
-          "type": "azfunc",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b2",
-          "invert_powerline": true,
-          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} \uf0e7",
-          "properties": {
-            "display_mode": "files",
-            "fetch_version": false
-          },
-          "background": "#FEAC19",
-          "foreground": "#ffffff"
-        },
-        {
-          "type": "aws",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b2",
-          "invert_powerline": true,
-          "background_templates": [
-            "{{if contains \"default\" .Profile}}#FFA400{{end}}",
-            "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
-          ],
-          "template": " {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} \ue7ad ",
-          "properties": {
-            "display_default": false
-          },
-          "foreground": "#ffffff"
-        },
-        {
           "type": "kubectl",
           "style": "powerline",
           "powerline_symbol": "\ue0b2",
           "invert_powerline": true,
           "background_templates": [
-            "{{if regexMatch \"prod\" .Context}}#ed8796{{end}}"
+            "{{if regexMatch \"prod\" .Context}}p:red{{end}}"
           ],
           "template": "\u2388 {{.Context}} ",
           "properties": {
             "display_default": false
           },
-          "background": "#7dc4e4",
+          "background": "p:sapphire",
           "foreground": "#000000"
         },
         {
@@ -201,7 +161,7 @@
           "powerline_symbol": "\ue0b2",
           "invert_powerline": true,
           "template": " {{ .FormattedMs }} \uf252 ",
-          "background": "#eed49f",
+          "background": "p:yellow",
           "foreground": "#000000"
         },
         {
@@ -210,25 +170,25 @@
           "powerline_symbol": "\ue0b2",
           "invert_powerline": true,
           "foreground_templates": [
-            "{{ if gt .Code 0 }}#363a4f{{ end }}"
+            "{{ if gt .Code 0 }}p:surface0{{ end }}"
           ],
           "background_templates": [
-            "{{ if gt .Code 0 }}#ed8796{{ end }}"
+            "{{ if gt .Code 0 }}p:red{{ end }}"
           ],
           "template": " {{ if gt .Code 0 }}{{ reason .Code }}{{ else }}\uf42e{{ end }} ",
           "properties": {
             "always_enabled": true
           },
-          "background": "#363a4f",
-          "foreground": "#d3d7cf"
+          "background": "p:surface0",
+          "foreground": "p:text"
         },
         {
           "type": "time",
           "style": "diamond",
           "invert_powerline": true,
           "template": " {{ .CurrentDate | date .Format }} \uf017 ",
-          "background": "#5b6078",
-          "foreground": "#cad3f5"
+          "background": "p:surface2",
+          "foreground": "p:text"
         }
       ]
     },
@@ -240,7 +200,7 @@
           "type": "text",
           "style": "plain",
           "template": "❯",
-          "foreground": "#a6da95"
+          "foreground": "p:green"
         }
       ],
       "newline": true
@@ -249,6 +209,6 @@
   "transient_prompt": {
     "template": "❯ ",
     "background": "transparent",
-    "foreground": "#ffffff"
+    "foreground": "p:green"
   }
 }
