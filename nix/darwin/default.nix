@@ -44,7 +44,6 @@
       auth       sufficient     pam_tid.so
     '';
 
-    loginShell = "${pkgs.zsh}/bin/zsh";
     shells = [pkgs.zsh];
 
     systemPackages = with pkgs; [
