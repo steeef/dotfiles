@@ -35,7 +35,7 @@ main() {
   fi
 
   header 'nix flake update'
-  nix flake update "${real_script_dir}"
+  nix flake update --flake "${real_script_dir}"
 
   if [ -f "/etc/NIXOS" ]; then
     header 'nixos update'
