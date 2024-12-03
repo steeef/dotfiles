@@ -41,14 +41,21 @@
           "type": "os",
           "style": "powerline",
           "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "background": "p:surface2",
-          "foreground": "p:text"
+          "background": "p:teal",
+          "foreground": "p:base"
+        },
+        {
+          "type": "session",
+          "style": "powerline",
+          "template": "{{ if .SSHSession }}\ueba9 {{ .UserName }}@{{ .HostName }}{{ end }}",
+          "background": "p:teal",
+          "foreground": "p:base"
         },
         {
           "type": "path",
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
-          "template": "\uf07c  {{ .Path }} ",
+          "template": " \uf07c  {{ .Path }} ",
           "properties": {
             "home_icon": "~",
             "style": "full"
