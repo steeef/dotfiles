@@ -41,14 +41,14 @@
           "type": "os",
           "style": "powerline",
           "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "background": "p:teal",
+          "background": "p:peach",
           "foreground": "p:crust"
         },
         {
           "type": "session",
           "style": "powerline",
           "template": "{{ if .SSHSession }}\ueba9 {{ .UserName }}@{{ .HostName }}{{ end }}",
-          "background": "p:teal",
+          "background": "p:peach",
           "foreground": "p:crust"
         },
         {
