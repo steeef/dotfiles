@@ -78,26 +78,25 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  environment.gnome.excludePackages =
-    (with pkgs; [
-      atomix # puzzle game
-      epiphany # web browser
-      evince # document viewer
-      geary # email reader
-      gedit # text editor
-      gnome-console
-      gnome-contacts
-      gnome-maps
-      gnome-music
-      gnome-photos
-      gnome-text-editor
-      gnome-tour
-      gnome-weather
-      hitori # sudoku game
-      iagno # go game
-      tali # poker game
-      totem # video player
-    ]);
+  environment.gnome.excludePackages = with pkgs; [
+    atomix # puzzle game
+    epiphany # web browser
+    evince # document viewer
+    geary # email reader
+    gedit # text editor
+    gnome-console
+    gnome-contacts
+    gnome-maps
+    gnome-music
+    gnome-photos
+    gnome-text-editor
+    gnome-tour
+    gnome-weather
+    hitori # sudoku game
+    iagno # go game
+    tali # poker game
+    totem # video player
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -136,7 +135,7 @@
     jetbrains-mono
     source-code-pro
     victor-mono
-    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+    (nerd-fonts.override {fonts = ["NerdFontsSymbolsOnly"];})
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

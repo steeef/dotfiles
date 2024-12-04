@@ -199,7 +199,7 @@
     packages = with pkgs; [
       fira-code
       hack-font
-      (pkgs.nerdfonts.override {fonts = ["Mononoki"];})
+      nerd-fonts.mononoki
       source-code-pro
       ttf-envy-code-r
     ];
