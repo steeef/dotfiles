@@ -77,6 +77,7 @@
         };
         modules = [
           ./nix/darwin
+
           ({...}: {
             system.stateVersion = 4;
           })
@@ -99,7 +100,7 @@
             (final: prev: {
               mkalias = inputs.mkalias.outputs.apps.${prev.stdenv.system}.default.program;
             })
-            (nur.overlay)
+            (nur.overlays.default)
             (import ./nix/pkgs)
           ];
         };
