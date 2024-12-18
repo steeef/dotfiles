@@ -1,8 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "version": 2,
+  "version": 3,
   "final_space": true,
-  "upgrade_notice": false,
+  "upgrade": {
+    "notice": false
+  },
   "console_title_template": "{{ .Shell }} in {{ .Folder }}",
   "palette": {
     "rosewater": "#f4dbd6",
