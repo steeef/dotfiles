@@ -75,6 +75,7 @@
   ];
 
   imports = [
+    ./atuin.nix
     ./bat.nix
     ./direnv.nix
     ./directories.nix
