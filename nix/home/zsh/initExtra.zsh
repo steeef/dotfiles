@@ -53,8 +53,6 @@ if ! zgenom saved; then
 
   zgenom load chisui/zsh-nix-shell
 
-  zgenom load larkery/zsh-histdb # save history to sqlite db
-
   zgenom load peterhurford/git-it-on.zsh # open github from repo
 
   zgenom load blimmer/zsh-aws-vault # aliases and prompt
