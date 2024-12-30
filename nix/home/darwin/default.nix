@@ -8,6 +8,7 @@
     docker-credential-helpers
     fatsort
     fswatch
+    ghostty
     iterm2
     reattach-to-user-namespace
   ];
