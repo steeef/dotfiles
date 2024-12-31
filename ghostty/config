@@ -1,0 +1,4 @@
+confirm-close-surface = false
+font-size = 11
+initial-command = zsh -l -c "tmux attach -t main || tmux new -s main"
+theme = catppuccin-macchiato
