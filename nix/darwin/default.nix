@@ -95,6 +95,7 @@
       "contexts"
       "elgato-stream-deck"
       "fantastical"
+      "ghostty"
       "github"
       "hammerspoon"
       "hazel"
