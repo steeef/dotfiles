@@ -9,6 +9,7 @@
       filter_mode_shell_up_key_binding = "session";
       inline_height = 50;
       keymap_mode = "vim-insert";
+      search_mode = "skim";
       store_failed = false;
       sync = {
         records = true;
