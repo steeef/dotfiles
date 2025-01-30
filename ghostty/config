@@ -1,4 +1,5 @@
 adjust-cell-height = -2
+adjust-cell-width = -1
 confirm-close-surface = false
 font-family = Monaco
 font-size = 10.0
