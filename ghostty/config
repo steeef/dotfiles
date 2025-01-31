@@ -3,6 +3,7 @@ adjust-cell-width = -1
 confirm-close-surface = false
 font-family = Monaco
 font-size = 10.0
+font-style-bold = false
 freetype-load-flags = no-hinting,no-force-autohint,no-monochrome,no-autohint
 initial-command = zsh -l -c "tmux attach -t main || tmux new -s main"
 theme = catppuccin-macchiato
