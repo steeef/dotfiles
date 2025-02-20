@@ -79,9 +79,11 @@
       "homebrew/services"
     ];
     brews = [
+      "docker-credential-helper-ecr"
       "mas"
       "ncdu"
       "pam-reattach"
+      "pipx"
       "vault"
     ];
     casks = [
