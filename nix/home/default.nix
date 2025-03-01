@@ -56,6 +56,7 @@
     rsnapshot
     rsync
     ruff
+    sox
     sqlite
     ssh-copy-id
     stern
