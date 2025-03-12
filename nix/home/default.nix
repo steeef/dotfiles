@@ -38,7 +38,6 @@
     gnused
     hidapitester
     jq
-    k9s
     kind
     kubectx
     kubectl
@@ -84,6 +83,7 @@
     ./fzf.nix
     ./gh.nix
     ./git
+    ./k9s
     ./neovim.nix
     ./nix-index.nix
     ./oh-my-posh
