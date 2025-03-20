@@ -84,6 +84,7 @@
       "ncdu"
       "pam-reattach"
       "pipx"
+      "uv"
       "vault"
     ];
     casks = [
