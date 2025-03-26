@@ -61,7 +61,7 @@ bandcamp:
 plugins: [
   bandcamp,
   discogs,
-  acousticbrainz,
+  xtractor,
   lyrics,
   fetchart,
   fromfilename,
