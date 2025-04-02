@@ -64,6 +64,7 @@
     tree
     tree-sitter
     unzip
+    uv
     vendir
     watch
     wget
