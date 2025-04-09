@@ -60,6 +60,7 @@
     stern
     stylua
     tenv
+    tflint
     tig
     tree
     tree-sitter
