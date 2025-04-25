@@ -10,7 +10,6 @@
       marksman
       nil
       ripgrep
-      ruff-lsp
       shellcheck
       shfmt
       statix
