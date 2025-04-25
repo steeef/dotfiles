@@ -13,7 +13,11 @@
     };
 
     enableCompletion = true;
-    initExtraBeforeCompInit = lib.strings.fileContents ./initExtraBeforeCompInit.zsh;
+    initContent = lib.mkMerge [
+      (lib.mkBefore (lib.strings.fileContents ./initExtraFirst.zsh))
+      (lib.mkOrder 550 (lib.strings.fileContents ./initExtraBeforeCompInit.zsh))
+      (lib.strings.fileContents ./initExtra.zsh)
+    ];
     completionInit = ''
       autoload -U compinit
       zstyle ':completion:*' accept-exact '*(N)'
@@ -39,8 +43,5 @@
       SUDO_EDITOR = "${pkgs.neovim}/bin/nvim";
       VISUAL = "nvim";
     };
-
-    initExtraFirst = lib.strings.fileContents ./initExtraFirst.zsh;
-    initExtra = lib.strings.fileContents ./initExtra.zsh;
   };
 }
