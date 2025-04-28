@@ -97,3 +97,7 @@ elif [ "$(uname -s)" = "Darwin" ]; then
   SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   export SSH_AUTH_SOCK
 fi
+
+#granted config
+GRANTED_ALIAS_CONFIGURED="true"
+export GRANTED_ALIAS_CONFIGURED
