@@ -85,6 +85,7 @@
     ./fzf.nix
     ./gh.nix
     ./git
+    ./granted.nix
     ./k9s
     ./neovim.nix
     ./nix-index.nix
