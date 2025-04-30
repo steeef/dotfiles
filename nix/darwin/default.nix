@@ -83,7 +83,6 @@
       "mas"
       "ncdu"
       "pam-reattach"
-      "vault"
     ];
     casks = [
       "1password"
