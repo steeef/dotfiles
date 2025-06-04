@@ -14,7 +14,7 @@
 
   home.shellAliases = {
     hms = "home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)";
-    dr = "darwin-rebuild switch --flake $HOME/.dotfiles";
+    dr = "sudo darwin-rebuild switch --flake $HOME/.dotfiles";
   };
 
   imports = [

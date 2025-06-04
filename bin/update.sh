@@ -49,7 +49,7 @@ main() {
 
   if [ "${os}" = "Darwin" ]; then
     header 'nix-darwin switch'
-    darwin-rebuild switch --flake "${real_script_dir}"
+    sudo darwin-rebuild switch --flake "${real_script_dir}"
     footer
   fi
 
