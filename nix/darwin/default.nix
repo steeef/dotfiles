@@ -2,6 +2,7 @@
   lib,
   pkgs,
   machine,
+  claude-code,
   ...
 }: {
   nix = {
@@ -48,6 +49,7 @@
 
     systemPackages = with pkgs; [
       pam-reattach
+      claude-code.packages.${pkgs.system}.default
     ];
 
     userLaunchAgents = {

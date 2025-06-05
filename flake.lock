@@ -1,5 +1,24 @@
 {
   "nodes": {
+    "claude-code": {
+      "inputs": {
+        "js2nix": "js2nix",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1749081670,
+        "narHash": "sha256-y6tg19l+DthFaqG7jzygSIVZ/7Bh1pzhTIoa9YX8NNg=",
+        "owner": "olebedev",
+        "repo": "claude-code.nix",
+        "rev": "902c744e5ecccedae5388948c4d7563bf273e319",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olebedev",
+        "repo": "claude-code.nix",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -61,6 +80,22 @@
         "type": "github"
       }
     },
+    "js2nix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1740636466,
+        "narHash": "sha256-udsxrWLtAaBkh++pqal3u5+hI0YhWI06O2UaC6IS5lY=",
+        "owner": "canva-public",
+        "repo": "js2nix",
+        "rev": "8cd32b5c87767b019e0960b27599f6b9d195ddb0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "canva-public",
+        "repo": "js2nix",
+        "type": "github"
+      }
+    },
     "mkalias": {
       "inputs": {
         "nixpkgs": [
@@ -119,6 +154,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1741402956,
+        "narHash": "sha256-y2hByvBM03s9T2fpeLjW6iprbxnhV9mJMmSwCHc41ZQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ed0b1881565c1ffef490c10d663d4f542031dad3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1749056520,
         "narHash": "sha256-u2VlWoIQdYgRcayNsYcg8Cpby2IsDiaufZiT6nfNigs=",
         "owner": "nixos",
@@ -132,7 +183,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1748929857,
         "narHash": "sha256-lcZQ8RhsmhsK8u7LIFsJhsLh/pzR9yZ8yqpTzyGdj+Q=",
@@ -151,7 +202,7 @@
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
@@ -170,12 +221,13 @@
     },
     "root": {
       "inputs": {
+        "claude-code": "claude-code",
         "darwin": "darwin",
         "home-manager": "home-manager",
         "mkalias": "mkalias",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nur": "nur"
       }
     },
