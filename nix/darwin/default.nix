@@ -76,7 +76,6 @@
       upgrade = true;
     };
     taps = [
-      "homebrew/cask-versions"
       "homebrew/bundle"
       "homebrew/services"
     ];
