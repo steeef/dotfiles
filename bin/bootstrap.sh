@@ -50,7 +50,7 @@ if ! grep -qR "^experimental-features = nix-command flakes" "${local_config_file
 fi
 
 case "${os}-${arch}" in
-"Darwin-x84-64" | "Darwin-arm64")
+"Darwin-x84_64" | "Darwin-arm64")
   echo "INFO: Running Home Manager configuration for MacOS ${arch}"
   nix run nix-darwin -- switch --flake "${DOTFILES_DIR}"
   nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@$(hostname).activationPackage"
