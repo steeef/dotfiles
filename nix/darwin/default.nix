@@ -3,6 +3,7 @@
   pkgs,
   machine,
   claude-code,
+  username,
   ...
 }: {
   nix = {
@@ -21,7 +22,7 @@
 
       trusted-users = [
         "root"
-        "sprice"
+        username
       ];
     };
     extraOptions = ''
