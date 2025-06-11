@@ -31,7 +31,6 @@
     gcc
     gnumake
     go
-    coreutils
     ffmpeg-headless
     findutils
     gnugrep
