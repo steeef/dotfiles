@@ -13,7 +13,7 @@
       shellcheck
       shfmt
       statix
-      sumneko-lua-language-server
+      lua-language-server
       terraform-ls
       tflint
       nodePackages.bash-language-server

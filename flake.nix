@@ -76,6 +76,7 @@
         };
         specialArgs = {
           inherit (args) machine;
+          inherit username;
         };
         modules = [
           ./nix/darwin

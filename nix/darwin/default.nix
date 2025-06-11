@@ -3,11 +3,11 @@
   pkgs,
   machine,
   claude-code,
+  username,
   ...
 }: {
   nix = {
     settings = {
-      auto-optimise-store = false;
 
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -21,12 +21,15 @@
 
       trusted-users = [
         "root"
-        "sprice"
+        username
       ];
     };
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    optimise = {
+      automatic = true;
+    };
     gc = {
       automatic = true;
       interval = {
