@@ -75,6 +75,7 @@ atuin-setup() {
   bindkey '^E' _atuin_search_widget
 
   export ATUIN_NOBIND="true"
+  CUR_SHELL=zsh
   eval "$(atuin init "$CUR_SHELL")"
   fzf-atuin-history-widget() {
     local selected num
