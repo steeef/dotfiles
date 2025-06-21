@@ -91,7 +91,6 @@
       "1password"
       "alfred"
       "anylist"
-      "balenaetcher"
       "blockblock"
       "calibre"
       "cameracontroller"
@@ -105,10 +104,6 @@
       "home-assistant"
       "istat-menus"
       "karabiner-elements"
-      {
-        name = "librewolf";
-        args = {no_quarantine = true;};
-      }
       "mullvad-vpn"
       "omnidisksweeper"
       "plex"
