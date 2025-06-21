@@ -95,7 +95,6 @@
       "calibre"
       "cameracontroller"
       "contexts"
-      "elgato-stream-deck"
       "fantastical"
       "ghostty"
       "github"
@@ -116,6 +115,8 @@
       "xld"
       "xscreensaver"
       "yubico-authenticator"
+    ] ++ lib.optionals (machine == "ltm-3914") [
+      "elgato-stream-deck"
     ];
     masApps = {
       "1password-for-safari" = 1569813296;
