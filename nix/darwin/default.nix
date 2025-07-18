@@ -52,7 +52,6 @@
     systemPackages = with pkgs; [
       pam-reattach
       claude-code.packages.${pkgs.system}.default
-      tailscale
     ];
 
     userLaunchAgents = {
@@ -113,6 +112,7 @@
         "slack"
         "steam"
         "swinsian"
+        "tailscale"
         "vnc-viewer"
         "vlc"
         "xld"
