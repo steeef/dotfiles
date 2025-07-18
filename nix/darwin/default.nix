@@ -52,6 +52,7 @@
     systemPackages = with pkgs; [
       pam-reattach
       claude-code.packages.${pkgs.system}.default
+      tailscale
     ];
 
     userLaunchAgents = {
@@ -126,7 +127,6 @@
       "automounter" = 1160435653;
       "ivory-for-mastodon" = 6444602274;
       "paprika-recipe-manager-3" = 1303222628;
-      "tailscale" = 1475387142;
       "unread" = 1363637349;
       "velja" = 1607635845;
     };
