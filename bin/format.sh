@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# https://github.com/krishna-bala/claude-code/blob/main/hooks/format.sh
+
 # Format files with appropriate formatters
 
 # Usage: Called by Claude Code PostToolUse hook
