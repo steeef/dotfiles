@@ -120,7 +120,7 @@
                 stateVersion = "23.05";
               };
             }
-            nix-index-database.hmModules.nix-index
+            nix-index-database.homeModules.nix-index
           ]
           ++ getExtraModules args.system;
 
