@@ -5,6 +5,12 @@
 # Usage: Called by Claude Code PostToolUse hook
 # Receives JSON via stdin with tool operation details
 
+# Check if jq is available
+if ! command -v jq >/dev/null 2>&1; then
+  echo "ERROR: jq is required but not found. Please install jq to use format.sh" >&2
+  exit 1
+fi
+
 # Read JSON from stdin and extract file path
 JSON=$(cat)
 FILE_PATH=$(echo "$JSON" | jq -r '.tool_input.file_path')
