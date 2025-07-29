@@ -41,3 +41,12 @@ if file "$FILE_PATH" 2>/dev/null | grep -q "text"; then
     ;;
   esac
 fi
+
+# Format files based on extension
+case "$FILE_PATH" in
+*.yaml | *.yml)
+  if command -v yamlfmt >/dev/null 2>&1; then
+    yamlfmt "$FILE_PATH"
+  fi
+  ;;
+esac
