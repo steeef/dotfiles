@@ -15,6 +15,12 @@ fi
 JSON=$(cat)
 FILE_PATH=$(echo "$JSON" | jq -r '.tool_input.file_path')
 
+# Validate file path exists
+if [[ "$FILE_PATH" == "null" ]] || [[ -z "$FILE_PATH" ]] || [[ ! -f "$FILE_PATH" ]]; then
+  echo "ERROR: Invalid or missing file path: $FILE_PATH" >&2
+  exit 1
+fi
+
 # Fix end-of-file newline (only for text files)
 if file "$FILE_PATH" 2>/dev/null | grep -q "text"; then
   # Add newline at end of file if missing
