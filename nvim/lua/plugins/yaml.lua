@@ -41,7 +41,7 @@ return {
             redhat = { telemetry = { enabled = false } },
             yaml = {
               keyOrdering = false,
-              format = { enable = true },
+              format = { enable = false },
               validate = true,
               hover = true,
               completion = true,

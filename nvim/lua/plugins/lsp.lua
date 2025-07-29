@@ -67,6 +67,7 @@ return {
         lua = { "stylua" },
         nix = { "alejandra" },
         python = { "black", "reorder_python_imports" },
+        yaml = { "yamlfmt" },
         bash = { "shfmt" },
         sh = { "shfmt" },
         zsh = { "shfmt" },

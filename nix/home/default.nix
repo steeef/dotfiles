@@ -68,6 +68,7 @@
     vendir
     watch
     wget
+    yamlfmt
     yq-go
     yt-dlp
     #    yubikey-manager
