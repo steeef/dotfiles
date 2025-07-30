@@ -4,3 +4,4 @@ formatter:
   include_document_start: false
   max_line_length: 140
   pad_line_comments: 2
+  retain_line_breaks: true
