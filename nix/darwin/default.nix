@@ -124,9 +124,12 @@
       ];
     masApps = {
       "1password-for-safari" = 1569813296;
+      "adguard-for-safari" = 1440147259;
       "automounter" = 1160435653;
+      "dark-reader-for-safari" = 1438243180;
       "ivory-for-mastodon" = 6444602274;
       "paprika-recipe-manager-3" = 1303222628;
+      "sink-it-for-reddit" = 6449873635;
       "unread" = 1363637349;
       "velja" = 1607635845;
     };
