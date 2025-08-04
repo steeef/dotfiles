@@ -49,4 +49,9 @@ case "$FILE_PATH" in
     yamlfmt "$FILE_PATH"
   fi
   ;;
+*.tf | *.hcl)
+  if command -v terraform >/dev/null 2>&1; then
+    terraform fmt "$FILE_PATH"
+  fi
+  ;;
 esac
