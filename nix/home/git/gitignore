@@ -23,3 +23,8 @@ oh-my-zsh/cache
 tmux/resurrect
 zsh/**/*.zwc
 zsh/.zsh_history
+# Claude Code
+TRASH/
+TRASH-FILES.md
+.claude/
+.claude_in_subtask.flag
