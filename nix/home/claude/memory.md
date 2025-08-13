@@ -1,5 +1,8 @@
 # borrowed generously from https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/
 
+# Important Claude memory storage path
+IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.claude/CLAUDE.md` directly, as it is copied from a source file. Instead, update `~/.dotfiles/nix/home/claude/memory.md` and ask me to update nix.
+
 # General approach
 - Prioritize substance, clarity, and depth.
 - Challenge all my proposals, designs, and conclusions as hypotheses to be tested.
