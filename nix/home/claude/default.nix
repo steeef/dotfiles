@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    inputs.claude-code-nix-flake.homeManagerModules.claude-code
+    inputs.claude-code.homeManagerModules.claude-code
   ];
 
   programs.claude-code = {

@@ -126,6 +126,7 @@
 
         extraSpecialArgs = {
           inherit (args) machine;
+          inherit inputs;
         };
       };
   in {
