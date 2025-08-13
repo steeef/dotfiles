@@ -50,6 +50,22 @@
                 type = "command";
                 command = "$CLAUDE_CODE_TOOLS_PATH/hooks/bash_hook.py";
               }
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/rm_block_hook.py";
+              }
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/git_add_block_hook.py";
+              }
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/git_checkout_safety_hook.py";
+              }
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/kubectl_safety_hook.py";
+              }
             ];
           }
           {
