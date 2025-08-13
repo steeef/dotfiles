@@ -1,0 +1,102 @@
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [
+    inputs.claude-code-nix-flake.homeManagerModules.claude-code
+  ];
+
+  programs.claude-code = {
+    enable = true;
+
+    # Memory configuration - reference to local file
+    memory.source = ./memory.md;
+
+    # Settings configuration - your settings.json content
+    settingsJson = {
+      includeCoAuthoredBy = false;
+      permissions = {
+        allow = [
+          "Bash(find:*)"
+          "Bash(grep:*)"
+          "Bash(pre-commit run:*)"
+          "Bash(rg:*)"
+          "Bash(yamllint:*)"
+          "Bash(yq:*)"
+        ];
+        deny = [];
+      };
+      hooks = {
+        Notification = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/notification_hook.sh";
+              }
+            ];
+          }
+        ];
+        PreToolUse = [
+          {
+            matcher = "Bash";
+            hooks = [
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/bash_hook.py";
+              }
+            ];
+          }
+          {
+            matcher = "Read";
+            hooks = [
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/file_size_conditional_hook.py";
+              }
+            ];
+          }
+          {
+            matcher = "Task";
+            hooks = [
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/pretask_subtask_flag.py";
+              }
+            ];
+          }
+          {
+            matcher = "Grep";
+            hooks = [
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/grep_block_hook.py";
+              }
+            ];
+          }
+        ];
+        PostToolUse = [
+          {
+            matcher = "Edit|MultiEdit|Write";
+            hooks = [
+              {
+                type = "command";
+                command = "~/.bin/format.sh";
+              }
+            ];
+          }
+          {
+            matcher = "Task";
+            hooks = [
+              {
+                type = "command";
+                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/posttask_subtask_flag.py";
+              }
+            ];
+          }
+        ];
+      };
+    };
+  };
+}
