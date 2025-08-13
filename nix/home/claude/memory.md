@@ -1,7 +1,7 @@
 # borrowed generously from https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/
 
 # Important Claude memory storage path
-IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.claude/CLAUDE.md` directly, as it is copied from a source file. Instead, update `~/.dotfiles/nix/home/claude/memory.md` and ask me to update nix.
+IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.claude/CLAUDE.md` directly, as it is copied from a source file. Instead, update `~/.dotfiles/nix/home/claude/memory.md` and run `hms` to apply the changes.
 
 # General approach
 - Prioritize substance, clarity, and depth.
@@ -76,6 +76,15 @@ Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.
 ALWAYS prefer editing an existing file to creating a new one.
 NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
+
+# Nix System Management
+
+## Rebuild Commands
+- `hms` - alias for `home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)`
+- `dr` - alias for `sudo darwin-rebuild switch --flake $HOME/.dotfiles`
+
+Use `hms` to apply home-manager configuration changes (including Claude Code settings).
+Use `dr` to apply system-wide Darwin configuration changes.
 
 # tmux-cli Command to interact with CLI applications
 
