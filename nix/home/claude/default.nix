@@ -1,3 +1,7 @@
+# Claude Code configuration
+#
+# Requires: Clone https://github.com/steeef/claude-code-tools to ~/code/claude-code-tools
+# and set CLAUDE_CODE_TOOLS_PATH environment variable
 {
   inputs,
   pkgs,
