@@ -2,7 +2,6 @@
   lib,
   pkgs,
   machine,
-  claude-code,
   username,
   ...
 }: {
@@ -51,7 +50,6 @@
 
     systemPackages = with pkgs; [
       pam-reattach
-      claude-code.packages.${pkgs.system}.default
     ];
 
     userLaunchAgents = {

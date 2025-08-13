@@ -21,7 +21,7 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-code.url = "github:olebedev/claude-code.nix";
+    claude-code.url = "github:Sewer56/claude-code-nix-flake";
     mkalias = {
       url = "github:reckenrode/mkalias";
       inputs.nixpkgs.follows = "nixpkgs";

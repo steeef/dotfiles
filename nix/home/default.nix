@@ -78,6 +78,7 @@
   imports = [
     ./atuin.nix
     ./bat.nix
+    ./claude
     ./direnv.nix
     ./directories.nix
     ./editorconfig.nix
