@@ -1,3 +1,5 @@
+# borrowed generously from https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/
+
 # General approach
 - Prioritize substance, clarity, and depth.
 - Challenge all my proposals, designs, and conclusions as hypotheses to be tested.
