@@ -8,18 +8,18 @@
   lib,
   ...
 }: {
-  # Install claude-code package from sadjow flake
-  home.packages = [ inputs.claude-code.packages.${pkgs.system}.default ];
+  # Use official home-manager claude-code module
+  programs.claude-code = {
+    enable = true;
+    # Use updated package from sadjow flake
+    package = inputs.claude-code.packages.${pkgs.system}.default;
+    # Import settings from existing JSON file
+    settings = lib.importJSON ./settings.json;
+  };
 
-  # Custom activation script to manage Claude configuration files
-  home.activation.claude-config = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    # Create ~/.claude directory structure
-    mkdir -p $HOME/.claude/hooks
-
-    # Copy memory file
+  # Still need activation script for memory.md since official module doesn't handle it
+  home.activation.claude-memory = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    # Copy memory file to CLAUDE.md
     install -m 644 ${./memory.md} $HOME/.claude/CLAUDE.md
-
-    # Copy settings.json file
-    install -m 644 ${./settings.json} $HOME/.claude/settings.json
   '';
 }
