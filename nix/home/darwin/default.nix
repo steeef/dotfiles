@@ -10,6 +10,7 @@
     fswatch
     iterm2
     reattach-to-user-namespace
+    terminal-notifier
   ];
 
   home.shellAliases = {
