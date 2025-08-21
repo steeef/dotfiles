@@ -5,118 +5,21 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: {
-  imports = [
-    inputs.claude-code.homeManagerModules.claude-code
-  ];
+  # Install claude-code package from sadjow flake
+  home.packages = [ inputs.claude-code.packages.${pkgs.system}.default ];
 
-  programs.claude-code = {
-    enable = true;
+  # Custom activation script to manage Claude configuration files
+  home.activation.claude-config = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    # Create ~/.claude directory structure
+    mkdir -p $HOME/.claude/hooks
 
-    # Memory configuration - reference to local file
-    memory.source = ./memory.md;
+    # Copy memory file
+    install -m 644 ${./memory.md} $HOME/.claude/CLAUDE.md
 
-    # Settings configuration - your settings.json content
-    settingsJson = {
-      includeCoAuthoredBy = false;
-      permissions = {
-        allow = [
-          "Bash(find:*)"
-          "Bash(grep:*)"
-          "Bash(pre-commit run:*)"
-          "Bash(rg:*)"
-          "Bash(yamllint:*)"
-          "Bash(yq:*)"
-        ];
-        deny = [];
-      };
-      hooks = {
-        Notification = [
-          {
-            hooks = [
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/notification_hook.sh";
-              }
-            ];
-          }
-        ];
-        PreToolUse = [
-          {
-            matcher = "Bash";
-            hooks = [
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/bash_hook.py";
-              }
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/rm_block_hook.py";
-              }
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/git_add_block_hook.py";
-              }
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/git_checkout_safety_hook.py";
-              }
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/kubectl_safety_hook.py";
-              }
-            ];
-          }
-          {
-            matcher = "Read";
-            hooks = [
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/file_size_conditional_hook.py";
-              }
-            ];
-          }
-          {
-            matcher = "Task";
-            hooks = [
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/pretask_subtask_flag.py";
-              }
-            ];
-          }
-          {
-            matcher = "Grep";
-            hooks = [
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/grep_block_hook.py";
-              }
-            ];
-          }
-        ];
-        PostToolUse = [
-          {
-            matcher = "Edit|MultiEdit|Write";
-            hooks = [
-              {
-                type = "command";
-                command = "~/.bin/format.sh";
-              }
-            ];
-          }
-          {
-            matcher = "Task";
-            hooks = [
-              {
-                type = "command";
-                command = "$CLAUDE_CODE_TOOLS_PATH/hooks/posttask_subtask_flag.py";
-              }
-            ];
-          }
-        ];
-      };
-    };
-  };
+    # Copy settings.json file
+    install -m 644 ${./settings.json} $HOME/.claude/settings.json
+  '';
 }

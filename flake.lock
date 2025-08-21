@@ -3,20 +3,19 @@
     "claude-code": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1755009822,
-        "narHash": "sha256-6v3JLxosIl0WFlXo+iPJcPF5IcEL3lITmxPy5NzT9n8=",
-        "owner": "Sewer56",
-        "repo": "claude-code-nix-flake",
-        "rev": "c873cb2fd9c55fd2792e8991d34e6834996a5b73",
+        "lastModified": 1755734591,
+        "narHash": "sha256-5PlQySXEptuASL+4X/88wtmBqIvD+y3Njw+KlWYRWUk=",
+        "owner": "sadjow",
+        "repo": "claude-code-nix",
+        "rev": "99b7d802a6b6023e015e4e356ae59b7634c0838c",
         "type": "github"
       },
       "original": {
-        "owner": "Sewer56",
-        "repo": "claude-code-nix-flake",
+        "owner": "sadjow",
+        "repo": "claude-code-nix",
         "type": "github"
       }
     },
@@ -80,27 +79,6 @@
       }
     },
     "home-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "claude-code",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1754974548,
-        "narHash": "sha256-XMjUjKD/QRPcqUnmSDczSYdw46SilnG0+wkho654DFM=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "27a26be51ff0162a8f67660239f9407dba68d7c5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "home-manager_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -178,16 +156,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1755027561,
-        "narHash": "sha256-IVft239Bc8p8Dtvf7UAACMG5P3ZV+3/aO28gXpGtMXI=",
+        "lastModified": 1755736253,
+        "narHash": "sha256-jlIQRypNhB1PcB1BE+expE4xZeJxzoAGr1iUbHQta8s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "005433b926e16227259a1843015b5b2b7f7d1fc3",
+        "rev": "596312aae91421d6923f18cecce934a7d3bfd6b8",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -246,7 +224,7 @@
       "inputs": {
         "claude-code": "claude-code",
         "darwin": "darwin",
-        "home-manager": "home-manager_2",
+        "home-manager": "home-manager",
         "mkalias": "mkalias",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
