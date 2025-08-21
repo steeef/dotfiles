@@ -231,9 +231,6 @@ nix/home/claude/
 ├── default.nix          # Nix module with activation scripts
 ├── memory.md            # Claude memory content
 └── settings.json        # Claude settings and hooks configuration
-
-scripts/
-└── validate-claude-migration.sh  # Validation script
 ```
 
 ## Testing Checklist

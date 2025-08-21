@@ -35,14 +35,14 @@ Scripts in `bin/` directory:
 - `nix/pkgs/` - Custom package definitions and overlays
 
 ### Configuration Organization
-- `nix/home/claude/` - Claude Code specific configuration including memory.md
+- `nix/home/claude/` - Claude Code specific configuration including memory.md and settings.json
 - Application configs in individual directories (hammerspoon, kitty, nvim, etc.)
 - Platform-specific configs in `nix/home/darwin/` and `nix/home/linux/`
 
 ### Key Components
 - **Home Manager**: Manages user environment, dotfiles, and applications
 - **nix-darwin**: Manages macOS system settings and global configurations
-- **Flake Inputs**: External dependencies like nixpkgs, home-manager, claude-code flake
+- **Flake Inputs**: External dependencies like nixpkgs, home-manager, claude-code package from sadjow/claude-code-nix
 - **Overlays**: Custom package modifications and additions in `nix/pkgs/`
 
 ## Machine Configurations
@@ -56,10 +56,14 @@ Scripts in `bin/` directory:
 
 ## Important Notes
 
-### Claude Memory Management
-- **CRITICAL**: Do not edit `~/.claude/CLAUDE.md` directly
-- Instead, edit `~/.dotfiles/nix/home/claude/memory.md` and run `hms` to apply changes
-- This ensures memory updates persist across system rebuilds
+### Claude Code Configuration
+- **CRITICAL**: Do not edit `~/.claude/CLAUDE.md` or `~/.claude/settings.json` directly
+- Instead, edit source files in `~/.dotfiles/nix/home/claude/` and run `hms` to apply changes:
+  - Memory: Edit `nix/home/claude/memory.md`
+  - Settings/Hooks: Edit `nix/home/claude/settings.json`
+- This ensures configuration updates persist across system rebuilds
+- Claude Code package sourced from `github:sadjow/claude-code-nix` with automated updates
+- Configuration managed via custom home-manager activation scripts
 
 ### File Organization
 - Configuration files are managed declaratively through Nix modules
