@@ -104,7 +104,21 @@
 
           overlays = [
             (final: prev: {
-              mkalias = inputs.mkalias.outputs.apps.${prev.stdenv.system}.default.program;
+              mkalias = prev.rustPlatform.buildRustPackage rec {
+                pname = "mkalias";
+                version = "0.3.2";
+                src = inputs.mkalias;
+                cargoLock = {
+                  lockFile = "${inputs.mkalias}/Cargo.lock";
+                };
+                buildInputs = prev.lib.optionals prev.stdenv.isDarwin [
+                  prev.libiconv
+                ];
+                meta = {
+                  description = "A simple command-line tool to create Finder aliases";
+                  platforms = prev.lib.platforms.darwin;
+                };
+              };
             })
             (nur.overlays.default)
             (import ./nix/pkgs)
