@@ -5,7 +5,10 @@
     "lines": [
       {
         "segments": {
-          "directory": { "enabled": true, "showBasename": true },
+          "directory": {
+            "enabled": true,
+            "showBasename": true
+          },
           "git": {
             "enabled": true,
             "showSha": true,
@@ -16,31 +19,67 @@
             "showStashCount": true,
             "showUpstream": false,
             "showRepoName": false
-          },
-          "tmux": { "enabled": true }
+          }
         }
       },
       {
         "segments": {
-          "version": { "enabled": true },
-          "model": { "enabled": true },
-          "context": { "enabled": true },
-          "block": { "enabled": true, "type": "time", "burnType": "tokens" },
-          "today": { "enabled": true, "type": "tokens" }
+          "version": {
+            "enabled": true
+          },
+          "model": {
+            "enabled": true
+          },
+          "context": {
+            "enabled": true
+          },
+          "block": {
+            "enabled": true,
+            "type": "time",
+            "burnType": "tokens"
+          },
+          "today": {
+            "enabled": true,
+            "type": "tokens"
+          }
         }
       }
     ]
   },
   "colors": {
     "custom": {
-      "directory": { "bg": "#494d64", "fg": "#cad3f5" },
-      "git": { "bg": "#363a4f", "fg": "#a6da95" },
-      "tmux": { "bg": "#494d64", "fg": "#8bd5ca" },
-      "version": { "bg": "#494d64", "fg": "#91d7e3" },
-      "model": { "bg": "#363a4f", "fg": "#8aadf4" },
-      "context": { "bg": "#494d64", "fg": "#b7bdf8" },
-      "block": { "bg": "#363a4f", "fg": "#f5a97f" },
-      "today": { "bg": "#494d64", "fg": "#eed49f" }
+      "directory": {
+        "bg": "#494d64",
+        "fg": "#cad3f5"
+      },
+      "git": {
+        "bg": "#363a4f",
+        "fg": "#a6da95"
+      },
+      "tmux": {
+        "bg": "#494d64",
+        "fg": "#8bd5ca"
+      },
+      "version": {
+        "bg": "#494d64",
+        "fg": "#91d7e3"
+      },
+      "model": {
+        "bg": "#363a4f",
+        "fg": "#8aadf4"
+      },
+      "context": {
+        "bg": "#494d64",
+        "fg": "#b7bdf8"
+      },
+      "block": {
+        "bg": "#363a4f",
+        "fg": "#f5a97f"
+      },
+      "today": {
+        "bg": "#494d64",
+        "fg": "#eed49f"
+      }
     }
   }
 }
