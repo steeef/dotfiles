@@ -6,41 +6,27 @@
       {
         "segments": {
           "directory": { "enabled": true, "showBasename": true },
-          "model": { "enabled": true },
-          "session": { "enabled": true, "type": "both" },
-          "today": { "enabled": true, "type": "both" }
-        }
-      },
-      {
-        "segments": {
-          "block": { "enabled": true, "type": "cost", "burnType": "cost" },
-          "version": { "enabled": true },
-          "metrics": {
-            "enabled": true,
-            "showResponseTime": true,
-            "showLastResponseTime": true,
-            "showDuration": true,
-            "showMessageCount": true,
-            "showLinesAdded": true,
-            "showLinesRemoved": true
-          },
-          "context": { "enabled": true },
-          "tmux": { "enabled": false }
-        }
-      },
-      {
-        "segments": {
           "git": {
             "enabled": true,
             "showSha": true,
             "showWorkingTree": true,
             "showOperation": true,
             "showTag": true,
-            "showTimeSinceCommit": true,
+            "showTimeSinceCommit": false,
             "showStashCount": true,
-            "showUpstream": true,
-            "showRepoName": true
-          }
+            "showUpstream": false,
+            "showRepoName": false
+          },
+          "tmux": { "enabled": true }
+        }
+      },
+      {
+        "segments": {
+          "version": { "enabled": true },
+          "model": { "enabled": true },
+          "context": { "enabled": true },
+          "block": { "enabled": true, "type": "time", "burnType": "tokens" },
+          "today": { "enabled": true, "type": "tokens" }
         }
       }
     ]

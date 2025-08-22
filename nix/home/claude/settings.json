@@ -2,7 +2,7 @@
   "includeCoAuthoredBy": false,
   "statusLine": {
     "type": "command",
-    "command": "claude-powerline --style=powerline"
+    "command": "claude-powerline"
   },
   "permissions": {
     "allow": [
