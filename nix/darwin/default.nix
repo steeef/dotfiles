@@ -110,7 +110,7 @@
         "slack"
         "steam"
         "swinsian"
-        "tailscale"
+        "tailscale-app"
         "vnc-viewer"
         "vlc"
         "xld"
