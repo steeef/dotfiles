@@ -12,6 +12,9 @@
   home.packages = with pkgs; [
     claude-powerline
   ];
+
+  # Claude powerline configuration
+  home.file.".claude/claude-powerline.json".source = ./claude-powerline.json;
   # Use official home-manager claude-code module
   programs.claude-code = {
     enable = true;
