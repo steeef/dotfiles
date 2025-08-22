@@ -8,6 +8,10 @@
   lib,
   ...
 }: {
+  # Install claude-powerline globally
+  home.packages = with pkgs; [
+    claude-powerline
+  ];
   # Use official home-manager claude-code module
   programs.claude-code = {
     enable = true;
