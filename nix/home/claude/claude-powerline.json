@@ -1,5 +1,5 @@
 {
-  "theme": "tokyo-night",
+  "theme": "custom",
   "display": {
     "style": "powerline",
     "lines": [
@@ -30,5 +30,17 @@
         }
       }
     ]
+  },
+  "colors": {
+    "custom": {
+      "directory": { "bg": "#494d64", "fg": "#cad3f5" },
+      "git": { "bg": "#363a4f", "fg": "#a6da95" },
+      "tmux": { "bg": "#494d64", "fg": "#8bd5ca" },
+      "version": { "bg": "#494d64", "fg": "#91d7e3" },
+      "model": { "bg": "#363a4f", "fg": "#8aadf4" },
+      "context": { "bg": "#494d64", "fg": "#b7bdf8" },
+      "block": { "bg": "#363a4f", "fg": "#f5a97f" },
+      "today": { "bg": "#494d64", "fg": "#eed49f" }
+    }
   }
 }
