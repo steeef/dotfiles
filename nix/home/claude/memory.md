@@ -78,7 +78,7 @@ ALWAYS prefer editing an existing file to creating a new one.
 NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
 
 # Project CLAUDE.md File Creation
-**SUPERDUPER IMPORTANT**: Do not create a `CLAUDE.md` file directly in projects. Instead, write content to `AGENTS.md` and then symlink it to `CLAUDE.md`. This ensures proper version control and management of project-specific instructions.
+**SUPERDUPER IMPORTANT**: Do not create a `CLAUDE.md` file directly in projects. Instead, write content to `AGENTS.md` and then symlink it to `CLAUDE.md`. This ensures proper version control and management of project-specific instructions. In `AGENTS.md`, do not refer to Claude Code specifically, just AI coding agents in general.
 
 # Nix System Management
 
