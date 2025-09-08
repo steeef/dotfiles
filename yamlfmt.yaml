@@ -1,9 +1,7 @@
 formatter:
-  type: basic
+  type: preserve_backslash
   indent: 2
   include_document_start: false
   max_line_length: 140
   pad_line_comments: 2
   retain_line_breaks: true
-regex_exclude:
-  - "external-dns\\.alpha\\.kubernetes\\.io/hostname"
