@@ -1067,6 +1067,8 @@
 	<string>C2F20648-6DD5-4E7C-AA3E-4B9A29CBE325</string>
 	<key>DisableWindowSizeSnap</key>
 	<false/>
+	<key>ForceAntialiasingOnRetina</key>
+	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
 		<key>0x19-0x60000</key>
@@ -1455,6 +1457,8 @@
 			<integer>0</integer>
 			<key>Initial Text</key>
 			<string>tmux attach -t main || tmux new -s main</string>
+			<key>Initial Use Transparency</key>
+			<false/>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -1816,6 +1820,8 @@
 			<false/>
 			<key>Transparency</key>
 			<real>0.0</real>
+			<key>Unicode Normalization</key>
+			<integer>0</integer>
 			<key>Unicode Version</key>
 			<integer>9</integer>
 			<key>Unlimited Scrollback</key>
@@ -1827,7 +1833,7 @@
 			<key>Use Italic Font</key>
 			<false/>
 			<key>Use Non-ASCII Font</key>
-			<true/>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
