@@ -1,13 +1,9 @@
-adjust-cell-width = -7%
+adjust-cell-height = -2
+adjust-cell-width = -1
 confirm-close-surface = false
-font-family = JetBrains Mono
+font-family = Monaco
 font-size = 10.0
-font-thicken = false
-font-feature = -calt
-font-feature = -liga
-font-feature = -dlig
-window-padding-x = 10
-window-padding-y = 10
+font-style-bold = false
 freetype-load-flags = no-hinting,no-force-autohint,no-monochrome,no-autohint
 initial-command = zsh -l -c "tmux attach -t main || tmux new -s main"
 theme = catppuccin-macchiato
