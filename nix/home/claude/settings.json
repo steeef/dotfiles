@@ -88,6 +88,15 @@
             "command": "$CLAUDE_CODE_TOOLS_PATH/hooks/grep_block_hook.py"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_CODE_TOOLS_PATH/hooks/claude_md_block_hook.py"
+          }
+        ]
       }
     ],
     "PostToolUse": [
