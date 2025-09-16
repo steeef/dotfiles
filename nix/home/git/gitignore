@@ -28,3 +28,4 @@ TRASH/
 TRASH-FILES.md
 .claude/
 .claude_in_subtask.flag
+*.backup
