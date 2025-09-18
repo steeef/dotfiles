@@ -6,6 +6,6 @@ font-size = 10.0
 font-style-bold = false
 freetype-load-flags = no-hinting,no-force-autohint,no-monochrome,no-autohint
 initial-command = zsh -l -c "tmux attach -t main || tmux new -s main"
-theme = catppuccin-macchiato
+theme = catppuccin-macchiato.conf
 window-decoration = false
 window-save-state = always
