@@ -13,7 +13,8 @@
       "Bash(yamllint:*)",
       "Bash(yq:*)"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "plan"
   },
   "hooks": {
     "Notification": [
