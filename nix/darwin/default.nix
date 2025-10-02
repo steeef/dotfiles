@@ -80,6 +80,7 @@
       "homebrew/services"
     ];
     brews = [
+      "codex"
       "docker-credential-helper-ecr"
       "mas"
       "ncdu"
