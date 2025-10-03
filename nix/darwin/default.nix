@@ -81,6 +81,7 @@
     ];
     brews = [
       "codex"
+      "docker-buildx"
       "docker-credential-helper-ecr"
       "mas"
       "ncdu"
