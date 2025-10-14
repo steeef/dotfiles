@@ -35,6 +35,10 @@ bindkey '^[[Z' autosuggest-accept # shift + tab
 PATH="${HOME}/.local/bin:${HOME}/.zgenom/bin:${HOME}/bin:${HOME}/.bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export PATH
 
+# Nix library path for Rust linking
+LIBRARY_PATH="${HOME}/.nix-profile/lib:${LIBRARY_PATH}"
+export LIBRARY_PATH
+
 # zgenom setup
 ZSHDIR="${HOME}/.zsh"
 
