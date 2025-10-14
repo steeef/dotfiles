@@ -26,6 +26,7 @@
     bash
     bfs
     btop
+    cargo
     coreutils
     cowsay
     curl
@@ -47,6 +48,7 @@
     kubernetes-helm
     kustomize
     lazygit
+    libiconv
     nixpkgs-fmt
     nmap
     ponysay
@@ -57,6 +59,7 @@
     rsnapshot
     rsync
     ruff
+    rustc
     sox
     sqlite
     ssh-copy-id
