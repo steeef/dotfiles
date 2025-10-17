@@ -1,77 +1,35 @@
-# CLAUDE.md
+# Repository Guidelines
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Project Structure & Module Organization
+- `flake.nix` defines all inputs, overlays, and per-host outputs; update it first when adding machines or packages.
+- `nix/home/` contains Home Manager modules, with platform splits under `darwin/`, `linux/`, and agent-specific config in `claude/`.
+- `nix/darwin/` and `nix/nixos/` hold system-level modules for macOS and Linux respectively; keep hardware-specific tweaks scoped here.
+- `nix/pkgs/` captures custom overlays and package derivations; new packages belong in a dedicated file with a matching attribute name.
+- `bin/` provides helper scripts such as `bootstrap.sh`, `format.sh`, and `update.sh`; treat them as the executable interface for routine tasks.
 
-## Project Overview
+## Build, Test, and Development Commands
+- `hms` applies the active Home Manager configuration defined by this flake; run after editing anything in `nix/home/`.
+- `dr` rebuilds macOS hosts via nix-darwin; use only on Darwin machines and expect sudo prompts.
+- `nix flake check` validates all flake outputs and is the preferred pre-commit sanity test.
+- `nix flake update` refreshes inputs; review `flake.lock` diffs before committing.
+- `uvx --with pre-commit-uv pre-commit run --files <paths>` runs targeted hooks, and `./bin/format.sh` batches the repo’s formatters.
 
-This is a Nix-based dotfiles repository using flakes, home-manager, and nix-darwin to manage development environments across Linux and macOS systems. The repository uses a declarative approach to system configuration management.
+## Coding Style & Naming Conventions
+- Nix files use two-space indentation and snake_case attribute names; align lists and let blocks for readability.
+- Shell scripts in `bin/` should remain POSIX-compatible, start with `#!/usr/bin/env bash`, and enable `set -euo pipefail`.
+- YAML is formatted via `yamlfmt` (config in `yamlfmt.yaml`); do not hand-tweak alignment after formatting.
+- Keep filenames lowercase with hyphens; stick to existing patterns such as `nix/home/<area>/<module>.nix`.
 
-## Key Commands
+## Testing Guidelines
+- Use `nix flake check` as the integration test suite; ensure new modules evaluate for every declared host.
+- When touching lint-configured files, execute the relevant pre-commit hook locally (e.g. `uvx --with pre-commit-uv pre-commit run --files file.nix`).
+- For experimental changes, prefer `nix develop` to spawn an isolated environment before applying `hms` or `dr`.
 
-### Nix Management
-- `hms` - Apply home-manager configuration changes (alias for `home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)`)
-- `dr` - Apply system-wide Darwin configuration changes (alias for `sudo darwin-rebuild switch --flake $HOME/.dotfiles`)
-- `nix flake update` - Update flake inputs
-- `nix flake check` - Validate flake configuration
+## Commit & Pull Request Guidelines
+- Follow the existing short, imperative, lower-case commit style (e.g. `add rust stuff`); keep subject lines under 72 characters.
+- Group related changes per commit to simplify rollbacks, and mention affected hosts or modules when relevant.
+- Pull requests should describe the user-facing impact, list applied commands (`hms`, `dr`, etc.), and reference any linked issues or work items.
 
-### Development Tools
-- `uvx --with pre-commit-uv pre-commit run --files <files>` - Run pre-commit hooks on specific files
-- `yamlfmt` - Format YAML files (configured via yamlfmt.yaml)
-
-### Utility Scripts
-Scripts in `bin/` directory:
-- `bootstrap.sh` - Initial setup script for new machines
-- `format.sh` - Format configuration files
-- `update.sh` - Update system and packages
-
-## Architecture
-
-### Core Structure
-- `flake.nix` - Main Nix flake configuration defining inputs, outputs, and system configurations
-- `nix/` - All Nix configuration modules organized by component
-- `nix/home/` - Home-manager modules for user environment
-- `nix/darwin/` - nix-darwin modules for macOS system configuration
-- `nix/nixos/` - NixOS system configuration (for Linux hosts)
-- `nix/pkgs/` - Custom package definitions and overlays
-
-### Configuration Organization
-- `nix/home/claude/` - Claude Code specific configuration including memory.md and settings.json
-- Application configs in individual directories (hammerspoon, kitty, nvim, etc.)
-- Platform-specific configs in `nix/home/darwin/` and `nix/home/linux/`
-
-### Key Components
-- **Home Manager**: Manages user environment, dotfiles, and applications
-- **nix-darwin**: Manages macOS system settings and global configurations
-- **Flake Inputs**: External dependencies like nixpkgs, home-manager, claude-code package from sadjow/claude-code-nix
-- **Overlays**: Custom package modifications and additions in `nix/pkgs/`
-
-## Machine Configurations
-
-### Darwin (macOS)
-- `sp` - Personal ARM64 macOS machine
-- `ltm-3914` - Work ARM64 macOS machine
-
-### NixOS (Linux)
-- `nixos` - Linux configuration with ThinkPad T440s hardware support
-
-## Important Notes
-
-### Claude Code Configuration
-- **CRITICAL**: Do not edit `~/.claude/CLAUDE.md` or `~/.claude/settings.json` directly
-- Instead, edit source files in `~/.dotfiles/nix/home/claude/` and run `hms` to apply changes:
-  - Memory: Edit `nix/home/claude/memory.md`
-  - Settings/Hooks: Edit `nix/home/claude/settings.json`
-- This ensures configuration updates persist across system rebuilds
-- Claude Code package sourced from `github:sadjow/claude-code-nix` with automated updates
-- Configuration managed via custom home-manager activation scripts
-
-### File Organization
-- Configuration files are managed declaratively through Nix modules
-- Manual file edits may be overwritten on next `hms` or `dr` run
-- Add new configurations through appropriate Nix modules in `nix/home/`
-
-### Bootstrap Process
-New machine setup requires:
-1. Clone repo to `~/.dotfiles`
-2. Run `./bin/bootstrap.sh`
-3. For macOS: Add machine configuration to flake.nix and follow nix-darwin setup steps in README.md
+## Agent-Specific Tips
+- Never edit generated files in `~/.claude/`; instead modify sources under `nix/home/claude/` and apply via `hms`.
+- Note that manual edits to dotfiles outside Nix modules will be overwritten; always stage changes through declarative modules.
