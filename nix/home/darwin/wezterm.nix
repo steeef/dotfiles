@@ -16,6 +16,34 @@
       config.freetype_render_target = 'Mono'
       config.freetype_load_target = 'Mono'
       config.window_close_confirmation = 'NeverPrompt'
+      config.window_decorations = 'RESIZE'
+      config.default_prog = {
+        '/bin/zsh',
+        '-l',
+        '-c',
+        'tmux attach -t main || tmux new -s main',
+      }
+      config.use_fancy_tab_bar = false
+      config.show_tabs_in_tab_bar = false
+      config.show_new_tab_button_in_tab_bar = false
+      config.font_rules = {
+        {
+          italic = true,
+          font = wezterm.font {
+            family = 'Monaco',
+            weight = 'Regular',
+            style = 'Normal',
+          },
+        },
+        {
+          intensity = 'Bold',
+          font = wezterm.font {
+            family = 'Monaco',
+            weight = 'Regular',
+            style = 'Normal',
+          },
+        },
+      }
       return config
     '';
   };
