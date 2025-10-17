@@ -5,57 +5,47 @@ local This = {}
 local GRID_SIZE = 4
 local HALF_GRID_SIZE = GRID_SIZE / 2
 
-local weztermCacheDir = hs.fs.pathToAbsolute(os.getenv('HOME') .. '/.cache/wezterm')
-local weztermStatePath = os.getenv('HOME') .. '/.cache/wezterm/window-state.json'
+local weztermCacheDir = os.getenv('HOME') .. '/.cache/wezterm'
+local weztermStatePath = weztermCacheDir .. '/window-state.json'
 
 local function ensureWeztermCacheDir()
-  if weztermCacheDir then
-    return
-  end
-  local path = os.getenv('HOME') .. '/.cache/wezterm'
-  hs.fs.mkdir(path)
-  weztermCacheDir = hs.fs.pathToAbsolute(path)
+  hs.fs.mkdir(weztermCacheDir)
 end
 
 local function readWeztermState()
   local file = io.open(weztermStatePath, 'r')
   if not file then
-    return {}
+    return nil
   end
   local contents = file:read('*a')
   file:close()
   if not contents or contents == '' then
-    return {}
+    return nil
   end
   local ok, decoded = pcall(hs.json.decode, contents)
   if not ok or type(decoded) ~= 'table' then
-    return {}
+    return nil
   end
   return decoded
 end
 
-local function mergeTables(base, updates)
-  for key, value in pairs(updates) do
-    if type(value) == 'table' and type(base[key]) == 'table' then
-      mergeTables(base[key], value)
-    else
-      base[key] = value
-    end
-  end
-  return base
-end
-
-local function writeWeztermState(update)
+local function writeWeztermState(state)
   ensureWeztermCacheDir()
-  local state = mergeTables(readWeztermState(), update)
-  state.updated_by = update.updated_by or 'hammerspoon'
-  state.updated_at = os.time()
+  local payload = {
+    width = state.width,
+    height = state.height,
+    pos_x = state.pos_x,
+    pos_y = state.pos_y,
+    screen = state.screen,
+    updated_by = state.updated_by or 'hammerspoon',
+    updated_at = os.time(),
+  }
   local file, err = io.open(weztermStatePath, 'w')
   if not file then
     hs.printf('wezterm state write failed: %s', err or 'unknown error')
     return
   end
-  file:write(hs.json.encode(state, true))
+  file:write(hs.json.encode(payload, true))
   file:close()
 end
 
