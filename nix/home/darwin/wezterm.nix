@@ -15,6 +15,7 @@
       config.color_scheme = 'Catppuccin Macchiato'
       config.freetype_render_target = 'Mono'
       config.freetype_load_target = 'Mono'
+      config.window_close_confirmation = 'NeverPrompt'
       return config
     '';
   };
