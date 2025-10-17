@@ -12,9 +12,9 @@
 
       config.font = wezterm.font 'Monaco'
       config.font_size = 10.0
-      config.font_antialias = 'None'
       config.color_scheme = 'Catppuccin Macchiato'
-
+      config.freetype_render_target = 'Mono'
+      config.freetype_load_target = 'Mono'
       return config
     '';
   };
