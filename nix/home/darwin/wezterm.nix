@@ -23,9 +23,7 @@
         '-c',
         'tmux attach -t main || tmux new -s main',
       }
-      config.use_fancy_tab_bar = false
-      config.show_tabs_in_tab_bar = false
-      config.show_new_tab_button_in_tab_bar = false
+      config.enable_tab_bar = false
       config.font_rules = {
         {
           italic = true,
