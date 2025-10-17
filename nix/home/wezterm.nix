@@ -1,0 +1,21 @@
+{
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      local wezterm = require 'wezterm'
+
+      local config = {}
+
+      if wezterm.config_builder then
+        config = wezterm.config_builder()
+      end
+
+      config.font = wezterm.font 'Monaco'
+      config.font_size = 10.0
+      config.font_antialias = 'None'
+      config.color_scheme = 'Catppuccin Macchiato'
+
+      return config
+    '';
+  };
+}
