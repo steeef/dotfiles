@@ -19,7 +19,7 @@ in {
     keyMode = "vi";
     newSession = true;
     prefix = "C-Space";
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
 
     plugins = with pkgs.tmuxPlugins; [
       {
@@ -85,6 +85,7 @@ in {
       # status bar settings
       set -g @catppuccin_flavor "macchiato" # latte, frappe, macchiato or mocha
       set -g @catppuccin_window_status_style "rounded"
+      set -as terminal-overrides ',wezterm:Tc'
     '';
 
     # extraConfig = lib.strings.fileContents ./extraConfig.conf;

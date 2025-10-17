@@ -17,6 +17,7 @@
       config.freetype_load_target = 'Mono'
       config.window_close_confirmation = 'NeverPrompt'
       config.window_decorations = 'RESIZE'
+      config.term = 'wezterm'
       config.default_prog = {
         '/bin/zsh',
         '-l',
