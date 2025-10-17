@@ -17,6 +17,7 @@
       config.window_decorations = 'RESIZE'
       config.term = 'wezterm'
       config.front_end = 'OpenGL'
+      config.use_resize_increments = true
       config.default_prog = {
         '/bin/zsh',
         '-l',
@@ -39,9 +40,19 @@
         local low_dpi = dpi and dpi <= 140
         local desired_load = low_dpi and 'Mono' or 'Light'
         local desired_render = low_dpi and 'Mono' or 'Light'
+        local changed = false
         if overrides.freetype_load_target ~= desired_load or overrides.freetype_render_target ~= desired_render then
           overrides.freetype_load_target = desired_load
           overrides.freetype_render_target = desired_render
+          changed = true
+        end
+        overrides.window_padding = {
+          left = 0,
+          right = 0,
+          top = 0,
+          bottom = 0,
+        }
+        if changed then
           window:set_config_overrides(overrides)
           wezterm.log_warn(
             string.format(
