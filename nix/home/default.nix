@@ -102,7 +102,6 @@
     ./rsnapshot.nix
     ./symlinks.nix
     ./tmux
-    ./wezterm.nix
     ./zsh
   ];
 }

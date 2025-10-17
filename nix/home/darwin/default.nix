@@ -23,6 +23,7 @@
     ./aliasApplications.nix
     ./symlinks.nix
     ./vscode
+    ./wezterm.nix
     # ./_1password.nix
   ];
 }
