@@ -99,6 +99,7 @@
           },
         },
       }
+      config.bypass_mouse_reporting_modifiers = 'SUPER'
       return config
     '';
   };
