@@ -1,20 +1,18 @@
 {lib, ...}: {
   programs.git = {
     enable = true;
-    aliases = {
-      co = "checkout";
-      lg = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
-      go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f";
-      set-upstream = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`";
-    };
-    userEmail = "stephen@stp5.net";
-    userName = "Stephen Price";
     ignores = lib.splitString "\n" (lib.strings.fileContents ./gitignore);
-    difftastic = {
-      enable = true;
-      background = "dark";
-    };
-    extraConfig = {
+    settings = {
+      alias = {
+        co = "checkout";
+        lg = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
+        go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f";
+        set-upstream = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`";
+      };
+      user = {
+        email = "stephen@stp5.net";
+        name = "Stephen Price";
+      };
       apply = {
         whitespace = "nowarn";
       };
@@ -74,5 +72,13 @@
         path = "~/.gitconfig-work";
       }
     ];
+  };
+
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
+    options = {
+      background = "dark";
+    };
   };
 }
