@@ -86,6 +86,7 @@
     ./atuin.nix
     ./bat.nix
     ./claude
+    ./codex.nix
     ./direnv.nix
     ./directories.nix
     ./editorconfig.nix
