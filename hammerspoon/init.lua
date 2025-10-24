@@ -93,7 +93,6 @@ hyper:bind({}, "1", nil, function()
   -- compute the unitRect of the focused window relative to the current screen
   -- and move the window to the next screen setting the same unitRect
   win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
-  wm.recordWeztermWindowState(win)
 end)
 hyper:bind({}, "2", nil, function()
   wm.windowMaximize(0)
@@ -176,13 +175,5 @@ hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 
 local appWatcher = hs.application.watcher.new(applicationWatcher)
 appWatcher:start()
-
-local weztermWindows = hs.window.filter.new('WezTerm')
-weztermWindows:subscribe(hs.window.filter.windowCreated, function(window, appName)
-  wm.applyWeztermWindowState(window)
-end)
-weztermWindows:subscribe({ hs.window.filter.windowMoved, hs.window.filter.windowResized }, function(window, appName)
-  wm.recordWeztermWindowState(window)
-end)
 
 hs.alert.show("🔨🥄✅")
