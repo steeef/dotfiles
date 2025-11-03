@@ -1,4 +1,5 @@
 {
+  "apiKeyHelper": "~/.claude/get-api-key.sh",
   "includeCoAuthoredBy": false,
   "statusLine": {
     "type": "command",
