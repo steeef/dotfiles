@@ -104,7 +104,6 @@
         "home-assistant"
         "istat-menus"
         "karabiner-elements"
-        "mullvad-vpn"
         "omnidisksweeper"
         "plex"
         "qlvideo"
