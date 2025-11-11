@@ -19,7 +19,7 @@
   programs.claude-code = {
     enable = true;
     # Use updated package from sadjow flake
-    package = inputs.claude-code.packages.${pkgs.system}.default;
+    package = inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default;
     # Import settings from existing JSON file
     settings = lib.importJSON ./settings.json;
   };
