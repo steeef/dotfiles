@@ -85,7 +85,6 @@
       "mas"
       "ncdu"
       "pam-reattach"
-      "pipx"
     ];
     casks =
       [

@@ -52,6 +52,7 @@
     nixpkgs-fmt
     nmap
     ponysay
+    pipx
     postgresql
     pyright
     rdiff-backup
