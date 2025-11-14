@@ -13,6 +13,11 @@
       sandbox_mode = "workspace-write";
       sandbox_workspace_write = {
         network_access = true;
+        writable_roots = [
+          "/Users/sprice/.cache/uv"
+          "/Users/sprice/.local/share/uv/tools"
+          "/Users/sprice/.cache/pre-commit"
+        ];
       };
     };
   };
