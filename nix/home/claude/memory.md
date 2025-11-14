@@ -51,6 +51,7 @@ IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.
 # Code style
 * IMPORTANT: When a `.pre-commit-config.yaml` is present in the project directory, run pre-commit after modifying files using: `uvx --with pre-commit-uv pre-commit run --files <file1> <file2> ...`
 * IMPORTANT: When running poetry in a project, use the global `poetry` command. This was installed with `uv` with this command: `uv tool install --python 3.11 poetry==2.1.1`
+* When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls (e.g., from pre-commit) do not fail with `PermissionError`.
 
 # File Analysis Strategy
 - When hooks block reading large files (>500 lines), ALWAYS use the Task tool for analysis
