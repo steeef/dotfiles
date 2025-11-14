@@ -100,6 +100,7 @@
     ./neovim.nix
     ./nix-index.nix
     ./oh-my-posh
+    ./opencode.nix
     ./ripgrep.nix
     ./rsnapshot.nix
     ./symlinks.nix

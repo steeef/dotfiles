@@ -32,6 +32,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    opencode.url = "github:GutMutCode/opencode-nix";
   };
 
   outputs = {
@@ -43,6 +44,7 @@
     darwin,
     nur,
     nix-index-database,
+    opencode,
     ...
   } @ inputs: let
     inherit builtins;
