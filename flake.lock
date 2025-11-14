@@ -79,6 +79,24 @@
         "type": "github"
       }
     },
+    "flake-parts_2": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1749398372,
+        "narHash": "sha256-tYBdgS56eXYaWVW3fsnPQ/nFlgWi/Z2Ymhyu21zVM98=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "9305fe4e5c2a6fcf5ba6a3ff155720fbe4076569",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -207,6 +225,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1748740939,
+        "narHash": "sha256-rQaysilft1aVMwF14xIdGS3sj1yHlI6oKQNBRTF40cc=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "656a64127e9d791a334452c6b6606d17539476e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1756819007,
@@ -256,16 +289,16 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1760524057,
-        "narHash": "sha256-EVAqOteLBFmd7pKkb0+FIUyzTF61VKi7YmvP1tw4nEw=",
+        "lastModified": 1750865895,
+        "narHash": "sha256-p2dWAQcLVzquy9LxYCZPwyUdugw78Qv3ChvnX755qHA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "544961dfcce86422ba200ed9a0b00dd4b1486ec5",
+        "rev": "61c0f513911459945e2cb8bf333dc849f1b976ff",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -291,19 +324,20 @@
     },
     "opencode": {
       "inputs": {
+        "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1763033737,
-        "narHash": "sha256-fFuiQXeQkecXdwfa8F4MtBV1Ub/0SDLJprgUPRDZ43o=",
-        "owner": "GutMutCode",
-        "repo": "opencode-nix",
-        "rev": "ad87f8df93c0b876fd6aff72efa0e1279e003298",
+        "lastModified": 1763101061,
+        "narHash": "sha256-YgTwSmNN5W0LKpSP7fxVw3XMQO9Y+QuiVT0vk9kDXV4=",
+        "owner": "mikael-lindstrom",
+        "repo": "opencode-flake",
+        "rev": "3f651db8e2244f6c4eb2d862bf536bf51c3e5d8b",
         "type": "github"
       },
       "original": {
-        "owner": "GutMutCode",
-        "repo": "opencode-nix",
+        "owner": "mikael-lindstrom",
+        "repo": "opencode-flake",
         "type": "github"
       }
     },

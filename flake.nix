@@ -32,7 +32,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    opencode.url = "github:GutMutCode/opencode-nix";
+    opencode.url = "github:mikael-lindstrom/opencode-flake";
   };
 
   outputs = {
