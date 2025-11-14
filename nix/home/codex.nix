@@ -14,6 +14,7 @@
       sandbox_workspace_write = {
         network_access = true;
         writable_roots = [
+          "/Users/sprice/Library/Caches/uv"
           "/Users/sprice/.cache/uv"
           "/Users/sprice/.local/share/uv/tools"
           "/Users/sprice/.cache/pre-commit"
