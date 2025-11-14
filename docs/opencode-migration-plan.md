@@ -179,150 +179,203 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 **Implementation Sketch:**
 
 ```typescript
-import { Plugin } from "@opencode-ai/plugin";
+import type { Plugin } from "@opencode-ai/plugin";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { once } from "node:events";
 
-export const GlobalSafety: Plugin = async ({ $, directory, client }) => {
-  const flag = (name: string) => path.join(directory, `.${name}`);
+// NOTE: Hook signatures, tool names, and arg shapes are
+// illustrative. Confirm them in Phase 4 with a debug plugin
+// and align this implementation with the actual types.
 
-  const checkRm = (command: string): string | null => {
-    if (/\brm\s/.test(command)) {
-      return "❌ Blocked: Instead of 'rm':\n" +
-             "- MOVE files using `mv` to the TRASH/ directory\n" +
-             "- Add entry to TRASH-FILES.md with reason";
-    }
-    return null;
+export const GlobalSafety: Plugin = async ({ $, directory }) => {
+  const flagPath = (name: string) => path.join(directory, `.${name}`);
+
+  const isBinaryPath = (filePath: string) =>
+    /\.(png|jpe?g|gif|pdf|zip|tar|gz|tgz|bz2)$/i.test(filePath);
+
+  const isClaudeMD = (filePath: string | undefined): boolean =>
+    !!filePath &&
+    (filePath.endsWith("CLAUDE.md") || filePath.includes("/CLAUDE.md"));
+
+  const fileExists = async (p: string): Promise<boolean> =>
+    fs
+      .access(p)
+      .then(() => true)
+      .catch(() => false);
+
+  const countLinesStreaming = async (
+    fullPath: string,
+    limit: number,
+  ): Promise<number> => {
+    const fh = await fs.open(fullPath, "r");
+    const stream = fh.createReadStream();
+    let lines = 0;
+
+    stream.on("data", (chunk: Buffer) => {
+      for (let i = 0; i < chunk.length; i++) {
+        if (chunk[i] === 0x0a) {
+          lines++;
+          if (lines > limit) {
+            stream.destroy();
+            break;
+          }
+        }
+      }
+    });
+
+    await once(stream, "close");
+    await fh.close();
+    return lines;
   };
 
-  const checkGitAdd = async (command: string): Promise<string | null> => {
-    if (/git\s+add\s+(\.|-A|--all)/.test(command)) {
-      return "❌ Blocked: Dangerous git add pattern\n" +
-             "Use: git add <specific-files> or git add -u\n" +
-             "Reason: Prevents accidental staging of unwanted files";
-    }
-    return null;
-  };
-
-  const checkKubectl = (command: string): string | null => {
-    if (/kubectl\s+(delete|destroy)/.test(command)) {
-      return "⚠️  Blocked: Destructive kubectl operation\n" +
-             "Run manually if you're absolutely sure";
-    }
-    return null;
-  };
-
-  const checkTerraform = (command: string): string | null => {
-    if (/terraform\s+(apply|destroy)/.test(command)) {
-      return "⚠️  Blocked: Destructive terraform operation\n" +
-             "Run manually with explicit approval";
-    }
-    return null;
-  };
-
-  const checkEnv = (command: string): string | null => {
-    if (/\.env/.test(command)) {
-      return "🔒 Blocked: .env file access\n" +
-             "Protect secrets from accidental exposure";
-    }
-    return null;
-  };
-
-  const checkGrep = (command: string): string | null => {
-    if (/\bgrep\s/.test(command) && !/\brg\s/.test(command)) {
-      return "💡 Suggestion: Use 'rg' (ripgrep) instead of 'grep'\n" +
-             "It's faster and respects .gitignore";
-    }
-    return null;
-  };
-
-  const enforceFileSize = async (
-    filePath: string | undefined,
-    args: any,
-    directory: string,
-    flagFn: (name: string) => string
-  ): Promise<void> => {
+  const enforceFileSize = async (filePath: string | undefined) => {
     if (!filePath) return;
+    if (isBinaryPath(filePath)) return;
 
     const fullPath = path.isAbsolute(filePath)
       ? filePath
       : path.join(directory, filePath);
 
-    // Check if binary (allow)
-    const isBinary = /\.(png|jpg|jpeg|gif|pdf|zip|tar|gz)$/i.test(filePath);
-    if (isBinary) return;
+    if (!(await fileExists(fullPath))) return;
 
-    // Check context
-    const inSubtask = await fs.access(flagFn("opencode_in_subtask.flag"))
-      .then(() => true)
-      .catch(() => false);
-
-    const limit = inSubtask ? 10000 : 500;
-
-    // Count lines
-    const lineCount = parseInt(
-      (await $`wc -l < ${fullPath}`.text()).trim(),
-      10
+    const inSubtask = await fileExists(
+      flagPath("opencode_in_subtask.flag"),
     );
+    const limit = inSubtask ? 10_000 : 500;
 
-    if (lineCount > limit) {
+    const lines = await countLinesStreaming(fullPath, limit + 1);
+
+    if (lines > limit) {
       throw new Error(
-        `📏 File too large: ${lineCount} lines (limit: ${limit})\n` +
-        `Use Task tool with subagent for large file analysis\n` +
-        `File: ${filePath}`
+        [
+          `📏 File too large: ${lines} lines (limit: ${limit})`,
+          "Use the Task tool + sub-agent for large-file analysis.",
+          `File: ${filePath}`,
+        ].join("\n"),
       );
     }
   };
 
-  const isClaudeMD = (filePath: string | undefined): boolean => {
-    return filePath?.endsWith("CLAUDE.md") || filePath?.includes("/CLAUDE.md") || false;
+  const collectTouchedFiles = (args: any): string[] => {
+    const candidates = new Set<string>();
+
+    if (typeof args?.filePath === "string") {
+      candidates.add(args.filePath);
+    }
+    if (typeof args?.file_path === "string") {
+      candidates.add(args.file_path);
+    }
+    if (Array.isArray(args?.files)) {
+      for (const f of args.files) {
+        if (typeof f === "string") candidates.add(f);
+      }
+    }
+
+    return [...candidates];
+  };
+
+  const formatFiles = async (files: string[]) => {
+    if (files.length === 0) return;
+    const payload = JSON.stringify({ files });
+
+    await $.raw`~/.bin/format.sh <<'JSON'\n${payload}\nJSON`;
+  };
+
+  const checkBashCommand = async (command: string): Promise<string[]> => {
+    const messages: string[] = [];
+
+    if (/\brm\s/.test(command)) {
+      messages.push(
+        "❌ Blocked: 'rm' is not allowed.\n" +
+          "Move files to TRASH/ and record them in TRASH-FILES.md instead.",
+      );
+    }
+
+    if (/git\s+add\s+(\.|-A|--all)\b/.test(command)) {
+      messages.push(
+        "❌ Blocked: Dangerous 'git add' pattern.\n" +
+          "Use 'git add <specific-files>' or 'git add -u' instead.",
+      );
+    }
+
+    if (/git\s+checkout\b/.test(command)) {
+      messages.push(
+        "⚠️ Blocked: 'git checkout' may discard local changes.\n" +
+          "Stash or commit manually, then rerun yourself if desired.",
+      );
+    }
+
+    if (/kubectl\s+(delete|destroy)\b/.test(command)) {
+      messages.push(
+        "⚠️ Blocked: Destructive kubectl operation.\n" +
+          "Run manually in a terminal if you're sure.",
+      );
+    }
+
+    if (/terraform\s+(apply|destroy)\b/.test(command)) {
+      messages.push(
+        "⚠️ Blocked: Destructive terraform operation.\n" +
+          "Run manually with explicit approval.",
+      );
+    }
+
+    if (/\.env\b/.test(command)) {
+      messages.push(
+        "🔒 Blocked: .env file access.\n" +
+          "Secrets should not be listed or copied via tools.",
+      );
+    }
+
+    if (/\bgrep\s/.test(command) && !/\brg\s/.test(command)) {
+      messages.push(
+        "❌ Blocked: 'grep' is disabled.\n" +
+          "Use 'rg' (ripgrep) instead; it's faster and respects .gitignore.",
+      );
+    }
+
+    return messages;
   };
 
   return {
-    "tool.execute.before": async (input, output) => {
-      // Bash safety checks
+    "tool.execute.before": async (input: any) => {
+      const args = input.args ?? {};
+
       if (input.tool === "bash") {
-        const command = output.args?.command ?? "";
-        const blockers = [
-          checkRm(command),
-          await checkGitAdd(command),
-          checkKubectl(command),
-          checkTerraform(command),
-          checkEnv(command),
-          checkGrep(command),
-        ].filter(Boolean);
+        const command =
+          typeof args.command === "string" ? args.command : "";
+        const blockers = await checkBashCommand(command);
 
         if (blockers.length > 0) {
           throw new Error(blockers.join("\n\n"));
         }
       }
 
-      // File size guard
       if (input.tool === "read") {
-        await enforceFileSize(
-          output.args?.file_path,
-          output.args,
-          directory,
-          flag
-        );
+        await enforceFileSize(args.filePath ?? args.file_path);
       }
 
-      // CLAUDE.md guard
-      if (["write", "edit"].includes(input.tool ?? "")) {
-        if (isClaudeMD(output.args?.file_path)) {
+      if (input.tool === "write" || input.tool === "edit") {
+        const filePath = args.filePath ?? args.file_path;
+        if (isClaudeMD(filePath)) {
           throw new Error(
-            "📝 Blocked: Do not write to CLAUDE.md directly\n" +
-            "Instead: Edit AGENTS.md and symlink CLAUDE.md → AGENTS.md"
+            [
+              "📝 Blocked: Do not write to CLAUDE.md directly.",
+              "Edit AGENTS.md instead and symlink CLAUDE.md → AGENTS.md.",
+            ].join("\n"),
           );
         }
       }
     },
 
-    "tool.execute.after": async (input, output) => {
-      // Auto-formatting
-      if (["write", "edit"].includes(input.tool ?? "")) {
-        const toolInput = JSON.stringify({ tool_input: output.args });
-        await $.raw`~/.bin/format.sh <<'JSON'\n${toolInput}\nJSON`;
+    "tool.execute.after": async (input: any, result: any) => {
+      if (input.tool === "write" || input.tool === "edit") {
+        try {
+          const files = collectTouchedFiles(input.args ?? {});
+          await formatFiles(files);
+        } catch (err) {
+          console.error("[global-safety] format failed", err);
+        }
       }
     },
   };
@@ -361,23 +414,54 @@ export const GlobalSafety: Plugin = async ({ $, directory, client }) => {
 **Implementation Sketch:**
 
 ```typescript
-import { Plugin } from "@opencode-ai/plugin";
+import type { Plugin } from "@opencode-ai/plugin";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+
+// NOTE: Hook signatures and arg shapes are illustrative.
+// Confirm the actual types in Phase 4 and adjust as needed.
 
 export const TaskContext: Plugin = async ({ directory }) => {
   const flagFile = path.join(directory, ".opencode_in_subtask.flag");
 
+  const writeFlag = async () => {
+    const payload = JSON.stringify(
+      { createdAt: new Date().toISOString() },
+      null,
+      2,
+    );
+    await fs.writeFile(flagFile, payload, "utf-8");
+  };
+
+  const clearFlag = async () => {
+    await fs.unlink(flagFile).catch(() => {});
+  };
+
+  const clearIfStale = async () => {
+    try {
+      const stat = await fs.stat(flagFile);
+      const ageMs = Date.now() - stat.mtimeMs;
+      const oneHour = 60 * 60 * 1000;
+      if (ageMs > oneHour) {
+        await clearFlag();
+      }
+    } catch {
+      // Flag does not exist or is unreadable; ignore.
+    }
+  };
+
   return {
-    "tool.execute.before": async (input) => {
+    "tool.execute.before": async (input: any) => {
       if (input.tool === "task") {
-        await fs.writeFile(flagFile, new Date().toISOString(), "utf-8");
+        // Best-effort cleanup of stale flags before setting a new one.
+        await clearIfStale();
+        await writeFlag();
       }
     },
 
-    "tool.execute.after": async (input) => {
+    "tool.execute.after": async (input: any) => {
       if (input.tool === "task") {
-        await fs.unlink(flagFile).catch(() => {}); // Ignore if doesn't exist
+        await clearFlag();
       }
     },
   };
