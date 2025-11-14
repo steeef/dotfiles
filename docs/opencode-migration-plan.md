@@ -561,10 +561,15 @@ ls ~/.bin/format.sh
 # Create source directory in dotfiles repo
 mkdir -p ~/.dotfiles/opencode/plugin
 cd ~/.dotfiles/opencode/plugin
+```
 
-# Ensure runtime directory is a symlink to dotfiles
-mkdir -p ~/.config/opencode
-ln -sfn ~/.dotfiles/opencode/plugin ~/.config/opencode/plugin
+Home Manager links this directory into `~/.config/opencode/plugin` via `nix/home/symlinks.nix`:
+
+```nix
+".config/opencode/plugin" = {
+  enable = true;
+  source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/opencode/plugin";
+};
 ```
 
 ### 3. Initialize TypeScript Project
