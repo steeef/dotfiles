@@ -17,7 +17,7 @@ This plan outlines migrating critical Claude Code safety hooks and automation to
 - ❌ SessionStart auto-loading (accepted limitation)
 - ❌ UserPromptSubmit skill activation (manual invocation)
 
-**Target Location:** `~/.config/opencode/plugin/` (global plugins)
+**Target Location:** `~/.dotfiles/opencode/plugin/` (source in dotfiles, symlinked to `~/.config/opencode/plugin/` for OpenCode runtime)
 
 ---
 
@@ -558,8 +558,13 @@ ls ~/.bin/format.sh
 ### 2. Create Plugin Directory
 
 ```bash
-mkdir -p ~/.config/opencode/plugin
-cd ~/.config/opencode/plugin
+# Create source directory in dotfiles repo
+mkdir -p ~/.dotfiles/opencode/plugin
+cd ~/.dotfiles/opencode/plugin
+
+# Ensure runtime directory is a symlink to dotfiles
+mkdir -p ~/.config/opencode
+ln -sfn ~/.dotfiles/opencode/plugin ~/.config/opencode/plugin
 ```
 
 ### 3. Initialize TypeScript Project
@@ -600,7 +605,7 @@ npm install
 
 ### 4. Create Plugins
 
-Create files:
+Create files in `~/.dotfiles/opencode/plugin` (symlinked to `~/.config/opencode/plugin`):
 - `global-safety.ts` (from Phase 1 implementation)
 - `task-context.ts` (from Phase 2 implementation)
 - `notifications.ts` (from Phase 3 implementation)
