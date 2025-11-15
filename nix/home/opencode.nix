@@ -6,6 +6,7 @@
    programs.opencode = {
      settings = {
        model = "gpt-5.1";
+       theme = "catppuccin";
      };
 
     enable = true;
