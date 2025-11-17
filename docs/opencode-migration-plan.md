@@ -66,13 +66,15 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 
 #### 4. PreToolUse Hooks (10 hooks)
 
-**Bash Safety Bundle:**
+**Bash Safety Hooks (currently configured):**
 - `bash_hook.py` - Composite safety checker
 - `rm_block_hook.py` - Prevents rm, enforces TRASH pattern
 - `git_add_block_hook.py` - Blocks dangerous git add patterns
 - `git_checkout_safety_hook.py` - Prevents destructive checkouts
-- `git_commit_block_hook.py` - Git commit speed bump
 - `kubectl_safety_hook.py` - Blocks kubectl destructive operations
+
+**Not currently wired but available in upstream repo:**
+- `git_commit_block_hook.py` - Git commit speed bump
 - `terraform_safety_hook.py` - Prevents terraform apply/destroy
 - `env_file_protection_hook.py` - Protects .env files
 
@@ -80,7 +82,7 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 - `file_size_conditional_hook.py` - Read tool: blocks large files
 - `pretask_subtask_flag.py` - Task tool: creates flag before execution
 - `grep_block_hook.py` - Grep tool: enforces ripgrep
-- `claude_md_block_hook.py` - Write/Edit: prevents CLAUDE.md writes
+- `claude_md_block_hook.py` - Write/Edit/MultiEdit: prevents CLAUDE.md writes
 
 #### 5. PostToolUse Hooks (2 hooks)
 - `~/.bin/format.sh` - Auto-formats YAML/Terraform files
@@ -97,8 +99,8 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 | Bash safety bundle (rm/git/kubectl/terraform/env) | `tool.execute.before` for `tool === "bash"` | Medium |
 | `file_size_conditional_hook.py` | `tool.execute.before` for `tool === "read"` | Medium |
 | `grep_block_hook.py` | `tool.execute.before` for bash grep commands | Low |
-| `claude_md_block_hook.py` | `tool.execute.before` for write/edit tools | Low |
-| `~/.bin/format.sh` | `tool.execute.after` for write/edit tools | Medium |
+| `claude_md_block_hook.py` | `tool.execute.before` for write/edit/multiedit tools | Low |
+| `~/.bin/format.sh` | `tool.execute.after` for write/edit/multiedit tools | Medium |
 | Task flag hooks | `tool.execute.before/after` for `tool === "task"` | Medium |
 
 ### ⚠️ Partial Support (Workarounds)
@@ -124,13 +126,13 @@ All hooks defined in: `nix/home/claude/settings.json:22`
    - `tool.execute.before` currently references `output.args`, but no `output` object exists until the tool finishes. Update the plan to inspect `input.args` (request payload) in the before-hook and reserve `result`/`output` for the after-hook. This is required for every guard (bash, file-size, CLAUDE.md) to run at all.
 
 2. **Auto-Format Invocation**
-   - The post-hook feeds `output.args` to `format.sh`, but write/edit tools often do not expose a single `file_path`. Adjust the plan so Phase 1 captures the actual touched files (e.g., via tool metadata or `git status --porcelain`) and pass that list to the formatter. Also guard `format.sh` calls with try/catch so edits do not fail if formatting cannot identify a file.
+   - The post-hook feeds `output.args` to `format.sh`, but write/edit/MultiEdit tools often do not expose a single `file_path`. Adjust the plan so Phase 1 captures the actual touched files (e.g., via tool metadata or `git status --porcelain`) and invoke `~/.bin/format.sh` once per file using the JSON contract it expects (`{"tool_input":{"file_path":"/abs/path"}}`). Also guard `format.sh` calls with try/catch so edits do not fail if formatting cannot identify a file.
 
 3. **File-Size Guard Shelling**
    - The current sketch shells out with ``$`wc -l < ${fullPath}`` without quoting, which breaks on whitespace and enables injection. Update Phase 1 tasks to compute line counts via Node streams (preferred) or run `wc -l` with proper argument passing (`$` helper supports `$`command`${fullPath}` without redirection). Confirm the plan emphasizes secure path handling.
 
 4. **Task Flag Cleanup**
-   - `.opencode_in_subtask.flag` is only removed in `tool.execute.after`, so crashes leave the flag behind and permanently relax the guard. Modify Phase 2 to wrap Task execution in a `try/finally` equivalent (add an `event` listener, or eagerly delete the flag before returning) so failure paths reset the state.
+   - `.opencode_in_subtask.flag` is only removed in `tool.execute.after`, so crashes leave the flag behind and permanently relax the guard. Modify Phase 2 (done below) to track active Task call IDs and register process-exit cleanup so the flag is cleared even when the Task tool crashes or OpenCode aborts execution.
 
 5. **State Storage Alternative (Open Question)**
    - Evaluate replacing the sentinel file with in-memory plugin state or OpenCode config storage. Document decision and add tests covering concurrent subtasks if multiple Task invocations run in parallel.
@@ -160,7 +162,7 @@ All hooks defined in: `nix/home/claude/settings.json:22`
    - Allow binary files
 
 3. **CLAUDE.md Guard (tool.execute.before)**
-   - Check Write/Edit tool operations
+   - Check Write/Edit/MultiEdit tool operations
    - Block if `filePath` matches `CLAUDE.md`
    - Suggest editing `AGENTS.md` and symlinking to `CLAUDE.md`
 
@@ -169,7 +171,7 @@ All hooks defined in: `nix/home/claude/settings.json:22`
    - Block and suggest using `rg` (ripgrep) instead
 
 5. **Auto-Formatting (tool.execute.after)**
-   - Trigger on Write/Edit tool completion
+   - Trigger on Write/Edit/MultiEdit tool completion
    - Shell out to `~/.bin/format.sh` with tool args
    - Apply yamlfmt for YAML files
    - Apply terraform fmt for .tf/.hcl files
@@ -277,9 +279,22 @@ export const GlobalSafety: Plugin = async ({ $, directory }) => {
 
   const formatFiles = async (files: string[]) => {
     if (files.length === 0) return;
-    const payload = JSON.stringify({ files });
 
-    await $.raw`~/.bin/format.sh <<'JSON'\n${payload}\nJSON`;
+    for (const file of files) {
+      const fullPath = path.isAbsolute(file)
+        ? file
+        : path.join(directory, file);
+
+      const payload = JSON.stringify({
+        tool_input: { file_path: fullPath },
+      });
+
+      try {
+        await $`~/.bin/format.sh <<'JSON'\n${payload}\nJSON`;
+      } catch (error) {
+        console.error("[global-safety] format.sh failed", error);
+      }
+    }
   };
 
   const checkBashCommand = async (command: string): Promise<string[]> => {
@@ -339,9 +354,13 @@ export const GlobalSafety: Plugin = async ({ $, directory }) => {
 
   return {
     "tool.execute.before": async (input: any) => {
+      const tool = (input.tool ?? "").toLowerCase();
       const args = input.args ?? {};
 
-      if (input.tool === "bash") {
+      // save args for use in tool.execute.after
+      callArgs.set(input.callID, args);
+
+      if (tool === "bash") {
         const command =
           typeof args.command === "string" ? args.command : "";
         const blockers = await checkBashCommand(command);
@@ -351,12 +370,13 @@ export const GlobalSafety: Plugin = async ({ $, directory }) => {
         }
       }
 
-      if (input.tool === "read") {
-        await enforceFileSize(args.filePath ?? args.file_path);
+      if (tool === "read") {
+        await enforceFileSize(args);
       }
 
-      if (input.tool === "write" || input.tool === "edit") {
-        const filePath = args.filePath ?? args.file_path;
+      if (["write", "edit", "multiedit"].includes(tool)) {
+        const filePath =
+          args.filePath ?? args.file_path ?? args.path;
         if (isClaudeMD(filePath)) {
           throw new Error(
             [
@@ -368,14 +388,22 @@ export const GlobalSafety: Plugin = async ({ $, directory }) => {
       }
     },
 
-    "tool.execute.after": async (input: any, result: any) => {
-      if (input.tool === "write" || input.tool === "edit") {
-        try {
-          const files = collectTouchedFiles(input.args ?? {});
-          await formatFiles(files);
-        } catch (err) {
-          console.error("[global-safety] format failed", err);
-        }
+    "tool.execute.after": async (input: any) => {
+      const tool = (input.tool ?? "").toLowerCase();
+
+      if (!["write", "edit", "multiedit"].includes(tool)) {
+        callArgs.delete(input.callID);
+        return;
+      }
+
+      try {
+        const args = callArgs.get(input.callID) ?? {};
+        const files = collectTouchedFiles(args);
+        await formatFiles(files);
+      } catch (err) {
+        console.error("[global-safety] format failed", err);
+      } finally {
+        callArgs.delete(input.callID);
       }
     },
   };
@@ -408,7 +436,8 @@ export const GlobalSafety: Plugin = async ({ $, directory }) => {
 
 **Features:**
 - Create `.opencode_in_subtask.flag` before Task tool executes
-- Remove flag after Task completes
+- Track active Task call IDs so multiple subtasks keep the flag set
+- Remove the flag in a `finally` equivalent (after-hook + process-exit cleanup) so crashes do not leave it behind
 - Enables `global-safety.ts` to distinguish main vs sub-agent context
 
 **Implementation Sketch:**
@@ -423,6 +452,7 @@ import path from "node:path";
 
 export const TaskContext: Plugin = async ({ directory }) => {
   const flagFile = path.join(directory, ".opencode_in_subtask.flag");
+  const pendingTasks = new Set<string>();
 
   const writeFlag = async () => {
     const payload = JSON.stringify(
@@ -435,6 +465,7 @@ export const TaskContext: Plugin = async ({ directory }) => {
 
   const clearFlag = async () => {
     await fs.unlink(flagFile).catch(() => {});
+    pendingTasks.clear();
   };
 
   const clearIfStale = async () => {
@@ -450,18 +481,41 @@ export const TaskContext: Plugin = async ({ directory }) => {
     }
   };
 
+  const ensureFlagState = async () => {
+    if (pendingTasks.size === 0) {
+      await clearFlag();
+    } else {
+      await writeFlag();
+    }
+  };
+
+  const teardown = async () => {
+    pendingTasks.clear();
+    await clearFlag();
+  };
+
+  process.once("exit", () => {
+    void teardown();
+  });
+
+  process.once("SIGINT", () => {
+    void teardown();
+    process.exit(1);
+  });
+
   return {
     "tool.execute.before": async (input: any) => {
       if (input.tool === "task") {
-        // Best-effort cleanup of stale flags before setting a new one.
         await clearIfStale();
+        pendingTasks.add(input.callID);
         await writeFlag();
       }
     },
 
     "tool.execute.after": async (input: any) => {
       if (input.tool === "task") {
-        await clearFlag();
+        pendingTasks.delete(input.callID);
+        await ensureFlagState();
       }
     },
   };
@@ -625,17 +679,14 @@ export const Notifications: Plugin = async ({ $ }) => {
 
 ### 1. Prerequisites
 
+OpenCode itself is already provided declaratively via Home Manager in `nix/home/opencode.nix`. After editing any of the modules below, run `hms` so the CLI, configuration, and symlinks are reconciled. For plugin development, rely on the repo’s Nix tooling rather than global npm installs:
+
 ```bash
-# Install OpenCode CLI (if not already)
-npm install -g @opencode-ai/cli
+# Enter the repo dev shell (add bun/tsc there if they are missing)
+nix develop
 
-# Install plugin types
-npm install -g @opencode-ai/plugin
-
-# Verify Bun runtime (required for $ shell)
+# Verify Bun runtime (required for the $ helper) and existing formatter script
 bun --version
-
-# Ensure format script exists
 ls ~/.bin/format.sh
 ```
 
@@ -707,9 +758,28 @@ npx tsc
 
 ### 6. Configure OpenCode
 
-> **Home-Manager Source of Truth:** These dotfiles manage OpenCode via Nix Home Manager. Any new settings (e.g., enabling plugins, configuring notification defaults) must be added to the appropriate module under `nix/home/` and rolled out with `hms`. Avoid hand-editing `~/.config/opencode/opencode.json`, since those changes will be overwritten on the next rebuild.
+> **Home-Manager Source of Truth:** These dotfiles manage OpenCode via Nix Home Manager. All configuration lives in `nix/home/opencode.nix` under `programs.opencode.settings`. Update that module (not the generated `~/.config/opencode/opencode.json`), then run `hms` so the rendered JSON picks up the changes.
 
-Add the configuration to the Home-Manager module that renders `~/.config/opencode/opencode.json`, then run `hms` to apply. The generated file should look like:
+For example:
+
+```nix
+programs.opencode = {
+  enable = true;
+  package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  rules = builtins.readFile ./claude/memory.md;
+  settings = {
+    model = "gpt-5.1";
+    theme = "catppuccin";
+    plugins = {
+      "global-safety".enabled = true;
+      "task-context".enabled = true;
+      "notifications".enabled = true;
+    };
+  };
+};
+```
+
+After editing the module run `hms`. The rendered `~/.config/opencode/opencode.json` should contain:
 
 ```json
 {
