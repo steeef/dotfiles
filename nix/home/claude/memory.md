@@ -14,6 +14,14 @@ IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.
 - Treat all factual claims as provisional unless cited or clearly justified. Cite when appropriate.
 - Acknowledge when claims rely on inference or incomplete information. Favor accuracy over sounding certain.
 
+## Context engineering workflow
+- Follow a research → plan → implement cadence; do not skip phases on complex work.
+- Research: read every referenced file in full before spawning tasks; use fast search (rg) and locate 3 similar patterns/tests to mirror; prefer sub-tasks for locating, analyzing, and pattern-finding.
+- Plan: produce phased steps with file:line evidence, and success criteria split into automated commands vs manual checks using project-standard tooling.
+- Implement: work phase-by-phase, verifying after each phase; compact progress (decisions, commands, failures) into concise notes instead of keeping long logs in context.
+- Compaction: strip noisy tool output; summarize only the essential facts, decisions, and next actions so context stays lean.
+- Guardrails: do not ask the user questions you can answer from code; pause and research when uncertain; when the task is documentation-only, describe what exists without proposing improvements.
+
 ## Project Integration
 
 ### Learning the Codebase
