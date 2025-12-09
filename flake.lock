@@ -25,11 +25,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1764875236,
-        "narHash": "sha256-Y8AOF0vDsH9AzRlKV2iJbr4cAYzBNFiCST+oL+naQXM=",
+        "lastModified": 1765253544,
+        "narHash": "sha256-ZEdxFknSn94IypQUGAzBbSwxphTQx4ZNzxF95RCObto=",
         "owner": "sadjow",
         "repo": "codex-cli-nix",
-        "rev": "540a76ab9d0659a25061d79bc1d70e74bab156da",
+        "rev": "362362bf7f6dfb59c31d86da2a51c03b7ab2d3b3",
         "type": "github"
       },
       "original": {
