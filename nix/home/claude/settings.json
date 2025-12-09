@@ -45,7 +45,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/hooks/skill_activation_hook.py"
+            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/skill_activation_hook.py"
           }
         ]
       }
@@ -104,7 +104,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/hooks/claude_md_block_hook.py"
+            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/claude_md_block_hook.py"
           }
         ]
       }
