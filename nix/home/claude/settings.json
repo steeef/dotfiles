@@ -69,6 +69,22 @@
           {
             "type": "command",
             "command": "$CLAUDE_CODE_TOOLS_PATH/hooks/git_checkout_safety_hook.py"
+          },
+          {
+            "type": "command",
+            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/kubectl_safety_hook.py"
+          },
+          {
+            "type": "command",
+            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/terraform_safety_hook.py"
+          },
+          {
+            "type": "command",
+            "command": "$CLAUDE_CODE_TOOLS_PATH/hooks/git_commit_block_hook.py"
+          },
+          {
+            "type": "command",
+            "command": "$CLAUDE_CODE_TOOLS_PATH/hooks/env_file_protection_hook.py"
           }
         ]
       },
@@ -105,6 +121,10 @@
           {
             "type": "command",
             "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/claude_md_block_hook.py"
+          },
+          {
+            "type": "command",
+            "command": "$CLAUDE_CODE_TOOLS_PATH/hooks/file_length_limit_hook.py"
           }
         ]
       }
