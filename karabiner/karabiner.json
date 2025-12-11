@@ -97,6 +97,7 @@
                     },
                     {
                         "description": "Mouse Keys Mode v4 (rev 1)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
