@@ -71,6 +71,10 @@ IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.
 - File size hook blocks >500 lines to prevent context bloat - delegate to Task tool
 - Git hooks prevent unsafe operations - follow suggested alternatives
 
+# GitHub style
+* IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
+* IMPORTANT: When creating pull request, prefix the title with the associated Jira issue, if it exists
+
 ## File Deletion Hook
 - `rm` command is blocked by safety hooks
 - Instead of `rm`, use `mv` to move files to TRASH/ directory in current folder
