@@ -18,7 +18,7 @@
             "showTimeSinceCommit": false,
             "showStashCount": true,
             "showUpstream": false,
-            "showRepoName": false
+            "showRepoName": true
           }
         }
       },

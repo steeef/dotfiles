@@ -104,6 +104,37 @@ If you're asked to pick up the project from where you left off, look for a PROGR
 Use `hms` to apply home-manager configuration changes (including Claude Code settings).
 Use `dr` to apply system-wide Darwin configuration changes.
 
+# Git Worktree Workflow
+
+## When to use worktrees
+Use git worktrees for feature work:
+- Starting implementation from a plan (brainstorming → writing-plans → execution)
+- Creating feature branches for multi-file changes
+- Any work identified as needing isolation from the main working directory
+
+Do NOT use worktrees for:
+- Single-file fixes or hotfixes
+- Documentation-only changes
+- Exploration/research tasks
+- Work on existing branches already checked out
+
+## Worktree locations
+- Work repos (under `~/code/work/`): `~/code/work/.worktrees/<repo>/<branch>/`
+- Other repos: `~/code/.worktrees/<repo>/<branch>/`
+
+## Communication requirements
+- ALWAYS announce when creating a worktree: "Creating worktree for feature work. Working in: <full-path>"
+- ALWAYS announce when cleaning up: "PR merged. Cleaning up worktree at <full-path>"
+- Status line shows `⧉` indicator when in a worktree (with repo name)
+
+## Lifecycle
+- Create worktree at start of feature work
+- After creation, auto-detect and run project setup (npm install, cargo build, pip install, poetry install, go mod download)
+- Run baseline tests to verify clean state before starting implementation
+- Work in worktree until PR merges
+- Auto-cleanup worktree after successful merge to main/master
+- Delete local branch after cleanup
+
 # tmux-cli Command to interact with CLI applications
 
 `tmux-cli` is a bash command that enables Claude Code to control CLI applications
