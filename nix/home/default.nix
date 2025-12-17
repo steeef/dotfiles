@@ -54,6 +54,7 @@
     ponysay
     pipx
     postgresql
+    python313
     pyright
     rdiff-backup
     rename
