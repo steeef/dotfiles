@@ -6,6 +6,12 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # Environment variables for native compilation (psycopg2, etc.)
+  home.sessionVariables = {
+    LIBRARY_PATH = "${pkgs.openssl.out}/lib:${pkgs.postgresql.lib}/lib";
+    C_INCLUDE_PATH = "${pkgs.openssl.dev}/include:${pkgs.postgresql.dev}/include";
+  };
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -54,6 +60,8 @@
     ponysay
     pipx
     postgresql
+    postgresql.pg_config  # pg_config for psycopg2 compilation
+    postgresql.dev  # headers for psycopg2 compilation
     python313
     pyright
     rdiff-backup
