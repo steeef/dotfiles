@@ -68,6 +68,10 @@
           },
           {
             "type": "command",
+            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/git_branch_workflow_hook.py"
+          },
+          {
+            "type": "command",
             "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-worktree-integration/hooks/worktree_hook.py"
           }
         ]
