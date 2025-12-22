@@ -21,7 +21,11 @@ function git_prune_remote() {
 }
 
 function git_remove_merged_local_branch() {
-  git branch --merged | egrep -v "(^\*|master|main|staging)" | xargs -I % git branch -d %
+  git branch --merged | grep -Ev "(^\*|master|main|staging)" | sed 's/^[+ ]*//' | while read branch; do
+    worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
+    [[ -n "$worktree" ]] && git worktree remove "$worktree"
+    git branch -d "$branch"
+  done
 }
 
 # When we use `Squash and merge` on GitHub,
@@ -38,8 +42,11 @@ function git_remove_squash_merged_local_branch() {
     git for-each-ref refs/heads/ "--format=%(refname:short)" |
     while read branch; do
       ancestor=$(git merge-base main $branch) &&
-        [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == "-"* ]] &&
-        git branch -D $branch
+        [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == "-"* ]] && {
+          worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
+          [[ -n "$worktree" ]] && git worktree remove "$worktree"
+          git branch -D $branch
+        }
     done
 }
 
@@ -47,6 +54,7 @@ function git_remove_squash_merged_local_branch() {
 function gcl() {
   (git checkout main && git pull)
   git_prune_remote
+  git worktree prune
   git_remove_merged_local_branch
   git_remove_squash_merged_local_branch
 }
