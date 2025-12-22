@@ -118,6 +118,17 @@ Do NOT use worktrees for:
 - Exploration/research tasks
 - Work on existing branches already checked out
 
+## Plan Execution Requirements
+**IMPORTANT**: When exiting plan mode to begin implementation:
+1. MUST create a Jira-prefixed branch (e.g., `PROJ-123-feature-description`)
+2. MUST create a worktree for that branch before any code changes
+3. MUST announce: "Creating worktree for plan execution. Working in: <full-path>"
+
+**IMPORTANT**: When plan execution is complete:
+1. Create PR (draft mode, Jira-prefixed title)
+2. After PR merges, clean up worktree and delete local branch
+3. MUST announce: "Plan complete. Cleaning up worktree at <full-path>"
+
 ## Worktree locations
 - Work repos (under `~/code/work/`): `~/code/work/.worktrees/<repo>/<branch>/`
 - Other repos: `~/code/.worktrees/<repo>/<branch>/`
