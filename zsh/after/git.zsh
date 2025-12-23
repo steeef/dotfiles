@@ -7,14 +7,12 @@ fbr() {
     git checkout $(echo "${branch}" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
-# https://blog.takanabe.tokyo/en/2020/04/remove-squash-merged-local-git-branches/
-#
 # gcl: git-cleanup-remote-and-local-branches
 #
-# Cleaning up remote and local branch is delivered as follows:
+# Cleaning up remote and local branches:
 # 1. Prune remote branches when they are deleted or merged
-# 2. Remove local branches when their remote branches are removed
-# 3. Remove local branches when a main included squash and merge commits
+# 2. Remove local branches that are merged into main
+# 3. Remove local branches whose remote tracking branch is gone
 
 function git_prune_remote() {
   git fetch --prune
@@ -30,28 +28,16 @@ function git_remove_merged_local_branch() {
   done
 }
 
-# When we use `Squash and merge` on GitHub,
-# `git branch --merged` cannot detect the squash-merged branches.
-# As a result, git_remove_merged_local_branch() cannot clean up
-# unused local branches. This function detects and removes local branches
-# when remote branches are squash-merged.
-#
-# There is an edge case. If you add suggested commits on GitHub,
-# the contents in local and remote are different. As a result,
-# This clean up function cannot remove local squash-merged branch.
-function git_remove_squash_merged_local_branch() {
-  git checkout -q main &&
-    git for-each-ref refs/heads/ "--format=%(refname:short)" |
-    while read branch; do
-      ancestor=$(git merge-base main $branch) &&
-        [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == "-"* ]] && {
-          worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
-          if [[ -n "$worktree" ]]; then
-            git worktree remove "$worktree" || { echo "Failed to remove worktree for $branch, skipping" >&2; continue; }
-          fi
-          git branch -D $branch
-        }
-    done
+# Remove local branches whose remote tracking branch no longer exists
+# (i.e., branches that were merged and deleted on the remote)
+function git_remove_orphaned_local_branches() {
+  git branch -vv | grep ': gone]' | awk '{print $1}' | while read branch; do
+    worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
+    if [[ -n "$worktree" ]]; then
+      git worktree remove "$worktree" || { echo "Worktree for $branch has changes, skipping" >&2; continue; }
+    fi
+    git branch -D "$branch"
+  done
 }
 
 # Clean up remote and local branches
@@ -60,5 +46,5 @@ function gcl() {
   git_prune_remote
   git worktree prune
   git_remove_merged_local_branch
-  git_remove_squash_merged_local_branch
+  git_remove_orphaned_local_branches
 }
