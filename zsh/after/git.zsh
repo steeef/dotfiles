@@ -23,7 +23,9 @@ function git_prune_remote() {
 function git_remove_merged_local_branch() {
   git branch --merged | grep -Ev "(^\*|master|main|staging)" | sed 's/^[+ ]*//' | while read branch; do
     worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
-    [[ -n "$worktree" ]] && git worktree remove "$worktree"
+    if [[ -n "$worktree" ]]; then
+      git worktree remove "$worktree" || { echo "Failed to remove worktree for $branch, skipping" >&2; continue; }
+    fi
     git branch -d "$branch"
   done
 }
@@ -44,7 +46,9 @@ function git_remove_squash_merged_local_branch() {
       ancestor=$(git merge-base main $branch) &&
         [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == "-"* ]] && {
           worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
-          [[ -n "$worktree" ]] && git worktree remove "$worktree"
+          if [[ -n "$worktree" ]]; then
+            git worktree remove "$worktree" || { echo "Failed to remove worktree for $branch, skipping" >&2; continue; }
+          fi
           git branch -D $branch
         }
     done
