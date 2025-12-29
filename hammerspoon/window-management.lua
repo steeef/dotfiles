@@ -25,27 +25,45 @@ screenPositions.bottomRight = {x = HALF_GRID_SIZE, y = HALF_GRID_SIZE, w = HALF_
 
 This.screenPositions = screenPositions
 
--- This function will move either the specified or the focuesd
+-- This function will move either the specified or the focused
 -- window to the requested screen position
 function This.moveWindowToPosition(cell, window)
   if window == nil then
     window = hs.window.focusedWindow()
   end
-  if window then
+  if window and window:isStandard() then
+    local app = window:application()
+    -- Skip Hammerspoon's own windows - they don't support frame manipulation
+    if app and app:name() == "Hammerspoon" then return end
     local screen = window:screen()
-    hs.grid.set(window, cell, screen)
+    if screen then
+      local ok, err = pcall(function()
+        hs.grid.set(window, cell, screen)
+      end)
+      if not ok then
+        print("Grid set failed for: " .. (app and app:name() or "unknown") .. " - " .. tostring(err))
+      end
+    end
   end
 end
 
 -- This function will move either the specified or the focused
--- window to the center of the sreen and let it fill up the
+-- window to the center of the screen and let it fill up the
 -- entire screen.
 function This.windowMaximize(factor, window)
    if window == nil then
       window = hs.window.focusedWindow()
    end
-   if window then
-      window:maximize()
+   if window and window:isStandard() then
+      local app = window:application()
+      -- Skip Hammerspoon's own windows - they don't support frame manipulation
+      if app and app:name() == "Hammerspoon" then return end
+      local ok, err = pcall(function()
+        window:maximize()
+      end)
+      if not ok then
+        print("Maximize failed for: " .. (app and app:name() or "unknown") .. " - " .. tostring(err))
+      end
    end
 end
 

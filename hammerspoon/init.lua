@@ -86,13 +86,21 @@ end)
 
 -- window management
 hyper:bind({}, "1", nil, function()
-  -- get the focused window
   local win = hs.window.focusedWindow()
-  -- get the screen where the focused window is displayed, a.k.a. current screen
-  local screen = win:screen()
-  -- compute the unitRect of the focused window relative to the current screen
-  -- and move the window to the next screen setting the same unitRect
-  win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
+  if win and win:isStandard() then
+    local app = win:application()
+    -- Skip Hammerspoon's own windows - they don't support frame manipulation
+    if app and app:name() == "Hammerspoon" then return end
+    local screen = win:screen()
+    if screen then
+      local ok, err = pcall(function()
+        win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
+      end)
+      if not ok then
+        print("Window move failed for: " .. (app and app:name() or "unknown") .. " - " .. tostring(err))
+      end
+    end
+  end
 end)
 hyper:bind({}, "2", nil, function()
   wm.windowMaximize(0)
