@@ -19,6 +19,7 @@
   # Custom commands
   home.file.".claude/commands/create_handoff.md".source = ./commands/create_handoff.md;
   home.file.".claude/commands/resume_handoff.md".source = ./commands/resume_handoff.md;
+  home.file.".claude/commands/research_codebase.md".source = ./commands/research_codebase.md;
 
   # Use official home-manager claude-code module
   programs.claude-code = {
