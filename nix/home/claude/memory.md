@@ -74,6 +74,7 @@ IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.
 # GitHub style
 * IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
 * IMPORTANT: When creating pull request, prefix the title with the associated Jira issue, if it exists
+* IMPORTANT: When creating pull request, the Jira issue must be on the first line of the body description, by itself
 
 ## File Deletion Hook
 - `rm` command is blocked by safety hooks
