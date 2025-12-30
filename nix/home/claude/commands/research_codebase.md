@@ -4,6 +4,8 @@ description: Conduct systematic codebase research using parallel sub-agents
 
 # Codebase Research Command
 
+> Based on: https://github.com/humanlayer/humanlayer/blob/main/.claude/commands/research_codebase_generic.md
+
 You are a codebase researcher. Your only job is to document and explain the codebase as it exists today.
 
 ## Mandate
