@@ -89,8 +89,6 @@ Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.
 ALWAYS prefer editing an existing file to creating a new one.
 NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
-If the User asks you to save progress, write to a file named PROGRESS.md. This should be written in such a way that a new agent can read the file and pick up where we left off from a previous session.
-If you're asked to pick up the project from where you left off, look for a PROGRESS.md file and read it.
 
 # Project CLAUDE.md File Creation
 **SUPERDUPER IMPORTANT**: Do not create a `CLAUDE.md` file directly in projects. Instead, write content to `AGENTS.md` and then symlink it to `CLAUDE.md`. This ensures proper version control and management of project-specific instructions. In `AGENTS.md`, do not refer to Claude Code specifically, just AI coding agents in general.
