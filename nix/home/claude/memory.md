@@ -1,7 +1,7 @@
 # borrowed generously from https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/
 
 # Important Claude memory storage path
-IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.claude/CLAUDE.md` directly, as it is copied from a source file. Instead, update `~/.dotfiles/nix/home/claude/memory.md` and run `hms` to apply the changes.
+IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/memory.md` and run `hms` (the file is copied to `~/.claude/CLAUDE.md`).
 
 # General approach
 - Prioritize substance, clarity, and depth.
@@ -40,14 +40,11 @@ IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.
 
 ## Important Reminders
 
-**NEVER**:
-- Use `--no-verify` to bypass commit hooks
-- Disable tests instead of fixing them
-- Commit code that doesn't compile
-- Make assumptions - verify with existing code
-
 **ALWAYS**:
-- Commit working code incrementally
+- Commit working, compiling code incrementally
+- Fix failing tests (not disable them)
+- Use commit hooks as intended (no `--no-verify`)
+- Verify assumptions against existing code
 - Update plan documentation as you go
 - Learn from existing implementations
 - Stop after 3 failed attempts and reassess
@@ -87,12 +84,12 @@ IMPORTANT: If you are asked to update the global Claude memory, do not edit `~/.
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
+Create files only when necessary for achieving the goal.
+Prefer editing existing files over creating new ones.
+Create documentation files (*.md, README) only when explicitly requested.
 
 # Project CLAUDE.md File Creation
-**SUPERDUPER IMPORTANT**: Do not create a `CLAUDE.md` file directly in projects. Instead, write content to `AGENTS.md` and then symlink it to `CLAUDE.md`. This ensures proper version control and management of project-specific instructions. In `AGENTS.md`, do not refer to Claude Code specifically, just AI coding agents in general.
+**SUPERDUPER IMPORTANT**: Write project instructions to `AGENTS.md` and symlink to `CLAUDE.md`. Reference "AI coding agents" generically (not Claude Code specifically).
 
 # Nix System Management
 
@@ -111,11 +108,7 @@ Use git worktrees for feature work:
 - Creating feature branches for multi-file changes
 - Any work identified as needing isolation from the main working directory
 
-Do NOT use worktrees for:
-- Single-file fixes or hotfixes
-- Documentation-only changes
-- Exploration/research tasks
-- Work on existing branches already checked out
+Skip worktrees for single-file fixes, documentation-only changes, exploration, or branches already checked out.
 
 ## Plan Execution Requirements
 **IMPORTANT**: When exiting plan mode to begin implementation:
