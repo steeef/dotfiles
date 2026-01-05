@@ -18,7 +18,7 @@
       config.window_decorations = 'RESIZE'
       config.term = 'wezterm'
       config.front_end = 'OpenGL'
-      config.use_resize_increments = true
+      config.use_resize_increments = false
       config.default_prog = {
         '/bin/zsh',
         '-l',
