@@ -31,7 +31,7 @@ function git_remove_merged_local_branch() {
 # Remove local branches whose remote tracking branch no longer exists
 # (i.e., branches that were merged and deleted on the remote)
 function git_remove_orphaned_local_branches() {
-  git branch -vv | grep ': gone]' | awk '{print $1}' | while read branch; do
+  git branch -vv | grep ': gone]' | awk '{if ($1 == "+" || $1 == "*") print $2; else print $1}' | while read branch; do
     worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
     if [[ -n "$worktree" ]]; then
       git worktree remove "$worktree" || { echo "Worktree for $branch has changes, skipping" >&2; continue; }
