@@ -127,7 +127,7 @@
       ];
     masApps = {
       "1password-for-safari" = 1569813296;
-      "adguard-for-safari" = 1440147259;
+      "ublock-origin-lite" = 6745342698;
       "automounter" = 1160435653;
       "dark-reader-for-safari" = 1438243180;
       "ivory-for-mastodon" = 6444602274;
