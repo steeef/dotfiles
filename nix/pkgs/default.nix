@@ -23,6 +23,11 @@ final: prev: {
           "test_thread_cancelled_and_abandoned"
         ];
       });
+      # Fix curl-cffi hanging tests on Darwin
+      # Tests deadlock in pytestCheckPhase with multiprocessing workers
+      curl-cffi = python-prev.curl-cffi.overrideAttrs (old: {
+        doCheck = false;
+      });
     })
   ];
 }
