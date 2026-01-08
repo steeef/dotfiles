@@ -13,6 +13,16 @@ final: prev: {
           "tests/test_process.py::TestAsyncio_AIO_Process::test_cancel_post_init"
         ];
       });
+      # Fix anyio flaky tests with Python 3.13 on Darwin
+      # https://github.com/NixOS/nixpkgs/issues/371079
+      anyio = python-prev.anyio.overrideAttrs (old: {
+        disabledTests = (old.disabledTests or [ ]) ++ [
+          "test_acquire_cancelled"
+          "test_cancel_wait_on_thread"
+          "test_single_thread"
+          "test_thread_cancelled_and_abandoned"
+        ];
+      });
     })
   ];
 }
