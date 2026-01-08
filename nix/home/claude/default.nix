@@ -1,7 +1,8 @@
 # Claude Code configuration
 #
-# Requires: ~/code/claude-hooks directory with hook plugins
-# and CLAUDE_HOOKS_DIR environment variable (set in zsh/default.nix)
+# Hooks are provided by claude-hooks plugins installed via:
+#   /plugin marketplace add steeef/claude-hooks
+#   /plugin install <plugin>@claude-hooks
 {
   inputs,
   pkgs,

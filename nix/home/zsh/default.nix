@@ -42,7 +42,6 @@
       EDITOR = "nvim";
       SUDO_EDITOR = "${pkgs.neovim}/bin/nvim";
       VISUAL = "nvim";
-      CLAUDE_HOOKS_DIR = "$HOME/code/claude-hooks";
     };
   };
 }

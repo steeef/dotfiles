@@ -1,6 +1,10 @@
 {
   "enabledPlugins": {
-    "superpowers@superpowers-marketplace": true
+    "superpowers@superpowers-marketplace": true,
+    "command-safety@claude-hooks": true,
+    "file-protection@claude-hooks": true,
+    "git-hooks@claude-hooks": true,
+    "notifications@claude-hooks": true
   },
   "includeCoAuthoredBy": false,
   "statusLine": {
@@ -20,50 +24,6 @@
     "defaultMode": "plan"
   },
   "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_HOOKS_DIR/plugins/notifications/hooks/notification_hook.sh"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_HOOKS_DIR/plugins/notifications/hooks/notification_hook.sh"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_HOOKS_DIR/plugins/command-safety/hooks/command_hook.py"
-          },
-          {
-            "type": "command",
-            "command": "$CLAUDE_HOOKS_DIR/plugins/git-hooks/hooks/git_pre_hook.py"
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_HOOKS_DIR/plugins/file-protection/hooks/file_hook.py"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Edit|MultiEdit|Write",
@@ -71,15 +31,6 @@
           {
             "type": "command",
             "command": "~/.bin/format.sh"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_HOOKS_DIR/plugins/git-hooks/hooks/cleanup_hook.py"
           }
         ]
       }
