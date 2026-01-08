@@ -201,7 +201,6 @@
     packages = with pkgs; [
       fira-code
       hack-font
-      jetbrains-mono
       nerd-fonts.mononoki
       source-code-pro
       ttf-envy-code-r
