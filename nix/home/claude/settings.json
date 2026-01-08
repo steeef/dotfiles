@@ -25,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/notification_hook.sh"
+            "command": "$CLAUDE_HOOKS_DIR/plugins/notifications/hooks/notification_hook.sh"
           }
         ]
       }
@@ -35,17 +35,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/notification_hook.sh"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/skill_activation_hook.py"
+            "command": "$CLAUDE_HOOKS_DIR/plugins/notifications/hooks/notification_hook.sh"
           }
         ]
       }
@@ -56,32 +46,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/safety-hooks/hooks/bash_hook.py"
+            "command": "$CLAUDE_HOOKS_DIR/plugins/command-safety/hooks/command_hook.py"
           },
           {
             "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/kubectl_safety_hook.py"
-          },
-          {
-            "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/terraform_safety_hook.py"
-          },
-          {
-            "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/git_branch_workflow_hook.py"
-          },
-          {
-            "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-worktree-integration/hooks/worktree_hook.py"
-          }
-        ]
-      },
-      {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/file_size_conditional_hook.py"
+            "command": "$CLAUDE_HOOKS_DIR/plugins/git-hooks/hooks/git_pre_hook.py"
           }
         ]
       },
@@ -90,11 +59,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-safety/hooks/claude_md_block_hook.py"
-          },
-          {
-            "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/safety-hooks/hooks/file_length_limit_hook.py"
+            "command": "$CLAUDE_HOOKS_DIR/plugins/file-protection/hooks/file_hook.py"
           }
         ]
       }
@@ -114,7 +79,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$CLAUDE_CODE_TOOLS_PATH/plugins/steeef-worktree-integration/hooks/cleanup_hook.py"
+            "command": "$CLAUDE_HOOKS_DIR/plugins/git-hooks/hooks/cleanup_hook.py"
           }
         ]
       }

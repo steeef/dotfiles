@@ -42,7 +42,7 @@
       EDITOR = "nvim";
       SUDO_EDITOR = "${pkgs.neovim}/bin/nvim";
       VISUAL = "nvim";
-      CLAUDE_CODE_TOOLS_PATH = "$HOME/code/claude-code-tools";
+      CLAUDE_HOOKS_DIR = "$HOME/code/claude-hooks";
     };
   };
 }

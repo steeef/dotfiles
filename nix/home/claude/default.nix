@@ -1,7 +1,7 @@
 # Claude Code configuration
 #
-# Requires: Clone https://github.com/steeef/claude-code-tools to ~/code/claude-code-tools
-# and set CLAUDE_CODE_TOOLS_PATH environment variable
+# Requires: ~/code/claude-hooks directory with hook plugins
+# and CLAUDE_HOOKS_DIR environment variable (set in zsh/default.nix)
 {
   inputs,
   pkgs,
