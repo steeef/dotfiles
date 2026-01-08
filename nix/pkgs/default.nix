@@ -9,8 +9,8 @@ final: prev: {
   pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
     (python-final: python-prev: {
       uvloop = python-prev.uvloop.overrideAttrs (old: {
-        disabledTests = (old.disabledTests or [ ]) ++ [
-          "test_cancel_post_init"
+        disabledTestPaths = (old.disabledTestPaths or [ ]) ++ [
+          "tests/test_process.py::TestAsyncio_AIO_Process::test_cancel_post_init"
         ];
       });
     })
