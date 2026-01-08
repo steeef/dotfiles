@@ -76,16 +76,21 @@
       upgrade = true;
     };
     taps = [
+      "atlassian/acli"
       "homebrew/bundle"
       "homebrew/services"
     ];
-    brews = [
-      "docker-buildx"
-      "docker-credential-helper-ecr"
-      "mas"
-      "ncdu"
-      "pam-reattach"
-    ];
+    brews =
+      [
+        "docker-buildx"
+        "docker-credential-helper-ecr"
+        "mas"
+        "ncdu"
+        "pam-reattach"
+      ]
+      ++ lib.optionals (machine == "ltm-3914") [
+        "atlassian/acli/acli"
+      ];
     casks =
       [
         "1password"
