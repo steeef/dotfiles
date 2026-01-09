@@ -1,5 +1,14 @@
 ---
 description: Conduct systematic codebase research using parallel sub-agents
+context: fork
+allowed-tools:
+  - Task(Explore)
+  - Read
+  - Glob
+  - Grep
+  - Bash(git:*)
+  - Bash(find:*)
+  - Bash(rg:*)
 ---
 
 # Codebase Research Command
@@ -62,6 +71,15 @@ Include file:line references.
 Find existing patterns in the codebase for [pattern type].
 Document 3+ examples with file:line references.
 ```
+
+### Step 4.5: Use LSP for Code Intelligence
+
+When tracing code relationships, leverage the LSP tool:
+- `go-to-definition` - Understand imports, dependencies, and type origins
+- `find-references` - Discover all usages of a symbol across the codebase
+- `hover` - Get documentation and type information
+
+This complements Explore agents by providing precise symbol-level navigation.
 
 ### Step 5: Synthesize Findings
 

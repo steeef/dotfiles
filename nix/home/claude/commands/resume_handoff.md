@@ -1,3 +1,11 @@
+---
+description: Resume work from previous handoff documents in new sessions
+allowed-tools:
+  - Read
+  - Bash(git:*)
+  - TodoWrite
+---
+
 # Resume Work from Handoff Document
 
 > Based on: https://github.com/humanlayer/humanlayer/blob/main/.claude/commands/resume_handoff.md

@@ -1,3 +1,11 @@
+---
+description: Create structured handoff document for session continuity
+allowed-tools:
+  - Write
+  - Bash(git:*)
+  - Bash(mkdir:*)
+---
+
 # Create Handoff
 
 > Based on: https://github.com/humanlayer/humanlayer/blob/main/.claude/commands/create_handoff.md
@@ -85,3 +93,16 @@ Handoff created! You can resume from this handoff in a new session with:
 - **More information, not less**. This template defines the minimum of what a handoff should be. Always feel free to include more information if necessary.
 - **Be thorough and precise**. Include both top-level objectives and lower-level details as necessary.
 - **Avoid excessive code snippets**. While a brief snippet to describe some key change is important, avoid large code blocks or diffs. Prefer using `/path/to/file.ext:line` references that an agent can follow later.
+
+---
+
+## Alternatives
+
+For short breaks (same day), consider using named sessions instead:
+- Run `/rename <descriptive-name>` before ending
+- Resume with `claude --resume <name>`
+
+Use full handoff documents for:
+- Multi-day breaks
+- Handing off to different environments
+- Complex multi-phase work requiring artifact references
