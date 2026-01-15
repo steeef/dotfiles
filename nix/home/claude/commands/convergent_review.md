@@ -15,6 +15,25 @@ Force 4-5 review passes on any artifact until it converges. Each pass examines f
 
 **Announce at start:** "Using /convergent_review to validate this [design/plan/implementation]."
 
+## Session Workflow
+
+**Each pass runs in a separate session.** This is intentional—fresh context prevents confirmation bias.
+
+**The cycle:**
+1. Run `/convergent_review` in a session
+2. Execute one pass, write findings to plan file
+3. Report to user and **end the session**
+4. User clears context (`/clear` command or restart Claude)
+5. User runs `/convergent_review` again in fresh session
+6. Read plan file to determine next pass, continue
+
+**The plan file is your persistent memory.** Everything relevant must be written there—the next session won't remember this one.
+
+**Why clear context?**
+- Fresh perspective catches issues you became blind to
+- Prevents building on flawed reasoning from earlier passes
+- Forces each pass to stand on its own analysis
+
 ## The Five Lenses
 
 Run passes in order (1→2→3→4→5). After Pass 5, cycle back to Pass 1 if needed.
@@ -67,15 +86,23 @@ Run passes in order (1→2→3→4→5). After Pass 5, cycle back to Pass 1 if n
 
 ## Pass Execution Protocol
 
-**Each pass is a discrete unit.** Do NOT run multiple passes in one turn.
+**One pass per session.** Do NOT run multiple passes without context clearing.
 
-**After completing each pass:**
-1. Update the plan file with findings under `## Convergent Review Log`
-2. **STOP** and report to user:
-   - What issues were found
-   - What fixes were applied (if any)
-   - Current pass status
-3. **Wait** for user to say "continue" or give other direction
+**During a pass:**
+1. Read the plan/design document under review
+2. Apply the lens for this pass (see The Five Lenses)
+3. Document all issues found with `file:line` references
+4. Apply fixes if within scope (or note for user if not)
+
+**After completing the pass:**
+1. Update plan file under `## Convergent Review Log`
+2. Report summary to user:
+   - Issues found and fixed
+   - Issues noted for user
+   - Pass status (Clean / Needs fixes)
+3. **End the session.** Say: "Pass N complete. Clear context and run `/convergent_review` to continue."
+
+**Do not proceed to the next pass.** Wait for user to clear context and start fresh.
 
 **Plan file format:**
 ```
@@ -88,17 +115,22 @@ Run passes in order (1→2→3→4→5). After Pass 5, cycle back to Pass 1 if n
 - [Fix description]
 **Status:** Clean / Needs fixes
 
-[User continued after review]
-
 ### Pass 2: Constraints
 ...
 ```
 
-**Why stop between passes:**
-- Prevents rushed analysis
-- User can redirect focus
-- Creates audit trail in plan file
-- Allows course correction before next lens
+## Resuming a Review
+
+When starting a new session after context was cleared:
+
+1. Read the plan file's `## Convergent Review Log`
+2. Find the last completed pass
+3. Determine next action:
+   - If last pass was **Clean** → proceed to next pass number
+   - If last pass had **Needs fixes** and fixes applied → re-run same pass
+   - If 2 consecutive **Clean** passes → announce convergence achieved
+4. Announce: "Resuming convergent review at Pass N: [Lens Name]"
+5. Execute that pass
 
 ## Output Format
 
