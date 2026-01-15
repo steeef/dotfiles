@@ -22,6 +22,19 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Compaction: strip noisy tool output; summarize only the essential facts, decisions, and next actions so context stays lean.
 - Guardrails: do not ask the user questions you can answer from code; pause and research when uncertain; when the task is documentation-only, describe what exists without proposing improvements.
 
+## Convergent Review (Rule of Five)
+- Apply 4-5 review passes on complex work until output stabilizes
+- Each pass examines from a different angle:
+  1. Functional: Does it solve the problem?
+  2. Constraints: Performance, security, compatibility?
+  3. Alternatives: Is there a simpler approach?
+  4. Integration: What breaks? Hidden dependencies?
+  5. Durability: Maintainable in 6 months?
+- 2-3 passes for simple tasks, 4-5 for complex
+- Convergence = 2 consecutive passes with no significant issues
+- After Pass 5, cycle back to Pass 1 if issues remain
+- Use `/convergent_review` command to enforce this discipline
+
 ## Project Integration
 
 ### Learning the Codebase

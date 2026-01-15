@@ -21,6 +21,9 @@
   home.file.".claude/commands/create_handoff.md".source = ./commands/create_handoff.md;
   home.file.".claude/commands/resume_handoff.md".source = ./commands/resume_handoff.md;
   home.file.".claude/commands/research_codebase.md".source = ./commands/research_codebase.md;
+  home.file.".claude/commands/convergent_review.md".source = ./commands/convergent_review.md;
+  home.file.".claude/commands/iterate_plan.md".source = ./commands/iterate_plan.md;
+  home.file.".claude/commands/validate_plan.md".source = ./commands/validate_plan.md;
 
   # Use official home-manager claude-code module
   programs.claude-code = {
