@@ -58,24 +58,66 @@ Run passes in order (1→2→3→4→5). After Pass 5, cycle back to Pass 1 if n
 - Stop when 2 consecutive passes find no significant issues
 
 **If pass reveals issues:**
-1. Record all issues found in the pass
-2. Fix issues (or note them for user action if outside scope)
+1. Record issues in plan file
+2. Fix issues (or note them for user if outside scope)
 3. Re-run THAT SAME pass to verify fix
-4. Only proceed to next pass after current pass is clean
+4. Update plan file with results
+5. STOP and report to user
+6. Wait for user before proceeding to next pass
+
+## Pass Execution Protocol
+
+**Each pass is a discrete unit.** Do NOT run multiple passes in one turn.
+
+**After completing each pass:**
+1. Update the plan file with findings under `## Convergent Review Log`
+2. **STOP** and report to user:
+   - What issues were found
+   - What fixes were applied (if any)
+   - Current pass status
+3. **Wait** for user to say "continue" or give other direction
+
+**Plan file format:**
+```
+## Convergent Review Log
+
+### Pass 1: Functional
+**Issues Found:** N
+- [Issue with file:line]
+**Fixes Applied:**
+- [Fix description]
+**Status:** Clean / Needs fixes
+
+[User continued after review]
+
+### Pass 2: Constraints
+...
+```
+
+**Why stop between passes:**
+- Prevents rushed analysis
+- User can redirect focus
+- Creates audit trail in plan file
+- Allows course correction before next lens
 
 ## Output Format
 
-After each pass:
+**Write to plan file first, then report to user.**
+
+After each pass, add to plan file:
 ```
 ### Pass N: [Lens Name]
 **Issues Found:** [count]
-- [Issue 1 with specific location]
-- [Issue 2 with specific location]
-
-**Status:** [Issues found - fixing / Clean - continuing]
+- [Issue 1 with file:line]
+- [Issue 2 with file:line]
+**Fixes Applied:**
+- [Fix description]
+**Status:** Clean / Needs fixes
 ```
 
-After convergence:
+Then tell user: "Pass N complete. [Summary of findings]. Updated plan file. Say 'continue' for next pass."
+
+After convergence, add to plan file:
 ```
 ### Convergence Achieved
 **Total Passes:** N (including re-runs)
