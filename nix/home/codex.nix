@@ -8,7 +8,7 @@
     package = inputs.codex-cli.packages.${pkgs.stdenv.hostPlatform.system}.default;
     custom-instructions = builtins.readFile ./claude/memory.md;
     settings = {
-      model = "gpt-5.1-codex-max";
+      model = "gpt-5.2-codex";
       approval_policy = "on-request";
       sandbox_mode = "workspace-write";
       notice = {
