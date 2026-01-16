@@ -1,4 +1,5 @@
 ---
+name: iterate_plan
 description: Make targeted edits to implementation plans - add tasks, modify steps, update context. Use when plan needs refinement after review or during execution.
 allowed-tools:
   - Read

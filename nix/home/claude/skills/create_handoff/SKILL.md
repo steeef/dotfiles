@@ -1,4 +1,5 @@
 ---
+name: create_handoff
 description: Create structured handoff document for session continuity
 allowed-tools:
   - Write

@@ -1,0 +1,3 @@
+# Ripgrep config for opencode file search
+# Allows searching gitignored files (audits, todo lists, etc.)
+--no-ignore-vcs
