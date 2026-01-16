@@ -37,7 +37,6 @@
     cowsay
     curl
     difftastic
-    fasd
     fd
     gcc
     gnumake
@@ -114,6 +113,7 @@
     ./rsnapshot.nix
     ./symlinks.nix
     ./tmux
+    ./zoxide.nix
     ./zsh
   ];
 }
