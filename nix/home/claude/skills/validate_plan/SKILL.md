@@ -1,4 +1,5 @@
 ---
+name: validate_plan
 description: Verify implementation matches plan requirements - check success criteria, run verification commands, report gaps. Use before marking plan complete or creating PR.
 allowed-tools:
   - Read

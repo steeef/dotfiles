@@ -1,4 +1,5 @@
 ---
+name: convergent_review
 description: Use when completing a design, plan, or implementation draft that needs quality validation - forces 4-5 review passes until output stabilizes
 allowed-tools:
   - Read

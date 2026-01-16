@@ -1,4 +1,5 @@
 ---
+name: resume_handoff
 description: Resume work from previous handoff documents in new sessions
 allowed-tools:
   - Read
