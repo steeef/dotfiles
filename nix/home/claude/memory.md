@@ -77,9 +77,29 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 
 # Code style
 * IMPORTANT: When a `.pre-commit-config.yaml` is present in the project directory, run pre-commit after modifying files using: `uvx --with pre-commit-uv pre-commit run --files <file1> <file2> ...`
-* IMPORTANT: When running poetry in a project, use the global `poetry` command. This was installed with `uv` with this command: `uv tool install --python 3.11 poetry==2.1.1`
+* IMPORTANT: When running poetry in a project, use the global `poetry` command (Python 3.11). If the project requires a different Python version, use: `uvx --python <version> --with poetry==<poetry-version> poetry ...` (e.g., `uvx --python 3.12 --with poetry==2.1.1 poetry install`)
 * IMPORTANT: Use `poetry lock` (without flags) to regenerate the lock file. The `--no-update` flag does not exist.
 * When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls (e.g., from pre-commit) do not fail with `PermissionError`.
+
+## Single-File Python Scripts
+When writing a standalone Python script (not part of a larger project), use uv with PEP 723 inline script metadata:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "httpx>=0.28.1",
+# ]
+# ///
+
+import httpx
+# ... rest of script
+```
+
+- Shebang enables direct execution: `./script.py` (after `chmod +x`)
+- Metadata block declares Python version and dependencies inline
+- No separate requirements.txt or virtual environment needed
 
 # File Analysis Strategy
 - When hooks block reading large files (>500 lines), ALWAYS use the Task tool for analysis
