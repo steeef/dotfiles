@@ -17,7 +17,25 @@ You are tasked with writing a handoff document to hand off your work to another 
 
 ### 1. Filepath & Metadata
 
-Create your file under `thoughts/shared/handoffs/YYYY-MM-DD_HH-MM-SS_description.md`, where:
+**IMPORTANT: Handoffs must be created in the main repository, never in worktrees.**
+
+First, detect if you're in a worktree and find the main repository location:
+
+```bash
+# Detect if in a worktree (worktrees have .git as a file, main repo has .git as directory)
+if [[ -f .git ]]; then
+  # In a worktree - find main repo
+  MAIN_REPO=$(git rev-parse --git-common-dir | sed 's|/.git$||')
+  HANDOFF_DIR="$MAIN_REPO/thoughts/shared/handoffs"
+  echo "Detected worktree. Creating handoff in main repository at: $HANDOFF_DIR"
+else
+  # In main repo
+  HANDOFF_DIR="thoughts/shared/handoffs"
+  echo "Creating handoff at: $HANDOFF_DIR"
+fi
+```
+
+Create your file under `$HANDOFF_DIR/YYYY-MM-DD_HH-MM-SS_description.md`, where:
 - YYYY-MM-DD is today's date
 - HH-MM-SS is the hours, minutes and seconds based on the current time, in 24-hour format
 - description is a brief kebab-case description of the work
@@ -72,8 +90,9 @@ type: handoff
 
 ### 3. Create Directory and Save
 
-1. Create the `thoughts/shared/handoffs/` directory if it doesn't exist
-2. Write the handoff document to the filepath
+1. Use the `$HANDOFF_DIR` variable determined in step 1 (accounts for worktree vs main repo)
+2. Create the handoff directory if it doesn't exist: `mkdir -p "$HANDOFF_DIR"`
+3. Write the handoff document to `$HANDOFF_DIR/YYYY-MM-DD_HH-MM-SS_description.md`
 
 ---
 

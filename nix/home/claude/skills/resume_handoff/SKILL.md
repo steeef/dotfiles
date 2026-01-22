@@ -17,8 +17,25 @@ This command resumes work based on a handoff document containing prior context a
 
 The handoff file path is provided as: `$ARGUMENTS`
 
+**IMPORTANT: Handoffs are always stored in the main repository, never in worktrees.**
+
+If you're in a worktree, adjust the path to search in the main repository:
+
+```bash
+# Detect if in a worktree
+if [[ -f .git ]]; then
+  # In a worktree - search main repo
+  MAIN_REPO=$(git rev-parse --git-common-dir | sed 's|/.git$||')
+  HANDOFF_DIR="$MAIN_REPO/thoughts/shared/handoffs"
+else
+  # In main repo
+  HANDOFF_DIR="thoughts/shared/handoffs"
+fi
+```
+
 If no path is provided, prompt the user to provide one:
-- Ask for the path to the handoff file (e.g., `thoughts/shared/handoffs/2025-01-08_13-55-22_add-auth.md`)
+- Ask for the path to the handoff file relative to the main repository (e.g., `thoughts/shared/handoffs/2025-01-08_13-55-22_add-auth.md`)
+- Search for handoffs in `$HANDOFF_DIR` when listing available options
 
 ## Three-Phase Process
 
