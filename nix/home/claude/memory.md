@@ -181,3 +181,10 @@ Skip worktrees for single-file fixes, documentation-only changes, exploration, o
 - Work in worktree until PR merges
 - Auto-cleanup worktree after successful merge to main/master
 - Delete local branch after cleanup
+
+## Handoff Storage
+- Handoffs are ALWAYS stored in the main repository's `thoughts/shared/handoffs/` directory
+- Never create handoffs in worktrees (they will be lost on cleanup)
+- Detection: Use `git rev-parse --git-common-dir` to find main repo from within worktree
+- When in a worktree, `create_handoff` skill automatically creates handoffs in the main repo
+- When resuming handoffs from a worktree, `resume_handoff` skill searches the main repo directory
