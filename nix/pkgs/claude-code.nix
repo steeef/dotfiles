@@ -2,6 +2,7 @@
   lib,
   stdenv,
   fetchurl,
+  makeWrapper,
   patchelf,
 }:
 # To update:
@@ -52,16 +53,24 @@ stdenv.mkDerivation {
   };
 
   dontUnpack = true;
-  dontFixup = true;
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [
+  nativeBuildInputs = [
+    makeWrapper
+  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
     patchelf
   ];
 
   installPhase = ''
+    runHook preInstall
     install -Dm755 $src $out/bin/claude
   '' + lib.optionalString stdenv.hostPlatform.isLinux ''
     patchelf --set-interpreter "$(cat ${stdenv.cc}/nix-support/dynamic-linker)" $out/bin/claude
+  '' + ''
+    wrapProgram $out/bin/claude \
+      --set DISABLE_INSTALLATION_CHECKS 1 \
+      --set DISABLE_AUTOUPDATER 1 \
+      --set DISABLE_AUTO_MIGRATE_TO_NATIVE 1
+    runHook postInstall
   '';
 
   doInstallCheck = true;
