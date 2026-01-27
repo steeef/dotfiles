@@ -21,7 +21,6 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-code.url = "github:sadjow/claude-code-nix";
     codex-cli.url = "github:sadjow/codex-cli-nix";
     mkalias = {
       url = "github:reckenrode/mkalias";
@@ -39,7 +38,6 @@
     nixpkgs,
     nixos-hardware,
     home-manager,
-    claude-code,
     codex-cli,
     darwin,
     nur,
@@ -84,9 +82,6 @@
         };
         modules = [
           ./nix/darwin
-          {
-            _module.args = {inherit claude-code;};
-          }
           ({...}: {
             system.stateVersion = 4;
             system.primaryUser = "sprice";

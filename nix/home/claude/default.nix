@@ -4,7 +4,6 @@
 #   /plugin marketplace add steeef/claude-hooks
 #   /plugin install <plugin>@claude-hooks
 {
-  inputs,
   pkgs,
   lib,
   ...
@@ -20,8 +19,7 @@
   # Use official home-manager claude-code module
   programs.claude-code = {
     enable = true;
-    # Use updated package from sadjow flake
-    package = inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    package = pkgs.claude-code;
     # Import settings from existing JSON file
     settings = lib.importJSON ./settings.json;
     # Custom skills directory
