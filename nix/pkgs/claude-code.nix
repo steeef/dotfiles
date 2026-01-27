@@ -53,6 +53,8 @@ stdenv.mkDerivation {
   };
 
   dontUnpack = true;
+  dontPatchELF = true; # automatic patchelf --shrink-rpath corrupts Bun payload
+  dontStrip = true; # strip corrupts the Bun embedded payload trailer
 
   nativeBuildInputs = [
     makeWrapper
@@ -65,6 +67,11 @@ stdenv.mkDerivation {
     install -Dm755 $src $out/bin/claude
   '' + lib.optionalString stdenv.hostPlatform.isLinux ''
     patchelf --set-interpreter "$(cat ${stdenv.cc}/nix-support/dynamic-linker)" $out/bin/claude
+    # Verify Bun trailer survived patching
+    if ! tail -c 20 $out/bin/claude | grep -q "Bun!"; then
+      echo "ERROR: Bun trailer corrupted by patchelf"
+      exit 1
+    fi
   '' + ''
     wrapProgram $out/bin/claude \
       --set DISABLE_INSTALLATION_CHECKS 1 \
@@ -75,7 +82,9 @@ stdenv.mkDerivation {
 
   doInstallCheck = true;
   installCheckPhase = ''
-    HOME=$TMPDIR $out/bin/claude --version
+    output=$(HOME=$TMPDIR $out/bin/claude --version 2>&1)
+    echo "$output"
+    echo "$output" | grep -q "${version}"
   '';
 
   meta = {
