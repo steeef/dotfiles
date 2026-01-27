@@ -4,6 +4,17 @@
   fetchurl,
   patchelf,
 }:
+# To update:
+# 1. Set `version` to the new release version
+# 2. Update all four SRI hashes by running:
+#      VERSION="<new-version>"
+#      BASE="https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases"
+#      for plat in linux-x64 linux-arm64 darwin-x64 darwin-arm64; do
+#        echo "$plat:"
+#        nix-prefetch-url --type sha256 "$BASE/$VERSION/$plat/claude" 2>/dev/null \
+#          | xargs nix hash convert --from nix32 --to sri --hash-algo sha256
+#      done
+# 3. Run `hms` to build and verify
 let
   version = "2.1.19";
   baseUrl = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases";
