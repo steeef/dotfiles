@@ -73,10 +73,11 @@ stdenv.mkDerivation {
       exit 1
     fi
   '' + ''
+    # https://github.com/anthropics/claude-code/issues/8523
+    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/cl/claude-code/package.nix
     wrapProgram $out/bin/claude \
       --set DISABLE_INSTALLATION_CHECKS 1 \
-      --set DISABLE_AUTOUPDATER 1 \
-      --set DISABLE_AUTO_MIGRATE_TO_NATIVE 1
+      --set DISABLE_AUTOUPDATER 1
     runHook postInstall
   '';
 
