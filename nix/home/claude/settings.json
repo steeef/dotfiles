@@ -2,6 +2,7 @@
   "enabledPlugins": {
     "superpowers@superpowers-marketplace": true,
     "command-safety@claude-hooks": true,
+    "env-protection@claude-hooks": true,
     "file-protection@claude-hooks": true,
     "git-hooks@claude-hooks": true,
     "notifications@claude-hooks": true
