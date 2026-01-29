@@ -7,7 +7,7 @@
       actionlint
       black
       helm-ls
-      marksman
+      markdown-oxide
       nil
       ripgrep
       shellcheck

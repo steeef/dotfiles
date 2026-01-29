@@ -18,7 +18,7 @@ return {
             },
           },
         },
-        marksman = {},
+        markdown_oxide = {},
         yamlls = {
           settings = {
             redhat = {
