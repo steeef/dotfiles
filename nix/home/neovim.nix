@@ -5,7 +5,6 @@
 
     extraPackages = with pkgs; [
       actionlint
-      black
       helm-ls
       markdown-oxide
       nil
