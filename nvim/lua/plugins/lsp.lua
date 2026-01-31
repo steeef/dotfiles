@@ -66,7 +66,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         nix = { "alejandra" },
-        python = { "black", "reorder_python_imports" },
+        python = { "ruff_organize_imports", "ruff_format" },
         yaml = { "yamlfmt" },
         bash = { "shfmt" },
         sh = { "shfmt" },
