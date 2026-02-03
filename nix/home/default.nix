@@ -58,6 +58,7 @@
     nmap
     ponysay
     pipx
+    prek
     postgresql
     postgresql.pg_config  # pg_config for psycopg2 compilation
     postgresql.dev  # headers for psycopg2 compilation

@@ -12,7 +12,7 @@
 - `dr` rebuilds macOS hosts via nix-darwin; use only on Darwin machines and expect sudo prompts.
 - `nix flake check` validates all flake outputs and is the preferred pre-commit sanity test.
 - `nix flake update` refreshes inputs; review `flake.lock` diffs before committing.
-- `uvx --with pre-commit-uv pre-commit run --files <paths>` runs targeted hooks, and `./bin/format.sh` batches the repo’s formatters.
+- `prek run --files <paths>` runs targeted hooks, and `./bin/format.sh` batches the repo's formatters.
 
 ## Coding Style & Naming Conventions
 - Nix files use two-space indentation and snake_case attribute names; align lists and let blocks for readability.
@@ -22,7 +22,7 @@
 
 ## Testing Guidelines
 - Use `nix flake check` as the integration test suite; ensure new modules evaluate for every declared host.
-- When touching lint-configured files, execute the relevant pre-commit hook locally (e.g. `uvx --with pre-commit-uv pre-commit run --files file.nix`).
+- When touching lint-configured files, execute the relevant pre-commit hook locally (e.g. `prek run --files file.nix`).
 - For experimental changes, prefer `nix develop` to spawn an isolated environment before applying `hms` or `dr`.
 
 ## Commit & Pull Request Guidelines
