@@ -19,16 +19,16 @@
 
 buildNpmPackage rec {
   pname = "claude-powerline";
-  version = "1.8.0";
+  version = "1.16.1";
 
   src = fetchFromGitHub {
     owner = "Owloops";
     repo = "claude-powerline";
     rev = "v${version}";
-    hash = "sha256-Py16b1L7Z9JGb2u0JoY4i16NMRCdj8lA+zQ6dTMOXpY=";
+    hash = "sha256-DeNXOYgMq9FcIXLCmFunjBQhO3KGUgoE7L1yPiCAEd4=";
   };
 
-  npmDepsHash = "sha256-FTWHxuOZrRPci/c0gpfNNR0PCGl2TKysNy0UWZXDEqk=";
+  npmDepsHash = "sha256-4xTN96MCAonXjsArM/oWCYnStqidjpQOsy9f4IJleTs=";
 
   nativeBuildInputs = [ nodejs ];
 
