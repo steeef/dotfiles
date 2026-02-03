@@ -10,7 +10,8 @@
   "includeCoAuthoredBy": false,
   "statusLine": {
     "type": "command",
-    "command": "claude-powerline"
+    "command": "claude-powerline",
+    "padding": 0
   },
   "permissions": {
     "allow": [
