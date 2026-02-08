@@ -17,30 +17,11 @@
             "showTag": true,
             "showTimeSinceCommit": false,
             "showStashCount": true,
-            "showUpstream": false,
-            "showRepoName": true
-          }
-        }
-      },
-      {
-        "segments": {
-          "version": {
-            "enabled": true
-          },
-          "model": {
-            "enabled": true
+            "showUpstream": false
           },
           "context": {
-            "enabled": true
-          },
-          "block": {
             "enabled": true,
-            "type": "time",
-            "burnType": "tokens"
-          },
-          "today": {
-            "enabled": true,
-            "type": "tokens"
+            "displayStyle": "bar"
           }
         }
       }
