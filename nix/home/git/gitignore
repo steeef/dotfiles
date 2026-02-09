@@ -30,3 +30,5 @@ TRASH-FILES.md
 .claude_in_subtask.flag
 *.backup
 thoughts/
+CLAUDE.local.md
+ai_docs/handoffs/
