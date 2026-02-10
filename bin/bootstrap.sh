@@ -21,6 +21,7 @@ load_nix_environment() {
   fi
 
   if [ -f "${profile_path}/etc/profile.d/nix-daemon.sh" ]; then
+    # shellcheck source=/dev/null
     . "${profile_path}/etc/profile.d/nix-daemon.sh"
   fi
 }
