@@ -1,0 +1,7 @@
+disabled = [
+  "repeated_keys",
+]
+
+[nix_version]
+minor = 2
+patch = 4
