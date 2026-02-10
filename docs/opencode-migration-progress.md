@@ -1,6 +1,7 @@
 # OpenCode Plugin Migration – Progress
 
 ## Current Focus
+
 - Phase 1: Core safety plugin (`global-safety.ts`) for OpenCode.
 
 ## Work Completed

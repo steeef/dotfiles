@@ -2,10 +2,12 @@
 name: convergent_review
 description: Use when completing a design, plan, or implementation draft that needs quality validation - forces 4-5 review passes until output stabilizes
 allowed-tools:
-  - Read
-  - Edit
-  - Glob
-  - Task(Explore)
+
+- Read
+- Edit
+- Glob
+- Task(Explore)
+
 ---
 
 # Convergent Review (Rule of Five)
@@ -21,6 +23,7 @@ Force 4-5 review passes on any artifact until it converges. Each pass examines f
 **Each pass runs in a separate session.** This is intentional—fresh context prevents confirmation bias.
 
 **The cycle:**
+
 1. Run `/convergent_review` in a session
 2. Execute one pass, write findings to plan file
 3. Report to user and **end the session**

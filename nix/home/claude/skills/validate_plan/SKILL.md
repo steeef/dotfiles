@@ -2,18 +2,20 @@
 name: validate_plan
 description: Verify implementation matches plan requirements - check success criteria, run verification commands, report gaps. Use before marking plan complete or creating PR.
 allowed-tools:
-  - Read
-  - Grep
-  - Glob
-  - Task(Explore)
-  - Bash(git:*)
-  - Bash(pytest:*)
-  - Bash(npm:*)
-  - Bash(cargo:*)
-  - Bash(nix:*)
-  - Bash(go:*)
-  - Bash(hms:*)
-  - Bash(home-manager:*)
+
+- Read
+- Grep
+- Glob
+- Task(Explore)
+- Bash(git:*)
+- Bash(pytest:*)
+- Bash(npm:*)
+- Bash(cargo:*)
+- Bash(nix:*)
+- Bash(go:*)
+- Bash(hms:*)
+- Bash(home-manager:*)
+
 ---
 
 # Validate Plan
@@ -25,6 +27,7 @@ allowed-tools:
 ## Supported Plan Schemas
 
 This command works with plans that have ANY of:
+
 1. `## Files to Modify` table with Create/Modify columns
 2. `### Task N:` sections with `- Create:` / `- Modify:` bullets
 3. `## Verification Checklist` with `- [ ]` items

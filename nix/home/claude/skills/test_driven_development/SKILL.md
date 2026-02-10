@@ -24,6 +24,7 @@ Wrote code before the test? Delete it. Start over. No "reference", no "adapting"
 ### RED — Write Failing Test
 
 Write one minimal test showing what should happen:
+
 - One behavior per test
 - Clear name describing the behavior
 - Real code, not mocks (unless unavoidable)

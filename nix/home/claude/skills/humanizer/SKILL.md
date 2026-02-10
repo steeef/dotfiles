@@ -253,28 +253,33 @@ When analyzing text, provide:
 
 ## Detection Strategy
 
-1. **Scan for high-confidence patterns first**
-   - Content: significance inflation, notability/attribution emphasis, superficial analysis, promotional language, vague attributions, challenges/prospects formula
-   - Language: AI vocabulary, copula avoidance, elegant variation
-   - Communication: collaborative chatbot phrases, knowledge-cutoff disclaimers, placeholder text
+### 1. Scan for high-confidence patterns first
 
-2. **Check for pattern clusters**
-   - Multiple patterns in same sentence = higher confidence
-   - Example: "Additionally" + "serves as" + "pivotal" = very likely AI
-   - Look for present participle ("-ing") chains at sentence ends
+- Content: significance inflation, notability/attribution emphasis, superficial analysis, promotional language, vague attributions, challenges/prospects formula
+- Language: AI vocabulary, copula avoidance, elegant variation
+- Communication: collaborative chatbot phrases, knowledge-cutoff disclaimers, placeholder text
 
-3. **Verify with context**
-   - Is the pattern inappropriate for this text type?
-   - Would a human expert in this domain write this way?
-   - Consider the specific AI model's idiolect (ChatGPT vs Gemini vs Claude)
+### 2. Check for pattern clusters
 
-4. **Provide specific locations**
-   - Quote exact phrase with surrounding context
-   - Reference paragraph/line if available
+- Multiple patterns in same sentence = higher confidence
+- Example: "Additionally" + "serves as" + "pivotal" = very likely AI
+- Look for present participle ("-ing") chains at sentence ends
 
-5. **Give concrete suggestions**
-   - Don't just flag — show how to fix
-   - Specific rewrites, not generic advice
+### 3. Verify with context
+
+- Is the pattern inappropriate for this text type?
+- Would a human expert in this domain write this way?
+- Consider the specific AI model's idiolect (ChatGPT vs Gemini vs Claude)
+
+### 4. Provide specific locations
+
+- Quote exact phrase with surrounding context
+- Reference paragraph/line if available
+
+### 5. Give concrete suggestions
+
+- Don't just flag — show how to fix
+- Specific rewrites, not generic advice
 
 ## Ineffective Indicators
 
@@ -308,7 +313,7 @@ Do NOT flag these as AI patterns (they produce false positives):
 
 Wikipedia's "Signs of AI writing" article evolves as AI writing changes. To update:
 
-1. Check Wikipedia for new patterns: https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+1. Check Wikipedia for new patterns: <https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing>
 2. Run `update-patterns.sh` to fetch latest wikitext
 3. Review changes and update pattern database above
 4. Test with known AI-generated samples

@@ -1,9 +1,10 @@
-# borrowed generously from https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/
+# borrowed generously from <https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/>
 
 # Important Claude memory storage path
 IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/memory.md` and run `hms` (the file is copied to `~/.claude/CLAUDE.md`).
 
 # General approach
+
 - Prioritize substance, clarity, and depth.
 - Challenge all my proposals, designs, and conclusions as hypotheses to be tested.
 - Sharpen follow-up questions for precision, surfacing hidden assumptions, trade offs, and failure modes early.
@@ -75,10 +76,10 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - IMPORTANT: Never mention Claude or Claude Code or AI in any commit messages
 
 # Code style
-* IMPORTANT: When a `.pre-commit-config.yaml` is present in the project directory, run pre-commit after modifying files using: `prek run --files <file1> <file2> ...`
-* IMPORTANT: When running poetry in a project, use the global `poetry` command (Python 3.11). If the project requires a different Python version, use: `uvx --python <version> --with poetry==<poetry-version> poetry ...` (e.g., `uvx --python 3.12 --with poetry==2.1.1 poetry install`)
-* IMPORTANT: Use `poetry lock` (without flags) to regenerate the lock file. The `--no-update` flag does not exist.
-* When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls do not fail with `PermissionError`.
+- IMPORTANT: When a `.pre-commit-config.yaml` is present in the project directory, run pre-commit after modifying files using: `prek run --files <file1> <file2> ...`
+- IMPORTANT: When running poetry in a project, use the global `poetry` command (Python 3.11). If the project requires a different Python version, use: `uvx --python <version> --with poetry==<poetry-version> poetry ...` (e.g., `uvx --python 3.12 --with poetry==2.1.1 poetry install`)
+- IMPORTANT: Use `poetry lock` (without flags) to regenerate the lock file. The `--no-update` flag does not exist.
+- When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls do not fail with `PermissionError`.
 
 ## Single-File Python Scripts
 When writing a standalone Python script (not part of a larger project), use uv with PEP 723 inline script metadata:
@@ -111,9 +112,9 @@ import httpx
 - Git hooks prevent unsafe operations - follow suggested alternatives
 
 # GitHub style
-* IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
-* IMPORTANT: When creating pull request, prefix the title with the associated Jira issue, if it exists
-* IMPORTANT: When creating pull request, the Jira issue must be on the first line of the body description, by itself
+- IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
+- IMPORTANT: When creating pull request, prefix the title with the associated Jira issue, if it exists
+- IMPORTANT: When creating pull request, the Jira issue must be on the first line of the body description, by itself
 
 ## File Deletion Hook
 - `rm` command is blocked by safety hooks
