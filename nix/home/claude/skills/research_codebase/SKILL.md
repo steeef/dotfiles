@@ -2,7 +2,14 @@
 name: research_codebase
 description: Conduct systematic codebase research using parallel sub-agents
 context: fork
-allowed-tools: ["Task(Explore)", "Read", "Glob", "Grep", "Bash(git:*)", "Bash(find:*)", "Bash(rg:*)"]
+allowed-tools:
+- Task(Explore)
+- Read
+- Glob
+- Grep
+- Bash(git:*)
+- Bash(find:*)
+- Bash(rg:*)
 ---
 
 # Codebase Research Command

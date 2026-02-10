@@ -1,4 +1,9 @@
 {
+  "extensions": {
+    "front-matter": {
+      "enabled": true
+    }
+  },
   "plugins": {
     "md024": {
       "siblings_only": true
