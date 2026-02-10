@@ -6,7 +6,7 @@ AI writing pattern detection based on Wikipedia's "Signs of AI writing" article.
 
 This skill implements patterns documented in Wikipedia's collaborative research on AI-generated text detection:
 
-**Original Source:** https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+**Original Source:** <https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing>
 
 The Wikipedia article is maintained by the Wikipedia community and evolves as AI writing patterns change. This skill provides a snapshot of patterns as of February 2026.
 
@@ -28,6 +28,7 @@ Review the snapshot, update SKILL.md with new patterns, and run `hms` to deploy.
 ## Pattern Categories
 
 The skill detects 30+ specific patterns across 7 categories:
+
 - **Content Patterns**: Significance inflation, notability/attribution emphasis, superficial analysis, promotional language, vague attributions, challenges/prospects formula
 - **Language Patterns**: AI vocabulary, copula avoidance, elegant variation, negative parallelisms, rule of three, false ranges
 - **Style Patterns**: Em dash overuse, excessive boldface, title case, emoji, curly quotes, unusual tables

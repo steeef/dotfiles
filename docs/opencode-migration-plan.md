@@ -11,6 +11,7 @@
 This plan outlines migrating critical Claude Code safety hooks and automation to OpenCode's plugin system. Most safety features can be ported via `tool.execute.before/after` hooks, though some lifecycle features (SessionStart, UserPromptSubmit) have no direct equivalent and are documented as accepted limitations.
 
 **Key Priorities (User-Selected):**
+
 - ✅ Bash safety checks (rm, git, kubectl, terraform blocking)
 - ✅ File size guards (prevents reading huge files)
 - ✅ Auto-formatting (YAML, Terraform post-edit)
@@ -122,23 +123,23 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 
 ### Phase 0: Correctness Fixes (Blockers Discovered During Review)
 
-##### Hook Argument Usage
+#### Hook Argument Usage
 
 - `tool.execute.before` currently references `output.args`, but no `output` object exists until the tool finishes. Update the plan to inspect `input.args` (request payload) in the before-hook and reserve `result`/`output` for the after-hook. This is required for every guard (bash, file-size, CLAUDE.md) to run at all.
 
-##### Auto-Format Invocation
+#### Auto-Format Invocation
 
 - The post-hook feeds `output.args` to `format.sh`, but write/edit/MultiEdit tools often do not expose a single `file_path`. Adjust the plan so Phase 1 captures the actual touched files (e.g., via tool metadata or `git status --porcelain`) and invoke `~/.bin/format.sh` once per file using the JSON contract it expects (`{"tool_input":{"file_path":"/abs/path"}}`). Also guard `format.sh` calls with try/catch so edits do not fail if formatting cannot identify a file.
 
-##### File-Size Guard Shelling
+#### File-Size Guard Shelling
 
 - The current sketch shells out with ``$`wc -l < ${fullPath}`` without quoting, which breaks on whitespace and enables injection. Update Phase 1 tasks to compute line counts via Node streams (preferred) or run `wc -l` with proper argument passing (`$` helper supports `$`command`${fullPath}` without redirection). Confirm the plan emphasizes secure path handling.
 
-##### Task Flag Cleanup
+#### Task Flag Cleanup
 
 - `.opencode_in_subtask.flag` is only removed in `tool.execute.after`, so crashes leave the flag behind and permanently relax the guard. Modify Phase 2 (done below) to track active Task call IDs and register process-exit cleanup so the flag is cleared even when the Task tool crashes or OpenCode aborts execution.
 
-##### State Storage Alternative (Open Question)
+#### State Storage Alternative (Open Question)
 
 - Evaluate replacing the sentinel file with in-memory plugin state or OpenCode config storage. Document decision and add tests covering concurrent subtasks if multiple Task invocations run in parallel.
 
@@ -150,7 +151,7 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 
 **Features:**
 
-##### Bash Safety (tool.execute.before)
+#### Bash Safety (tool.execute.before)
 
 - Block `rm` commands → suggest TRASH/ pattern
 - Block `git add ./-A/--all` → suggest specific files or `git add -u`
@@ -159,7 +160,7 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 - Block `terraform apply/destroy` → require manual confirmation
 - Block `.env` file access in commands
 
-##### File Size Guard (tool.execute.before)
+#### File Size Guard (tool.execute.before)
 
 - Check if reading file via Read tool
 - Inspect file size via `fs.stat` + line count via `wc -l`
@@ -168,18 +169,18 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 - Sub-agent: block >10k lines
 - Allow binary files
 
-##### CLAUDE.md Guard (tool.execute.before)
+#### CLAUDE.md Guard (tool.execute.before)
 
 - Check Write/Edit/MultiEdit tool operations
 - Block if `filePath` matches `CLAUDE.md`
 - Suggest editing `AGENTS.md` and symlinking to `CLAUDE.md`
 
-##### Grep Enforcement (tool.execute.before)
+#### Grep Enforcement (tool.execute.before)
 
 - Check bash commands for `grep` usage
 - Block and suggest using `rg` (ripgrep) instead
 
-##### Auto-Formatting (tool.execute.after)
+#### Auto-Formatting (tool.execute.after)
 
 - Trigger on Write/Edit/MultiEdit tool completion
 - Shell out to `~/.bin/format.sh` with tool args
@@ -846,19 +847,19 @@ opencode
 
 ### Critical Unknowns
 
-##### Tool Identifier Casing
+#### Tool Identifier Casing
 
 - **Question:** Are tool names `bash`/`read`/`write` or `Bash`/`Read`/`Write`?
 - **Impact:** Mismatches will silently bypass all checks
 - **Mitigation:** Add debug logging and validate in Phase 4
 
-##### Error Propagation
+#### Error Propagation
 
 - **Question:** Does `throw new Error()` in plugin actually block tool execution?
 - **Impact:** If not, safety checks are ineffective
 - **Mitigation:** Test thoroughly with dangerous commands in sandbox
 
-##### Tool Args Structure
+#### Tool Args Structure
 
 - **Question:** What's the exact structure of `output.args` for each tool?
 - **Impact:** May need to adjust property access (`file_path` vs `filePath`)
@@ -866,19 +867,19 @@ opencode
 
 ### Medium Risks
 
-##### Format Script Dependency
+#### Format Script Dependency
 
 - **Risk:** `~/.bin/format.sh` may not exist or may fail
 - **Impact:** Auto-formatting fails silently
 - **Mitigation:** Add try/catch and fallback to basic formatting
 
-##### Skill Activation Gap
+#### Skill Activation Gap
 
 - **Risk:** No automatic skill activation means reduced productivity
 - **Impact:** User must remember to invoke skills manually
 - **Mitigation:** Create custom commands or macros for common skills
 
-##### Notification Granularity
+#### Notification Granularity
 
 - **Risk:** `session.idle` may not map well to Claude's Notification events
 - **Impact:** Notifications may be less useful
@@ -886,13 +887,13 @@ opencode
 
 ### Low Risks
 
-##### Plugin Performance
+#### Plugin Performance
 
 - **Risk:** Synchronous file I/O may slow tool execution
 - **Impact:** Slight UX degradation
 - **Mitigation:** Optimize file checks, use caching if needed
 
-##### Cross-Platform Compatibility
+#### Cross-Platform Compatibility
 
 - **Risk:** `terminal-notifier` is macOS-only
 - **Impact:** Notifications won't work on Linux
@@ -1049,4 +1050,4 @@ See implementation sketches in:
 - Phase 2: `task-context.ts`
 - Phase 3: `notifications.ts`
 
-**End of Plan**
+End of Plan
