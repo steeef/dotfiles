@@ -20,18 +20,18 @@ MINOR="$(echo "$base" | sed -e "s#$RE#\2#")"
 PATCH="$(echo "$base" | sed -e "s#$RE#\3#")"
 
 case "$step" in
-major)
-  let MAJOR+=1
-  let MINOR=0
-  let PATCH=0
-  ;;
-minor)
-  let MINOR+=1
-  let PATCH=0
-  ;;
-patch)
-  let PATCH+=1
-  ;;
+  major)
+    let MAJOR+=1
+    let MINOR=0
+    let PATCH=0
+    ;;
+  minor)
+    let MINOR+=1
+    let PATCH=0
+    ;;
+  patch)
+    let PATCH+=1
+    ;;
 esac
 
 echo "v$MAJOR.$MINOR.$PATCH"
