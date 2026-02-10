@@ -8,13 +8,14 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 **Why it matters**: The plan targets prompt and integration parity, but the summary does not match what is actually wired in the repo. That makes the migration target ambiguous and risks missing required behavior.
 
-**Evidence**
+#### Evidence
+
 - `nix/home/zsh/initExtraFirst.zsh` enables p10k instant prompt.
 - `nix/home/symlinks.nix` symlinks `.p10k.zsh` from `zsh/p10k.zsh`.
 - There is no explicit oh-my-posh initialization in zsh files; only config under `nix/home/oh-my-posh/`.
 - Zsh integrations also exist in `nix/home/granted.nix` and `nix/home/nix-index.nix`.
 
-**Proposed change (diff)**
+#### Proposed change (diff)
 
 ```diff
 --- a/migration-plan.md
@@ -36,13 +37,14 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 **Why it matters**: Fish will not inherit critical environment variables and PATH unless moved into shell-agnostic config. Current values are defined inside zsh-specific files, which will break fish equivalence.
 
-**Evidence**
+#### Evidence
+
 - `nix/home/zsh/default.nix` sets `EDITOR`, `VISUAL`, `SUDO_EDITOR` only for zsh.
 - `nix/home/zsh/initExtra.zsh` sets `PATH`, `LIBRARY_PATH`, `SSH_AUTH_SOCK`, `GRANTED_*`.
 - `zsh/after/aws-vault.zsh` sets `AWS_VAULT_KEYCHAIN_NAME`.
 - `zsh/after/nix-direnv.zsh` sets `DIRENV_WARN_TIMEOUT`.
 
-**Proposed change (diff)**
+#### Proposed change (diff)
 
 ```diff
 --- a/migration-plan.md
@@ -59,7 +61,7 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 @@
 -## Files to Modify
 +## Files to Modify
- 
+
 -- `nix/home/default.nix` - add fish and starship imports, remove fish disable block
 +- `nix/home/default.nix` - add fish/starship imports; move shared sessionVariables/sessionPath out of zsh
 +- `nix/home/zsh/default.nix` - remove zsh-only sessionVariables once moved
@@ -72,7 +74,7 @@ This review focuses on correctness, integration risk, maintainability, and perfo
  - `nix/home/direnv.nix` - already auto-enabled for fish (read-only flag, defaults to true)
 @@
  ## Verification
- 
+
  1. Run `hms` to apply fish config
  2. Open new terminal, verify fish launches (via terminal config or zsh bootstrap)
 -3. Test each integration:
@@ -98,19 +100,20 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 **Why it matters**: The plan does not state the motivation for migrating, which affects whether the scope is justified. It also skips auditing local overrides, which can cause regressions.
 
-**Evidence**
+#### Evidence
+
 - `nix/home/zsh/initExtra.zsh` sources `~/.zshrc.d`, which is outside the repo and unknown to the plan.
 
-**Proposed change (diff)**
+#### Proposed change (diff)
 
 ```diff
 --- a/migration-plan.md
 +++ b/migration-plan.md
 @@
  ## Overview
- 
+
  Migrate from zsh (with oh-my-posh) to fish shell with starship prompt, maintaining the Catppuccin Macchiato theme and all existing integrations.
- 
+
 +## Goals & Non-goals
 +
 +**Goals**
@@ -125,7 +128,7 @@ This review focuses on correctness, integration risk, maintainability, and perfo
  ## Current Setup Summary
 @@
  ## Implementation Steps
- 
+
 +### Phase 0: Preflight audit (before changes)
 +1. Confirm the active prompt in a live zsh session (p10k vs oh-my-posh).
 +2. Inventory `~/.zshrc.d` for local overrides to port or explicitly drop.
@@ -139,10 +142,11 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 **Why it matters**: Fish syntax differs for command substitution and quoting. Treating aliases as a direct port will cause functional breakage.
 
-**Evidence**
+#### Evidence
+
 - `zsh/after/aliases.zsh` uses command substitution in `drm`, `drmi`, and `grm`, which must be converted to fish `( ... )`.
 
-**Proposed change (diff)**
+#### Proposed change (diff)
 
 ```diff
 --- a/migration-plan.md
@@ -159,11 +163,12 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 **Why it matters**: The zsh widget has extra behavior (query prefill, ctrl-d reload) and fish fzf integration may conflict with Ctrl+R. Without a parity plan, the fish experience regresses.
 
-**Evidence**
+#### Evidence
+
 - `nix/home/zsh/initExtra.zsh` defines `fzf-atuin-history-widget` with custom reloads and query handling.
 - `programs.fzf.enableFishIntegration` typically binds Ctrl+R unless disabled.
 
-**Proposed change (diff)**
+#### Proposed change (diff)
 
 ```diff
 --- a/migration-plan.md
@@ -188,7 +193,7 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 -
 -# Bind to Ctrl+R (configured in fish/conf.d/keybindings.fish)
  ```
- 
+
 -Add `fish/conf.d/keybindings.fish` to Files to Create for this and other keybindings.
 +In `fish/conf.d/keybindings.fish`:
 +```fish
@@ -204,11 +209,12 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 **Why it matters**: Several zgenom plugins add prompt cues (aws vault, nix shell). Without matching starship modules and prompt timeouts, the migration could lose important context or regress on performance.
 
-**Evidence**
+#### Evidence
+
 - `nix/home/zsh/initExtra.zsh` loads `blimmer/zsh-aws-vault` and `chisui/zsh-nix-shell`.
 - The plan only calls out generic performance testing, not timeouts.
 
-**Proposed change (diff)**
+#### Proposed change (diff)
 
 ```diff
 --- a/migration-plan.md
@@ -234,7 +240,7 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 **Why it matters**: Without mirroring the existing `nix/home/symlinks.nix` pattern, it is easy to edit the wrong files and lose runtime changes.
 
-**Proposed change (diff)**
+#### Proposed change (diff)
 
 ```diff
 --- a/migration-plan.md
@@ -249,10 +255,11 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 **Why it matters**: The statement says macOS rejects fish even when added to `/etc/shells`, but the repo currently only declares zsh as a valid shell. The plan should instruct to test and fall back instead of asserting a universal failure.
 
-**Evidence**
+#### Evidence
+
 - `nix/darwin/default.nix` sets `environment.shells = [pkgs.zsh];`
 
-**Proposed change (diff)**
+#### Proposed change (diff)
 
 ```diff
 --- a/migration-plan.md

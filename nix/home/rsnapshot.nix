@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   home.file.".rsnapshot.conf".source = pkgs.writeText "rsnapshot.conf" ''
     config_version	1.2
     snapshot_root		${config.home.homeDirectory}/remote/backup/

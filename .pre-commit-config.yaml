@@ -1,0 +1,91 @@
+repos:
+  # --- General hygiene ---
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.(patch|diff)$'
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+        exclude: '\.(patch|diff)$'
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: detect-private-key
+      - id: check-case-conflict
+      - id: check-symlinks
+      - id: check-executables-have-shebangs
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-json
+        exclude: '^(vim/bundle/|TRASH/)'
+      - id: check-yaml
+        exclude: '^(vim/bundle/|TRASH/|beets/)'
+        args: [--allow-multiple-documents]
+
+  # --- Nix ---
+  - repo: local
+    hooks:
+      - id: alejandra
+        name: alejandra
+        entry: alejandra
+        language: system
+        files: '\.nix$'
+        exclude: '^(vim/bundle/|TRASH/|result/)'
+      - id: deadnix
+        name: deadnix
+        entry: deadnix --edit
+        language: system
+        files: '\.nix$'
+        exclude: '^(vim/bundle/|TRASH/|result/)'
+      - id: statix
+        name: statix
+        entry: statix check
+        language: system
+        files: '\.nix$'
+        exclude: '^(vim/bundle/|TRASH/|result/)'
+        pass_filenames: false
+
+  # --- Shell (shellcheck via official repo) ---
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.11.0
+    hooks:
+      - id: shellcheck
+        exclude: '^(vim/bundle/|tmux/plugins/|TRASH/)'
+        types: [bash]
+
+  - repo: local
+    hooks:
+      - id: shfmt
+        name: shfmt
+        entry: shfmt -i 2 -ci -w
+        language: system
+        types: [bash]
+        exclude: '^(vim/bundle/|tmux/plugins/|TRASH/)'
+
+  # --- YAML ---
+  - repo: local
+    hooks:
+      - id: yamlfmt
+        name: yamlfmt
+        entry: yamlfmt
+        language: system
+        types: [yaml]
+        exclude: '^(vim/bundle/|TRASH/|beets/)'
+
+  # --- Markdown ---
+  - repo: https://github.com/jackdewinter/pymarkdown
+    rev: v0.9.35
+    hooks:
+      - id: pymarkdown
+        exclude: '^(vim/bundle/|TRASH/)'
+
+  # --- Lua ---
+  - repo: local
+    hooks:
+      - id: stylua
+        name: stylua
+        entry: stylua
+        language: system
+        types: [lua]
+        exclude: '^(vim/bundle/|TRASH/)'

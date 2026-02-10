@@ -39,15 +39,11 @@
     nixpkgs,
     nixos-hardware,
     home-manager,
-    claude-code,
-    codex-cli,
     darwin,
     nur,
     nix-index-database,
-    opencode,
     ...
   } @ inputs: let
-    inherit builtins;
     username = "sprice";
 
     getHomeDirectory = system:
@@ -74,7 +70,7 @@
             allowUnfree = true;
             allowInsecure = false;
             allowUnsupportedSystem = true;
-            allowUnfreePredicate = pkg: true;
+            allowUnfreePredicate = _pkg: true;
             allowBroken = false;
           };
         };
@@ -99,12 +95,12 @@
             allowUnfree = true;
             allowInsecure = false;
             allowUnsupportedSystem = true;
-            allowUnfreePredicate = pkg: true;
+            allowUnfreePredicate = _pkg: true;
             allowBroken = false;
           };
 
           overlays = [
-            (final: prev: {
+            (_final: prev: {
               mkalias = prev.rustPlatform.buildRustPackage rec {
                 pname = "mkalias";
                 version = "0.3.2";

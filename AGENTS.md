@@ -1,6 +1,7 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
+
 - `flake.nix` defines all inputs, overlays, and per-host outputs; update it first when adding machines or packages.
 - `nix/home/` contains Home Manager modules, with platform splits under `darwin/`, `linux/`, and agent-specific config in `claude/`.
 - `nix/darwin/` and `nix/nixos/` hold system-level modules for macOS and Linux respectively; keep hardware-specific tweaks scoped here.

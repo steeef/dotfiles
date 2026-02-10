@@ -21,6 +21,7 @@ load_nix_environment() {
   fi
 
   if [ -f "${profile_path}/etc/profile.d/nix-daemon.sh" ]; then
+    # shellcheck source=/dev/null
     . "${profile_path}/etc/profile.d/nix-daemon.sh"
   fi
 }
@@ -50,16 +51,16 @@ if ! grep -qR "^experimental-features = nix-command flakes" "${local_config_file
 fi
 
 case "${os}-${arch}" in
-"Darwin-x84_64" | "Darwin-arm64")
-  echo "INFO: Running Home Manager configuration for MacOS ${arch}"
-  nix run nix-darwin -- switch --flake "${DOTFILES_DIR}"
-  nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@$(hostname).activationPackage"
-  ;;
-"Linux-x86_64")
-  echo "INFO: Running Home Manager configuration for Linux ${arch}"
-  nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@linux.activationPackage"
-  ;;
-*)
-  echo "ERROR: unsupported OS and arch: ${os}-${arch}"
-  ;;
+  "Darwin-x84_64" | "Darwin-arm64")
+    echo "INFO: Running Home Manager configuration for MacOS ${arch}"
+    nix run nix-darwin -- switch --flake "${DOTFILES_DIR}"
+    nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@$(hostname).activationPackage"
+    ;;
+  "Linux-x86_64")
+    echo "INFO: Running Home Manager configuration for Linux ${arch}"
+    nix run "${DOTFILES_DIR}#homeConfigurations.${USER}@linux.activationPackage"
+    ;;
+  *)
+    echo "ERROR: unsupported OS and arch: ${os}-${arch}"
+    ;;
 esac

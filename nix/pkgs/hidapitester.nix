@@ -1,5 +1,9 @@
-{ stdenv, fetchurl, installShellFiles, unzip }:
-let
+{
+  stdenv,
+  fetchurl,
+  installShellFiles,
+  unzip,
+}: let
   version = "0.3";
   sources = {
     x86_64-linux = [
@@ -22,28 +26,28 @@ let
     ];
   };
 in
-stdenv.mkDerivation rec {
-  inherit version;
-  pname = "hidapitester";
-  srcs = sources.${stdenv.hostPlatform.system};
+  stdenv.mkDerivation rec {
+    inherit version;
+    pname = "hidapitester";
+    srcs = sources.${stdenv.hostPlatform.system};
 
-  phases = [ "unpackPhase" "installPhase" ];
+    phases = ["unpackPhase" "installPhase"];
 
-  nativeBuildInputs = [ installShellFiles unzip ];
+    nativeBuildInputs = [installShellFiles unzip];
 
-  # Work around the "unpacker appears to have produced no directories"
-  # case that happens when the archive doesn't have a subdirectory.
-  setSourceRoot = "sourceRoot=`pwd`";
+    # Work around the "unpacker appears to have produced no directories"
+    # case that happens when the archive doesn't have a subdirectory.
+    setSourceRoot = "sourceRoot=`pwd`";
 
-  installPhase = ''
-    for src in $srcs; do
-      local name="hidapitester"
-      install -m755 -D hidapitester $out/bin/hidapitester
-    done
-  '';
+    installPhase = ''
+      for src in $srcs; do
+        local name="hidapitester"
+        install -m755 -D hidapitester $out/bin/hidapitester
+      done
+    '';
 
-  platforms = [
-    "x86_64-linux"
-    "x86_64-darwin"
-  ];
-}
+    platforms = [
+      "x86_64-linux"
+      "x86_64-darwin"
+    ];
+  }

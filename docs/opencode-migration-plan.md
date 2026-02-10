@@ -11,6 +11,7 @@
 This plan outlines migrating critical Claude Code safety hooks and automation to OpenCode's plugin system. Most safety features can be ported via `tool.execute.before/after` hooks, though some lifecycle features (SessionStart, UserPromptSubmit) have no direct equivalent and are documented as accepted limitations.
 
 **Key Priorities (User-Selected):**
+
 - ✅ Bash safety checks (rm, git, kubectl, terraform blocking)
 - ✅ File size guards (prevents reading huge files)
 - ✅ Auto-formatting (YAML, Terraform post-edit)
@@ -122,20 +123,25 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 
 ### Phase 0: Correctness Fixes (Blockers Discovered During Review)
 
-1. **Hook Argument Usage**
-   - `tool.execute.before` currently references `output.args`, but no `output` object exists until the tool finishes. Update the plan to inspect `input.args` (request payload) in the before-hook and reserve `result`/`output` for the after-hook. This is required for every guard (bash, file-size, CLAUDE.md) to run at all.
+#### Hook Argument Usage
 
-2. **Auto-Format Invocation**
-   - The post-hook feeds `output.args` to `format.sh`, but write/edit/MultiEdit tools often do not expose a single `file_path`. Adjust the plan so Phase 1 captures the actual touched files (e.g., via tool metadata or `git status --porcelain`) and invoke `~/.bin/format.sh` once per file using the JSON contract it expects (`{"tool_input":{"file_path":"/abs/path"}}`). Also guard `format.sh` calls with try/catch so edits do not fail if formatting cannot identify a file.
+- `tool.execute.before` currently references `output.args`, but no `output` object exists until the tool finishes. Update the plan to inspect `input.args` (request payload) in the before-hook and reserve `result`/`output` for the after-hook. This is required for every guard (bash, file-size, CLAUDE.md) to run at all.
 
-3. **File-Size Guard Shelling**
-   - The current sketch shells out with ``$`wc -l < ${fullPath}`` without quoting, which breaks on whitespace and enables injection. Update Phase 1 tasks to compute line counts via Node streams (preferred) or run `wc -l` with proper argument passing (`$` helper supports `$`command`${fullPath}` without redirection). Confirm the plan emphasizes secure path handling.
+#### Auto-Format Invocation
 
-4. **Task Flag Cleanup**
-   - `.opencode_in_subtask.flag` is only removed in `tool.execute.after`, so crashes leave the flag behind and permanently relax the guard. Modify Phase 2 (done below) to track active Task call IDs and register process-exit cleanup so the flag is cleared even when the Task tool crashes or OpenCode aborts execution.
+- The post-hook feeds `output.args` to `format.sh`, but write/edit/MultiEdit tools often do not expose a single `file_path`. Adjust the plan so Phase 1 captures the actual touched files (e.g., via tool metadata or `git status --porcelain`) and invoke `~/.bin/format.sh` once per file using the JSON contract it expects (`{"tool_input":{"file_path":"/abs/path"}}`). Also guard `format.sh` calls with try/catch so edits do not fail if formatting cannot identify a file.
 
-5. **State Storage Alternative (Open Question)**
-   - Evaluate replacing the sentinel file with in-memory plugin state or OpenCode config storage. Document decision and add tests covering concurrent subtasks if multiple Task invocations run in parallel.
+#### File-Size Guard Shelling
+
+- The current sketch shells out with ``$`wc -l < ${fullPath}`` without quoting, which breaks on whitespace and enables injection. Update Phase 1 tasks to compute line counts via Node streams (preferred) or run `wc -l` with proper argument passing (`$` helper supports `$`command`${fullPath}` without redirection). Confirm the plan emphasizes secure path handling.
+
+#### Task Flag Cleanup
+
+- `.opencode_in_subtask.flag` is only removed in `tool.execute.after`, so crashes leave the flag behind and permanently relax the guard. Modify Phase 2 (done below) to track active Task call IDs and register process-exit cleanup so the flag is cleared even when the Task tool crashes or OpenCode aborts execution.
+
+#### State Storage Alternative (Open Question)
+
+- Evaluate replacing the sentinel file with in-memory plugin state or OpenCode config storage. Document decision and add tests covering concurrent subtasks if multiple Task invocations run in parallel.
 
 ### Phase 1: Core Safety Plugin (`global-safety.ts`)
 
@@ -145,38 +151,43 @@ All hooks defined in: `nix/home/claude/settings.json:22`
 
 **Features:**
 
-1. **Bash Safety (tool.execute.before)**
-   - Block `rm` commands → suggest TRASH/ pattern
-   - Block `git add ./-A/--all` → suggest specific files or `git add -u`
-   - Block `git checkout` with uncommitted changes → suggest stash
-   - Block `kubectl delete/destroy` → require manual confirmation
-   - Block `terraform apply/destroy` → require manual confirmation
-   - Block `.env` file access in commands
+#### Bash Safety (tool.execute.before)
 
-2. **File Size Guard (tool.execute.before)**
-   - Check if reading file via Read tool
-   - Inspect file size via `fs.stat` + line count via `wc -l`
-   - Check for `.opencode_in_subtask.flag` to determine context
-   - Main agent: block >500 lines
-   - Sub-agent: block >10k lines
-   - Allow binary files
+- Block `rm` commands → suggest TRASH/ pattern
+- Block `git add ./-A/--all` → suggest specific files or `git add -u`
+- Block `git checkout` with uncommitted changes → suggest stash
+- Block `kubectl delete/destroy` → require manual confirmation
+- Block `terraform apply/destroy` → require manual confirmation
+- Block `.env` file access in commands
 
-3. **CLAUDE.md Guard (tool.execute.before)**
-   - Check Write/Edit/MultiEdit tool operations
-   - Block if `filePath` matches `CLAUDE.md`
-   - Suggest editing `AGENTS.md` and symlinking to `CLAUDE.md`
+#### File Size Guard (tool.execute.before)
 
-4. **Grep Enforcement (tool.execute.before)**
-   - Check bash commands for `grep` usage
-   - Block and suggest using `rg` (ripgrep) instead
+- Check if reading file via Read tool
+- Inspect file size via `fs.stat` + line count via `wc -l`
+- Check for `.opencode_in_subtask.flag` to determine context
+- Main agent: block >500 lines
+- Sub-agent: block >10k lines
+- Allow binary files
 
-5. **Auto-Formatting (tool.execute.after)**
-   - Trigger on Write/Edit/MultiEdit tool completion
-   - Shell out to `~/.bin/format.sh` with tool args
-   - Apply yamlfmt for YAML files
-   - Apply terraform fmt for .tf/.hcl files
-   - Add EOF newline if missing
-   - Remove trailing whitespace
+#### CLAUDE.md Guard (tool.execute.before)
+
+- Check Write/Edit/MultiEdit tool operations
+- Block if `filePath` matches `CLAUDE.md`
+- Suggest editing `AGENTS.md` and symlinking to `CLAUDE.md`
+
+#### Grep Enforcement (tool.execute.before)
+
+- Check bash commands for `grep` usage
+- Block and suggest using `rg` (ripgrep) instead
+
+#### Auto-Formatting (tool.execute.after)
+
+- Trigger on Write/Edit/MultiEdit tool completion
+- Shell out to `~/.bin/format.sh` with tool args
+- Apply yamlfmt for YAML files
+- Apply terraform fmt for .tf/.hcl files
+- Add EOF newline if missing
+- Remove trailing whitespace
 
 **Implementation Sketch:**
 
@@ -623,40 +634,46 @@ export const Notifications: Plugin = async ({ $ }) => {
 
 **Test Suite:**
 
-1. **Bash Safety**
-   - ✓ Block: `rm file.txt`
-   - ✓ Block: `git add .`
-   - ✓ Block: `git add -A`
-   - ✓ Block: `kubectl delete pod foo`
-   - ✓ Block: `terraform apply`
-   - ✓ Block: `cat .env`
-   - ✓ Allow: `git add specific-file.txt`
-   - ✓ Allow: `mv file.txt TRASH/`
+##### Bash Safety
 
-2. **File Size Guard**
-   - ✓ Block reading 600-line file (main agent)
-   - ✓ Allow reading 600-line file (sub-agent)
-   - ✓ Block reading 15k-line file (sub-agent)
-   - ✓ Allow binary files regardless of size
+- ✓ Block: `rm file.txt`
+- ✓ Block: `git add .`
+- ✓ Block: `git add -A`
+- ✓ Block: `kubectl delete pod foo`
+- ✓ Block: `terraform apply`
+- ✓ Block: `cat .env`
+- ✓ Allow: `git add specific-file.txt`
+- ✓ Allow: `mv file.txt TRASH/`
 
-3. **CLAUDE.md Guard**
-   - ✓ Block: Write to `CLAUDE.md`
-   - ✓ Block: Edit to `project/CLAUDE.md`
-   - ✓ Allow: Write to `AGENTS.md`
+##### File Size Guard
 
-4. **Auto-Formatting**
-   - ✓ Write YAML file → verify yamlfmt runs
-   - ✓ Edit .tf file → verify terraform fmt runs
-   - ✓ Verify no double-formatting on successive edits
+- ✓ Block reading 600-line file (main agent)
+- ✓ Allow reading 600-line file (sub-agent)
+- ✓ Block reading 15k-line file (sub-agent)
+- ✓ Allow binary files regardless of size
 
-5. **Task Context**
-   - ✓ Task starts → flag created
-   - ✓ Task completes → flag removed
-   - ✓ File size limits respect flag state
+##### CLAUDE.md Guard
 
-6. **Notifications**
-   - ✓ Session idle → notification sent
-   - ✓ Permission request → notification sent
+- ✓ Block: Write to `CLAUDE.md`
+- ✓ Block: Edit to `project/CLAUDE.md`
+- ✓ Allow: Write to `AGENTS.md`
+
+##### Auto-Formatting
+
+- ✓ Write YAML file → verify yamlfmt runs
+- ✓ Edit .tf file → verify terraform fmt runs
+- ✓ Verify no double-formatting on successive edits
+
+##### Task Context
+
+- ✓ Task starts → flag created
+- ✓ Task completes → flag removed
+- ✓ File size limits respect flag state
+
+##### Notifications
+
+- ✓ Session idle → notification sent
+- ✓ Permission request → notification sent
 
 #### 3. Error Handling
 
@@ -830,49 +847,57 @@ opencode
 
 ### Critical Unknowns
 
-1. **Tool Identifier Casing**
-   - **Question:** Are tool names `bash`/`read`/`write` or `Bash`/`Read`/`Write`?
-   - **Impact:** Mismatches will silently bypass all checks
-   - **Mitigation:** Add debug logging and validate in Phase 4
+#### Tool Identifier Casing
 
-2. **Error Propagation**
-   - **Question:** Does `throw new Error()` in plugin actually block tool execution?
-   - **Impact:** If not, safety checks are ineffective
-   - **Mitigation:** Test thoroughly with dangerous commands in sandbox
+- **Question:** Are tool names `bash`/`read`/`write` or `Bash`/`Read`/`Write`?
+- **Impact:** Mismatches will silently bypass all checks
+- **Mitigation:** Add debug logging and validate in Phase 4
 
-3. **Tool Args Structure**
-   - **Question:** What's the exact structure of `output.args` for each tool?
-   - **Impact:** May need to adjust property access (`file_path` vs `filePath`)
-   - **Mitigation:** Log full args structure during validation
+#### Error Propagation
+
+- **Question:** Does `throw new Error()` in plugin actually block tool execution?
+- **Impact:** If not, safety checks are ineffective
+- **Mitigation:** Test thoroughly with dangerous commands in sandbox
+
+#### Tool Args Structure
+
+- **Question:** What's the exact structure of `output.args` for each tool?
+- **Impact:** May need to adjust property access (`file_path` vs `filePath`)
+- **Mitigation:** Log full args structure during validation
 
 ### Medium Risks
 
-4. **Format Script Dependency**
-   - **Risk:** `~/.bin/format.sh` may not exist or may fail
-   - **Impact:** Auto-formatting fails silently
-   - **Mitigation:** Add try/catch and fallback to basic formatting
+#### Format Script Dependency
 
-5. **Skill Activation Gap**
-   - **Risk:** No automatic skill activation means reduced productivity
-   - **Impact:** User must remember to invoke skills manually
-   - **Mitigation:** Create custom commands or macros for common skills
+- **Risk:** `~/.bin/format.sh` may not exist or may fail
+- **Impact:** Auto-formatting fails silently
+- **Mitigation:** Add try/catch and fallback to basic formatting
 
-6. **Notification Granularity**
-   - **Risk:** `session.idle` may not map well to Claude's Notification events
-   - **Impact:** Notifications may be less useful
-   - **Mitigation:** Monitor actual behavior and adjust triggers
+#### Skill Activation Gap
+
+- **Risk:** No automatic skill activation means reduced productivity
+- **Impact:** User must remember to invoke skills manually
+- **Mitigation:** Create custom commands or macros for common skills
+
+#### Notification Granularity
+
+- **Risk:** `session.idle` may not map well to Claude's Notification events
+- **Impact:** Notifications may be less useful
+- **Mitigation:** Monitor actual behavior and adjust triggers
 
 ### Low Risks
 
-7. **Plugin Performance**
-   - **Risk:** Synchronous file I/O may slow tool execution
-   - **Impact:** Slight UX degradation
-   - **Mitigation:** Optimize file checks, use caching if needed
+#### Plugin Performance
 
-8. **Cross-Platform Compatibility**
-   - **Risk:** `terminal-notifier` is macOS-only
-   - **Impact:** Notifications won't work on Linux
-   - **Mitigation:** Already have ntfy fallback
+- **Risk:** Synchronous file I/O may slow tool execution
+- **Impact:** Slight UX degradation
+- **Mitigation:** Optimize file checks, use caching if needed
+
+#### Cross-Platform Compatibility
+
+- **Risk:** `terminal-notifier` is macOS-only
+- **Impact:** Notifications won't work on Linux
+- **Mitigation:** Already have ntfy fallback
 
 ---
 
@@ -1010,11 +1035,11 @@ If plugins cause critical issues:
 
 ## References
 
-- **OpenCode Plugin Docs:** https://opencode.ai/docs/plugins/
+- **OpenCode Plugin Docs:** <https://opencode.ai/docs/plugins/>
 - **Current Claude Hooks:** `nix/home/claude/settings.json:22`
 - **Format Script:** `~/.bin/format.sh`
 - **OpenCode SDK Types:** `@opencode-ai/plugin` package
-- **Bun Shell Docs:** https://bun.sh/docs/api/shell
+- **Bun Shell Docs:** <https://bun.sh/docs/api/shell>
 
 ---
 
@@ -1025,4 +1050,4 @@ See implementation sketches in:
 - Phase 2: `task-context.ts`
 - Phase 3: `notifications.ts`
 
-**End of Plan**
+End of Plan

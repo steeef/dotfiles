@@ -90,7 +90,9 @@ hyper:bind({}, "1", nil, function()
   if win and win:isStandard() then
     local app = win:application()
     -- Skip Hammerspoon's own windows - they don't support frame manipulation
-    if app and app:name() == "Hammerspoon" then return end
+    if app and app:name() == "Hammerspoon" then
+      return
+    end
     local screen = win:screen()
     if screen then
       local ok, err = pcall(function()

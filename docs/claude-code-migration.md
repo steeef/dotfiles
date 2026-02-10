@@ -7,6 +7,7 @@ Migration plan to switch from `github:Sewer56/claude-code-nix-flake` to `github:
 ## Current State Analysis
 
 ### Sewer56 Flake Features
+
 - Provides `homeManagerModules.claude-code` with declarative config management
 - Uses **home.activation scripts** (not symlinks) to manage `~/.claude/` files
 - Supports settings.json, hooks, memory.md, commands, agents

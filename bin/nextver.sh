@@ -1,37 +1,34 @@
 #! /bin/bash
 
-RE='[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)'
-
-step="$1"
-if [ -z "$1" ]; then
-  step="patch"
-fi
+step="${1:-patch}"
 
 base="$2"
-if [ -z "$2" ]; then
+if [ -z "$base" ]; then
   base=$(git tag --sort v:refname 2>/dev/null | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | tail -n 1)
   if [ -z "$base" ]; then
     base=0.0.0
   fi
 fi
 
-MAJOR="$(echo "$base" | sed -e "s#$RE#\1#")"
-MINOR="$(echo "$base" | sed -e "s#$RE#\2#")"
-PATCH="$(echo "$base" | sed -e "s#$RE#\3#")"
+if [[ "$base" =~ ([0-9]+)\.([0-9]+)\.([0-9]+) ]]; then
+  MAJOR="${BASH_REMATCH[1]}"
+  MINOR="${BASH_REMATCH[2]}"
+  PATCH="${BASH_REMATCH[3]}"
+fi
 
 case "$step" in
-major)
-  let MAJOR+=1
-  let MINOR=0
-  let PATCH=0
-  ;;
-minor)
-  let MINOR+=1
-  let PATCH=0
-  ;;
-patch)
-  let PATCH+=1
-  ;;
+  major)
+    ((MAJOR += 1))
+    ((MINOR = 0))
+    ((PATCH = 0))
+    ;;
+  minor)
+    ((MINOR += 1))
+    ((PATCH = 0))
+    ;;
+  patch)
+    ((PATCH += 1))
+    ;;
 esac
 
 echo "v$MAJOR.$MINOR.$PATCH"

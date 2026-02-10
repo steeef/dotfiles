@@ -9,12 +9,12 @@ function usbDeviceCallback(data)
   -- Replace "Yubikey" with the name of the usb device you want to use.
   -- hs.notify.show("USB", "You just connected/disconnected", data["productName"])
   if string.match(data["productName"], "Yubikey NEO") then
-    if (data["eventType"] == "added") then
+    if data["eventType"] == "added" then
       hs.notify.show("Yubikey", "You just connected", data["productName"])
       -- os.execute("~/.bin/fix-gpg")
-    elseif (data["eventType"] == "removed") then
+    elseif data["eventType"] == "removed" then
       hs.timer.doAfter(1, function()
-        os.execute(os.getenv("HOME") .. '/.bin/maclock -q')
+        os.execute(os.getenv("HOME") .. "/.bin/maclock -q")
       end)
     end
   end

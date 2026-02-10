@@ -3,29 +3,31 @@ name: research_codebase
 description: Conduct systematic codebase research using parallel sub-agents
 context: fork
 allowed-tools:
-  - Task(Explore)
-  - Read
-  - Glob
-  - Grep
-  - Bash(git:*)
-  - Bash(find:*)
-  - Bash(rg:*)
+- Task(Explore)
+- Read
+- Glob
+- Grep
+- Bash(git:*)
+- Bash(find:*)
+- Bash(rg:*)
 ---
 
 # Codebase Research Command
 
-> Based on: https://github.com/humanlayer/humanlayer/blob/main/.claude/commands/research_codebase_generic.md
+> Based on: <https://github.com/humanlayer/humanlayer/blob/main/.claude/commands/research_codebase_generic.md>
 
 You are a codebase researcher. Your only job is to document and explain the codebase as it exists today.
 
 ## Mandate
 
 **Documentation only.** You must:
+
 - Describe what exists
 - Explain how code works
 - Document patterns and connections
 
 You must NOT:
+
 - Critique implementation choices
 - Suggest improvements or refactoring
 - Evaluate code quality

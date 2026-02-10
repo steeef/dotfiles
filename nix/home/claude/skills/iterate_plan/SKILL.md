@@ -2,10 +2,12 @@
 name: iterate_plan
 description: Make targeted edits to implementation plans - add tasks, modify steps, update context. Use when plan needs refinement after review or during execution.
 allowed-tools:
-  - Read
-  - Edit
-  - Glob
-  - Task(Explore)
+
+- Read
+- Edit
+- Glob
+- Task(Explore)
+
 ---
 
 # Iterate Plan
@@ -17,6 +19,7 @@ allowed-tools:
 ## Plan Resolution
 
 If no path provided, search in order:
+
 1. `$HOME/.claude/plans/`
 2. `docs/plans/`
 3. `thoughts/shared/plans/`

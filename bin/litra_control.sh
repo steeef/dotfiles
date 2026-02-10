@@ -46,37 +46,37 @@ function lower_brightness() {
 }
 
 case "${1}" in
-"on")
-  hid "0x11,0xff,0x04,0x1c,0x01"
-  ;;
-"off")
-  hid "0x11,0xff,0x04,0x1c"
-  ;;
-"up")
-  raise_brightness
-  ;;
-"down")
-  lower_brightness
-  ;;
-"min")
-  set_brightness 20
-  ;;
-"medium")
-  set_brightness 70
-  ;;
-"max")
-  set_brightness 240
-  ;;
-"2700K")
-  hid "0x11,0xff,0x04,0x9c,10,140"
-  ;;
-"3200K")
-  hid "0x11,0xff,0x04,0x9c,12,128"
-  ;;
-"6500K")
-  hid "0x11,0xff,0x04,0x9c,25,100"
-  ;;
-*)
-  echo "ERROR: unknown code"
-  ;;
+  "on")
+    hid "0x11,0xff,0x04,0x1c,0x01"
+    ;;
+  "off")
+    hid "0x11,0xff,0x04,0x1c"
+    ;;
+  "up")
+    raise_brightness
+    ;;
+  "down")
+    lower_brightness
+    ;;
+  "min")
+    set_brightness 20
+    ;;
+  "medium")
+    set_brightness 70
+    ;;
+  "max")
+    set_brightness 240
+    ;;
+  "2700K")
+    hid "0x11,0xff,0x04,0x9c,10,140"
+    ;;
+  "3200K")
+    hid "0x11,0xff,0x04,0x9c,12,128"
+    ;;
+  "6500K")
+    hid "0x11,0xff,0x04,0x9c,25,100"
+    ;;
+  *)
+    echo "ERROR: unknown code"
+    ;;
 esac

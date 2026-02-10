@@ -1,19 +1,19 @@
 return {
   {
-    'TimUntersberger/neogit',
+    "TimUntersberger/neogit",
     dependencies = {
-      'plenary.nvim'
+      "plenary.nvim",
     },
     opts = {
       disable_signs = false,
       disable_context_highlighting = false,
       disable_commit_confirmation = true,
-      kind = 'vsplit',
+      kind = "vsplit",
     },
     lazy = true,
-    cmd = 'Neogit',
+    cmd = "Neogit",
     keys = {
-      { "<leader>g", ":Neogit<Enter>" }
-    }
+      { "<leader>g", ":Neogit<Enter>" },
+    },
   },
 }
