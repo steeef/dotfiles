@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   home.file = {
     ".hammerspoon" = {
       enable = true;

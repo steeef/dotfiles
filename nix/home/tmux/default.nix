@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+{pkgs, ...}: let
   tmux = pkgs.callPackage ./tmux.nix {};
 in {
   programs.tmux = {

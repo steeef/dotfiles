@@ -1,9 +1,8 @@
-{ ... }:
-{
+{...}: {
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
-    options = [ "--cmd" "z" ];
+    options = ["--cmd" "z"];
   };
 }

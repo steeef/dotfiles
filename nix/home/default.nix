@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -60,8 +56,8 @@
     pipx
     prek
     postgresql
-    postgresql.pg_config  # pg_config for psycopg2 compilation
-    postgresql.dev  # headers for psycopg2 compilation
+    postgresql.pg_config # pg_config for psycopg2 compilation
+    postgresql.dev # headers for psycopg2 compilation
     python313
     pyright
     rdiff-backup

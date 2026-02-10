@@ -1,14 +1,18 @@
-{ config, lib, pkgs, ... }: {
-  home.activation.aliasApplications =
-    lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (
-      let
-        apps = pkgs.buildEnv {
-          name = "home-manager-applications";
-          paths = config.home.packages;
-          pathsToLink = [ "/Applications" ];
-        };
-      in
-      lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  home.activation.aliasApplications = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (
+    let
+      apps = pkgs.buildEnv {
+        name = "home-manager-applications";
+        paths = config.home.packages;
+        pathsToLink = ["/Applications"];
+      };
+    in
+      lib.hm.dag.entryAfter ["linkGeneration"] ''
         echo "Linking Home Manager applications..."
 
         # only link per-user applications
@@ -26,5 +30,5 @@
 
         $DRY_RUN_CMD mv "$tmp_path" "$app_path"
       ''
-    );
+  );
 }

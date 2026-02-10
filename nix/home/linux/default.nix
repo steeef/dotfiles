@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [
@@ -25,7 +25,7 @@
     };
 
     Install = {
-      WantedBy = [ "default.target" ];
+      WantedBy = ["default.target"];
     };
   };
 
