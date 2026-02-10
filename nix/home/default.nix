@@ -42,6 +42,7 @@
     gnugrep
     gnused
     hidapitester
+    hugo
     jq
     kind
     kubectx
