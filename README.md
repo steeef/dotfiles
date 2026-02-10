@@ -33,7 +33,7 @@ You can then use the alias `hms` to run `home-manager switch` to update things p
 # MacOS setup
 
 On MacOS, this will also install Homebrew. I use [nix-darwin](https://github.com/LnL7/nix-darwin) to separately
-configure my MacOS machines, but this install is not yet currently automated. 
+configure my MacOS machines, but this install is not yet currently automated.
 
 First add a `darwinConfigurations` block for your machine near the bottom of [flake.nix](flake.nix):
 
