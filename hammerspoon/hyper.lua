@@ -23,7 +23,7 @@ end
 
 -- Set the key you want to be HYPER to F19 in karabiner or keyboard
 -- Bind the Hyper key to the hammerspoon modal
-hs.hotkey.bind({}, 'F19', hyper.pressed, hyper.released)
+hs.hotkey.bind({}, "F19", hyper.pressed, hyper.released)
 
 hyper.launch = function(app)
   hs.application.launchOrFocusByBundleID(app.bundleID)
@@ -44,7 +44,9 @@ hyper.start = function(config_table)
   hs.fnutils.map(config_table.applications, function(app)
     -- Apps that I want to jump to
     if app.hyper_key then
-      hyper:bind({}, app.hyper_key, function() hyper.launch(app); end)
+      hyper:bind({}, app.hyper_key, function()
+        hyper.launch(app)
+      end)
     end
 
     -- I use hyper to power some shortcuts in different apps If the app is closed
@@ -54,17 +56,14 @@ hyper.start = function(config_table)
       hs.fnutils.map(app.local_bindings, function(key)
         hyper:bind({}, key, nil, function()
           if hs.application.get(app.bundleID) then
-            hs.eventtap.keyStroke({'cmd','alt','shift','ctrl'}, key)
+            hs.eventtap.keyStroke({ "cmd", "alt", "shift", "ctrl" }, key)
           else
             hyper.launch(app)
-            hs.timer.waitWhile(
-              function()
-                return not hs.application.get(app.bundleID):isFrontmost()
-              end,
-              function()
-                hs.eventtap.keyStroke({'cmd','alt','shift','ctrl'}, key)
-              end
-            )
+            hs.timer.waitWhile(function()
+              return not hs.application.get(app.bundleID):isFrontmost()
+            end, function()
+              hs.eventtap.keyStroke({ "cmd", "alt", "shift", "ctrl" }, key)
+            end)
           end
         end)
       end)
