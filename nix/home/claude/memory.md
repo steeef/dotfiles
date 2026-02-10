@@ -18,16 +18,16 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Follow a research → plan → implement cadence; do not skip phases on complex work.
 - Research: read every referenced file in full before spawning tasks; use fast search (rg) and locate 3 similar patterns/tests to mirror; prefer sub-tasks for locating, analyzing, and pattern-finding.
 - Plan: produce phased steps with file:line evidence, and success criteria split into automated commands vs manual checks using project-standard tooling.
-- Implement: invoke `/test-driven-development` skill; write failing tests first, then minimal code to pass; work phase-by-phase, verifying after each phase; compact progress (decisions, commands, failures) into concise notes instead of keeping long logs in context.
+- Implement: write failing tests first, then minimal code to pass; work phase-by-phase, verifying after each phase; compact progress (decisions, commands, failures) into concise notes instead of keeping long logs in context.
 - Compaction: strip noisy tool output; summarize only the essential facts, decisions, and next actions so context stays lean.
 - Guardrails: do not ask the user questions you can answer from code; pause and research when uncertain; when the task is documentation-only, describe what exists without proposing improvements.
 
 ## Test-Driven Development
-- **IMPORTANT**: Use `/test-driven-development` skill before writing implementation code
 - TDD cycle: Red (write failing test) → Green (minimal code to pass) → Refactor
 - Tests define the specification; implementation follows
 - Never write implementation without a failing test that describes the expected behavior
 - Run tests after each change to verify progress
+- Use `/test-driven-development` skill for detailed TDD workflow guidance
 
 ## Convergent Review (Rule of Five)
 - Apply 4-5 review passes on complex work until output stabilizes
@@ -69,7 +69,6 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Learn from existing implementations
 - Stop after 3 failed attempts and reassess
 - Write failing tests before implementation code (TDD)
-- Invoke `/test-driven-development` for feature work
 
 # Git style
 - Git commit message first line must be 50 characters or less.
@@ -158,7 +157,7 @@ Skip worktrees for single-file fixes, documentation-only changes, exploration, o
 1. MUST create a Jira-prefixed branch (e.g., `PROJ-123-feature-description`)
 2. MUST create a worktree for that branch before any code changes
 3. MUST announce: "Creating worktree for plan execution. Working in: <full-path>"
-4. MUST invoke `/test-driven-development` skill before writing any implementation code
+4. Follow TDD workflow (use `/test-driven-development` skill for guidance)
 
 **IMPORTANT**: When plan execution is complete:
 1. Create PR (draft mode, Jira-prefixed title)
