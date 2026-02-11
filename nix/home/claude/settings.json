@@ -15,12 +15,14 @@
     "allow": [
       "Bash(find:*)",
       "Bash(grep:*)",
-      "Bash(pre-commit run:*)",
+      "Bash(prek run:*)",
       "Bash(rg:*)",
       "Bash(yamllint:*)",
       "Bash(yq:*)"
     ],
-    "deny": [],
+    "deny": [
+      "Bash(pre-commit:*)"
+    ],
     "defaultMode": "plan"
   },
   "hooks": {

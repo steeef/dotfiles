@@ -42,7 +42,7 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Complex tasks: all 5 lenses
 - Convergence = full round where all lenses return CLEAN
 - Max 3 rounds; parent synthesizes, deduplicates, and applies fixes between rounds
-- Use `/convergent_review` command to enforce this discipline
+- Use `/convergent-review` command to enforce this discipline
 
 ## Project Integration
 

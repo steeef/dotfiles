@@ -1,5 +1,5 @@
 ---
-name: validate_plan
+name: validate-plan
 description: Verify implementation matches plan requirements - check success criteria, run verification commands, report gaps. Use before marking plan complete or creating PR.
 allowed-tools:
 
@@ -22,7 +22,7 @@ allowed-tools:
 
 ## Usage
 
-`/validate_plan <plan-path>`
+`/validate-plan <plan-path>`
 
 ## Supported Plan Schemas
 

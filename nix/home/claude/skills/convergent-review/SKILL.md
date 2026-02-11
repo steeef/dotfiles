@@ -1,5 +1,5 @@
 ---
-name: convergent_review
+name: convergent-review
 description: Use when completing a design, plan, or implementation draft that needs quality validation - runs parallel review agents across 5 lenses until output converges
 allowed-tools:
 - Read
@@ -15,7 +15,7 @@ allowed-tools:
 
 Run 3–5 review lenses in parallel using `Task(Explore)` sub-agents, synthesize findings, fix issues, and repeat until a full round returns clean. Max 3 rounds.
 
-**Announce at start:** "Using /convergent_review to validate this [design/plan/implementation]."
+**Announce at start:** "Using /convergent-review to validate this [design/plan/implementation]."
 
 ## The Five Lenses
 

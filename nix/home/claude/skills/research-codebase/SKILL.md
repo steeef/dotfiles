@@ -1,5 +1,5 @@
 ---
-name: research_codebase
+name: research-codebase
 description: Conduct systematic codebase research using parallel sub-agents
 context: fork
 allowed-tools:
