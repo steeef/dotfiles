@@ -227,7 +227,7 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 
 When analyzing text, provide:
 
-```
+```markdown
 ## Analysis Results
 
 **Text analyzed**: [word count] words

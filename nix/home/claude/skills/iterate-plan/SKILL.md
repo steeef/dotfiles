@@ -69,25 +69,29 @@ Summarize what was changed. Do NOT commit - user will commit when ready.
 ## Edit Type Examples
 
 ### Add Task
-```
+
+```text
 Add task after Task 3: "Add input validation"
 → Insert Task 4, renumber 4→5, 5→6, etc.
 ```
 
 ### Modify Step
-```
+
+```text
 In Task 2, Step 3: change pytest command to include -v flag
 → Edit only that step, preserve everything else
 ```
 
 ### Remove Task
-```
+
+```text
 Remove Task 4
 → Delete task, renumber 5→4, 6→5, etc.
 ```
 
 ### Update Context
-```
+
+```text
 Update Architecture section to mention new dependency
 → Edit Architecture section only
 ```

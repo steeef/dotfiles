@@ -934,6 +934,7 @@ opencode
 **Current Plan:** Shell out to `~/.bin/format.sh`
 
 **Alternative:** Port formatting logic to pure TypeScript
+
 ```typescript
 const format = async (filePath: string) => {
   if (filePath.endsWith('.yaml') || filePath.endsWith('.yml')) {

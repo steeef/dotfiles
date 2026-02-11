@@ -41,7 +41,7 @@ Skip any step = unverified claim. This includes satisfaction language ("Great!",
 
 ## Regression Tests (TDD Red-Green)
 
-```
+```text
 Write test -> Run (pass) -> Revert fix -> Run (MUST FAIL) -> Restore -> Run (pass)
 ```
 

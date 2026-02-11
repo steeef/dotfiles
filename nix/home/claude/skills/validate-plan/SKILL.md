@@ -63,7 +63,8 @@ For each identified task:
 - Timeout: 60s per command (warn if exceeded)
 
 **Report Status:**
-```
+
+```text
 ### Task N: [Name]
 - Files: ✓ all present
 - Verification: ✓ passing (exit 0)
@@ -72,7 +73,7 @@ For each identified task:
 
 OR
 
-```
+```text
 ### Task N: [Name]
 - Files: ✗ missing src/module.py
 - Verification: ✗ failing (exit 1)
@@ -88,7 +89,7 @@ If plan has "Success Criteria" or "Verification Checklist":
 
 ### 5. Summary Report
 
-```
+```markdown
 ## Validation Summary
 
 **Plan:** [plan-path]

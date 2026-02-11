@@ -28,6 +28,7 @@ Located in `nix/home/claude/default.nix`:
 ## Migration Strategy
 
 ### 1. Extract Settings Configuration
+
 ```bash
 # Create separate settings file:
 nix/home/claude/settings.json
@@ -36,6 +37,7 @@ nix/home/claude/settings.json
 This separates the JSON configuration from Nix code, making it easier to maintain and edit.
 
 ### 2. Flake Input Change
+
 ```nix
 # In flake.nix, line 24:
 # FROM:
@@ -45,12 +47,14 @@ claude-code.url = "github:sadjow/claude-code-nix";
 ```
 
 ### 3. Package Installation
+
 ```nix
 # Add to home.packages in appropriate module:
 home.packages = [ inputs.claude-code.packages.${pkgs.system}.default ];
 ```
 
 ### 4. Replace Home Manager Module
+
 ```nix
 # In nix/home/claude/default.nix:
 # REMOVE:
@@ -68,6 +72,7 @@ home.packages = [ inputs.claude-code.packages.${pkgs.system}.default ];
 ```
 
 ### 5. Custom Activation Script Implementation
+
 ```nix
 # Replace with:
 { inputs, pkgs, lib, ... }: {
@@ -90,6 +95,7 @@ home.packages = [ inputs.claude-code.packages.${pkgs.system}.default ];
 
 ### 1. Extract settings.json ✓
 **Test:**
+
 ```bash
 # Validate JSON syntax
 jq . nix/home/claude/settings.json > /dev/null && echo "✓ Valid JSON" || echo "✗ Invalid JSON"
@@ -102,6 +108,7 @@ diff /tmp/current_settings.json /tmp/new_settings.json || echo "Settings differ 
 
 ### 2. Switch flake input
 **Test:**
+
 ```bash
 # Validate flake builds
 nix flake check
@@ -112,6 +119,7 @@ nix eval .#homeConfigurations."$(whoami)@$(hostname -s)".config.home.packages --
 
 ### 3. Remove module & add activation script
 **Test:**
+
 ```bash
 # Build home-manager config without applying
 home-manager build --flake .#"$(whoami)@$(hostname -s)"
@@ -123,6 +131,7 @@ home-manager build --flake .#"$(whoami)@$(hostname -s)" && \
 
 ### 4. Apply configuration
 **Test:**
+
 ```bash
 # Backup current config before applying
 cp -r ~/.claude ~/.claude.backup.$(date +%s) 2>/dev/null || true
@@ -138,6 +147,7 @@ test -d ~/.claude/hooks && echo "✓ Hooks directory exists" || echo "✗ Hooks 
 
 ### 5. Validate configuration content
 **Test:**
+
 ```bash
 # Check memory file content matches
 diff ~/.claude/CLAUDE.md nix/home/claude/memory.md && echo "✓ Memory content matches" || echo "✗ Memory content differs"
@@ -150,6 +160,7 @@ jq -e '.hooks.PostToolUse | length > 0' ~/.claude/settings.json && echo "✓ Pos
 
 ### 6. Test Claude Code functionality
 **Test:**
+
 ```bash
 # Test basic execution
 claude --version && echo "✓ Claude executable works" || echo "✗ Claude executable failed"
@@ -174,6 +185,7 @@ claude --non-interactive < <(echo "Bash find . -name '*.nix'") && echo "✓ Allo
 ## Complete Validation Script
 
 Create `scripts/validate-claude-migration.sh`:
+
 ```bash
 #!/bin/bash
 set -e
@@ -227,7 +239,7 @@ echo "✅ All validations passed!"
 
 ## File Structure After Migration
 
-```
+```text
 nix/home/claude/
 ├── default.nix          # Nix module with activation scripts
 ├── memory.md            # Claude memory content

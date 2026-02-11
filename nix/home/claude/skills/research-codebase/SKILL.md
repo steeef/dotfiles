@@ -57,20 +57,23 @@ Analyze the research question and break it into distinct investigation areas. Us
 Launch these Task agents **in parallel** (single message, multiple tool calls):
 
 **codebase-locator** (subagent_type: Explore)
-```
+
+```text
 Find all files and components related to: [aspect of query]
 Report file paths, their purposes, and how they connect.
 ```
 
 **codebase-analyzer** (subagent_type: Explore)
-```
+
+```text
 Analyze how [specific code/feature] works.
 Trace the code path and explain the implementation.
 Include file:line references.
 ```
 
 **pattern-finder** (subagent_type: Explore)
-```
+
+```text
 Find existing patterns in the codebase for [pattern type].
 Document 3+ examples with file:line references.
 ```
@@ -95,6 +98,7 @@ Wait for all agents to complete. Compile findings with:
 ### Step 6: Generate Research Document
 
 Gather metadata:
+
 ```bash
 git rev-parse HEAD        # commit
 git branch --show-current # branch

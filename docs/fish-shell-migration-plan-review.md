@@ -170,7 +170,7 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 
 #### Proposed change (diff)
 
-```diff
+````diff
 --- a/migration-plan.md
 +++ b/migration-plan.md
 @@
@@ -203,7 +203,7 @@ This review focuses on correctness, integration risk, maintainability, and perfo
 +bind \ce _atuin_search
 +bind \cv edit_command_buffer
 +```
-```
+````
 
 ### 6) Missing prompt modules and guardrails (Medium)
 
