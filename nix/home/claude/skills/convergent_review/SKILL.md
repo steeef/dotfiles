@@ -1,167 +1,169 @@
 ---
 name: convergent_review
-description: Use when completing a design, plan, or implementation draft that needs quality validation - forces 4-5 review passes until output stabilizes
+description: Use when completing a design, plan, or implementation draft that needs quality validation - runs parallel review agents across 5 lenses until output converges
 allowed-tools:
-
 - Read
 - Edit
 - Glob
+- Grep
 - Task(Explore)
-
 ---
 
-# Convergent Review (Rule of Five)
+# Convergent Review (Rule of Five) — Parallel Sub-Agent Edition
 
 ## Overview
 
-Force 4-5 review passes on any artifact until it converges. Each pass examines from a different angle. Convergence = 2 consecutive clean passes.
+Run 3–5 review lenses in parallel using `Task(Explore)` sub-agents, synthesize findings, fix issues, and repeat until a full round returns clean. Max 3 rounds.
 
 **Announce at start:** "Using /convergent_review to validate this [design/plan/implementation]."
 
-## Session Workflow
-
-**Each pass runs in a separate session.** This is intentional—fresh context prevents confirmation bias.
-
-**The cycle:**
-
-1. Run `/convergent_review` in a session
-2. Execute one pass, write findings to plan file
-3. Report to user and **end the session**
-4. User clears context (`/clear` command or restart Claude)
-5. User runs `/convergent_review` again in fresh session
-6. Read plan file to determine next pass, continue
-
-**The plan file is your persistent memory.** Everything relevant must be written there—the next session won't remember this one.
-
-**Why clear context?**
-- Fresh perspective catches issues you became blind to
-- Prevents building on flawed reasoning from earlier passes
-- Forces each pass to stand on its own analysis
-
 ## The Five Lenses
 
-Run passes in order (1→2→3→4→5). After Pass 5, cycle back to Pass 1 if needed.
+### 1. Functional
 
-### Pass 1: Functional
 - Does this actually solve the stated problem?
 - What requirements are missing or incomplete?
 - Are there gaps in the logic?
 
-### Pass 2: Constraints
+### 2. Constraints
 - Performance implications?
 - Security vulnerabilities?
 - Compatibility issues?
 - Resource consumption?
 
-### Pass 3: Alternatives
+### 3. Alternatives
 - Is there a simpler approach we didn't consider?
 - Are we over-engineering?
 - What would a 10x simpler version look like?
 
-### Pass 4: Integration
+### 4. Integration
 - How does this interact with existing systems?
 - What might break?
 - Are there hidden dependencies?
 
-### Pass 5: Durability
+### 5. Durability
 - Can someone else understand this in 6 months?
 - Is it maintainable?
 - What happens when requirements change?
 
-## Convergence Rules
+## Workflow
 
-**Pass cycling:** After Pass 5, if issues remain, cycle back to Pass 1 (→2→3→4→5→1→...).
+### Step 1: Read Artifact and Classify Complexity
 
-**For simple tasks (single component, <100 lines):**
-- Minimum 2 passes
-- Stop when 2 consecutive passes find no significant issues
+Read all files under review. Classify:
 
-**For complex tasks (multi-component, architectural):**
-- Minimum 4 passes
-- Stop when 2 consecutive passes find no significant issues
+- **Simple** (single file, <100 lines changed): use 3 lenses — Functional, Constraints, Alternatives
+- **Complex** (multi-file, architectural, >100 lines): use all 5 lenses
 
-**If pass reveals issues:**
-1. Record issues in plan file
-2. Fix issues (or note them for user if outside scope)
-3. Re-run THAT SAME pass to verify fix
-4. Update plan file with results
-5. STOP and report to user
-6. Wait for user before proceeding to next pass
+Announce: "Classified as [simple/complex]. Running [3/5] lenses in parallel."
 
-## Pass Execution Protocol
+### Step 2: Launch Parallel Review Sub-Agents
 
-**One pass per session.** Do NOT run multiple passes without context clearing.
+Launch all selected lenses as `Task(Explore)` sub-agents **in a single message** (parallel execution). Each sub-agent receives:
 
-**During a pass:**
-1. Read the plan/design document under review
-2. Apply the lens for this pass (see The Five Lenses)
-3. Document all issues found with `file:line` references
-4. Apply fixes if within scope (or note for user if not)
+1. The artifact path(s) to read
+2. Its specific lens questions
+3. A structured output format
 
-**After completing the pass:**
-1. Update plan file under `## Convergent Review Log`
-2. Report summary to user:
-   - Issues found and fixed
-   - Issues noted for user
-   - Pass status (Clean / Needs fixes)
-3. **End the session.** Say: "Pass N complete. Clear context and run `/convergent_review` to continue."
+**Sub-agent prompt template** (adapt per lens):
 
-**Do not proceed to the next pass.** Wait for user to clear context and start fresh.
-
-**Plan file format:**
 ```
+Review the following artifact through the **[LENS NAME]** lens.
+
+Artifact files:
+- [path1]
+- [path2]
+
+Questions to evaluate:
+- [lens question 1]
+- [lens question 2]
+- [lens question 3]
+
+Read each file completely, then report using EXACTLY this format:
+
+LENS: [Lens Name]
+STATUS: CLEAN | ISSUES_FOUND
+ISSUES:
+- [severity: HIGH|MEDIUM|LOW] [file:line] [description]
+- ...
+SUMMARY: [1-2 sentence summary of findings]
+
+If no issues found, use STATUS: CLEAN and ISSUES: none.
+```
+
+### Step 3: Synthesize Findings
+
+After all sub-agents complete:
+
+1. Collect all ISSUES from every lens
+2. Deduplicate — same file:line referenced by multiple lenses counts once (note which lenses flagged it)
+3. Detect conflicts — if two lenses disagree (e.g., Alternatives says "remove X", Integration says "X is critical"), flag as CONFLICT
+4. Sort by severity: HIGH → MEDIUM → LOW
+
+### Step 4: Apply Fixes or Escalate
+
+- **Fixable issues** (clear, unambiguous): apply fixes using Edit
+- **Conflicts between lenses**: escalate to user with both perspectives — do NOT auto-resolve
+- **Out-of-scope issues**: note for user
+
+After applying fixes, list what changed.
+
+### Step 5: Re-Review (If Fixes Applied)
+
+If fixes were applied in Step 4:
+
+1. Determine which lenses need re-running:
+   - Lenses that originally found the fixed issues
+   - Cross-cutting lenses affected by the changes (e.g., Integration if structure changed)
+2. Launch only those lenses as parallel sub-agents (same prompt template)
+3. Synthesize again (back to Step 3)
+
+### Step 6: Convergence Check
+
+- **Converged**: a full round where ALL lenses return CLEAN → done
+- **Not converged**: repeat from Step 2 with only the affected lenses
+- **Max 3 rounds**: after 3 rounds, stop and report remaining issues to user
+
+Announce: "Round N complete. [Converged / N issues remain, starting round N+1 / Max rounds reached, reporting remaining issues]."
+
+### Step 7: Write Review Log to Plan File
+
+Update the plan file under `## Convergent Review Log`:
+
+```markdown
 ## Convergent Review Log
 
-### Pass 1: Functional
+### Round 1
+**Lenses Run:** Functional, Constraints, Alternatives, Integration, Durability
 **Issues Found:** N
-- [Issue with file:line]
+- [HIGH] [file:line] [description] (flagged by: Functional, Integration)
+- [MEDIUM] [file:line] [description] (flagged by: Constraints)
 **Fixes Applied:**
-- [Fix description]
-**Status:** Clean / Needs fixes
+- [description of fix]
+**Conflicts Escalated:**
+- [lens A] vs [lens B]: [description]
 
-### Pass 2: Constraints
-...
-```
+### Round 2 (Re-Review)
+**Lenses Re-Run:** Functional, Integration
+**Issues Found:** 0
+**Status:** All lenses CLEAN
 
-## Resuming a Review
-
-When starting a new session after context was cleared:
-
-1. Read the plan file's `## Convergent Review Log`
-2. Find the last completed pass
-3. Determine next action:
-   - If last pass was **Clean** → proceed to next pass number
-   - If last pass had **Needs fixes** and fixes applied → re-run same pass
-   - If 2 consecutive **Clean** passes → announce convergence achieved
-4. Announce: "Resuming convergent review at Pass N: [Lens Name]"
-5. Execute that pass
-
-## Output Format
-
-**Write to plan file first, then report to user.**
-
-After each pass, add to plan file:
-```
-### Pass N: [Lens Name]
-**Issues Found:** [count]
-- [Issue 1 with file:line]
-- [Issue 2 with file:line]
-**Fixes Applied:**
-- [Fix description]
-**Status:** Clean / Needs fixes
-```
-
-Then tell user: "Pass N complete. [Summary of findings]. Updated plan file. Say 'continue' for next pass."
-
-After convergence, add to plan file:
-```
 ### Convergence Achieved
-**Total Passes:** N (including re-runs)
+**Total Rounds:** 2
 **Final Status:** Ready for [next step]
 **Key Improvements Made:**
 - [Improvement 1]
 - [Improvement 2]
 ```
+
+Then report summary to user.
+
+## Convergence Rules Summary
+
+| Complexity | Lenses | Converged When | Max Rounds |
+|------------|--------|----------------|------------|
+| Simple | 3 (Functional, Constraints, Alternatives) | Full round all CLEAN | 3 |
+| Complex | 5 (all) | Full round all CLEAN | 3 |
 
 ## When to Use
 

@@ -31,16 +31,17 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Use `/test-driven-development` skill for detailed TDD workflow guidance
 
 ## Convergent Review (Rule of Five)
-- Apply 4-5 review passes on complex work until output stabilizes
-- Each pass examines from a different angle:
+- Runs 3–5 review lenses in parallel via `Task(Explore)` sub-agents
+- Each lens examines from a different angle:
   1. Functional: Does it solve the problem?
   2. Constraints: Performance, security, compatibility?
   3. Alternatives: Is there a simpler approach?
   4. Integration: What breaks? Hidden dependencies?
   5. Durability: Maintainable in 6 months?
-- 2-3 passes for simple tasks, 4-5 for complex
-- Convergence = 2 consecutive passes with no significant issues
-- After Pass 5, cycle back to Pass 1 if issues remain
+- Simple tasks: 3 lenses (Functional, Constraints, Alternatives)
+- Complex tasks: all 5 lenses
+- Convergence = full round where all lenses return CLEAN
+- Max 3 rounds; parent synthesizes, deduplicates, and applies fixes between rounds
 - Use `/convergent_review` command to enforce this discipline
 
 ## Project Integration
