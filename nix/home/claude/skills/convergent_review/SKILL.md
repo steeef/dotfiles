@@ -91,7 +91,7 @@ SUMMARY: [1-2 sentence summary of findings]
 If no issues found, use STATUS: CLEAN and ISSUES: none.
 ```
 
-**Error handling:** If a sub-agent returns malformed output or fails, re-launch that single lens. After 2 failures for the same lens, skip it and note in the review log.
+**Error handling:** If a sub-agent returns malformed output or fails, re-launch that single lens. After 2 failures for the same lens, skip it and note in the review log. A skipped lens is excluded from the selected set — convergence is evaluated against remaining active lenses only.
 
 ### Step 3: Synthesize Findings
 
@@ -105,10 +105,10 @@ After all sub-agents complete:
 ### Step 4: Apply Fixes or Escalate
 
 - **Fixable issues** (clear, unambiguous): apply fixes using Edit
-- **Conflicts between lenses**: escalate to user with both perspectives — do NOT auto-resolve
+- **Conflicts between lenses**: escalate to user — present as "[Lens A] recommends X because [reason]. [Lens B] recommends Y because [reason]. Tradeoff: [summary]." Do NOT auto-resolve.
 - **Out-of-scope issues**: note for user
 
-After applying fixes, list what changed.
+Fixes must preserve existing behavior, stay within the scope of flagged issues, and run any applicable formatters/linters. After applying fixes, list what changed.
 
 ### Step 5: Re-Review (If Fixes Applied)
 
