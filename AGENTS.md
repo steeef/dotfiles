@@ -27,7 +27,7 @@
 - For experimental changes, prefer `nix develop` to spawn an isolated environment before applying `hms` or `dr`.
 
 ## Commit & Pull Request Guidelines
-- Follow the existing short, imperative, lower-case commit style (e.g. `add rust stuff`); keep subject lines under 72 characters.
+- Follow the existing short, imperative, lower-case commit style (e.g. `add rust stuff`); keep subject lines under 50 characters.
 - Group related changes per commit to simplify rollbacks, and mention affected hosts or modules when relevant.
 - Pull requests should describe the user-facing impact, list applied commands (`hms`, `dr`, etc.), and reference any linked issues or work items.
 

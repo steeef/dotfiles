@@ -12,8 +12,7 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Skip unnecessary praise unless grounded in evidence. Explicitly acknowledge uncertainty when applicable.
 - Always propose at least one alternative framing.
 - Accept critical debate as normal and preferred.
-- Treat all factual claims as provisional unless cited or clearly justified. Cite when appropriate.
-- Acknowledge when claims rely on inference or incomplete information. Favor accuracy over sounding certain.
+- Treat factual claims as provisional; cite when appropriate and flag reliance on inference. Favor accuracy over sounding certain.
 
 ## Context engineering workflow
 - Follow a research → plan → implement cadence; do not skip phases on complex work.
@@ -46,13 +45,6 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 
 ## Project Integration
 
-### Learning the Codebase
-
-- Find 3 similar features/components
-- Identify common patterns and conventions
-- Use same libraries/utilities when possible
-- Follow existing test patterns
-
 ### Tooling
 
 - Use project's existing build system
@@ -70,7 +62,6 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Update plan documentation as you go
 - Learn from existing implementations
 - Stop after 3 failed attempts and reassess
-- Write failing tests before implementation code (TDD)
 
 # Git style
 - Git commit message first line must be 50 characters or less.
@@ -98,33 +89,21 @@ import httpx
 # ... rest of script
 ```
 
-- Shebang enables direct execution: `./script.py` (after `chmod +x`)
-- Metadata block declares Python version and dependencies inline
 - No separate requirements.txt or virtual environment needed
 
-# File Analysis Strategy
-- When hooks block reading large files (>500 lines), ALWAYS use the Task tool for analysis
-- Use Task tool for searching keywords across multiple files or open-ended exploration
-- Use direct Read/Glob tools only for specific files you know you need
-
 # Hook Integration
-- Safety hooks are enabled and will block dangerous operations (rm, large file reads, etc.)
-- File size hook blocks >500 lines to prevent context bloat - delegate to Task tool
-- Git hooks prevent unsafe operations - follow suggested alternatives
+- Safety hooks block dangerous operations (rm, large file reads >500 lines) — delegate to Task tool
+- Use Task tool for keyword searches across multiple files or open-ended exploration; use direct Read/Glob for specific known files
+- Git hooks prevent unsafe operations — follow suggested alternatives
+- Instead of `rm`, use `mv` to move files to TRASH/ directory in current folder
+- Create TRASH-FILES.md in current directory with one-line entries showing:
+  - File name, where it moved (TRASH/), and reason for deletion
+  - Example: `test_script.py - moved to TRASH/ - temporary test script`
 
 # GitHub style
 - IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
 - IMPORTANT: When creating pull request, prefix the title with the associated Jira issue, if it exists
 - IMPORTANT: When creating pull request, the Jira issue must be on the first line of the body description, by itself
-
-## File Deletion Hook
-- `rm` command is blocked by safety hooks
-- Instead of `rm`, use `mv` to move files to TRASH/ directory in current folder
-- Create TRASH-FILES.md in current directory with one-line entries showing:
-  - File name
-  - Where it moved (TRASH/)
-  - Reason for deletion
-- Example format: `test_script.py - moved to TRASH/ - temporary test script`
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
@@ -144,6 +123,13 @@ Create documentation files (*.md, README) only when explicitly requested.
 Use `hms` to apply home-manager configuration changes (including Claude Code settings).
 Use `dr` to apply system-wide Darwin configuration changes.
 
+# Git Repository Discovery
+- When a task references a git repository, check for an existing local clone before cloning:
+  - Work repos: `~/code/work/`
+  - Personal/other repos: `~/code/`
+- If found locally, fetch and fast-forward the main branch (`git fetch origin && git merge --ff-only origin/main`) before starting work.
+- Only clone if no local copy exists.
+
 # Git Worktree Workflow
 
 ## When to use worktrees
@@ -158,13 +144,13 @@ Skip worktrees for single-file fixes, documentation-only changes, exploration, o
 **IMPORTANT**: When exiting plan mode to begin implementation:
 1. MUST create a Jira-prefixed branch (e.g., `PROJ-123-feature-description`)
 2. MUST create a worktree for that branch before any code changes
-3. MUST announce: "Creating worktree for plan execution. Working in: <full-path>"
+3. Announce per Communication requirements below
 4. Follow TDD workflow (use `/test-driven-development` skill for guidance)
 
 **IMPORTANT**: When plan execution is complete:
 1. Create PR (draft mode, Jira-prefixed title)
 2. After PR merges, clean up worktree and delete local branch
-3. MUST announce: "Plan complete. Cleaning up worktree at <full-path>"
+3. Announce per Communication requirements below
 
 ## Worktree locations
 - Work repos (under `~/code/work/`): `~/code/work/.worktrees/<repo>/<branch>/`
