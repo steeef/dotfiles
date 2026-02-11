@@ -40,6 +40,7 @@
     go
     ffmpeg-headless
     findutils
+    fnm
     gnugrep
     gnused
     hidapitester
