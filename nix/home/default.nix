@@ -32,6 +32,7 @@
     coreutils
     cowsay
     curl
+    deadnix
     difftastic
     fd
     gcc
@@ -67,9 +68,11 @@
     rsync
     ruff
     rustc
+    shfmt
     sox
     sqlite
     ssh-copy-id
+    statix
     stern
     stylua
     tenv
