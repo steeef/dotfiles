@@ -48,9 +48,9 @@ repos:
         files: '\.nix$'
         pass_filenames: false
 
-  # --- Shell (shellcheck via official repo) ---
-  - repo: https://github.com/koalaman/shellcheck-precommit
-    rev: v0.11.0
+  # --- Shell ---
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
     hooks:
       - id: shellcheck
         types: [bash]
