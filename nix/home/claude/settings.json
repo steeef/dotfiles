@@ -6,6 +6,8 @@
     "git-hooks@claude-hooks": true
   },
   "includeCoAuthoredBy": false,
+  "spinnerTipsEnabled": false,
+  "companyAnnouncements": [],
   "statusLine": {
     "type": "command",
     "command": "claude-powerline",
