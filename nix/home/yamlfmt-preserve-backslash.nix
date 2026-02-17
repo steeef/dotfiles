@@ -1,7 +1,7 @@
 {pkgs}:
 pkgs.stdenv.mkDerivation rec {
   pname = "yamlfmt";
-  version = "0.17.3-0.0.2";
+  version = "0.21.0-0.0.1";
 
   src = pkgs.fetchurl {
     url = "https://github.com/steeef/yamlfmt/releases/download/v${version}/yamlfmt_${version}_${{
@@ -14,10 +14,10 @@ pkgs.stdenv.mkDerivation rec {
       }}.tar.gz";
     hash =
       {
-        "x86_64-linux" = "sha256-qDGnn2bwg9XP7PtOB5PEu9sbrQxP1KmwMA1B4Ecl4+Y=";
-        "aarch64-linux" = "sha256-x1XXKly9xIbAs9sbJ4xJoZIs6Z8LQ8O5J1NRxb39rb8=";
-        "x86_64-darwin" = "sha256-tFgc58KO+mDUC6m2IyIlPH+/eldk5uA4GAU9w6/wn3w=";
-        "aarch64-darwin" = "sha256-YfbEw0Vl2OgrGHUszRACJCETUNsUItv7CBzlDG17c80=";
+        "x86_64-linux" = "sha256-ZYCFM+/nBnaQOCScEi/YQJoH8lltk/90tXCa29RZIsQ=";
+        "aarch64-linux" = "sha256-D73iIbLqbZMI2tEHnhi3WJ/64kxk+MLVlvivz+iUZzs=";
+        "x86_64-darwin" = "sha256-H26KBEyPxQhsj8jFLLIJKOkLVfJobe+h6iGVyIve3dQ=";
+        "aarch64-darwin" = "sha256-eyL5cyEtxzJ4qgzHba3eBsElkvqnBC86y8oSCEw19E8=";
       }.${
         pkgs.stdenv.hostPlatform.system
       };
