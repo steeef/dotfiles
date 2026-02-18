@@ -14,6 +14,7 @@
 - `nix flake check` validates all flake outputs and is the preferred pre-commit sanity test.
 - `nix flake update` refreshes inputs; review `flake.lock` diffs before committing.
 - `prek run --files <paths>` runs targeted hooks, and `./bin/format.sh` batches the repo's formatters.
+- To trace unexpected build-time deps, use `nix derivation show -r` (not `nix-store -qR` which only shows runtime closure) then `nix-store --query --referrers` on the .drv.
 
 ## Coding Style & Naming Conventions
 - Nix files use two-space indentation and snake_case attribute names; align lists and let blocks for readability.
