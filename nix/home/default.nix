@@ -93,6 +93,11 @@
     yubikey-personalization
   ];
 
+  xdg.configFile."yt-dlp/config".text = ''
+    --no-js-runtimes
+    --js-runtimes bun
+  '';
+
   imports = [
     ./atuin.nix
     ./bat.nix
