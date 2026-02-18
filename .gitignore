@@ -12,3 +12,6 @@ result/
 *.zwc
 .DS_Store
 .worktrees/
+
+# AI session handoffs — ephemeral by default
+ai_docs/handoffs/
