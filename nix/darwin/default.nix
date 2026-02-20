@@ -184,6 +184,10 @@
       NSAutomaticDashSubstitutionEnabled = false;
       NSAutomaticQuoteSubstitutionEnabled = false;
     };
+
+    CustomUserPreferences."com.tinyspeck.slackmacgap" = {
+      SlackNoAutoUpdates = true;
+    };
   };
 
   system.activationScripts.nix-darwin = {
