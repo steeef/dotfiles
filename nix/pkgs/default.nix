@@ -28,6 +28,7 @@ final: prev: {
               "test_cancel_wait_on_thread"
               "test_single_thread"
               "test_thread_cancelled_and_abandoned"
+              "test_run_in_custom_limiter"
             ];
         });
         # Fix curl-cffi hanging tests on Darwin
