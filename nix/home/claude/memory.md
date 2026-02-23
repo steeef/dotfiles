@@ -99,9 +99,6 @@ import httpx
 - Create TRASH-FILES.md in current directory with one-line entries showing:
   - File name, where it moved (TRASH/), and reason for deletion
   - Example: `test_script.py - moved to TRASH/ - temporary test script`
-- WorktreeCreate hook runs `~/.bin/worktree-setup.sh` to auto-install project dependencies
-- If dependencies are missing after `EnterWorktree`, check `/tmp/worktree-setup.log` for errors
-  - `grep FAIL /tmp/worktree-setup.log` shows which commands failed and their output
 
 # Jira Integration
 - IMPORTANT: For all Jira operations (search, view, create, transition, comment), use the `/jira` skill first.
@@ -161,7 +158,6 @@ Skip worktrees for single-file fixes, documentation-only changes, exploration, o
 
 ## Lifecycle
 - `EnterWorktree` creates worktree at `.claude/worktrees/<name>/` inside the repo
-- `WorktreeCreate` hook auto-runs project setup (dependency install)
 - Run baseline tests to verify clean state before starting implementation
 - Work in worktree until PR merges
 - On session exit, choose "keep" if work continues across sessions
