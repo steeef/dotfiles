@@ -44,6 +44,23 @@ final: prev: {
         curl-cffi = python-prev.curl-cffi.overrideAttrs (_old: {
           doCheck = false;
         });
+        # Fix aiohttp flaky timing test on Darwin
+        # test_regex_performance asserts < 10ms which fails under build load
+        aiohttp = python-prev.aiohttp.overrideAttrs (old: {
+          disabledTests =
+            (old.disabledTests or [])
+            ++ [
+              "test_regex_performance"
+            ];
+        });
+        # Fix jeepney build failure on Darwin
+        # dbus-run-session fails because launchd activation is broken after
+        # Meson upgrade. Upstream fix: https://github.com/NixOS/nixpkgs/pull/485980
+        jeepney = python-prev.jeepney.overrideAttrs (old: {
+          doInstallCheck = false;
+          pythonImportsCheck =
+            builtins.filter (m: m != "jeepney.io.trio") (old.pythonImportsCheck or []);
+        });
       })
     ];
 }
