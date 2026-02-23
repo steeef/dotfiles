@@ -17,6 +17,16 @@
   # Claude powerline configuration
   home.file.".claude/claude-powerline.json".source = ./claude-powerline.json;
 
+  # Agent definitions (Nix-managed)
+  home.file.".claude/agents/batch-reader.md" = {
+    source = ./agents/batch-reader.md;
+    force = true;
+  };
+  home.file.".claude/agents/budgeted-explore.md" = {
+    source = ./agents/budgeted-explore.md;
+    force = true;
+  };
+
   # Use official home-manager claude-code module
   programs.claude-code = {
     enable = true;

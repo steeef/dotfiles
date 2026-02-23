@@ -39,6 +39,16 @@
           }
         ]
       }
+    ],
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.bin/worktree-setup.sh"
+          }
+        ]
+      }
     ]
   }
 }

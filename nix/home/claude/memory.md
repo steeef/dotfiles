@@ -146,35 +146,26 @@ Skip worktrees for single-file fixes, documentation-only changes, exploration, o
 
 ## Plan Execution Requirements
 **IMPORTANT**: When exiting plan mode to begin implementation:
-1. MUST create a Jira-prefixed branch (e.g., `PROJ-123-feature-description`)
-2. MUST create a worktree for that branch before any code changes
-3. Announce per Communication requirements below
+1. MUST use `EnterWorktree(name: "PROJ-123-feature-description")` with Jira-prefixed name
+2. Announce: "Creating worktree for feature work. Working in: <full-path>"
+3. Run baseline tests to verify clean state
 4. Follow TDD workflow (use `/test-driven-development` skill for guidance)
 
 **IMPORTANT**: When plan execution is complete:
 1. Create PR (draft mode, Jira-prefixed title)
 2. After PR merges, clean up worktree and delete local branch
-3. Announce per Communication requirements below
-
-## Worktree locations
-- Work repos (under `~/code/work/`): `~/code/work/.worktrees/<repo>/<branch>/`
-- Other repos: `~/code/.worktrees/<repo>/<branch>/`
-
-## Communication requirements
-- ALWAYS announce when creating a worktree: "Creating worktree for feature work. Working in: <full-path>"
-- ALWAYS announce when cleaning up: "PR merged. Cleaning up worktree at <full-path>"
-- Status line shows `⧉` indicator when in a worktree (with repo name)
+3. Announce: "PR merged. Cleaning up worktree at <full-path>"
 
 ## Lifecycle
-- Create worktree at start of feature work
-- After creation, auto-detect and run project setup (npm install, cargo build, pip install, poetry install, go mod download)
+- `EnterWorktree` creates worktree at `.claude/worktrees/<name>/` inside the repo
+- `WorktreeCreate` hook auto-runs project setup (dependency install)
 - Run baseline tests to verify clean state before starting implementation
 - Work in worktree until PR merges
-- Auto-cleanup worktree after successful merge to main/master
-- Delete local branch after cleanup
+- On session exit, choose "keep" if work continues across sessions
+- After PR merge, clean up worktree and delete local branch
 
 ## Decision Docs in Worktrees
-- Store plans, research, and handoffs in `ai_docs/` within the current working directory (worktree or main repo)
+- Store plans, research, and handoffs in `ai_docs/` within the worktree
 - **Commit decision docs** so they merge with the feature branch
 - When resuming handoffs, skill searches current directory first, falls back to main repo for legacy docs
 - On PR merge, decision docs naturally flow to main with the branch
