@@ -27,7 +27,6 @@
     awscli2
     bash
     bfs
-    btop
     cargo
     coreutils
     cowsay
@@ -101,6 +100,7 @@
   imports = [
     ./atuin.nix
     ./bat.nix
+    ./btop
     ./claude
     ./codex.nix
     ./direnv.nix
