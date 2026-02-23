@@ -100,6 +100,10 @@ import httpx
   - File name, where it moved (TRASH/), and reason for deletion
   - Example: `test_script.py - moved to TRASH/ - temporary test script`
 
+# Jira Integration
+- IMPORTANT: For all Jira operations (search, view, create, transition, comment), use the `/jira` skill first.
+- The `/jira` skill uses `acli` (Atlassian CLI) which is faster and more token-efficient than MCP round-trips.
+
 # GitHub style
 - IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
 - IMPORTANT: When creating pull request, prefix the title with the associated Jira issue, if it exists
