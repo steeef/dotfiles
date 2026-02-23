@@ -64,9 +64,5 @@
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/opencode/plugin";
     };
-    ".config/btop" = {
-      enable = true;
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/btop";
-    };
   };
 }
