@@ -2,7 +2,15 @@ final: prev: {
   claude-powerline = final.callPackage ./claude-powerline.nix {};
   hidapitester = final.callPackage ./hidapitester.nix {};
   kubectl = final.callPackage ./kubectl.nix {};
-  yt-dlp = prev.yt-dlp.override {deno = final.bun;};
+  yt-dlp = (prev.yt-dlp.override {deno = final.bun;}).overrideAttrs (_old: {
+    version = "2026.02.21";
+    src = final.fetchFromGitHub {
+      owner = "yt-dlp";
+      repo = "yt-dlp";
+      tag = "2026.02.21";
+      hash = "sha256-r9I/zLyqGPeIzsHsLxJcfnLC3jpuyKMyX1UaMoM08jk=";
+    };
+  });
 
   # Fix uvloop test failure with Python 3.13 on Darwin
   # nixpkgs only disables test_cancel_post_init for Python >= 3.14
