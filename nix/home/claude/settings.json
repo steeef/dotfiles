@@ -4,7 +4,6 @@
     "env-protection@claude-hooks": true,
     "file-protection@claude-hooks": true,
     "git-hooks@claude-hooks": true,
-    "ocr@aclarify": true
   },
   "includeCoAuthoredBy": false,
   "spinnerTipsEnabled": false,
