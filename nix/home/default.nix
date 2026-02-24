@@ -85,7 +85,7 @@
     vendir
     watch
     wget
-    (pkgs.callPackage ./yamlfmt-preserve-backslash.nix {})
+
     yq-go
     yt-dlp
     #    yubikey-manager
