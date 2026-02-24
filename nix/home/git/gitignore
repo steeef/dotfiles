@@ -27,7 +27,7 @@ zsh/.zsh_history
 TRASH/
 TRASH-FILES.md
 .claude/
-.claude_in_subtask.flag
+.claude_*.flag
 *.backup
 thoughts/
 CLAUDE.local.md
