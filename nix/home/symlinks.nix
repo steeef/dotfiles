@@ -56,10 +56,6 @@
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/zsh/p10k.zsh";
     };
-    ".config/yamlfmt/yamlfmt.yaml" = {
-      enable = true;
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/yamlfmt.yaml";
-    };
     ".config/opencode/plugin" = {
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/opencode/plugin";

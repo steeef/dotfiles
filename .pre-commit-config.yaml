@@ -66,9 +66,9 @@ repos:
   # --- YAML ---
   - repo: local
     hooks:
-      - id: yamlfmt
-        name: yamlfmt
-        entry: yamlfmt
+      - id: yamllint
+        name: yamllint
+        entry: uvx yamllint -s -c yamllint.yaml
         language: system
         types: [yaml]
         exclude: '^beets/'

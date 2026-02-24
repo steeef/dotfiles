@@ -32,26 +32,30 @@ if file "$FILE_PATH" 2>/dev/null | grep -q "text"; then
 
   # Remove trailing whitespace (safe for most files)
   case "$FILE_PATH" in
-  *.patch | *.diff)
-    # Skip patch files where whitespace might be significant
-    ;;
-  *)
-    # Remove trailing whitespace
-    sed -i 's/[ \t]*$//' "$FILE_PATH" 2>/dev/null || true
-    ;;
+    *.patch | *.diff)
+      # Skip patch files where whitespace might be significant
+      ;;
+    *)
+      # Remove trailing whitespace
+      sed -i 's/[ \t]*$//' "$FILE_PATH" 2>/dev/null || true
+      ;;
   esac
 fi
 
 # Format files based on extension
 case "$FILE_PATH" in
-*.yaml | *.yml)
-  #if command -v yamlfmt >/dev/null 2>&1; then
-  #yamlfmt "$FILE_PATH"
-  #fi
-  ;;
-*.tf | *.hcl)
-  if command -v terraform >/dev/null 2>&1; then
-    terraform fmt "$FILE_PATH"
-  fi
-  ;;
+  *.yaml | *.yml)
+    if command -v uvx >/dev/null 2>&1; then
+      if ! OUTPUT=$(uvx yamllint -s "$FILE_PATH" 2>&1); then
+        echo "yamllint errors in $FILE_PATH:" >&2
+        echo "$OUTPUT" >&2
+        exit 1
+      fi
+    fi
+    ;;
+  *.tf | *.hcl)
+    if command -v terraform >/dev/null 2>&1; then
+      terraform fmt "$FILE_PATH"
+    fi
+    ;;
 esac

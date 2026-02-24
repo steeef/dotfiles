@@ -8,15 +8,13 @@
   lib,
   inputs,
   ...
-}:
-let
+}: let
   jsonFormat = pkgs.formats.json {};
   baseSettings = lib.importJSON ./settings.json;
   baseSettingsFile = jsonFormat.generate "claude-code-base-settings.json" (
     baseSettings // {"$schema" = "https://json.schemastore.org/claude-code-settings.json";}
   );
-in
-{
+in {
   # Install claude-powerline globally
   home.packages = with pkgs; [
     claude-powerline
