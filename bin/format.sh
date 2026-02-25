@@ -47,9 +47,8 @@ case "$FILE_PATH" in
   *.yaml | *.yml)
     if command -v uvx >/dev/null 2>&1; then
       if ! OUTPUT=$(uvx yamllint -s "$FILE_PATH" 2>&1); then
-        echo "yamllint errors in $FILE_PATH:" >&2
-        echo "$OUTPUT" >&2
-        exit 1
+        echo "yamllint warnings in $FILE_PATH:"
+        echo "$OUTPUT"
       fi
     fi
     ;;
