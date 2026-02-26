@@ -8,8 +8,9 @@
     package = inputs.codex-cli.packages.${pkgs.stdenv.hostPlatform.system}.default;
     custom-instructions = builtins.readFile ./claude/memory.md;
     settings = {
-      model = "gpt-5.2-codex";
+      model = "gpt-5.3-codex";
       approval_policy = "on-request";
+      personality = "pragmatic";
       sandbox_mode = "workspace-write";
       notice = {
         hide_gpt5_1_migration_prompt = true;
