@@ -162,9 +162,3 @@ Skip worktrees for single-file fixes, documentation-only changes, exploration, o
 - Work in worktree until PR merges
 - On session exit, choose "keep" if work continues across sessions
 - After PR merge, clean up worktree and delete local branch
-
-## Decision Docs in Worktrees
-- Store plans, research, and handoffs in `ai_docs/` within the worktree
-- **Commit decision docs** so they merge with the feature branch
-- When resuming handoffs, skill searches current directory first, falls back to main repo for legacy docs
-- On PR merge, decision docs naturally flow to main with the branch
