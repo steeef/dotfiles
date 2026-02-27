@@ -72,6 +72,7 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - IMPORTANT: When running poetry in a project, use the global `poetry` command (Python 3.11). If the project requires a different Python version, use: `uvx --python <version> --with poetry==<poetry-version> poetry ...` (e.g., `uvx --python 3.12 --with poetry==2.1.1 poetry install`)
 - IMPORTANT: Use `poetry lock` (without flags) to regenerate the lock file. The `--no-update` flag does not exist.
 - When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls do not fail with `PermissionError`.
+- Use `fnm` (Fast Node Manager) when working on Node projects or attempting to run Node commands like `npm` and `yarn`.
 
 ## Single-File Python Scripts
 When writing a standalone Python script (not part of a larger project), use uv with PEP 723 inline script metadata:
