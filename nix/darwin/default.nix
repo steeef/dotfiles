@@ -82,6 +82,7 @@
     ];
     brews =
       [
+        "asciinema"
         "docker-buildx"
         "docker-credential-helper-ecr"
         "mas"
