@@ -17,7 +17,7 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 ## Context engineering workflow
 - Follow a research → plan → implement cadence; do not skip phases on complex work.
 - Research: read every referenced file in full before spawning tasks; use fast search (rg) and locate 3 similar patterns/tests to mirror; prefer sub-tasks for locating, analyzing, and pattern-finding.
-- Plan: produce phased steps with file:line evidence, and success criteria split into automated commands vs manual checks using project-standard tooling.
+- Plan: produce phased steps with file:line evidence, and success criteria split into automated commands vs manual checks using project-standard tooling. When a skill or workflow writes plans as documents to disk, that is the deliverable — do not treat plan creation as a trigger to begin implementation.
 - Implement: write failing tests first, then minimal code to pass; work phase-by-phase, verifying after each phase; compact progress (decisions, commands, failures) into concise notes instead of keeping long logs in context.
 - Compaction: strip noisy tool output; summarize only the essential facts, decisions, and next actions so context stays lean.
 - Guardrails: do not ask the user questions you can answer from code; pause and research when uncertain; when the task is documentation-only, describe what exists without proposing improvements.
@@ -114,7 +114,6 @@ import httpx
 Do what has been asked; nothing more, nothing less.
 Create files only when necessary for achieving the goal.
 Prefer editing existing files over creating new ones.
-Create documentation files (*.md, README) only when explicitly requested.
 
 # Project CLAUDE.md File Creation
 **SUPERDUPER IMPORTANT**: Write project instructions to `AGENTS.md` and symlink to `CLAUDE.md`. Reference "AI coding agents" generically (not Claude Code specifically).
@@ -146,7 +145,9 @@ Use git worktrees for feature work:
 Skip worktrees for single-file fixes, documentation-only changes, exploration, or branches already checked out.
 
 ## Plan Execution Requirements
-**IMPORTANT**: When exiting plan mode to begin implementation:
+**IMPORTANT**: These requirements apply when the user explicitly asks to begin implementation (e.g., "start coding", "implement the plan"). Writing a plan document is NOT implementation — do not start worktrees or write code after creating a plan.
+
+When beginning implementation:
 1. MUST use `EnterWorktree(name: "PROJ-123-feature-description")` with Jira-prefixed name
 2. Announce: "Creating worktree for feature work. Working in: <full-path>"
 3. Run baseline tests to verify clean state
