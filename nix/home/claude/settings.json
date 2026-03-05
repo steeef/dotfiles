@@ -11,7 +11,7 @@
   "companyAnnouncements": [],
   "statusLine": {
     "type": "command",
-    "command": "claude-powerline",
+    "command": "~/.claude/statusline.sh",
     "padding": 0
   },
   "permissions": {

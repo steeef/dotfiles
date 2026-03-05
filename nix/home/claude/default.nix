@@ -25,6 +25,12 @@ in
   # Claude powerline configuration
   home.file.".claude/claude-powerline.json".source = ./claude-powerline.json;
 
+  # ClaudeCodeStatusLine (shows real 5h/7d rate limit usage)
+  home.file.".claude/statusline.sh" = {
+    source = ./statusline.sh;
+    executable = true;
+  };
+
   # Agent definitions (Nix-managed)
   home.file.".claude/agents/batch-reader.md" = {
     source = ./agents/batch-reader.md;
