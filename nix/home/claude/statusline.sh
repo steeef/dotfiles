@@ -1,5 +1,6 @@
 #!/bin/bash
-# Single line: Model | tokens | %used | %remain | think | 5h bar @reset | 7d bar @reset | extra
+# Line 1: Model effort | dir@branch
+# Line 2: ctx [bar] tokens pct | 5h [bar] pct @reset
 # Source: https://github.com/daniel3303/ClaudeCodeStatusLine
 
 set -f  # disable globbing
@@ -34,13 +35,7 @@ format_tokens() {
     fi
 }
 
-# Format number with commas (e.g., 134,938)
-format_commas() {
-    printf "%'d" "$1"
-}
-
 # Return color escape based on usage percentage
-# Usage: usage_color <pct>
 usage_color() {
     local pct=$1
     if [ "$pct" -ge 90 ]; then echo "$red"
@@ -48,6 +43,22 @@ usage_color() {
     elif [ "$pct" -ge 50 ]; then echo "$yellow"
     else echo "$green"
     fi
+}
+
+# Render a progress bar: progress_bar <pct> <width>
+# Uses block characters: ████░░░░
+progress_bar() {
+    local pct=$1
+    local width=${2:-10}
+    local filled=$(( pct * width / 100 ))
+    [ "$filled" -gt "$width" ] && filled=$width
+    local empty=$(( width - filled ))
+    local color
+    color=$(usage_color "$pct")
+    local bar=""
+    for ((i=0; i<filled; i++)); do bar+="█"; done
+    for ((i=0; i<empty; i++)); do bar+="░"; done
+    printf "%b%s%b" "$color" "$bar" "$reset"
 }
 
 # ===== Extract data from JSON =====
@@ -71,11 +82,6 @@ if [ "$size" -gt 0 ]; then
 else
     pct_used=0
 fi
-pct_remain=$(( 100 - pct_used ))
-
-used_comma=$(format_commas $current)
-remain_comma=$(format_commas $(( size - current )))
-
 # Check reasoning effort
 settings_path="$HOME/.claude/settings.json"
 effort_level="high"
@@ -86,33 +92,35 @@ elif [ -f "$settings_path" ]; then
     [ -n "$effort_val" ] && effort_level="$effort_val"
 fi
 
-# ===== Build single-line output =====
-out=""
-out+="${blue}${model_name}${reset}"
+# ===== Build output =====
+sep=" ${dim}|${reset} "
 
-# Current working directory
+# Line 1: Model + effort + dir/git
+line1=""
+line1+="${blue}${model_name}${reset}"
+line1+=" "
+case "$effort_level" in
+    low)    line1+="${dim}low${reset}" ;;
+    medium) line1+="${orange}med${reset}" ;;
+    *)      line1+="${green}high${reset}" ;;
+esac
+
 cwd=$(echo "$input" | jq -r '.cwd // empty')
 if [ -n "$cwd" ]; then
     display_dir="${cwd##*/}"
     git_branch=$(git -C "${cwd}" rev-parse --abbrev-ref HEAD 2>/dev/null)
-    out+=" ${dim}|${reset} "
-    out+="${cyan}${display_dir}${reset}"
+    line1+="${sep}"
+    line1+="${cyan}${display_dir}${reset}"
     if [ -n "$git_branch" ]; then
-        out+="${dim}@${reset}${green}${git_branch}${reset}"
+        line1+="${dim}@${reset}${green}${git_branch}${reset}"
         git_stat=$(git -C "${cwd}" diff --numstat 2>/dev/null | awk '{a+=$1; d+=$2} END {if (a+d>0) printf "+%d -%d", a, d}')
-        [ -n "$git_stat" ] && out+=" ${dim}(${reset}${green}${git_stat%% *}${reset} ${red}${git_stat##* }${reset}${dim})${reset}"
+        [ -n "$git_stat" ] && line1+=" ${dim}(${reset}${green}${git_stat%% *}${reset} ${red}${git_stat##* }${reset}${dim})${reset}"
     fi
 fi
 
-out+=" ${dim}|${reset} "
-out+="${orange}${used_tokens}/${total_tokens}${reset} ${dim}(${reset}${green}${pct_used}%${reset}${dim})${reset}"
-out+=" ${dim}|${reset} "
-out+="effort: "
-case "$effort_level" in
-    low)    out+="${dim}low${reset}" ;;
-    medium) out+="${orange}med${reset}" ;;
-    *)      out+="${green}high${reset}" ;;
-esac
+# Line 2: context bar + 5h bar
+ctx_bar=$(progress_bar "$pct_used" 10)
+line2="ctx ${ctx_bar} ${orange}${used_tokens}/${total_tokens}${reset} ${dim}${pct_used}%${reset}"
 
 # ===== Cross-platform OAuth token resolution =====
 # Tries credential sources in order: env var > macOS Keychain > Linux creds file > GNOME Keyring
@@ -237,69 +245,30 @@ iso_to_epoch() {
     return 1
 }
 
-# Format ISO reset time to compact local time
+# Format ISO reset time to compact local time (e.g. "3:45pm")
 format_reset_time() {
     local iso_str="$1"
-    local style="$2"
     [ -z "$iso_str" ] || [ "$iso_str" = "null" ] && return
 
     local epoch
     epoch=$(iso_to_epoch "$iso_str")
     [ -z "$epoch" ] && return
 
-    case "$style" in
-        time)
-            date -j -r "$epoch" +"%l:%M%p" 2>/dev/null | sed 's/^ //' | tr '[:upper:]' '[:lower:]' || \
-            date -d "@$epoch" +"%l:%M%P" 2>/dev/null | sed 's/^ //'
-            ;;
-        datetime)
-            date -j -r "$epoch" +"%b %-d, %l:%M%p" 2>/dev/null | sed 's/  / /g; s/^ //' | tr '[:upper:]' '[:lower:]' || \
-            date -d "@$epoch" +"%b %-d, %l:%M%P" 2>/dev/null | sed 's/  / /g; s/^ //'
-            ;;
-        *)
-            date -j -r "$epoch" +"%b %-d" 2>/dev/null | tr '[:upper:]' '[:lower:]' || \
-            date -d "@$epoch" +"%b %-d" 2>/dev/null
-            ;;
-    esac
+    date -j -r "$epoch" +"%l:%M%p" 2>/dev/null | sed 's/^ //' | tr '[:upper:]' '[:lower:]' || \
+    date -d "@$epoch" +"%l:%M%P" 2>/dev/null | sed 's/^ //'
 }
 
-sep=" ${dim}|${reset} "
-
 if [ -n "$usage_data" ] && echo "$usage_data" | jq -e . >/dev/null 2>&1; then
-    # ---- 5-hour (current) ----
     five_hour_pct=$(echo "$usage_data" | jq -r '.five_hour.utilization // 0' | awk '{printf "%.0f", $1}')
     five_hour_reset_iso=$(echo "$usage_data" | jq -r '.five_hour.resets_at // empty')
-    five_hour_reset=$(format_reset_time "$five_hour_reset_iso" "time")
-    five_hour_color=$(usage_color "$five_hour_pct")
+    five_hour_reset=$(format_reset_time "$five_hour_reset_iso")
 
-    out+="${sep}${white}5h${reset} ${five_hour_color}${five_hour_pct}%${reset}"
-    [ -n "$five_hour_reset" ] && out+=" ${dim}@${five_hour_reset}${reset}"
-
-    # ---- 7-day (weekly) ----
-    seven_day_pct=$(echo "$usage_data" | jq -r '.seven_day.utilization // 0' | awk '{printf "%.0f", $1}')
-    seven_day_reset_iso=$(echo "$usage_data" | jq -r '.seven_day.resets_at // empty')
-    seven_day_reset=$(format_reset_time "$seven_day_reset_iso" "datetime")
-    seven_day_color=$(usage_color "$seven_day_pct")
-
-    out+="${sep}${white}7d${reset} ${seven_day_color}${seven_day_pct}%${reset}"
-    [ -n "$seven_day_reset" ] && out+=" ${dim}@${seven_day_reset}${reset}"
-
-    # ---- Extra usage ----
-    extra_enabled=$(echo "$usage_data" | jq -r '.extra_usage.is_enabled // false')
-    if [ "$extra_enabled" = "true" ]; then
-        extra_pct=$(echo "$usage_data" | jq -r '.extra_usage.utilization // 0' | awk '{printf "%.0f", $1}')
-        extra_used=$(echo "$usage_data" | jq -r '.extra_usage.used_credits // 0' | LC_NUMERIC=C awk '{printf "%.2f", $1/100}')
-        extra_limit=$(echo "$usage_data" | jq -r '.extra_usage.monthly_limit // 0' | LC_NUMERIC=C awk '{printf "%.2f", $1/100}')
-        if [ -n "$extra_used" ] && [ -n "$extra_limit" ] && [[ "$extra_used" != *'$'* ]] && [[ "$extra_limit" != *'$'* ]]; then
-            extra_color=$(usage_color "$extra_pct")
-            out+="${sep}${white}extra${reset} ${extra_color}\$${extra_used}/\$${extra_limit}${reset}"
-        else
-            out+="${sep}${white}extra${reset} ${green}enabled${reset}"
-        fi
-    fi
+    five_bar=$(progress_bar "$five_hour_pct" 10)
+    line2+="${sep}5h ${five_bar} ${dim}${five_hour_pct}%${reset}"
+    [ -n "$five_hour_reset" ] && line2+=" ${dim}@${five_hour_reset}${reset}"
 fi
 
-# Output single line
-printf "%b" "$out"
+# Output two lines
+printf "%b\n%b" "$line1" "$line2"
 
 exit 0
