@@ -6,6 +6,7 @@
     "git-hooks@claude-hooks": true
   },
   "includeCoAuthoredBy": false,
+  "includeGitInstructions": false,
   "spinnerTipsEnabled": false,
   "companyAnnouncements": [],
   "statusLine": {
