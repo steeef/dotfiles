@@ -12,15 +12,15 @@ if [ -z "$input" ]; then
     exit 0
 fi
 
-# ANSI colors matching oh-my-posh theme
-blue='\033[38;2;0;153;255m'
-orange='\033[38;2;255;176;85m'
-green='\033[38;2;0;160;0m'
-cyan='\033[38;2;46;149;153m'
-red='\033[38;2;255;85;85m'
-yellow='\033[38;2;230;200;0m'
-white='\033[38;2;220;220;220m'
-dim='\033[2m'
+# Catppuccin Macchiato palette
+blue='\033[38;2;138;173;244m'    # Blue
+orange='\033[38;2;245;169;127m'  # Peach
+green='\033[38;2;166;218;149m'   # Green
+cyan='\033[38;2;139;213;202m'    # Teal
+red='\033[38;2;237;135;150m'     # Red
+yellow='\033[38;2;238;212;159m'  # Yellow
+white='\033[38;2;202;211;245m'   # Text
+dim='\033[38;2;110;115;141m'     # Overlay0
 reset='\033[0m'
 
 # Format token counts (e.g., 50k / 200k)
