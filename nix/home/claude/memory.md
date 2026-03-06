@@ -148,7 +148,7 @@ Skip worktrees for single-file fixes, documentation-only changes, exploration, o
 **IMPORTANT**: These requirements apply when the user explicitly asks to begin implementation (e.g., "start coding", "implement the plan"). Writing a plan document is NOT implementation — do not start worktrees or write code after creating a plan.
 
 When beginning implementation:
-1. MUST use `EnterWorktree(name: "PROJ-123-feature-description")` with Jira-prefixed name
+1. Use `EnterWorktree(name: "descriptive-branch-name")` — the name becomes the branch name directly
 2. Announce: "Creating worktree for feature work. Working in: <full-path>"
 3. Run baseline tests to verify clean state
 4. Follow TDD workflow (use `/test-driven-development` skill for guidance)
@@ -160,6 +160,7 @@ When beginning implementation:
 
 ## Lifecycle
 - `EnterWorktree` creates worktree at `.claude/worktrees/<name>/` inside the repo
+- Branch name = worktree name (no `worktree-` prefix)
 - Run baseline tests to verify clean state before starting implementation
 - Work in worktree until PR merges
 - On session exit, choose "keep" if work continues across sessions
