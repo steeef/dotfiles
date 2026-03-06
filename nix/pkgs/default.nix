@@ -1,5 +1,4 @@
 final: prev: {
-  claude-powerline = final.callPackage ./claude-powerline.nix {};
   hidapitester = final.callPackage ./hidapitester.nix {};
   kubectl = final.callPackage ./kubectl.nix {};
   yt-dlp = (prev.yt-dlp.override {deno = final.bun;}).overrideAttrs (_old: {

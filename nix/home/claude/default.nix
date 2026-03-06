@@ -8,23 +8,13 @@
   lib,
   inputs,
   ...
-}:
-let
+}: let
   jsonFormat = pkgs.formats.json {};
   baseSettings = lib.importJSON ./settings.json;
   baseSettingsFile = jsonFormat.generate "claude-code-base-settings.json" (
     baseSettings // {"$schema" = "https://json.schemastore.org/claude-code-settings.json";}
   );
-in
-{
-  # Install claude-powerline globally
-  home.packages = with pkgs; [
-    claude-powerline
-  ];
-
-  # Claude powerline configuration
-  home.file.".claude/claude-powerline.json".source = ./claude-powerline.json;
-
+in {
   # ClaudeCodeStatusLine (shows real 5h/7d rate limit usage)
   home.file.".claude/statusline.sh" = {
     source = ./statusline.sh;
