@@ -93,8 +93,14 @@ cwd=$(echo "$input" | jq -r '.cwd // empty')
 if [ -n "$cwd" ]; then
     display_dir="${cwd##*/}"
     git_branch=$(git -C "${cwd}" rev-parse --abbrev-ref HEAD 2>/dev/null)
+    repo_root=$(git -C "${cwd}" rev-parse --show-toplevel 2>/dev/null)
+    repo_name="${repo_root##*/}"
     line1+="${sep}"
-    line1+="${cyan}${display_dir}${reset}"
+    if [ -n "$repo_name" ] && [ "$repo_name" != "$display_dir" ]; then
+        line1+="${cyan}${repo_name}${reset} ${dim}>${reset} ${cyan}${display_dir}${reset}"
+    else
+        line1+="${cyan}${display_dir}${reset}"
+    fi
     if [ -n "$git_branch" ]; then
         line1+="${dim}@${reset}${green}${git_branch}${reset}"
         git_stat=$(git -C "${cwd}" diff --numstat 2>/dev/null | awk '{a+=$1; d+=$2} END {if (a+d>0) printf "+%d -%d", a, d}')
