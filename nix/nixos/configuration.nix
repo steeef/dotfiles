@@ -131,7 +131,7 @@
     jetbrains-mono
     source-code-pro
     victor-mono
-    (nerd-fonts.override {fonts = ["NerdFontsSymbolsOnly"];})
+    nerd-fonts.symbols-only
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
