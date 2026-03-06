@@ -1,5 +1,5 @@
 #!/bin/bash
-# Line 1: Model effort | dir@branch
+# Line 1: Model | dir@branch
 # Line 2: ctx [bar] tokens pct | 5h [bar] pct @reset
 # Source: https://github.com/daniel3303/ClaudeCodeStatusLine
 
@@ -82,28 +82,12 @@ if [ "$size" -gt 0 ]; then
 else
     pct_used=0
 fi
-# Check reasoning effort
-settings_path="$HOME/.claude/settings.json"
-effort_level="high"
-if [ -n "$CLAUDE_CODE_EFFORT_LEVEL" ]; then
-    effort_level="$CLAUDE_CODE_EFFORT_LEVEL"
-elif [ -f "$settings_path" ]; then
-    effort_val=$(jq -r '.effortLevel // empty' "$settings_path" 2>/dev/null)
-    [ -n "$effort_val" ] && effort_level="$effort_val"
-fi
-
 # ===== Build output =====
 sep=" ${dim}|${reset} "
 
-# Line 1: Model + effort + dir/git
+# Line 1: Model + dir/git
 line1=""
 line1+="${blue}${model_name}${reset}"
-line1+=" "
-case "$effort_level" in
-    low)    line1+="${dim}low${reset}" ;;
-    medium) line1+="${orange}med${reset}" ;;
-    *)      line1+="${green}high${reset}" ;;
-esac
 
 cwd=$(echo "$input" | jq -r '.cwd // empty')
 if [ -n "$cwd" ]; then
