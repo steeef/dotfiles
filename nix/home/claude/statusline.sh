@@ -93,7 +93,9 @@ cwd=$(echo "$input" | jq -r '.cwd // empty')
 if [ -n "$cwd" ]; then
     display_dir="${cwd##*/}"
     git_branch=$(git -C "${cwd}" rev-parse --abbrev-ref HEAD 2>/dev/null)
-    repo_root=$(git -C "${cwd}" rev-parse --show-toplevel 2>/dev/null)
+    git_common_dir=$(git -C "${cwd}" rev-parse --path-format=absolute --git-common-dir 2>/dev/null)
+    # Strip /.git suffix to get the actual repo root (works for both regular repos and worktrees)
+    repo_root="${git_common_dir%/.git}"
     repo_name="${repo_root##*/}"
     line1+="${sep}"
     if [ -n "$repo_name" ] && [ "$repo_name" != "$display_dir" ]; then
