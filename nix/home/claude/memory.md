@@ -119,7 +119,6 @@ Prefer editing existing files over creating new ones.
 When adding agent instructions to a project, pick the first matching rule:
 1. If a non-symlink `CLAUDE.md` already exists, edit it directly.
 2. If `AGENTS.md` exists, write instructions there and symlink `CLAUDE.md -> AGENTS.md`.
-3. Otherwise, write instructions to `CONTRIBUTING.md` and symlink both `AGENTS.md` and `CLAUDE.md` to it.
 
 # Nix System Management
 
