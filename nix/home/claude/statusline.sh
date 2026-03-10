@@ -1,6 +1,6 @@
 #!/bin/bash
 # Line 1: Model | dir@branch
-# Line 2: ctx [bar] tokens pct | 5h [bar] pct @reset
+# Line 2: ctx [bar] tokens pct | 5h [bar] pct @reset | 7d [bar] pct
 # Source: https://github.com/daniel3303/ClaudeCodeStatusLine
 
 set -f  # disable globbing
@@ -255,9 +255,18 @@ if [ -n "$usage_data" ] && echo "$usage_data" | jq -e . >/dev/null 2>&1; then
     five_hour_reset_iso=$(echo "$usage_data" | jq -r '.five_hour.resets_at // empty')
     five_hour_reset=$(format_reset_time "$five_hour_reset_iso")
 
-    five_bar=$(progress_bar "$five_hour_pct" 10)
-    line2+="${sep}5h ${five_bar} ${dim}${five_hour_pct}%${reset}"
-    [ -n "$five_hour_reset" ] && line2+=" ${dim}@${five_hour_reset}${reset}"
+    if [ "$five_hour_pct" -ge 95 ]; then
+        line2+="${sep}5h ${red}BLOCKED${reset}"
+        [ -n "$five_hour_reset" ] && line2+=" ${red}resets @${five_hour_reset}${reset}"
+    else
+        five_bar=$(progress_bar "$five_hour_pct" 10)
+        line2+="${sep}5h ${five_bar} ${dim}${five_hour_pct}%${reset}"
+        [ -n "$five_hour_reset" ] && line2+=" ${dim}@${five_hour_reset}${reset}"
+    fi
+
+    seven_day_pct=$(echo "$usage_data" | jq -r '.seven_day.utilization // 0' | awk '{printf "%.0f", $1}')
+    seven_bar=$(progress_bar "$seven_day_pct" 10)
+    line2+="${sep}7d ${seven_bar} ${dim}${seven_day_pct}%${reset}"
 fi
 
 # Output two lines
