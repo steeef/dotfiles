@@ -246,8 +246,12 @@ format_reset_time() {
     epoch=$(iso_to_epoch "$iso_str")
     [ -z "$epoch" ] && return
 
-    date -j -r "$epoch" +"%l:%M%p" 2>/dev/null | sed 's/^ //' | tr '[:upper:]' '[:lower:]' || \
-    date -d "@$epoch" +"%l:%M%P" 2>/dev/null | sed 's/^ //'
+    local formatted
+    formatted=$(date -j -r "$epoch" +"%H:%M" 2>/dev/null)
+    if [ -z "$formatted" ]; then
+        formatted=$(date -d "@$epoch" +"%H:%M" 2>/dev/null)
+    fi
+    [ -n "$formatted" ] && printf "%s" "$formatted"
 }
 
 if [ -n "$usage_data" ] && echo "$usage_data" | jq -e . >/dev/null 2>&1; then
