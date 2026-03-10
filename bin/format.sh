@@ -46,7 +46,10 @@ fi
 case "$FILE_PATH" in
   *.yaml | *.yml)
     if command -v uvx >/dev/null 2>&1; then
-      if ! OUTPUT=$(uvx yamllint -s "$FILE_PATH" 2>&1); then
+      if grep -q '\${{' "$FILE_PATH"; then
+        # Skip yamllint for template files with nunjucks/Backstage syntax
+        :
+      elif ! OUTPUT=$(uvx yamllint -s "$FILE_PATH" 2>&1); then
         echo "yamllint warnings in $FILE_PATH:"
         echo "$OUTPUT"
       fi
