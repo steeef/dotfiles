@@ -160,10 +160,14 @@ When beginning implementation:
 2. After PR merges, clean up worktree and delete local branch
 3. Announce: "PR merged. Cleaning up worktree at <full-path>"
 
+## Resuming Work in Existing Worktrees
+When resuming work on a ticket/branch with an existing PR or worktree:
+1. Run `git worktree list` to check for existing worktrees matching the ticket/branch
+2. If found: `EnterWorktree(name: "branch-name")` to re-enter (hook detects existing and returns path)
+3. If not found but branch exists: `EnterWorktree(name: "branch-name")` creates a fresh worktree
+4. Read any plan files or handoff docs for the ticket before proceeding
+
 ## Lifecycle
 - `EnterWorktree` creates worktree at `.claude/worktrees/<name>/` inside the repo
 - Branch name = worktree name (no `worktree-` prefix)
-- Run baseline tests to verify clean state before starting implementation
-- Work in worktree until PR merges
 - On session exit, choose "keep" if work continues across sessions
-- After PR merge, clean up worktree and delete local branch
