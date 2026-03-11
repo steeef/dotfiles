@@ -1,9 +1,11 @@
 {
-  "enabledPlugins": {
-    "command-safety@claude-hooks": true,
-    "env-protection@claude-hooks": true,
-    "file-protection@claude-hooks": true,
-    "git-hooks@claude-hooks": true
+  "extraKnownMarketplaces": {
+    "claude-hooks": {
+      "source": {
+        "source": "github",
+        "repo": "steeef/claude-hooks"
+      }
+    }
   },
   "includeCoAuthoredBy": false,
   "includeGitInstructions": false,

@@ -1,8 +1,7 @@
 # Claude Code configuration
 #
-# Hooks are provided by claude-hooks plugins installed via:
-#   /plugin marketplace add steeef/claude-hooks
-#   /plugin install <plugin>@claude-hooks
+# Hooks are provided by claude-hooks plugins resolved via extraKnownMarketplaces.
+# Claude Code auto-installs enabled plugins from registered marketplaces at startup.
 {
   pkgs,
   lib,
@@ -10,7 +9,22 @@
   ...
 }: let
   jsonFormat = pkgs.formats.json {};
-  baseSettings = lib.importJSON ./settings.json;
+
+  claudeHooksPlugins = [
+    "command-safety"
+    "env-protection"
+    "file-protection"
+    "git-hooks"
+  ];
+
+  baseSettings =
+    lib.importJSON ./settings.json
+    // {
+      enabledPlugins =
+        lib.genAttrs
+        (map (p: "${p}@claude-hooks") claudeHooksPlugins)
+        (_: true);
+    };
   baseSettingsFile = jsonFormat.generate "claude-code-base-settings.json" (
     baseSettings // {"$schema" = "https://json.schemastore.org/claude-code-settings.json";}
   );
