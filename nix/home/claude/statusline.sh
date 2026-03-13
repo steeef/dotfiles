@@ -119,6 +119,72 @@ fi
 ctx_bar=$(progress_bar "$pct_used" 10)
 line2="ctx ${ctx_bar} ${orange}${used_tokens}/${total_tokens}${reset} ${dim}${pct_used}%${reset}"
 
+# Cross-platform ISO to epoch conversion
+iso_to_epoch() {
+    local iso_str="$1"
+
+    # Try GNU date first (Linux)
+    local epoch
+    epoch=$(date -d "${iso_str}" +%s 2>/dev/null)
+    if [ -n "$epoch" ]; then
+        echo "$epoch"
+        return 0
+    fi
+
+    # BSD date (macOS)
+    local stripped="${iso_str%%.*}"
+    stripped="${stripped%%Z}"
+    stripped="${stripped%%+*}"
+    stripped="${stripped%%-[0-9][0-9]:[0-9][0-9]}"
+
+    if [[ "$iso_str" == *"Z"* ]] || [[ "$iso_str" == *"+00:00"* ]] || [[ "$iso_str" == *"-00:00"* ]]; then
+        epoch=$(env TZ=UTC date -j -f "%Y-%m-%dT%H:%M:%S" "$stripped" +%s 2>/dev/null)
+    else
+        epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$stripped" +%s 2>/dev/null)
+    fi
+
+    if [ -n "$epoch" ]; then
+        echo "$epoch"
+        return 0
+    fi
+
+    return 1
+}
+
+# Format ISO reset time to compact local time (e.g. "3:45pm")
+format_reset_time() {
+    local iso_str="$1"
+    [ -z "$iso_str" ] || [ "$iso_str" = "null" ] && return
+
+    local epoch
+    epoch=$(iso_to_epoch "$iso_str")
+    [ -z "$epoch" ] && return
+
+    local formatted
+    formatted=$(date -j -r "$epoch" +"%H:%M" 2>/dev/null)
+    if [ -z "$formatted" ]; then
+        formatted=$(date -d "@$epoch" +"%H:%M" 2>/dev/null)
+    fi
+    [ -n "$formatted" ] && printf "%s" "$formatted"
+}
+
+# Format ISO reset time to day+time (e.g. "Thu 14:30") for weekly window
+format_reset_time_with_day() {
+    local iso_str="$1"
+    [ -z "$iso_str" ] || [ "$iso_str" = "null" ] && return
+
+    local epoch
+    epoch=$(iso_to_epoch "$iso_str")
+    [ -z "$epoch" ] && return
+
+    local formatted
+    formatted=$(date -j -r "$epoch" +"%a %H:%M" 2>/dev/null)
+    if [ -z "$formatted" ]; then
+        formatted=$(date -d "@$epoch" +"%a %H:%M" 2>/dev/null)
+    fi
+    [ -n "$formatted" ] && printf "%s" "$formatted"
+}
+
 # ===== Cross-platform OAuth token resolution =====
 # Tries credential sources in order: env var > macOS Keychain > Linux creds file > GNOME Keyring
 get_oauth_token() {
@@ -200,6 +266,28 @@ if $needs_refresh; then
             -H "User-Agent: claude-code/2.1.34" \
             "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
         if [ -n "$response" ] && echo "$response" | jq . >/dev/null 2>&1; then
+            # Preserve resets_at from previous cache when new response omits them
+            if [ -f "$cache_file" ]; then
+                prev_cache=$(cat "$cache_file" 2>/dev/null)
+                if echo "$prev_cache" | jq -e . >/dev/null 2>&1; then
+                    now=$(date +%s)
+                    for window in five_hour seven_day; do
+                        # Only merge if the fresh response has this window object
+                        has_window=$(echo "$response" | jq -e ".${window}" >/dev/null 2>&1 && echo true || echo false)
+                        [ "$has_window" = "false" ] && continue
+                        new_reset=$(echo "$response" | jq -r ".${window}.resets_at // empty")
+                        if [ -z "$new_reset" ]; then
+                            old_reset=$(echo "$prev_cache" | jq -r ".${window}.resets_at // empty")
+                            if [ -n "$old_reset" ]; then
+                                old_epoch=$(iso_to_epoch "$old_reset")
+                                if [ -n "$old_epoch" ] && [ "$old_epoch" -gt "$now" ]; then
+                                    response=$(echo "$response" | jq --arg r "$old_reset" ".${window}.resets_at = \$r")
+                                fi
+                            fi
+                        fi
+                    done
+                fi
+            fi
             usage_data="$response"
             echo "$response" > "$cache_file"
         fi
@@ -209,72 +297,6 @@ if $needs_refresh; then
         usage_data=$(cat "$cache_file" 2>/dev/null)
     fi
 fi
-
-# Cross-platform ISO to epoch conversion
-iso_to_epoch() {
-    local iso_str="$1"
-
-    # Try GNU date first (Linux)
-    local epoch
-    epoch=$(date -d "${iso_str}" +%s 2>/dev/null)
-    if [ -n "$epoch" ]; then
-        echo "$epoch"
-        return 0
-    fi
-
-    # BSD date (macOS)
-    local stripped="${iso_str%%.*}"
-    stripped="${stripped%%Z}"
-    stripped="${stripped%%+*}"
-    stripped="${stripped%%-[0-9][0-9]:[0-9][0-9]}"
-
-    if [[ "$iso_str" == *"Z"* ]] || [[ "$iso_str" == *"+00:00"* ]] || [[ "$iso_str" == *"-00:00"* ]]; then
-        epoch=$(env TZ=UTC date -j -f "%Y-%m-%dT%H:%M:%S" "$stripped" +%s 2>/dev/null)
-    else
-        epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$stripped" +%s 2>/dev/null)
-    fi
-
-    if [ -n "$epoch" ]; then
-        echo "$epoch"
-        return 0
-    fi
-
-    return 1
-}
-
-# Format ISO reset time to compact local time (e.g. "3:45pm")
-format_reset_time() {
-    local iso_str="$1"
-    [ -z "$iso_str" ] || [ "$iso_str" = "null" ] && return
-
-    local epoch
-    epoch=$(iso_to_epoch "$iso_str")
-    [ -z "$epoch" ] && return
-
-    local formatted
-    formatted=$(date -j -r "$epoch" +"%H:%M" 2>/dev/null)
-    if [ -z "$formatted" ]; then
-        formatted=$(date -d "@$epoch" +"%H:%M" 2>/dev/null)
-    fi
-    [ -n "$formatted" ] && printf "%s" "$formatted"
-}
-
-# Format ISO reset time to day+time (e.g. "Thu 14:30") for weekly window
-format_reset_time_with_day() {
-    local iso_str="$1"
-    [ -z "$iso_str" ] || [ "$iso_str" = "null" ] && return
-
-    local epoch
-    epoch=$(iso_to_epoch "$iso_str")
-    [ -z "$epoch" ] && return
-
-    local formatted
-    formatted=$(date -j -r "$epoch" +"%a %H:%M" 2>/dev/null)
-    if [ -z "$formatted" ]; then
-        formatted=$(date -d "@$epoch" +"%a %H:%M" 2>/dev/null)
-    fi
-    [ -n "$formatted" ] && printf "%s" "$formatted"
-}
 
 if [ -n "$usage_data" ] && echo "$usage_data" | jq -e . >/dev/null 2>&1; then
     five_hour_pct=$(echo "$usage_data" | jq -r '.five_hour.utilization // 0' | awk '{printf "%.0f", $1}')
