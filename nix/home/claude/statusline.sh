@@ -87,7 +87,12 @@ sep=" ${dim}|${reset} "
 
 # Line 1: Model + dir/git
 line1=""
+session_id=$(echo "$input" | jq -r '.session_id // empty')
 line1+="${blue}${model_name}${reset}"
+if [ -n "$session_id" ]; then
+    short_id="${session_id:0:8}"
+    line1+=" ${dim}${short_id}${reset}"
+fi
 
 cwd=$(echo "$input" | jq -r '.cwd // empty')
 if [ -n "$cwd" ]; then
@@ -254,6 +259,23 @@ format_reset_time() {
     [ -n "$formatted" ] && printf "%s" "$formatted"
 }
 
+# Format ISO reset time to day+time (e.g. "Thu 14:30") for weekly window
+format_reset_time_with_day() {
+    local iso_str="$1"
+    [ -z "$iso_str" ] || [ "$iso_str" = "null" ] && return
+
+    local epoch
+    epoch=$(iso_to_epoch "$iso_str")
+    [ -z "$epoch" ] && return
+
+    local formatted
+    formatted=$(date -j -r "$epoch" +"%a %H:%M" 2>/dev/null)
+    if [ -z "$formatted" ]; then
+        formatted=$(date -d "@$epoch" +"%a %H:%M" 2>/dev/null)
+    fi
+    [ -n "$formatted" ] && printf "%s" "$formatted"
+}
+
 if [ -n "$usage_data" ] && echo "$usage_data" | jq -e . >/dev/null 2>&1; then
     five_hour_pct=$(echo "$usage_data" | jq -r '.five_hour.utilization // 0' | awk '{printf "%.0f", $1}')
     five_hour_reset_iso=$(echo "$usage_data" | jq -r '.five_hour.resets_at // empty')
@@ -269,8 +291,11 @@ if [ -n "$usage_data" ] && echo "$usage_data" | jq -e . >/dev/null 2>&1; then
     fi
 
     seven_day_pct=$(echo "$usage_data" | jq -r '.seven_day.utilization // 0' | awk '{printf "%.0f", $1}')
+    seven_day_reset_iso=$(echo "$usage_data" | jq -r '.seven_day.resets_at // empty')
+    seven_day_reset=$(format_reset_time_with_day "$seven_day_reset_iso")
     seven_bar=$(progress_bar "$seven_day_pct" 10)
     line2+="${sep}7d ${seven_bar} ${dim}${seven_day_pct}%${reset}"
+    [ -n "$seven_day_reset" ] && line2+=" ${dim}@${seven_day_reset}${reset}"
 fi
 
 # Output two lines
