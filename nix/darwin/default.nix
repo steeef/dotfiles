@@ -111,6 +111,7 @@
         "karabiner-elements"
         "omnidisksweeper"
         "plex"
+        "qlmarkdown"
         "qlvideo"
         "raspberry-pi-imager"
         "slack"
