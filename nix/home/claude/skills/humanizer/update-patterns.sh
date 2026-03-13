@@ -10,14 +10,15 @@ set -euo pipefail
 
 WIKI_PAGE="Wikipedia:Signs_of_AI_writing"
 TIMESTAMP=$(date +%Y-%m-%d)
-SNAPSHOT_FILE="wp-snapshot-${TIMESTAMP}.txt"
+SNAPSHOT_FILE="/tmp/wp-snapshot-${TIMESTAMP}.txt"
 
 echo "Fetching Wikipedia article: ${WIKI_PAGE}"
 echo "Timestamp: ${TIMESTAMP}"
 echo ""
 
 # Fetch wikitext via Wikipedia API
-curl -s "https://en.wikipedia.org/w/api.php?action=parse&page=${WIKI_PAGE}&format=json&prop=wikitext" |
+curl -s -H "User-Agent: dotfiles-update-patterns/1.0 (skill maintenance; contact via GitHub)" \
+  "https://en.wikipedia.org/w/api.php?action=parse&page=${WIKI_PAGE}&format=json&prop=wikitext" |
   jq -r '.parse.wikitext["*"]' >"$SNAPSHOT_FILE"
 
 if [ -s "$SNAPSHOT_FILE" ]; then

@@ -84,7 +84,8 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 ### Language Patterns (High Confidence)
 
 #### Overused AI Vocabulary
-**Triggers**: "Additionally" (sentence-start), "Moreover", "Furthermore", "Consequently", "Hence", "Thus", "Therefore" (overused), "leverage", "utilize", "facilitate", "underscore" (verb), "showcase", "underline", "align with", "crucial", "delve" (declining post-2024), "emphasizing", "enduring", "enhance", "fostering", "garner", "highlight" (verb), "interplay", "intricate/intricacies", "key" (adjective), "landscape" (abstract), "pivotal", "tapestry" (abstract), "testament", "valuable", "vibrant"
+**Triggers**: "Additionally" (sentence-start), "Moreover", "Furthermore", "Consequently", "Hence", "Thus", "Therefore" (overused), "bolstered", "leverage", "meticulous/meticulously", "utilize", "facilitate", "underscore" (verb), "showcase", "underline", "align with", "crucial", "delve" (declining sharply post-2024), "emphasizing", "enduring", "enhance", "fostering", "garner", "highlight" (verb), "interplay", "intricate/intricacies", "key" (adjective), "landscape" (abstract), "pivotal", "tapestry" (abstract), "testament", "valuable", "vibrant"
+**Era clustering**: 2023–mid 2024 (GPT-4 era: delve, intricate, tapestry, testament) → mid 2024–mid 2025 (GPT-4o era: align with, fostering, showcasing) → mid 2025+ (GPT-5 era: emphasizing, enhance, highlighting, showcasing)
 **When to flag**: Multiple formal connectors in short text; weak verbs replacing simple ones; research shows statistically elevated usage in AI text (Kobak et al.)
 **Example**:
 - ❌ "Additionally, the system leverages technology to facilitate user engagement"
@@ -98,7 +99,7 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 - ✅ "The building is a community center"
 
 #### Negative Parallelisms
-**Triggers**: "not only... but also", "not just... but", "both... and", "It is not just about..., it's...", negation-then-assertion patterns ("not ..., it's ...")
+**Triggers**: "not only... but also", "not just... but", "both... and", "It is not just about..., it's...", negation-then-assertion patterns ("not ..., it's ..."), "Not X, but Y" subtypes: "is not..., but...", "no..., no..., just..."
 **When to flag**: Used to inflate simple statements; multi-sentence negative parallelisms spanning paragraphs
 **Example**:
 - ❌ "The library provides not only books but also digital resources"
@@ -129,7 +130,7 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 
 #### Em Dash Overuse
 **Triggers**: 3+ em dashes in paragraph, em dashes interrupting simple sentences
-**When to flag**: Used for complexity instead of clarity. Note: may be less common in newer AI models (late 2025+).
+**When to flag**: Used for complexity instead of clarity. Note: GPT-5.1 (Nov 2025) actively suppresses em dashes; declining as indicator in newer models.
 **Example**:
 - ❌ "The system — which was developed in 2020 — provides users with access to — among other things — digital resources"
 - ✅ "The system (developed in 2020) provides users with digital resources and other materials"
@@ -149,11 +150,33 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 
 #### Curly Quotes in Technical Text
 **Triggers**: \u201ccurly quotes\u201d instead of "straight quotes" in code or technical text
-**When to flag**: Technical documentation with typographic quotes. Note: ChatGPT and DeepSeek produce curly quotes; Claude and Gemini typically do not. Also produced by macOS smart quotes and Microsoft Word.
+**When to flag**: Technical documentation with typographic quotes. ChatGPT and DeepSeek produce curly quotes; Claude and Gemini typically do not. Also produced by macOS smart quotes and Microsoft Word.
 
 #### Unusual Tables
 **Triggers**: Small tables where prose would suffice
 **When to flag**: LLMs create tabular formatting for information that reads better as sentences
+
+#### Inline-Header Vertical Lists
+**Triggers**: Bold inline headers in bullet/numbered lists: "1. **Topic**: description...", "- **Key point**: explanation..."
+**When to flag**: Inherited from READMEs, fan wikis, and listicles. Strong signal in encyclopedic or formal prose where plain lists or paragraphs are standard.
+
+#### Markdown in Non-Markdown Contexts
+**Triggers**: `**bold**` instead of native formatting, `##` for headings, fenced code blocks in non-Markdown environments
+**When to flag**: High confidence when mixed with other markup systems (HTML, wikitext, rich-text editors). Strong signal of pasted chatbot output.
+
+#### Skipping Heading Levels
+**Triggers**: Jumping from h1/h2 directly to h3+; excessive `###` nesting
+**When to flag**: Chatbots trained on Markdown default to `###`; legitimate documents use sequential heading levels.
+
+### Markup Patterns (High Confidence)
+
+#### Chatbot Citation Artifacts
+**Triggers**: `turn0search0`, `citeturn0search1` (ChatGPT citation placeholders), `contentReference[oaicite:0]{index=0}` (ChatGPT reference bugs), `utm_source=chatgpt.com` / `utm_source=openai` in URLs, `[attached_file:1]` (Perplexity), `grok_card` tags (Grok)
+**When to flag**: Any of these in published content is near-certain chatbot output. Check URLs for tracking parameters too.
+
+#### Hallucinated Citations
+**Triggers**: Multiple broken URLs (404s with no archive), DOIs resolving to unrelated articles, invalid ISBN checksums, book citations lacking page numbers or URLs, batch of citations sharing the same old access-date
+**When to flag**: High confidence when multiple citation red flags cluster in new content. Verify DOIs and ISBNs before flagging.
 
 ### Communication Patterns (High Confidence)
 
@@ -199,9 +222,9 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 
 ### Historical Patterns (Lower Confidence — declining in newer models)
 
-#### Didactic Disclaimers (common pre-2025)
+#### Didactic Disclaimers (common 2022–2024)
 **Triggers**: "It's important to note", "It should be mentioned", "It's worth noting", "One should keep in mind", "it's important/critical/crucial to note/remember/consider"
-**When to flag**: Hedging without adding information. Was very common in ~2023 LLMs but declining in newer models.
+**When to flag**: Hedging without adding information. Very common in 2023 LLMs, declining sharply by 2025.
 **Example**:
 - ❌ "It's important to note that the library opened in 1992"
 - ✅ "The library opened in 1992"
@@ -213,15 +236,27 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 - ❌ "In conclusion, the library serves an important role in the community"
 - ✅ [End with substantive point, or omit conclusion]
 
+#### Prompt Refusal Artifacts (declining since 2024)
+**Triggers**: "as an AI language model", "I cannot offer medical/legal advice", "I'm not able to provide", "I don't have personal opinions"
+**When to flag**: Safety-layer refusal text pasted into published content. Was very common in 2023; newer models are less trigger-happy.
+
+#### Abrupt Cut-Offs
+**Triggers**: Mid-sentence truncation, incomplete lists, text ending with a comma or conjunction
+**When to flag**: Token-limit truncation where the user pasted output without noticing it was cut short.
+
 ### Structural Indicators (Medium Confidence)
 
 #### Sudden Style Shifts
 **Triggers**: Abrupt changes in grammar quality, vocabulary level, or English variety mid-text
 **When to flag**: One section reads casually while another is formally polished; British/American English inconsistency within same text
 
-#### Verbose Summaries and Edit Descriptions
-**Triggers**: Unusually detailed first-person descriptions of changes, "adhering to encyclopedic standards", "ensuring neutrality"
-**When to flag**: Descriptions of edits or changes that are far more formal and verbose than normal
+#### Verbose Meta-Descriptions
+**Triggers**: Overly formal first-person descriptions of changes/edits, "I revised the content to provide a neutral description adhering to...", submission statements explaining why content meets guidelines, "adhering to encyclopedic standards", "ensuring neutrality"
+**When to flag**: Descriptions of edits or changes that are far more formal and verbose than any human would write. High confidence when combined with guideline-parroting language.
+
+#### Subject Lines and Templates
+**Triggers**: "Subject: Request for..." pasted from email-style chatbot output, pre-placed maintenance/review templates in new content, form-letter openings ("Dear [Title]", "I am writing to...")
+**When to flag**: Chatbot email/letter templates pasted without adaptation into non-email contexts.
 
 ## Output Format
 
@@ -257,7 +292,8 @@ When analyzing text, provide:
 
 - Content: significance inflation, notability/attribution emphasis, superficial analysis, promotional language, vague attributions, challenges/prospects formula
 - Language: AI vocabulary, copula avoidance, elegant variation
-- Communication: collaborative chatbot phrases, knowledge-cutoff disclaimers, placeholder text
+- Markup: chatbot citation artifacts, hallucinated citations
+- Communication: collaborative chatbot phrases, knowledge-cutoff disclaimers, placeholder text, verbose meta-descriptions
 
 ### 2. Check for pattern clusters
 
@@ -313,10 +349,10 @@ Do NOT flag these as AI patterns (they produce false positives):
 
 Wikipedia's "Signs of AI writing" article evolves as AI writing changes. To update:
 
-1. Check Wikipedia for new patterns: <https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing>
-2. Run `update-patterns.sh` to fetch latest wikitext
+1. Browse the article manually: <https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing>
+2. Run `update-patterns.sh` to fetch latest wikitext snapshot (uses `curl` with the Wikipedia API — WebFetch gets 403'd by Wikipedia, so agents/scripts must use `curl`)
 3. Review changes and update pattern database above
 4. Test with known AI-generated samples
 5. Update `last_updated` below
 
-Last updated: 2026-02-10 (Wikipedia revision: February 2026)
+Last updated: 2026-03-13 (Wikipedia revision: March 2026)
