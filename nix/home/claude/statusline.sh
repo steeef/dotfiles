@@ -265,7 +265,7 @@ if $needs_refresh; then
             -H "anthropic-beta: oauth-2025-04-20" \
             -H "User-Agent: claude-code/2.1.34" \
             "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
-        if [ -n "$response" ] && echo "$response" | jq . >/dev/null 2>&1; then
+        if [ -n "$response" ] && echo "$response" | jq -e '.five_hour' >/dev/null 2>&1; then
             # Preserve resets_at from previous cache when new response omits them
             if [ -f "$cache_file" ]; then
                 prev_cache=$(cat "$cache_file" 2>/dev/null)
@@ -298,7 +298,7 @@ if $needs_refresh; then
     fi
 fi
 
-if [ -n "$usage_data" ] && echo "$usage_data" | jq -e . >/dev/null 2>&1; then
+if [ -n "$usage_data" ] && echo "$usage_data" | jq -e '.five_hour' >/dev/null 2>&1; then
     five_hour_pct=$(echo "$usage_data" | jq -r '.five_hour.utilization // 0' | awk '{printf "%.0f", $1}')
     five_hour_reset_iso=$(echo "$usage_data" | jq -r '.five_hour.resets_at // empty')
     five_hour_reset=$(format_reset_time "$five_hour_reset_iso")
