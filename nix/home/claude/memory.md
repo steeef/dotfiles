@@ -29,6 +29,11 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Run tests after each change to verify progress
 - Use `/test-driven-development` skill for detailed TDD workflow guidance
 
+### Test Quality
+- Tests are specifications of intent: each one detects a real defect — boundary, error path, or contract violation — rather than confirming what the implementation already does.
+- Assertions verify observable behavior (returned value, state change, thrown error) that would be absent if the feature were removed.
+- Tests survive internal refactoring; a test that breaks when implementation changes without behavior changing is the wrong test.
+
 ## Convergent Review (Rule of Five)
 - Runs 3–5 review lenses in parallel via `Task(Explore)` sub-agents
 - Each lens examines from a different angle:
