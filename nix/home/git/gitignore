@@ -26,7 +26,8 @@ zsh/.zsh_history
 # Claude Code
 TRASH/
 TRASH-FILES.md
-.claude/
+.claude/settings.local.json
+.claude/worktrees/
 .claude_*.flag
 *.backup
 thoughts/
