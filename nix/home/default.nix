@@ -75,6 +75,7 @@
     statix
     stern
     stylua
+    tea
     tenv
     tflint
     tig
