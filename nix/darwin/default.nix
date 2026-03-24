@@ -100,6 +100,7 @@
         "blockblock"
         "calibre"
         "cameracontroller"
+        "claude-devtools"
         "contexts"
         "fantastical"
         "ghostty"
