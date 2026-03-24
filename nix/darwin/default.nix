@@ -113,7 +113,7 @@
         "omnidisksweeper"
         "plex"
         "qlmarkdown"
-        "qlvideo"
+        "quicklook-video"
         "raspberry-pi-imager"
         "slack"
         "steam"
