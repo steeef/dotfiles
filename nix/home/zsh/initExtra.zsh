@@ -35,6 +35,9 @@ bindkey '^[[Z' autosuggest-accept # shift + tab
 PATH="${HOME}/.local/bin:${HOME}/.zgenom/bin:${HOME}/bin:${HOME}/.bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:${PATH}"
 export PATH
 
+# Initialize fnm (Fast Node Manager) for interactive shells
+eval "$(fnm env --shell zsh)"
+
 # Nix library path for Rust linking
 LIBRARY_PATH="${HOME}/.nix-profile/lib:${LIBRARY_PATH}"
 export LIBRARY_PATH
