@@ -1,13 +1,13 @@
 ---
 name: humanizer
-description: Use when analyzing text for AI writing patterns - detects Wikipedia-documented signs like significance inflation, copula avoidance, promotional language, chatbot phrases, and 30+ other specific patterns
+description: Use when analyzing text for AI writing patterns - detects Wikipedia-documented signs like significance inflation, copula avoidance, promotional language, chatbot phrases, and 35+ other specific patterns
 ---
 
 # Humanizer: AI Writing Pattern Detection
 
 ## Overview
 
-Detect AI-generated text using Wikipedia's documented patterns from "Signs of AI writing". Provides systematic analysis across 30+ specific pattern categories with confidence levels and concrete suggestions. Patterns are backed by academic research (Kobak et al., Reinhart et al., Juzek & Ward, Russell et al.).
+Detect AI-generated text using Wikipedia's documented patterns from "Signs of AI writing". Provides systematic analysis across 35+ specific pattern categories with confidence levels and concrete suggestions. Patterns are backed by academic research (Kobak et al., Reinhart et al., Juzek & Ward, Russell et al.).
 
 ## Caveats
 
@@ -35,7 +35,7 @@ Detect AI-generated text using Wikipedia's documented patterns from "Signs of AI
 
 ## Pattern Database
 
-Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each pattern has trigger phrases, confidence level, and improvement guidance.
+Wikipedia documents 35+ specific AI writing patterns across 7 categories. Each pattern has trigger phrases, confidence level, and improvement guidance.
 
 ### Content Patterns (High Confidence)
 
@@ -67,6 +67,10 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 - ❌ "Nestled in the heart of the valley, this vibrant town boasts a rich cultural tapestry"
 - ✅ "The town, located in the central valley, hosts annual craft markets and music festivals"
 
+**Subtypes**:
+- **Cultural Heritage Inflation**: LLMs inflate cultural heritage significance even for mundane topics (e.g., a country's electronics industry, a town's road network). Additional triggers: "rich cultural heritage", "breathtaking", "gateway to", "stands as a vibrant"
+- **Press-Release/Commercial Tone**: When writing about people or companies, LLMs adopt promotional press-release language. Additional triggers: "align with goals of", "powerful emotional presence", "reducing its environmental footprint", "fostering community development"
+
 #### Vague Attributions and Overgeneralization
 **Triggers**: "some researchers", "studies show", "experts say/argue", "it is believed", "industry reports", "observers have cited", "some critics argue", "several sources/publications" (when only 1-2 are cited), "such as" (before exhaustive lists presented as non-exhaustive)
 **When to flag**: No specific citation follows; exaggerates number of sources; presents one person's view as widely held
@@ -81,11 +85,18 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 - ❌ "Despite its vibrant cultural scene, the city faces several challenges including infrastructure and economic development. Despite these challenges, ongoing initiatives promise a brighter future."
 - ✅ [Omit, or state specific challenges with evidence: "Traffic congestion increased 30% between 2020-2024 (City Report, 2024)"]
 
+#### Leads Treating Titles as Proper Nouns
+**Triggers**: Opening sentence defines the document/article/section title as a standalone real-world entity; treating descriptive phrases or compound titles as proper nouns; "X is a curated compilation of...", "X refers to the...", "X is the chronological list of..."
+**When to flag**: High confidence when the title is a descriptive phrase (not a proper noun) and the opening sentence formally defines it as an entity. Common in AI-generated blog posts, documentation pages, and wiki articles.
+**Example**:
+- ❌ "'List of songs about Mexico' is a curated compilation of musical works that reference Mexico"
+- ✅ "The following songs reference Mexico in their lyrics or themes"
+
 ### Language Patterns (High Confidence)
 
 #### Overused AI Vocabulary
 **Triggers**: "Additionally" (sentence-start), "Moreover", "Furthermore", "Consequently", "Hence", "Thus", "Therefore" (overused), "bolstered", "leverage", "meticulous/meticulously", "utilize", "facilitate", "underscore" (verb), "showcase", "underline", "align with", "crucial", "delve" (declining sharply post-2024), "emphasizing", "enduring", "enhance", "fostering", "garner", "highlight" (verb), "interplay", "intricate/intricacies", "key" (adjective), "landscape" (abstract), "pivotal", "tapestry" (abstract), "testament", "valuable", "vibrant"
-**Era clustering**: 2023–mid 2024 (GPT-4 era: delve, intricate, tapestry, testament) → mid 2024–mid 2025 (GPT-4o era: align with, fostering, showcasing) → mid 2025+ (GPT-5 era: emphasizing, enhance, highlighting, showcasing)
+**Era clustering**: 2023–mid 2024 (GPT-4 era: delve, intricate, tapestry, testament) → mid 2024–mid 2025 (GPT-4o era: align with, bolstered, crucial, fostering, pivotal, showcasing, underscore) → mid 2025+ (GPT-5 era: emphasizing, enhance, highlighting, showcasing — heavily overlaps with "Undue Emphasis on Significance" and "Notability and Attribution Emphasis" triggers)
 **When to flag**: Multiple formal connectors in short text; weak verbs replacing simple ones; research shows statistically elevated usage in AI text (Kobak et al.)
 **Example**:
 - ❌ "Additionally, the system leverages technology to facilitate user engagement"
@@ -97,6 +108,7 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 **Example**:
 - ❌ "The building serves as a community center"
 - ✅ "The building is a community center"
+**Note**: Copula avoidance is less reliable when AI is imitating a well-known format (e.g., encyclopedia leads of the form "[Subject] is...", README templates). LLMs trained on such formats have plenty of examples to emulate.
 
 #### Negative Parallelisms
 **Triggers**: "not only... but also", "not just... but", "both... and", "It is not just about..., it's...", negation-then-assertion patterns ("not ..., it's ..."), "Not X, but Y" subtypes: "is not..., but...", "no..., no..., just..."
@@ -168,15 +180,27 @@ Wikipedia documents 30+ specific AI writing patterns across 5 categories. Each p
 **Triggers**: Jumping from h1/h2 directly to h3+; excessive `###` nesting
 **When to flag**: Chatbots trained on Markdown default to `###`; legitimate documents use sequential heading levels.
 
+#### Thematic Breaks Before Headings
+**Triggers**: Horizontal rules (`----`, `---`, `***`) inserted before every heading or section break
+**When to flag**: Medium confidence. Chatbots trained on Markdown insert thematic breaks as section separators. Inherited from Markdown output conventions. Legitimate in some contexts (e.g., slide decks, changelogs).
+
 ### Markup Patterns (High Confidence)
 
 #### Chatbot Citation Artifacts
 **Triggers**: `turn0search0`, `citeturn0search1` (ChatGPT citation placeholders), `contentReference[oaicite:0]{index=0}` (ChatGPT reference bugs), `utm_source=chatgpt.com` / `utm_source=openai` in URLs, `[attached_file:1]` (Perplexity), `grok_card` tags (Grok)
 **When to flag**: Any of these in published content is near-certain chatbot output. Check URLs for tracking parameters too.
 
+#### ChatGPT Attribution Markup
+**Triggers**: `({"attribution":{"attributableIndex":"X-Y"}})` appended to sentences, JSON-formatted attribution metadata in plain text
+**When to flag**: Very high confidence ChatGPT artifact. Appears when ChatGPT's internal attribution system leaks into output. Near-certain indicator of unedited ChatGPT paste.
+
 #### Hallucinated Citations
-**Triggers**: Multiple broken URLs (404s with no archive), DOIs resolving to unrelated articles, invalid ISBN checksums, book citations lacking page numbers or URLs, batch of citations sharing the same old access-date
-**When to flag**: High confidence when multiple citation red flags cluster in new content. Verify DOIs and ISBNs before flagging.
+**Triggers**: Multiple broken URLs (404s with no archive), DOIs resolving to unrelated articles, invalid ISBN checksums, book citations lacking page numbers or URLs, batch of citations sharing the same old access-date, DOIs pointing to articles on completely different topics
+**When to flag**: High confidence when multiple citation red flags cluster in new content. Three distinct subtypes: (1) broken external links — URLs that return 404s, especially when multiple links fail in the same article, (2) invalid identifiers — bad ISBN checksums, malformed DOIs, (3) mismatched DOIs — DOIs that resolve to real but completely unrelated articles. Verify DOIs and ISBNs before flagging.
+
+#### Hallucinated Internal References
+**Triggers**: Links to non-existent pages, API endpoints, function names, or shortcuts; references to non-existent sections within the same document; plausible-looking cross-references that don't resolve
+**When to flag**: High confidence. AI-generated text includes plausible-looking internal references (shortcuts, anchors, function names, page links) that don't exist. Generalizable: in code documentation, watch for references to non-existent APIs or modules; in wikis, watch for fake shortcuts or policy references.
 
 ### Communication Patterns (High Confidence)
 
@@ -290,9 +314,10 @@ When analyzing text, provide:
 
 ### 1. Scan for high-confidence patterns first
 
-- Content: significance inflation, notability/attribution emphasis, superficial analysis, promotional language, vague attributions, challenges/prospects formula
+- Content: significance inflation, notability/attribution emphasis, superficial analysis, promotional language (incl. cultural heritage inflation, press-release tone), vague attributions, challenges/prospects formula, title-as-proper-noun leads
 - Language: AI vocabulary, copula avoidance, elegant variation
-- Markup: chatbot citation artifacts, hallucinated citations
+- Style: thematic breaks before headings
+- Markup: chatbot citation artifacts, ChatGPT attribution markup, hallucinated citations, hallucinated internal references
 - Communication: collaborative chatbot phrases, knowledge-cutoff disclaimers, placeholder text, verbose meta-descriptions
 
 ### 2. Check for pattern clusters
@@ -355,4 +380,4 @@ Wikipedia's "Signs of AI writing" article evolves as AI writing changes. To upda
 4. Test with known AI-generated samples
 5. Update `last_updated` below
 
-Last updated: 2026-03-13 (Wikipedia revision: March 2026)
+Last updated: 2026-03-26 (Wikipedia revision: March 2026)
