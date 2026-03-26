@@ -298,26 +298,44 @@ if $needs_refresh; then
     fi
 fi
 
-if [ -n "$usage_data" ] && echo "$usage_data" | jq -e '.five_hour' >/dev/null 2>&1; then
+if [ -n "$usage_data" ] && echo "$usage_data" | jq -e '.five_hour // .seven_day' >/dev/null 2>&1; then
     five_hour_pct=$(echo "$usage_data" | jq -r '.five_hour.utilization // 0' | awk '{printf "%.0f", $1}')
-    five_hour_reset_iso=$(echo "$usage_data" | jq -r '.five_hour.resets_at // empty')
-    five_hour_reset=$(format_reset_time "$five_hour_reset_iso")
 
-    if [ "$five_hour_pct" -ge 95 ]; then
-        line2+="${sep}5h ${red}BLOCKED${reset}"
-        [ -n "$five_hour_reset" ] && line2+=" ${red}resets @${five_hour_reset}${reset}"
-    else
-        five_bar=$(progress_bar "$five_hour_pct" 10)
-        line2+="${sep}5h ${five_bar} ${dim}${five_hour_pct}%${reset}"
-        [ -n "$five_hour_reset" ] && line2+=" ${dim}@${five_hour_reset}${reset}"
+    # Only show 5h bar when it has meaningful data (>0% or approaching limit)
+    if [ "$five_hour_pct" -gt 0 ]; then
+        five_hour_reset_iso=$(echo "$usage_data" | jq -r '.five_hour.resets_at // empty')
+        five_hour_reset=$(format_reset_time "$five_hour_reset_iso")
+        if [ "$five_hour_pct" -ge 95 ]; then
+            line2+="${sep}5h ${red}BLOCKED${reset}"
+            [ -n "$five_hour_reset" ] && line2+=" ${red}resets @${five_hour_reset}${reset}"
+        else
+            five_bar=$(progress_bar "$five_hour_pct" 10)
+            line2+="${sep}5h ${five_bar} ${dim}${five_hour_pct}%${reset}"
+            [ -n "$five_hour_reset" ] && line2+=" ${dim}@${five_hour_reset}${reset}"
+        fi
     fi
 
+    # Aggregate 7d usage
     seven_day_pct=$(echo "$usage_data" | jq -r '.seven_day.utilization // 0' | awk '{printf "%.0f", $1}')
     seven_day_reset_iso=$(echo "$usage_data" | jq -r '.seven_day.resets_at // empty')
     seven_day_reset=$(format_reset_time_with_day "$seven_day_reset_iso")
     seven_bar=$(progress_bar "$seven_day_pct" 10)
     line2+="${sep}7d ${seven_bar} ${dim}${seven_day_pct}%${reset}"
     [ -n "$seven_day_reset" ] && line2+=" ${dim}@${seven_day_reset}${reset}"
+
+    # Per-model 7d breakdowns (Enterprise) — show compact inline when present
+    model_suffix=""
+    for model_key in seven_day_opus seven_day_sonnet; do
+        model_pct=$(echo "$usage_data" | jq -r ".${model_key}.utilization // empty" 2>/dev/null)
+        if [ -n "$model_pct" ] && [ "$model_pct" != "null" ]; then
+            model_pct_int=$(echo "$model_pct" | awk '{printf "%.0f", $1}')
+            model_label="${model_key#seven_day_}"  # strip prefix → "opus" or "sonnet"
+            model_label="${model_label:0:1}"        # first char → "o" or "s"
+            model_color=$(usage_color "$model_pct_int")
+            model_suffix+=" ${model_color}${model_label}:${model_pct_int}%${reset}"
+        fi
+    done
+    [ -n "$model_suffix" ] && line2+="${model_suffix}"
 fi
 
 # Output two lines
