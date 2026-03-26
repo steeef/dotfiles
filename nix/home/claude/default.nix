@@ -48,24 +48,23 @@ in {
   # Nix base settings (read-only reference for merge)
   home.file.".claude/settings.nix.json".source = baseSettingsFile;
 
-  # Merge Nix base into mutable settings.json on every hms
+  # Three-way merge Nix base into mutable settings.json on every hms
+  # See merge-settings.sh for details
   home.activation.mergeClaudeSettings = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    base="$HOME/.claude/settings.nix.json"
-    target="$HOME/.claude/settings.json"
+    run ${./merge-settings.sh} \
+      ${pkgs.jq}/bin/jq \
+      "$HOME/.claude/settings.nix.json" \
+      "$HOME/.claude/settings.nix.prev.json" \
+      "$HOME/.claude/settings.json"
+  '';
 
-    # Transition: remove symlink from previous Nix management
-    if [ -L "$target" ]; then
-      run rm "$target"
-    fi
-
-    if [ -f "$target" ]; then
-      # Deep merge: existing + Nix base (Nix wins for scalar conflicts)
-      run ${pkgs.jq}/bin/jq -s '.[0] * .[1]' "$target" "$base" > "$target.tmp"
-      run mv "$target.tmp" "$target"
-    else
-      # No existing settings — copy base as mutable file
-      run cp "$base" "$target"
-      run chmod 644 "$target"
+  # Symlink fnm default node into ~/.local/bin for non-interactive contexts (MCP)
+  home.activation.linkFnmNode = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    fnm_node="$HOME/.local/share/fnm/aliases/default/bin/node"
+    target="$HOME/.local/bin/node"
+    if [ -x "$fnm_node" ]; then
+      run mkdir -p "$(dirname "$target")"
+      run ln -sf "$fnm_node" "$target"
     fi
   '';
 
