@@ -114,6 +114,7 @@ import httpx
 - IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
 - IMPORTANT: When creating pull request, prefix the title with the associated Jira issue, if it exists
 - IMPORTANT: When creating pull request, the Jira issue must be on the first line of the body description, by itself
+- IMPORTANT: When commenting on a GitHub PR or issue, prefix the comment with ":robot: From Claude Code: "
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
