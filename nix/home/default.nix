@@ -27,6 +27,7 @@
     awscli2
     bash
     bfs
+    bun
     cargo
     coreutils
     cowsay
