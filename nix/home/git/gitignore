@@ -30,6 +30,5 @@ TRASH-FILES.md
 .claude/worktrees/
 .claude_*.flag
 *.backup
-thoughts/
 CLAUDE.local.md
 ai_docs/handoffs/
