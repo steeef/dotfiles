@@ -16,11 +16,20 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 
 ## Context engineering workflow
 - Follow a research → plan → implement cadence; do not skip phases on complex work.
-- Research: read every referenced file in full before spawning tasks; use fast search (rg) and locate 3 similar patterns/tests to mirror; prefer sub-tasks for locating, analyzing, and pattern-finding.
+- Research: use `/extract-research-questions` then `/objective-codebase-research` for solution-blind investigation; or `/research-and-questions` to chain both. Read every referenced file in full before spawning tasks; use fast search (rg) and locate 3 similar patterns/tests to mirror.
 - Plan: produce phased steps with file:line evidence, and success criteria split into automated commands vs manual checks using project-standard tooling. When a skill or workflow writes plans as documents to disk, that is the deliverable — do not treat plan creation as a trigger to begin implementation.
 - Implement: write failing tests first, then minimal code to pass; work phase-by-phase, verifying after each phase; compact progress (decisions, commands, failures) into concise notes instead of keeping long logs in context.
 - Compaction: strip noisy tool output; summarize only the essential facts, decisions, and next actions so context stays lean.
 - Guardrails: do not ask the user questions you can answer from code; pause and research when uncertain; when the task is documentation-only, describe what exists without proposing improvements.
+
+## QRSPI stages
+- Q: `/extract-research-questions` — generate research questions from ticket
+- R: `/objective-codebase-research` — problem-aware, solution-blind codebase research
+- QR: `/research-and-questions` — chains Q then R
+- Design: `/draft-design-discussion` — interactive design synthesis from research
+- Structure: `/draft-structure-outline` — vertical slice outline from design
+- Plan: `/conductor:plan` (existing) — detailed implementation plan
+- Implement: `/conductor:implement` (existing) — phased implementation
 
 ## Test-Driven Development
 - TDD cycle: Red (write failing test) → Green (minimal code to pass) → Refactor
