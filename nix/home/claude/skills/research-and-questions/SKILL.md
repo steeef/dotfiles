@@ -6,6 +6,7 @@ allowed-tools:
 - Read
 - Glob
 - Grep
+- Bash(acli:*)
 ---
 
 # Research and Questions
@@ -22,10 +23,10 @@ Reduces the workflow from 7 manual steps to 5 by combining:
 
 ### Step 1: Accept Input
 
-Accept the same input as `/extract-research-questions`:
-- File path to a ticket or description
-- Pasted ticket content
-- Free-text problem description
+Determine input type:
+- **Jira ID** (matches `[A-Z]+-\d+`): Fetch ticket via `acli jira workitem view <ID>` and use the output
+- **File path** (exists on disk): Read the file
+- **Pasted content / free text**: Use directly
 
 ### Step 2: Extract Questions
 
