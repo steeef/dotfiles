@@ -118,6 +118,7 @@ import httpx
 # Jira Integration
 - IMPORTANT: For all Jira operations (search, view, create, transition, comment), use the `/jira` skill first.
 - The `/jira` skill uses `acli` (Atlassian CLI) which is faster and more token-efficient than MCP round-trips.
+- IMPORTANT: When using Atlassian MCP tools to add or update comments, always set `contentFormat: "markdown"` to avoid ADF serialization issues that corrupt formatting on edit.
 
 # GitHub style
 - IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
