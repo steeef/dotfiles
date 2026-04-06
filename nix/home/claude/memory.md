@@ -87,6 +87,7 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - IMPORTANT: Use `poetry lock` (without flags) to regenerate the lock file. The `--no-update` flag does not exist.
 - When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls do not fail with `PermissionError`.
 - Use `fnm` (Fast Node Manager) when working on Node projects or attempting to run Node commands like `npm` and `yarn`.
+- IMPORTANT: Use GNU syntax for all CLI tools. Nix provides GNU sed, grep, find, and xargs ahead of macOS built-ins. For example, use `sed -i '/pattern/d' file` (GNU style) rather than `sed -i '' '/pattern/d' file` (BSD style). When uncertain, run `<tool> --version` to confirm which variant is active.
 
 ## Single-File Python Scripts
 When writing a standalone Python script (not part of a larger project), use uv with PEP 723 inline script metadata:
