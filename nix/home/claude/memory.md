@@ -1,5 +1,3 @@
-# borrowed generously from <https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/>
-
 # Important Claude memory storage path
 IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/memory.md` and run `hms` (the file is copied to `~/.claude/CLAUDE.md`).
 
@@ -23,48 +21,27 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Guardrails: do not ask the user questions you can answer from code; pause and research when uncertain; when the task is documentation-only, describe what exists without proposing improvements.
 
 ## QRSPI stages
-- Q: `/extract-research-questions` — generate research questions from ticket
-- R: `/objective-codebase-research` — problem-aware, solution-blind codebase research
+- Q: `/extract-research-questions` — research questions from ticket
+- R: `/objective-codebase-research` — solution-blind codebase research
 - QR: `/research-and-questions` — chains Q then R
-- Design: `/draft-design-discussion` — interactive design synthesis from research
-- Structure: `/draft-structure-outline` — vertical slice outline from design
-- Plan: `/conductor:plan` (existing) — detailed implementation plan
-- Implement: `/conductor:implement` (existing) — phased implementation
+- Design → Structure → Plan → Implement: `/draft-design-discussion`, `/draft-structure-outline`, `/conductor:plan`, `/conductor:implement`
 
 ## Test-Driven Development
-- TDD cycle: Red (write failing test) → Green (minimal code to pass) → Refactor
-- Tests define the specification; implementation follows
-- Never write implementation without a failing test that describes the expected behavior
-- Run tests after each change to verify progress
-- Use `/test-driven-development` skill for detailed TDD workflow guidance
+- Never write implementation without a failing test that describes expected behavior.
+- Run tests after each red/green step and before marking work complete.
+- Each test detects a real defect — boundary, error path, or contract violation.
+- Assertions verify observable behavior that would be absent if the feature were removed.
+- Tests survive internal refactoring; a breaking test on non-behavioral change is the wrong test.
+- Use `/test-driven-development` for detailed workflow guidance.
 
-### Test Quality
-- Tests are specifications of intent: each one detects a real defect — boundary, error path, or contract violation — rather than confirming what the implementation already does.
-- Assertions verify observable behavior (returned value, state change, thrown error) that would be absent if the feature were removed.
-- Tests survive internal refactoring; a test that breaks when implementation changes without behavior changing is the wrong test.
-
-## Convergent Review (Rule of Five)
-- Runs 3–5 review lenses in parallel via `Task(Explore)` sub-agents
-- Each lens examines from a different angle:
-  1. Functional: Does it solve the problem?
-  2. Constraints: Performance, security, compatibility?
-  3. Alternatives: Is there a simpler approach?
-  4. Integration: What breaks? Hidden dependencies?
-  5. Durability: Maintainable in 6 months?
-- Simple tasks: 3 lenses (Functional, Constraints, Alternatives)
-- Complex tasks: all 5 lenses
-- Convergence = full round where all lenses return CLEAN
-- Max 3 rounds; parent synthesizes, deduplicates, and applies fixes between rounds
-- Use `/convergent-review` command to enforce this discipline
+## Convergent Review
+- Run 3–5 review lenses in parallel after completing design, plan, or implementation.
+- Simple tasks: 3 lenses (Functional, Constraints, Alternatives). Complex: all 5.
+- Convergence = full round where all lenses return CLEAN. Max 3 rounds.
+- Use `/convergent-review` to enforce this discipline.
 
 ## Project Integration
-
-### Tooling
-
-- Use project's existing build system
-- Use project's test framework
-- Use project's formatter/linter settings
-- Don't introduce new tools without strong justification
+Use the repo's existing build, test, formatter, and linter tools; don't introduce new ones without strong justification.
 
 ## Important Reminders
 
@@ -90,31 +67,21 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - IMPORTANT: Use GNU syntax for all CLI tools. Nix provides GNU sed, grep, find, and xargs ahead of macOS built-ins. For example, use `sed -i '/pattern/d' file` (GNU style) rather than `sed -i '' '/pattern/d' file` (BSD style). When uncertain, run `<tool> --version` to confirm which variant is active.
 
 ## Single-File Python Scripts
-When writing a standalone Python script (not part of a larger project), use uv with PEP 723 inline script metadata:
+Use uv with PEP 723 inline script metadata — no separate requirements.txt or venv needed:
 
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.13"
-# dependencies = [
-#     "httpx>=0.28.1",
-# ]
+# dependencies = ["httpx>=0.28.1"]
 # ///
-
-import httpx
-# ... rest of script
 ```
-
-- No separate requirements.txt or virtual environment needed
 
 # Hook Integration
 - Safety hooks block dangerous operations (rm, large file reads >500 lines) — delegate to Task tool
 - Use Task tool for keyword searches across multiple files or open-ended exploration; use direct Read/Glob for specific known files
 - Git hooks prevent unsafe operations — follow suggested alternatives
-- Instead of `rm`, use `mv` to move files to TRASH/ directory in current folder
-- Create TRASH-FILES.md in current directory with one-line entries showing:
-  - File name, where it moved (TRASH/), and reason for deletion
-  - Example: `test_script.py - moved to TRASH/ - temporary test script`
+- Instead of `rm`, use `mv` to TRASH/; log it in TRASH-FILES.md as: `<file> - moved to TRASH/ - <reason>`
 
 # Jira Integration
 - IMPORTANT: For all Jira operations (search, view, create, transition, comment), use the `/jira` skill first.
@@ -138,53 +105,24 @@ When adding agent instructions to a project, pick the first matching rule:
 2. If `AGENTS.md` exists, write instructions there and symlink `CLAUDE.md -> AGENTS.md`.
 
 # Nix System Management
-
-## Rebuild Commands
-- `hms` - alias for `home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)`
-- `dr` - alias for `sudo darwin-rebuild switch --flake $HOME/.dotfiles`
-
-Use `hms` to apply home-manager configuration changes (including Claude Code settings).
-Use `dr` to apply system-wide Darwin configuration changes.
+- `hms` — applies home-manager/Claude changes (`home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)`)
+- `dr` — applies system-wide Darwin changes (`sudo darwin-rebuild switch --flake $HOME/.dotfiles`)
 
 # Git Repository Discovery
-- When a task references a git repository, check for an existing local clone before cloning:
-  - Work repos: `~/code/work/`
-  - Personal/other repos: `~/code/`
-- If found locally, fetch and fast-forward the main branch (`git fetch origin && git merge --ff-only origin/main`) before starting work.
-- Only clone if no local copy exists.
+Before cloning, check for local copies: work repos in `~/code/work/`, personal in `~/code/`. If found, `git fetch origin && git merge --ff-only origin/main` before starting.
 
 # Git Worktree Workflow
 
-## When to use worktrees
-Use git worktrees for feature work:
-- Starting implementation from a plan (brainstorming → writing-plans → execution)
-- Creating feature branches for multi-file changes
-- Any work identified as needing isolation from the main working directory
-
-Skip worktrees for single-file fixes, documentation-only changes, exploration, or branches already checked out.
-
-## Plan Execution Requirements
-**IMPORTANT**: These requirements apply when the user explicitly asks to begin implementation (e.g., "start coding", "implement the plan"). Writing a plan document is NOT implementation — do not start worktrees or write code after creating a plan.
+Use worktrees for feature work (implementation from a plan, multi-file changes).
+Skip for single-file fixes, docs-only changes, exploration, or already-checked-out branches.
 
 When beginning implementation:
-1. Use `EnterWorktree(name: "descriptive-branch-name")` — the name becomes the branch name directly
+1. `EnterWorktree(name: "descriptive-branch-name")`
 2. Announce: "Creating worktree for feature work. Working in: <full-path>"
 3. Run baseline tests to verify clean state
-4. Follow TDD workflow (use `/test-driven-development` skill for guidance)
 
-**IMPORTANT**: When plan execution is complete:
-1. Create PR (draft mode, Jira-prefixed title)
-2. After PR merges, clean up worktree and delete local branch
-3. Announce: "PR merged. Cleaning up worktree at <full-path>"
+When resuming: `git worktree list` first; `EnterWorktree(name: "branch-name")` to re-enter or create; then read any plan/handoff docs before proceeding.
 
-## Resuming Work in Existing Worktrees
-When resuming work on a ticket/branch with an existing PR or worktree:
-1. Run `git worktree list` to check for existing worktrees matching the ticket/branch
-2. If found: `EnterWorktree(name: "branch-name")` to re-enter (hook detects existing and returns path)
-3. If not found but branch exists: `EnterWorktree(name: "branch-name")` creates a fresh worktree
-4. Read any plan files or handoff docs for the ticket before proceeding
+On completion: create draft PR (Jira-prefixed title), then clean up worktree after merge.
 
-## Lifecycle
-- `EnterWorktree` creates worktree at `.claude/worktrees/<name>/` inside the repo
-- Branch name = worktree name (no `worktree-` prefix)
-- On session exit, choose "keep" if work continues across sessions
+**IMPORTANT**: Writing a plan is NOT implementation — do not start worktrees after plan creation.
