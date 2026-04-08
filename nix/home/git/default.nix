@@ -6,8 +6,13 @@
       alias = {
         co = "checkout";
         lg = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
-        go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f";
+        go = "!f() { git checkout \"$1\" 2>/dev/null || git checkout -b \"$1\"; }; f";
         set-upstream = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`";
+        ds = "diff --staged";
+        lo = "log --oneline";
+        ll = "log --graph --topo-order --date=short --abbrev-commit --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset'";
+        undo = "reset --soft HEAD~1";
+        cane = "commit --amend --no-edit";
       };
       user = {
         email = "stephen@stp5.net";
@@ -32,7 +37,6 @@
       };
       diff = {
         algorithm = "histogram";
-        compactionHeuristic = "off";
         indentHeuristic = "on";
       };
       fetch = {

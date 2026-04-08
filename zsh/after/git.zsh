@@ -1,10 +1,12 @@
-# fbr - checkout git branch (including remote branches), sorted by most recent commit, limit 30 last branches
+# fbr - checkout git branch (local + remote), sorted by most recent commit
 fbr() {
   local branches branch
-  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
-    branch=$(echo "${branches}" |
-      fzf -d $((2 + $(wc -l <<<"${branches}"))) +m) &&
-    git checkout $(echo "${branch}" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+  branches=$(git for-each-ref --count=50 --sort=-committerdate \
+    refs/heads/ refs/remotes/ \
+    --format="%(refname:short)" | grep -v 'HEAD') &&
+  branch=$(echo "${branches}" |
+    fzf -d $((2 + $(wc -l <<<"${branches}"))) +m) &&
+  git checkout $(echo "${branch}" | sed "s/.* //" | sed "s#[^/]*/##")
 }
 
 # gcl: git-cleanup-remote-and-local-branches
@@ -42,9 +44,32 @@ function git_remove_orphaned_local_branches() {
 
 # Clean up remote and local branches
 function gcl() {
-  (git checkout main && git pull)
+  local default_branch
+  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@') || default_branch="main"
+  (git checkout "$default_branch" && git pull)
   git_prune_remote
   git worktree prune
   git_remove_merged_local_branch
   git_remove_orphaned_local_branches
+}
+
+# gsummary - codebase health diagnostic (churn, bus factor, bug clusters, crisis commits, timeline)
+function gsummary() {
+  echo "\n=== Churn Hotspots (last year) ==="
+  git log --format=format: --name-only --since="1 year ago" | grep -v '^$' | sort | uniq -c | sort -nr | head -20
+
+  echo "\n=== Bus Factor (all time) ==="
+  git shortlog -sn --no-merges | head -20
+
+  echo "\n=== Recent Contributors (6 months) ==="
+  git shortlog -sn --no-merges --since="6 months ago" | head -10
+
+  echo "\n=== Bug Hotspots ==="
+  git log -i -E --grep="fix|bug|broken" --name-only --format='' | grep -v '^$' | sort | uniq -c | sort -nr | head -20
+
+  echo "\n=== Crisis Commits (reverts/hotfixes) ==="
+  git log --oneline --since="1 year ago" | grep -iE 'revert|hotfix|emergency|rollback' || echo "(none)"
+
+  echo "\n=== Activity Timeline ==="
+  git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
 }
