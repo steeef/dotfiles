@@ -85,13 +85,13 @@ fi
 # ===== Build output =====
 sep=" ${dim}|${reset} "
 
-# Line 1: Model + dir/git
+# Line 1: Model | session | dir/git
 line1=""
 session_id=$(echo "$input" | jq -r '.session_id // empty')
 line1+="${blue}${model_name}${reset}"
 if [ -n "$session_id" ]; then
     short_id="${session_id:0:8}"
-    line1+=" ${dim}${short_id}${reset}"
+    line1+="${sep}${dim}${short_id}${reset}"
 fi
 
 cwd=$(echo "$input" | jq -r '.cwd // empty')
@@ -337,6 +337,28 @@ if [ -n "$usage_data" ] && echo "$usage_data" | jq -e '.five_hour // .seven_day'
     done
     [ -n "$model_suffix" ] && line2+="${model_suffix}"
 fi
+
+# ===== Cost =====
+# Session cost from JSON (always fresh); day/week from ccu (no cache)
+c_sess=$(echo "$input" | jq -r '.cost.total_cost_usd // empty' | awk '{if ($1 != "") printf "%.2f", $1}')
+
+c_today=""
+c_week=""
+if command -v ccu >/dev/null 2>&1; then
+    c_today=$(ccu today --total 2>/dev/null)
+    c_week=$(ccu weekly --total 2>/dev/null)
+fi
+
+cost_str=""
+for _label_val in "s:$c_sess" "d:$c_today" "w:$c_week"; do
+    _label="${_label_val%%:*}"
+    _val="${_label_val#*:}"
+    if [ -n "$_val" ]; then
+        [ -n "$cost_str" ] && cost_str+=" "
+        cost_str+="${dim}${_label}${reset} ${cyan}\$${_val}${reset}"
+    fi
+done
+[ -n "$cost_str" ] && line2+="${sep}${cost_str}"
 
 # Output two lines
 printf "%b\n%b" "$line1" "$line2"
