@@ -25,23 +25,21 @@ reset='\033[0m'
 
 # Format token counts (e.g., 50k / 200k)
 format_tokens() {
-    local num=$1
-    if [ "$num" -ge 1000000 ]; then
-        awk "BEGIN {printf \"%.1fm\", $num / 1000000}"
-    elif [ "$num" -ge 1000 ]; then
-        awk "BEGIN {printf \"%.0fk\", $num / 1000}"
-    else
-        printf "%d" "$num"
-    fi
+    awk -v n="$1" 'BEGIN {
+        if (n >= 1000000) printf "%.1fm", n / 1000000
+        else if (n >= 1000) printf "%.0fk", n / 1000
+        else printf "%d", n
+    }'
 }
 
 # Return color escape based on usage percentage
+usage_color_result=""
 usage_color() {
     local pct=$1
-    if [ "$pct" -ge 90 ]; then echo "$red"
-    elif [ "$pct" -ge 70 ]; then echo "$orange"
-    elif [ "$pct" -ge 50 ]; then echo "$yellow"
-    else echo "$green"
+    if [ "$pct" -ge 90 ]; then usage_color_result=$red
+    elif [ "$pct" -ge 70 ]; then usage_color_result=$orange
+    elif [ "$pct" -ge 50 ]; then usage_color_result=$yellow
+    else usage_color_result=$green
     fi
 }
 
@@ -53,8 +51,8 @@ progress_bar() {
     local filled=$(( pct * width / 100 ))
     [ "$filled" -gt "$width" ] && filled=$width
     local empty=$(( width - filled ))
-    local color
-    color=$(usage_color "$pct")
+    usage_color "$pct"
+    local color=$usage_color_result
     local bar=""
     for ((i=0; i<filled; i++)); do bar+="█"; done
     for ((i=0; i<empty; i++)); do bar+="░"; done
@@ -62,20 +60,23 @@ progress_bar() {
 }
 
 # ===== Extract data from JSON =====
-model_name=$(echo "$input" | jq -r '.model.display_name // "Claude"')
-
-# Context window
-size=$(echo "$input" | jq -r '.context_window.context_window_size // 200000')
-[ "$size" -eq 0 ] 2>/dev/null && size=200000
-
-# Token usage
-input_tokens=$(echo "$input" | jq -r '.context_window.current_usage.input_tokens // 0')
-cache_create=$(echo "$input" | jq -r '.context_window.current_usage.cache_creation_input_tokens // 0')
-cache_read=$(echo "$input" | jq -r '.context_window.current_usage.cache_read_input_tokens // 0')
+IFS=$'\n' read -r -d '' model_name size input_tokens cache_create cache_read session_id cwd c_sess < <(
+    jq -r '[
+        (.model.display_name // "Claude" | tostring),
+        (.context_window.context_window_size // 200000 | tostring),
+        (.context_window.current_usage.input_tokens // 0 | tostring),
+        (.context_window.current_usage.cache_creation_input_tokens // 0 | tostring),
+        (.context_window.current_usage.cache_read_input_tokens // 0 | tostring),
+        (.session_id // ""),
+        (.cwd // ""),
+        (if .cost.total_cost_usd == null then "" else (.cost.total_cost_usd | tostring) end)
+    ] | .[]' <<< "$input"
+    printf '\0'
+)
 current=$(( input_tokens + cache_create + cache_read ))
 
-used_tokens=$(format_tokens $current)
-total_tokens=$(format_tokens $size)
+used_tokens=$(format_tokens "$current")
+total_tokens=$(format_tokens "$size")
 
 if [ "$size" -gt 0 ]; then
     pct_used=$(( current * 100 / size ))
@@ -87,14 +88,12 @@ sep=" ${dim}|${reset} "
 
 # Line 1: Model | session | dir/git
 line1=""
-session_id=$(echo "$input" | jq -r '.session_id // empty')
 line1+="${blue}${model_name}${reset}"
 if [ -n "$session_id" ]; then
     short_id="${session_id:0:8}"
     line1+="${sep}${dim}${short_id}${reset}"
 fi
 
-cwd=$(echo "$input" | jq -r '.cwd // empty')
 if [ -n "$cwd" ]; then
     display_dir="${cwd##*/}"
     git_branch=$(git -C "${cwd}" rev-parse --abbrev-ref HEAD 2>/dev/null)
@@ -153,35 +152,13 @@ iso_to_epoch() {
 
 # Format ISO reset time to compact local time (e.g. "3:45pm")
 format_reset_time() {
-    local iso_str="$1"
+    local iso_str="$1" fmt="${2:-%H:%M}"
     [ -z "$iso_str" ] || [ "$iso_str" = "null" ] && return
 
-    local epoch
-    epoch=$(iso_to_epoch "$iso_str")
-    [ -z "$epoch" ] && return
-
+    local epoch; epoch=$(iso_to_epoch "$iso_str") || return
     local formatted
-    formatted=$(date -j -r "$epoch" +"%H:%M" 2>/dev/null)
-    if [ -z "$formatted" ]; then
-        formatted=$(date -d "@$epoch" +"%H:%M" 2>/dev/null)
-    fi
-    [ -n "$formatted" ] && printf "%s" "$formatted"
-}
-
-# Format ISO reset time to day+time (e.g. "Thu 14:30") for weekly window
-format_reset_time_with_day() {
-    local iso_str="$1"
-    [ -z "$iso_str" ] || [ "$iso_str" = "null" ] && return
-
-    local epoch
-    epoch=$(iso_to_epoch "$iso_str")
-    [ -z "$epoch" ] && return
-
-    local formatted
-    formatted=$(date -j -r "$epoch" +"%a %H:%M" 2>/dev/null)
-    if [ -z "$formatted" ]; then
-        formatted=$(date -d "@$epoch" +"%a %H:%M" 2>/dev/null)
-    fi
+    formatted=$(date -j -r "$epoch" +"$fmt" 2>/dev/null) || \
+    formatted=$(date -d "@$epoch" +"$fmt" 2>/dev/null)
     [ -n "$formatted" ] && printf "%s" "$formatted"
 }
 
@@ -201,7 +178,7 @@ get_oauth_token() {
         local blob
         blob=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null)
         if [ -n "$blob" ]; then
-            token=$(echo "$blob" | jq -r '.claudeAiOauth.accessToken // empty' 2>/dev/null)
+            token=$(jq -r '.claudeAiOauth.accessToken // empty' <<< "$blob" 2>/dev/null)
             if [ -n "$token" ] && [ "$token" != "null" ]; then
                 echo "$token"
                 return 0
@@ -224,7 +201,7 @@ get_oauth_token() {
         local blob
         blob=$(timeout 2 secret-tool lookup service "Claude Code-credentials" 2>/dev/null)
         if [ -n "$blob" ]; then
-            token=$(echo "$blob" | jq -r '.claudeAiOauth.accessToken // empty' 2>/dev/null)
+            token=$(jq -r '.claudeAiOauth.accessToken // empty' <<< "$blob" 2>/dev/null)
             if [ -n "$token" ] && [ "$token" != "null" ]; then
                 echo "$token"
                 return 0
@@ -242,6 +219,8 @@ mkdir -p /tmp/claude
 
 needs_refresh=true
 usage_data=""
+cached_json=""
+[ -f "$cache_file" ] && cached_json=$(cat "$cache_file" 2>/dev/null)
 
 # Check cache
 if [ -f "$cache_file" ]; then
@@ -250,7 +229,7 @@ if [ -f "$cache_file" ]; then
     cache_age=$(( now - cache_mtime ))
     if [ "$cache_age" -lt "$cache_max_age" ]; then
         needs_refresh=false
-        usage_data=$(cat "$cache_file" 2>/dev/null)
+        usage_data=$cached_json
     fi
 fi
 
@@ -265,45 +244,50 @@ if $needs_refresh; then
             -H "anthropic-beta: oauth-2025-04-20" \
             -H "User-Agent: claude-code/2.1.34" \
             "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
-        if [ -n "$response" ] && echo "$response" | jq -e '.five_hour' >/dev/null 2>&1; then
+        if [ -n "$response" ] && jq -e '.five_hour' <<< "$response" >/dev/null 2>&1; then
             # Preserve resets_at from previous cache when new response omits them
-            if [ -f "$cache_file" ]; then
-                prev_cache=$(cat "$cache_file" 2>/dev/null)
-                if echo "$prev_cache" | jq -e . >/dev/null 2>&1; then
+            if [ -n "$cached_json" ]; then
+                prev_cache=$cached_json
+                if jq -e . <<< "$prev_cache" >/dev/null 2>&1; then
                     now=$(date +%s)
                     for window in five_hour seven_day; do
-                        # Only merge if the fresh response has this window object
-                        has_window=$(echo "$response" | jq -e ".${window}" >/dev/null 2>&1 && echo true || echo false)
-                        [ "$has_window" = "false" ] && continue
-                        new_reset=$(echo "$response" | jq -r ".${window}.resets_at // empty")
-                        if [ -z "$new_reset" ]; then
-                            old_reset=$(echo "$prev_cache" | jq -r ".${window}.resets_at // empty")
-                            if [ -n "$old_reset" ]; then
-                                old_epoch=$(iso_to_epoch "$old_reset")
-                                if [ -n "$old_epoch" ] && [ "$old_epoch" -gt "$now" ]; then
-                                    response=$(echo "$response" | jq --arg r "$old_reset" ".${window}.resets_at = \$r")
-                                fi
-                            fi
-                        fi
+                        jq -e ".${window}" <<< "$response" >/dev/null 2>&1 || continue
+                        new_reset=$(jq -r ".${window}.resets_at // empty" <<< "$response")
+                        [ -n "$new_reset" ] && continue
+                        old_reset=$(jq -r ".${window}.resets_at // empty" <<< "$prev_cache")
+                        [ -z "$old_reset" ] && continue
+                        old_epoch=$(iso_to_epoch "$old_reset")
+                        [ -n "$old_epoch" ] && [ "$old_epoch" -gt "$now" ] || continue
+                        response=$(jq --arg r "$old_reset" ".${window}.resets_at = \$r" <<< "$response")
                     done
                 fi
             fi
             usage_data="$response"
+            cached_json=$response
             echo "$response" > "$cache_file"
         fi
     fi
     # Fall back to stale cache
-    if [ -z "$usage_data" ] && [ -f "$cache_file" ]; then
-        usage_data=$(cat "$cache_file" 2>/dev/null)
+    if [ -z "$usage_data" ]; then
+        usage_data=$cached_json
     fi
 fi
 
-if [ -n "$usage_data" ] && echo "$usage_data" | jq -e '.five_hour // .seven_day' >/dev/null 2>&1; then
-    five_hour_pct=$(echo "$usage_data" | jq -r '.five_hour.utilization // 0' | awk '{printf "%.0f", $1}')
+if [ -n "$usage_data" ] && jq -e '.five_hour // .seven_day' <<< "$usage_data" >/dev/null 2>&1; then
+    IFS=$'\n' read -r -d '' five_hour_pct five_hour_reset_iso seven_day_pct seven_day_reset_iso seven_day_opus_pct seven_day_sonnet_pct < <(
+        jq -r '[
+            (.five_hour.utilization // 0 | round | tostring),
+            (.five_hour.resets_at // ""),
+            (.seven_day.utilization // 0 | round | tostring),
+            (.seven_day.resets_at // ""),
+            (if .seven_day_opus.utilization? == null then "" else (.seven_day_opus.utilization | round | tostring) end),
+            (if .seven_day_sonnet.utilization? == null then "" else (.seven_day_sonnet.utilization | round | tostring) end)
+        ] | .[]' <<< "$usage_data"
+        printf '\0'
+    )
 
     # Only show 5h bar when it has meaningful data (>0% or approaching limit)
     if [ "$five_hour_pct" -gt 0 ]; then
-        five_hour_reset_iso=$(echo "$usage_data" | jq -r '.five_hour.resets_at // empty')
         five_hour_reset=$(format_reset_time "$five_hour_reset_iso")
         if [ "$five_hour_pct" -ge 95 ]; then
             line2+="${sep}5h ${red}BLOCKED${reset}"
@@ -316,23 +300,18 @@ if [ -n "$usage_data" ] && echo "$usage_data" | jq -e '.five_hour // .seven_day'
     fi
 
     # Aggregate 7d usage
-    seven_day_pct=$(echo "$usage_data" | jq -r '.seven_day.utilization // 0' | awk '{printf "%.0f", $1}')
-    seven_day_reset_iso=$(echo "$usage_data" | jq -r '.seven_day.resets_at // empty')
-    seven_day_reset=$(format_reset_time_with_day "$seven_day_reset_iso")
+    seven_day_reset=$(format_reset_time "$seven_day_reset_iso" "%a %H:%M")
     seven_bar=$(progress_bar "$seven_day_pct" 10)
     line2+="${sep}7d ${seven_bar} ${dim}${seven_day_pct}%${reset}"
     [ -n "$seven_day_reset" ] && line2+=" ${dim}@${seven_day_reset}${reset}"
 
-    # Per-model 7d breakdowns (Enterprise) — show compact inline when present
     model_suffix=""
-    for model_key in seven_day_opus seven_day_sonnet; do
-        model_pct=$(echo "$usage_data" | jq -r ".${model_key}.utilization // empty" 2>/dev/null)
+    for model_entry in "opus|$seven_day_opus_pct" "sonnet|$seven_day_sonnet_pct"; do
+        model_label="${model_entry%%|*}"
+        model_pct="${model_entry#*|}"
         if [ -n "$model_pct" ] && [ "$model_pct" != "null" ]; then
-            model_pct_int=$(echo "$model_pct" | awk '{printf "%.0f", $1}')
-            model_label="${model_key#seven_day_}"  # strip prefix → "opus" or "sonnet"
-            model_label="${model_label:0:1}"        # first char → "o" or "s"
-            model_color=$(usage_color "$model_pct_int")
-            model_suffix+=" ${model_color}${model_label}:${model_pct_int}%${reset}"
+            usage_color "$model_pct"
+            model_suffix+=" ${usage_color_result}${model_label:0:1}:${model_pct}%${reset}"
         fi
     done
     [ -n "$model_suffix" ] && line2+="${model_suffix}"
@@ -340,7 +319,9 @@ fi
 
 # ===== Cost =====
 # Session cost from JSON (always fresh); day/week from ccu (no cache)
-c_sess=$(echo "$input" | jq -r '.cost.total_cost_usd // empty' | awk '{if ($1 != "") printf "%.2f", $1}')
+if [ -n "$c_sess" ]; then
+    c_sess=$(printf "%.2f" "$c_sess" 2>/dev/null)
+fi
 
 c_today=""
 c_week=""
@@ -350,9 +331,9 @@ if command -v ccu >/dev/null 2>&1; then
 fi
 
 cost_str=""
-for _label_val in "s:$c_sess" "d:$c_today" "w:$c_week"; do
-    _label="${_label_val%%:*}"
-    _val="${_label_val#*:}"
+for _entry in "s|$c_sess" "d|$c_today" "w|$c_week"; do
+    _label="${_entry%%|*}"
+    _val="${_entry#*|}"
     if [ -n "$_val" ]; then
         [ -n "$cost_str" ] && cost_str+=" "
         cost_str+="${dim}${_label}${reset} ${cyan}\$${_val}${reset}"
