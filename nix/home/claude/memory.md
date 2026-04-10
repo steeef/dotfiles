@@ -46,6 +46,7 @@ Use the repo's existing build, test, formatter, and linter tools; don't introduc
 ## Important Reminders
 
 **ALWAYS**:
+- Format shell commands for copy-paste: split multi-step sequences across lines (`\` at line end, `&&` at start of continuation); break long single commands at flags/args with `\` continuation; target ~80 cols but best-effort — up to ~100 is fine if splitting would be awkward
 - Commit working, compiling code incrementally
 - Fix failing tests (not disable them)
 - Use commit hooks as intended (no `--no-verify`)
