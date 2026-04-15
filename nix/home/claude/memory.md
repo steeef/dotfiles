@@ -1,24 +1,24 @@
 # Important Claude memory storage path
-IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/memory.md` and run `hms` (the file is copied to `~/.claude/CLAUDE.md`).
+IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/memory.md` and run `hms` (copied to `~/.claude/CLAUDE.md`).
 
 # General approach
 
-- Prioritize substance, clarity, and depth.
-- Challenge all my proposals, designs, and conclusions as hypotheses to be tested.
-- Sharpen follow-up questions for precision, surfacing hidden assumptions, trade offs, and failure modes early.
-- Default to terse, logically structured, information-dense responses unless detailed exploration is required.
-- Skip unnecessary praise unless grounded in evidence. Explicitly acknowledge uncertainty when applicable.
+- Prioritize substance, clarity, depth.
+- Challenge all proposals, designs, conclusions as hypotheses to test.
+- Sharpen follow-up questions — surface hidden assumptions, trade-offs, failure modes early.
+- Default terse, logically structured, information-dense unless detailed exploration required.
+- Skip praise unless evidence-grounded. Acknowledge uncertainty explicitly.
 - Always propose at least one alternative framing.
 - Accept critical debate as normal and preferred.
-- Treat factual claims as provisional; cite when appropriate and flag reliance on inference. Favor accuracy over sounding certain.
+- Treat factual claims as provisional; cite when appropriate, flag inference. Favor accuracy over certainty.
 
 ## Context engineering workflow
-- Follow a research → plan → implement cadence; do not skip phases on complex work.
-- Research: use `/extract-research-questions` then `/objective-codebase-research` for solution-blind investigation; or `/research-and-questions` to chain both. Read every referenced file in full before spawning tasks; use fast search (rg) and locate 3 similar patterns/tests to mirror.
-- Plan: produce phased steps with file:line evidence, and success criteria split into automated commands vs manual checks using project-standard tooling. When a skill or workflow writes plans as documents to disk, that is the deliverable — do not treat plan creation as a trigger to begin implementation.
-- Implement: write failing tests first, then minimal code to pass; work phase-by-phase, verifying after each phase; compact progress (decisions, commands, failures) into concise notes instead of keeping long logs in context.
-- Compaction: strip noisy tool output; summarize only the essential facts, decisions, and next actions so context stays lean.
-- Guardrails: do not ask the user questions you can answer from code; pause and research when uncertain; when the task is documentation-only, describe what exists without proposing improvements.
+- Follow research → plan → implement cadence; don't skip phases on complex work.
+- Research: use `/extract-research-questions` then `/objective-codebase-research` for solution-blind investigation; or `/research-and-questions` to chain both. Read every referenced file in full before spawning tasks; use fast search (rg), locate 3 similar patterns/tests to mirror.
+- Plan: produce phased steps with file:line evidence, success criteria split into automated commands vs manual checks using project-standard tooling. When skill or workflow writes plans to disk, that's deliverable — don't treat plan creation as trigger to begin implementation.
+- Implement: write failing tests first, then minimal code to pass; work phase-by-phase, verify after each phase; compact progress (decisions, commands, failures) into concise notes, not long logs.
+- Compaction: strip noisy tool output; summarize only essential facts, decisions, next actions.
+- Guardrails: don't ask questions answerable from code; pause and research when uncertain; documentation-only tasks describe what exists without proposing improvements.
 
 ## QRSPI stages
 - Q: `/extract-research-questions` — research questions from ticket
@@ -27,11 +27,11 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Design → Structure → Plan → Implement: `/draft-design-discussion`, `/draft-structure-outline`, `/conductor:plan`, `/conductor:implement`
 
 ## Test-Driven Development
-- Never write implementation without a failing test that describes expected behavior.
+- Never write implementation without failing test describing expected behavior.
 - Run tests after each red/green step and before marking work complete.
-- Each test detects a real defect — boundary, error path, or contract violation.
-- Assertions verify observable behavior that would be absent if the feature were removed.
-- Tests survive internal refactoring; a breaking test on non-behavioral change is the wrong test.
+- Each test detects real defect — boundary, error path, or contract violation.
+- Assertions verify observable behavior absent if feature removed.
+- Tests survive internal refactoring; breaking test on non-behavioral change is wrong test.
 - Use `/test-driven-development` for detailed workflow guidance.
 
 ## Convergent Review
@@ -41,12 +41,12 @@ IMPORTANT: To update global Claude memory, edit `~/.dotfiles/nix/home/claude/mem
 - Use `/convergent-review` to enforce this discipline.
 
 ## Project Integration
-Use the repo's existing build, test, formatter, and linter tools; don't introduce new ones without strong justification.
+Use repo's existing build, test, formatter, linter tools; don't introduce new ones without strong justification.
 
 ## Important Reminders
 
 **ALWAYS**:
-- Format shell commands for copy-paste: split multi-step sequences across lines (`\` at line end, `&&` at start of continuation); break long single commands at flags/args with `\` continuation; target ~80 cols but best-effort — up to ~100 is fine if splitting would be awkward
+- Format shell commands for copy-paste: split multi-step sequences across lines (`\` at line end, `&&` at start of continuation); break long single commands at flags/args with `\` continuation; target ~80 cols but best-effort — up to ~100 fine if splitting would be awkward
 - Commit working, compiling code incrementally
 - Fix failing tests (not disable them)
 - Use commit hooks as intended (no `--no-verify`)
@@ -60,12 +60,12 @@ Use the repo's existing build, test, formatter, and linter tools; don't introduc
 - IMPORTANT: Never mention Claude or Claude Code or AI in any commit messages
 
 # Code style
-- IMPORTANT: When a `.pre-commit-config.yaml` is present in the project directory, run pre-commit after modifying files using: `prek run --files <file1> <file2> ...`
-- IMPORTANT: When running poetry in a project, use the global `poetry` command (Python 3.11). If the project requires a different Python version, use: `uvx --python <version> --with poetry==<poetry-version> poetry ...` (e.g., `uvx --python 3.12 --with poetry==2.1.1 poetry install`)
-- IMPORTANT: Use `poetry lock` (without flags) to regenerate the lock file. The `--no-update` flag does not exist.
-- When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls do not fail with `PermissionError`.
-- Use `fnm` (Fast Node Manager) when working on Node projects or attempting to run Node commands like `npm` and `yarn`.
-- IMPORTANT: Use GNU syntax for all CLI tools. Nix provides GNU sed, grep, find, and xargs ahead of macOS built-ins. For example, use `sed -i '/pattern/d' file` (GNU style) rather than `sed -i '' '/pattern/d' file` (BSD style). When uncertain, run `<tool> --version` to confirm which variant is active.
+- IMPORTANT: When `.pre-commit-config.yaml` present in project directory, run pre-commit after modifying files using: `prek run --files <file1> <file2> ...`
+- IMPORTANT: When running poetry in project, use global `poetry` command (Python 3.11). Different Python version needed: `uvx --python <version> --with poetry==<poetry-version> poetry ...` (e.g., `uvx --python 3.12 --with poetry==2.1.1 poetry install`)
+- IMPORTANT: Use `poetry lock` (without flags) to regenerate lock file. `--no-update` flag does not exist.
+- When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls don't fail with `PermissionError`.
+- Use `fnm` (Fast Node Manager) for Node projects or Node commands like `npm` and `yarn`.
+- IMPORTANT: Use GNU syntax for all CLI tools. Nix provides GNU sed, grep, find, xargs ahead of macOS built-ins. Use `sed -i '/pattern/d' file` (GNU style) not `sed -i '' '/pattern/d' file` (BSD style). Uncertain: run `<tool> --version` to confirm.
 
 ## Single-File Python Scripts
 Use uv with PEP 723 inline script metadata — no separate requirements.txt or venv needed:
@@ -80,29 +80,29 @@ Use uv with PEP 723 inline script metadata — no separate requirements.txt or v
 
 # Hook Integration
 - Safety hooks block dangerous operations (rm, large file reads >500 lines) — delegate to Task tool
-- Use Task tool for keyword searches across multiple files or open-ended exploration; use direct Read/Glob for specific known files
+- Use Task tool for keyword searches across multiple files or open-ended exploration; direct Read/Glob for specific known files
 - Git hooks prevent unsafe operations — follow suggested alternatives
-- Instead of `rm`, use `mv` to TRASH/; log it in TRASH-FILES.md as: `<file> - moved to TRASH/ - <reason>`
+- Instead of `rm`, use `mv` to TRASH/; log in TRASH-FILES.md as: `<file> - moved to TRASH/ - <reason>`
 
 # Jira Integration
-- IMPORTANT: For all Jira operations (search, view, create, transition, comment), use the `/jira` skill first.
-- The `/jira` skill uses `acli` (Atlassian CLI) which is faster and more token-efficient than MCP round-trips.
+- IMPORTANT: All Jira operations (search, view, create, transition, comment) — use `/jira` skill first.
+- `/jira` uses `acli` (Atlassian CLI) — faster and more token-efficient than MCP round-trips.
 - IMPORTANT: When using Atlassian MCP tools to add or update comments, always set `contentFormat: "markdown"` to avoid ADF serialization issues that corrupt formatting on edit.
 
 # GitHub style
-- IMPORTANT: When creating pull request, ALWAYS create them in draft mode first
-- IMPORTANT: When creating pull request, prefix the title with the associated Jira issue, if it exists
-- IMPORTANT: When creating pull request, the Jira issue must be on the first line of the body description, by itself
-- IMPORTANT: When commenting on a GitHub PR or issue, prefix the comment with ":robot: From Claude Code: "
+- IMPORTANT: When creating pull request, ALWAYS create in draft mode first
+- IMPORTANT: When creating pull request, prefix title with associated Jira issue, if it exists
+- IMPORTANT: When creating pull request, Jira issue must be on first line of body description, by itself
+- IMPORTANT: When commenting on GitHub PR or issue, prefix comment with ":robot: From Claude Code: "
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
-Create files only when necessary for achieving the goal.
+Create files only when necessary for achieving goal.
 Prefer editing existing files over creating new ones.
 
 # Project CLAUDE.md File Creation
-When adding agent instructions to a project, pick the first matching rule:
-1. If a non-symlink `CLAUDE.md` already exists, edit it directly.
+When adding agent instructions to project, pick first matching rule:
+1. If non-symlink `CLAUDE.md` already exists, edit it directly.
 2. If `AGENTS.md` exists, write instructions there and symlink `CLAUDE.md -> AGENTS.md`.
 
 # Nix System Management
@@ -114,8 +114,8 @@ Before cloning, check for local copies: work repos in `~/code/work/`, personal i
 
 # Git Worktree Workflow
 
-Use worktrees for feature work (implementation from a plan, multi-file changes).
-Skip for single-file fixes, docs-only changes, exploration, or already-checked-out branches.
+Use worktrees for feature work (implementation from plan, multi-file changes).
+Skip for single-file fixes, docs-only, exploration, or already-checked-out branches.
 
 When beginning implementation:
 1. `EnterWorktree(name: "descriptive-branch-name")`
@@ -124,6 +124,6 @@ When beginning implementation:
 
 When resuming: `git worktree list` first; `EnterWorktree(name: "branch-name")` to re-enter or create; then read any plan/handoff docs before proceeding.
 
-On completion: create draft PR (Jira-prefixed title), then clean up worktree after merge.
+On completion: create draft PR (Jira-prefixed title), clean up worktree after merge.
 
-**IMPORTANT**: Writing a plan is NOT implementation — do not start worktrees after plan creation.
+**IMPORTANT**: Writing plan is NOT implementation — don't start worktrees after plan creation.
