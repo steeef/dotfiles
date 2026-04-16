@@ -23,6 +23,7 @@
     };
     claude-code.url = "github:sadjow/claude-code-nix";
     codex-cli.url = "github:sadjow/codex-cli-nix";
+    gemini-cli.url = "github:sadjow/gemini-cli-nix";
     mkalias = {
       url = "github:reckenrode/mkalias";
       inputs.nixpkgs.follows = "nixpkgs";

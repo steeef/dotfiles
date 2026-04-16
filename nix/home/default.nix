@@ -110,6 +110,7 @@
     ./editorconfig.nix
     ./firefox
     ./fzf.nix
+    ./gemini.nix
     ./gh.nix
     ./git
     ./granted.nix
