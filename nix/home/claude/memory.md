@@ -95,6 +95,9 @@ Use uv with PEP 723 inline script metadata — no separate requirements.txt or v
 - IMPORTANT: When creating pull request, Jira issue must be on first line of body description, by itself
 - IMPORTANT: When commenting on GitHub PR or issue, prefix comment with ":robot: From Claude Code: "
 
+# Docker on macOS
+- IMPORTANT: Before running any docker command on macOS, check colima is running: `colima status`. If not running, `colima start` and wait for it to be ready before proceeding.
+
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
 Create files only when necessary for achieving goal.
