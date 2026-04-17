@@ -9,8 +9,6 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
 - Default terse, logically structured, information-dense unless detailed exploration required.
 - Skip praise unless evidence-grounded. Acknowledge uncertainty explicitly.
 - Always propose at least one alternative framing.
-- Accept critical debate as normal and preferred.
-- Treat factual claims as provisional; cite when appropriate, flag inference. Favor accuracy over certainty.
 
 ## Context engineering workflow
 - Follow research → plan → implement cadence; don't skip phases on complex work.
@@ -47,12 +45,9 @@ Use repo's existing build, test, formatter, linter tools; don't introduce new on
 
 **ALWAYS**:
 - Format shell commands for copy-paste: split multi-step sequences across lines (`\` at line end, `&&` at start of continuation); break long single commands at flags/args with `\` continuation; target ~80 cols but best-effort — up to ~100 fine if splitting would be awkward
-- Commit working, compiling code incrementally
 - Fix failing tests (not disable them)
 - Use commit hooks as intended (no `--no-verify`)
-- Verify assumptions against existing code
 - Update plan documentation as you go
-- Learn from existing implementations
 - Stop after 3 failed attempts and reassess
 
 # Git style
