@@ -2,7 +2,9 @@
   programs.neovim = {
     enable = true;
     withNodeJs = true;
-    extraLuaConfig = builtins.readFile ../../nvim/init.lua;
+    withRuby = false;
+    withPython3 = false;
+    initLua = builtins.readFile ../../nvim/init.lua;
 
     extraPackages = with pkgs; [
       actionlint
@@ -16,8 +18,8 @@
       lua-language-server
       terraform-ls
       tflint
-      nodePackages.bash-language-server
-      nodePackages.yaml-language-server
+      bash-language-server
+      yaml-language-server
       vscode-langservers-extracted
     ];
   };
