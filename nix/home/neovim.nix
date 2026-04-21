@@ -2,6 +2,7 @@
   programs.neovim = {
     enable = true;
     withNodeJs = true;
+    extraLuaConfig = builtins.readFile ../../nvim/init.lua;
 
     extraPackages = with pkgs; [
       actionlint
