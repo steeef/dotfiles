@@ -129,7 +129,7 @@
               home = {
                 inherit username;
                 homeDirectory = getHomeDirectory args.system;
-                stateVersion = "23.05";
+                stateVersion = "26.05";
               };
             }
             nix-index-database.homeModules.nix-index
