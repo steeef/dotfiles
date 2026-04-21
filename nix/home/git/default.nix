@@ -70,6 +70,10 @@
         };
       };
     };
+    signing = {
+      format = "openpgp";
+    };
+
     includes = [
       {
         condition = "gitdir:~/code/work/";

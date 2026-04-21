@@ -74,8 +74,8 @@ in {
     package = inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default;
     # Settings managed via activation script merge (see below)
     # Custom skills directory
-    skillsDir = ./skills;
+    skills = ./skills;
     # Memory file for CLAUDE.md
-    memory.source = ./memory.md;
+    context = ./memory.md;
   };
 }

@@ -7,12 +7,15 @@
   programs.opencode = {
     settings = {
       model = "gpt-5.1";
+    };
+
+    tui = {
       theme = "catppuccin";
     };
 
     enable = true;
     package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    rules = builtins.readFile ./claude/memory.md;
+    context = ./claude/memory.md;
   };
 
   # Opencode-specific ripgrep config to include gitignored files in file search
