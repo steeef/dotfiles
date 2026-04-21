@@ -16,8 +16,8 @@
       ];
 
       trusted-substituters = [
-        "cache.nixos.org"
-        "nix-community.cachix.org"
+        "https://cache.nixos.org"
+        "https://nix-community.cachix.org"
         "https://gemini-cli-nix.cachix.org"
         "https://claude-code.cachix.org"
         "https://codex-cli.cachix.org"
