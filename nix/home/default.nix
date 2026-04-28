@@ -35,6 +35,7 @@
     deadnix
     difftastic
     fd
+    forgejo-cli
     gcc
     gnumake
     go
