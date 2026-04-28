@@ -24,7 +24,7 @@ function git_remove_merged_local_branch() {
   git branch --merged | grep -Ev "(^\*|master|main|staging)" | sed 's/^[+ ]*//' | while read branch; do
     worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
     if [[ -n "$worktree" ]]; then
-      git worktree remove "$worktree" || { echo "Failed to remove worktree for $branch, skipping" >&2; continue; }
+      git worktree remove "$worktree" 2>/dev/null || { echo "Could not remove worktree for $branch, skipping" >&2; continue; }
     fi
     git branch -d "$branch"
   done
@@ -36,7 +36,7 @@ function git_remove_orphaned_local_branches() {
   git branch -vv | grep ': gone]' | awk '{if ($1 == "+" || $1 == "*") print $2; else print $1}' | while read branch; do
     worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
     if [[ -n "$worktree" ]]; then
-      git worktree remove "$worktree" || { echo "Worktree for $branch has changes, skipping" >&2; continue; }
+      git worktree remove "$worktree" 2>/dev/null || { echo "Could not remove worktree for $branch, skipping" >&2; continue; }
     fi
     git branch -D "$branch"
   done
@@ -45,8 +45,10 @@ function git_remove_orphaned_local_branches() {
 # Clean up remote and local branches
 function gcl() {
   local default_branch
-  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@') || default_branch="main"
-  (git checkout "$default_branch" && git pull)
+  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null) || default_branch="refs/remotes/origin/main"
+  default_branch=${default_branch#refs/remotes/origin/}
+  git checkout "$default_branch" || return 1
+  git pull || return 1
   git_prune_remote
   git worktree prune
   git_remove_merged_local_branch
