@@ -107,6 +107,7 @@
         "calibre"
         "cameracontroller"
         "claude-devtools"
+        "coderabbit"
         "contexts"
         "fantastical"
         "ghostty"
