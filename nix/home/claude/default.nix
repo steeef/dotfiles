@@ -58,13 +58,22 @@ in {
       "$HOME/.claude/settings.json"
   '';
 
-  # Symlink fnm default node into ~/.local/bin for non-interactive contexts (MCP)
+  # Symlink fnm default node/npm/npx/corepack into ~/.local/bin for non-interactive contexts (MCP)
   home.activation.linkFnmNode = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    fnm_node="$HOME/.local/share/fnm/aliases/default/bin/node"
-    target="$HOME/.local/bin/node"
-    if [ -x "$fnm_node" ]; then
-      run mkdir -p "$(dirname "$target")"
-      run ln -sf "$fnm_node" "$target"
+    fnm_bin="$HOME/.local/share/fnm/aliases/default/bin"
+    target_dir="$HOME/.local/bin"
+    if [ -d "$fnm_bin" ]; then
+      run mkdir -p "$target_dir"
+      for name in node npm npx corepack; do
+        src="$fnm_bin/$name"
+        target="$target_dir/$name"
+        [ -f "$src" ] && [ -x "$src" ] || continue
+        if [ -e "$target" ] && [ ! -L "$target" ]; then
+          echo "refusing to replace non-symlink: $target" >&2
+          exit 1
+        fi
+        run ln -sfn "$src" "$target"
+      done
     fi
   '';
 
