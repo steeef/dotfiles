@@ -1,4 +1,5 @@
 final: prev: {
+  fgj = final.callPackage ./fgj.nix {};
   hidapitester = final.callPackage ./hidapitester.nix {};
   kubectl = final.callPackage ./kubectl.nix {};
   yt-dlp = (prev.yt-dlp.override {deno = final.bun;}).overrideAttrs (_old: {
