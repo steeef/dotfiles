@@ -56,6 +56,7 @@
     libiconv
     nixpkgs-fmt
     nmap
+    pandoc
     ponysay
     pipx
     prek
