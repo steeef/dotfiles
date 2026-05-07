@@ -34,6 +34,7 @@
     "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "65",
     "BASH_MAX_OUTPUT_LENGTH": "150000"
   },
+  "skillListingBudgetFraction": 0.02,
   "hooks": {
     "PostToolUse": [
       {
