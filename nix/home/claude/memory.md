@@ -99,6 +99,7 @@ Use uv with PEP 723 inline script metadata — no separate requirements.txt or v
 Do what has been asked; nothing more, nothing less.
 Create files only when necessary for achieving goal.
 Prefer editing existing files over creating new ones.
+- ALWAYS: Never read `.jsonl` files (session transcripts) directly — they are 10MB+. If a skill passes a transcript path, ignore it or summarize via ctx_execute_file with a line count limit.
 
 # Project CLAUDE.md File Creation
 When adding agent instructions to project, pick first matching rule:
