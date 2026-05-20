@@ -112,6 +112,7 @@
     ./editorconfig.nix
     ./firefox
     ./fzf.nix
+    ./antigravity.nix
     ./gemini.nix
     ./gh.nix
     ./git

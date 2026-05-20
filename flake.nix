@@ -24,6 +24,7 @@
     claude-code.url = "github:sadjow/claude-code-nix";
     codex-cli.url = "github:sadjow/codex-cli-nix";
     gemini-cli.url = "github:sadjow/gemini-cli-nix";
+    antigravity-cli.url = "github:Hy4ri/antigravity-flake";
     mkalias = {
       url = "github:reckenrode/mkalias";
       inputs.nixpkgs.follows = "nixpkgs";
