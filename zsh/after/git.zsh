@@ -24,7 +24,7 @@ function git_remove_merged_local_branch() {
   git branch --merged | grep -Ev "(^\*|master|main|staging)" | sed 's/^[+ ]*//' | while read branch; do
     worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
     if [[ -n "$worktree" ]]; then
-      git worktree remove "$worktree" 2>/dev/null || { echo "Could not remove worktree for $branch, skipping" >&2; continue; }
+      git worktree remove --force "$worktree" 2>/dev/null || { echo "Could not remove worktree for $branch, skipping" >&2; continue; }
     fi
     git branch -d "$branch"
   done
@@ -36,7 +36,7 @@ function git_remove_orphaned_local_branches() {
   git branch -vv | grep ': gone]' | awk '{if ($1 == "+" || $1 == "*") print $2; else print $1}' | while read branch; do
     worktree=$(git worktree list | grep "\[$branch\]" | awk '{print $1}')
     if [[ -n "$worktree" ]]; then
-      git worktree remove "$worktree" 2>/dev/null || { echo "Could not remove worktree for $branch, skipping" >&2; continue; }
+      git worktree remove --force "$worktree" 2>/dev/null || { echo "Could not remove worktree for $branch, skipping" >&2; continue; }
     fi
     git branch -D "$branch"
   done
