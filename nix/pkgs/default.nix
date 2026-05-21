@@ -12,6 +12,20 @@ final: prev: {
     };
   });
 
+  # Fix pipx 1.8.0 tests failing against packaging>=26.0
+  # packaging 26.0 inserts a space in Requirement.__str__ (`pkg @ url`),
+  # but pipx 1.8.0 tests hard-code the old `pkg@ url` form.
+  # Remove when nixpkgs ships pipx >= 1.9.
+  # https://github.com/pypa/packaging/releases/tag/26.0
+  pipx = prev.pipx.overrideAttrs (old: {
+    disabledTests =
+      (old.disabledTests or [])
+      ++ [
+        "test_fix_package_name"
+        "test_parse_specifier_for_metadata"
+      ];
+  });
+
   # Fix uvloop test failure with Python 3.13 on Darwin
   # nixpkgs only disables test_cancel_post_init for Python >= 3.14
   # https://github.com/MagicStack/uvloop/issues/622
