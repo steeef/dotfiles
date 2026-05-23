@@ -8,7 +8,7 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
 
 # GitHub pull requests
 
-- IMPORTANT: Always create PRs in draft mode first.
+- IMPORTANT: For GitHub remotes, always create PRs in draft mode first (`--draft`). For Forgejo remotes, draft mode is unsupported via CLI — create as open.
 - IMPORTANT: Prefix PR title with associated Jira issue if it exists.
 - IMPORTANT: First line of PR body is the Jira issue, by itself.
 - IMPORTANT: Prefix comments on GitHub PRs or issues with `:robot: From Claude Code:`.
@@ -62,7 +62,7 @@ Before cloning, check local copies: work repos in `~/code/work/`, personal in `~
 Use for feature work (implementation from plan, multi-file changes). Skip for single-file fixes, docs-only, exploration, or already-checked-out branches.
 - Start: `EnterWorktree(name: "descriptive-branch-name")` → announce path → run baseline tests.
 - Resume: `git worktree list` first; `EnterWorktree(name: "branch-name")` to re-enter or create; read any plan/handoff docs before proceeding.
-- Done: create draft PR (Jira-prefixed title); clean up worktree after merge.
+- Done: create PR (draft if GitHub, open if Forgejo; Jira-prefixed title); clean up worktree after merge.
 
 # Docker on macOS
 - IMPORTANT: Before any docker command, check `colima status`. If not running, `colima start` and wait until ready before proceeding.
