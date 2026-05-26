@@ -198,6 +198,10 @@
     CustomUserPreferences."com.tinyspeck.slackmacgap" = {
       SlackNoAutoUpdates = true;
     };
+
+    CustomUserPreferences."com.elgato.StreamDeck" = {
+      NSAppSleepDisabled = true;
+    };
   };
 
   system.activationScripts.nix-darwin = {
