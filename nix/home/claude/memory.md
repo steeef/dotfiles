@@ -9,8 +9,6 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
 # GitHub pull requests
 
 - IMPORTANT: For GitHub remotes, always create PRs in draft mode first (`--draft`). For Forgejo remotes, draft mode is unsupported via CLI — create as open.
-- IMPORTANT: Prefix PR title with associated Jira issue if it exists.
-- IMPORTANT: First line of PR body is the Jira issue, by itself.
 - IMPORTANT: Prefix comments on GitHub PRs or issues with `:robot: From Claude Code:`.
 
 # Commit hooks
@@ -43,26 +41,21 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
 
 # Workflow skills
 - Research: `/extract-research-questions` (Q), `/objective-codebase-research` (R), `/research-and-questions` (chains Q+R).
-- Plan: `/draft-design-discussion` → `/draft-structure-outline` → `/conductor:plan` → `/conductor:implement`.
 - TDD: `/test-driven-development` — failing test before impl; assertions verify observable behavior; tests survive refactors.
 - Review: `/convergent-review` — 3-5 parallel lenses (Functional/Constraints/Alternatives + Risk/Performance for complex); convergence = full clean round; max 3 rounds.
-
-# Jira integration
-- IMPORTANT: All Jira operations (search, view, create, transition, comment) — use `/jira` skill first. `/jira` uses `acli` (Atlassian CLI), faster + more token-efficient than MCP.
-- IMPORTANT: When using Atlassian MCP tools for comments, always set `contentFormat: "markdown"` to avoid ADF serialization corruption.
 
 # Nix system management
 - `hms` — Home Manager switch (`home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)`).
 - `dr` — Darwin system switch (`sudo darwin-rebuild switch --flake $HOME/.dotfiles`).
 
 # Git repository discovery
-Before cloning, check local copies: work repos in `~/code/work/`, personal in `~/code/`. If found, `git fetch origin && git merge --ff-only origin/main` before starting.
+IMPORTANT: Claude works in bare-container worktrees under `~/wt`, NEVER in the user's clones (`~/code/work/`, `~/code/`) — those are the human's, leave them untouched. To start work: `cd` into any clone of the target repo (its `origin` URL is read, read-only, to derive the container) and use `EnterWorktree`; it clones `--bare` on demand into `~/wt/<repo>/.bare` and creates a worktree. Do not `git fetch`/edit/commit inside `~/code/work` or `~/code` clones.
 
 # Git worktree workflow
-Use for feature work (implementation from plan, multi-file changes). Skip for single-file fixes, docs-only, exploration, or already-checked-out branches.
-- Start: `EnterWorktree(name: "descriptive-branch-name")` → announce path → run baseline tests.
-- Resume: `git worktree list` first; `EnterWorktree(name: "branch-name")` to re-enter or create; read any plan/handoff docs before proceeding.
-- Done: create PR (draft if GitHub, open if Forgejo; Jira-prefixed title); clean up worktree after merge.
+`EnterWorktree` is the default before modifying files in any repo. It bootstraps a bare container under `~/wt` (override the base with `$CLAUDE_WORKTREE_BASE`), so every worktree is a peer with no privileged main checkout. Editing a human clone directly is the opt-out (the worktree guard will prompt).
+- Start: `EnterWorktree(name: "descriptive-branch-name")` → announce path → run baseline tests. In work repos, prefix the name with the ticket/issue key.
+- Resume: `git worktree list` first; `EnterWorktree(name: "branch-name")` to re-enter (idempotent) or create; read any plan/handoff docs before proceeding.
+- Done: create PR (draft if GitHub, open if Forgejo) → clean up the worktree (`ExitWorktree`) after merge.
 
 # Docker on macOS
 - IMPORTANT: Before any docker command, check `colima status`. If not running, `colima start` and wait until ready before proceeding.
