@@ -55,6 +55,8 @@ IMPORTANT: Claude works in bare-container worktrees under `~/wt`, NEVER in the u
 `EnterWorktree` is the default before modifying files in any repo. It bootstraps a bare container under `~/wt` (override the base with `$CLAUDE_WORKTREE_BASE`), so every worktree is a peer with no privileged main checkout. Editing a human clone directly is the opt-out (the worktree guard will prompt).
 - Start: `EnterWorktree(name: "descriptive-branch-name")` → announce path → run baseline tests. In work repos, prefix the name with the ticket/issue key.
 - Resume: `git worktree list` first; `EnterWorktree(name: "branch-name")` to re-enter (idempotent) or create; read any plan/handoff docs before proceeding.
+- NEVER `EnterWorktree(path: ~/wt/...)` to adopt a bare-container worktree — the builtin validates `path` against the *current clone's* `git worktree list`, which never lists `~/wt` worktrees (different repo), so it rejects. Always re-enter with `name:`; it is idempotent and adopts an existing `~/wt/<repo>/<name>`.
+- NEVER hand-roll `git worktree add` then edit via absolute paths to "satisfy the guard's intent." If a `~/wt/<repo>/<name>` worktree exists, `EnterWorktree(name:)` adopts it; if not, it creates it. The tool is the path, not a workaround.
 - Done: create PR (draft if GitHub, open if Forgejo) → clean up the worktree (`ExitWorktree`) after merge.
 
 # Docker on macOS
