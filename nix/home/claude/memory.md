@@ -48,18 +48,13 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
 - `hms` — Home Manager switch (`home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)`).
 - `dr` — Darwin system switch (`sudo darwin-rebuild switch --flake $HOME/.dotfiles`).
 
-# Git repository discovery
-IMPORTANT: Claude works in bare-container worktrees under `~/wt`, NEVER in the user's clones (`~/code/work/`, `~/code/`) — those are the human's, leave them untouched. To start work: `cd` into any clone of the target repo (its `origin` URL is read, read-only, to derive the container) and use `EnterWorktree`; it clones `--bare` on demand into `~/wt/<repo>/.bare` and creates a worktree. Do not `git fetch`/edit/commit inside `~/code/work` or `~/code` clones.
-
-# Git worktree workflow
-`EnterWorktree` is the default before modifying files in any repo. It bootstraps a bare container under `~/wt` (override the base with `$CLAUDE_WORKTREE_BASE`), so every worktree is a peer with no privileged main checkout. Editing a human clone directly is the opt-out (the worktree guard will prompt).
-- Start: `EnterWorktree(name: "descriptive-branch-name")` → announce path → run baseline tests. In work repos, prefix the name with the ticket/issue key.
-- Resume: `git worktree list` first; `EnterWorktree(name: "branch-name")` to re-enter (idempotent) or create; read any plan/handoff docs before proceeding.
-- NEVER `EnterWorktree(path: ~/wt/...)` to adopt a bare-container worktree — the builtin validates `path` against the *current clone's* `git worktree list`, which never lists `~/wt` worktrees (different repo), so it rejects. Always re-enter with `name:`; it is idempotent and adopts an existing `~/wt/<repo>/<name>`.
-- NEVER hand-roll `git worktree add` then edit via absolute paths to "satisfy the guard's intent." If a `~/wt/<repo>/<name>` worktree exists, `EnterWorktree(name:)` adopts it; if not, it creates it. The tool is the path, not a workaround.
-- Done: create PR (draft if GitHub, open if Forgejo) → clean up the worktree (`ExitWorktree`) after merge.
-- IMPORTANT: `EnterWorktree` FIRST — before any clone-resident work. If you `cd` around `~/code/work/*` clones first and only later enter a worktree, `ExitWorktree` returns the session to that clone AND leaves a residual cwd pin: every later `cd` snaps back ("Shell cwd was reset to …") and you are stuck in a forbidden clone. If that happens, re-`EnterWorktree(name:)` to re-pin into the worktree, or start a fresh session — do not keep fighting `cd`. (Diagnosed: session f358f1ef.)
-- IMPORTANT: Multi-repo tickets — enter a worktree **per repo** before *any* clone-resident work, and never `cd` between human clones within a session. `EnterWorktree(name:)` derives its target repo from the **session's pinned cwd** (the launch dir / current clone's origin), so calling it while pinned to the wrong clone silently makes a worktree in the wrong repo. For each repo: start (or re-pin) the session in that repo's clone → `EnterWorktree(name:)` → do all that repo's work in the worktree → switch repos only by starting fresh in the next clone followed immediately by its own `EnterWorktree`. A session launched in repo A *cannot* worktree into repo B — start a new session in B's clone. The residual-cwd-pin compounds this on multi-repo tickets. (Diagnosed: session bebc56f7, SRE-3861 across performance-report + platform-infra.)
+# Git worktrees — work in ~/wt, never the human's clones
+- Modify files only in `~/wt` bare worktrees; `~/code/work` and `~/code` clones are read-only (origin-URL source — never `git fetch`/edit/commit there). `EnterWorktree` clones `--bare` into `~/wt/<repo>/.bare` (override base with `$CLAUDE_WORKTREE_BASE`) and fetches origin.
+- Start/resume: `EnterWorktree(name:)` — idempotent, adopts-or-creates, bases the branch on `origin/main`. In work repos prefix `name` with the ticket key; announce the path and run baseline tests. Never pass `path:` for a `~/wt` worktree (the builtin validates it against the *current clone's* worktree list and rejects); never hand-roll `git worktree add`.
+- `EnterWorktree` FIRST, before `cd`-ing among clones — otherwise a residual cwd-pin traps the session in a forbidden clone (every `cd` snaps back); re-`EnterWorktree(name:)` or start fresh. (f358f1ef)
+- One worktree per repo; a session pinned to repo A can't worktree into B (target is derived from pinned cwd) — start a fresh session in B's clone. (bebc56f7)
+- Explore *inside the worktree*, not the human clone's working tree (it may be on a stale branch). `EnterWorktree` fetches origin and bases off `origin/main` itself, so clone staleness can't reach the worktree. A `read_clone_warn` hook (git-worktree-hooks) warns when you Read/Grep/Glob a clone that already has a `~/wt` worktree. (cf94a602)
+- Done: PR (draft GitHub / open Forgejo) → `ExitWorktree` after merge.
 
 # Docker on macOS
 - IMPORTANT: Before any docker command, check `colima status`. If not running, `colima start` and wait until ready before proceeding.
