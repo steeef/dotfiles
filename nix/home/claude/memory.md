@@ -58,6 +58,7 @@ IMPORTANT: Claude works in bare-container worktrees under `~/wt`, NEVER in the u
 - NEVER `EnterWorktree(path: ~/wt/...)` to adopt a bare-container worktree — the builtin validates `path` against the *current clone's* `git worktree list`, which never lists `~/wt` worktrees (different repo), so it rejects. Always re-enter with `name:`; it is idempotent and adopts an existing `~/wt/<repo>/<name>`.
 - NEVER hand-roll `git worktree add` then edit via absolute paths to "satisfy the guard's intent." If a `~/wt/<repo>/<name>` worktree exists, `EnterWorktree(name:)` adopts it; if not, it creates it. The tool is the path, not a workaround.
 - Done: create PR (draft if GitHub, open if Forgejo) → clean up the worktree (`ExitWorktree`) after merge.
+- IMPORTANT: `EnterWorktree` FIRST — before any clone-resident work. If you `cd` around `~/code/work/*` clones first and only later enter a worktree, `ExitWorktree` returns the session to that clone AND leaves a residual cwd pin: every later `cd` snaps back ("Shell cwd was reset to …") and you are stuck in a forbidden clone. If that happens, re-`EnterWorktree(name:)` to re-pin into the worktree, or start a fresh session — do not keep fighting `cd`. (Diagnosed: session f358f1ef.)
 
 # Docker on macOS
 - IMPORTANT: Before any docker command, check `colima status`. If not running, `colima start` and wait until ready before proceeding.
