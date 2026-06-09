@@ -26,6 +26,7 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
 - IMPORTANT: `poetry lock` (no flags) regenerates lock file. `--no-update` flag does not exist.
 - When invoking `uv` or `uvx`, request escalated permissions so sandboxed `os.sysconf` calls don't fail with `PermissionError`.
 - Use `fnm` (Fast Node Manager) for Node projects or commands like `npm`, `yarn`, `npx`.
+- IMPORTANT: Use `tenv` for Terraform version management (NOT `tfenv` — not installed). `tenv tf install <ver>` / `tenv tf use <ver>`; respects `.terraform-version` / `.tool-versions`. `tenv` also manages tofu/terragrunt/atmos via `tenv tofu|tg|atmos`.
 - IMPORTANT: Use GNU syntax for CLI tools. Nix provides GNU sed/grep/find/xargs ahead of macOS built-ins. Use `sed -i '/pattern/d' file` (GNU) not `sed -i '' '/pattern/d' file` (BSD). Confirm with `<tool> --version`.
 - Single-file Python: use `uv` with PEP 723 inline script metadata (`#!/usr/bin/env -S uv run --script` + `# /// script ... # ///` block). See <https://docs.astral.sh/uv/guides/scripts/>.
 
