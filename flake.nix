@@ -82,7 +82,7 @@
         };
         modules = [
           ./nix/darwin
-          ({...}: {
+          (_: {
             system.stateVersion = 4;
             system.primaryUser = "sprice";
           })
@@ -119,7 +119,7 @@
                 };
               };
             })
-            (nur.overlays.default)
+            nur.overlays.default
             (import ./nix/pkgs)
           ];
         };
