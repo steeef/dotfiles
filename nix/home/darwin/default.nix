@@ -2,6 +2,7 @@
   targets.genericLinux.enable = false;
 
   home.packages = with pkgs; [
+    bento4 # mp4decrypt — Apple Music DRM decrypt for gamdl (music tool)
     cmake
     colima
     docker
