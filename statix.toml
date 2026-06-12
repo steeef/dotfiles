@@ -2,6 +2,10 @@ disabled = [
   "repeated_keys",
 ]
 
+ignore = [
+  "**/TRASH",
+]
+
 [nix_version]
 minor = 2
 patch = 4
