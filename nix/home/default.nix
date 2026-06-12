@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -6,7 +11,15 @@
   home.sessionVariables = {
     LIBRARY_PATH = "${pkgs.openssl.out}/lib:${pkgs.postgresql.lib}/lib";
     C_INCLUDE_PATH = "${pkgs.openssl.dev}/include:${pkgs.postgresql.dev}/include";
+    # Share one terraform provider cache across workspaces instead of a
+    # full copy per .terraform dir
+    TF_PLUGIN_CACHE_DIR = "${config.xdg.cacheHome}/terraform/plugin-cache";
   };
+
+  # terraform does not create the plugin cache dir itself
+  home.activation.createTfPluginCacheDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p "${config.xdg.cacheHome}/terraform/plugin-cache"
+  '';
 
   nix.gc = {
     automatic = true;
