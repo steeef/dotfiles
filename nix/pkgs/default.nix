@@ -2,15 +2,7 @@ final: prev: {
   fgj = final.callPackage ./fgj.nix {};
   hidapitester = final.callPackage ./hidapitester.nix {};
   kubectl = final.callPackage ./kubectl.nix {};
-  yt-dlp = (prev.yt-dlp.override {deno = final.bun;}).overrideAttrs (_old: {
-    version = "2026.02.21";
-    src = final.fetchFromGitHub {
-      owner = "yt-dlp";
-      repo = "yt-dlp";
-      tag = "2026.02.21";
-      hash = "sha256-r9I/zLyqGPeIzsHsLxJcfnLC3jpuyKMyX1UaMoM08jk=";
-    };
-  });
+  yt-dlp = prev.yt-dlp.override {deno = final.bun;};
 
   # Fix pipx 1.8.0 tests failing against packaging>=26.0
   # packaging 26.0 inserts a space in Requirement.__str__ (`pkg @ url`),
