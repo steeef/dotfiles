@@ -145,6 +145,9 @@
       "sink-it-for-reddit" = 6449873635;
       "unread" = 1363637349;
       "velja" = 1607635845;
+      "testflight" = 899247664;
+      "night-eye" = 1450504903;
+      "privacy-redirect" = 1578144015;
     };
   };
 
