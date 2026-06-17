@@ -18,5 +18,10 @@ function upgrade_versioned_casks() {
     done <<< "${outdated_casks}"
   fi
 }
-alias bup='brew update; brew upgrade; upgrade_versioned_casks'
-alias bclean='brew cleanup'
+function bup() {
+  local -x HOMEBREW_NO_ASK=1 HOMEBREW_NO_ENV_HINTS=1
+  brew update
+  brew upgrade
+  upgrade_versioned_casks
+}
+alias bclean='HOMEBREW_NO_ENV_HINTS=1 brew cleanup'
