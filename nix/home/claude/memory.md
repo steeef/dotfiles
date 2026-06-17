@@ -50,8 +50,9 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
 - `hms` — Home Manager switch (`home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)`).
 - `dr` — Darwin system switch (`sudo darwin-rebuild switch --flake $HOME/.dotfiles`).
 
-# Git worktrees — work in ~/wt, never the human's clones
+# Git worktrees — modify only in ~/wt; the human's clones are read-only
 - Modify files only in `~/wt` bare worktrees; the human's original clones (wherever they live on this machine) are read-only (origin-URL source — never `git fetch`/edit/commit there). `EnterWorktree` clones `--bare` into `~/wt/<repo>/.bare` (override base with `$CLAUDE_WORKTREE_BASE`) and fetches origin.
+- Read vs modify: the read-only rule forbids **writes** (`fetch`/edit/commit), not reads. Researching the human's **local state** (current branch, uncommitted work, why their build fails) → Read/Grep/Glob the clone directly — it's the fastest source and shows exactly that state. Research that needs **canonical `origin/main`** (comparing against main, ignoring local drift), or any modification → `EnterWorktree` first and work inside `~/wt`.
 - Start/resume: `EnterWorktree(name:)` — idempotent, adopts-or-creates, bases the branch on `origin/main`. In work repos prefix `name` with the ticket key; announce the path and run baseline tests. Never pass `path:` for a `~/wt` worktree (the builtin validates it against the *current clone's* worktree list and rejects); never hand-roll `git worktree add`.
 - Targeting the right repo: the `cwd_tracker` hook (git-worktree-hooks) records each `cd <clone>` as intent *before* the harness snaps cwd back, and `EnterWorktree` derives its repo from the most-recent such cd-intent (falling back to the cwd's `origin`). So:
   - Already inside the target clone (single-repo session) → call `EnterWorktree(name:)` directly; cwd carries the right `origin`.
@@ -59,7 +60,7 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
   - After `ExitWorktree` the harness resets cwd to a fallback dir (deleted worktree out from under the shell) — re-`cd` into the next target clone before the next `EnterWorktree`. (a5b66c2b)
 - One worktree per repo; a session pinned to repo A can't worktree into B (derivation follows the A cd-intent / pinned cwd) — start a fresh session in B's clone. (bebc56f7)
 - `ExitWorktree(remove)` may refuse when it can't verify worktree state — re-invoke with `discard_changes: true` (or `action: "keep"` to preserve it). This is the safety guard, not an error.
-- Explore *inside the worktree*, not the human clone's working tree (it may be on a stale branch). `EnterWorktree` fetches origin and bases off `origin/main` itself, so clone staleness can't reach the worktree. A `read_clone_warn` hook (git-worktree-hooks) warns when you Read/Grep/Glob a clone that already has a `~/wt` worktree. (cf94a602)
+- When a worktree exists or you need canonical state, explore *inside* it — not the human clone's working tree (it may be on a stale/dirty branch). `EnterWorktree` fetches origin and bases off `origin/main`, so clone staleness can't reach the worktree. The `read_clone_warn` hook (git-worktree-hooks) warns when you Read/Grep/Glob a clone that already has a `~/wt` worktree — treat it as a cue to switch, or to confirm you deliberately want the clone's local state, never as a block. (cf94a602)
 - Done: PR (draft GitHub / open Forgejo) → `ExitWorktree` after merge.
 
 # Docker on macOS
