@@ -28,10 +28,9 @@ module — manual edits outside Nix get overwritten.
 
 ## Lessons
 
-- Commit subjects: short, imperative, lower-case, under 50 chars (e.g. `add rust stuff`).
+- Commit subjects: short, imperative, lower-case (e.g. `add rust stuff`).
 - Don't hand-format; `.pre-commit-config.yaml` enforces style at commit time.
 - Edit `AGENTS.md`, not `CLAUDE.md` — the latter is a symlink to it.
-- Instead of `rm`, `mv` to `TRASH/` and log the move in `TRASH-FILES.md`.
 
 ## Doc Contract
 
