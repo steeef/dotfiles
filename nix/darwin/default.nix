@@ -229,7 +229,6 @@
       hack-font
       nerd-fonts.mononoki
       source-code-pro
-      ttf-envy-code-r
       terminus_font_ttf
     ];
   };
