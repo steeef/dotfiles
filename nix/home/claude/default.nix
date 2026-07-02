@@ -86,5 +86,23 @@ in {
     skills = ./skills;
     # Memory file for CLAUDE.md
     context = ./memory.md;
+
+    # CodeGraph MCP server — one-call structural queries (callers, blast radius,
+    # symbol lookup) over the ~/wt worktree Claude is working in. Darwin-only
+    # (pkgs.codegraph is macOS-only). Absolute store path so the non-login MCP
+    # subprocess resolves it without PATH. --no-watch + CODEGRAPH_NO_DAEMON keep
+    # any file watcher from leaking per ephemeral worktree; the server reconciles
+    # the index on connect instead. Usage guidance lives in memory.md.
+    mcpServers = lib.optionalAttrs pkgs.stdenv.isDarwin {
+      codegraph = {
+        type = "stdio";
+        command = "${pkgs.codegraph}/bin/codegraph";
+        args = ["serve" "--mcp" "--no-watch"];
+        env = {
+          CODEGRAPH_NO_DAEMON = "1";
+          DO_NOT_TRACK = "1";
+        };
+      };
+    };
   };
 }

@@ -1,4 +1,5 @@
 final: prev: {
+  codegraph = final.callPackage ./codegraph.nix {};
   fgj = final.callPackage ./fgj.nix {};
   hidapitester = final.callPackage ./hidapitester.nix {};
   kubectl = final.callPackage ./kubectl.nix {};

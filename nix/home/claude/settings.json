@@ -23,7 +23,8 @@
       "Bash(prek run:*)",
       "Bash(rg:*)",
       "Bash(yamllint:*)",
-      "Bash(yq:*)"
+      "Bash(yq:*)",
+      "mcp__codegraph"
     ],
     "deny": [
       "Bash(pre-commit:*)"

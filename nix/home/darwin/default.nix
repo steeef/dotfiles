@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     bento4 # mp4decrypt — Apple Music DRM decrypt for gamdl (music tool)
     cmake
+    codegraph # local code knowledge graph (MCP); see nix/home/claude for wiring
     colima
     docker
     docker-credential-helpers
@@ -13,6 +14,15 @@
     reattach-to-user-namespace
     terminal-notifier
   ];
+
+  # CodeGraph: no detached auto-sync daemon (would leak a watcher per ephemeral
+  # ~/wt worktree; the MCP server reconciles on connect instead), and no
+  # telemetry. Inherited by interactive `codegraph` runs; the MCP server also
+  # sets these in its own env block (nix/home/claude/default.nix).
+  home.sessionVariables = {
+    CODEGRAPH_NO_DAEMON = "1";
+    DO_NOT_TRACK = "1";
+  };
 
   home.shellAliases = {
     hms = "home-manager switch --flake $HOME/.dotfiles#$USER@$(hostname)";
