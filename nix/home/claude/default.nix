@@ -78,6 +78,46 @@ in {
     fi
   '';
 
+  # Register codegraph as a user-scoped MCP server (macOS only). We do NOT use
+  # programs.claude-code.mcpServers: that emits a --plugin-dir plugin whose MCP
+  # server appears in `claude mcp list` but never loads into a real session
+  # (verified). A ~/.claude.json entry (like coderabbit-docs) does load. Both
+  # ~/.claude.json and the allowlist are mutable, Claude-owned, and NOT in the
+  # Nix base, so we jq-merge idempotently on each hms rather than manage them
+  # declaratively. Command is the stable profile path so the allowlist entry
+  # (matched by exact serverCommand argv) survives codegraph version bumps.
+  # Caveat: a Claude session writing ~/.claude.json concurrently with `hms`
+  # could race this read-modify-write; low risk in practice (run hms when idle).
+  # Runs after mergeClaudeSettings so it edits the post-merge settings.json.
+  home.activation.codegraphMcp = lib.hm.dag.entryAfter ["mergeClaudeSettings"] (
+    lib.optionalString pkgs.stdenv.isDarwin ''
+      cg="${config.home.homeDirectory}/.nix-profile/bin/codegraph"
+      cj="$HOME/.claude.json"
+      cs="$HOME/.claude/settings.json"
+      jq="${pkgs.jq}/bin/jq"
+
+      # user-scoped MCP server entry (skip if ~/.claude.json not yet created)
+      if [ -f "$cj" ]; then
+        run "$jq" --arg cmd "$cg" '.mcpServers.codegraph = {
+          type: "stdio", command: $cmd,
+          args: ["serve", "--mcp", "--no-watch"],
+          env: {CODEGRAPH_NO_DAEMON: "1", DO_NOT_TRACK: "1"}
+        }' "$cj" > "$cj.tmp" && run mv "$cj.tmp" "$cj"
+      fi
+
+      # allowlist entry (strict allowlist; stdio matched by exact serverCommand),
+      # add-if-absent since merge-settings.sh can't manage array elements
+      if [ -f "$cs" ]; then
+        run "$jq" --arg cmd "$cg" '
+          .allowedMcpServers = ((.allowedMcpServers // [])
+            | if any(.[]; .serverCommand[0]? == $cmd) then .
+              else . + [{serverCommand: [$cmd, "serve", "--mcp", "--no-watch"]}]
+              end)
+        ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
+      fi
+    ''
+  );
+
   # Use official home-manager claude-code module
   programs.claude-code = {
     enable = true;
@@ -87,31 +127,10 @@ in {
     skills = ./skills;
     # Memory file for CLAUDE.md
     context = ./memory.md;
-
-    # CodeGraph MCP server — one-call structural queries (callers, blast radius,
-    # symbol lookup) over the ~/wt worktree Claude is working in. Darwin-only
-    # (pkgs.codegraph is macOS-only). --no-watch + CODEGRAPH_NO_DAEMON keep any
-    # file watcher from leaking per ephemeral worktree; the server reconciles the
-    # index on connect instead. Usage guidance lives in memory.md.
-    #
-    # command is the STABLE profile path, not `${pkgs.codegraph}/bin/codegraph`,
-    # on purpose: ~/.claude/settings.json has a strict `allowedMcpServers`
-    # allowlist (blocks every non-listed MCP, incl. plugin/stdio servers), and a
-    # stdio server is allowlisted by exact `serverCommand` argv. A store path
-    # would change on every version bump and silently drop codegraph from the
-    # allowlist; the profile path keeps the one-time allowlist entry valid across
-    # bumps. The allowlist entry itself lives in the mutable settings.json (not
-    # the Nix base) — see reference_mcp_allowlist memory / the PR.
-    mcpServers = lib.optionalAttrs pkgs.stdenv.isDarwin {
-      codegraph = {
-        type = "stdio";
-        command = "${config.home.homeDirectory}/.nix-profile/bin/codegraph";
-        args = ["serve" "--mcp" "--no-watch"];
-        env = {
-          CODEGRAPH_NO_DAEMON = "1";
-          DO_NOT_TRACK = "1";
-        };
-      };
-    };
+    # NB: codegraph MCP is registered via the codegraphMcp activation script
+    # below, NOT programs.claude-code.mcpServers. The module's mcpServers option
+    # emits a --plugin-dir plugin whose MCP server shows in `claude mcp list`
+    # but does NOT load into actual sessions (verified). A ~/.claude.json
+    # user-scoped server (like coderabbit-docs) does load.
   };
 }
