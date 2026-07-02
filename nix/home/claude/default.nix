@@ -3,6 +3,7 @@
 # Hooks are provided by claude-hooks plugins resolved via extraKnownMarketplaces.
 # Claude Code auto-installs enabled plugins from registered marketplaces at startup.
 {
+  config,
   pkgs,
   lib,
   inputs,
@@ -89,14 +90,22 @@ in {
 
     # CodeGraph MCP server — one-call structural queries (callers, blast radius,
     # symbol lookup) over the ~/wt worktree Claude is working in. Darwin-only
-    # (pkgs.codegraph is macOS-only). Absolute store path so the non-login MCP
-    # subprocess resolves it without PATH. --no-watch + CODEGRAPH_NO_DAEMON keep
-    # any file watcher from leaking per ephemeral worktree; the server reconciles
-    # the index on connect instead. Usage guidance lives in memory.md.
+    # (pkgs.codegraph is macOS-only). --no-watch + CODEGRAPH_NO_DAEMON keep any
+    # file watcher from leaking per ephemeral worktree; the server reconciles the
+    # index on connect instead. Usage guidance lives in memory.md.
+    #
+    # command is the STABLE profile path, not `${pkgs.codegraph}/bin/codegraph`,
+    # on purpose: ~/.claude/settings.json has a strict `allowedMcpServers`
+    # allowlist (blocks every non-listed MCP, incl. plugin/stdio servers), and a
+    # stdio server is allowlisted by exact `serverCommand` argv. A store path
+    # would change on every version bump and silently drop codegraph from the
+    # allowlist; the profile path keeps the one-time allowlist entry valid across
+    # bumps. The allowlist entry itself lives in the mutable settings.json (not
+    # the Nix base) — see reference_mcp_allowlist memory / the PR.
     mcpServers = lib.optionalAttrs pkgs.stdenv.isDarwin {
       codegraph = {
         type = "stdio";
-        command = "${pkgs.codegraph}/bin/codegraph";
+        command = "${config.home.homeDirectory}/.nix-profile/bin/codegraph";
         args = ["serve" "--mcp" "--no-watch"];
         env = {
           CODEGRAPH_NO_DAEMON = "1";
