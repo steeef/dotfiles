@@ -28,6 +28,8 @@ TRASH/
 TRASH-FILES.md
 .claude/settings.local.json
 .claude/worktrees/
+# CodeGraph per-project index (disposable local artifact, binary SQLite)
+.codegraph/
 .claude_*.flag
 *.backup
 CLAUDE.local.md

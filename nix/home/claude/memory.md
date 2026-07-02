@@ -65,6 +65,13 @@ IMPORTANT: Update global Claude memory — edit `~/.dotfiles/nix/home/claude/mem
 - The `read_clone_warn` hook (git-worktree-hooks) warns when you Read/Grep/Glob a human clone instead of a worktree — both when a `~/wt` worktree already exists AND (≥1.5.0) on the first research read of a not-yet-worktreed repo while the `~/wt` workflow is in use (deduped per session). A cue to switch to a worktree or read `origin` via `gh api`/`gh search`; never a block. (cf94a602)
 - Done: PR (draft GitHub / open Forgejo) → `ExitWorktree` after merge.
 
+# CodeGraph — code-structure MCP (macOS; index the worktree, never the clone)
+- What: a local pre-indexed knowledge graph (`codegraph_explore`, `codegraph_node` MCP tools) answering structural questions — who-calls-X, blast-radius of Y, how-does-Z-fit — in one call. Prefer it over broad grep for those; fall back to built-in tools when it reports no index.
+- Lazy build: only when a task genuinely needs structural / blast-radius understanding (NOT every worktree, NOT surgical edits), run `codegraph init "$WORKTREE"` in the **background** — the one full parse. It writes `.codegraph/` (gitignored, disposable).
+- **Index the worktree you're in; never `codegraph init` a human clone** (read-only rule — it writes `.codegraph/` + would be stale for in-flight code). Pass `projectPath=<worktree root>` on MCP calls; don't rely on the server's cwd.
+- Freshness: automatic on a fresh session (the server reconciles the index on connect). The file watcher is disabled (`--no-watch` + `CODEGRAPH_NO_DAEMON=1`, so nothing leaks per worktree), so mid-session — after you've made significant edits and need a structural query to reflect them — run `codegraph sync "$WORKTREE"` first. Rarely needed; you already know your own edits.
+- The index persists for the worktree's life (idempotent `EnterWorktree` reuses the dir); it dies with `ExitWorktree(remove)`. No cleanup, no daemon to kill.
+
 # Docker on macOS
 - IMPORTANT: Before any docker command, check `colima status`. If not running, `colima start` and wait until ready before proceeding.
 
