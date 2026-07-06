@@ -35,6 +35,10 @@
       url = "github:reckenrode/mkalias";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    yt-dlp-src = {
+      url = "github:yt-dlp/yt-dlp";
+      flake = false;
+    };
     nur.url = "github:nix-community/NUR";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -126,7 +130,7 @@
               };
             })
             nur.overlays.default
-            (import ./nix/pkgs)
+            (import ./nix/pkgs inputs)
           ];
         };
         modules =

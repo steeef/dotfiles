@@ -457,7 +457,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
         "nur": "nur",
-        "opencode": "opencode"
+        "opencode": "opencode",
+        "yt-dlp-src": "yt-dlp-src"
       }
     },
     "systems": {
@@ -502,6 +503,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "yt-dlp-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783203787,
+        "narHash": "sha256-+oHcVylLXFJTRR6jXF6IXvgntXJz0tRdtnwTruRPkoc=",
+        "owner": "yt-dlp",
+        "repo": "yt-dlp",
+        "rev": "fdec00e0bf530dc6c3cc7b1dd780e95d9ae460e9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yt-dlp",
+        "repo": "yt-dlp",
         "type": "github"
       }
     }

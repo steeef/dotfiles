@@ -1,9 +1,11 @@
-final: prev: {
+inputs: final: prev: {
   codegraph = final.callPackage ./codegraph.nix {};
   fgj = final.callPackage ./fgj.nix {};
   hidapitester = final.callPackage ./hidapitester.nix {};
   kubectl = final.callPackage ./kubectl.nix {};
-  yt-dlp = prev.yt-dlp.override {deno = final.bun;};
+  yt-dlp = (prev.yt-dlp.override {deno = final.bun;}).overrideAttrs (_old: {
+    src = inputs.yt-dlp-src;
+  });
 
   # Fix pipx 1.8.0 tests failing against packaging>=26.0
   # packaging 26.0 inserts a space in Requirement.__str__ (`pkg @ url`),
