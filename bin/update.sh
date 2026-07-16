@@ -39,7 +39,7 @@ upgrade_versioned_casks() {
     echo "${outdated_casks}"
     while read -r cask; do
       if ! [[ ${unversioned_casks} =~ ${cask} ]]; then
-        brew upgrade --cask "${cask}"
+        brew upgrade --cask --force "${cask}"
       fi
     done <<<"${outdated_casks}"
   fi
