@@ -125,6 +125,8 @@ in {
     # Settings managed via activation script merge (see below)
     # Custom skills directory
     skills = ./skills;
+    # Path-scoped and unconditional rules (see rules/)
+    rulesDir = ./rules;
     # Memory file for CLAUDE.md
     context = ./memory.md;
     # NB: codegraph MCP is registered via the codegraphMcp activation script

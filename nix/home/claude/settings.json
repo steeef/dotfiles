@@ -10,6 +10,7 @@
   "includeCoAuthoredBy": false,
   "includeGitInstructions": false,
   "spinnerTipsEnabled": false,
+  "autoMemoryEnabled": false,
   "companyAnnouncements": [],
   "statusLine": {
     "type": "command",

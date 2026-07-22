@@ -25,6 +25,8 @@ module — manual edits outside Nix get overwritten.
 ## Index
 
 - README.md — bootstrap and installation instructions.
+- nix/home/claude/AGENTS.md — Claude Code module: memory/rules/skills
+  generation, settings merge, MCP registration gotchas.
 
 ## Lessons
 
