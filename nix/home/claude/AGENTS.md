@@ -16,10 +16,10 @@ skills, agents, and settings from this directory.
   load every session like `memory.md`.
 - `skills/` → `~/.claude/skills/*` (symlinked via `skills`).
 - `agents/*.md` → `~/.claude/agents/*.md` (symlinked individually,
-  `default.nix:40-47`).
+  `default.nix:40-51`).
 - `settings.json` — declarative base settings, merged (not symlinked) into
   the live, Claude-mutated `~/.claude/settings.json` on every `hms` via
-  `home.activation.mergeClaudeSettings` (`default.nix:54-60`) running
+  `home.activation.mergeClaudeSettings` (`default.nix:58-64`) running
   `merge-settings.sh`. A plain symlink would break because Claude Code writes
   to this file at runtime (plugin installs, MCP allowlist edits).
 - `statusline.sh` → `~/.claude/statusline.sh` (symlink).
@@ -36,7 +36,7 @@ skills, agents, and settings from this directory.
   server shows in `claude mcp list` but never loads into a real session
   (verified). A `~/.claude.json` user-scoped server entry does load. codegraph
   is therefore registered via the `home.activation.codegraphMcp` script
-  (`default.nix:92-119`), not `mcpServers`: it jq-writes codegraph into
+  (`default.nix:96-123`), not `mcpServers`: it jq-writes codegraph into
   `~/.claude.json` `.mcpServers` and add-if-absent's its `allowedMcpServers`
   entry into `settings.json`, keyed on the stable `~/.nix-profile/bin/codegraph`
   path (not the store path, which changes every version bump and would drop

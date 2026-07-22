@@ -45,6 +45,10 @@ in {
     source = ./agents/budgeted-explore.md;
     force = true;
   };
+  home.file.".claude/agents/fable-reviewer.md" = {
+    source = ./agents/fable-reviewer.md;
+    force = true;
+  };
 
   # Nix base settings (read-only reference for merge)
   home.file.".claude/settings.nix.json".source = baseSettingsFile;
