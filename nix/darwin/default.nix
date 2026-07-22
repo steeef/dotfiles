@@ -54,6 +54,10 @@
 
     shells = [pkgs.zsh];
 
+    variables = {
+      LANG = "en_US.UTF-8";
+    };
+
     systemPackages = with pkgs; [
       pam-reattach
     ];
@@ -91,6 +95,11 @@
         "asciinema"
         "docker-buildx"
         "docker-credential-helper-ecr"
+        {
+          name = "herdr";
+          start_service = true;
+          restart_service = "changed";
+        }
         "mas"
         "ncdu"
         "pam-reattach"
