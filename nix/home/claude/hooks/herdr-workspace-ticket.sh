@@ -7,7 +7,7 @@ trap 'rm -f "$hook_input_file"' EXIT HUP INT TERM
 cat >"$hook_input_file" 2>/dev/null || true
 
 case "$action" in
-  session|prompt) ;;
+  session | prompt) ;;
   *) exit 0 ;;
 esac
 
@@ -36,8 +36,8 @@ case "$action" in
 esac
 [ -n "$candidate" ] || exit 0
 
-ticket="$(printf '%s' "$candidate" \
-  | grep -oE '\b[A-Za-z]{2,4}-[0-9]{1,5}\b' | head -1 | tr '[:lower:]' '[:upper:]')"
+ticket="$(printf '%s' "$candidate" |
+  grep -oE '\b[A-Za-z]{2,4}-[0-9]{1,5}\b' | head -1 | tr '[:lower:]' '[:upper:]')"
 [ -n "$ticket" ] || exit 0
 
 current_label="$(printf '%s' "$snapshot" | jq -r --arg ws "$workspace_id" \
