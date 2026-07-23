@@ -17,8 +17,10 @@ command -v jq >/dev/null 2>&1 || exit 0
 snapshot="$(herdr api snapshot 2>/dev/null)" || exit 0
 [ -n "$snapshot" ] || exit 0
 
-workspace_id="$(printf '%s' "$snapshot" | jq -r --arg pane "$HERDR_PANE_ID" \
-  '.result.snapshot.agents[]? | select(.pane_id == $pane) | .workspace_id // empty')"
+IFS=$'\t' read -r workspace_id workspace_cwd <<EOF
+$(printf '%s' "$snapshot" | jq -r --arg pane "$HERDR_PANE_ID" \
+  '.result.snapshot.agents[]? | select(.pane_id == $pane) | [(.workspace_id // ""), (.cwd // "")] | @tsv')
+EOF
 [ -n "$workspace_id" ] || exit 0
 
 candidate=""
@@ -40,6 +42,11 @@ ticket="$(printf '%s' "$candidate" |
 
 current_label="$(printf '%s' "$snapshot" | jq -r --arg ws "$workspace_id" \
   '.result.snapshot.workspaces[]? | select(.workspace_id == $ws) | .label // empty')"
+
+[ -n "$workspace_cwd" ] || exit 0
+original_label="$(basename "$workspace_cwd")"
+[ "$current_label" = "$original_label" ] || exit 0
+
 [ "$current_label" = "$ticket" ] && exit 0
 
 herdr workspace rename "$workspace_id" "$ticket" >/dev/null 2>&1 || true
