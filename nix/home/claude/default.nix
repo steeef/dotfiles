@@ -143,19 +143,18 @@ in {
     jq="${pkgs.jq}/bin/jq"
     script="$HOME/.claude/hooks/herdr-workspace-ticket.sh"
 
-    if [ -f "$cs" ]; then
-      for event_action in "SessionStart:session" "UserPromptSubmit:prompt"; do
-        event="''${event_action%%:*}"
-        action="''${event_action##*:}"
-        cmd="bash '$script' $action"
-        run "$jq" --arg event "$event" --arg cmd "$cmd" '
-          .hooks[$event] = ((.hooks[$event] // [])
-            | if any(.[]; (.hooks // [])[0].command? == $cmd) then .
-              else . + [{hooks: [{type: "command", command: $cmd, timeout: 10}]}]
-              end)
-        ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
-      done
-    fi
+    add_ticket_hook() {
+      cmd="bash '$script' $2"
+      [ -f "$cs" ] || return 0
+      run "$jq" --arg event "$1" --arg cmd "$cmd" '
+        .hooks[$event] = ((.hooks[$event] // [])
+          | if any(.[]; (.hooks // [])[0].command? == $cmd) then .
+            else . + [{hooks: [{type: "command", command: $cmd, timeout: 10}]}]
+            end)
+      ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
+    }
+    add_ticket_hook SessionStart session
+    add_ticket_hook UserPromptSubmit prompt
   '';
 
   # Use official home-manager claude-code module

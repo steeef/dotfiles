@@ -2,9 +2,7 @@
 set -eu
 
 action="${1:-}"
-hook_input_file="$(mktemp "${TMPDIR:-/tmp}/herdr-ticket-rename.XXXXXX")" || exit 0
-trap 'rm -f "$hook_input_file"' EXIT HUP INT TERM
-cat >"$hook_input_file" 2>/dev/null || true
+hook_input="$(cat)"
 
 case "$action" in
   session | prompt) ;;
@@ -26,12 +24,12 @@ workspace_id="$(printf '%s' "$snapshot" | jq -r --arg pane "$HERDR_PANE_ID" \
 candidate=""
 case "$action" in
   session)
-    cwd="$(jq -r '.cwd // empty' "$hook_input_file" 2>/dev/null || true)"
+    cwd="$(printf '%s' "$hook_input" | jq -r '.cwd // empty' 2>/dev/null || true)"
     [ -n "$cwd" ] || exit 0
     candidate="$(git -C "$cwd" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
     ;;
   prompt)
-    candidate="$(jq -r '.prompt // empty' "$hook_input_file" 2>/dev/null || true)"
+    candidate="$(printf '%s' "$hook_input" | jq -r '.prompt // empty' 2>/dev/null || true)"
     ;;
 esac
 [ -n "$candidate" ] || exit 0
