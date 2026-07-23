@@ -35,7 +35,7 @@ esac
 [ -n "$candidate" ] || exit 0
 
 ticket="$(printf '%s' "$candidate" |
-  grep -oE '\b[A-Za-z]{2,4}-[0-9]{1,5}\b' | head -1 | tr '[:lower:]' '[:upper:]')"
+  grep -oE '\b[A-Za-z]{2,4}-[0-9]{2,5}\b' | head -1 | tr '[:lower:]' '[:upper:]')"
 [ -n "$ticket" ] || exit 0
 
 current_label="$(printf '%s' "$snapshot" | jq -r --arg ws "$workspace_id" \
