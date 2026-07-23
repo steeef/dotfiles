@@ -36,6 +36,16 @@ in {
     executable = true;
   };
 
+  # Renames the herdr workspace for this pane to a Jira-style ticket key
+  # (e.g. ENG-1234) detected in the session's git branch or prompt text.
+  # Wired into hooks.SessionStart/UserPromptSubmit by the
+  # herdrWorkspaceTicketHook activation script below (not declared in
+  # settings.json directly — see that script's comment for why).
+  home.file.".claude/hooks/herdr-workspace-ticket.sh" = {
+    source = ./hooks/herdr-workspace-ticket.sh;
+    executable = true;
+  };
+
   # Agent definitions (Nix-managed)
   home.file.".claude/agents/batch-reader.md" = {
     source = ./agents/batch-reader.md;
@@ -121,6 +131,32 @@ in {
       fi
     ''
   );
+
+  # Wire herdr-workspace-ticket.sh into hooks.SessionStart/UserPromptSubmit.
+  # Not declared in settings.json directly: merge-settings.sh replaces hook
+  # arrays wholesale rather than merging elements, which would clobber the
+  # SessionStart entry herdr's own Claude integration already added, plus
+  # context-mode-cache-heal.mjs's entry. Add-if-absent instead, matched on
+  # the script's stable path, same approach as codegraphMcp above.
+  home.activation.herdrWorkspaceTicketHook = lib.hm.dag.entryAfter ["mergeClaudeSettings"] ''
+    cs="$HOME/.claude/settings.json"
+    jq="${pkgs.jq}/bin/jq"
+    script="$HOME/.claude/hooks/herdr-workspace-ticket.sh"
+
+    if [ -f "$cs" ]; then
+      for event_action in "SessionStart:session" "UserPromptSubmit:prompt"; do
+        event="''${event_action%%:*}"
+        action="''${event_action##*:}"
+        cmd="bash '$script' $action"
+        run "$jq" --arg event "$event" --arg cmd "$cmd" '
+          .hooks[$event] = ((.hooks[$event] // [])
+            | if any(.[]; (.hooks // [])[0].command? == $cmd) then .
+              else . + [{hooks: [{type: "command", command: $cmd, timeout: 10}]}]
+              end)
+        ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
+      done
+    fi
+  '';
 
   # Use official home-manager claude-code module
   programs.claude-code = {
