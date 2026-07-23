@@ -82,6 +82,11 @@ in {
       set -g @catppuccin_flavor "macchiato" # latte, frappe, macchiato or mocha
       set -g @catppuccin_window_status_style "rounded"
       set -as terminal-overrides ',wezterm:Tc'
+
+      # forward outer terminal identity so nested tools (e.g. herdr, Claude Code)
+      # can detect image paste / clipboard support instead of seeing a blank TERM_PROGRAM
+      set-option -ga update-environment " TERM_PROGRAM TERM_PROGRAM_VERSION COLORTERM"
+      set -g allow-passthrough on
     '';
 
     # extraConfig = lib.strings.fileContents ./extraConfig.conf;
