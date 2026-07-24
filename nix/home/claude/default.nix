@@ -18,6 +18,12 @@
     "git-hooks"
   ];
 
+  # command-safety's rm_check.py delegates "what to do instead of rm" guidance
+  # to CLAUDE_HOOKS_RM_HANDLER (falls back to its own bundled TRASH/mv handler
+  # if unset). Point it at our rkvr_handler.sh below so the fallback shown on
+  # a blocked `rm` matches how we actually delete things on this machine.
+  rkvrHandlerPath = "${config.home.homeDirectory}/.claude/hooks/rkvr_handler.sh";
+
   baseSettings =
     lib.importJSON ./settings.json
     // {
@@ -44,6 +50,17 @@ in {
   home.file.".claude/hooks/herdr-workspace-ticket.sh" = {
     source = ./hooks/herdr-workspace-ticket.sh;
     executable = true;
+  };
+
+  # rm-block guidance handler for command-safety@claude-hooks (see
+  # rkvrHandlerPath / CLAUDE_HOOKS_RM_HANDLER above).
+  home.file.".claude/hooks/rkvr_handler.sh" = {
+    source = ./hooks/rkvr_handler.sh;
+    executable = true;
+  };
+
+  home.sessionVariables = {
+    CLAUDE_HOOKS_RM_HANDLER = rkvrHandlerPath;
   };
 
   # Agent definitions (Nix-managed)

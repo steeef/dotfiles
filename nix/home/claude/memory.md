@@ -23,7 +23,7 @@ IMPORTANT: Update global Claude memory: cross-cutting instructions → edit `~/.
 
 # File deletion
 
-- Instead of `rm`, `mv` to `TRASH/` and log in `TRASH-FILES.md` as: `<file> - moved to TRASH/ - <reason>`.
+- Instead of `rm`, use `rkvr <path>` — archives to a tar.gz (recoverable via `rkvr rcvr <path>`, listed via `rkvr ls-rmrf`) then removes.
 
 # Working approach
 - Default terse, logically structured, information-dense. Acknowledge uncertainty explicitly. Skip praise unless evidence-grounded. Propose at least one alternative framing.
