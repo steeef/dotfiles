@@ -3,6 +3,7 @@ inputs: final: prev: {
   fgj = final.callPackage ./fgj.nix {};
   hidapitester = final.callPackage ./hidapitester.nix {};
   kubectl = final.callPackage ./kubectl.nix {};
+  rkvr = final.callPackage ./rkvr.nix {};
   yt-dlp = (prev.yt-dlp.override {deno = final.bun;}).overrideAttrs (_old: {
     src = inputs.yt-dlp-src;
   });

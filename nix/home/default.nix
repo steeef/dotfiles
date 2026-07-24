@@ -80,6 +80,7 @@
     pyright
     rdiff-backup
     rename
+    rkvr
     rsnapshot
     rsync
     ruff
