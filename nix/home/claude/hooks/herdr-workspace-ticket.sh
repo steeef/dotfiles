@@ -45,7 +45,13 @@ current_label="$(printf '%s' "$snapshot" | jq -r --arg ws "$workspace_id" \
 
 [ -n "$workspace_cwd" ] || exit 0
 original_label="$(basename "$workspace_cwd")"
-[ "$current_label" = "$original_label" ] || exit 0
+
+if [ "$current_label" != "$original_label" ]; then
+  case "$action:$current_label" in
+    session:[A-Za-z][A-Za-z]-[0-9]*) ;;
+    *) exit 0 ;;
+  esac
+fi
 
 [ "$current_label" = "$ticket" ] && exit 0
 
