@@ -115,6 +115,19 @@
     --js-runtimes bun
   '';
 
+  # rkvr (still named "rmrf" internally pre-rename) hard-requires this INI
+  # file to exist - it errors out before reaching its own coded defaults if
+  # ~/.config/rmrf/rmrf.cfg is missing, even though every key below has a
+  # fallback in the binary. Without this file, `rkvr` cannot run at all.
+  xdg.configFile."rmrf/rmrf.cfg".text = ''
+    [DEFAULT]
+    rmrf_path = ${config.home.homeDirectory}/.local/share/rkvr/archive
+    bkup_path = ${config.home.homeDirectory}/.local/share/rkvr/backup
+    sudo = no
+    keep = 30
+    threshold = 70
+  '';
+
   imports = [
     ./atuin.nix
     ./bat.nix
