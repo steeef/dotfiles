@@ -318,28 +318,12 @@ if [ -n "$usage_data" ] && jq -e '.five_hour // .seven_day' <<< "$usage_data" >/
 fi
 
 # ===== Cost =====
-# Session cost from JSON (always fresh); day/week from ccu (no cache)
+# Session cost from JSON (always fresh)
 if [ -n "$c_sess" ]; then
     c_sess=$(printf "%.2f" "$c_sess" 2>/dev/null)
 fi
 
-c_today=""
-c_week=""
-if command -v ccu >/dev/null 2>&1; then
-    c_today=$(ccu today --total 2>/dev/null)
-    c_week=$(ccu weekly --total 2>/dev/null)
-fi
-
-cost_str=""
-for _entry in "s|$c_sess" "d|$c_today" "w|$c_week"; do
-    _label="${_entry%%|*}"
-    _val="${_entry#*|}"
-    if [ -n "$_val" ]; then
-        [ -n "$cost_str" ] && cost_str+=" "
-        cost_str+="${dim}${_label}${reset} ${cyan}\$${_val}${reset}"
-    fi
-done
-[ -n "$cost_str" ] && line2+="${sep}${cost_str}"
+[ -n "$c_sess" ] && line2+="${sep}${dim}s${reset} ${cyan}\$${c_sess}${reset}"
 
 # Output two lines
 printf "%b\n%b" "$line1" "$line2"
