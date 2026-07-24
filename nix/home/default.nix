@@ -47,6 +47,7 @@
     curl
     deadnix
     difftastic
+    eza
     fd
     fgj
     gcc
