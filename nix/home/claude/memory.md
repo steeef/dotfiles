@@ -23,7 +23,7 @@ IMPORTANT: Update global Claude memory: cross-cutting instructions → edit `~/.
 
 # File deletion
 
-- Instead of `rm`, use `rkvr <path>` — archives to a tar.gz (recoverable via `rkvr rcvr <path>`, listed via `rkvr ls-rmrf`) then removes.
+- Instead of `rm`, use `rkvr <path>` — archives to a tar.gz then removes. Recover with `rkvr ls-rmrf` to find the timestamp-ID bundle, then `rkvr rcvr <timestamp-id>` (recovery is by bundle ID, not by filename).
 
 # Working approach
 - Default terse, logically structured, information-dense. Acknowledge uncertainty explicitly. Skip praise unless evidence-grounded. Propose at least one alternative framing.

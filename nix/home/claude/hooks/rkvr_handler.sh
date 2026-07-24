@@ -11,6 +11,6 @@ cat <<EOF
 rm is blocked, use rkvr to manage files to remove and it will archive them for possible retrieval later.
 
   rkvr $targets          # archive + remove (drop-in for \`rm -rf\`)
-  rkvr rcvr $targets     # restore from archive
-  rkvr ls-rmrf           # list what's been archived
+  rkvr ls-rmrf           # list archived bundles (each one is a timestamp ID)
+  rkvr rcvr <timestamp>  # restore a bundle by the ID shown in ls-rmrf - NOT by filename
 EOF
