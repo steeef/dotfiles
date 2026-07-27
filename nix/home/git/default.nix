@@ -1,4 +1,15 @@
-{lib, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  secretiveSocket = "${config.home.homeDirectory}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
+  secretiveSshKeygen = pkgs.writeShellScript "secretive-ssh-keygen" ''
+    export SSH_AUTH_SOCK="${secretiveSocket}"
+    exec ${pkgs.openssh}/bin/ssh-keygen "$@"
+  '';
+in {
   programs.git = {
     enable = true;
     ignores = lib.splitString "\n" (lib.strings.fileContents ./gitignore);
@@ -69,9 +80,16 @@
           insteadOf = "https://github.com/";
         };
       };
+      gpg = {
+        ssh = {
+          allowedSignersFile = "~/.ssh/allowed_signers";
+        };
+      };
     };
     signing = {
-      format = "openpgp";
+      format = "ssh";
+      key = "~/.ssh/id_secretive_git_sign.pub";
+      signer = "${secretiveSshKeygen}";
     };
 
     includes = [
