@@ -27,6 +27,8 @@ module — manual edits outside Nix get overwritten.
 - README.md — bootstrap and installation instructions.
 - nix/home/claude/AGENTS.md — Claude Code module: memory/rules/skills
   generation, settings merge, MCP registration gotchas.
+- docs/secretive-ssh-agent.md — Secure Enclave SSH auth/signing setup,
+  key-to-host mapping, adding a new machine.
 
 ## Lessons
 
