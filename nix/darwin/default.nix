@@ -131,6 +131,7 @@
         "qlmarkdown"
         "quicklook-video"
         "raspberry-pi-imager"
+        "secretive"
         "slack"
         "steam"
         "swinsian"
