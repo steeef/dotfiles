@@ -131,7 +131,6 @@
         "qlmarkdown"
         "quicklook-video"
         "raspberry-pi-imager"
-        "secretive"
         "slack"
         "steam"
         "swinsian"
@@ -144,6 +143,9 @@
       ]
       ++ lib.optionals (machine == "ltm-3914") [
         "elgato-stream-deck"
+      ]
+      ++ lib.optionals (machine == "sp") [
+        "secretive"
       ];
     masApps = {
       "1password-for-safari" = 1569813296;
