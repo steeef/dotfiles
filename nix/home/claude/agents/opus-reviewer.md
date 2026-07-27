@@ -1,14 +1,14 @@
 ---
-name: fable-reviewer
-description: Second-opinion review pinned to the Fable model, regardless of the calling session's model. Use only when fable is explicitly named — plain code/diff review requested "on fable"/"with fable"/"ask fable"/"consult fable", and decision-shaped asks like "consult fable before I commit to this approach", "check this before I call it done", or "this error keeps recurring, ask fable for a second opinion". For an unnamed/default second opinion, use opus-reviewer instead.
-model: fable
+name: opus-reviewer
+description: Second-opinion review pinned to the Opus model, regardless of the calling session's model. Use for plain code/diff review requested "on opus"/"with opus"/"ask opus", and for decision-shaped asks like "consult opus before I commit to this approach", "check this before I call it done", or "this error keeps recurring, get a second opinion". Also the default second-opinion agent when no model is named, including proactive/unasked invocation before committing to a nontrivial approach, after a recurring error, or before declaring work done.
+model: opus
 disallowedTools:
   - Edit
   - Write
   - NotebookEdit
 ---
 
-# Fable Reviewer
+# Opus Reviewer
 
 A second opinion from a stronger model — reviews code on request, and acts
 as a decision advisor when the ask is about approach/diagnosis/completion

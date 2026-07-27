@@ -39,7 +39,7 @@ IMPORTANT: Update global Claude memory: cross-cutting instructions → edit `~/.
 - Research: `/extract-research-questions` (Q), `/objective-codebase-research` (R), `/research-and-questions` (chains Q+R).
 - TDD: `/test-driven-development` — failing test before impl; assertions verify observable behavior; tests survive refactors.
 - Review: `/convergent-review` — 3-5 parallel lenses (Functional/Constraints/Alternatives + Risk/Performance for complex); convergence = full clean round; max 3 rounds.
-- Fable review: on "review/consult/ask fable" or "...opus" (legacy phrasing, same target), invoke the `fable-reviewer` subagent (Agent tool, model pinned to fable) — fill in its input template (decision point, approach, what's been tried, errors, files touched, specific question) with real context, not a bare "review this file". Also proactively consider invoking it — unasked — before committing to a nontrivial approach, after a recurring error, or before declaring a task/plan done, when the stakes justify a second model's opinion.
+- Second-opinion review: on "review/consult/ask fable", invoke the `fable-reviewer` subagent (Agent tool, model pinned to fable). On "review/consult/ask opus", or when no model is named — including proactively, unasked, before committing to a nontrivial approach, after a recurring error, or before declaring a task/plan done — invoke `opus-reviewer` (model pinned to opus; now the default). Either way, fill in the input template (decision point, approach, what's been tried, errors, files touched, specific question) with real context, not a bare "review this file".
 
 # Hooks + Task tool
 - Safety hooks block dangerous ops (rm, large file reads >500 lines) — delegate to the Task tool.

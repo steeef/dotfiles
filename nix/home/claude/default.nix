@@ -76,6 +76,10 @@ in {
     source = ./agents/fable-reviewer.md;
     force = true;
   };
+  home.file.".claude/agents/opus-reviewer.md" = {
+    source = ./agents/opus-reviewer.md;
+    force = true;
+  };
 
   # Nix base settings (read-only reference for merge)
   home.file.".claude/settings.nix.json".source = baseSettingsFile;
