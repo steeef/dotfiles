@@ -29,6 +29,22 @@ hyper:bind({}, "b", nil, function()
   end)
 end)
 
+-- Screenshot -> copy the saved file's path to the clipboard.
+--
+-- Saves straight to disk via the `screencapture` CLI instead of the
+-- Cmd+Shift+4 floating thumbnail, whose drag-and-drop uses a promise-style
+-- drag that herdr swallows silently (herdrdev/herdr#2091). Pasting the path
+-- of an already-saved file reproduces the working case (a saved file works
+-- through herdr) without any drag at all. Goes to the clipboard rather than
+-- typed into the focused window, since that window isn't necessarily herdr.
+hyper:bind({}, "4", nil, function()
+  local path = (os.getenv("TMPDIR") or "/tmp/") .. "hs-screenshot-" .. os.time() .. ".png"
+  hs.execute("/usr/sbin/screencapture -i " .. path)
+  if hs.fs.attributes(path) then
+    hs.pasteboard.setContents(path)
+  end
+end)
+
 -- Start Screensaver
 --
 -- Normally I'd use the built-in function, but that doesn't seem to work
