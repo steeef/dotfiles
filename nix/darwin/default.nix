@@ -119,7 +119,6 @@
         "coderabbit"
         "contexts"
         "fantastical"
-        "ghostty"
         "github"
         "hammerspoon"
         "hazel"
