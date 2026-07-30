@@ -5,8 +5,10 @@
 }: {
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = true;
     autocd = true;
+    # autosuggestion is loaded via zgenom in initExtra.zsh instead of here —
+    # fzf-tab must load before it, and this native option sources it too
+    # early (right after compinit, before initContent/zgenom ever runs).
 
     syntaxHighlighting = {
       enable = true;

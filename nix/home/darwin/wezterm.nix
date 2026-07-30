@@ -11,20 +11,26 @@
         config = wezterm.config_builder()
       end
 
+      -- flip to true to auto-attach tmux on new windows/panes; false opens a
+      -- plain login shell (e.g. to test herdr/drag-and-drop without tmux nesting)
+      local auto_attach_tmux = false
+
       config.font = wezterm.font 'Monaco'
       config.font_size = 10.0
       config.color_scheme = 'Catppuccin Macchiato'
       config.window_close_confirmation = 'NeverPrompt'
       config.window_decorations = 'RESIZE'
-      config.term = 'wezterm'
+      config.term = 'xterm-256color'
       config.front_end = 'OpenGL'
       config.use_resize_increments = false
-      config.default_prog = {
-        '/bin/zsh',
-        '-l',
-        '-c',
-        'tmux attach -t main || tmux new -s main',
-      }
+      config.default_prog = auto_attach_tmux
+        and {
+          '/bin/zsh',
+          '-l',
+          '-c',
+          'tmux attach -t main || tmux new -s main',
+        }
+        or { '/bin/zsh', '-l' }
       config.enable_tab_bar = false
       config.window_padding = {
         left = 0,
@@ -100,6 +106,7 @@
         },
       }
       config.bypass_mouse_reporting_modifiers = 'SUPER'
+      config.quote_dropped_files = 'Posix'
       return config
     '';
   };

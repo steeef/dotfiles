@@ -54,6 +54,9 @@ unsetopt nullglob
 
 zgenom autoupdate --background 7
 if ! zgenom saved; then
+  zgenom load Aloxaf/fzf-tab # must load before widget-wrapping plugins below
+  zgenom load zsh-users/zsh-autosuggestions
+
   zgenom load zsh-users/zsh-completions src # Load more completions
   zgenom load zsh-users/zsh-syntax-highlighting
   zgenom load zsh-users/zsh-history-substring-search
