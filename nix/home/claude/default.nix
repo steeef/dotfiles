@@ -15,6 +15,7 @@
     "command-safety"
     "env-protection"
     "file-protection"
+    "gh-formatting"
     "git-hooks"
   ];
 
