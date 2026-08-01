@@ -5,8 +5,6 @@ skills, agents, and settings from this directory.
 
 ## What
 
-- `default.nix` — the module; wires everything below into
-  `programs.claude-code`.
 - `memory.md` → `~/.claude/CLAUDE.md` (symlink). Cross-cutting instructions
   loaded into every session.
 - `rules/` → `~/.claude/rules/*.md` (symlinked individually via `rulesDir`).
@@ -14,7 +12,6 @@ skills, agents, and settings from this directory.
   load when Claude reads a matching file (Terraform, Python, Node, Docker,
   Nix). Unconditional files (worktrees, CodeGraph, CLI gotchas, config/infra)
   load every session like `memory.md`.
-- `skills/` → `~/.claude/skills/*` (symlinked via `skills`).
 - `agents/*.md` → `~/.claude/agents/*.md` (symlinked individually,
   `default.nix:40-51`).
 - `settings.json` — declarative base settings, merged (not symlinked) into
@@ -22,7 +19,6 @@ skills, agents, and settings from this directory.
   `home.activation.mergeClaudeSettings` (`default.nix:58-64`) running
   `merge-settings.sh`. A plain symlink would break because Claude Code writes
   to this file at runtime (plugin installs, MCP allowlist edits).
-- `statusline.sh` → `~/.claude/statusline.sh` (symlink).
 
 ## Gotchas
 

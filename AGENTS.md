@@ -6,8 +6,6 @@ module — manual edits outside Nix get overwritten.
 
 ## What
 
-- Stack: Nix flakes, Home Manager, nix-darwin; targets macOS, NixOS, and a
-  home-only Linux profile.
 - Layout: `flake.nix` — inputs, overlays, per-host outputs; the host list lives
   here. Update first when adding machines or packages.
 - Layout: `nix/home/` — Home Manager modules (`darwin/`, `linux/`, `claude/`).
@@ -17,8 +15,6 @@ module — manual edits outside Nix get overwritten.
 
 ## How
 
-- Apply (Home Manager): `hms` — `home-manager switch --flake`.
-- Apply (Darwin system): `dr` — `darwin-rebuild switch --flake`.
 - Verify: `nix flake check` — validates all flake outputs; new modules must
   evaluate for every declared host.
 
