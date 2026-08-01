@@ -9,6 +9,7 @@ IMPORTANT: Update global Claude memory: cross-cutting instructions → edit `~/.
 # GitHub pull requests
 
 - IMPORTANT: For GitHub remotes, always create PRs in draft mode first (`--draft`). For Forgejo remotes, draft mode is unsupported via CLI — create as open.
+- IMPORTANT: Never transition a PR out of draft (`gh pr ready`) or merge it to work around a blocked/pending state — surface the blocker and ask first. Draft status is a deliberate gate, not an obstacle to route around.
 - IMPORTANT: Prefix comments on GitHub PRs or issues with `:robot: From Claude Code:`.
 - IMPORTANT: Don't hard-wrap PR/issue description or comment body prose. One paragraph = one line — GitHub renders in-paragraph newlines as `<br>` in these fields, so column-wrapping shows as broken lines.
 - IMPORTANT: Always include the full PR URL (never just "PR #123") whenever creating, updating, or referencing a PR — surface it directly in chat as a clickable link, don't make the user dig for it.
