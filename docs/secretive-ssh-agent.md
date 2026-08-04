@@ -37,9 +37,9 @@ modules below only ever reference *paths*, never key contents.
 
 ## What's local-only (not in this repo)
 
-- `~/.ssh/config` — `Host` blocks for `ubnt` and `git.steeef.net` pin
-  `IdentityAgent` to 1Password's socket (the two exceptions); the catch-all
-  `Host *` block's `IdentityAgent` points at Secretive's socket
+- `~/.ssh/config` — the `Host ubnt` block pins `IdentityAgent` to 1Password's
+  socket (the one remaining exception); the catch-all `Host *` block's
+  `IdentityAgent` points at Secretive's socket
   (`~/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh`),
   making it the default for everything else. Each machine's `~/.ssh/config`
   is independent — there's no shared file to sync.
@@ -83,7 +83,7 @@ the Secure Enclave supports), named by purpose:
 | --- | --- |
 | `github` | Personal GitHub SSH auth (`steeef` account) — `IdentityFile` on the `personal-github` `Host` block; registered as an additional Authentication key on the personal GitHub account. |
 | `github-tatari` | Work GitHub SSH auth (`stephen-tatari` account) — `IdentityFile` on the `github.com`/`gist.github.com`/`tatari.github.com`/`tatari.gist.github.com` `Host` block; registered as an additional Authentication key on the work GitHub account. |
-| `git-sign-steeef` | Git commit/tag signing for the default/personal identity — `programs.git.signing.key`, registered as a Signing Key on `steeef`. Protection Level `Notify`. |
+| `git-sign-steeef` | Git commit/tag signing for the default/personal identity — `programs.git.signing.key`, registered as a Signing Key on `steeef` (GitHub) and on `git.steeef.net` (Forgejo). Protection Level `Notify`. |
 | `git-sign-tatari` | Git commit/tag signing for the work identity (via `~/.gitconfig-work`) — registered as a Signing Key on `stephen-tatari`. Protection Level `Notify`. |
 | `steeef.net` | `goto`, `avi`, `epiphyte`, `vid` (the Docker hosts in `~/code/infra`). |
 | `IoT` | `powerpi` only — `dns-iot`/`dns-guest` were decommissioned. |
@@ -98,8 +98,10 @@ account's key is offered), while `IdentityAgent` comes from whichever
 `Host` block matches — the catch-all for everything except the two
 exceptions below.
 
-`ubnt` and `git.steeef.net` (self-hosted Forgejo) are untouched, still on
-1Password's `steeef.net` key.
+`ubnt` is untouched, still on 1Password's `steeef.net` key. `git.steeef.net`
+(self-hosted Forgejo) now uses Secretive for both auth (the same
+`steeef.net` key already used for the `goto`/`avi`/`epiphyte`/`vid` Docker
+hosts) and signature verification (`git-sign-steeef`).
 
 ## Adding another machine
 
