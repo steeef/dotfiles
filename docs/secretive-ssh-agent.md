@@ -24,13 +24,13 @@ modules below only ever reference *paths*, never key contents.
   "Adding another machine" below).
 - `nix/home/git/default.nix` — `programs.git.signing` set to
   `format = "ssh"` with `key` pointing at a local pubkey path
-  (`~/.ssh/id_secretive_git_sign_personal.pub`, the default/personal
+  (`~/.ssh/id_secretive_git_sign_steeef.pub`, the default/personal
   identity), plus a small wrapper script (`pkgs.writeShellScript`) that pins
   `SSH_AUTH_SOCK` to Secretive's agent socket for the signing operation. The
   work identity override (`~/.gitconfig-work`, loaded via `gitdir:~/code/work/`)
-  uses the separate `git-sign` key instead, signed with plain `ssh-keygen`
-  (works now that `SSH_AUTH_SOCK` defaults to Secretive globally — no wrapper
-  needed there).
+  uses the separate `git-sign-tatari` key instead, signed with plain
+  `ssh-keygen` (works now that `SSH_AUTH_SOCK` defaults to Secretive globally
+  — no wrapper needed there).
 - `nix/home/zsh/initExtra.zsh` — the global `SSH_AUTH_SOCK` on Darwin now
   points at Secretive's agent socket by default (shared across every Mac,
   not machine-gated).
@@ -47,10 +47,29 @@ modules below only ever reference *paths*, never key contents.
 - `~/.ssh/allowed_signers`, used for local `git log --show-signature`
   verification.
 - `~/.gitconfig-work` — the work-identity `user.signingkey` (path to
-  `~/.ssh/id_secretive_git_sign.pub`) and `gpg.ssh.program` (`ssh-keygen`).
-  This file predates Secretive and used to hardcode a 1Password key plus
-  1Password's `op-ssh-sign` binary; both were migrated here as part of the
-  cutover.
+  `~/.ssh/id_secretive_git_sign_tatari.pub`) and `gpg.ssh.program`
+  (`ssh-keygen`). This file predates Secretive and used to hardcode a
+  1Password key plus 1Password's `op-ssh-sign` binary; both were migrated
+  here as part of the cutover.
+
+## Touch ID prompt frequency
+
+Commit/tag signing calls `ssh-keygen -Y sign` directly against Secretive's
+agent socket (`SSH_AUTH_SOCK`) — a local call, not a network connection, so
+`~/.ssh/config`'s `ControlMaster`/`ControlPath`/`ControlPersist` (SSH
+connection multiplexing to remote hosts) never enters the picture and can't
+affect how often Touch ID fires. Prompt frequency is governed entirely by
+Secretive's own per-key **Protection Level**, set when the key is created and
+not editable afterward ([secretive#572](https://github.com/maxgoedjen/secretive/issues/572)):
+`Require Authentication` gates every use behind Touch ID, `Notify` allows the
+operation immediately and just posts a notification. `git-sign-tatari` and
+`git-sign-steeef` are both set to `Notify` for exactly this reason — commit
+signing happens often enough that per-signature Touch ID was disruptive.
+Auth keys (`github`, `github-tatari`, etc.) are left on `Require`. Changing
+an existing key's level isn't possible; it means creating a replacement key,
+re-registering it as a GitHub Signing Key, and updating
+`~/.ssh/allowed_signers`/the nix `signing.key` path (or `~/.gitconfig-work`
+for the work identity).
 
 ## Key-to-host mapping
 
@@ -64,8 +83,8 @@ the Secure Enclave supports), named by purpose:
 | --- | --- |
 | `github` | Personal GitHub SSH auth (`steeef` account) — `IdentityFile` on the `personal-github` `Host` block; registered as an additional Authentication key on the personal GitHub account. |
 | `github-tatari` | Work GitHub SSH auth (`stephen-tatari` account) — `IdentityFile` on the `github.com`/`gist.github.com`/`tatari.github.com`/`tatari.gist.github.com` `Host` block; registered as an additional Authentication key on the work GitHub account. |
-| `git-sign-personal` | Git commit/tag signing for the default/personal identity — `programs.git.signing.key`, registered as a Signing Key on `steeef`. |
-| `git-sign` | Git commit/tag signing for the work identity (via `~/.gitconfig-work`) — registered as a Signing Key on `stephen-tatari`. |
+| `git-sign-steeef` | Git commit/tag signing for the default/personal identity — `programs.git.signing.key`, registered as a Signing Key on `steeef`. Protection Level `Notify`. |
+| `git-sign-tatari` | Git commit/tag signing for the work identity (via `~/.gitconfig-work`) — registered as a Signing Key on `stephen-tatari`. Protection Level `Notify`. |
 | `steeef.net` | `goto`, `avi`, `epiphyte`, `vid` (the Docker hosts in `~/code/infra`). |
 | `IoT` | `powerpi` only — `dns-iot`/`dns-guest` were decommissioned. |
 
@@ -86,13 +105,16 @@ exceptions below.
 
 Secure Enclave keys can't be exported or synced, so a new Mac needs its own
 set generated locally in Secretive, at the same local paths the nix config
-already references (e.g. `~/.ssh/id_secretive_git_sign_personal.pub`) — but
+already references (e.g. `~/.ssh/id_secretive_git_sign_steeef.pub`) — but
 unlike the rest of the setup, the `secretive` Homebrew cask is gated by an
 explicit machine allowlist in `nix/darwin/default.nix`, so add the new
-machine name there first. Separately: register the new machine's
-`github`/`github-tatari`/`git-sign-personal` keys as *additional*
+machine name there first. The two signing keys (`git-sign-steeef`,
+`git-sign-tatari`) should be created with Protection Level `Notify`; the rest
+default to `Require`. Separately: register the new machine's
+`github`/`github-tatari`/`git-sign-steeef` keys as *additional*
 Authentication/Signing keys on the matching GitHub account (one key per
-account — see the uniqueness note above), register `git-sign` as a Signing
-Key on the work account and point `~/.gitconfig-work`'s `user.signingkey` at
-it, append `steeef.net`/`IoT` keys to the relevant hosts' `authorized_keys`,
-and copy the `~/.ssh/config` `Host` blocks over by hand.
+account — see the uniqueness note above), register `git-sign-tatari` as a
+Signing Key on the work account and point `~/.gitconfig-work`'s
+`user.signingkey` at it, append `steeef.net`/`IoT` keys to the relevant
+hosts' `authorized_keys`, and copy the `~/.ssh/config` `Host` blocks over by
+hand.
