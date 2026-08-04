@@ -88,7 +88,7 @@ in {
     };
     signing = {
       format = "ssh";
-      key = "~/.ssh/id_secretive_git_sign.pub";
+      key = "~/.ssh/id_secretive_git_sign_personal.pub";
       signer = "${secretiveSshKeygen}";
     };
 

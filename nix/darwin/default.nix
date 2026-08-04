@@ -143,7 +143,7 @@
       ++ lib.optionals (machine == "ltm-3914") [
         "elgato-stream-deck"
       ]
-      ++ lib.optionals (machine == "sp") [
+      ++ lib.optionals (builtins.elem machine ["sp" "ltm-3914"]) [
         "secretive"
       ];
     masApps = {

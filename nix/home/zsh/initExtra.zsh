@@ -143,7 +143,7 @@ if [ "$(uname -s)" = "Linux" ]; then
     export SSH_AUTH_SOCK
   fi
 elif [ "$(uname -s)" = "Darwin" ]; then
-  SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  SSH_AUTH_SOCK="${HOME}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
   export SSH_AUTH_SOCK
 fi
 
