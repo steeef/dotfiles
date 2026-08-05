@@ -25,6 +25,8 @@ module — manual edits outside Nix get overwritten.
   generation, settings merge, MCP registration gotchas.
 - docs/secretive-ssh-agent.md — Secure Enclave SSH auth/signing setup,
   key-to-host mapping, adding a new machine.
+- docs/claude-code-autocompact.md — auto-compact threshold tuning, the
+  undocumented PreCompact stdout mechanism, re-verification after upgrades.
 
 ## Lessons
 

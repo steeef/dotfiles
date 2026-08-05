@@ -15,6 +15,18 @@
 - Fix: write the prompt to a scratch file first (Write tool), then pass it as `"$(cat /path/to/prompt.txt)"`. Do this up front for any prompt long/complex enough to consider a heredoc — don't wait for the hang to happen first.
 - If a backgrounded command's output shows nothing but a stdin-wait message, don't wait it out — `TaskStop` it immediately and switch to the prompt-file approach.
 
+## Claude Code auto-compact tuning
+- `autoCompactWindow: 433000` (settings.json) tunes the effective auto-compact
+  trigger to ~400k tokens (was ~637k). A `PreCompact` hook
+  (`compact-instructions.sh`) also shapes what compaction preserves, via an
+  undocumented stdout→`newCustomInstructions` channel verified against the
+  installed binary — it can silently stop working on a Claude Code upgrade
+  with no error.
+- If compaction seems to fire at the wrong point, or seems to lose context it
+  shouldn't (especially right after upgrading Claude Code), see
+  `~/.dotfiles/docs/claude-code-autocompact.md` for the full derivation and
+  re-verification steps before assuming the config is wrong.
+
 ## claude binary shadowing
 - Two Claude Code installs can coexist: the native self-updating one at `~/.local/bin/claude` (official install script) and the nix home-manager one at `~/.nix-profile/bin/claude`. `~/.local/bin` is ahead on PATH, so the native one wins `which claude` if present.
 - Only the nix wrapper passes `--plugin-dir <hm-plugin>`, which is how nix-managed plugin MCP servers get injected. The native claude reads `~/.claude/settings.json` fine (so marketplace/`~/.claude.json` servers still show) but never loads the nix plugin — so a nix-managed MCP silently disappears from `/mcp` whenever the native binary is the one running, even though the nix config is correct.

@@ -118,6 +118,18 @@ fi
 ctx_bar=$(progress_bar "$pct_used" 10)
 line2="ctx ${ctx_bar} ${orange}${used_tokens}/${total_tokens}${reset} ${dim}${pct_used}%${reset}"
 
+# Auto-compact proximity: only shown when it differs from the ctx bar
+# above (long-context sessions where the real window exceeds the compact
+# threshold) — otherwise it'd just duplicate it. See nix/home/claude/AGENTS.md
+# for where the 400000 figure comes from.
+compact_threshold=400000
+if [ "$compact_threshold" -lt "$size" ]; then
+    compact_pct=$(( current * 100 / compact_threshold ))
+    [ "$compact_pct" -gt 100 ] && compact_pct=100
+    compact_bar=$(progress_bar "$compact_pct" 10)
+    line2+="${sep}compact ${compact_bar} ${dim}${compact_pct}%${reset}"
+fi
+
 # Cross-platform ISO to epoch conversion
 iso_to_epoch() {
     local iso_str="$1"

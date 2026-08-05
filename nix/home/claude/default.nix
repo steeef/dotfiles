@@ -60,6 +60,15 @@ in {
     executable = true;
   };
 
+  # Non-blocking PreCompact hook: stdout is folded into compaction's
+  # summarization instructions (undocumented behavior — see AGENTS.md).
+  # Wired declaratively in settings.json's hooks.PreCompact, unlike the
+  # herdr hook above, since no installed plugin currently owns that key.
+  home.file.".claude/hooks/compact-instructions.sh" = {
+    source = ./hooks/compact-instructions.sh;
+    executable = true;
+  };
+
   home.sessionVariables = {
     CLAUDE_HOOKS_RM_HANDLER = rkvrHandlerPath;
   };
