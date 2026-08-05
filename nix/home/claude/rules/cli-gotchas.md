@@ -22,8 +22,8 @@
 - After starting any CLI call expected to run long via `run_in_background`, check `TaskOutput` for real, tool-specific progress signals before telling the user it's "running, I'll report back." If output only shows a startup banner or a wait-for-input message with no further progress, `TaskStop` immediately, diagnose, and relaunch correctly — don't wait indefinitely on a hunch that it'll come good.
 
 ## Claude Code auto-compact tuning
-- `autoCompactWindow: 433000` (settings.json) tunes the effective auto-compact
-  trigger to ~400k tokens (was ~637k). A `PreCompact` hook
+- `autoCompactWindow: 533000` (settings.json) tunes the effective auto-compact
+  trigger to ~500k tokens (was ~637k). A `PreCompact` hook
   (`compact-instructions.sh`) also shapes what compaction preserves, via an
   undocumented stdout→`newCustomInstructions` channel verified against the
   installed binary — it can silently stop working on a Claude Code upgrade

@@ -51,8 +51,8 @@ skills, agents, and settings from this directory.
 - Auto-memory (`autoMemoryEnabled: false` in `settings.json`) is intentionally
   off — see the root `AGENTS.md` Doc Contract for why user-authored
   memory.md/rules were chosen over Claude-authored auto-memory for this setup.
-- `autoCompactWindow: 433000` and `hooks.PreCompact` (`compact-instructions.sh`)
-  tune when/how auto-compact fires — `433000` is a derived value, not round,
+- `autoCompactWindow: 533000` and `hooks.PreCompact` (`compact-instructions.sh`)
+  tune when/how auto-compact fires — `533000` is a derived value, not round,
   and the hook relies on undocumented behavior verified against the
   installed binary. `hooks.PreCompact` is declared directly (unlike the
   `UserPromptSubmit` hook above) since no installed plugin currently owns

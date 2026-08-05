@@ -1,7 +1,7 @@
 # Claude Code auto-compact tuning
 
 `nix/home/claude/settings.json` tunes when Claude Code auto-compacts
-(`autoCompactWindow: 433000`) and adds a `PreCompact` hook
+(`autoCompactWindow: 533000`) and adds a `PreCompact` hook
 (`hooks/compact-instructions.sh`) that shapes what a compaction summary
 preserves. Both were verified against the actual installed binary
 (`~/.local/share/claude/versions/2.1.222`) via `strings`, not just the
@@ -9,7 +9,7 @@ official docs, because the load-bearing mechanism turned out to be
 undocumented. Re-verify after Claude Code upgrades — see "Staying current"
 below.
 
-## Why 433000, not a round 400000
+## Why 533000, not a round 500000
 
 Claude Code used to also carry an env var,
 `CLAUDE_AUTOCOMPACT_PCT_OVERRIDE: "65"`, in the same `env` block. That knob
@@ -23,9 +23,9 @@ Concretely, with a 1M-token model:
 |---|---|
 | `autoCompactWindow` unset, pct=65 (old default) | ~637k |
 | `autoCompactWindow: 400000`, pct=65 still set | ~247k (surprise undershoot) |
-| `autoCompactWindow: 433000`, pct override removed | ~400k (intended) |
+| `autoCompactWindow: 533000`, pct override removed | ~500k (intended) |
 
-So the override was removed, and `433000` is a **derived** value tied to
+So the override was removed, and `533000` is a **derived** value tied to
 Claude Code's internal ~20k reserve and ~13k margin constants — not a
 timeless constant. If a future upgrade changes those, re-derive it (see
 "Staying current").
@@ -74,8 +74,8 @@ strings "$(readlink -f "$(command -v claude)")" | grep newCustomInstructions
 If that string disappears, the `PreCompact` hook is a no-op and can be
 removed. If `autoCompactWindow` starts behaving differently than expected,
 re-derive the reserve/margin constants the same way (`strings` for
-`function FTo`/`function qX`) rather than assuming `433000` still means
-~400k.
+`function FTo`/`function qX`) rather than assuming `533000` still means
+~500k.
 
 ## Statusline
 
