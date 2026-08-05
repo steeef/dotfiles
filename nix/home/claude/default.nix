@@ -44,8 +44,8 @@ in {
   };
 
   # Renames the herdr workspace for this pane to a Jira-style ticket key
-  # (e.g. ENG-1234) detected in the session's git branch or prompt text.
-  # Wired into hooks.SessionStart/UserPromptSubmit by the
+  # (e.g. ENG-1234) detected in the session's first user prompt only — later
+  # prompts never change it. Wired into hooks.UserPromptSubmit by the
   # herdrWorkspaceTicketHook activation script below (not declared in
   # settings.json directly — see that script's comment for why).
   home.file.".claude/hooks/herdr-workspace-ticket.sh" = {
@@ -154,29 +154,35 @@ in {
     ''
   );
 
-  # Wire herdr-workspace-ticket.sh into hooks.SessionStart/UserPromptSubmit.
-  # Not declared in settings.json directly: merge-settings.sh replaces hook
+  # Wire herdr-workspace-ticket.sh into hooks.UserPromptSubmit only. Not
+  # declared in settings.json directly: merge-settings.sh replaces hook
   # arrays wholesale rather than merging elements, which would clobber the
   # SessionStart entry herdr's own Claude integration already added, plus
   # context-mode-cache-heal.mjs's entry. Add-if-absent instead, matched on
-  # the script's stable path, same approach as codegraphMcp above.
+  # the script's stable path, same approach as codegraphMcp above. Also
+  # strips any older SessionStart/UserPromptSubmit entries referencing this
+  # script (from before it was narrowed to first-prompt-only) regardless of
+  # the argv they were registered with.
   home.activation.herdrWorkspaceTicketHook = lib.hm.dag.entryAfter ["mergeClaudeSettings"] ''
     cs="$HOME/.claude/settings.json"
     jq="${pkgs.jq}/bin/jq"
     script="$HOME/.claude/hooks/herdr-workspace-ticket.sh"
+    cmd="bash '$script'"
 
-    add_ticket_hook() {
-      cmd="bash '$script' $2"
-      [ -f "$cs" ] || return 0
-      run "$jq" --arg event "$1" --arg cmd "$cmd" '
-        .hooks[$event] = ((.hooks[$event] // [])
-          | if any(.[]; (.hooks // [])[0].command? == $cmd) then .
-            else . + [{hooks: [{type: "command", command: $cmd, timeout: 10}]}]
-            end)
+    if [ -f "$cs" ]; then
+      run "$jq" --arg cmd "$cmd" '
+        .hooks.SessionStart = ((.hooks.SessionStart // [])
+          | map(select(((.hooks // [])[0].command? // "") | test("herdr-workspace-ticket\\.sh") | not)))
+        | .hooks.UserPromptSubmit = ((.hooks.UserPromptSubmit // [])
+            | map(select(
+                (.hooks // [])[0].command? == $cmd
+                or (((.hooks // [])[0].command? // "") | test("herdr-workspace-ticket\\.sh") | not)
+              ))
+            | if any(.[]; (.hooks // [])[0].command? == $cmd) then .
+              else . + [{hooks: [{type: "command", command: $cmd, timeout: 10}]}]
+              end)
       ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
-    }
-    add_ticket_hook SessionStart session
-    add_ticket_hook UserPromptSubmit prompt
+    fi
   '';
 
   # Use official home-manager claude-code module
