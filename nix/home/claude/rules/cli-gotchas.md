@@ -10,10 +10,16 @@
 - Two accounts are logged in: `stephen-tatari` (work, active by default) and `steeef` (personal). Personal repos (e.g. `steeef/dotfiles`, pushed via the `personal-github` SSH host alias) reject PR/issue creation under the work account with `GraphQL: must be a collaborator`.
 - Before PR/issue ops on a personal (steeef-owned) repo: `gh auth switch --hostname github.com --user steeef`, do the operation, then restore with `gh auth switch --hostname github.com --user stephen-tatari`. `git push` is unaffected (SSH via the `personal-github` alias). Check with `gh auth status`.
 
-## codex exec (and other CLIs) with long/multi-line prompts
-- Never inline a heredoc inside a command substitution as a CLI argument (`"$(cat <<'EOF' ... EOF)"`) when running through the Bash tool, especially in a command likely to run long or get auto-backgrounded on timeout. It can silently evaluate to an empty string, and tools that fall back to reading stdin when given an empty/missing prompt (e.g. `codex exec`, which prints `Reading additional input from stdin...`) then hang forever waiting for input that will never arrive — background execution has no attached stdin to unblock it.
-- Fix: write the prompt to a scratch file first (Write tool), then pass it as `"$(cat /path/to/prompt.txt)"`. Do this up front for any prompt long/complex enough to consider a heredoc — don't wait for the hang to happen first.
-- If a backgrounded command's output shows nothing but a stdin-wait message, don't wait it out — `TaskStop` it immediately and switch to the prompt-file approach.
+## codex exec hangs when backgrounded
+- `codex exec` *always* tries to read supplementary stdin before using the prompt argument (prints `Reading additional input from stdin...` — this is normal, not an error, even with a perfectly good prompt). The hang happens when stdin is inherited from a backgrounded/non-interactive parent that never sends EOF (the `subprocess` default, and the Bash tool's `run_in_background` behavior) — that read blocks forever, regardless of whether the prompt itself is valid.
+- Fix: always close stdin on a `codex exec` call that might run backgrounded — append `< /dev/null` to a raw command. Verified live: `codex exec ... "prompt" < /dev/null` completes normally under `run_in_background`; the identical command without the redirect hangs on the stdin-read banner forever.
+- Separately (a real but different bug): never inline a heredoc inside a command substitution as a CLI argument (`"$(cat <<'EOF' ... EOF)"`) — it can silently evaluate to an empty string, sending the wrong/missing prompt to codex. Fix: write the prompt to a scratch file first (Write tool), then pass it as `"$(cat /path/to/prompt.txt)"`.
+- Prefer the `general:codex` skill's `codex-query.py` over a hand-rolled `codex exec` command — it closes stdin (`DEVNULL`) internally and accepts `"@/path/to/prompt.txt"` (same `@`-file convention as its `--instructions` flag) so neither failure mode applies. See the skill's Troubleshooting section ("Hung on Stdin") for the full mechanism.
+- If a backgrounded command's output shows nothing but the stdin-wait banner with no further progress, don't wait it out — `TaskStop` it immediately and relaunch with stdin closed.
+
+## Verifying backgrounded CLI calls before trusting them
+- A clean launch (no error, no immediate exit) is not proof a backgrounded long-running command is doing anything — some tools silently wedge (e.g. falling back to stdin with nothing attached, per the codex case above) without ever erroring.
+- After starting any CLI call expected to run long via `run_in_background`, check `TaskOutput` for real, tool-specific progress signals before telling the user it's "running, I'll report back." If output only shows a startup banner or a wait-for-input message with no further progress, `TaskStop` immediately, diagnose, and relaunch correctly — don't wait indefinitely on a hunch that it'll come good.
 
 ## Claude Code auto-compact tuning
 - `autoCompactWindow: 433000` (settings.json) tunes the effective auto-compact
