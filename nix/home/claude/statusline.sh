@@ -120,9 +120,10 @@ line2="ctx ${ctx_bar} ${orange}${used_tokens}/${total_tokens}${reset} ${dim}${pc
 
 # Auto-compact proximity: only shown when it differs from the ctx bar
 # above (long-context sessions where the real window exceeds the compact
-# threshold) — otherwise it'd just duplicate it. See nix/home/claude/AGENTS.md
-# for where the 400000 figure comes from.
-compact_threshold=400000
+# threshold) — otherwise it'd just duplicate it. settings.json's
+# autoCompactWindow (533000) is tuned to produce this ~500k effective
+# trigger; see docs/claude-code-autocompact.md for the derivation.
+compact_threshold=500000
 if [ "$compact_threshold" -lt "$size" ]; then
     compact_pct=$(( current * 100 / compact_threshold ))
     [ "$compact_pct" -gt 100 ] && compact_pct=100
