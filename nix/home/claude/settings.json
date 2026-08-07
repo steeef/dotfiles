@@ -28,7 +28,11 @@
       "mcp__codegraph"
     ],
     "deny": [
-      "Bash(pre-commit:*)"
+      "Bash(pre-commit:*)",
+      "DesignSync",
+      "NotebookEdit",
+      "RemoteTrigger",
+      "PushNotification"
     ],
     "defaultMode": "plan"
   },
@@ -37,6 +41,11 @@
   },
   "autoCompactWindow": 533000,
   "skillListingBudgetFraction": 0.02,
+  "disableWorkflows": true,
+  "disableRemoteControl": true,
+  "disableClaudeAiConnectors": true,
+  "disableArtifact": true,
+  "disableBundledSkills": true,
   "hooks": {
     "PostToolUse": [
       {
