@@ -205,6 +205,11 @@ in {
     rulesDir = ./rules;
     # Memory file for CLAUDE.md
     context = ./memory.md;
+    # Custom output styles. Attr name sets the destination filename
+    # (output-styles/<name>.md); the active-style lookup key is the
+    # frontmatter `name` field, not this attr, so they're kept identical
+    # to avoid a silent name mismatch.
+    outputStyles.Brief = ./output-styles/brief.md;
     # NB: codegraph MCP is registered via the codegraphMcp activation script
     # below, NOT programs.claude-code.mcpServers. The module's mcpServers option
     # emits a --plugin-dir plugin whose MCP server shows in `claude mcp list`
