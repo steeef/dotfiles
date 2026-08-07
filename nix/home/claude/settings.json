@@ -30,11 +30,12 @@
     "deny": [
       "Bash(pre-commit:*)",
       "DesignSync",
+      "EnterPlanMode",
+      "ExitPlanMode",
       "NotebookEdit",
-      "RemoteTrigger",
-      "PushNotification"
-    ],
-    "defaultMode": "plan"
+      "PushNotification",
+      "RemoteTrigger"
+    ]
   },
   "env": {
     "BASH_MAX_OUTPUT_LENGTH": "150000"
