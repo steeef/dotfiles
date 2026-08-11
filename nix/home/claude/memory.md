@@ -31,6 +31,7 @@ IMPORTANT: Update global Claude memory: cross-cutting instructions → edit `~/.
 - State assumptions explicitly before coding; ask if ambiguous.
 - Research → plan → implement; don't skip phases on complex work.
 - Writing a plan is the deliverable — do NOT treat plan creation as trigger to start implementation.
+- IMPORTANT: Get a second-model review (`opus-reviewer`, or `fable-reviewer` if named) of any plan before presenting it as final.
 - Stop after 3 failed attempts and reassess.
 - Surgical edit test: every changed line must trace directly to the user's request.
 - Format shell commands for copy-paste: `\` line continuation, `&&` at start of continuation, target ~80 cols.
