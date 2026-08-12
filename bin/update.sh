@@ -30,9 +30,9 @@ footer() {
 # outdated casks that have a real version. (mirrors `bup` in zsh/after/homebrew.zsh)
 upgrade_versioned_casks() {
   local outdated_casks unversioned_casks cask
-  outdated_casks="$(brew outdated --cask --greedy | awk '{print $1}')"
+  outdated_casks="$(brew outdated --cask --greedy | awk '{print $1}' || true)"
   unversioned_casks="$(brew list --cask --versions | grep -w 'latest' |
-    awk '{print $1}' | tr '\n' ' ')"
+    awk '{print $1}' | tr '\n' ' ' || true)"
 
   if [ -n "${outdated_casks}" ]; then
     echo "brew: upgrading casks:"
