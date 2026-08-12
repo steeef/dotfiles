@@ -6,7 +6,7 @@ in {
     package = tmux;
     shell = "${pkgs.zsh}/bin/zsh";
     secureSocket =
-      if pkgs.stdenv.isDarwin
+      if pkgs.stdenv.hostPlatform.isDarwin
       then false
       else true;
     mouse = true;

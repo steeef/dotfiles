@@ -38,7 +38,7 @@ rustPlatform.buildRustPackage rec {
   # produce a working binary.
   doCheck = false;
 
-  buildInputs = lib.optionals stdenv.isDarwin [libiconv];
+  buildInputs = lib.optionals stdenv.hostPlatform.isDarwin [libiconv];
 
   meta = {
     description = "A safe file archival and removal tool";

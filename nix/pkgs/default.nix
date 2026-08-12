@@ -27,7 +27,7 @@ inputs: final: prev: {
   # python313Packages fixed point, so applying it unconditionally busts the
   # binary cache for every python3-based package on every platform.
   pythonPackagesExtensions =
-    if prev.stdenv.isDarwin
+    if prev.stdenv.hostPlatform.isDarwin
     then
       prev.pythonPackagesExtensions
       ++ [

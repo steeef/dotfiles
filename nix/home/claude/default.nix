@@ -135,7 +135,7 @@ in {
   # could race this read-modify-write; low risk in practice (run hms when idle).
   # Runs after mergeClaudeSettings so it edits the post-merge settings.json.
   home.activation.codegraphMcp = lib.hm.dag.entryAfter ["mergeClaudeSettings"] (
-    lib.optionalString pkgs.stdenv.isDarwin ''
+    lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
       cg="${config.home.homeDirectory}/.nix-profile/bin/codegraph"
       cj="$HOME/.claude.json"
       cs="$HOME/.claude/settings.json"

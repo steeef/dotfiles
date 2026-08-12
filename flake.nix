@@ -120,7 +120,7 @@
                 cargoLock = {
                   lockFile = "${inputs.mkalias}/Cargo.lock";
                 };
-                buildInputs = prev.lib.optionals prev.stdenv.isDarwin [
+                buildInputs = prev.lib.optionals prev.stdenv.hostPlatform.isDarwin [
                   prev.libiconv
                 ];
                 meta = {
