@@ -12,8 +12,11 @@ _: {
       "--color=selected-bg:#494d64"
       "--multi"
     ];
-    fileWidgetCommand = "rg --files --no-ignore --hidden --follow -g '!{.git,node_modules}/*' 2> /dev/null";
-    changeDirWidgetCommand = "bfs ~ -nohidden -type d -printf '~/%P\\n' 2> /dev/null";
+    fileWidget.command = "rg --files --no-ignore --hidden --follow -g '!{.git,node_modules}/*' 2> /dev/null";
+    changeDirWidget.command = "bfs ~ -nohidden -type d -printf '~/%P\\n' 2> /dev/null";
     tmux.enableShellIntegration = true;
+
+    # Atuin owns Ctrl-R for history search.
+    historyWidget.command = "";
   };
 }
