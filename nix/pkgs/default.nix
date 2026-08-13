@@ -32,14 +32,21 @@ inputs: final: prev: {
       prev.pythonPackagesExtensions
       ++ [
         (_python-final: python-prev: {
-          # Fix uvloop test failure with Python 3.13 on Darwin
+          # Fix uvloop test failures on Darwin
           # nixpkgs only disables test_cancel_post_init for Python >= 3.14
           # https://github.com/MagicStack/uvloop/issues/622
+          # test_process_delayed_stdio__not_paused__no_stdin fails on
+          # Python 3.14.7 (flaky fd-set assertion); not yet disabled upstream.
           uvloop = python-prev.uvloop.overrideAttrs (old: {
             disabledTestPaths =
               (old.disabledTestPaths or [])
               ++ [
                 "tests/test_process.py::TestAsyncio_AIO_Process::test_cancel_post_init"
+              ];
+            disabledTests =
+              (old.disabledTests or [])
+              ++ [
+                "test_process_delayed_stdio__not_paused__no_stdin"
               ];
           });
           # Fix anyio flaky tests with Python 3.13 on Darwin
@@ -53,6 +60,16 @@ inputs: final: prev: {
                 "test_single_thread"
                 "test_thread_cancelled_and_abandoned"
                 "test_run_in_custom_limiter"
+              ];
+          });
+          # Fix httpx2 flaky timing tests on Darwin
+          # Tight (0.1s) mock keepalive/timeout windows miss under sandbox load
+          httpx2 = python-prev.httpx2.overrideAttrs (old: {
+            disabledTests =
+              (old.disabledTests or [])
+              ++ [
+                "test_keepalive_ping"
+                "test_receive_timeout"
               ];
           });
           # Fix curl-cffi hanging tests on Darwin
