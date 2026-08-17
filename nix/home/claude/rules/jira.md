@@ -4,8 +4,8 @@ Applies whenever creating or editing a Jira ticket's title/description (conducto
 jira-management skill, acli, or Atlassian MCP directly). Source: [How to write a
 useful Jira ticket](https://community.atlassian.com/forums/Jira-articles/How-to-write-a-useful-Jira-ticket/ba-p/2147004).
 
-- **Title**: imperative verb, action-oriented. Test: "To complete this ticket, I
-  need to [TITLE]" must read naturally.
+- **Title**: imperative verb, action-oriented, 4-7 words. Test: "To complete this
+  ticket, I need to [TITLE]" must read naturally and stay concise.
 - **Story (why)**: "We need to [TASK] from [RESOURCE] in order for [USER] to
   [ACTION]." State purpose and beneficiary, not just the task.
 - **Acceptance criteria (what)**: SMART, descriptive, achievable — the Definition
