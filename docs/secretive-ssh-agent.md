@@ -52,6 +52,25 @@ modules below only ever reference *paths*, never key contents.
   1Password key plus 1Password's `op-ssh-sign` binary; both were migrated
   here as part of the cutover.
 
+## HTTPS fetch/clone doesn't need Secretive
+
+`nix/home/git/default.nix`'s `url."git@github.com:".pushInsteadOf =
+"https://github.com/"` only rewrites **pushes** to SSH; fetch/clone/pull of an
+`https://github.com/...` URL stays plain HTTPS and never touches Secretive.
+This used to be a blanket `insteadOf`, which silently rewrote *every*
+`https://github.com/` operation (including Homebrew's internal tap fetches
+during `brew update`) to SSH. Homebrew updates several taps back-to-back, each
+triggering a Secretive Touch ID prompt — and Secretive can only show one
+prompt at a time, so all but the first request are rejected outright
+("agent refused operation"), a known unfixed upstream bug
+([secretive#776](https://github.com/maxgoedjen/secretive/issues/776),
+[secretive#532](https://github.com/maxgoedjen/secretive/issues/532)). Scoping
+the rewrite to pushes only avoids triggering Secretive for reads that never
+needed authentication in the first place. Tradeoff: cloning a *private* repo
+via a literal `https://github.com/...` URL (instead of `git@github.com:...`
+or `gh repo clone`) now attempts real HTTPS auth, which will fail since no
+GitHub PAT is stored in the macOS keychain — use the SSH form instead.
+
 ## Touch ID prompt frequency
 
 Commit/tag signing calls `ssh-keygen -Y sign` directly against Secretive's
