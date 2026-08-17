@@ -3,9 +3,13 @@
 Applies whenever creating or editing a Jira ticket's title/description (conductor's
 jira-management skill, acli, or Atlassian MCP directly). Source: [How to write a
 useful Jira ticket](https://community.atlassian.com/forums/Jira-articles/How-to-write-a-useful-Jira-ticket/ba-p/2147004).
+Naming guidelines below are guidelines, not gates; don't rename existing tickets
+to match.
 
-- **Title**: imperative verb, action-oriented, 4-7 words. Test: "To complete this
-  ticket, I need to [TITLE]" must read naturally and stay concise.
+- **Title**: imperative verb, action-oriented, 4-7 words, Title Case. Test: "To
+  complete this ticket, I need to [TITLE]" must read naturally and stay concise.
+  Spike titles start with "Investigate" where it fits. A leading `service-name:`
+  or `[Scope]` prefix is fine and keeps the service's actual casing.
 - **Story (why)**: "We need to [TASK] from [RESOURCE] in order for [USER] to
   [ACTION]." State purpose and beneficiary, not just the task.
 - **Acceptance criteria (what)**: SMART, descriptive, achievable — the Definition
