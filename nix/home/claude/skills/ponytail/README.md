@@ -10,7 +10,7 @@ Vendored from DietrichGebert/ponytail:
 
 **Original Source:** <https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail/SKILL.md>
 
-License: MIT. Snapshot date: 2026-07-22.
+License: MIT. Snapshot date: 2026-08-24.
 
 The upstream frontmatter also includes `argument-hint` and `license` keys; those are
 dropped here to match this repo's convention (`name` + `description` only — see
