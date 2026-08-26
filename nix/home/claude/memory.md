@@ -20,7 +20,7 @@ IMPORTANT: Update global Claude memory: cross-cutting instructions → edit `~/.
 # Commit hooks
 
 - IMPORTANT: Use commit hooks as intended — never `--no-verify`. Fix failing checks, don't bypass.
-- IMPORTANT: When `.pre-commit-config.yaml` present, run pre-commit after modifying files: `prek run --files <file1> <file2> ...`.
+- IMPORTANT: When `.pre-commit-config.yaml` present, run pre-commit after modifying files. Use `prek run --files <file1> <file2> ...` if `prek` is installed, else `pre-commit run --files <file1> <file2> ...`.
 
 # File deletion
 
