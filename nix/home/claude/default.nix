@@ -13,6 +13,7 @@
 
   claudeHooksPlugins = [
     "command-safety"
+    "comment-style"
     "env-protection"
     "file-protection"
     "gh-formatting"
