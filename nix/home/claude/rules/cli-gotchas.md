@@ -37,3 +37,9 @@
 - Two Claude Code installs can coexist: the native self-updating one at `~/.local/bin/claude` (official install script) and the nix home-manager one at `~/.nix-profile/bin/claude`. `~/.local/bin` is ahead on PATH, so the native one wins `which claude` if present.
 - Only the nix wrapper passes `--plugin-dir <hm-plugin>`, which is how nix-managed plugin MCP servers get injected. The native claude reads `~/.claude/settings.json` fine (so marketplace/`~/.claude.json` servers still show) but never loads the nix plugin — so a nix-managed MCP silently disappears from `/mcp` whenever the native binary is the one running, even though the nix config is correct.
 - If a nix-managed MCP "disappears," check `type -a claude` / `readlink -f $(command -v claude)` first — a stray `claude update` or re-run of the native installer recreates `~/.local/bin/claude` and re-shadows nix. Fix: remove `~/.local/bin/claude` so bare `claude` resolves to the nix profile.
+
+## Allowing a new MCP server (`allowedMcpServers`)
+- `claude mcp add ... -> "Cannot add MCP server: not allowed by enterprise policy"` isn't necessarily an org/MDM block — it also fires purely from a populated `allowedMcpServers` in `~/.claude/settings.json` (user scope), no managed policy involved.
+- Once that list has *any* `serverCommand` entry, every stdio server must match a `serverCommand` exactly — a `serverName` entry stops counting for stdio servers. Same split for remote servers: any `serverUrl` entry forces all HTTP/SSE servers to match by URL, `serverName` alone no longer works. Each transport type is poisoned independently.
+- Fix: add a `serverCommand` (stdio) or `serverUrl` (HTTP/SSE) entry with the exact command/URL — `serverName` entries are then redundant for that transport and can be dropped. Commands must match every argument in order.
+- Full mechanics: <https://code.claude.com/docs/en/managed-mcp>
