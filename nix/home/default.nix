@@ -61,6 +61,7 @@
     hidapitester
     hugo
     jq
+    just
     kind
     kubectx
     kubectl
