@@ -1,0 +1,53 @@
+{
+  "trigger": {
+    "trials": 3,
+    "setup": [
+      "printf 'The bug was fixed by the on-call engineer, and it is believed that this issue will not recur.\\n' > notes.md"
+    ],
+    "positive": [
+      "run vale against notes.md",
+      "vale check notes.md before I publish it",
+      "can you lint notes.md for prose issues before I post it to Slack?",
+      "check notes.md for AI-writing tells before I publish it to Confluence",
+      "I'm about to send notes.md as a Marquee post, can you review the writing quality first?"
+    ],
+    "negative": [
+      "review this PR for code quality issues",
+      "run eslint on this file and fix the warnings",
+      "can you spell-check this email for typos",
+      "refactor this Python function to be more readable"
+    ]
+  },
+  "behavior": [
+    {
+      "name": "happy-path-existing-file",
+      "setup": [
+        "printf 'The config was updated by the team, and it is believed that the change will fix the issue.\\n\\nThis is a very good approach that will completely solve the problem.\\n' > draft.md"
+      ],
+      "prompt": "Use the vale-check skill on ./draft.md and tell me what it finds.",
+      "invoke": "explicit",
+      "max_turns": 15,
+      "checks": [
+        "test -f draft.md",
+        "grep -q 'was updated' draft.md"
+      ],
+      "judge": [
+        "Did the response report specific findings (like passive voice or wordiness) rather than just a generic summary?",
+        "Did the response avoid claiming the draft is blocked or must be fixed before it can be used?"
+      ]
+    },
+    {
+      "name": "unsaved-draft-before-publish",
+      "prompt": "I'm about to post this Slack announcement, can you check it first: 'We believe the migration was completed successfully by the team, and it is expected that most users will see very good performance.'",
+      "invoke": "explicit",
+      "max_turns": 15,
+      "checks": [
+        "! find . -maxdepth 1 -name '*.md' | grep -q ."
+      ],
+      "judge": [
+        "Did the response identify at least one specific prose issue (such as passive voice or a weasel word) in the Slack draft text?",
+        "Did the response clean up after itself rather than leaving a scratch file behind in the working directory?"
+      ]
+    }
+  ]
+}

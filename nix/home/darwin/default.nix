@@ -13,6 +13,7 @@
     iterm2
     reattach-to-user-namespace
     terminal-notifier
+    vale # prose linter; see nix/home/claude/skills/vale-check
   ];
 
   # CodeGraph: no detached auto-sync daemon (would leak a watcher per ephemeral
