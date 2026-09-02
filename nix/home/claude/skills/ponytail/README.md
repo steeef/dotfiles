@@ -13,9 +13,8 @@ Vendored from DietrichGebert/ponytail:
 License: MIT. Snapshot date: 2026-08-24.
 
 The upstream frontmatter also includes `argument-hint` and `license` keys; those are
-dropped here to match this repo's convention (`name` + `description` only — see
-`../humanizer/SKILL.md`). The intensity-level argument is documented in the body
-instead.
+dropped here to match this repo's convention (`name` + `description` only). The
+intensity-level argument is documented in the body instead.
 
 ## Updating
 
