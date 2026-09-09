@@ -4,7 +4,7 @@
 
 ## acli (Jira CLI)
 - Works reliably on 1.3.19-stable+ (verified working 2026-06-10: `acli jira auth status` → Authenticated). Always try acli first for Jira operations — don't assume it's broken. If it errors, run `acli jira auth status` and `/conductor:setup-acli` to fix in-session; fall back to Atlassian MCP tools only if acli genuinely can't be fixed.
-- `acli jira workitem comment create --body` mangles markdown/ADF formatting, same class of issue as Atlassian MCP tools without `contentFormat: "markdown"`. Prefer Atlassian MCP tools with `contentFormat: "markdown"` for Jira comments over acli's comment subcommand.
+- IMPORTANT: `acli jira workitem comment create --body` mangles markdown/ADF formatting (raw `## syntax`, bare URLs) — the same failure mode as calling the Atlassian MCP comment tool without `contentFormat: "markdown"`. Never call acli's comment subcommand or the MCP comment tool directly, even for a one-off note or as a fallback when a ticket transition isn't reachable — always route through `Skill(skill='conductor:jira-management')`'s add-comment operation (`add-comment.sh`), which converts markdown to ADF correctly before posting.
 
 ## gh (GitHub CLI)
 - Two accounts are logged in: `stephen-tatari` (work, active by default) and `steeef` (personal). Personal repos (e.g. `steeef/dotfiles`, pushed via the `personal-github` SSH host alias) reject PR/issue creation under the work account with `GraphQL: must be a collaborator`.
