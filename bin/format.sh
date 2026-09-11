@@ -46,7 +46,7 @@ fi
 case "$FILE_PATH" in
   *.yaml | *.yml)
     if command -v uvx >/dev/null 2>&1; then
-      if grep -q '\${{' "$FILE_PATH"; then
+      if grep -qE '\{%|\$\{\{' "$FILE_PATH"; then
         # Skip yamllint for template files with nunjucks/Backstage syntax
         :
       elif ! OUTPUT=$(uvx yamllint -s "$FILE_PATH" 2>&1); then
@@ -56,7 +56,10 @@ case "$FILE_PATH" in
     fi
     ;;
   *.tf | *.hcl)
-    if command -v terraform >/dev/null 2>&1; then
+    if grep -qE '\{%|\$\{\{' "$FILE_PATH"; then
+      # Skip terraform fmt for Nunjucks/Backstage template fragments
+      :
+    elif command -v terraform >/dev/null 2>&1; then
       terraform fmt "$FILE_PATH"
     fi
     ;;
