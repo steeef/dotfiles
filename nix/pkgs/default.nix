@@ -73,9 +73,9 @@ inputs: final: prev: {
               ];
           });
           # Fix curl-cffi hanging tests on Darwin
-          # Tests deadlock in pytestCheckPhase with multiprocessing workers
           curl-cffi = python-prev.curl-cffi.overrideAttrs (_old: {
             doCheck = false;
+            doInstallCheck = false;
           });
           # Fix jeepney build failure on Darwin
           # dbus-run-session fails because launchd activation is broken after
