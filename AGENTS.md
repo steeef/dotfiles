@@ -27,6 +27,9 @@ module — manual edits outside Nix get overwritten.
   key-to-host mapping, adding a new machine.
 - docs/claude-code-autocompact.md — auto-compact threshold tuning, the
   undocumented PreCompact stdout mechanism, re-verification after upgrades.
+- docs/cli-troubleshooting.md — full derivations for the one-line pointers
+  in nix/home/claude/rules/cli-gotchas.md (codex stdin hangs, MCP spawn/
+  shadowing/config-key gotchas).
 - docs/herdr-stuck-multichoice-prompt.md — open bug: Claude Code
   multiple-choice prompts sometimes hang in herdr/tmux (only Ctrl-C
   escapes); hypotheses and a live-capture checklist for next occurrence.
