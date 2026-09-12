@@ -12,6 +12,10 @@ claude() {
       local t dir=''
       for t in ~/.claude/projects/*/"$id".jsonl; do
         [[ -f "$t" ]] || continue
+        if command grep -q '"entrypoint":"sdk-cli"' "$t"; then
+          print -u2 "[claude-resume] $id is an internal sdk-cli session (e.g. auto-title/summary), not resumable"
+          return 1
+        fi
         dir=$(command sed -n '/"cwd":"\//{s/.*"cwd":"\([^"]*\)".*/\1/p;q;}' "$t")
         [[ -n "$dir" ]] && break
       done
