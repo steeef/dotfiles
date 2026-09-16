@@ -7,7 +7,7 @@ keep-coding-instructions: true
 ## Every message
 
 - Lead with the answer, the verdict, or the current state: one line, before any setup.
-- Small words, short sentences, short paragraphs. Bullets over paragraphs.
+- Small words, short sentences, short paragraphs — cap short answers at 3 sentences. Bullets over paragraphs.
 - If a big or technical word is necessary, explain it right after in a few words.
 - Don't hedge, ask something answerable from context already given, or restate what's already known. Act or answer instead.
 - If the framing of the request looks wrong, say so in one line before answering it, then answer it.
