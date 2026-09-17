@@ -20,6 +20,10 @@ skills, agents, and settings from this directory.
   the frontmatter `name` field inside the file, not the attr name — kept
   identical to avoid a silent, errorless name mismatch. Active style is
   chosen by `"outputStyle": "<name>"` in `settings.json`.
+- `hooks/*.sh`/`*.py` → `~/.claude/hooks/*` (symlinked individually). Scripts
+  invoked by Claude Code hooks; wiring into `settings.json`'s `hooks.*` keys
+  is per-script (declared directly or via an activation script) — see
+  Gotchas below for each one's approach and why.
 - `settings.json` — declarative base settings, merged (not symlinked) into
   the live, Claude-mutated `~/.claude/settings.json` on every `hms` via
   `home.activation.mergeClaudeSettings` (`default.nix:58-64`) running
@@ -60,10 +64,11 @@ skills, agents, and settings from this directory.
   repo pinned off the Nix-set style that way. Custom styles also silently
   disappear under `--safe-mode`/`CLAUDE_CODE_SIMPLE` (built-ins only, no
   error). Both are inherent to Claude Code, not bugs in this module.
-- `repoMirrorGuardHook` add-if-absents into `hooks.PreToolUse` the same way
-  `herdrWorkspaceTicketHook` does for `UserPromptSubmit` — that key is also
-  owned outside Nix (a `clyde` entry), so it can't be declared in
-  `settings.json` directly. See `rules/repo-mirrors.md` for what it guards.
+- `repoMirrorGuardHook` upserts into `hooks.PreToolUse` — unconditionally
+  strips any matching entry then re-appends, unlike `herdrWorkspaceTicketHook`
+  which appends only if absent — since that key is also owned outside Nix (a
+  `clyde` entry) and can't be declared in `settings.json` directly. See
+  `rules/repo-mirrors.md` for what it guards.
 - Auto-memory (`autoMemoryEnabled: false` in `settings.json`) is intentionally
   off — see the root `AGENTS.md` Doc Contract for why user-authored
   memory.md/rules were chosen over Claude-authored auto-memory for this setup.

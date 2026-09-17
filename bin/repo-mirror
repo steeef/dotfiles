@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Local read-only mirror cache for hot GitHub repos (see
-# nix/home/claude/rules/repo-mirrors.md for when/why to use this).
+# See rules/repo-mirrors.md for when/why.
 set -euo pipefail
 
-# fail fast instead of hanging on an interactive credential prompt
+# avoids hanging on an auth prompt
 export GIT_TERMINAL_PROMPT=0
+export GIT_ASKPASS=/bin/echo
 
 CACHE_ROOT="${REPO_MIRROR_CACHE:-$HOME/.cache/repo-mirrors}"
 
@@ -17,6 +17,7 @@ usage() {
 [ $# -eq 2 ] || usage
 cmd="$1"
 slug="$2"
+[[ "$slug" =~ ^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$ && "$slug" != *..* ]] || usage
 dir="$CACHE_ROOT/$slug"
 
 case "$cmd" in
@@ -25,6 +26,13 @@ case "$cmd" in
     ;;
   sync)
     mkdir -p "$(dirname "$dir")"
+    lock="$dir.lock"
+    if ! mkdir "$lock" 2>/dev/null; then
+      echo "repo-mirror: sync already in progress for $slug (stuck? rm -rf ${dir}*)" >&2
+      exit 1
+    fi
+    trap 'rmdir "$lock" 2>/dev/null' EXIT
+
     if [ ! -d "$dir/.git" ]; then
       if ! git clone "https://github.com/$slug.git" "$dir"; then
         rm -rf "$dir"
@@ -32,13 +40,13 @@ case "$cmd" in
         exit 1
       fi
     fi
-    # re-assert every sync: covers a pre-existing dir or a reset remote
+    # guards a pre-existing or reset remote
     git -C "$dir" remote set-url --push origin no_push
     if ! git -C "$dir" fetch --prune origin; then
       echo "repo-mirror: fetch failed for $slug, cache left untouched" >&2
       exit 1
     fi
-    # self-heal origin/HEAD if the upstream default branch was renamed
+    # recovers from an upstream branch rename
     git -C "$dir" remote set-head origin -a >/dev/null 2>&1 || true
     branch=$(git -C "$dir" symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')
     git -C "$dir" checkout -q "$branch"

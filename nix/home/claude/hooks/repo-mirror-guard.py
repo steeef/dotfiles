@@ -9,7 +9,6 @@ import sys
 REPO_MIRROR = os.path.expanduser("~/.bin/repo-mirror")
 SLUG = re.compile(r"^/?repos/([\w.-]+/[\w.-]+)")
 REPO_FLAG = re.compile(r"repo:([\w.-]+/[\w.-]+)")
-GRAPHQL_OWNER_NAME = re.compile(r'owner:\s*"([\w.-]+)".*?name:\s*"([\w.-]+)"', re.DOTALL)
 
 
 def _tokens(command):
@@ -19,31 +18,55 @@ def _tokens(command):
         return command.split()
 
 
-def extract_slug(command):
+def _is_gh(token):
+    return os.path.basename(token) == "gh"
+
+
+def _repo_slugs_from_search(tokens):
+    slugs = []
+    for i, token in enumerate(tokens):
+        if token in ("--repo", "-R") and i + 1 < len(tokens):
+            slugs.append(tokens[i + 1])
+        elif token.startswith("--repo="):
+            slugs.append(token.split("=", 1)[1])
+        else:
+            match = REPO_FLAG.search(token)
+            if match:
+                slugs.append(match.group(1))
+    return slugs
+
+
+def _graphql_owner_name(tokens):
+    owner = name = None
+    for i, token in enumerate(tokens):
+        if token == "-F" and i + 1 < len(tokens):
+            key, _, value = tokens[i + 1].partition("=")
+            if key == "owner":
+                owner = value
+            elif key == "name":
+                name = value
+    return f"{owner}/{name}" if owner and name else None
+
+
+def extract_slugs(command):
     tokens = _tokens(command)
-    if "gh" not in tokens:
-        return None
+    if not any(_is_gh(t) for t in tokens):
+        return []
 
     if "api" in tokens:
         for token in tokens:
             match = SLUG.match(token)
             if match:
-                return match.group(1)
-        match = GRAPHQL_OWNER_NAME.search(command)
-        if match:
-            return f"{match.group(1)}/{match.group(2)}"
+                return [match.group(1)]
+        if "graphql" in tokens:
+            slug = _graphql_owner_name(tokens)
+            if slug:
+                return [slug]
 
-    if "search" in tokens and "code" in tokens:
-        for i, token in enumerate(tokens):
-            if token in ("--repo", "-R") and i + 1 < len(tokens):
-                return tokens[i + 1]
-            if token.startswith("--repo="):
-                return token.split("=", 1)[1]
-            match = REPO_FLAG.search(token)
-            if match:
-                return match.group(1)
+    if any(a == "search" and b == "code" for a, b in zip(tokens, tokens[1:])):
+        return _repo_slugs_from_search(tokens)
 
-    return None
+    return []
 
 
 def mirrored_path(slug):
@@ -65,10 +88,15 @@ if __name__ == "__main__":
         sys.exit(0)
 
     command = data.get("tool_input", {}).get("command", "")
-    slug = extract_slug(command)
-    path = mirrored_path(slug) if slug else None
+    blocked = None
+    for slug in dict.fromkeys(extract_slugs(command)):
+        path = mirrored_path(slug)
+        if path:
+            blocked = (slug, path)
+            break
 
-    if path:
+    if blocked:
+        slug, path = blocked
         reason = (
             f"{slug} has a local mirror at {path} - read from there instead "
             f"(e.g. `git -C {path} grep ...`). Run `~/.bin/repo-mirror sync {slug}` "
