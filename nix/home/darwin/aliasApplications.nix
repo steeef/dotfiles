@@ -4,6 +4,9 @@
   pkgs,
   ...
 }: {
+  # avoid broken permission check (home-manager#8079)
+  targets.darwin.copyApps.enable = false;
+
   home.activation.aliasApplications = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (
     let
       apps = pkgs.buildEnv {
