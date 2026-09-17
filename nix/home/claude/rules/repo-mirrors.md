@@ -24,15 +24,17 @@
   Read/Grep/Glob-only agents (no Bash) use the cache too, and `--mirror` sets
   `remote.mirror=true`, so an argument-less `git push` there force-deletes
   remote branches.
-- A PreToolUse hook (`repo-mirror-guard.py`) blocks `gh api`/`gh search code`
-  calls against any repo that already has a mirror — sync and read from the
-  cache instead of working around the block. It matches on command text, so
-  it fails open (never blocks, silently) for: a nested invocation like
-  `bash -c "gh api ..."`; `gh api https://api.github.com/repos/...` (absolute
-  URL form); `gh api graphql`/`gh search code` using concatenated short
-  flags (`-Rorg/repo`, `-Fowner=x`) or `-f`/`--field`/`--raw-field` instead of
-  `-F`; or if `~/.bin/repo-mirror` is missing/broken. Accepted gaps for a
-  personal tool — not worth chasing further evasions.
+- A PreToolUse hook (`repo-mirror-guard.py`) only blocks `gh search code`
+  calls against a mirrored repo — not `gh api`. `gh search code`'s rate limit
+  (~10/min) is the actual constraint being solved; `gh api` volume is nowhere
+  near its own limit, so mechanically blocking it too isn't worth the
+  detection complexity (regex/GraphQL-flag scanning) it would take to do
+  reliably. Still worth running `sync` and reading `gh api`-style content
+  from the mirror by hand for the latency win — just not hook-enforced.
+  The hook matches on command text, so it fails open (never blocks, silently)
+  for a nested invocation like `bash -c "gh search code ..."`, a concatenated
+  short flag (`-Rorg/repo`), or if `~/.bin/repo-mirror` is missing/broken —
+  accepted gaps for a personal tool, not worth chasing further evasions.
 - Full clones, no eviction: each mirror keeps its whole history and nothing
   prunes old mirrors automatically. Rebuildable cache, not a source of truth
   — safe to delete `~/.cache/repo-mirrors/` (or one `<org>/<repo>*`, see

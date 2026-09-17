@@ -7,7 +7,6 @@ import subprocess
 import sys
 
 REPO_MIRROR = os.path.expanduser("~/.bin/repo-mirror")
-SLUG = re.compile(r"^/?repos/([\w.-]+/[\w.-]+)")
 REPO_FLAG = re.compile(r"repo:([\w.-]+/[\w.-]+)")
 
 
@@ -22,7 +21,13 @@ def _is_gh(token):
     return os.path.basename(token) == "gh"
 
 
-def _repo_slugs_from_search(tokens):
+def extract_slugs(command):
+    tokens = _tokens(command)
+    if not any(_is_gh(t) for t in tokens):
+        return []
+    if not any(a == "search" and b == "code" for a, b in zip(tokens, tokens[1:])):
+        return []
+
     slugs = []
     for i, token in enumerate(tokens):
         if token in ("--repo", "-R") and i + 1 < len(tokens):
@@ -34,39 +39,6 @@ def _repo_slugs_from_search(tokens):
             if match:
                 slugs.append(match.group(1))
     return slugs
-
-
-def _graphql_owner_name(tokens):
-    owner = name = None
-    for i, token in enumerate(tokens):
-        if token == "-F" and i + 1 < len(tokens):
-            key, _, value = tokens[i + 1].partition("=")
-            if key == "owner":
-                owner = value
-            elif key == "name":
-                name = value
-    return f"{owner}/{name}" if owner and name else None
-
-
-def extract_slugs(command):
-    tokens = _tokens(command)
-    if not any(_is_gh(t) for t in tokens):
-        return []
-
-    if "api" in tokens:
-        for token in tokens:
-            match = SLUG.match(token)
-            if match:
-                return [match.group(1)]
-        if "graphql" in tokens:
-            slug = _graphql_owner_name(tokens)
-            if slug:
-                return [slug]
-
-    if any(a == "search" and b == "code" for a, b in zip(tokens, tokens[1:])):
-        return _repo_slugs_from_search(tokens)
-
-    return []
 
 
 def mirrored_path(slug):
