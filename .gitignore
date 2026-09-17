@@ -8,6 +8,7 @@ maid/maid.log
 tmux/plugins/
 !tmux/plugins/tpm/
 karabiner/automatic_backups/
+__pycache__/
 result/
 *.zwc
 .DS_Store

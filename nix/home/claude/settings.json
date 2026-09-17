@@ -23,6 +23,7 @@
       "Bash(find:*)",
       "Bash(grep:*)",
       "Bash(prek run:*)",
+      "Bash(~/.bin/repo-mirror:*)",
       "Bash(rg:*)",
       "Bash(yamllint:*)",
       "Bash(yq:*)",

@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Local read-only mirror cache for hot GitHub repos (see
+# nix/home/claude/rules/repo-mirrors.md for when/why to use this).
+set -euo pipefail
+
+# fail fast instead of hanging on an interactive credential prompt
+export GIT_TERMINAL_PROMPT=0
+
+CACHE_ROOT="${REPO_MIRROR_CACHE:-$HOME/.cache/repo-mirrors}"
+
+usage() {
+  echo "usage: repo-mirror sync <org>/<repo>" >&2
+  echo "       repo-mirror path <org>/<repo>" >&2
+  exit 1
+}
+
+[ $# -eq 2 ] || usage
+cmd="$1"
+slug="$2"
+dir="$CACHE_ROOT/$slug"
+
+case "$cmd" in
+  path)
+    echo "$dir"
+    ;;
+  sync)
+    mkdir -p "$(dirname "$dir")"
+    if [ ! -d "$dir/.git" ]; then
+      if ! git clone "https://github.com/$slug.git" "$dir"; then
+        rm -rf "$dir"
+        echo "repo-mirror: clone failed for $slug" >&2
+        exit 1
+      fi
+    fi
+    # re-assert every sync: covers a pre-existing dir or a reset remote
+    git -C "$dir" remote set-url --push origin no_push
+    if ! git -C "$dir" fetch --prune origin; then
+      echo "repo-mirror: fetch failed for $slug, cache left untouched" >&2
+      exit 1
+    fi
+    # self-heal origin/HEAD if the upstream default branch was renamed
+    git -C "$dir" remote set-head origin -a >/dev/null 2>&1 || true
+    branch=$(git -C "$dir" symbolic-ref --short refs/remotes/origin/HEAD | sed 's@^origin/@@')
+    git -C "$dir" checkout -q "$branch"
+    git -C "$dir" reset -q --hard "origin/$branch"
+    git -C "$dir" gc --auto -q
+    sha=$(git -C "$dir" rev-parse HEAD)
+    echo "repo-mirror: $slug @ $sha ($(date -u +%FT%TZ))"
+    ;;
+  *)
+    usage
+    ;;
+esac

@@ -60,6 +60,10 @@ skills, agents, and settings from this directory.
   repo pinned off the Nix-set style that way. Custom styles also silently
   disappear under `--safe-mode`/`CLAUDE_CODE_SIMPLE` (built-ins only, no
   error). Both are inherent to Claude Code, not bugs in this module.
+- `repoMirrorGuardHook` add-if-absents into `hooks.PreToolUse` the same way
+  `herdrWorkspaceTicketHook` does for `UserPromptSubmit` — that key is also
+  owned outside Nix (a `clyde` entry), so it can't be declared in
+  `settings.json` directly. See `rules/repo-mirrors.md` for what it guards.
 - Auto-memory (`autoMemoryEnabled: false` in `settings.json`) is intentionally
   off — see the root `AGENTS.md` Doc Contract for why user-authored
   memory.md/rules were chosen over Claude-authored auto-memory for this setup.

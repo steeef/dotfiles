@@ -61,10 +61,13 @@ in {
     executable = true;
   };
 
-  # Non-blocking PreCompact hook: stdout is folded into compaction's
-  # summarization instructions (undocumented behavior — see AGENTS.md).
-  # Wired declaratively in settings.json's hooks.PreCompact, unlike the
-  # herdr hook above, since no installed plugin currently owns that key.
+  # PreToolUse guard for mirrored repos (see rules/repo-mirrors.md).
+  home.file.".claude/hooks/repo-mirror-guard.py" = {
+    source = ./hooks/repo-mirror-guard.py;
+    executable = true;
+  };
+
+  # See AGENTS.md for PreCompact hook rationale.
   home.file.".claude/hooks/compact-instructions.sh" = {
     source = ./hooks/compact-instructions.sh;
     executable = true;
@@ -191,6 +194,21 @@ in {
             | if any(.[]; (.hooks // [])[0].command? == $cmd) then .
               else . + [{hooks: [{type: "command", command: $cmd, timeout: 10}]}]
               end)
+      ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
+    fi
+  '';
+
+  # PreToolUse array is clobbered wholesale on merge.
+  home.activation.repoMirrorGuardHook = lib.hm.dag.entryAfter ["mergeClaudeSettings"] ''
+    cs="$HOME/.claude/settings.json"
+    jq="${pkgs.jq}/bin/jq"
+    cmd="${pkgs.python3}/bin/python3 $HOME/.claude/hooks/repo-mirror-guard.py"
+
+    if [ -f "$cs" ]; then
+      run "$jq" --arg cmd "$cmd" '
+        .hooks.PreToolUse = ((.hooks.PreToolUse // [])
+          | map(select(((.hooks // [])[0].command? // "") | test("repo-mirror-guard\\.py") | not))
+          | . + [{matcher: "Bash", hooks: [{type: "command", command: $cmd, timeout: 5}]}])
       ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
     fi
   '';
