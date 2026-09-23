@@ -78,18 +78,6 @@ in {
   };
 
   # Agent definitions (Nix-managed)
-  home.file.".claude/agents/batch-reader.md" = {
-    source = ./agents/batch-reader.md;
-    force = true;
-  };
-  home.file.".claude/agents/budgeted-explore.md" = {
-    source = ./agents/budgeted-explore.md;
-    force = true;
-  };
-  home.file.".claude/agents/fable-reviewer.md" = {
-    source = ./agents/fable-reviewer.md;
-    force = true;
-  };
   home.file.".claude/agents/opus-reviewer.md" = {
     source = ./agents/opus-reviewer.md;
     force = true;

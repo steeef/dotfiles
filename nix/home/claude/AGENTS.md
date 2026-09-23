@@ -13,7 +13,7 @@ skills, agents, and settings from this directory.
   Nix). Unconditional files (worktrees, CodeGraph, CLI gotchas, config/infra)
   load every session like `memory.md`.
 - `agents/*.md` → `~/.claude/agents/*.md` (symlinked individually,
-  `default.nix:40-51`).
+  `default.nix:81-84`).
 - `output-styles/*.md` → `~/.claude/output-styles/*.md` via the module's
   native `outputStyles` attrset option (`default.nix`, near `context`). The
   attr name sets the destination filename; the active-style lookup key is
