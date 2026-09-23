@@ -18,8 +18,9 @@ prompt="$(printf '%s' "$hook_input" | jq -r '.prompt // empty' 2>/dev/null || tr
 # user entries yet) means this is turn #1; anything else means it's later.
 transcript_path="$(printf '%s' "$hook_input" | jq -r '.transcript_path // empty' 2>/dev/null || true)"
 first_prompt="$(jq -rs '
-  ([.[] | select(.type=="user")] | .[0].message.content) as $c
-  | if ($c | type) == "string" then $c else "" end
+  [.[] | select(.type=="user") | .message.content | select(type == "string")
+    | select(startswith("<local-command") or startswith("<command-name>") | not)]
+  | .[0] // ""
 ' "$transcript_path" 2>/dev/null || true)"
 [ -z "$first_prompt" ] || [ "$first_prompt" = "$prompt" ] || exit 0
 
