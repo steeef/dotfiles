@@ -15,7 +15,11 @@ below are guidelines, not gates; don't rename existing tickets to match.
   [ACTION]." State purpose and beneficiary, not just the task.
 - **Acceptance criteria (what)**: SMART, descriptive, achievable — the Definition
   of Done. Omit implicit requirements (e.g. "write unit tests") that apply to
-  every ticket.
+  every ticket. Goes in the dedicated Acceptance Criteria field, not folded
+  into the description — description is a brief what-and-why, not an
+  implementation plan or a second home for AC. If the project's issue type has
+  no AC field, a clearly labeled `## Acceptance Criteria` section in the
+  description is the fallback.
 - **Resources (how)**: link planning docs, designs (Figma), tech specs, Slack
   threads/email subjects, points of contact. Long material (runbooks, execution
   plans, agent transcripts) belongs here too, not pasted into the description or
