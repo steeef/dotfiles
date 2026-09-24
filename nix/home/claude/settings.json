@@ -32,8 +32,7 @@
       "Bash(~/.bin/repo-mirror:*)",
       "Bash(rg:*)",
       "Bash(yamllint:*)",
-      "Bash(yq:*)",
-      "mcp__codegraph"
+      "Bash(yq:*)"
     ],
     "deny": [
       "Bash(pre-commit:*)",

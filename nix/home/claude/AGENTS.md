@@ -10,7 +10,7 @@ skills, agents, and settings from this directory.
 - `rules/` → `~/.claude/rules/*.md` (symlinked individually via `rulesDir`).
   One topic per file; path-scoped files carry `paths:` frontmatter and only
   load when Claude reads a matching file (Terraform, Python, Node, Docker,
-  Nix). Unconditional files (worktrees, CodeGraph, CLI gotchas, config/infra)
+  Nix). Unconditional files (worktrees, CLI gotchas, config/infra)
   load every session like `memory.md`.
 - `agents/*.md` → `~/.claude/agents/*.md` (symlinked individually,
   `default.nix:81-84`).
@@ -40,13 +40,9 @@ skills, agents, and settings from this directory.
   clobbered.
 - `programs.claude-code.mcpServers` emits a `--plugin-dir` plugin whose MCP
   server shows in `claude mcp list` but never loads into a real session
-  (verified). A `~/.claude.json` user-scoped server entry does load. codegraph
-  is therefore registered via the `home.activation.codegraphMcp` script
-  (`default.nix:96-123`), not `mcpServers`: it jq-writes codegraph into
-  `~/.claude.json` `.mcpServers` and add-if-absent's its `allowedMcpServers`
-  entry into `settings.json`, keyed on the stable `~/.nix-profile/bin/codegraph`
-  path (not the store path, which changes every version bump and would drop
-  the allowlist entry).
+  (verified). A `~/.claude.json` user-scoped server entry does load instead —
+  see git history (pre codegraph removal) for the jq-merge activation-script
+  pattern if another MCP needs this.
 - `allowedMcpServers` in the live `~/.claude/settings.json` is a strict
   allowlist — every MCP connector not listed (including claude.ai connectors
   and plugin-provided servers) is silently blocked in all directories.
