@@ -19,6 +19,5 @@ to match.
   threads/email subjects, points of contact.
 - **Linked issues**: use Jira's link-issues feature for `blocks`/`is blocked by`;
   surface dependencies up front, don't bury them in the description.
-- **Epic**: assign to the relevant epic for context; use a TECH DEBT or KTLO
-  label for one-off tasks with no natural epic.
+- **Epic**: assign to the relevant epic for context
 - **Blocked tickets**: flag/label clearly so they're visible in board swimlanes.
