@@ -32,7 +32,10 @@
       enabledPlugins =
         lib.genAttrs
         (map (p: "${p}@claude-hooks") claudeHooksPlugins)
-        (_: true);
+        (_: true)
+        // {
+          "ast-grep@ast-grep-marketplace" = true;
+        };
     };
   baseSettingsFile = jsonFormat.generate "claude-code-base-settings.json" (
     baseSettings // {"$schema" = "https://json.schemastore.org/claude-code-settings.json";}

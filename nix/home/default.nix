@@ -36,6 +36,7 @@
   home.packages = with pkgs; [
     _1password-cli
     alejandra
+    ast-grep # structural code search/lint/rewrite; used as a Claude Code skill/MCP
     aws-vault
     awscli2
     bash

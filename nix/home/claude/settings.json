@@ -5,6 +5,12 @@
         "source": "github",
         "repo": "steeef/claude-hooks"
       }
+    },
+    "ast-grep-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "ast-grep/agent-skill"
+      }
     }
   },
   "outputStyle": "Brief",
