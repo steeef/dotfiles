@@ -14,7 +14,7 @@ if ! command -v jq >/dev/null 2>&1; then
 fi
 
 status_json="$(herdr status --json)"
-restart_needed="$(jq -r '.server.restart_needed' <<<"$status_json")"
+restart_needed="$(jq -r '.server.restart_needed or .server.server_binary_stale' <<<"$status_json")"
 
 if [ "$restart_needed" != "true" ]; then
   echo "herdr server already up to date, nothing to do."
@@ -45,7 +45,7 @@ for _ in $(seq 1 15); do
   sleep 1
   status_json="$(herdr status --json 2>/dev/null || echo '{}')"
   if [ "$(jq -r '.server.compatible' <<<"$status_json")" = "true" ] &&
-    [ "$(jq -r '.server.restart_needed' <<<"$status_json")" = "false" ]; then
+    [ "$(jq -r '.server.restart_needed or .server.server_binary_stale' <<<"$status_json")" = "false" ]; then
     ok=true
     break
   fi
