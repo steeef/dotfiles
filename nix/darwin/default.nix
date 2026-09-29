@@ -95,11 +95,7 @@
         "asciinema"
         "docker-buildx"
         "docker-credential-helper-ecr"
-        {
-          name = "herdr";
-          start_service = true;
-          restart_service = "changed";
-        }
+        "herdr"
         "mas"
         "ncdu"
         "pam-reattach"
