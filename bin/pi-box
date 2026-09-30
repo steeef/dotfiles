@@ -40,11 +40,17 @@ tty=(-i)
 [[ -t 0 ]] && tty+=(-t)
 
 # container is the boundary; bwrap can't nest without extra caps
-exec docker run --rm "${tty[@]}" \
+state=$HOME/.pi/box
+mkdir -p "$state/sessions" "$state/permission-mode"
+
+exec docker run --rm --init "${tty[@]}" \
+  --cpus 2 \
   --cap-drop ALL \
   --security-opt no-new-privileges \
   --pids-limit 512 \
   --memory 4g \
   -v "$PWD:/workspace" \
-  -v "$HOME/.pi/agent/auth.json:/root/.pi/agent/auth.json:ro" \
+  -v "$HOME/.pi/agent/auth.json:/home/node/.pi/agent/auth.json:ro" \
+  -v "$state/sessions:/home/node/.pi/agent/sessions" \
+  -v "$state/permission-mode:/home/node/.pi/agent/permission-mode" \
   "$img" "$@"
