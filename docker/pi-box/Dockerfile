@@ -18,6 +18,8 @@ ARG PI_EXTENSIONS
 RUN --mount=type=cache,target=/home/node/.npm,uid=1000 \
   for e in ${PI_EXTENSIONS}; do pi install "$e"; done
 
+COPY --chown=node deepseek-offpeak.ts /home/node/.pi/agent/extensions/deepseek-offpeak.ts
+
 COPY --chown=node defaults.json /tmp/defaults.json
 RUN node -e '\
   const fs = require("fs"); \
