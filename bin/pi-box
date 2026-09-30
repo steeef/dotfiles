@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# usage: pi-box [--build|--outdated] [pi args...]
+set -euo pipefail
+
+ctx=$(dirname "$(readlink -f "$0")")/../docker/pi-box
+set -a
+# shellcheck source=/dev/null
+. "$ctx/versions.env"
+set +a
+
+hash=$(cat "$ctx/Dockerfile" "$ctx/versions.env" "$ctx/defaults.json" |
+  shasum | cut -c1-12)
+img=pi-sandbox:$hash
+
+force=
+case ${1:-} in
+  --outdated)
+    latest() { npm view "$1" version; }
+    echo "pi: $PI_VERSION -> $(latest @earendil-works/pi-coding-agent)"
+    for e in $PI_EXTENSIONS; do
+      n=${e#npm:}
+      n=${n%@*}
+      echo "$n: ${e##*@} -> $(latest "$n")"
+    done
+    exit
+    ;;
+  --build)
+    force=1
+    shift
+    ;;
+esac
+
+if [[ -n $force ]] || ! docker image inspect "$img" >/dev/null 2>&1; then
+  docker build ${force:+--pull} -t "$img" -t pi-sandbox:latest \
+    --build-arg NODE_IMAGE --build-arg PI_VERSION --build-arg PI_EXTENSIONS \
+    "$ctx"
+fi
+
+tty=(-i)
+[[ -t 0 ]] && tty+=(-t)
+
+# container is the boundary; bwrap can't nest without extra caps
+exec docker run --rm "${tty[@]}" \
+  --cap-drop ALL \
+  --security-opt no-new-privileges \
+  --pids-limit 512 \
+  --memory 4g \
+  -v "$PWD:/workspace" \
+  -v "$HOME/.pi/agent/auth.json:/root/.pi/agent/auth.json:ro" \
+  "$img" "$@"

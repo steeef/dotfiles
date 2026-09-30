@@ -30,6 +30,9 @@ module — manual edits outside Nix get overwritten.
 - docs/cli-troubleshooting.md — full derivations for the one-line pointers
   in nix/home/claude/rules/cli-gotchas.md (codex stdin hangs, MCP spawn/
   shadowing/config-key gotchas).
+- docker/pi-box/ — sandboxed pi image; bump pi, extensions, or base
+  image in versions.env, then run `bin/pi-box` (rebuilds on change;
+  `--outdated` lists newer versions, `--build` forces a fresh pull).
 - docs/herdr-stuck-multichoice-prompt.md — open bug: Claude Code
   multiple-choice prompts sometimes hang in herdr/tmux (only Ctrl-C
   escapes); hypotheses and a live-capture checklist for next occurrence.

@@ -1,0 +1,8 @@
+{
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-flash",
+  "defaultThinkingLevel": "low",
+  "modelThinkingLevels": {
+    "deepseek/deepseek-v4-pro": "high"
+  }
+}
