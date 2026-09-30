@@ -152,6 +152,7 @@
     ./nix-index.nix
     ./oh-my-posh
     ./opencode.nix
+    ./pi.nix
     ./ripgrep.nix
     ./rsnapshot.nix
     ./symlinks.nix

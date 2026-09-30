@@ -7,12 +7,14 @@
       "https://gemini-cli-nix.cachix.org"
       "https://claude-code.cachix.org"
       "https://codex-cli.cachix.org"
+      "https://cache.numtide.com"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "gemini-cli-nix.cachix.org-1:DzAIhrYktyRtR1OO0KjyYEKR5hjwsdZU2NwHlEBCcvI="
       "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
       "codex-cli.cachix.org-1:1Br3H1hHoRYG22n//cGKJOk3cQXgYobUel6O8DgSing="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     ];
   };
 
@@ -30,6 +32,7 @@
     claude-code.url = "github:sadjow/claude-code-nix";
     codex-cli.url = "github:sadjow/codex-cli-nix";
     gemini-cli.url = "github:sadjow/gemini-cli-nix";
+    llm-agents.url = "github:numtide/llm-agents.nix";
     antigravity-cli.url = "github:Hy4ri/antigravity-flake";
     mkalias = {
       url = "github:reckenrode/mkalias";
