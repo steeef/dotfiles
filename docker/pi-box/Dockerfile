@@ -27,4 +27,5 @@ RUN node -e '\
   fs.writeFileSync(f, JSON.stringify(s, null, 2));' \
   && rm /tmp/defaults.json
 
+# bwrap can't nest in container
 ENTRYPOINT ["pi", "--no-sandbox"]

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# usage: pi-box [--build|--outdated] [pi args...]
+# usage: pi-box [--outdated] [pi args...]
 set -euo pipefail
 
 ctx=$(dirname "$(readlink -f "$0")")/../docker/pi-box
@@ -8,42 +8,27 @@ set -a
 . "$ctx/versions.env"
 set +a
 
-hash=$(cat "$ctx/Dockerfile" "$ctx/versions.env" "$ctx/defaults.json" |
-  shasum | cut -c1-12)
-img=pi-sandbox:$hash
-
-force=
-case ${1:-} in
-  --outdated)
-    latest() { npm view "$1" version; }
-    echo "pi: $PI_VERSION -> $(latest @earendil-works/pi-coding-agent)"
-    for e in $PI_EXTENSIONS; do
-      n=${e#npm:}
-      n=${n%@*}
-      echo "$n: ${e##*@} -> $(latest "$n")"
-    done
-    exit
-    ;;
-  --build)
-    force=1
-    shift
-    ;;
-esac
-
-if [[ -n $force ]] || ! docker image inspect "$img" >/dev/null 2>&1; then
-  docker build ${force:+--pull} -t "$img" -t pi-sandbox:latest \
-    --build-arg NODE_IMAGE --build-arg PI_VERSION --build-arg PI_EXTENSIONS \
-    "$ctx"
+if [[ ${1:-} == --outdated ]]; then
+  echo "pi: $PI_VERSION -> $(npm view @earendil-works/pi-coding-agent version)"
+  for e in $PI_EXTENSIONS; do
+    n=${e#npm:}
+    n=${n%@*}
+    echo "$n: ${e##*@} -> $(npm view "$n" version)"
+  done
+  exit
 fi
 
-tty=(-i)
-[[ -t 0 ]] && tty+=(-t)
+docker build -q -t pi-sandbox \
+  --build-arg NODE_IMAGE --build-arg PI_VERSION --build-arg PI_EXTENSIONS \
+  "$ctx" >/dev/null
 
-# container is the boundary; bwrap can't nest without extra caps
+tty=-i
+[[ -t 0 ]] && tty=-it
+
 state=$HOME/.pi/box
 mkdir -p "$state/sessions" "$state/permission-mode"
 
-exec docker run --rm --init "${tty[@]}" \
+exec docker run --rm --init "$tty" \
   --cpus 2 \
   --cap-drop ALL \
   --security-opt no-new-privileges \
@@ -53,4 +38,4 @@ exec docker run --rm --init "${tty[@]}" \
   -v "$HOME/.pi/agent/auth.json:/home/node/.pi/agent/auth.json:ro" \
   -v "$state/sessions:/home/node/.pi/agent/sessions" \
   -v "$state/permission-mode:/home/node/.pi/agent/permission-mode" \
-  "$img" "$@"
+  pi-sandbox "$@"
