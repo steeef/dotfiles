@@ -18,6 +18,7 @@
   "includeGitInstructions": false,
   "spinnerTipsEnabled": false,
   "autoMemoryEnabled": false,
+  "cleanupPeriodDays": 365,
   "companyAnnouncements": [],
   "statusLine": {
     "type": "command",

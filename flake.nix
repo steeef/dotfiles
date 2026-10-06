@@ -148,7 +148,8 @@
             }
             nix-index-database.homeModules.nix-index
           ]
-          ++ getExtraModules args.system;
+          ++ getExtraModules args.system
+          ++ (args.extraModules or []);
 
         extraSpecialArgs = {
           inherit (args) machine;
@@ -185,6 +186,7 @@
 
     homeConfigurations."${username}@ltm-3914" = mkHomeConfig {
       system = "aarch64-darwin";
+      extraModules = [./nix/home/darwin/telemetry.nix];
     };
 
     homeConfigurations."${username}@sp" = mkHomeConfig {
