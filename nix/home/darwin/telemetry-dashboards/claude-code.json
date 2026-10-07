@@ -38,7 +38,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(max_over_time(claude_code_cost_usage_USD_total[$__range]))",
+          "expr": "sum(max_over_time(claude_code_cost_usage_USD_total{conductor_role=~\"$role\"}[$__range]))",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -73,7 +73,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(max_over_time(claude_code_token_usage_tokens_total{type!=\"cacheRead\"}[$__range]))",
+          "expr": "sum(max_over_time(claude_code_token_usage_tokens_total{type!=\"cacheRead\",conductor_role=~\"$role\"}[$__range]))",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -108,7 +108,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "count(count by (session_id) (last_over_time(claude_code_session_count_total[$__range])))",
+          "expr": "count(count by (session_id) (last_over_time(claude_code_session_count_total{conductor_role=~\"$role\"}[$__range])))",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -143,7 +143,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(max_over_time(claude_code_active_time_seconds_total[$__range])) / 3600",
+          "expr": "sum(max_over_time(claude_code_active_time_seconds_total{conductor_role=~\"$role\"}[$__range])) / 3600",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -185,7 +185,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum by (model) (max_over_time(claude_code_cost_usage_USD_total[$__interval] offset -$__interval))",
+          "expr": "sum by (model) (max_over_time(claude_code_cost_usage_USD_total{conductor_role=~\"$role\"}[$__interval] offset -$__interval))",
           "legendFormat": "{{model}}",
           "refId": "A"
         }
@@ -225,7 +225,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum by (type) (max_over_time(claude_code_token_usage_tokens_total[$__interval] offset -$__interval))",
+          "expr": "sum by (type) (max_over_time(claude_code_token_usage_tokens_total{conductor_role=~\"$role\"}[$__interval] offset -$__interval))",
           "legendFormat": "{{type}}",
           "refId": "A"
         }
@@ -265,7 +265,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(max_over_time(claude_code_active_time_seconds_total[$__interval] offset -$__interval)) / 3600",
+          "expr": "sum(max_over_time(claude_code_active_time_seconds_total{conductor_role=~\"$role\"}[$__interval] offset -$__interval)) / 3600",
           "legendFormat": "active",
           "refId": "A"
         }
@@ -318,7 +318,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "topk(15, sum by (session_id) (max_over_time(claude_code_cost_usage_USD_total[$__range])))",
+          "expr": "topk(15, sum by (session_id) (max_over_time(claude_code_cost_usage_USD_total{conductor_role=~\"$role\"}[$__range])))",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -491,5 +491,31 @@
         }
       ]
     }
-  ]
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "role",
+        "label": "Role",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "query": {
+          "query": "label_values(claude_code_session_count_total, conductor_role)",
+          "refId": "role"
+        },
+        "definition": "label_values(claude_code_session_count_total, conductor_role)",
+        "includeAll": true,
+        "allValue": ".*",
+        "multi": false,
+        "refresh": 2,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        }
+      }
+    ]
+  }
 }

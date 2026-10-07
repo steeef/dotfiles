@@ -9,6 +9,9 @@
   promConfig = pkgs.writeText "prometheus.yml" ''
     global:
       scrape_interval: 1m
+    otlp:
+      promote_resource_attributes:
+        - conductor.role
   '';
 
   lokiConfig = pkgs.writeText "loki.yaml" ''
@@ -78,6 +81,9 @@
       '';
     }
   ];
+  summarizerClaude = pkgs.writeShellScript "claude-summarizer" ''
+    exec env OTEL_RESOURCE_ATTRIBUTES=conductor.role=summarizer claude "$@"
+  '';
   otelEnv = {
     CLAUDE_CODE_ENABLE_TELEMETRY = "1";
     OTEL_METRICS_EXPORTER = "otlp";
@@ -97,7 +103,7 @@ in {
   home.activation.claudeTelemetrySettingsEnv = config.lib.dag.entryAfter ["mergeClaudeSettings"] ''
     cs="$HOME/.claude/settings.json"
     if [ -f "$cs" ]; then
-      run ${pkgs.jq}/bin/jq --argjson env '${builtins.toJSON otelEnv}' '.env += $env' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
+      run ${pkgs.jq}/bin/jq --argjson env '${builtins.toJSON (otelEnv // {CLAUDE_PATH = "${summarizerClaude}";})}' '.env += $env' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
     fi
   '';
 
