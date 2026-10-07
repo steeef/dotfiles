@@ -160,6 +160,7 @@
         "uid": "prometheus"
       },
       "interval": "1d",
+      "timeFrom": "30d",
       "gridPos": {
         "x": 0,
         "y": 4,
@@ -200,6 +201,7 @@
         "uid": "prometheus"
       },
       "interval": "1d",
+      "timeFrom": "30d",
       "gridPos": {
         "x": 12,
         "y": 4,
@@ -240,6 +242,7 @@
         "uid": "prometheus"
       },
       "interval": "1d",
+      "timeFrom": "30d",
       "gridPos": {
         "x": 0,
         "y": 12,

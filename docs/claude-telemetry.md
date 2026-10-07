@@ -25,6 +25,8 @@ Defined in `nix/home/darwin/telemetry.nix`; attached only to
   Dashboard queries use `max_over_time`, not `increase()`, which drops each
   series' first sample. A session spanning midnight counts fully on each day.
 - Day buckets align to UTC midnight (5pm Pacific).
+- The three per-day panels pin `timeFrom: 30d` and ignore the dashboard range;
+  a 1d step has no points in short ranges ("Data outside time range").
 - `OTEL_LOG_TOOL_DETAILS=1` stores tool arguments (commands, paths) in Loki;
   needed for skill names. Drop it to stop storing them.
 - Metrics and events only exist from first setup; there is no backfill.
