@@ -17,6 +17,10 @@ Defined in `nix/home/darwin/telemetry.nix`; attached only to
   before `hms` carries `__HM_SESS_VARS_SOURCED=1` and never loads them; restart
   the terminal multiplexer. The Bash tool's `env` doesn't show `OTEL_*` even when
   the process has them; check Prometheus instead.
+- `claude -p` children (conductor `session-end.sh` summarizer) don't inherit
+  `OTEL_*`. The same vars are also merged into `~/.claude/settings.json` `env`
+  by `claudeTelemetrySettingsEnv` (`telemetry.nix`), so every Claude process
+  exports regardless of shell env.
 - Counters are cumulative (Prometheus rejects delta), one series per session.
   Dashboard queries use `max_over_time`, not `increase()`, which drops each
   series' first sample. A session spanning midnight counts fully on each day.

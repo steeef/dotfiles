@@ -78,8 +78,7 @@
       '';
     }
   ];
-in {
-  home.sessionVariables = {
+  otelEnv = {
     CLAUDE_CODE_ENABLE_TELEMETRY = "1";
     OTEL_METRICS_EXPORTER = "otlp";
     OTEL_EXPORTER_OTLP_PROTOCOL = "http/protobuf";
@@ -91,6 +90,16 @@ in {
     # Prometheus OTLP ingest rejects delta temporality
     OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE = "cumulative";
   };
+in {
+  home.sessionVariables = otelEnv;
+
+  # settings env reaches claude -p children that strip inherited OTEL_*
+  home.activation.claudeTelemetrySettingsEnv = config.lib.dag.entryAfter ["mergeClaudeSettings"] ''
+    cs="$HOME/.claude/settings.json"
+    if [ -f "$cs" ]; then
+      run ${pkgs.jq}/bin/jq --argjson env '${builtins.toJSON otelEnv}' '.env += $env' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
+    fi
+  '';
 
   home.activation.claudeTelemetryDirs = config.lib.dag.entryAfter ["writeBoundary"] ''
     run mkdir -p ${dataDir}/prometheus ${dataDir}/grafana ${dataDir}/loki ${logDir}
