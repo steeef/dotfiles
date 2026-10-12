@@ -84,7 +84,6 @@
     gnome-contacts
     gnome-maps
     gnome-music
-    gnome-photos
     gnome-text-editor
     gnome-tour
     gnome-weather
