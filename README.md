@@ -28,7 +28,7 @@ git clone <this-repo> ~/.dotfiles
 ./.dotfiles/bin/bootstrap.sh
 ```
 
-You can then use the alias `hms` to run `home-manager switch` to update things periodically.
+Afterwards, run `just switch` to update things periodically (`just --list` shows all tasks).
 
 # MacOS setup
 
@@ -70,7 +70,7 @@ sudo ln -sfn /etc/static/nix/nix.conf /etc/nix/nix.conf
 ./result/sw/bin/darwin-rebuild switch --flake ./.dotfiles
 ```
 
-after that the `dr` alias should be available to run `darwin-rebuild switch`.
+after that, `just darwin` runs `darwin-rebuild switch`.
 
 *NOTE:* if at any point you see errors like "Operation not permitted", it's likely you need to give `nix` `Full Disk
 Access` permissions (System Preferences/Settings -> Security & Privacy -> Privacy tab -> Full Disk Access).

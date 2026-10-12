@@ -15,8 +15,9 @@ module — manual edits outside Nix get overwritten.
 
 ## How
 
-- Verify: `nix flake check` — validates all flake outputs; new modules must
-  evaluate for every declared host.
+- Tasks: `just` (justfile) — run `just --list`; it's the only entry point for
+  switch, build, check, lint, fmt, update, and pi-box. Run `just check` after
+  adding a module; it must evaluate for every declared host.
 
 ## Index
 
@@ -31,8 +32,7 @@ module — manual edits outside Nix get overwritten.
   in nix/home/claude/rules/cli-gotchas.md (codex stdin hangs, MCP spawn/
   shadowing/config-key gotchas).
 - docker/pi-box/ — sandboxed pi image; bump pi, extensions, or base
-  image in versions.env, then run `bin/pi-box` (rebuilds on change;
-  `--outdated` lists newer versions).
+  image in versions.env (`just pi-outdated`, `just pi-box`).
 - docs/claude-telemetry.md — ltm-3914-only Prometheus/Loki/Grafana stack
   for Claude Code cost, token, tool, and skill metrics; env and query gotchas.
 - docs/herdr-stuck-multichoice-prompt.md — open bug: Claude Code
@@ -42,7 +42,7 @@ module — manual edits outside Nix get overwritten.
 ## Lessons
 
 - Commit subjects: short, imperative, lower-case (e.g. `add rust stuff`).
-- Don't hand-format; `.pre-commit-config.yaml` enforces style at commit time.
+- Don't hand-format; use `just fmt` / `just lint` (hooks enforce at commit).
 - Edit `AGENTS.md`, not `CLAUDE.md` — the latter is a symlink to it.
 
 ## Doc Contract

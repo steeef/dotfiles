@@ -14,7 +14,7 @@ Defined in `nix/home/darwin/telemetry.nix`; attached only to
 ## Gotchas
 
 - Claude Code gets its `OTEL_*` vars from `home.sessionVariables`. A shell started
-  before `hms` carries `__HM_SESS_VARS_SOURCED=1` and never loads them; restart
+  before `just switch` carries `__HM_SESS_VARS_SOURCED=1` and never loads them; restart
   the terminal multiplexer. The Bash tool's `env` doesn't show `OTEL_*` even when
   the process has them; check Prometheus instead.
 - `claude -p` children (conductor `session-end.sh` summarizer) don't inherit

@@ -25,7 +25,7 @@ skills, agents, and settings from this directory.
   is per-script (declared directly or via an activation script) — see
   Gotchas below for each one's approach and why.
 - `settings.json` — declarative base settings, merged (not symlinked) into
-  the live, Claude-mutated `~/.claude/settings.json` on every `hms` via
+  the live, Claude-mutated `~/.claude/settings.json` on every `just switch` via
   `home.activation.mergeClaudeSettings` (`default.nix:58-64`) running
   `merge-settings.sh`. A plain symlink would break because Claude Code writes
   to this file at runtime (plugin installs, MCP allowlist edits).
@@ -56,7 +56,7 @@ skills, agents, and settings from this directory.
   `readlink -f $(command -v claude)` if a nix-managed MCP disappears.
 - Switching output style via `/config` or the picker writes to that project's
   `.claude/settings.local.json`, which outranks the user-scope
-  `~/.claude/settings.json` this module manages — `hms` can never reclaim a
+  `~/.claude/settings.json` this module manages — `just switch` can never reclaim a
   repo pinned off the Nix-set style that way. Custom styles also silently
   disappear under `--safe-mode`/`CLAUDE_CODE_SIMPLE` (built-ins only, no
   error). Both are inherent to Claude Code, not bugs in this module.
@@ -74,6 +74,6 @@ skills, agents, and settings from this directory.
   installed binary. `hooks.PreCompact` is declared directly (unlike the
   `UserPromptSubmit` hook above) since no installed plugin currently owns
   that key — a future runtime-added `PreCompact` hook would be silently
-  wiped on the next `hms` (same array-wholesale-replace mechanism as the
+  wiped on the next `just switch` (same array-wholesale-replace mechanism as the
   `allowedMcpServers` gotcha above). Full derivation and re-verification
   steps: `docs/claude-code-autocompact.md`.
