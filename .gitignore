@@ -16,3 +16,4 @@ result/
 
 # AI session handoffs — ephemeral by default
 ai_docs/handoffs/
+/result
