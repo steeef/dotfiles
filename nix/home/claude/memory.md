@@ -6,17 +6,6 @@ Update global Claude memory: cross-cutting instructions → edit `~/.dotfiles/ni
 - First line of commit message must be 50 characters or less.
 - Write commit messages as if a person wrote them — no mention of Claude, Claude Code, or AI.
 
-# GitHub pull requests
-
-- For GitHub remotes, always create PRs in draft mode first (`--draft`). For Forgejo remotes, draft mode is unsupported via CLI — create as open.
-- Leave a PR in draft through any blocked/pending state; surface the blocker and ask before doing anything (`gh pr ready`, merging) to route around it. Draft status is a deliberate gate.
-- Prefix comments on GitHub PRs or issues with `:robot: From Claude Code:`.
-- Write PR/issue description and comment body prose one paragraph per line — GitHub renders in-paragraph newlines as `<br>` in these fields, so column-wrapping shows as broken lines.
-- Always include the full PR URL, not just "PR #123", whenever creating, updating, or referencing a PR — surface it directly in chat as a clickable link the user doesn't have to dig for.
-- Keep PR descriptions to a short summary plus the essentials — skip padding sections and diff-by-diff restatement.
-- If a Jira ticket is associated with the work, put it on the first line of the PR description by itself.
-- Tailor tone and detail to the audience reading the PR — a reviewing SRE IC needs different context/detail than a CODEOWNER doing a merge-gate review.
-
 # Commit hooks
 
 - Use commit hooks as intended: fix failing checks rather than bypassing them with `--no-verify`.
