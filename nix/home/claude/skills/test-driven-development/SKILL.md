@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: Use when implementing any feature or bugfix, before writing implementation code
+description: Test-driven development, strict red-green-refactor: write a failing test before any production code. Use when implementing a feature, fixing a bug, refactoring, or changing behavior
 ---
 
 # Test-Driven Development
@@ -9,9 +9,9 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 ## When to Use
 
-**Always:** New features, bug fixes, refactoring, behavior changes.
+**Always:** New features, bug fixes, behavior changes, refactors that change behavior.
 
-**Exceptions (require human permission):** Throwaway prototypes, generated code, configuration-only changes.
+**Ask the user before skipping:** Throwaway prototypes, generated code, configuration-only changes.
 
 ## The Iron Law
 
@@ -27,7 +27,7 @@ Write one minimal test showing what should happen:
 
 - One behavior per test
 - Clear name describing the behavior
-- Real code, not mocks (unless unavoidable)
+- Real code, not mocks. If a mock is unavoidable, test real behavior through it, keep test-only methods out of production classes, and understand the dependency first.
 
 ### Verify RED — Watch It Fail
 
@@ -38,32 +38,34 @@ Run the test. Confirm:
 
 ### GREEN — Minimal Code
 
-Write the simplest code that makes the test pass.
-- Don't add features beyond the test
-- Don't refactor other code
-- Don't over-engineer (YAGNI)
+Write only what the failing test demands: the simplest code that makes it pass.
 
 ### Verify GREEN — Watch It Pass
 
 Run the test. Confirm:
 - New test passes
 - All other tests still pass
-- No errors or warnings in output
+- Output is clean, no errors or warnings
 
 Test fails? Fix code, not test. Other tests fail? Fix now.
 
+### Verify Strength — Mutation Check
+
+Target the changed files only.
+
+- **Repo has a mutation tool** (mutmut, Stryker, PITest): run it on those files.
+- **No tool:** plant 3-5 small bugs by hand in the changed code (flip a condition, shift a boundary, drop a return value). Run the tests after each; at least one must fail. Revert each bug before the next. Do not install a tool.
+
+Done when every surviving mutant is either killed by a new assertion (re-run to confirm) or is equivalent (no observable change) and noted in the final summary.
+
 ### REFACTOR — Clean Up
 
-Only after green:
+Only after green. Refactoring changes structure only; tests stay green throughout:
 - Remove duplication
 - Improve names
 - Extract helpers
 
-Keep tests green throughout. Don't add behavior.
-
-### Repeat
-
-Next failing test for next behavior.
+Then return to RED for the next behavior.
 
 ## Common Rationalizations
 
@@ -84,16 +86,6 @@ Next failing test for next behavior.
 | Must mock everything | Code too coupled. Use dependency injection. |
 | Test setup huge | Extract helpers. Still complex? Simplify design. |
 
-## Anti-Patterns
+## Before Marking Work Complete
 
-When introducing mocks or test helpers, watch for: testing mock behavior instead of real behavior, adding test-only methods to production classes, mocking without understanding the dependency.
-
-## Verification Checklist
-
-Before marking work complete:
-- [ ] Every new function/method has a test
-- [ ] Watched each test fail before implementing
-- [ ] Each test failed for expected reason (feature missing, not typo)
-- [ ] Wrote minimal code to pass each test
-- [ ] All tests pass with clean output
-- [ ] Edge cases and errors covered
+Every new function/method has a test, and edge cases and errors are covered.
