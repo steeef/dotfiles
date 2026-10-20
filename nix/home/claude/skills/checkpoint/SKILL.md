@@ -54,8 +54,10 @@ Reuse it as-is for Steps 3 and 4 - don't draft two different summaries.
 
 Identify whichever plan/research/tech-plan doc is already the active
 artifact for this ticket in the thoughts repo (the doc already open or being
-worked on this session - not a new handoff or session-log doc). If none
-exists, say so, skip this step, and continue. Edit it in place via `Bash`
+worked on this session - not a new handoff or session-log doc). Search file
+paths and file contents for the ticket key, and read the ticket description
+and comments for thoughts links. Only when all three come up empty, say none
+exists, skip this step, and continue. Edit it in place via `Bash`
 (`sed -i`, `printf '…' >>`; no heredocs or `&&` chains, the guard rejects
 them as too complex), not `Edit`/`Write`: in a worktree session the built-in
 isolation rejects `Edit`/`Write` on the thoughts clone. Check off completed
