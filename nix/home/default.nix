@@ -79,7 +79,7 @@
     postgresql
     postgresql.pg_config # pg_config for psycopg2 compilation
     postgresql.dev # headers for psycopg2 compilation
-    python313
+    (python3.withPackages (ps: [ps.pyyaml])) # pyyaml for repo pre-commit hooks
     pyright
     rdiff-backup
     rename
