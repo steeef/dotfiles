@@ -57,7 +57,7 @@
     username = "sprice";
 
     getHomeDirectory = system:
-      with nixpkgs.legacyPackages.${system}.stdenv;
+      with nixpkgs.legacyPackages.${system}.stdenv.hostPlatform;
         if isDarwin
         then "/Users/${username}"
         else if isLinux
@@ -65,7 +65,7 @@
         else "";
 
     getExtraModules = system:
-      with nixpkgs.legacyPackages.${system}.stdenv;
+      with nixpkgs.legacyPackages.${system}.stdenv.hostPlatform;
         if isDarwin || isAarch64
         then [./nix/home/darwin]
         else if isLinux
