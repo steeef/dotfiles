@@ -53,9 +53,5 @@
       enable = true;
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/yamllint.yaml";
     };
-    ".config/opencode/plugin" = {
-      enable = true;
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/opencode/plugin";
-    };
   };
 }

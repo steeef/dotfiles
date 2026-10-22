@@ -136,15 +136,11 @@
     ./atuin.nix
     ./bat.nix
     ./btop
-    ./claude
-    ./codex.nix
     ./direnv.nix
     ./directories.nix
     ./editorconfig.nix
     ./firefox
     ./fzf.nix
-    ./antigravity.nix
-    ./gemini.nix
     ./gh.nix
     ./git
     ./granted.nix
@@ -152,7 +148,6 @@
     ./neovim.nix
     ./nix-index.nix
     ./oh-my-posh
-    ./opencode.nix
     ./pi.nix
     ./ripgrep.nix
     ./rsnapshot.nix

@@ -25,6 +25,8 @@
   };
 
   imports = [
+    ../claude
+    ../codex.nix
     ./iterm2
     ./aliasApplications.nix
     ./symlinks.nix
