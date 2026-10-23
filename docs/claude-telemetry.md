@@ -29,6 +29,10 @@ Defined in `nix/home/darwin/telemetry.nix`; attached only to
   a 1d step has no points in short ranges ("Data outside time range").
 - `OTEL_LOG_TOOL_DETAILS=1` stores tool arguments (commands, paths) in Loki;
   needed for skill names. Drop it to stop storing them.
+- Grafana 13 no longer bundles the Prometheus/Loki datasources; `telemetry.nix`
+  supplies them via `GF_PATHS_PLUGINS`. Empty panels plus `plugin.notRegistered`
+  in `grafana.log` means they're missing. Grafana's `backgroundinstaller` errors
+  for other plugins (jaeger etc.) are harmless noise.
 - Metrics and events only exist from first setup; there is no backfill.
 
 ## Why OTLP, where vars live

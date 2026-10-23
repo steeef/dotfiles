@@ -52,6 +52,11 @@
       reporting_enabled: false
   '';
 
+  plugins = pkgs.linkFarm "grafana-plugins" (map (p: {
+    name = p.pname;
+    path = p;
+  }) [pkgs.grafanaPlugins.prometheus pkgs.grafanaPlugins.loki]);
+
   provisioning = pkgs.linkFarm "grafana-provisioning" [
     {
       name = "datasources/prometheus.yaml";
@@ -154,6 +159,7 @@ in {
       EnvironmentVariables = {
         GF_PATHS_DATA = "${dataDir}/grafana";
         GF_PATHS_LOGS = logDir;
+        GF_PATHS_PLUGINS = "${plugins}";
         GF_PATHS_PROVISIONING = "${provisioning}";
         GF_SERVER_HTTP_ADDR = "127.0.0.1";
         GF_AUTH_ANONYMOUS_ENABLED = "true";
