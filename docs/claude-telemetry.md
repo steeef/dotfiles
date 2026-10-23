@@ -31,8 +31,9 @@ Defined in `nix/home/darwin/telemetry.nix`; attached only to
   needed for skill names. Drop it to stop storing them.
 - Grafana 13 no longer bundles the Prometheus/Loki datasources; `telemetry.nix`
   supplies them via `GF_PATHS_PLUGINS`. Empty panels plus `plugin.notRegistered`
-  in `grafana.log` means they're missing. Grafana's `backgroundinstaller` errors
-  for other plugins (jaeger etc.) are harmless noise.
+  in `grafana.log` means they're missing. `GF_PLUGINS_PREINSTALL_DISABLED` must
+  stay set: the background installer "updates" them, fails on the read-only
+  store, and leaves them unregistered ~12s after start.
 - Metrics and events only exist from first setup; there is no backfill.
 
 ## Why OTLP, where vars live

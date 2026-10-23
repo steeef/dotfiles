@@ -160,6 +160,7 @@ in {
         GF_PATHS_DATA = "${dataDir}/grafana";
         GF_PATHS_LOGS = logDir;
         GF_PATHS_PLUGINS = "${plugins}";
+        GF_PLUGINS_PREINSTALL_DISABLED = "true";
         GF_PATHS_PROVISIONING = "${provisioning}";
         GF_SERVER_HTTP_ADDR = "127.0.0.1";
         GF_AUTH_ANONYMOUS_ENABLED = "true";
