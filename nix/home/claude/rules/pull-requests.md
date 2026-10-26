@@ -6,6 +6,7 @@ Applies whenever creating, editing, or referencing a PR (conductor's `pr` skill,
 
 - For GitHub remotes, always create PRs in draft mode first (`--draft`). For Forgejo remotes, draft mode is unsupported via CLI — create as open.
 - Leave a PR in draft through any blocked/pending state; surface the blocker and ask before doing anything (`gh pr ready`, merging) to route around it. Draft status is a deliberate gate.
+- Never request reviewers (`--reviewer`, `gh pr edit --add-reviewer`) unless asked. CODEOWNERS routes review; a plan or ticket listing reviewers is not an instruction to request them.
 - Prefix comments on GitHub PRs or issues with `:robot: From Claude Code:`.
 - Always include the full PR URL, not just "PR #123", whenever creating, updating, or referencing a PR — surface it directly in chat as a clickable link the user doesn't have to dig for.
 
