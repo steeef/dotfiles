@@ -6,6 +6,11 @@
 - Works reliably on 1.3.19-stable+ (verified working 2026-06-10: `acli jira auth status` → Authenticated). Always try acli first for Jira operations — don't assume it's broken. If it errors, run `acli jira auth status` and `/conductor:setup-acli` to fix in-session; fall back to Atlassian MCP tools only if acli genuinely can't be fixed.
 - IMPORTANT: `acli jira workitem comment create --body` mangles markdown/ADF formatting (raw `## syntax`, bare URLs) — the same failure mode as calling the Atlassian MCP comment tool without `contentFormat: "markdown"`. Never call acli's comment subcommand or the MCP comment tool directly, even for a one-off note or as a fallback when a ticket transition isn't reachable — always route through `Skill(skill='conductor:jira-management')`'s add-comment operation (`add-comment.sh`), which converts markdown to ADF correctly before posting.
 
+## aws (AWS CLI)
+- Run `aws` commands bare. The shell's `$AWS_PROFILE` is the right profile ~99% of the time, so `--profile` stays off the command line.
+- On an auth or access error, run `aws sts get-caller-identity` and report the identity it returns.
+- Ask about profiles only when the task names an account or environment the current identity can't reach.
+
 ## gh (GitHub CLI)
 - Two accounts are logged in: `stephen-tatari` (work, active by default) and `steeef` (personal). Personal repos (e.g. `steeef/dotfiles`, pushed via the `personal-github` SSH host alias) reject PR/issue creation under the work account with `GraphQL: must be a collaborator`.
 - Before PR/issue ops on a personal (steeef-owned) repo: `gh auth switch --hostname github.com --user steeef`, do the operation, then restore with `gh auth switch --hostname github.com --user stephen-tatari`. `git push` is unaffected (SSH via the `personal-github` alias). Check with `gh auth status`.
