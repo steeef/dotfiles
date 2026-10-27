@@ -1,7 +1,6 @@
 ---
 name: objective-codebase-research
 description: Answer numbered research questions about how the current codebase works, with file:line evidence and no recommendations. Input is a problem statement, acceptance criteria, and questions.
-disable-model-invocation: true
 context: fork
 allowed-tools:
 - Task(Explore)
