@@ -28,6 +28,7 @@ Update global Claude memory: cross-cutting instructions → edit `~/.dotfiles/ni
 
 # Workflow skills
 - Research: `/objective-codebase-research` — solution-blind codebase research from a problem and numbered questions.
+- Plan: `/mk-plan` writes a phased plan (stops there); `/do-plan` implements it phase by phase; `/validate-plan` checks it; `/iterate-plan` edits it.
 - TDD: `/test-driven-development` — failing test before impl; assertions verify observable behavior; tests survive refactors.
 - Review: `/convergent-review` — 3-5 parallel lenses (Functional/Constraints/Alternatives + Risk/Performance for complex); convergence = full clean round; max 3 rounds.
 - Second-opinion review: invoke the `llm:opus-reviewer` subagent (Agent tool, model pinned to opus) before committing to a nontrivial approach, after a recurring error, or before declaring a task/plan done. Fill in the input template (decision point, approach, what's been tried, errors, files touched, specific question) with real context, not a bare "review this file".
