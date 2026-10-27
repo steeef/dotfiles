@@ -42,3 +42,7 @@ pi-outdated:
 
 pi-box *args:
     bin/pi-box {{args}}
+
+# list claude skill names
+skills:
+    @ls -1 nix/home/claude/skills
