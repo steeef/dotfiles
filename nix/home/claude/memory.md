@@ -27,7 +27,7 @@ Update global Claude memory: cross-cutting instructions → edit `~/.dotfiles/ni
 - Use the repo's existing build/test/format/lint tools; introduce a new one only with strong justification.
 
 # Workflow skills
-- Research: `/extract-research-questions` (Q), `/objective-codebase-research` (R), `/research-and-questions` (chains Q+R).
+- Research: `/objective-codebase-research` (R), `/research-and-questions` (chains Q+R).
 - TDD: `/test-driven-development` — failing test before impl; assertions verify observable behavior; tests survive refactors.
 - Review: `/convergent-review` — 3-5 parallel lenses (Functional/Constraints/Alternatives + Risk/Performance for complex); convergence = full clean round; max 3 rounds.
 - Second-opinion review: invoke the `llm:opus-reviewer` subagent (Agent tool, model pinned to opus) before committing to a nontrivial approach, after a recurring error, or before declaring a task/plan done. Fill in the input template (decision point, approach, what's been tried, errors, files touched, specific question) with real context, not a bare "review this file".
