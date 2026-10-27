@@ -5,6 +5,7 @@
 ## acli (Jira CLI)
 - Works reliably on 1.3.19-stable+ (verified working 2026-06-10: `acli jira auth status` → Authenticated). Always try acli first for Jira operations — don't assume it's broken. If it errors, run `acli jira auth status` and `/conductor:setup-acli` to fix in-session; fall back to Atlassian MCP tools only if acli genuinely can't be fixed.
 - IMPORTANT: `acli jira workitem comment create --body` mangles markdown/ADF formatting (raw `## syntax`, bare URLs) — the same failure mode as calling the Atlassian MCP comment tool without `contentFormat: "markdown"`. Never call acli's comment subcommand or the MCP comment tool directly, even for a one-off note or as a fallback when a ticket transition isn't reachable — always route through `Skill(skill='conductor:jira-management')`'s add-comment operation (`add-comment.sh`), which converts markdown to ADF correctly before posting.
+- Editing an existing comment is allowed: `acli jira workitem comment update` has no skill wrapper, so convert the markdown first (`markdown_to_adf.py --comment file.md > c.json` in the jira-management skill's `scripts/`), then `acli jira workitem comment update --key KEY --id ID --body-adf c.json`. Never use `--body` or `--body-file` (plain text). Find the id with `fetch_comments.py`. Verified 2026-10-26 on SRE-4354.
 
 ## aws (AWS CLI)
 - Run `aws` commands bare. The shell's `$AWS_PROFILE` is the right profile ~99% of the time, so `--profile` stays off the command line.
