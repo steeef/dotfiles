@@ -27,7 +27,7 @@ Plan format: `references/plan-schema.md`. Legacy `### Task N` plans validate the
 
 ## Process
 
-1. Read the plan fully. Resolve each `repos:` entry (`org/repo`) to `~/wt/<repo>` if a worktree exists there, else `~/code/work/<repo>`. Without `repos:`, use the git repo containing the plan and say so. Check files and run commands only in those repos, never in the thoughts repo.
+1. Read the plan fully. Resolve each `repos:` entry (`org/repo`) to a worktree under `~/wt/<repo>/` (`~/wt/<repo>` itself is a bare container; list its worktrees with `git -C ~/wt/<repo>/.bare worktree list`) whose branch contains the plan's ticket key or slug; else a clone whose `origin` matches (`~/code/work/<repo>`; `steeef/dotfiles` is `~/.dotfiles`); else ask. Without `repos:`, use the git repo containing the plan and say so. Check files and run commands only in those repos, never in the thoughts repo.
 2. Per phase, run each backticked `Verify:` command in its repo. Use `git -C <path>` and `just --working-directory <path> <recipe>`; one plain command per call, no `cd` or `&&`. Capture exit code, the last 50 lines, and lines containing "error" or "fail". A command outside the allowed tools: report "not run: tool not permitted".
 3. Check that files the phase names exist and changed, via `git -C <repo> diff --stat <base>`.
 4. List `manual:` items as pending. Never mark them passed.
