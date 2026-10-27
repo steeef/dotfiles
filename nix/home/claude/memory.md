@@ -4,6 +4,7 @@ Update global Claude memory: cross-cutting instructions → edit `~/.dotfiles/ni
 # Git commits
 
 - First line of commit message must be 50 characters or less.
+- End commits you write with a blank line, then `Assisted-by: Claude <current model name> <noreply@anthropic.com>` (e.g. `Claude Sonnet 5.5`). Never `Co-Authored-By`.
 
 # Commit hooks
 

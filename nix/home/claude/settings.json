@@ -14,6 +14,9 @@
     }
   },
   "outputStyle": "Brief",
+  "attribution": {
+    "commit": ""
+  },
   "includeGitInstructions": false,
   "spinnerTipsEnabled": false,
   "autoMemoryEnabled": false,
