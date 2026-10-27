@@ -4,7 +4,6 @@ Update global Claude memory: cross-cutting instructions → edit `~/.dotfiles/ni
 # Git commits
 
 - First line of commit message must be 50 characters or less.
-- Write commit messages as if a person wrote them — no mention of Claude, Claude Code, or AI.
 
 # Commit hooks
 
