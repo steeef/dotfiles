@@ -1,104 +1,28 @@
 ---
 name: iterate-plan
-description: Make targeted edits to implementation plans - add tasks, modify steps, update context. Use when plan needs refinement after review or during execution.
+description: Make targeted edits to an implementation plan - add, modify, or remove a phase or step, or update context. Use when a plan needs refinement after review or during execution, e.g. "add a phase to the plan" or "update the plan after review".
 allowed-tools:
-
 - Read
 - Edit
 - Glob
-- Task(Explore)
-
+- Grep
 ---
 
 # Iterate Plan
 
-## Usage
-
 `/iterate-plan [plan-path] [edit-instructions]`
 
-## Plan Resolution
+## Resolve the plan
 
-If no path provided, search in order:
-
-1. `$HOME/.claude/plans/`
-2. `docs/plans/`
-3. `thoughts/shared/plans/`
-
-**Multiple matches:** Present numbered list, ask user to select.
-**No matches:** Ask user for explicit path.
-
-## Supported Plan Formats
-
-This command supports plans with:
-- `### Task N:` headings (e.g., `### Task 1: Create module`)
-- Numbered markdown lists (`1. First task`, `2. Second task`)
-- YAML task blocks under `## Tasks` or `## Implementation Tasks`
-
-**Unrecognized format:** Propose minimal diff and ask user to confirm before editing.
+No path given: Glob `plans/` in the thoughts project (`.thoughts.json` `THOUGHTS_ROOT`, walk up from cwd). Several matches: ask the user to pick. None: ask for a path.
 
 ## Process
 
-### 1. Load Plan
-- Read the entire plan file
-- Parse YAML frontmatter (preserve all fields)
-- Detect task numbering format
-- Note current task count
-
-### 2. Understand Edit Request
-- What type of edit? (add task, modify step, remove task, update context)
-- Where in the plan does it apply?
-- Does it affect task dependencies or numbering?
-
-### 3. Apply Surgical Edit
-Use Edit tool for precise changes:
-- Add task: Insert at correct position, renumber subsequent tasks
-- Modify step: Update only the affected step content
-- Remove task: Delete task, renumber subsequent tasks
-- Update context: Modify relevant section without touching tasks
-
-### 4. Verify Structure
-After edit, verify:
-- [ ] YAML frontmatter intact
-- [ ] Task numbering sequential (no gaps)
-- [ ] No broken cross-references
-- [ ] Plan still coherent
-
-### 5. Report Changes
-Summarize what was changed. Do NOT commit - user will commit when ready.
-
-## Edit Type Examples
-
-### Add Task
-
-```text
-Add task after Task 3: "Add input validation"
-→ Insert Task 4, renumber 4→5, 5→6, etc.
-```
-
-### Modify Step
-
-```text
-In Task 2, Step 3: change pytest command to include -v flag
-→ Edit only that step, preserve everything else
-```
-
-### Remove Task
-
-```text
-Remove Task 4
-→ Delete task, renumber 5→4, 6→5, etc.
-```
-
-### Update Context
-
-```text
-Update Architecture section to mention new dependency
-→ Edit Architecture section only
-```
-
-## Key Principles
-
-- **Surgical:** Change only what's needed
-- **Preserve:** Keep existing structure, frontmatter, formatting
-- **Sequential:** Maintain correct task numbering
-- **No auto-commit:** User controls when to commit
+1. Read the whole plan. Format is in `~/.claude/skills/validate-plan/references/plan-schema.md` (`### Phase N` or legacy `### Task N`). An unrecognized format: propose a minimal diff and ask before editing.
+2. Apply only the requested edit with Edit:
+   - Add or remove a phase or task: renumber the rest, and keep each phase's `Verify:` lines with it.
+   - Modify a step: touch only that step.
+   - Update context: touch no phases.
+   - Keep frontmatter intact. If an edit adds or removes a target repo, ask first, then update `repos:`.
+3. Grep the plan for each phase or task number you renumbered and fix stale references. Confirm numbering is sequential and frontmatter is intact.
+4. Report what changed. Do not commit; the user commits, or runs `thoughts:sync`.
