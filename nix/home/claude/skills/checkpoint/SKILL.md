@@ -1,6 +1,6 @@
 ---
 name: checkpoint
-description: Checkpoint the active ticket mid-session (write mode) or resume from a prior checkpoint (resume mode). Write - update its in-progress thoughts doc, post a Jira progress comment, and sync that ticket's thoughts files; use when the user says "checkpoint this", "save progress", "log where we are", or "add jira comment, update thoughts, sync thoughts". Resume - read the ticket, all its comments, and its linked thoughts; use when the user says "continue from checkpoint", "resume from checkpoint", or "pick up from the checkpoint" and names or implies a Jira ticket. A lone comment goes to conductor:jira-management, a lone sync to conductor:thoughts-sync, an end-of-session handoff to conductor:create-handoff.
+description: Checkpoint the active ticket mid-session (write mode) or resume from a prior checkpoint (resume mode). Write - update its in-progress thoughts doc, post a Jira progress comment, and sync that ticket's thoughts files; use when the user says "checkpoint this", "save progress", "log where we are", or "add jira comment, update thoughts, sync thoughts". Resume - read the ticket, all its comments, and its linked thoughts; use when the user says "continue from checkpoint", "resume from checkpoint", or "pick up from the checkpoint" and names or implies a Jira ticket. A lone comment goes to jira:manage, a lone sync to thoughts:sync.
 allowed-tools:
 - Skill
 - Read
@@ -16,14 +16,13 @@ else). Resume is read-only.
 
 ## Resume workflow
 
-1. Detect the ticket: key in the user's message, else session context or
-   branch name. If ambiguous, ask.
+1. Detect the ticket: key in the user's message, else the branch
+   name. If ambiguous, ask.
 2. Read the ticket and every comment via
-   `Skill(skill='conductor:jira-management')` (read operation, comments
-   included). Checkpoint comments are the `Done/Findings/Next` log.
+   `Skill(skill='jira:manage')` (read operation, comments included). Checkpoint comments are the `Done/Findings/Next` log.
 3. Collect thoughts: follow thoughts links in the description and comments,
    and find docs whose path contains the ticket key via
-   `Skill(skill='conductor:thoughts-discovery')`. Read the active
+   `Skill(skill='thoughts:discover')`. Read the active
    plan/research/tech-plan in full.
 4. Report in 5 lines or fewer: latest `Next:` from the newest checkpoint
    comment, open decisions, active thoughts doc path. Then stop and wait; do
@@ -33,7 +32,7 @@ else). Resume is read-only.
 
 ### Step 1: Detect the ticket
 
-Use session context (injected at startup), branch name, or a `[A-Z]+-\d+`
+Use the branch name or a `[A-Z]+-\d+`
 pattern already present in the conversation. If ambiguous, ask before
 proceeding.
 
@@ -66,16 +65,15 @@ path must contain the ticket key so Step 5 picks it up.
 
 ### Step 4: Add the Jira comment
 
-Call `Skill(skill='conductor:jira-management')` with an add-comment operation
-for the detected ticket, using the summary from Step 2. This is a
-Conductor-originated comment - prefix it `🤖 From Conductor:` per this
-project's convention. If the call fails, stop and report; skip Step 5 so
+Call `Skill(skill='jira:manage')` with an add-comment operation for the
+detected ticket, using the summary from Step 2, prefixed `🤖 From Claude Code:`
+(the prefix jira:manage requires). If the call fails, stop and report; skip Step 5 so
 the thoughts doc and Jira stay in step.
 
 ### Step 5: Sync thoughts
 
-Run the bundled script with the thoughts dir from session context, the
-ticket key, and a commit message. `projectId` is the top-level thoughts
+Run the bundled script with the thoughts dir (`THOUGHTS_ROOT` from
+`.thoughts.json`, walking up from cwd), the ticket key, and a commit message. `projectId` is the top-level thoughts
 subdir holding the Step 3 doc (e.g. `tatari-skills` for
 `<thoughts>/tatari-skills/plans/...`):
 
@@ -88,8 +86,7 @@ key, then runs `pull --rebase --autostash` and `push`. Other uncommitted
 files stay in the working tree. On a rebase conflict it exits nonzero;
 report the conflict to the user.
 
-Ticket-scoped, unlike `conductor:thoughts-sync`, which commits the whole
-thoughts repo.
+Ticket-scoped, unlike `thoughts:sync`, which commits the whole thoughts repo.
 
 ### Step 6: Report
 
