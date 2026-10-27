@@ -11,7 +11,7 @@ branch: <branch>
 repository: <repo-name>
 topic: <research-topic>
 tags: [<relevant>, <tags>]
-status: complete
+status: <complete, or partial if any question is open>
 ---
 
 # Research: <Topic>

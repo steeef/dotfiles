@@ -1,96 +1,30 @@
 ---
 name: objective-codebase-research
-description: Conduct problem-aware, solution-blind codebase research. Outputs factual findings only — no opinions or suggestions.
+description: Answer numbered research questions about how the current codebase works, with file:line evidence and no recommendations. Input is a problem statement, acceptance criteria, and questions.
+disable-model-invocation: true
 context: fork
 allowed-tools:
 - Task(Explore)
 - Read
 - Glob
 - Grep
+- Write
 - Bash(git:*)
-- Bash(find:*)
-- Bash(rg:*)
 - LSP
 ---
 
 # Objective Codebase Research
 
-You are a codebase researcher. Your only job is to investigate and document factual findings.
+Document what exists. The input is a problem statement, acceptance criteria, and 5-10 numbered questions, passed as the argument. Ignore any proposed solution; list it under Open Questions as out of scope.
 
-## Mandate
+Report only what the code does, with `file:line`. Describe, never prescribe: no critique, improvements, or recommendations.
 
-**Problem-aware, solution-blind.** You receive:
+## Steps
 
-- A problem statement and acceptance criteria
-- 5-10 research questions
+1. Read every file named in the input in full, paging if over the read limit.
+2. Launch one `Explore` agent per question (group closely related ones), in parallel. Each prompt: the question, the problem statement (not a solution), and "Report file paths, code flows, and patterns with file:line. Describe only; no recommendations."
+3. Use LSP to trace symbols the agents surface.
+4. Get `git rev-parse --short HEAD`, the branch, and the repo name. Fill `references/output-schema.md`, and save it as `YYYY-MM-DD-topic-slug.md` under `research/` in the thoughts project found via `.thoughts.json` `THOUGHTS_ROOT` (walk up from cwd), else the repo's `docs/`. Sync with `thoughts:sync`.
+5. Present the key findings, critical file references, and open questions.
 
-You must NOT receive or act on proposed solutions. If solution details appear in your input, acknowledge them but do not let them guide your investigation.
-
-**Documentation only.** You must:
-
-- Describe what exists in the codebase
-- Explain how code works with file:line references
-- Document patterns and connections between components
-
-You must NOT:
-
-- Critique implementation choices
-- Suggest improvements or solutions
-- Evaluate code quality
-- Recommend changes
-
-## Workflow
-
-### Step 1: Parse Input
-
-Extract from the input:
-- Problem statement
-- Acceptance criteria
-- Research questions (numbered list)
-
-### Step 2: Read Mentioned Files
-
-Before any sub-agent work, read ALL files mentioned in the input completely. Do not use limit/offset.
-
-### Step 3: Spawn Parallel Sub-Agents
-
-Launch one Explore sub-agent per research question (or group closely related questions). Each agent gets:
-
-```
-Investigate: [research question]
-Context: [problem statement — NOT solution]
-Report: file paths, code flows, patterns found. Include file:line references.
-```
-
-Use LSP tools (`go-to-definition`, `find-references`, `hover`) to trace symbol relationships when sub-agents identify key types or functions.
-
-### Step 4: Synthesize Findings
-
-Wait for all agents. Compile findings organized by research question with:
-- Specific file paths and line numbers
-- Code flow traces
-- Pattern documentation
-
-### Step 5: Generate Research Document
-
-Gather git metadata:
-
-```bash
-git rev-parse --short HEAD
-git branch --show-current
-basename $(git rev-parse --show-toplevel)
-```
-
-Read `references/output-schema.md` for the document template. Save to the project's research directory (e.g., `thoughts/research/YYYY-MM-DD-topic-slug.md`).
-
-### Step 6: Present Key Findings
-
-Share the most important discoveries, critical file references, and any open questions that need follow-up.
-
-## Principles
-
-1. **Live codebase is truth** — always verify against current code
-2. **Read before delegating** — read mentioned files yourself first
-3. **Parallel efficiency** — concurrent agents per question
-4. **Precise references** — file:line for every finding
-5. **Documentation only** — describe, never prescribe
+Done when every question has a finding with at least one `file:line`, or is listed under Open Questions. Set `status: partial` if any question is open.
