@@ -17,7 +17,7 @@ Defined in `nix/home/darwin/telemetry.nix`; attached only to
   before `just switch` carries `__HM_SESS_VARS_SOURCED=1` and never loads them; restart
   the terminal multiplexer. The Bash tool's `env` doesn't show `OTEL_*` even when
   the process has them; check Prometheus instead.
-- `claude -p` children (conductor `session-end.sh` summarizer) don't inherit
+- `claude -p` children don't inherit
   `OTEL_*`. The same vars are also merged into `~/.claude/settings.json` `env`
   by `claudeTelemetrySettingsEnv` (`telemetry.nix`), so every Claude process
   exports regardless of shell env.
@@ -43,17 +43,6 @@ Defined in `nix/home/darwin/telemetry.nix`; attached only to
 - `OTEL_*` live in `otelEnv` (`telemetry.nix`), applied twice: `home.sessionVariables`
   (shells) and settings.json `env` (GUI sessions, hook children).
 - Dropping a key from `otelEnv` does not remove it from settings.json; delete it by hand.
-
-## Summarizer tag
-
-- Settings `env` sets `CLAUDE_PATH` to a wrapper that adds
-  `OTEL_RESOURCE_ATTRIBUTES=conductor.role=summarizer`; conductor's
-  `summarize_session.py` reads `CLAUDE_PATH` for its `claude -p` child.
-- Prometheus promotes it to the label `conductor_role` (`otlp.promote_resource_attributes`,
-  new samples only); Loki: `| conductor_role="summarizer"`. Dashboard variable `Role`.
-- Keep `OTEL_RESOURCE_ATTRIBUTES` out of `otelEnv`; settings env would override the wrapper.
-- Fragile: relies on an undocumented conductor env var. If conductor uses
-  `CLAUDE_PATH` elsewhere, those runs get mislabeled.
 
 ## Verify
 
