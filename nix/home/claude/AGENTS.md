@@ -12,8 +12,6 @@ skills, agents, and settings from this directory.
   load when Claude reads a matching file (Terraform, Python, Node, Docker,
   Nix). Unconditional files (worktrees, CLI gotchas, config/infra)
   load every session like `memory.md`.
-- `agents/*.md` → `~/.claude/agents/*.md` (symlinked individually,
-  `default.nix:81-84`).
 - `output-styles/*.md` → `~/.claude/output-styles/*.md` via the module's
   native `outputStyles` attrset option (`default.nix`, near `context`). The
   attr name sets the destination filename; the active-style lookup key is

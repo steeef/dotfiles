@@ -20,7 +20,7 @@ Update global Claude memory: cross-cutting instructions → edit `~/.dotfiles/ni
 - State assumptions explicitly before coding; ask if ambiguous.
 - Research → plan → implement; don't skip phases on complex work.
 - Writing a plan is the deliverable — stop there; implementation is a separate step.
-- Get a second-model review (`opus-reviewer`) of any plan before presenting it as final.
+- Get a second-model review (`llm:opus-reviewer`) of any plan before presenting it as final.
 - Stop after 3 failed attempts and reassess.
 - Surgical edit test: every changed line must trace directly to the user's request.
 - Format shell commands for copy-paste: `\` line continuation, `&&` at start of continuation, target ~80 cols.
@@ -30,7 +30,7 @@ Update global Claude memory: cross-cutting instructions → edit `~/.dotfiles/ni
 - Research: `/extract-research-questions` (Q), `/objective-codebase-research` (R), `/research-and-questions` (chains Q+R).
 - TDD: `/test-driven-development` — failing test before impl; assertions verify observable behavior; tests survive refactors.
 - Review: `/convergent-review` — 3-5 parallel lenses (Functional/Constraints/Alternatives + Risk/Performance for complex); convergence = full clean round; max 3 rounds.
-- Second-opinion review: invoke the `opus-reviewer` subagent (Agent tool, model pinned to opus) before committing to a nontrivial approach, after a recurring error, or before declaring a task/plan done. Fill in the input template (decision point, approach, what's been tried, errors, files touched, specific question) with real context, not a bare "review this file".
+- Second-opinion review: invoke the `llm:opus-reviewer` subagent (Agent tool, model pinned to opus) before committing to a nontrivial approach, after a recurring error, or before declaring a task/plan done. Fill in the input template (decision point, approach, what's been tried, errors, files touched, specific question) with real context, not a bare "review this file".
 
 # Hooks + Task tool
 - Safety hooks block dangerous ops (rm, large file reads >500 lines) — delegate to the Task tool.
