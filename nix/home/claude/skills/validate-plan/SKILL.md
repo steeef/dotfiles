@@ -1,13 +1,15 @@
 ---
 name: validate-plan
-description: Verify implementation matches plan requirements - check success criteria, run verification commands, report gaps. Use before marking plan complete or creating PR.
+description: Verify an implementation matches its plan - run each phase's Verify checks in the plan's target repos and report gaps. Use before marking a plan complete or opening a PR.
 allowed-tools:
-
 - Read
 - Grep
 - Glob
 - Task(Explore)
 - Bash(git:*)
+- Bash(just:*)
+- Bash(prek:*)
+- Bash(pre-commit:*)
 - Bash(pytest:*)
 - Bash(npm:*)
 - Bash(cargo:*)
@@ -15,102 +17,41 @@ allowed-tools:
 - Bash(go:*)
 - Bash(hms:*)
 - Bash(home-manager:*)
-
 ---
 
 # Validate Plan
 
-## Usage
-
 `/validate-plan <plan-path>`
 
-## Supported Plan Schemas
-
-This command works with plans that have ANY of:
-
-1. `## Files to Modify` table with Create/Modify columns
-2. `### Task N:` sections with `- Create:` / `- Modify:` bullets
-3. `## Verification Checklist` with `- [ ]` items
-4. `## Success Criteria` section
-
-**Minimal fallback:** If none found, infer from:
-- `## Implementation Tasks` section → check mentioned file paths exist
-- Prompt user: "What command verifies this plan is complete?"
+Plan format: `references/plan-schema.md`. Legacy `### Task N` plans validate the same way, treating each task as a phase.
 
 ## Process
 
-### 1. Locate Repo Root
-- If plan is in a git repo, use repo root
-- Otherwise, use plan's parent directory
-- Verify with user if ambiguous
+1. Read the plan fully. Resolve each `repos:` entry (`org/repo`) to `~/wt/<repo>` if a worktree exists there, else `~/code/work/<repo>`. Without `repos:`, use the git repo containing the plan and say so. Check files and run commands only in those repos, never in the thoughts repo.
+2. Per phase, run each backticked `Verify:` command in its repo. Use `git -C <path>` and `just --working-directory <path> <recipe>`; one plain command per call, no `cd` or `&&`. Capture exit code, the last 50 lines, and lines containing "error" or "fail". A command outside the allowed tools: report "not run: tool not permitted".
+3. Check that files the phase names exist and changed, via `git -C <repo> diff --stat <base>`.
+4. List `manual:` items as pending. Never mark them passed.
+5. Apply the evidence standard from `verification-before-completion`.
 
-### 2. Load Plan and Parse Schema
-- Read the plan file completely
-- Identify which schema elements are present
-- Build verification checklist from available information
-
-### 3. Task-by-Task Verification
-
-For each identified task:
-
-**Check Files Exist:**
-- [ ] All "Create:" files exist
-- [ ] All "Modify:" files show expected changes (via grep for key terms)
-
-**Run Verification Commands:**
-- Execute commands from plan's verification section
-- Capture: exit code + last 50 lines + any lines containing "error"/"fail"
-- Timeout: 60s per command (warn if exceeded)
-
-**Report Status:**
-
-```text
-### Task N: [Name]
-- Files: ✓ all present
-- Verification: ✓ passing (exit 0)
-- Status: COMPLETE
-```
-
-OR
-
-```text
-### Task N: [Name]
-- Files: ✗ missing src/module.py
-- Verification: ✗ failing (exit 1)
-  └─ Error: test_validation AssertionError line 45
-- Status: INCOMPLETE
-```
-
-### 4. Success Criteria Check
-
-If plan has "Success Criteria" or "Verification Checklist":
-- Run each checkable criterion
-- Note criteria requiring manual verification
-
-### 5. Summary Report
+## Report
 
 ```markdown
 ## Validation Summary
 
-**Plan:** [plan-path]
-**Repo:** [repo-root]
-**Tasks:** N/M complete
-**Verification Commands:** X/Y passing
+**Plan:** <plan-path>
+**Repos:** <resolved paths>
+**Phases:** N/M complete
+**Verify commands:** X/Y passing
+
+### Per phase
+Phase N: <title> — COMPLETE | INCOMPLETE — <file/command evidence, exit code>
 
 ### Issues Found
-[None / List of issues with locations]
+<None, or issues with file:line>
 
 ### Manual Checks Required
-[List any criteria that couldn't be automated]
+<manual: items>
 
 ### Recommendation
-[Ready to merge / Fix N issues first / Needs manual verification]
+<Ready to merge | Fix N issues first | Needs manual verification> (advisory only)
 ```
-
-## Key Principles
-
-- **Evidence-based:** Run commands, don't assume
-- **Complete:** Check every task, not just tests
-- **Actionable:** Report specific issues with file:line locations
-- **Honest:** Report actual state, not hoped state
-- **Graceful degradation:** Work with partial schemas
