@@ -24,7 +24,7 @@ Plan format: `~/.claude/skills/validate-plan/references/plan-schema.md`.
 
 ## Steps
 
-1. **Load.** Read the plan fully (a ticket key: find its plan with `thoughts:discover`). Resume at the first phase with an unticked automated item. Set `status: in-progress`. Work in the repos named in `repos:` (no `repos:`: the repo containing the plan, and say so) via `EnterWorktree(name: <ticket-slug>)`. A plan spanning several repos: one repo per session.
+1. **Load.** Read the plan fully (a ticket key: find its plan with `thoughts:discover`). Resume at the first phase with an unticked automated item. Set `status: in-progress`. Work in the repos named in `repos:` (no `repos:`: the repo containing the plan, and say so) via `EnterWorktree(name: <ticket-slug>)`; if the hook denies it as a direct-commit repo (e.g. dotfiles), work in the clone. A plan spanning several repos: one repo per session.
 2. **Per phase**, in order:
    1. Write a failing test with `test-driven-development`, then implement. For config-only phases, the `Verify:` command is the failing check.
    2. Run the phase's `Verify:` commands via `repo:test-runner` and the repo's lint tools. Apply `verification-before-completion`.
