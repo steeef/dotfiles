@@ -1,7 +1,7 @@
 # Writing Jira tickets
 
 Applies whenever creating or editing a Jira ticket's title/description/comments
-(the jira plugin's `jira:manage` skill, acli, or Atlassian MCP directly). Sources:
+(the jira plugin's skills (`/jira:create`, `/jira:edit`, `/jira:comment`), acli, or Atlassian MCP directly). Sources:
 [How to write a useful Jira ticket](https://community.atlassian.com/forums/Jira-articles/How-to-write-a-useful-Jira-ticket/ba-p/2147004)
 and [Good History Documentation](https://github.com/scottidler/devops/blob/main/docs/best-practices/good-history-documentation.md)
 (Scott Idler) — where the two disagree, Scott's precedes. Naming guidelines

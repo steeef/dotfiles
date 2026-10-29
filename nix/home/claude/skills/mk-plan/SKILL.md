@@ -20,7 +20,7 @@ allowed-tools:
 
 ## Steps
 
-1. **Resolve input.** A ticket key: read it with `jira:manage`. A path: read it fully. Free text: use as is. Find the thoughts project from `.thoughts.json` `THOUGHTS_ROOT` (walk up from cwd); if not found, ask.
+1. **Resolve input.** A ticket key: read it with `jira:view`. A path: read it fully. Free text: use as is. Find the thoughts project from `.thoughts.json` `THOUGHTS_ROOT` (walk up from cwd); if not found, ask.
 2. **Settle open decisions.** Run `mattpocock-skills:grilling` on anything ambiguous. Skip when the request is already unambiguous.
 3. **Gather facts.** Run `thoughts:discover` and cite existing research. Otherwise write numbered questions for what the plan must know, then run `objective-codebase-research` with the problem statement, acceptance criteria, and questions. Name the target repos.
 4. **Write the plan** to `<thoughts project>/plans/YYYY-MM-DD-[KEY-]slug.md` in the format of `~/.claude/skills/validate-plan/references/plan-schema.md`, with `status: draft`. Schema frontmatter wins; take only `created` and git fields from `thoughts:spec-metadata`. Every phase ends with a `Verify:` list, or `Verify: none - <reason>`. Under a worktree pin, Write on the thoughts clone is rejected; write via Bash instead.
