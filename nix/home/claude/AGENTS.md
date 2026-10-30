@@ -59,8 +59,9 @@ skills, agents, and settings from this directory.
   disappear under `--safe-mode`/`CLAUDE_CODE_SIMPLE` (built-ins only, no
   error). Both are inherent to Claude Code, not bugs in this module.
 - `repoMirrorGuardHook` upserts into `hooks.PreToolUse` — unconditionally
-  strips any matching entry then re-appends, unlike `herdrWorkspaceTicketHook`
-  which appends only if absent — since that key is also owned outside Nix (a
+  strips any matching entry then re-appends (as `herdrWorkspaceTicketHook`
+  does for `PostToolUse`; it only appends if absent for `UserPromptSubmit`;
+  it names the herdr workspace from the cwd/worktree) — since that key is also owned outside Nix (a
   `clyde` entry) and can't be declared in `settings.json` directly. See
   `rules/repo-mirrors.md` for what it guards.
 - Auto-memory (`autoMemoryEnabled: false` in `settings.json`) is intentionally

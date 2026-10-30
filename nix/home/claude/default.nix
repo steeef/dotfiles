@@ -47,11 +47,7 @@ in {
     executable = true;
   };
 
-  # Renames the herdr workspace for this pane to a Jira-style ticket key
-  # (e.g. ENG-1234) detected in the session's first user prompt only — later
-  # prompts never change it. Wired into hooks.UserPromptSubmit by the
-  # herdrWorkspaceTicketHook activation script below (not declared in
-  # settings.json directly — see that script's comment for why).
+  # hook wired by herdrWorkspaceTicketHook activation below
   home.file.".claude/hooks/herdr-workspace-ticket.sh" = {
     source = ./hooks/herdr-workspace-ticket.sh;
     executable = true;
@@ -112,15 +108,7 @@ in {
     fi
   '';
 
-  # Wire herdr-workspace-ticket.sh into hooks.UserPromptSubmit only. Not
-  # declared in settings.json directly: merge-settings.sh replaces hook
-  # arrays wholesale rather than merging elements, which would clobber the
-  # SessionStart entry herdr's own Claude integration already added, plus
-  # context-mode-cache-heal.mjs's entry. Add-if-absent instead, matched on
-  # the script's stable path. Also
-  # strips any older SessionStart/UserPromptSubmit entries referencing this
-  # script (from before it was narrowed to first-prompt-only) regardless of
-  # the argv they were registered with.
+  # add-if-absent: herdr owns sibling hook entries
   home.activation.herdrWorkspaceTicketHook = lib.hm.dag.entryAfter ["mergeClaudeSettings"] ''
     cs="$HOME/.claude/settings.json"
     jq="${pkgs.jq}/bin/jq"
@@ -139,6 +127,9 @@ in {
             | if any(.[]; (.hooks // [])[0].command? == $cmd) then .
               else . + [{hooks: [{type: "command", command: $cmd, timeout: 10}]}]
               end)
+        | .hooks.PostToolUse = ((.hooks.PostToolUse // [])
+            | map(select(((.hooks // [])[0].command? // "") | test("herdr-workspace-ticket\\.sh") | not))
+            | . + [{matcher: "EnterWorktree|ExitWorktree", hooks: [{type: "command", command: $cmd, timeout: 10}]}])
       ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
     fi
   '';
