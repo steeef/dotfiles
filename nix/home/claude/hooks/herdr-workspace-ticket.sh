@@ -58,6 +58,11 @@ current_label="$(printf '%s' "$snapshot" | jq -r --arg ws "$workspace_id" \
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/herdr-workspace-name"
 state_file="$state_dir/$workspace_id"
 mkdir -p "$state_dir"
+# keep ticket label over cwd name
+key_re='^[A-Za-z]{2,4}-[0-9]{2,5}( |$)'
+if [[ "$current_label" =~ $key_re ]] && ! [[ "$name" =~ $key_re ]]; then
+  exit 0
+fi
 if [ "$current_label" = "$name" ]; then
   printf '%s' "$name" >"$state_file"
   exit 0
