@@ -61,7 +61,8 @@ skills, agents, and settings from this directory.
 - `repoMirrorGuardHook` upserts into `hooks.PreToolUse` — unconditionally
   strips any matching entry then re-appends (as `herdrWorkspaceTicketHook`
   does for `PostToolUse`; it only appends if absent for `UserPromptSubmit`;
-  it names the herdr workspace from the cwd/worktree) — since that key is also owned outside Nix (a
+  it names the herdr workspace from the cwd/worktree, or the ticket in a
+  `/do-plan`/`/mk-plan` prompt) — since that key is also owned outside Nix (a
   `clyde` entry) and can't be declared in `settings.json` directly. See
   `rules/repo-mirrors.md` for what it guards.
 - Auto-memory (`autoMemoryEnabled: false` in `settings.json`) is intentionally

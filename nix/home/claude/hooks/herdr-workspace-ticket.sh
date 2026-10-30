@@ -38,6 +38,14 @@ if [[ "$name" =~ ^([A-Za-z]{2,4}-[0-9]{2,5})(-(.*))?$ ]]; then
   name="${key}${slug:+ $slug}"
 fi
 
+# plan commands name the ticket worked on
+plan_key="$(printf '%s' "${prompt:-}" |
+  grep -E '^/(do-plan|mk-plan)([[:space:]]|$)' |
+  grep -oE '[A-Za-z]{2,4}-[0-9]{2,5}' | head -1 | tr '[:lower:]' '[:upper:]' || true)"
+if [ -n "$plan_key" ] && [[ "$name" != "$plan_key"* ]]; then
+  name="$plan_key"
+fi
+
 snapshot="$(herdr api snapshot 2>/dev/null)" || exit 0
 [ -n "$snapshot" ] || exit 0
 
