@@ -40,7 +40,7 @@ fi
 
 # plan commands name the ticket worked on
 plan_key="$(printf '%s' "${prompt:-}" |
-  grep -E '^/(do-plan|mk-plan)([[:space:]]|$)' |
+  grep -E '(^|[[:space:]/])(do-plan|mk-plan)([[:space:]]|$)' |
   grep -oE '[A-Za-z]{2,4}-[0-9]{2,5}' | head -1 | tr '[:lower:]' '[:upper:]' || true)"
 if [ -n "$plan_key" ] && [[ "$name" != "$plan_key"* ]]; then
   name="$plan_key"
