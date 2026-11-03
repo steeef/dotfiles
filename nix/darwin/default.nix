@@ -124,7 +124,6 @@
         "qlmarkdown"
         "quicklook-video"
         "raspberry-pi-imager"
-        "realvnc-connect-viewer"
         "slack"
         "steam"
         "swinsian"
