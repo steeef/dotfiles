@@ -25,6 +25,8 @@ allowed-tools:
 3. **Gather facts.** Run `thoughts:discover` and cite existing research. Otherwise write numbered questions for what the plan must know, then run `objective-codebase-research` with the problem statement, acceptance criteria, and questions. Name the target repos.
 4. **Write the plan** to `<thoughts project>/plans/YYYY-MM-DD-[KEY-]slug.md` in the format of `~/.claude/skills/validate-plan/references/plan-schema.md`, with `status: draft`. Schema frontmatter wins; take only `created` and git fields from `thoughts:spec-metadata`. Every phase ends with a `Verify:` list, or `Verify: none - <reason>`. Under a worktree pin, Write on the thoughts clone is rejected; write via Bash instead.
 5. **Review.** Spawn the `llm:opus-reviewer` agent with the decision point, approach, and plan path. At most 2 rounds.
-6. **Report** the plan path and open risks.
+6. **Sync.** If the `thoughts` plugin is installed (its skills are listed), run `thoughts:sync` so the plan is pushed. Links in the next step need the pushed commit. Otherwise skip and say so in the report.
+7. **Link in Jira.** Only with a ticket key and both the `thoughts` and `jira` plugins installed: get the plan's permalink via `thoughts:links`, then run `jira:edit` to append it to the description under Resources with a one-line summary. Never paste plan content. Skip otherwise and say why in the report.
+8. **Report** the plan path, the Jira link status, and open risks.
 
-Done when the plan file exists, the count of `### Phase` headings equals the count of `Verify:` lines, `repos:` is set, and each review finding is fixed or listed under Open risks.
+Done when the plan file exists, the count of `### Phase` headings equals the count of `Verify:` lines, `repos:` is set, each review finding is fixed or listed under Open risks, `thoughts:sync` succeeded (when `thoughts` is installed), and (with a ticket key and both plugins installed) the Jira description contains the plan link.
