@@ -66,6 +66,11 @@ skills, agents, and settings from this directory.
   keyless name) — since that key is also owned outside Nix (a
   `clyde` entry) and can't be declared in `settings.json` directly. See
   `rules/repo-mirrors.md` for what it guards.
+- `herdrTicketPromptHook` upserts a `startup`-only `SessionStart` entry
+  (`hooks/herdr-ticket-prompt.sh`): if the herdr workspace label has a Jira
+  key, it injects context telling Claude to `AskUserQuestion` whether to
+  continue that ticket (yes → `checkpoint` resume). Separate script from
+  `herdrWorkspaceTicketHook`, which strips its own `SessionStart` entries.
 - Auto-memory (`autoMemoryEnabled: false` in `settings.json`) is intentionally
   off — see the root `AGENTS.md` Doc Contract for why user-authored
   memory.md/rules were chosen over Claude-authored auto-memory for this setup.

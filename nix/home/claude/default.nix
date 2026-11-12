@@ -53,6 +53,12 @@ in {
     executable = true;
   };
 
+  # hook wired by herdrTicketPromptHook activation below
+  home.file.".claude/hooks/herdr-ticket-prompt.sh" = {
+    source = ./hooks/herdr-ticket-prompt.sh;
+    executable = true;
+  };
+
   # rm-block guidance handler for command-safety@claude-hooks (see
   # rkvrHandlerPath / CLAUDE_HOOKS_RM_HANDLER above).
   home.file.".claude/hooks/rkvr_handler.sh" = {
@@ -130,6 +136,20 @@ in {
         | .hooks.PostToolUse = ((.hooks.PostToolUse // [])
             | map(select(((.hooks // [])[0].command? // "") | test("herdr-workspace-ticket\\.sh") | not))
             | . + [{matcher: "EnterWorktree|ExitWorktree", hooks: [{type: "command", command: $cmd, timeout: 10}]}])
+      ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
+    fi
+  '';
+
+  home.activation.herdrTicketPromptHook = lib.hm.dag.entryAfter ["herdrWorkspaceTicketHook"] ''
+    cs="$HOME/.claude/settings.json"
+    jq="${pkgs.jq}/bin/jq"
+    cmd="bash '$HOME/.claude/hooks/herdr-ticket-prompt.sh'"
+
+    if [ -f "$cs" ]; then
+      run "$jq" --arg cmd "$cmd" '
+        .hooks.SessionStart = ((.hooks.SessionStart // [])
+          | map(select(((.hooks // [])[0].command? // "") | test("herdr-ticket-prompt\\.sh") | not))
+          | . + [{matcher: "startup", hooks: [{type: "command", command: $cmd, timeout: 10}]}])
       ' "$cs" > "$cs.tmp" && run mv "$cs.tmp" "$cs"
     fi
   '';

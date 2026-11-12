@@ -44,6 +44,8 @@ module — manual edits outside Nix get overwritten.
 - Commit subjects: short, imperative, lower-case (e.g. `add rust stuff`).
 - Don't hand-format; use `just fmt` / `just lint` (hooks enforce at commit).
 - Edit `AGENTS.md`, not `CLAUDE.md` — the latter is a symlink to it.
+- Flakes ignore untracked files: `git add -N <new file>` before `hms`/`dr`,
+  or eval fails with "is not tracked by Git".
 
 ## Doc Contract
 
