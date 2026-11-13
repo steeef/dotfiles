@@ -75,8 +75,7 @@
         end
       end
       wezterm.on('gui-startup', function(cmd)
-        local _, _, window = mux.spawn_window(cmd or {})
-        apply_hinting(window)
+        mux.spawn_window(cmd or {})
       end)
       wezterm.on('window-created', function(window, _)
         apply_hinting(window)
