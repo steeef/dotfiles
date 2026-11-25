@@ -38,6 +38,8 @@ module — manual edits outside Nix get overwritten.
 - docs/herdr-stuck-multichoice-prompt.md — open bug: Claude Code
   multiple-choice prompts sometimes hang in herdr/tmux (only Ctrl-C
   escapes); hypotheses and a live-capture checklist for next occurrence.
+- docs/wezterm-window-placement.md — Hammerspoon owns WezTerm window
+  size/placement; WezTerm config stays font/rendering only.
 
 ## Lessons
 
